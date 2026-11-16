@@ -2,7 +2,7 @@ name: Website quality check
 on:
   push:
     branches: [main]
-    paths: ["*.html", "assets/**", "tests/**", ".github/workflows/site-check.yml", "sitemap.xml", "robots.txt"]
+    paths: ["*.html", "assets/**", "build.py", "content/**", "tests/**", ".github/workflows/site-check.yml", "sitemap.xml", "robots.txt"]
   pull_request:
     branches: [main]
 jobs:
@@ -16,6 +16,9 @@ jobs:
         run: python3 tests/check_site.py
       - name: Verify browser JavaScript syntax
         run: |
-          node --check assets/modern.js
-          node --check assets/site.js
+          node --check assets/os.js
           node --check assets/ar.js
+      - name: Pages are generated from build.py (no hand edits)
+        run: |
+          python3 build.py
+          git diff --exit-code -- '*.html' assets/ar.js || (echo "Run python3 build.py and commit the result" && exit 1)
