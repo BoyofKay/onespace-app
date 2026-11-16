@@ -476,7 +476,8 @@ html[dir="rtl"] .city b, html[dir="rtl"] .clocks b, html[dir="rtl"] .slot time {
 .device.sm { width: 240px; } .device.xs { width: 190px; border-radius: 32px; padding: 7px; } .device.xs img { border-radius: 26px; } .device.xs::after { top: 13px; width: 10px; height: 10px; }
 .device.lg { width: 340px; }
 .tilt-l { transform: perspective(1400px) rotateY(16deg) rotateZ(-2deg); } .tilt-r { transform: perspective(1400px) rotateY(-16deg) rotateZ(2deg); }
-.fan { position: relative; display: grid; place-items: center; min-height: 640px; }
+.fan { position: relative; display: grid; place-items: center; min-height: 700px; width: 100%; }
+.fan .device { max-width: none; }
 .fan .device { position: absolute; }
 .fan .d1 { z-index: 3; } .fan .d2 { z-index: 2; transform: translateX(-62%) scale(.82) rotate(-7deg); opacity: .96; } .fan .d3 { z-index: 1; transform: translateX(62%) scale(.82) rotate(7deg); opacity: .96; }
 @media (max-width: 760px) { .fan { min-height: 560px; } .fan .d2 { transform: translateX(-38%) scale(.74) rotate(-6deg); } .fan .d3 { transform: translateX(38%) scale(.74) rotate(6deg); } }
@@ -487,3 +488,13 @@ html[dir="rtl"] .city b, html[dir="rtl"] .clocks b, html[dir="rtl"] .slot time {
 .wall figcaption { margin-top: 12px; font-weight: 700; font-size: 14px; }
 .wall .device { width: 200px; }
 .device video { width: 100%; height: 100%; object-fit: cover; object-position: top; border-radius: 35px; display: block; background: #F6F8FC; }
+.stage .fan ~ .t1 { top: 40%; inset-inline-start: -3%; } .stage .fan ~ .t2 { bottom: 4%; inset-inline-end: -2%; }
+.snip { margin-top: 12px; border-radius: 14px; overflow: hidden; border: 1px solid var(--line); box-shadow: var(--shadow-s); }
+.snip img { display: block; width: 100%; }
+.playground[data-pg="midnight"] h3, .playground[data-pg="mono"] h3 { color: #fff; }
+.playground[data-pg="midnight"] .ticks li, .playground[data-pg="mono"] .ticks li { color: #C8D1E3; }
+.playground[data-pg="midnight"] .more, .playground[data-pg="mono"] .more { color: #9CC9FF; }
+.playground[data-pg="midnight"] .step, .playground[data-pg="mono"] .step { background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.14); color: #fff; }
+.playground[data-pg="midnight"] .step span, .playground[data-pg="mono"] .step span { color: #B9C3D8; }
+.store-grid { grid-template-columns: repeat(6, 1fr); gap: 12px; }
+@media (max-width: 900px) { .store-grid { grid-template-columns: repeat(3, 1fr); } }

@@ -454,10 +454,20 @@ def clip(name, alt, alt_ar, cls=''):
 
 
 # ------------------------------------------------------------------ pages
-def pain(them, them_ar, me, me_ar, ans, ans_ar, who='Lina', who_ar='لينا'):
+def snip(name, alt, alt_ar):
+    if not has_shot(f'snip/{name}'):
+        return ''
+    en = f'assets/app/en/snip/{name}.webp'
+    ar = f'assets/app/ar/snip/{name}.webp' if has_shot(f'snip/{name}', 'ar') else en
+    k = K(alt, alt_ar)
+    return (f'<div class="snip"><img src="{en}" data-en-src="{en}" data-ar-src="{ar}" alt="{escape(alt)}" '
+            f'data-i18n-attr="alt:{k}" loading="lazy" decoding="async"></div>')
+
+
+def pain(them, them_ar, me, me_ar, ans, ans_ar, who='Lina', who_ar='لينا', shot=''):
     return f"""<div class="pain reveal"><div class="msg them">{T(them, them_ar)}<small>{T(who, who_ar)}</small></div>
   <div class="msg me">{T(me, me_ar)}</div>
-  <div class="answer"><b>OneSpace</b>{T(ans, ans_ar)}</div></div>"""
+  <div class="answer"><b>OneSpace</b>{T(ans, ans_ar)}</div>{snip(shot, ans, ans_ar) if shot else ''}</div>"""
 
 
 def slot(time, text, text_ar):
@@ -551,7 +561,7 @@ def page_index():
     ]
     btns = ''.join(f'<button class="step" type="button" role="tab" data-view="{k}" aria-selected="{"true" if i == 0 else "false"}"><b>{ic} {T(e, ar)}</b>{T(t, tar)}</button>'
                    for i, (k, ic, e, ar, t, tar, _, _, _) in enumerate(tabs))
-    views = ''.join(f'<div data-view-of="tabs" data-view-name="{k}"{" hidden" if i else ""}>{device(k, e + " tab", ar, fallback=phone(SCREENS[sc](), "clean", label=e + " tab", label_ar=ar))}'
+    views = ''.join(f'<div data-view-of="tabs" data-view-name="{k}"{" hidden" if i else ""}>{(device("themes/today_cleanLight", "Today tab", ar, themed=True) if k == "today" and has_shot("themes/today_cleanLight") else device(k, e + " tab", ar, fallback=phone(SCREENS[sc](), "clean", label=e + " tab", label_ar=ar)))}'
                     f'<ul class="ticks" style="max-width:320px">{"".join(f"<li>{T(x, y)}</li>" for x, y in pts)}</ul><a class="more" href="{href}" style="font-weight:700">{T("More about " + e + " →", "المزيد عن " + ar + " ←")}</a></div>'
                     for i, (k, ic, e, ar, t, tar, pts, sc, href) in enumerate(tabs))
     marquee_items = [('🛒', 'Groceries for Friday · 4 left', 'مشتريات الجمعة · بقي 4'), ('💍', 'Anniversary in 12 days', 'الذكرى بعد 12 يومًا'), ('💌', 'A letter opens on Saturday', 'رسالة تُفتح يوم السبت'),
@@ -594,12 +604,12 @@ def page_index():
   <div class="sec-head center">{T('Sound familiar?', 'هل يبدو هذا مألوفًا؟', 'span', 'eyebrow')}<h2>{T('Love is easy.', 'الحب سهل.')} <span class="serif accent">{T('Logistics aren’t.', 'التفاصيل ليست كذلك.')}</span></h2>
   {T('Every couple has these conversations. OneSpace quietly takes care of them, so your chats can be about you again.', 'كل زوجين يمرّان بهذه المحادثات. يتولاها OneSpace بهدوء، لتعود محادثاتكما عنكما من جديد.', 'p', 'lead')}</div>
   <div class="pains">
-    {pain('Did you book the dentist? 🦷', 'هل حجزت موعد طبيب الأسنان؟ 🦷', 'I thought YOU were doing it 😅', 'ظننت أنكِ ستحجزينه 😅', 'Reminders that belong to someone — and show up in their Today.', 'تذكيرات لها صاحب — وتظهر في «اليوم» لديه.')}
-    {pain('What was that restaurant we loved in Jeddah?', 'ما اسم المطعم الذي أحببناه في جدة؟', 'No idea… it had blue chairs?', 'لا أذكر… كانت كراسيه زرقاء؟', 'Our places: every spot you loved, pinned on your own map.', 'أماكننا: كل مكان أحببتماه، على خريطتكما الخاصة.')}
-    {pain('Sorry, did I wake you? 🙈', 'آسفة، هل أيقظتك؟ 🙈', 'It’s 3 a.m. here…', 'الساعة 3 فجرًا هنا…', 'Two clocks and two weathers on Today — know before you call.', 'ساعتان وطقسان في «اليوم» — اعرف قبل أن تتصل.')}
-    {pain('Which sofa did we say? The grey one?', 'أي أريكة اتفقنا عليها؟ الرمادية؟', 'I sent you 14 links last week…', 'أرسلت لكِ 14 رابطًا الأسبوع الماضي…', 'Activities: options side by side, both your picks, one decision.', 'الأنشطة: خيارات جنبًا إلى جنب، واختيار كل منكما، وقرار واحد.')}
-    {pain('Is it our anniversary this month?!', 'هل ذكرانا هذا الشهر؟!', '…it was last Tuesday 💔', '…كانت الثلاثاء الماضي 💔', 'Counters and occasions that remind you weeks before — with gift ideas.', 'عدّادات ومناسبات تذكّرك قبلها بأسابيع — مع أفكار هدايا.')}
-    {pain('Who has the passports?', 'من معه الجوازات؟', 'Me? I thought they were in your bag', 'أنا؟ ظننتها في حقيبتك', 'Trips with a shared packing list — who brings what, ticked off.', 'رحلات بقائمة تجهيز مشتركة — من يحضر ماذا، مع علامة الإنجاز.')}
+    {pain('Did you book the dentist? 🦷', 'هل حجزت موعد طبيب الأسنان؟ 🦷', 'I thought YOU were doing it 😅', 'ظننت أنكِ ستحجزينه 😅', 'Reminders that belong to someone — and show up in their Today.', 'تذكيرات لها صاحب — وتظهر في «اليوم» لديه.', shot='lists')}
+    {pain('What was that restaurant we loved in Jeddah?', 'ما اسم المطعم الذي أحببناه في جدة؟', 'No idea… it had blue chairs?', 'لا أذكر… كانت كراسيه زرقاء؟', 'Our places: every spot you loved, pinned on your own map.', 'أماكننا: كل مكان أحببتماه، على خريطتكما الخاصة.', shot='places')}
+    {pain('Sorry, did I wake you? 🙈', 'آسفة، هل أيقظتك؟ 🙈', 'It’s 3 a.m. here…', 'الساعة 3 فجرًا هنا…', 'Two clocks and two weathers on Today — know before you call.', 'ساعتان وطقسان في «اليوم» — اعرف قبل أن تتصل.', shot='clocks')}
+    {pain('Which sofa did we say? The grey one?', 'أي أريكة اتفقنا عليها؟ الرمادية؟', 'I sent you 14 links last week…', 'أرسلت لكِ 14 رابطًا الأسبوع الماضي…', 'Activities: options side by side, both your picks, one decision.', 'الأنشطة: خيارات جنبًا إلى جنب، واختيار كل منكما، وقرار واحد.', shot='options')}
+    {pain('Is it our anniversary this month?!', 'هل ذكرانا هذا الشهر؟!', '…it was last Tuesday 💔', '…كانت الثلاثاء الماضي 💔', 'Counters and occasions that remind you weeks before — with gift ideas.', 'عدّادات ومناسبات تذكّرك قبلها بأسابيع — مع أفكار هدايا.', shot='counter')}
+    {pain('Who has the passports?', 'من معه الجوازات؟', 'Me? I thought they were in your bag', 'أنا؟ ظننتها في حقيبتك', 'Trips with a shared packing list — who brings what, ticked off.', 'رحلات بقائمة تجهيز مشتركة — من يحضر ماذا، مع علامة الإنجاز.', shot='trip')}
   </div>
 </div></section>
 
@@ -835,7 +845,7 @@ def persona_page(page, apart):
 <section class="tint"><div class="wrap"><div class="sec-head center">{T('Sound familiar?', 'هل يبدو هذا مألوفًا؟', 'span', 'eyebrow')}{T('The conversations OneSpace quietly handles.', 'المحادثات التي يتولاها OneSpace بهدوء.', 'h2')}</div>
 <div class="pains">{pains_html}</div></div></section>
 <section><div class="wrap split">
-  <div class="stage">{device('today' if apart else 'together/today', 'Today screen', 'شاشة اليوم', fallback=phone(scr, theme, label='Today screen', label_ar='شاشة اليوم'))}</div>
+  <div class="stage">{device('trip' if apart else 'together/lists', 'The trip to Istanbul' if apart else 'Shared to-do lists', 'رحلة إسطنبول' if apart else 'قوائم المهام المشتركة', fallback=phone(scr, theme, label='Today screen', label_ar='شاشة اليوم'))}</div>
   <div><div class="grid g2">{cards}</div></div>
 </div></section>
 <section class="tint"><div class="narrow center">
@@ -1306,6 +1316,14 @@ def legal_page(page, kind):
 </div></section>''' + foot()
 
 
+def store_shots():
+    if not (ROOT / 'assets' / 'press' / 'store-en-1.png').exists():
+        return ''
+    imgs = ''.join(f'<a href="assets/press/store-en-{i}.png" download data-ar-href="assets/press/store-ar-{i}.png"><img src="assets/press/store-en-{i}.png" data-en-src="assets/press/store-en-{i}.png" data-ar-src="assets/press/store-ar-{i}.png" alt="Store screenshot {i}" loading="lazy" width="1080" height="1920"></a>' for i in range(1, 7))
+    return f'''<section><div class="wrap"><div class="sec-head">{T('App store screenshots', 'لقطات متجر التطبيقات', 'h2')}{T('Real screens from the app with the fictional couple Omar and Lina. 1080×1920, English and Arabic (switch the page language).', 'شاشات حقيقية من التطبيق مع الزوجين الافتراضيين عمر ولينا. 1080×1920 بالعربية والإنجليزية (بدّل لغة الصفحة).', 'p', 'muted')}</div>
+  <div class="grid assets-grid store-grid">{imgs}</div></div></section>'''
+
+
 def page_share_kit():
     h = head('share-kit.html', 'OneSpace share kit', 'مواد مشاركة OneSpace',
              'Logos, colours, descriptions in English and Arabic, social images and ready-to-send messages for telling people about OneSpace.',
@@ -1341,6 +1359,7 @@ def page_share_kit():
     <a href="assets/mark.svg" download><img src="assets/mark.svg" alt="OneSpace mark (SVG)" loading="lazy" width="200" height="200" style="max-width:200px;margin:auto">{T('Logo mark · SVG', 'رمز الشعار · SVG', 'p', 'muted')}</a>
   </div>
 </div></section>
+{store_shots()}
 <section><div class="wrap">
   <div class="sec-head">{T('Colours', 'الألوان', 'h2')}</div>
   <div class="grid g3" style="grid-template-columns:repeat(auto-fit,minmax(150px,1fr))">{col_html}</div>
