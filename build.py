@@ -9,6 +9,7 @@ never screenshots with real data.
 """
 import hashlib
 import json
+import re
 from datetime import date
 from html import escape
 from pathlib import Path
@@ -18,6 +19,12 @@ BASE = 'https://onespace.live/'
 TODAY = date.today().isoformat()
 # Privacy-friendly, cookieless analytics (https://www.goatcounter.com, free). Set to your code, e.g. 'onespace', then rebuild.
 GOATCOUNTER = ''
+# Search engine ownership checks. Paste the content="..." value Google Search Console / Bing Webmaster Tools gives you
+# for the "HTML tag" method (or verify by DNS and leave these empty).
+GOOGLE_VERIFY = ''
+BING_VERIFY = ''
+# IndexNow key (Bing, Yandex, Seznam, Naver): the file <key>.txt is published at the site root.
+INDEXNOW_KEY = '5f0c3a9e7b2d4c18a6e1f4b9d2c7e3a1'
 AR: dict[str, str] = {}
 LEGAL = json.loads((ROOT / 'content' / 'legal.json').read_text(encoding='utf-8'))
 import sys as _sys
@@ -76,6 +83,12 @@ def head(page, title, title_ar, desc, desc_ar=''):
                 ('whats-new.html', '✨', "What's new", 'الجديد', 'Updates and availability', 'التحديثات والتوفر')],
                  ('guides.html', 'tutorials.html', 'faq.html', 'whats-new.html') + tuple(g['slug'] for g in GUIDES))]
     dk = K(desc, desc_ar or desc)
+    verify = (f'\n<meta name="google-site-verification" content="{GOOGLE_VERIFY}">' if GOOGLE_VERIFY else '') + \
+             (f'\n<meta name="msvalidate.01" content="{BING_VERIFY}">' if BING_VERIFY else '')
+    site_ld = json.dumps({'@context': 'https://schema.org', '@graph': [
+        {'@type': 'Organization', '@id': BASE + '#org', 'name': 'OneSpace', 'url': BASE, 'logo': BASE + 'assets/icon-512.png',
+         'slogan': 'Two of us. One Space.'},
+        {'@type': 'WebSite', '@id': BASE + '#site', 'name': 'OneSpace', 'url': BASE, 'inLanguage': ['en', 'ar'], 'publisher': {'@id': BASE + '#org'}}]})
     analytics = f'\n<script data-goatcounter="https://{GOATCOUNTER}.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>' if GOATCOUNTER else ''
     return f'''<!doctype html>
 <html lang="en" dir="ltr">
@@ -85,6 +98,9 @@ def head(page, title, title_ar, desc, desc_ar=''):
 <title data-ar="{escape(title_ar)}">{escape(title)}</title>
 <meta name="description" content="{escape(desc)}" data-i18n-attr="content:{dk}">
 <link rel="canonical" href="{canonical}">
+<link rel="alternate" hreflang="en" href="{canonical}">
+<link rel="alternate" hreflang="ar" href="{BASE}ar/{'' if page == 'index.html' else page}">
+<link rel="alternate" hreflang="x-default" href="{canonical}">{verify}
 <meta property="og:site_name" content="OneSpace">
 <meta property="og:title" content="{escape(title)}">
 <meta property="og:description" content="{escape(desc)}">
@@ -100,6 +116,7 @@ def head(page, title, title_ar, desc, desc_ar=''):
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/os.css">{analytics}
+<script type="application/ld+json">{site_ld}</script>
 </head>
 <body>
 <a class="skip" href="#main">{T('Skip to content', 'انتقل إلى المحتوى')}</a>
@@ -196,7 +213,7 @@ def row(icon, title, title_ar, sub='', sub_ar='', value='', value_ar='', small='
 def scr_today(apart=True):
     if apart:
         place = f'''<div class="pc"><h4>✈️ {T('Living apart', 'متباعدان')}</h4>
-  <div class="clocks"><div>{T('Omar · Riyadh', 'عمر · الرياض')}<b>8:14 PM</b><em>☀️ 31° · {T('clear', 'صافٍ')}</em></div>
+  <div class="clocks"><div>{T('Omar · Toronto', 'عمر · تورونتو')}<b>12:14 PM</b><em>☀️ 18° · {T('clear', 'صافٍ')}</em></div>
   <div>{T('Lina · London', 'لينا · لندن')}<b>5:14 PM</b><em>🌧 9° · {T('good time to talk', 'وقت مناسب للحديث')}</em></div></div></div>'''
     else:
         place = f'''<div class="pc"><h4>🏡 {T('Together under one roof', 'معًا تحت سقف واحد')}</h4>
@@ -259,8 +276,8 @@ def scr_places():
   <div class="map"><span class="pin" style="left:30%;top:45%">❤️</span><span class="pin" style="left:62%;top:38%">❤️</span>
     <span class="pin" style="left:48%;top:78%">🧭</span><span class="pin" style="left:80%;top:70%">🧭</span></div>
   <div style="display:flex;gap:6px"><span class="chip">❤️ {T('Been there', 'زرناه')}</span><span class="chip">🧭 {T('Bucket list', 'قائمة الأحلام')}</span></div>
-  <div class="pc">{row('☕', 'Our café', 'مقهانا', 'Riyadh · 12 visits · ★★★★★', 'الرياض · 12 زيارة · ★★★★★')}
-    {row('🏖', 'Marsa Matrouh', 'مرسى مطروح', 'Egypt · first time 2023', 'مصر · أول مرة 2023')}
+  <div class="pc">{row('☕', 'Our café', 'مقهانا', 'Toronto · 12 visits · ★★★★★', 'تورونتو · 12 زيارة · ★★★★★')}
+    {row('🏖', 'Cascais', 'كاشكايش', 'Portugal · first time 2023', 'البرتغال · أول مرة 2023')}
     {row('🗼', 'Santorini', 'سانتوريني', 'Bucket list · tick to plan a trip', 'قائمة الأحلام · اختر لتخطط لرحلة', '☐')}</div>
 </div>{nav_bar('remember')}'''
 
@@ -268,10 +285,10 @@ def scr_places():
 def scr_trip():
     return f'''<div class="app-head"><b style="font-size:15px">← {T('Trip', 'الرحلة')}</b></div><div class="body">
   {T('Istanbul for our anniversary', 'إسطنبول في ذكرانا', 'div', 'greet')}
-  <div style="display:flex;gap:6px;flex-wrap:wrap"><span class="chip">RUH → IST</span><span class="chip">{T('Booked', 'محجوزة')}</span><span class="chip">👥 2</span></div>
+  <div style="display:flex;gap:6px;flex-wrap:wrap"><span class="chip">YYZ → IST</span><span class="chip">{T('Booked', 'محجوزة')}</span><span class="chip">👥 2</span></div>
   <div class="pc"><h4>✈️ {T('Flights', 'الطيران')}</h4>
-    {row('🛫', 'RUH → IST · Sat 07:40', 'الرياض ← إسطنبول · السبت 07:40', '1 stop · 2 cabin bags', 'توقف واحد · حقيبتا مقصورة', 'SAR 2,180', '2,180 ريال')}
-    {row('🛬', 'IST → RUH · Thu 18:05', 'إسطنبول ← الرياض · الخميس 18:05', 'Direct · seat 14A', 'مباشر · مقعد 14A')}</div>
+    {row('🛫', 'YYZ → IST · Sat 07:40', 'تورونتو ← إسطنبول · السبت 07:40', '1 stop · 2 cabin bags', 'توقف واحد · حقيبتا مقصورة', '$1,180', '1,180 دولار')}
+    {row('🛬', 'IST → YYZ · Thu 18:05', 'إسطنبول ← تورونتو · الخميس 18:05', 'Direct · seat 14A', 'مباشر · مقعد 14A')}</div>
   <div class="pc"><h4>🧳 {T('Packing', 'التجهيز')} <span class="n">7/12</span></h4><div class="prog"><i style="width:58%"></i></div>
     {row('🛂', 'Passports and visas', 'الجوازات والتأشيرات', 'Lina · done', 'لينا · تم')}
     {row('🔌', 'Travel adapter', 'محوّل الكهرباء', 'Omar', 'عمر')}</div>
@@ -307,8 +324,8 @@ def scr_letter():
 def scr_occasion():
     return f'''<div class="app-head"><b style="font-size:15px">← {T('Occasion', 'المناسبة')}</b></div><div class="body">
   {T("Lina's birthday", 'عيد ميلاد لينا', 'div', 'greet')}<div class="sub">🔒 {T('Only me · a surprise', 'أنا فقط · مفاجأة')}</div>
-  <div class="pc"><h4>💰 {T('Occasion budget', 'ميزانية المناسبة')}</h4><b style="font-size:20px">SAR 1,240</b> <span class="sub">{T('left of SAR 2,000', 'متبقٍ من 2,000 ريال')}</span><div class="prog"><i style="width:38%"></i></div></div>
-  <div class="pc"><h4>🎁 {T('Gift ideas', 'أفكار الهدايا')} <span class="n">4</span></h4>{row('💐', 'Flowers + dinner', 'ورود وعشاء', 'Reserved', 'محجوز', 'SAR 520', '520 ريال')}{row('📷', 'Instant camera', 'كاميرا فورية', 'Considering · ★★★★', 'قيد الدراسة · ★★★★', 'SAR 340', '340 ريال')}</div>
+  <div class="pc"><h4>💰 {T('Occasion budget', 'ميزانية المناسبة')}</h4><b style="font-size:20px">$370</b> <span class="sub">{T('left of $600', 'متبقٍ من 600 دولار')}</span><div class="prog"><i style="width:38%"></i></div></div>
+  <div class="pc"><h4>🎁 {T('Gift ideas', 'أفكار الهدايا')} <span class="n">4</span></h4>{row('💐', 'Flowers + dinner', 'ورود وعشاء', 'Reserved', 'محجوز', '$160', '160 دولار')}{row('📷', 'Instant camera', 'كاميرا فورية', 'Considering · ★★★★', 'قيد الدراسة · ★★★★', '$120', '120 دولار')}</div>
   <div class="pc"><h4>🗓 {T('Plan', 'الخطة')}</h4>{row('⏰', 'Start preparing', 'ابدأ التحضير', '3 weeks before', 'قبل 3 أسابيع')}</div>
 </div>{nav_bar('remember')}'''
 
@@ -316,7 +333,7 @@ def scr_occasion():
 def scr_activity():
     return f'''<div class="app-head"><b style="font-size:15px">← {T('Activity', 'النشاط')}</b></div><div class="body">
   {T('A new sofa', 'أريكة جديدة', 'div', 'greet')}<div class="sub">{T('Exploring · compare 2 options', 'قيد البحث · مقارنة خيارين')}</div>
-  <div class="pc"><h4>⚖️ {T('Options', 'الخيارات')}</h4>{row('🛋', 'Grey corner sofa', 'أريكة زاوية رمادية', 'Omar ♥ · Lina ?', 'عمر ♥ · لينا ؟', 'SAR 3,400', '3,400 ريال')}{row('🛋', 'Velvet 3-seater', 'أريكة مخمل لثلاثة', 'Omar ? · Lina ♥', 'عمر ؟ · لينا ♥', 'SAR 2,900', '2,900 ريال')}</div>
+  <div class="pc"><h4>⚖️ {T('Options', 'الخيارات')}</h4>{row('🛋', 'Grey corner sofa', 'أريكة زاوية رمادية', 'Omar ♥ · Lina ?', 'عمر ♥ · لينا ؟', '$1,400', '1,400 دولار')}{row('🛋', 'Velvet 3-seater', 'أريكة مخمل لثلاثة', 'Omar ? · Lina ♥', 'عمر ؟ · لينا ♥', '$1,150', '1,150 دولار')}</div>
   <div class="pc"><h4>💬 {T('Conversation', 'المحادثة')}</h4>{row('🎙', 'Voice note · 0:12', 'رسالة صوتية · 0:12', 'Lina')}{row('💬', '“The velvet one fits the window”', '«المخمل يناسب النافذة»', 'Omar')}</div>
   <div class="pc"><h4>✅ {T('Decision', 'القرار')}</h4>{row('🛋', 'Velvet 3-seater', 'أريكة مخمل لثلاثة', 'Decided together', 'قررناها معًا')}</div>
 </div>{nav_bar('coordinate')}'''
@@ -326,7 +343,7 @@ def scr_arabic():
     return f'''<div dir="rtl" style="display:flex;flex-direction:column;height:100%;font-family:var(--font-ar)">
   <div class="app-head"><img src="assets/mark.svg" alt=""><div><b>OneSpace</b><small>نحن الاثنان، مساحة واحدة</small></div><span class="bell">🔔<i></i></span></div>
   <div class="body"><div class="greet">صباح الخير، لينا</div><div class="sub">مساحتك مع عمر</div>
-  <div class="pc"><h4>✈️ متباعدان</h4><div class="clocks"><div><span>لينا · لندن</span><b>8:02 ص</b><em>🌧 9°</em></div><div><span>عمر · الرياض</span><b>11:02 ص</b><em>☀️ 31°</em></div></div></div>
+  <div class="pc"><h4>✈️ متباعدان</h4><div class="clocks"><div><span>لينا · لندن</span><b>8:02 ص</b><em>🌧 9°</em></div><div><span>عمر · تورونتو</span><b>3:02 ص</b><em>🌙 12°</em></div></div></div>
   <div class="pc"><h4>💌 منذ غيابك</h4><div class="row"><span class="ri">☀️</span><span class="rt"><b>عمر يقول صباح الخير</b><span>«يومك جميل يا حبيبتي»</span></span></div></div>
   <div class="pc"><h4>📅 اليوم والأيام السبعة القادمة</h4><div class="row"><span class="ri">✈️</span><span class="rt"><b>رحلة إلى إسطنبول</b><span>السبت · 7:40 ص</span></span></div></div>
   </div><div class="nav-b"><span class="on"><i>📅</i>اليوم</span><span><i>🔖</i>تذكّر</span><span><i>🧭</i>نسّق</span><span><i>♡</i>تواصل</span><span><i>👤</i>أنا</span></div></div>'''
@@ -393,8 +410,8 @@ def bubble(text, text_ar, mine=False, who=''):
 def scr_demo_note():
     return f"""{_bar('Note', 'ملاحظة')}<div class="body">
   {T('Weekend away ideas', 'أفكار لعطلة نهاية الأسبوع', 'div', 'greet')}<div class="sub">📌 {T('Pinned · shared with Lina', 'مثبتة · مشتركة مع لينا')}</div>
-  <div class="pc" style="line-height:1.6">{T('<b>Somewhere quiet, 2 nights</b><br>• AlUla — stars and the old town<br>• Jeddah — the sea, seafood on the Corniche<br>• Budget around SAR 3,000', '<b>مكان هادئ، ليلتان</b><br>• العُلا — النجوم والبلدة القديمة<br>• جدة — البحر والمأكولات البحرية على الكورنيش<br>• الميزانية نحو 3,000 ريال')}</div>
-  <div class="pc">{row('🔗', 'AlUla stargazing tour', 'جولة مراقبة النجوم في العُلا', 'link · added by Lina', 'رابط · أضافته لينا')}</div>
+  <div class="pc" style="line-height:1.6">{T('<b>Somewhere quiet, 2 nights</b><br>• Banff — stars and the mountains<br>• Muskoka — a lake cabin, canoe at sunrise<br>• Budget around $800', '<b>مكان هادئ، ليلتان</b><br>• بانف — النجوم والجبال<br>• موسكوكا — كوخ على البحيرة وتجديف عند الشروق<br>• الميزانية نحو 800 دولار')}</div>
+  <div class="pc">{row('🔗', 'Banff stargazing tour', 'جولة مراقبة النجوم في بانف', 'link · added by Lina', 'رابط · أضافته لينا')}</div>
   <div class="pc" style="background:color-mix(in srgb,var(--p) 12%,var(--pcard))">{row('🧭', 'Create from this → Activity', 'أنشئ من هذه ← نشاط', 'Turn the ideas into options to compare', 'حوّل الأفكار إلى خيارات للمقارنة')}</div>
 </div>{nav_bar('remember')}"""
 
@@ -403,8 +420,8 @@ def scr_demo_activity():
     return f"""{_bar('Activity', 'النشاط')}<div class="body">
   {T('Weekend away', 'عطلة نهاية الأسبوع', 'div', 'greet')}<div class="sub">{T('Exploring · Fri 28 Nov · 2 options', 'قيد البحث · الجمعة 28 نوفمبر · خياران')}</div>
   <div class="pc"><h4>⚖️ {T('Options', 'الخيارات')}</h4>
-    {row('🏜', 'AlUla, 2 nights', 'العُلا، ليلتان', 'Omar ♥ · Lina ?', 'عمر ♥ · لينا ؟', 'SAR 2,800', '2,800 ريال')}
-    {row('🌊', 'Jeddah, 2 nights', 'جدة، ليلتان', 'Omar ? · Lina ?', 'عمر ؟ · لينا ؟', 'SAR 2,100', '2,100 ريال')}</div>
+    {row('🏔', 'Banff, 2 nights', 'بانف، ليلتان', 'Omar ♥ · Lina ?', 'عمر ♥ · لينا ؟', '$760', '760 دولار')}
+    {row('🛶', 'Muskoka, 2 nights', 'موسكوكا، ليلتان', 'Omar ? · Lina ?', 'عمر ؟ · لينا ؟', '$540', '540 دولار')}</div>
   <div class="pc"><h4>📎 {T('Linked', 'مرتبط')}</h4>{row('📝', 'Weekend away ideas', 'أفكار لعطلة نهاية الأسبوع', 'Note', 'ملاحظة')}</div>
   <div class="pc" style="background:color-mix(in srgb,var(--p) 12%,var(--pcard))">{row('🔔', 'Lina was asked to pick', 'طُلب من لينا الاختيار', 'Shows in her Needs your attention', 'يظهر في «يحتاج انتباهك» لديها')}</div>
 </div>{nav_bar('coordinate')}"""
@@ -412,11 +429,11 @@ def scr_demo_activity():
 
 def scr_demo_chat():
     return f"""{_bar('Our conversation', 'محادثتنا')}<div class="body" style="gap:7px">
-  {bubble('AlUla looks magical — @Lina what do you think?', 'العُلا تبدو ساحرة — @لينا ما رأيك؟', True)}
+  {bubble('Banff looks magical — @Lina what do you think?', 'بانف تبدو ساحرة — @لينا ما رأيك؟', True)}
   {bubble('🎙 Voice note · 0:14', '🎙 رسالة صوتية · 0:14', False, 'Lina')}
-  {bubble('Yes! But can we do Jeddah for your birthday?', 'نعم! لكن هل نجعل جدة لعيد ميلادك؟', False, 'Lina')}
-  {bubble('Deal 🤝 AlUla now, Jeddah in March', 'اتفقنا 🤝 العُلا الآن وجدة في مارس', True)}
-  <div class="pc">{row('♥', 'Lina picked AlUla', 'اختارت لينا العُلا', 'Both of you agree', 'كلاكما متفقان')}</div>
+  {bubble('Yes! But can we do Muskoka for your birthday?', 'نعم! لكن هل نجعل موسكوكا لعيد ميلادك؟', False, 'Lina')}
+  {bubble('Deal 🤝 Banff now, Muskoka in March', 'اتفقنا 🤝 بانف الآن وموسكوكا في مارس', True)}
+  <div class="pc">{row('♥', 'Lina picked Banff', 'اختارت لينا بانف', 'Both of you agree', 'كلاكما متفقان')}</div>
   <div class="pc" style="display:flex;gap:6px;align-items:center;margin-top:auto"><span style="flex:1;color:var(--pmuted)">{T('Write a message… type @ to mention', 'اكتب رسالة… اكتب @ للإشارة')}</span>🎙</div>
 </div>{nav_bar('coordinate')}"""
 
@@ -424,9 +441,9 @@ def scr_demo_chat():
 def scr_demo_decision():
     return f"""{_bar('Activity', 'النشاط')}<div class="body">
   {T('Weekend away', 'عطلة نهاية الأسبوع', 'div', 'greet')}<div class="sub">✅ {T('Decided together', 'قررناها معًا')}</div>
-  <div class="pc" style="background:color-mix(in srgb,var(--p) 12%,var(--pcard))"><h4>✅ {T('Decision', 'القرار')}</h4>{row('🏜', 'AlUla, 2 nights', 'العُلا، ليلتان', 'Fri 28 – Sun 30 Nov', 'الجمعة 28 – الأحد 30 نوفمبر', 'SAR 2,800', '2,800 ريال')}</div>
+  <div class="pc" style="background:color-mix(in srgb,var(--p) 12%,var(--pcard))"><h4>✅ {T('Decision', 'القرار')}</h4>{row('🏔', 'Banff, 2 nights', 'بانف، ليلتان', 'Fri 28 – Sun 30 Nov', 'الجمعة 28 – الأحد 30 نوفمبر', '$760', '760 دولار')}</div>
   <div class="pc"><h4>📎 {T('Linked items', 'العناصر المرتبطة')}</h4>
-    {row('📅', 'Calendar · AlUla weekend', 'التقويم · عطلة العُلا', 'Fri 28 Nov, all weekend', 'الجمعة 28 نوفمبر، طوال العطلة')}
+    {row('📅', 'Calendar · Banff weekend', 'التقويم · عطلة بانف', 'Fri 28 Nov, all weekend', 'الجمعة 28 نوفمبر، طوال العطلة')}
     {row('⏰', 'Reminder · book the hotel', 'تذكير · احجز الفندق', 'Omar · tomorrow 9:00 AM', 'عمر · غدًا 9:00 ص')}
     {row('📝', 'Weekend away ideas', 'أفكار لعطلة نهاية الأسبوع', 'Note', 'ملاحظة')}</div>
 </div>{nav_bar('coordinate')}"""
@@ -437,7 +454,7 @@ def scr_demo_connect():
   <div class="pc" style="text-align:center;padding:16px 12px"><div style="font-size:38px">🤗</div>{T('Send Lina a hug', 'أرسل لينا حضنًا', 'b')}
     <div class="pc" style="margin-top:8px;text-align:start;background:var(--pbg)">{T('“Can’t wait for our stars weekend.”', '«لا أطيق الانتظار لعطلة النجوم.»')}</div>
     <div style="margin-top:8px;background:var(--p);color:#fff;border-radius:12px;padding:8px;font-weight:800">{T('Send', 'أرسل')}</div></div>
-  <div class="pc"><h4>📸 {T('Afterwards: keep the memory', 'بعدها: احفظا الذكرى')}</h4>{row('🌌', 'Under the AlUla stars', 'تحت نجوم العُلا', 'Story · 8 photos · Sun 30 Nov', 'قصة · 8 صور · الأحد 30 نوفمبر')}{row('📍', 'AlUla moved to “Been there”', 'انتقلت العُلا إلى «زرناه»', 'Our places', 'أماكننا')}</div>
+  <div class="pc"><h4>📸 {T('Afterwards: keep the memory', 'بعدها: احفظا الذكرى')}</h4>{row('🌌', 'Under the Banff stars', 'تحت نجوم بانف', 'Story · 8 photos · Sun 30 Nov', 'قصة · 8 صور · الأحد 30 نوفمبر')}{row('📍', 'Banff moved to “Been there”', 'انتقلت بانف إلى «زرناه»', 'Our places', 'أماكننا')}</div>
 </div>{nav_bar('connect')}"""
 
 
@@ -518,13 +535,13 @@ def slot(time, text, text_ar):
 def cities_panel():
     return f"""<div class="cities">
     <div class="split" style="gap:40px;align-items:start">
-      <div>{T('A day in two cities', 'يوم في مدينتين', 'span', 'eyebrow')}{T('3,000 km, one shared day.', '3,000 كم، ويوم مشترك واحد.', 'h3', '', 'style="font-size:30px;margin:10px 0 0"')}
+      <div>{T('A day in two cities', 'يوم في مدينتين', 'span', 'eyebrow')}{T('5,700 km, one shared day.', '5,700 كم، ويوم مشترك واحد.', 'h3', '', 'style="font-size:30px;margin:10px 0 0"')}
         <svg class="route" viewBox="0 0 400 120" aria-hidden="true"><path class="arc" d="M30 95 Q200 -20 370 95" fill="none" stroke="#F3A27E" stroke-width="2.5"/><circle cx="30" cy="95" r="7" fill="#F3A27E"/><circle cx="370" cy="95" r="7" fill="#7FC4CC"/><text x="200" y="40" text-anchor="middle" font-size="22">✈️</text></svg>
-        <div class="city-row"><div class="city">{T('Riyadh · Omar', 'الرياض · عمر')}<b>8:14 PM</b><span>☀️ 31° · {T('evening', 'مساءً')}</span></div><div class="city">{T('London · Lina', 'لندن · لينا')}<b>5:14 PM</b><span>🌧 9° · {T('good time to talk', 'وقت مناسب للحديث')}</span></div></div>
+        <div class="city-row"><div class="city">{T('Toronto · Omar', 'تورونتو · عمر')}<b>12:14 PM</b><span>☀️ 18° · {T('lunchtime', 'وقت الغداء')}</span></div><div class="city">{T('London · Lina', 'لندن · لينا')}<b>5:14 PM</b><span>🌧 9° · {T('good time to talk', 'وقت مناسب للحديث')}</span></div></div>
         <a class="btn btn-primary" style="margin-top:24px" href="long-distance.html">{T('OneSpace for long distance →', 'OneSpace للعلاقات عن بُعد ←')}</a></div>
       <div class="day">
-        {slot('07:40', '<b>Lina</b> wakes up to “Good morning ☀️” Omar sent at his lunch break.', '<b>لينا</b> تستيقظ على «صباح الخير ☀️» أرسلها عمر في استراحة غدائه.')}
-        {slot('12:10', '<b>Omar</b> adds the flight to Istanbul — RUH → IST, Saturday 07:40.', '<b>عمر</b> يضيف رحلة إسطنبول — الرياض ← إسطنبول، السبت 07:40.')}
+        {slot('07:40', '<b>Lina</b> wakes up to “Good morning ☀️” Omar sent before bed.', '<b>لينا</b> تستيقظ على «صباح الخير ☀️» أرسلها عمر قبل نومه.')}
+        {slot('12:10', '<b>Omar</b> adds the flight to Istanbul — YYZ → IST, Saturday 07:40.', '<b>عمر</b> يضيف رحلة إسطنبول — تورونتو ← إسطنبول، السبت 07:40.')}
         {slot('17:14', 'Today says it is <b>a good time to talk</b> in London. They call.', '«اليوم» يقول إنه <b>وقت مناسب للحديث</b> في لندن. يتصلان.')}
         {slot('21:30', '<b>Lina</b> ticks “Passports” on the packing list. 7 of 12 done.', '<b>لينا</b> تضع علامة على «الجوازات» في قائمة التجهيز. 7 من 12.')}
         {slot('23:55', 'The reunion counter flips to <b>5 days</b>. ✈️', 'عدّاد اللقاء يصبح <b>5 أيام</b>. ✈️')}
@@ -568,6 +585,34 @@ def theme_wall():
                                                        ('Desert Sand', 'رمال الصحراء'), ('Midnight Blue', 'أزرق منتصف الليل'), ('Monochrome', 'أحادي اللون')]))
     return f'''<section class="tint"><div class="wrap"><div class="sec-head center">{T('Nine themes, the real app', 'تسع سمات من التطبيق الحقيقي', 'span', 'eyebrow')}{T('Which one feels like you two?', 'أيها يشبهكما؟', 'h2')}</div>
   <div class="wall reveal">{figs}</div></div></section>'''
+
+
+ONE_LIST = [  # (icon, kind, kind_ar, [(app, its list)], onespace, onespace_ar, link)
+    ('🎬', 'Movies & shows', 'الأفلام والمسلسلات', [('Netflix', 'My List'), ('Prime Video', 'Watchlist'), ('Disney+', 'Watchlist'), ('YouTube', 'Watch later'), ('Apple TV+', 'Up Next')],
+     'One shared watchlist — with what you both want on top', 'قائمة مشاهدة مشتركة واحدة — وما يريده كلاكما في الأعلى', 'watchlists.html'),
+    ('🎵', 'Music, books & games', 'الموسيقى والكتب والألعاب', [('Spotify', 'Liked songs'), ('Apple Music', 'Library'), ('Goodreads', 'Want to read'), ('Steam', 'Wishlist')],
+     'One list per kind, rated by both of you', 'قائمة واحدة لكل نوع، بتقييم كل منكما', 'watchlists.html'),
+    ('🛒', 'Things to buy', 'المشتريات', [('Amazon', 'Wish list'), ('IKEA', 'Favourites'), ('Etsy', 'Favourites'), ('eBay', 'Watchlist')],
+     'Options from every shop side by side — or one gift list per occasion', 'خيارات كل المتاجر جنبًا إلى جنب — أو قائمة هدايا واحدة لكل مناسبة', 'decide-together.html'),
+    ('✈️', 'Flights & stays', 'الطيران والإقامة', [('Google Flights', 'Tracked'), ('Skyscanner', 'Saved'), ('Kayak', 'Trips'), ('Booking.com', 'Saved')],
+     'One trip: every flight option compared, hotel, plan and documents', 'رحلة واحدة: كل خيارات الطيران مقارنة، والفندق والخطة والمستندات', 'trips.html'),
+    ('📍', 'Places', 'الأماكن', [('Google Maps', 'Saved'), ('Apple Maps', 'Guides'), ('Waze', 'Favorites')],
+     'One map of where you have been — and where you dream of going', 'خريطة واحدة لما زرتماه — ولما تحلمان بزيارته', 'memories.html'),
+]
+
+
+def one_list_section(cls='tint', head=True, cta=True):
+    rows = ''
+    for icon, k, ka, apps, o, oa, link in ONE_LIST:
+        chips = ''.join(f'<span class="ol-app"><b>{a}</b> {l}</span>' for a, l in apps)
+        rows += f"""<div class="ol-row reveal"><div class="ol-kind"><span class="ol-ico">{icon}</span>{T(k, ka, 'b')}</div>
+  <div class="ol-apps">{chips}<span class="ol-x">{T('×2 — you each have your own', '×2 — لكلٍّ منكما حسابه')}</span></div>
+  <span class="ol-arrow" aria-hidden="true">→</span>
+  <a class="ol-one" href="{link}"><span class="ol-badge">{T('1 in OneSpace', '1 في OneSpace')}</span>{T(o, oa)}</a></div>"""
+    top = f"""<div class="sec-head center">{T('One list per kind', 'قائمة واحدة لكل نوع', 'span', 'eyebrow')}{T('Every app keeps its own list. OneSpace keeps one for both of you.', 'كل تطبيق يحتفظ بقائمته. OneSpace يحتفظ بقائمة واحدة لكليكما.', 'h2')}
+  {T('Five streaming services, four shops, three flight sites — each with its own list, and each of you with your own account. That is easily 20 lists between two people. Tap Share in any of them and OneSpace puts it in the one list where it belongs.', 'خمس منصات بث وأربعة متاجر وثلاثة مواقع طيران — لكل منها قائمته، ولكل منكما حسابه. هذا يعني بسهولة 20 قائمة بينكما. انقر «مشاركة» في أي منها وسيضعه OneSpace في القائمة الوحيدة التي ينتمي إليها.', 'p', 'lead')}</div>""" if head else ''
+    return f"""<section class="{cls}" id="one-list"><div class="wrap">{top}<div class="ol">{rows}</div>
+  {f'<p class="center" style="margin-top:22px"><a class="btn btn-ghost" href="smart-sharing.html">' + T('See how sharing works →', 'شاهد كيف تعمل المشاركة ←') + '</a></p>' if cta else ''}</div></section>"""
 
 
 def watch_section():
@@ -633,6 +678,7 @@ def deep_page(d):
   <div class="stage"><div class="phones">{main_dev}{side}</div></div>
 </div></section>
 <section class="tint"><div class="wrap"><div class="sec-head center">{T('The problem', 'المشكلة', 'span', 'eyebrow')}{T('Sound familiar?', 'هل يبدو هذا مألوفًا؟', 'h2')}</div><div class="pains">{pains}</div></div></section>
+{one_list_section('', cta=slug != 'smart-sharing.html') if slug in ('smart-sharing.html', 'watchlists.html', 'trips.html') else ''}
 <section id="how"><div class="wrap split" style="align-items:start">
   <div>{T('How OneSpace solves it', 'كيف يحلها OneSpace', 'span', 'eyebrow')}{T('Four simple steps.', 'أربع خطوات بسيطة.', 'h2', '', 'style="margin:10px 0 26px"')}<ol class="how">{steps}</ol></div>
   <div class="stage" style="position:sticky;top:100px">{illus}</div>
@@ -681,7 +727,7 @@ def page_index():
                     f'<ul class="ticks" style="max-width:320px">{"".join(f"<li>{T(x, y)}</li>" for x, y in pts)}</ul><a class="more" href="{href}" style="font-weight:700">{T("More about " + e + " →", "المزيد عن " + ar + " ←")}</a></div>'
                     for i, (k, ic, e, ar, t, tar, pts, sc, href) in enumerate(tabs))
     marquee_items = [('🛒', 'Groceries for Friday · 4 left', 'مشتريات الجمعة · بقي 4'), ('💍', 'Anniversary in 12 days', 'الذكرى بعد 12 يومًا'), ('💌', 'A letter opens on Saturday', 'رسالة تُفتح يوم السبت'),
-                     ('🏜', 'Lina picked AlUla', 'اختارت لينا العُلا'), ('🤗', 'Omar sent a hug', 'أرسل عمر حضنًا'), ('✈️', 'RUH → IST · packing 7/12', 'الرياض ← إسطنبول · التجهيز 7/12'),
+                     ('🏔', 'Lina picked Banff', 'اختارت لينا بانف'), ('🤗', 'Omar sent a hug', 'أرسل عمر حضنًا'), ('✈️', 'YYZ → IST · packing 7/12', 'تورونتو ← إسطنبول · التجهيز 7/12'),
                      ('🧾', 'Internet bill due Thursday', 'فاتورة الإنترنت الخميس'), ('📍', 'Santorini added to the bucket list', 'أُضيفت سانتوريني إلى قائمة الأحلام'), ('🎂', 'Gift ideas: 3 shortlisted', 'أفكار هدايا: 3 في القائمة'),
                      ('😊', 'Lina felt great today', 'شعرت لينا اليوم بأنها رائعة'), ('🎬', 'Movie night · Friday 9 PM', 'سهرة فيلم · الجمعة 9 م'), ('☕', 'Our café · 12 visits', 'مقهانا · 12 زيارة')]
     chips = ''.join(f'<span class="chip">{i} {T(e, a)}</span>' for i, e, a in marquee_items)
@@ -689,9 +735,9 @@ def page_index():
               'applicationCategory': 'LifestyleApplication', 'description': 'A private app for couples: shared calendar, lists, trips, gestures, letters, counters and memories.',
               'offers': {'@type': 'Offer', 'price': '0', 'priceCurrency': 'USD'}, 'inLanguage': ['en', 'ar'], 'url': BASE}
     rot = ''.join(f'<span class="{"on" if i == 0 else ""}">{T(e, a)}</span>' for i, (e, a) in enumerate([
-        ('living together', 'يعيشان معًا'), ('3,000 km apart', 'على بُعد 3,000 كم'), ('just married', 'تزوّجا حديثًا'), ('planning a wedding', 'يخططان لزفاف'), ('with busy weeks', 'أسابيعهم مزدحمة')]))
+        ('living together', 'يعيشان معًا'), ('5,700 km apart', 'على بُعد 5,700 كم'), ('just married', 'تزوّجا حديثًا'), ('planning a wedding', 'يخططان لزفاف'), ('with busy weeks', 'أسابيعهم مزدحمة')]))
     toasts = [('🤍', 'Lina sent you a hug', 'أرسلت لك لينا حضنًا', 'just now', 'الآن'), ('💌', 'A letter is waiting for you', 'رسالة تنتظرك', 'opens Saturday', 'تُفتح السبت'),
-              ('✅', 'Lina ticked “Buy flowers”', 'أنهت لينا «شراء الورد»', '2 min ago', 'قبل دقيقتين'), ('🏜', 'You both picked AlUla', 'اخترتما العُلا كلاكما', 'decision saved', 'حُفظ القرار')]
+              ('✅', 'Lina ticked “Buy flowers”', 'أنهت لينا «شراء الورد»', '2 min ago', 'قبل دقيقتين'), ('🏔', 'You both picked Banff', 'اخترتما بانف كلاكما', 'decision saved', 'حُفظ القرار')]
     toast_data = ''.join(f'<template data-toast><span class="e">{i}</span><div>{T(a, b, "b")}{T(c, d)}</div></template>' for i, a, b, c, d in toasts)
     return h + f"""
 <section class="hero-xl"><div class="wrap hero-grid">
@@ -715,13 +761,14 @@ def page_index():
 </div></section>
 <div class="marquee" aria-hidden="true"><div class="marquee-track">{chips}{chips}</div></div>
 {watch_section()}
+{one_list_section()}
 
 <section><div class="wrap">
   <div class="sec-head center">{T('Sound familiar?', 'هل يبدو هذا مألوفًا؟', 'span', 'eyebrow')}<h2>{T('Love is easy.', 'الحب سهل.')} <span class="serif accent">{T('Logistics aren’t.', 'التفاصيل ليست كذلك.')}</span></h2>
   {T('Every couple has these conversations. OneSpace quietly takes care of them, so your chats can be about you again.', 'كل زوجين يمرّان بهذه المحادثات. يتولاها OneSpace بهدوء، لتعود محادثاتكما عنكما من جديد.', 'p', 'lead')}</div>
   <div class="pains">
     {pain('Did you book the dentist? 🦷', 'هل حجزت موعد طبيب الأسنان؟ 🦷', 'I thought YOU were doing it 😅', 'ظننت أنكِ ستحجزينه 😅', 'Reminders that belong to someone — and show up in their Today.', 'تذكيرات لها صاحب — وتظهر في «اليوم» لديه.', shot='lists')}
-    {pain('What was that restaurant we loved in Jeddah?', 'ما اسم المطعم الذي أحببناه في جدة؟', 'No idea… it had blue chairs?', 'لا أذكر… كانت كراسيه زرقاء؟', 'Our places: every spot you loved, pinned on your own map.', 'أماكننا: كل مكان أحببتماه، على خريطتكما الخاصة.', shot='places')}
+    {pain('What was that restaurant we loved in Lisbon?', 'ما اسم المطعم الذي أحببناه في لشبونة؟', 'No idea… it had blue chairs?', 'لا أذكر… كانت كراسيه زرقاء؟', 'Our places: every spot you loved, pinned on your own map.', 'أماكننا: كل مكان أحببتماه، على خريطتكما الخاصة.', shot='places')}
     {pain('Sorry, did I wake you? 🙈', 'آسفة، هل أيقظتك؟ 🙈', 'It’s 3 a.m. here…', 'الساعة 3 فجرًا هنا…', 'Two clocks and two weathers on Today — know before you call.', 'ساعتان وطقسان في «اليوم» — اعرف قبل أن تتصل.', shot='clocks')}
     {pain('Which sofa did we say? The grey one?', 'أي أريكة اتفقنا عليها؟ الرمادية؟', 'I sent you 14 links last week…', 'أرسلت لكِ 14 رابطًا الأسبوع الماضي…', 'Activities: options side by side, both your picks, one decision.', 'الأنشطة: خيارات جنبًا إلى جنب، واختيار كل منكما، وقرار واحد.', shot='options')}
     {pain('Is it our anniversary this month?!', 'هل ذكرانا هذا الشهر؟!', '…it was last Tuesday 💔', '…كانت الثلاثاء الماضي 💔', 'Counters and occasions that remind you weeks before — with gift ideas.', 'عدّادات ومناسبات تذكّرك قبلها بأسابيع — مع أفكار هدايا.', shot='counter')}
@@ -745,7 +792,7 @@ def page_index():
     <div class="bx b-2 lilac reveal"><div class="ico i-violet">🌤</div>{T('A one-minute check-in', 'تواصل يومي في دقيقة', 'h3')}{T('How was today, really? Pick a face, add one honest line.', 'كيف كان يومك حقًا؟ اختر وجهًا وأضف سطرًا صادقًا.', 'p')}<div class="viz"><div class="faces"><span>😞</span><span>😕</span><span>🙂</span><span class="on">😊</span><span>🤩</span></div></div></div>
     <div class="bx b-4 ink reveal"><div class="ico" style="background:rgba(255,255,255,.1)">🌙</div>{T('Arabic and English, side by side', 'العربية والإنجليزية جنبًا إلى جنب', 'h3')}{T('Each of you picks your language. Every screen works right to left.', 'يختار كل منكما لغته. وكل شاشة تعمل من اليمين لليسار.', 'p')}
       <div class="viz lang-pair"><div>🤗 <b style="color:#fff">Lina sent you a hug</b><br><span style="color:#B9C3D8">“Sending you a big, warm hug.”</span></div><div dir="rtl" style="font-family:var(--font-ar)">🤗 <b style="color:#fff">أرسل لكِ عمر حضنًا</b><br><span style="color:#B9C3D8">«أرسل لكِ حضنًا كبيرًا ودافئًا.»</span></div></div></div>
-    <div class="bx b-2 reveal"><div class="ico i-green">🎁</div>{T('Surprises stay secret', 'المفاجآت تبقى سرًا', 'h3')}{T('Mark a gift or an occasion “Only me”. Your partner never sees it.', 'اجعل الهدية أو المناسبة «أنا فقط». لن يراها شريكك أبدًا.', 'p')}<div class="viz"><span class="chip">🔒 {T('Only me', 'أنا فقط')}</span> <span class="chip">💰 SAR 1,240 {T('left', 'متبقٍ')}</span></div></div>
+    <div class="bx b-2 reveal"><div class="ico i-green">🎁</div>{T('Surprises stay secret', 'المفاجآت تبقى سرًا', 'h3')}{T('Mark a gift or an occasion “Only me”. Your partner never sees it.', 'اجعل الهدية أو المناسبة «أنا فقط». لن يراها شريكك أبدًا.', 'p')}<div class="viz"><span class="chip">🔒 {T('Only me', 'أنا فقط')}</span> <span class="chip">💰 $370 {T('left', 'متبقٍ')}</span></div></div>
   </div>
   <p class="center" style="margin-top:28px"><a class="btn btn-ghost" href="features.html">{T('See every feature →', 'شاهد كل المزايا ←')}</a></p>
 </div></section>
@@ -1524,6 +1571,60 @@ for _g in GUIDES:
 REDIRECTS = {'v4.html': ('./', 'Home'), 'v4-tutorial.html': ('how-it-works.html', 'How it works')}
 
 
+def arabic_page(html, name):
+    """The same page, rendered in Arabic on the server so search engines can index it at /ar/."""
+    from bs4 import BeautifulSoup
+    soup = BeautifulSoup(html, 'html.parser')
+    for el in soup.find_all(attrs={'data-i18n': True}):
+        k = el.get('data-i18n')
+        if k in AR:
+            el.clear()
+            el.append(BeautifulSoup(AR[k], 'html.parser'))
+    for el in soup.find_all(attrs={'data-i18n-attr': True}):
+        for pair in el['data-i18n-attr'].split(';'):
+            attr, k = pair.split(':')
+            if k in AR:
+                el[attr] = AR[k]
+    for el in soup.find_all(attrs={'data-ar-src': True}):
+        el['src'] = el['data-ar-src']
+        if el.get('data-ar-poster'):
+            el['poster'] = el['data-ar-poster']
+    hroot = soup.find('html')
+    hroot['lang'], hroot['dir'] = 'ar', 'rtl'
+    t = soup.find('title')
+    if t and t.get('data-ar'):
+        t.string = t['data-ar']
+    slug = '' if name == 'index.html' else name
+    soup.find('link', rel='canonical')['href'] = BASE + 'ar/' + slug
+    desc = soup.find('meta', attrs={'name': 'description'})
+    for prop, val in (('og:title', t.string if t else None), ('og:description', desc['content'] if desc else None), ('og:url', BASE + 'ar/' + slug)):
+        m = soup.find('meta', property=prop)
+        if m is not None and val:
+            m['content'] = val
+    og = soup.find('meta', property='og:type')
+    if og is not None:
+        og.insert_after(soup.new_tag('meta', property='og:locale', content='ar_AR'))
+    for b in soup.find_all('button', class_='lang'):
+        b.string = 'English'
+        b['aria-label'] = 'Switch to English'
+    out = str(soup)
+    # Shared files live at the site root, one level up from /ar/.
+    return re.sub(r'((?:src|href|poster|data-en-src|data-ar-src|data-en-poster|data-ar-poster|srcset)=")(assets/|site\.webmanifest)', r'\1/\2', out)
+
+
+def llms_txt():
+    lines = ['# OneSpace', '', '> OneSpace is a private app for couples — living together or apart — that keeps the shared life in one place: '
+             'one shared watchlist, one place to compare things to buy, one trip with every flight option, one calendar, reminders for me, '
+             'my partner or both, occasions with budgets, counters, letters and memories. English and Arabic. Android now, iPhone soon.', '',
+             '## Main pages']
+    for n, (_, p, _c) in PAGES.items():
+        if n in ('privacy.html', 'terms.html', 'delete-account.html'):
+            continue
+        lines.append(f'- [{n.replace(".html", "").replace("-", " ").title() if n != "index.html" else "Home"}]({BASE}{"" if n == "index.html" else n})')
+    lines += ['', '## Arabic', f'- [العربية]({BASE}ar/)', '', '## Legal', f'- [Privacy]({BASE}privacy.html)', f'- [Terms]({BASE}terms.html)', '']
+    return '\n'.join(lines)
+
+
 def main():
     for name, (fn, _, _) in PAGES.items():
         (ROOT / name).write_text(fn(), encoding='utf-8')
@@ -1531,10 +1632,21 @@ def main():
     for name, (target, title) in REDIRECTS.items():
         (ROOT / name).write_text(redirect(target, title), encoding='utf-8')
     (ROOT / 'assets' / 'ar.js').write_text('window.ONESPACE_AR=' + json.dumps(AR, ensure_ascii=False, sort_keys=True) + ';\n', encoding='utf-8')
-    urls = ''.join(f'  <url><loc>{BASE}{"" if n == "index.html" else n}</loc><lastmod>{TODAY}</lastmod><changefreq>{c}</changefreq><priority>{p}</priority></url>\n'
-                   for n, (_, p, c) in PAGES.items())
-    (ROOT / 'sitemap.xml').write_text(f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n{urls}</urlset>\n', encoding='utf-8')
-    (ROOT / 'robots.txt').write_text(f'User-agent: *\nAllow: /\nSitemap: {BASE}sitemap.xml\n', encoding='utf-8')
+    (ROOT / 'ar').mkdir(exist_ok=True)
+    for name in PAGES:
+        (ROOT / 'ar' / name).write_text(arabic_page((ROOT / name).read_text(encoding='utf-8'), name), encoding='utf-8')
+    urls = ''
+    for n, (_, p, c) in PAGES.items():
+        slug = '' if n == 'index.html' else n
+        alt = (f'<xhtml:link rel="alternate" hreflang="en" href="{BASE}{slug}"/><xhtml:link rel="alternate" hreflang="ar" href="{BASE}ar/{slug}"/>'
+               f'<xhtml:link rel="alternate" hreflang="x-default" href="{BASE}{slug}"/>')
+        for loc, pr in ((BASE + slug, p), (BASE + 'ar/' + slug, f'{max(float(p) - 0.1, 0.1):.1f}')):
+            urls += f'  <url><loc>{loc}</loc><lastmod>{TODAY}</lastmod><changefreq>{c}</changefreq><priority>{pr}</priority>{alt}</url>\n'
+    (ROOT / 'sitemap.xml').write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" '
+                                      f'xmlns:xhtml="http://www.w3.org/1999/xhtml">\n{urls}</urlset>\n', encoding='utf-8')
+    (ROOT / 'robots.txt').write_text(f'User-agent: *\nAllow: /\nDisallow: /v4.html\nDisallow: /v4-tutorial.html\n\nSitemap: {BASE}sitemap.xml\n', encoding='utf-8')
+    (ROOT / f'{INDEXNOW_KEY}.txt').write_text(INDEXNOW_KEY + '\n', encoding='utf-8')
+    (ROOT / 'llms.txt').write_text(llms_txt(), encoding='utf-8')
     (ROOT / 'site.webmanifest').write_text(json.dumps({'name': 'OneSpace', 'short_name': 'OneSpace', 'start_url': './', 'display': 'standalone',
         'background_color': '#FFFFFF', 'theme_color': '#14213D', 'icons': [{'src': 'assets/icon-512.png', 'sizes': '512x512', 'type': 'image/png'},
         {'src': 'assets/apple-touch-icon.png', 'sizes': '180x180', 'type': 'image/png'}]}, indent=1) + '\n', encoding='utf-8')

@@ -21,14 +21,31 @@
   }
   // Optional privacy-friendly analytics: set GOATCOUNTER in build.py to enable.
   function track(name) { var gc = window.goatcounter; if (gc && gc.count) gc.count({ path: 'event/' + name, title: name, event: true }); }
+  // Conversion clicks, named by where they happened: cta_join@/watchlists.html, outbound_play.google.com …
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href]'); if (!a || a.hasAttribute('data-track')) return;
+    var h = a.getAttribute('href') || '', where = '@' + location.pathname;
+    if (/join\.html/.test(h)) track('cta_join' + where);
+    else if (/how-it-works\.html|#tour/.test(h)) track('cta_demo' + where);
+    else if (/^mailto:/.test(h)) track('email' + where);
+    else if (/^https?:/.test(h) && a.host !== location.host) track('outbound_' + a.host);
+  }, true);
   document.addEventListener('click', function (e) { var t = e.target.closest && e.target.closest('[data-track],[data-theme-pick],[data-view]'); if (!t) return;
     track(t.getAttribute('data-track') || (t.hasAttribute('data-theme-pick') ? 'theme_' + t.getAttribute('data-theme-pick') : 'view_' + t.getAttribute('data-view'))); });
 
   // ---------- Language ----------
   var english = new WeakMap();
-  var lang = new URLSearchParams(location.search).get('lang') || get('os-lang') ||
-    ((navigator.language || '').toLowerCase().indexOf('ar') === 0 ? 'ar' : 'en');
-  if (lang !== 'ar') lang = 'en';
+  // Each language has its own address: /page.html (English) and /ar/page.html (Arabic).
+  var lang = root.getAttribute('lang') === 'ar' ? 'ar' : 'en';
+  function twin(to) {
+    var p = location.pathname, isAr = p.indexOf('/ar/') === 0 || p === '/ar';
+    var rest = isAr ? p.replace(/^\/ar\/?/, '/') : p;
+    return (to === 'ar' ? '/ar' + rest : rest) + location.search.replace(/[?&]lang=(ar|en)/, '').replace(/^&/, '?') + location.hash;
+  }
+  var want = new URLSearchParams(location.search).get('lang') || get('os-lang') ||
+    (!get('os-lang-seen') && (navigator.language || '').toLowerCase().indexOf('ar') === 0 ? 'ar' : null);
+  put('os-lang-seen', '1');
+  if ((want === 'ar' || want === 'en') && want !== lang && location.protocol !== 'file:') { location.replace(twin(want)); return; }
   function tr(key, en) { return lang === 'ar' && AR[key] ? AR[key] : en; }
   function apply() {
     root.lang = lang; root.dir = lang === 'ar' ? 'rtl' : 'ltr';
@@ -56,8 +73,8 @@
     var t = document.querySelector('title');
     if (t && t.dataset.ar) { if (!t.dataset.en) t.dataset.en = t.textContent; t.textContent = lang === 'ar' ? t.dataset.ar : t.dataset.en; }
   }
-  apply();
-  $$('.lang').forEach(function (b) { b.addEventListener('click', function () { lang = lang === 'ar' ? 'en' : 'ar'; put('os-lang', lang); apply(); }); });
+  if (lang === 'ar') apply();  // already rendered in Arabic on the server; this only fills script-made text
+  $$('.lang').forEach(function (b) { b.addEventListener('click', function () { var to = lang === 'ar' ? 'en' : 'ar'; put('os-lang', to); track('lang_' + to); location.href = twin(to); }); });
 
   // ---------- Menu ----------
   var burger = $('.burger'), menu = $('.menu');

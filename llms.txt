@@ -1,0 +1,35 @@
+# OneSpace
+
+> OneSpace is a private app for couples — living together or apart — that keeps the shared life in one place: one shared watchlist, one place to compare things to buy, one trip with every flight option, one calendar, reminders for me, my partner or both, occasions with budgets, counters, letters and memories. English and Arabic. Android now, iPhone soon.
+
+## Main pages
+- [Home](https://onespace.live/)
+- [Features](https://onespace.live/features.html)
+- [Long Distance](https://onespace.live/long-distance.html)
+- [Living Together](https://onespace.live/living-together.html)
+- [How It Works](https://onespace.live/how-it-works.html)
+- [Whats New](https://onespace.live/whats-new.html)
+- [Faq](https://onespace.live/faq.html)
+- [Compare](https://onespace.live/compare.html)
+- [Tutorials](https://onespace.live/tutorials.html)
+- [Guides](https://onespace.live/guides.html)
+- [Join](https://onespace.live/join.html)
+- [Support](https://onespace.live/support.html)
+- [Share Kit](https://onespace.live/share-kit.html)
+- [Smart Sharing](https://onespace.live/smart-sharing.html)
+- [Decide Together](https://onespace.live/decide-together.html)
+- [Trips](https://onespace.live/trips.html)
+- [Occasions](https://onespace.live/occasions.html)
+- [Watchlists](https://onespace.live/watchlists.html)
+- [Memories](https://onespace.live/memories.html)
+- [Everyday](https://onespace.live/everyday.html)
+- [Guide Long Distance Ideas](https://onespace.live/guide-long-distance-ideas.html)
+- [Guide Mental Load](https://onespace.live/guide-mental-load.html)
+- [Guide Anniversary Planning](https://onespace.live/guide-anniversary-planning.html)
+
+## Arabic
+- [العربية](https://onespace.live/ar/)
+
+## Legal
+- [Privacy](https://onespace.live/privacy.html)
+- [Terms](https://onespace.live/terms.html)
