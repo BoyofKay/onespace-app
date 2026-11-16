@@ -1,0 +1,21 @@
+name: Website quality check
+on:
+  push:
+    branches: [main]
+    paths: ["*.html", "assets/**", "tests/**", ".github/workflows/site-check.yml", "sitemap.xml", "robots.txt"]
+  pull_request:
+    branches: [main]
+jobs:
+  static-check:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify HTML, internal links and accessibility basics
+        run: python3 tests/check_site.py
+      - name: Verify browser JavaScript syntax
+        run: |
+          node --check assets/modern.js
+          node --check assets/site.js
+          node --check assets/ar.js
