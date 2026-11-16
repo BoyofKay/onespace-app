@@ -33,3 +33,6 @@ body[data-site-theme=mono] .hero{background:linear-gradient(135deg,#292929,#1010
 body[data-site-theme=mono] .dark-section{background:#191919}
 body[data-site-theme=mono] .early{background:linear-gradient(125deg,#333,#151515)}
 body[data-site-theme=mono] .btn-primary{color:#131313}
+
+/* Compact subpages so visitors can scan without excessive scrolling. */
+.inner-hero{padding:64px 0}.content-section{padding:51px 0}.section{padding:65px 0}.footer-layout{gap:24px}.story-grid{gap:45px}.feature{min-height:auto}@media(max-width:760px){.inner-hero{padding:53px 0}.content-section{padding:34px 0}.section{padding:48px 0}}
