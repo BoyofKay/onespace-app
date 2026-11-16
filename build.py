@@ -14,12 +14,15 @@ from html import escape
 from pathlib import Path
 
 ROOT = Path(__file__).parent
-BASE = 'https://boyofkay.github.io/onespace-app/'
+BASE = 'https://onespace.live/'
 TODAY = date.today().isoformat()
 # Privacy-friendly, cookieless analytics (https://www.goatcounter.com, free). Set to your code, e.g. 'onespace', then rebuild.
 GOATCOUNTER = ''
 AR: dict[str, str] = {}
 LEGAL = json.loads((ROOT / 'content' / 'legal.json').read_text(encoding='utf-8'))
+import sys as _sys
+_sys.path.insert(0, str(ROOT / 'content'))
+from deep_pages import DEEP, COMPARE  # noqa: E402
 
 
 def T(en, ar, tag='span', cls='', attrs=''):
@@ -58,7 +61,10 @@ def head(page, title, title_ar, desc, desc_ar=''):
         cur = ' aria-current="page"' if page in pages else ''
         inner = ''.join(f'<a href="{h}"><span class="e">{e}</span><span>{T(t, ta, "b")}{T(d, da, "small")}</span></a>' for h, e, t, ta, d, da in items)
         return f'<div class="drop"><button type="button" aria-expanded="false"{cur}>{T(label, label_ar)} ▾</button><div class="drop-panel">{inner}</div></div>'
-    menu = [link('features.html', 'Features', 'المزايا'),
+    feat_items = [('features.html', '✨', 'All features', 'كل المزايا', 'The five tabs, one by one', 'التبويبات الخمسة واحدًا تلو الآخر')] + \
+        [(d['slug'], d['icon'], d['nav'][0], d['nav'][1], d['navd'][0], d['navd'][1]) for d in DEEP] + \
+        [('compare.html', '🆚', 'Compare', 'مقارنة', 'vs. chat, notes and calendars', 'مقارنة بالمحادثة والملاحظات والتقويمات')]
+    menu = [drop('Features', 'المزايا', feat_items, ('features.html', 'compare.html') + tuple(d['slug'] for d in DEEP)),
             drop('For couples', 'للأزواج', [
                 ('long-distance.html', '🌍', 'Living apart', 'متباعدان', 'Two cities, two clocks, one life', 'مدينتان وساعتان وحياة واحدة'),
                 ('living-together.html', '🏡', 'Living together', 'تحت سقف واحد', 'One home, so much to share', 'بيت واحد وكثير لنتشاركه')], ('long-distance.html', 'living-together.html')),
@@ -335,6 +341,40 @@ def scr_memories():
 </div>{nav_bar('remember')}'''
 
 
+def scr_share():
+    sug = [('🎬', 'Shared experience', 'تجربة مشتركة', 'Watchlist · Movies', 'قائمة المشاهدة · أفلام'), ('🧭', 'New Activity', 'نشاط جديد', '', ''), ('📝', 'Note', 'ملاحظة', '', '')]
+    rows = ''.join(row(i, e, a, se, sa) for i, e, a, se, sa in sug)
+    return f"""<div class="body" style="opacity:.35;padding-top:30px"><div class="pc" style="height:140px"></div><div class="pc" style="height:120px"></div></div>
+  <div class="sheet">{T('Save to OneSpace', 'احفظ في OneSpace', 'div', 'greet')}
+    <div class="pc" style="margin:8px 0">{row('▶️', 'Before Sunrise (1995)', 'قبل الشروق (1995)', 'netflix.com/title/…', 'netflix.com/title/…')}</div>
+    {T('Suggested for this link', 'مقترح لهذا الرابط', 'div', 'grp')}<div class="pc">{rows}</div>
+    <div style="margin-top:8px;background:var(--p);color:#fff;border-radius:12px;padding:9px;text-align:center;font-weight:800">{T('Save as Shared experience', 'احفظ كتجربة مشتركة')}</div></div>"""
+
+
+def scr_watch():
+    return f"""<div class="app-head"><b style="font-size:15px">← {T('Shared experiences', 'التجارب المشتركة')}</b></div><div class="body">
+  <div style="display:flex;gap:5px;flex-wrap:wrap">{''.join(f'<span class="chip" style="font-size:9px;padding:3px 8px">{T(e, a)}</span>' for e, a in [('Movies', 'أفلام'), ('TV', 'مسلسلات'), ('Music', 'موسيقى'), ('Books', 'كتب'), ('Games', 'ألعاب')])}</div>
+  <div class="pc" style="background:color-mix(in srgb,var(--p) 13%,var(--pcard))"><h4>✨ {T('What shall we do together?', 'ماذا نفعل معًا؟')}</h4>{row('🎬', 'Before Sunrise', 'قبل الشروق', 'A mutual pick · Prime Video', 'اختيار مشترك · برايم فيديو')}</div>
+  <div class="pc"><h4>💞 {T('Mutual picks', 'اختيارات مشتركة')} <span class="n">3</span></h4>
+    {row('📺', 'The Great British Bake Off', 'مسابقة الخَبز البريطانية', 'Planned · Fri 9 PM', 'مخطط · الجمعة 9 م')}
+    {row('🎵', 'Our wedding playlist', 'قائمة أغاني زفافنا', 'Music · Spotify', 'موسيقى · سبوتيفاي')}
+    {row('📖', 'The Little Prince', 'الأمير الصغير', 'Book · a chapter each', 'كتاب · فصل لكل منا')}</div>
+  <div class="pc"><h4>⭐ {T('Our ratings', 'تقييماتنا')}</h4>{row('🎞', 'Before Sunrise', 'قبل الشروق', 'Omar ★★★★ · Lina ★★★★★', 'عمر ★★★★ · لينا ★★★★★')}</div>
+</div>{nav_bar('connect')}"""
+
+
+def scr_contacts():
+    return f"""<div class="app-head"><b style="font-size:15px">← {T('Contact cards', 'بطاقات التواصل')}</b></div><div class="body">
+  <div class="pc" style="color:var(--pmuted)">🔎 {T('Search contact cards', 'ابحث في بطاقات التواصل')}</div>
+  <div class="pc">{row('🦷', 'Dr. Sara — dentist', 'د. سارة — طبيبة الأسنان', 'Smile Clinic · Sun–Thu 9–21', 'عيادة الابتسامة · الأحد–الخميس 9–21')}
+    {row('🔧', 'Building maintenance', 'صيانة المبنى', 'Faisal · WhatsApp is fastest', 'فيصل · الواتساب أسرع')}
+    {row('🏊', 'Kids’ swim club', 'نادي السباحة للأطفال', 'From the Activity “Summer plans”', 'من نشاط «خطط الصيف»')}</div>
+  <div class="pc"><h4>📇 {T('Dr. Sara — dentist', 'د. سارة — طبيبة الأسنان')}</h4>
+    <div style="display:flex;gap:6px;flex-wrap:wrap">{''.join(f'<span class="chip" style="font-size:9px;padding:3px 8px">{i} {T(e, a)}</span>' for i, e, a in [('📞', 'Call', 'اتصال'), ('💬', 'WhatsApp', 'واتساب'), ('🗺', 'Directions', 'الاتجاهات'), ('📲', 'Save to phone', 'احفظ في الهاتف')])}</div></div>
+  <div class="pc" style="background:color-mix(in srgb,var(--p) 12%,var(--pcard))">{row('📥', 'Import from phone', 'استيراد من الهاتف', 'Duplicates are spotted for you', 'يكتشف التكرار تلقائيًا')}</div>
+</div>{nav_bar('remember')}"""
+
+
 SCREENS = {'today': scr_today, 'ourspace': scr_ourspace, 'quickadd': scr_quickadd, 'counters': scr_counters,
            'places': scr_places, 'trip': scr_trip, 'love': scr_love, 'letter': scr_letter, 'occasion': scr_occasion,
            'activity': scr_activity, 'arabic': scr_arabic, 'memories': scr_memories}
@@ -401,6 +441,7 @@ def scr_demo_connect():
 </div>{nav_bar('connect')}"""
 
 
+SCREENS.update({'share': scr_share, 'watch': scr_watch, 'contacts': scr_contacts})
 SCREENS.update({'demo_note': scr_demo_note, 'demo_activity': scr_demo_activity, 'demo_chat': scr_demo_chat,
                 'demo_decision': scr_demo_decision, 'demo_connect': scr_demo_connect})
 
@@ -543,6 +584,81 @@ def watch_section():
 </div></section>'''
 
 
+def compare_rows(limit=None):
+    rows = COMPARE[:limit] if limit else COMPARE
+    return ''.join(f'<tr><th scope="row">{T(n, na)}</th><td class="old">{T(u, ua)}</td><td class="new">✓ {T(o, oa)}</td></tr>' for n, na, u, ua, o, oa in rows)
+
+
+def compare_table(limit=None):
+    return f"""<div class="cmp-wrap"><table class="cmp"><thead><tr><th></th><th>{T('The usual mix', 'الخليط المعتاد')}<small>{T('chat, notes, two calendars, spreadsheets, photos', 'محادثة وملاحظات وتقويمان وجداول وصور')}</small></th><th class="new">OneSpace<small>{T('one private app for two', 'تطبيق خاص واحد لشخصين')}</small></th></tr></thead>
+<tbody>{compare_rows(limit)}</tbody></table></div>"""
+
+
+def value_grid():
+    cards = ''.join(f"""<a class="card link value reveal" href="{d['slug']}"><span class="vi">{d['icon']}</span>{T(d['nav'][0], d['nav'][1], 'h3')}{T(d['navd'][0], d['navd'][1], 'p')}<span class="more">{T('See how →', 'شاهد كيف ←')}</span></a>""" for d in DEEP)
+    extra = [('long-distance.html', '🌍', 'Made for distance', 'مصمم للمسافة', 'Two clocks, reunion countdowns, sealed letters', 'ساعتان وعدّ للقاء ورسائل مغلقة'),
+             ('features.html#remember', '⏳', 'Counters that understand dates', 'عدّادات تفهم التواريخ', 'The day itself and its anniversary, with progress', 'اليوم نفسه وذكراه، مع التقدم'),
+             ('features.html#connect', '♡', 'A little love, daily', 'لمسة حب يومية', 'Gestures, letters and a one-minute check-in', 'لمسات ورسائل وتواصل يومي في دقيقة'),
+             ('compare.html', '🆚', 'vs. the usual mix', 'مقارنة بالخليط المعتاد', 'Why one app beats chat + notes + calendars', 'لماذا يتفوق تطبيق واحد على المحادثة والملاحظات والتقويمات')]
+    cards += ''.join(f"""<a class="card link value reveal" href="{h}"><span class="vi">{i}</span>{T(e, a, 'h3')}{T(de, da, 'p')}<span class="more">{T('See how →', 'شاهد كيف ←')}</span></a>""" for h, i, e, a, de, da in extra)
+    return f"""<section id="why"><div class="wrap">
+  <div class="sec-head center">{T('Why couples choose OneSpace', 'لماذا يختار الأزواج OneSpace', 'span', 'eyebrow')}<h2>{T('Eleven things your chat app', 'إحدى عشرة ميزة لا يستطيع')} <span class="serif accent">{T('can’t do.', 'تطبيق المحادثة فعلها.')}</span></h2>
+  {T('Each one solves a real problem couples have every week. Tap any card to see exactly how.', 'كل واحدة تحل مشكلة حقيقية يواجهها الأزواج كل أسبوع. انقر أي بطاقة لترى كيف بالضبط.', 'p', 'lead')}</div>
+  <div class="values">{cards}</div>
+</div></section>"""
+
+
+def deep_page(d):
+    slug = d['slug']
+    t_en, t_ar = d['title']
+    h = head(slug, f"{d['nav'][0]} — OneSpace couples app", f"{d['nav'][1]} — تطبيق OneSpace للأزواج", d['seo'][0], d['seo'][1])
+    shot = d.get('shot')
+    main_dev = device(shot, d['nav'][0], d['nav'][1], 'lg', fallback=phone(SCREENS[d['illus']](), d['theme'], label=d['nav'][0], label_ar=d['nav'][1])) if shot else phone(SCREENS[d['illus']](), d['theme'], label=d['nav'][0], label_ar=d['nav'][1])
+    second = d.get('shot2')
+    pains = ''.join(pain(a, b, c, e, f, g) for a, b, c, e, f, g in d['pains'])
+    steps = ''.join(f'<li class="reveal"><span class="sn">{i}</span><div>{T(a, b, "h3")}{T(c, e, "p")}</div></li>' for i, (a, b, c, e) in enumerate(d['steps'], 1))
+    details = ''.join(trust_card(i, 'i-teal', a, b, c, e) for i, a, b, c, e in d['details'])
+    vs = ''.join(f'<tr><th scope="row">{T(n, na)}</th><td class="old">{T(u, ua)}</td><td class="new">✓ {T(o, oa)}</td></tr>' for n, na, u, ua, o, oa in d['vs'])
+    faq = ''.join(f'<details>{T(q, qa, "summary")}{T(a, aa, "p")}</details>' for q, qa, a, aa in d['faq'])
+    side = device(second, d['nav'][0], d['nav'][1], 'sm', fallback='') if second else ''
+    illus = phone(SCREENS[d['illus']](), d['theme'], label=d['nav'][0], label_ar=d['nav'][1])
+    others = ''.join(f'<a class="chip" href="{o["slug"]}">{o["icon"]} {T(o["nav"][0], o["nav"][1])}</a>' for o in DEEP if o is not d)
+    ld = {'@context': 'https://schema.org', '@type': 'WebPage', 'name': t_en, 'description': d['seo'][0], 'url': BASE + slug,
+          'about': {'@type': 'MobileApplication', 'name': 'OneSpace'}}
+    return h + f"""
+<section class="page-hero deep-hero"><div class="wrap split">
+  <div><div class="crumbs"><a href="./">{T('Home', 'الرئيسية')}</a> › <a href="features.html">{T('Features', 'المزايا')}</a> › {T(d['nav'][0], d['nav'][1])}</div>
+    <div style="font-size:44px;margin-top:14px">{d['icon']}</div>{T(t_en, t_ar, 'h1')}{T(d['lead'][0], d['lead'][1], 'p', 'lead')}
+    <div class="cta-row"><a class="btn btn-primary" href="join.html">{T('Join the Founding 500', 'انضم إلى المؤسسين الـ500')}</a><a class="btn btn-ghost" href="#how">{T('How it works', 'كيف يعمل')}</a></div></div>
+  <div class="stage"><div class="phones">{main_dev}{side}</div></div>
+</div></section>
+<section class="tint"><div class="wrap"><div class="sec-head center">{T('The problem', 'المشكلة', 'span', 'eyebrow')}{T('Sound familiar?', 'هل يبدو هذا مألوفًا؟', 'h2')}</div><div class="pains">{pains}</div></div></section>
+<section id="how"><div class="wrap split" style="align-items:start">
+  <div>{T('How OneSpace solves it', 'كيف يحلها OneSpace', 'span', 'eyebrow')}{T('Four simple steps.', 'أربع خطوات بسيطة.', 'h2', '', 'style="margin:10px 0 26px"')}<ol class="how">{steps}</ol></div>
+  <div class="stage" style="position:sticky;top:100px">{illus}</div>
+</div></section>
+<section class="tint"><div class="wrap"><div class="sec-head">{T('In detail', 'بالتفصيل', 'span', 'eyebrow')}{T('Everything it can do.', 'كل ما يستطيع فعله.', 'h2')}</div><div class="grid g3">{details}</div></div></section>
+<section><div class="narrow"><div class="sec-head center">{T('The difference', 'الفرق', 'span', 'eyebrow')}{T('Before and after OneSpace', 'قبل OneSpace وبعده', 'h2')}</div>
+  <div class="cmp-wrap"><table class="cmp"><thead><tr><th></th><th>{T('Without', 'بدونه')}</th><th class="new">{T('With OneSpace', 'مع OneSpace')}</th></tr></thead><tbody>{vs}</tbody></table></div>
+  {('<div style="margin-top:36px">' + faq + '</div>') if faq else ''}
+  <p class="center" style="margin-top:30px"><a href="compare.html">{T('See the full comparison →', 'شاهد المقارنة الكاملة ←')}</a></p></div></section>
+<section class="tint"><div class="wrap center">{T('More of what OneSpace does', 'المزيد مما يفعله OneSpace', 'h2', '', 'style="font-size:28px;margin-bottom:18px"')}<div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center">{others}</div></div></section>
+<script type="application/ld+json">{json.dumps(ld, ensure_ascii=False)}</script>
+""" + cta_band() + foot()
+
+
+def page_compare():
+    h = head('compare.html', 'OneSpace vs. chat apps, notes and shared calendars', 'OneSpace مقارنة بتطبيقات المحادثة والملاحظات والتقويمات',
+             'Why couples use OneSpace instead of a chat thread, a notes app, two calendars and a spreadsheet: decisions, links, trips, gifts, watchlists, memories and privacy in one app.',
+             'لماذا يستخدم الأزواج OneSpace بدل محادثة وتطبيق ملاحظات وتقويمين وجدول: القرارات والروابط والرحلات والهدايا وقوائم المشاهدة والذكريات والخصوصية في تطبيق واحد.')
+    return h + page_hero('Compare', 'مقارنة', 'One app instead of five.', 'تطبيق واحد بدل خمسة.',
+                         'Most couples run their life across a chat app, a notes app, two calendars, a spreadsheet and a camera roll. Here is what changes when it all lives in one private space.',
+                         'يدير معظم الأزواج حياتهم عبر تطبيق محادثة وتطبيق ملاحظات وتقويمين وجدول وألبوم صور. إليك ما يتغير حين يجتمع كل ذلك في مساحة خاصة واحدة.') + f"""
+<section style="padding-top:20px"><div class="wrap">{compare_table()}
+<p class="muted center" style="margin-top:18px">{T('Chat apps are great for talking. OneSpace is for the life you organise together — and it keeps the talking next to the plans.', 'تطبيقات المحادثة رائعة للحديث. OneSpace للحياة التي تنظمانها معًا — ويبقي الحديث بجانب الخطط.')}</p></div></section>
+{value_grid()}""" + cta_band() + foot()
+
+
 def page_index():
     h = head('index.html', 'OneSpace — the private couples app for plans, love and memories', 'OneSpace — تطبيق الأزواج الخاص للخطط والحب والذكريات',
              'OneSpace is a private couples app: shared calendar, lists, trips, little gestures, letters, counters and memories — for couples living together or long distance.',
@@ -613,6 +729,8 @@ def page_index():
   </div>
 </div></section>
 
+{value_grid()}
+
 <section class="tint"><div class="wrap">
   <div class="sec-head center">{T('Everything for two', 'كل شيء لاثنين', 'span', 'eyebrow')}<h2>{T('One app instead of', 'تطبيق واحد بدل')} <span class="serif accent">{T('ten chats, three lists and a lost calendar.', 'عشر محادثات وثلاث قوائم وتقويم ضائع.')}</span></h2></div>
   <div class="bento">
@@ -651,6 +769,8 @@ def page_index():
 </div></div></section>
 
 {theme_wall()}
+<section><div class="narrow"><div class="sec-head center">{T('Compare', 'قارن', 'span', 'eyebrow')}{T('One app instead of five.', 'تطبيق واحد بدل خمسة.', 'h2')}</div>{compare_table(6)}
+<p class="center" style="margin-top:22px"><a class="btn btn-ghost" href="compare.html">{T('See the full comparison →', 'شاهد المقارنة الكاملة ←')}</a></p></div></section>
 <section class="warm"><div class="wrap">
   <p class="promise reveal">{T('“Your relationship isn’t content. Nothing you put in OneSpace is shown to anyone but the two of you — no feed, no followers, no ads, and never sold.”', '«علاقتكما ليست محتوى. لا يُعرض شيء تضعانه في OneSpace إلا لكما — بلا منشورات ولا متابعين ولا إعلانات، ولا يُباع أبدًا.»')}</p>
   <p class="center muted" style="margin-top:14px">— {T('Our promise', 'وعدنا')}</p>
@@ -795,7 +915,7 @@ def page_features():
   <ul class="ticks"><li>{T('<b>Notifications that explain themselves</b> — who, what and when, grouped by day.', '<b>إشعارات واضحة</b> — من وماذا ومتى، مجمعة حسب اليوم.')}</li>
   <li>{T('<b>Help without signing in</b> — contact us even if you are locked out.', '<b>مساعدة دون تسجيل الدخول</b> — تواصل معنا حتى لو لم تستطع الدخول.')}</li></ul></div>
   <div class="phones">{screen('quickadd', 'clean', 'Appearance and themes', 'المظهر والسمات', 'sm', real='appearance')}{screen('memories', 'clean', 'Me tab', 'تبويب أنا', 'sm', real='me')}</div>
-</div></section>''' + cta_band() + foot()
+</div></section>''' + value_grid() + cta_band() + foot()
 
 
 def persona_page(page, apart):
@@ -1370,7 +1490,7 @@ def page_share_kit():
 
 def page_404():
     h = head('404.html', 'Page not found — OneSpace', 'الصفحة غير موجودة — OneSpace', 'This page does not exist.', 'هذه الصفحة غير موجودة.')
-    return h.replace('<link rel="stylesheet" href="assets/os.css">', '<base href="/onespace-app/"><link rel="stylesheet" href="assets/os.css">').replace('<meta name="description"', '<meta name="robots" content="noindex"><meta name="description"', 1) + f'''
+    return h.replace('<link rel="stylesheet" href="assets/os.css">', '<base href="/"><link rel="stylesheet" href="assets/os.css">').replace('<meta name="description"', '<meta name="robots" content="noindex"><meta name="description"', 1) + f'''
 <section class="page-hero" style="padding:110px 0"><div class="narrow center">
   <div style="font-size:64px">🧭</div>{T('This page wandered off.', 'هذه الصفحة تاهت.', 'h1')}
   {T('It may have moved when we tidied the site. Try one of these:', 'ربما انتقلت عندما رتّبنا الموقع. جرّب أحد هذه:', 'p', 'lead')}
@@ -1391,12 +1511,14 @@ PAGES = {
     'long-distance.html': (lambda: persona_page('long-distance.html', True), '0.8', 'monthly'),
     'living-together.html': (lambda: persona_page('living-together.html', False), '0.8', 'monthly'),
     'how-it-works.html': (page_how, '0.8', 'monthly'), 'whats-new.html': (page_whats_new, '0.7', 'weekly'),
-    'faq.html': (page_faq, '0.7', 'monthly'), 'tutorials.html': (page_tutorials, '0.7', 'monthly'), 'guides.html': (page_guides, '0.8', 'weekly'), 'join.html': (page_join, '0.9', 'monthly'),
+    'faq.html': (page_faq, '0.7', 'monthly'), 'compare.html': (page_compare, '0.8', 'monthly'), 'tutorials.html': (page_tutorials, '0.7', 'monthly'), 'guides.html': (page_guides, '0.8', 'weekly'), 'join.html': (page_join, '0.9', 'monthly'),
     'support.html': (page_support, '0.6', 'monthly'), 'share-kit.html': (page_share_kit, '0.4', 'monthly'),
     'privacy.html': (lambda: legal_page('privacy.html', 'privacy'), '0.4', 'yearly'),
     'terms.html': (lambda: legal_page('terms.html', 'terms'), '0.4', 'yearly'),
     'delete-account.html': (page_delete, '0.4', 'yearly'),
 }
+for _d in DEEP:
+    PAGES[_d['slug']] = ((lambda d=_d: deep_page(d)), '0.9', 'monthly')
 for _g in GUIDES:
     PAGES[_g['slug']] = ((lambda g=_g: guide_page(g)), '0.7', 'monthly')
 REDIRECTS = {'v4.html': ('./', 'Home'), 'v4-tutorial.html': ('how-it-works.html', 'How it works')}

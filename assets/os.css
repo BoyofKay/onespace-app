@@ -500,3 +500,26 @@ html[dir="rtl"] .city b, html[dir="rtl"] .clocks b, html[dir="rtl"] .slot time {
 @media (max-width: 900px) { .store-grid { grid-template-columns: repeat(3, 1fr); } }
 html, body { overflow-x: clip; } section, .hero-xl { overflow-x: clip; }
 .split > *, .tour > *, .hero-grid > * { min-width: 0; } @media (max-width: 640px) { .device.lg { width: 300px; } }
+
+/* ================= v8: competitive value ================= */
+.values { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+@media (max-width: 1100px) { .values { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 760px) { .values { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 480px) { .values { grid-template-columns: 1fr; } }
+.value { padding: 22px; } .value h3 { font-size: 17px; margin-top: 10px; } .value p { font-size: 14px; }
+.value .vi { font-size: 30px; display: inline-grid; place-items: center; width: 56px; height: 56px; border-radius: 18px; background: var(--warm); }
+.drop-panel { max-height: 78vh; overflow-y: auto; }
+.cmp-wrap { overflow-x: auto; border-radius: 20px; border: 1px solid var(--line); background: #fff; }
+.cmp { width: 100%; border-collapse: collapse; font-size: 15px; min-width: 560px; }
+.cmp th, .cmp td { padding: 14px 18px; text-align: start; border-bottom: 1px solid var(--line); vertical-align: top; }
+.cmp thead th { font-size: 16px; background: var(--soft); } .cmp thead th small { display: block; font-weight: 500; color: var(--muted); font-size: 12px; }
+.cmp thead th.new { background: var(--ink); color: #fff; } .cmp thead th.new small { color: #B9C3D8; }
+.cmp tbody th { font-weight: 700; color: var(--ink); width: 26%; }
+.cmp td.old { color: var(--muted); } .cmp td.new { color: var(--ink); font-weight: 600; background: #F6FBFA; }
+.cmp tr:last-child th, .cmp tr:last-child td { border-bottom: 0; }
+.how { list-style: none; padding: 0; margin: 0; display: grid; gap: 18px; }
+.how li { display: grid; grid-template-columns: 46px 1fr; gap: 14px; }
+.how .sn { width: 46px; height: 46px; border-radius: 50%; background: var(--coral); color: #fff; display: grid; place-items: center; font-weight: 800; font-size: 18px; }
+.how h3 { font-size: 19px; } .how p { margin: 4px 0 0; color: var(--ink-2); }
+.deep-hero .phones { flex-wrap: nowrap; } .deep-hero .phones .device.sm { margin-inline-start: -60px; transform: translateY(40px); }
+@media (max-width: 760px) { .deep-hero .phones .device.sm { display: none; } }
