@@ -65,8 +65,10 @@ def main():
             if url.scheme or ref.startswith("//") or ref.startswith("mailto:"):
                 continue
             clean = url.path
-            if clean in ("", ".", "./"):
+            if clean == "":
                 target = ROOT / name
+            elif clean in (".", "./"):
+                target = ROOT / "index.html"
             else:
                 target = ROOT / clean.removeprefix("./")
                 if target.is_dir():
