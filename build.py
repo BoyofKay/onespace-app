@@ -1608,6 +1608,21 @@ def page_founders_admin():
 </div></section>""" + foot()
 
 
+def page_unsubscribe():
+    h = head('unsubscribe.html', 'Unsubscribe — OneSpace', 'إلغاء الاشتراك — OneSpace', 'Stop OneSpace Founder emails.', 'أوقف رسائل مؤسسي OneSpace.')
+    h = h.replace('<meta charset="utf-8">', '<meta charset="utf-8">\n<meta name="robots" content="noindex">', 1)
+    return h + f"""
+<section class="page-hero"><div class="narrow center" data-unsub>
+  <div class="cf-state" data-state="ask"><div style="font-size:46px">✉️</div>{T('Stop Founder emails?', 'إيقاف رسائل المؤسسين؟', 'h1')}
+    {T('You will stop receiving OneSpace launch updates and invitations. Your Founder number stays yours.', 'لن تصلك تحديثات إطلاق OneSpace ودعواته. ويبقى رقمك كمؤسس محفوظًا لك.', 'p', 'lead')}
+    <button class="btn btn-primary" type="button" data-unsub-go>{T('Unsubscribe', 'إلغاء الاشتراك')}</button></div>
+  <div class="cf-state" data-state="done" hidden><div style="font-size:46px">✅</div>{T('You’re unsubscribed', 'تم إلغاء اشتراكك', 'h1')}
+    {T('No more emails from us. Changed your mind? Sign up again with the same email.', 'لن نراسلك بعد الآن. غيّرت رأيك؟ سجّل مجددًا بالبريد نفسه.', 'p', 'lead')}</div>
+  <div class="cf-state" data-state="invalid" hidden><div style="font-size:46px">🔗</div>{T('We couldn’t use this link', 'لم نتمكن من استخدام هذا الرابط', 'h1')}
+    {T('Reply “unsubscribe” to any of our emails, or write to <a href="mailto:privacy@onespace.live">privacy@onespace.live</a>.', 'ردّ بكلمة «إلغاء» على أي رسالة منا، أو راسل <a href="mailto:privacy@onespace.live">privacy@onespace.live</a>.', 'p', 'lead')}</div>
+</div></section>""" + foot()
+
+
 def page_404():
     h = head('404.html', 'Page not found — OneSpace', 'الصفحة غير موجودة — OneSpace', 'This page does not exist.', 'هذه الصفحة غير موجودة.')
     return h.replace('<link rel="stylesheet" href="assets/os.css">', '<base href="/"><link rel="stylesheet" href="assets/os.css">').replace('<meta name="description"', '<meta name="robots" content="noindex"><meta name="description"', 1) + f'''
@@ -1709,6 +1724,8 @@ def main():
     (ROOT / 'confirm.html').write_text(page_confirm(), encoding='utf-8')
     (ROOT / 'ar' / 'confirm.html').write_text(arabic_page((ROOT / 'confirm.html').read_text(encoding='utf-8'), 'confirm.html'), encoding='utf-8')
     (ROOT / 'founders-admin.html').write_text(page_founders_admin(), encoding='utf-8')
+    (ROOT / 'unsubscribe.html').write_text(page_unsubscribe(), encoding='utf-8')
+    (ROOT / 'ar' / 'unsubscribe.html').write_text(arabic_page((ROOT / 'unsubscribe.html').read_text(encoding='utf-8'), 'unsubscribe.html'), encoding='utf-8')
     for name in PAGES:
         (ROOT / 'ar' / name).write_text(arabic_page((ROOT / name).read_text(encoding='utf-8'), name), encoding='utf-8')
     urls = ''
@@ -1720,7 +1737,7 @@ def main():
             urls += f'  <url><loc>{loc}</loc><lastmod>{TODAY}</lastmod><changefreq>{c}</changefreq><priority>{pr}</priority>{alt}</url>\n'
     (ROOT / 'sitemap.xml').write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" '
                                       f'xmlns:xhtml="http://www.w3.org/1999/xhtml">\n{urls}</urlset>\n', encoding='utf-8')
-    (ROOT / 'robots.txt').write_text(f'User-agent: *\nAllow: /\nDisallow: /v4.html\nDisallow: /v4-tutorial.html\nDisallow: /confirm.html\nDisallow: /ar/confirm.html\nDisallow: /founders-admin.html\n\nSitemap: {BASE}sitemap.xml\n', encoding='utf-8')
+    (ROOT / 'robots.txt').write_text(f'User-agent: *\nAllow: /\nDisallow: /v4.html\nDisallow: /v4-tutorial.html\nDisallow: /confirm.html\nDisallow: /ar/confirm.html\nDisallow: /founders-admin.html\nDisallow: /unsubscribe.html\nDisallow: /ar/unsubscribe.html\n\nSitemap: {BASE}sitemap.xml\n', encoding='utf-8')
     (ROOT / f'{INDEXNOW_KEY}.txt').write_text(INDEXNOW_KEY + '\n', encoding='utf-8')
     (ROOT / 'llms.txt').write_text(llms_txt(), encoding='utf-8')
     (ROOT / 'site.webmanifest').write_text(json.dumps({'name': 'OneSpace', 'short_name': 'OneSpace', 'start_url': './', 'display': 'standalone',

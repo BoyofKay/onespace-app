@@ -55,8 +55,8 @@ function shell(lang: string, preheader: string, title: string, body: string, but
   const rtl = lang === 'ar';
   const font = rtl ? "'IBM Plex Sans Arabic', Tahoma, Arial, sans-serif" : "'Plus Jakarta Sans', 'Segoe UI', Helvetica, Arial, sans-serif";
   const foot = rtl
-    ? `وصلتك هذه الرسالة لأنك سجّلت في <a href="${SITE}/ar/" style="color:#1F6E78">onespace.live</a>. لأي سؤال، ردّ على هذه الرسالة.<br><a href="${SITE}/ar/privacy.html" style="color:#8A8FA3">الخصوصية</a> · لإيقاف الرسائل ردّ بكلمة «إلغاء».`
-    : `You received this because you signed up at <a href="${SITE}/" style="color:#1F6E78">onespace.live</a>. Questions? Just reply to this email.<br><a href="${SITE}/privacy.html" style="color:#8A8FA3">Privacy</a> · To stop these emails, reply “unsubscribe”.`;
+    ? `وصلتك هذه الرسالة لأنك سجّلت في <a href="${SITE}/ar/" style="color:#1F6E78">onespace.live</a>. لأي سؤال، ردّ على هذه الرسالة.<br><a href="${SITE}/ar/privacy.html" style="color:#8A8FA3">الخصوصية</a> · <a href="{{UNSUB_AR}}" style="color:#8A8FA3">إلغاء الاشتراك</a>`
+    : `You received this because you signed up at <a href="${SITE}/" style="color:#1F6E78">onespace.live</a>. Questions? Just reply to this email.<br><a href="${SITE}/privacy.html" style="color:#8A8FA3">Privacy</a> · <a href="{{UNSUB_EN}}" style="color:#8A8FA3">Unsubscribe</a>`;
   const btn = button ? `<tr><td style="padding:8px 0 4px"><a href="${button.href}" style="display:inline-block;background:#E8735A;color:#ffffff;text-decoration:none;font-weight:700;font-size:16px;padding:14px 26px;border-radius:999px">${esc(button.label)}</a></td></tr>` : '';
   return `<!doctype html><html lang="${lang}" dir="${rtl ? 'rtl' : 'ltr'}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width">
 <title>${esc(title)}</title></head>
@@ -159,7 +159,12 @@ export function mailAlready(lang: string, r: any): Mail {
 }
 
 // ------------------------------------------------------------------ sending
-export async function send(memberId: string, kind: string, to: string, m: Mail): Promise<boolean> {
+const FN_URL = 'https://ugwrpeduzyzrujkizqfo.supabase.co/functions/v1';
+export const unsubPage = (lang: string, token?: string) => token ? `${SITE}${lang === 'ar' ? '/ar/' : '/'}unsubscribe.html#u=${token}` : `mailto:founders@onespace.live?subject=unsubscribe`;
+
+export async function send(memberId: string, kind: string, to: string, m: Mail, unsub?: string): Promise<boolean> {
+  m = { ...m, html: m.html.replace('{{UNSUB_EN}}', unsubPage('en', unsub)).replace('{{UNSUB_AR}}', unsubPage('ar', unsub)) };
+  const listUnsub = (unsub ? `<${FN_URL}/founder-unsubscribe?u=${unsub}>, ` : '') + '<mailto:founders@onespace.live?subject=unsubscribe>';
   const key = Deno.env.get('RESEND_API_KEY');
   if (!key) {
     await rpc('founder_log_email', { p_member: memberId, p_kind: kind, p_status: 'skipped', p_provider_id: null, p_error: 'RESEND_API_KEY is not set' });
@@ -174,7 +179,7 @@ export async function send(memberId: string, kind: string, to: string, m: Mail):
         'Idempotency-Key': `${memberId}-${kind}-${(await sha256(m.subject + m.text)).slice(0, 16)}`,
       },
       body: JSON.stringify({ from: FROM, to: [to], reply_to: REPLY_TO, subject: m.subject, html: m.html, text: m.text,
-        headers: { 'List-Unsubscribe': '<mailto:founders@onespace.live?subject=unsubscribe>' },
+        headers: unsub ? { 'List-Unsubscribe': listUnsub, 'List-Unsubscribe-Post': 'List-Unsubscribe=One-Click' } : { 'List-Unsubscribe': listUnsub },
         tags: [{ name: 'type', value: kind }] }),
     });
     const body = await r.json().catch(() => ({}));
@@ -188,4 +193,17 @@ export async function send(memberId: string, kind: string, to: string, m: Mail):
     await rpc('founder_log_email', { p_member: memberId, p_kind: kind, p_status: 'failed', p_provider_id: null, p_error: String(e).slice(0, 400) });
   }
   return false;
+}
+
+// Website contact / account requests → our own inboxes (support@ or privacy@), reply goes straight to the visitor.
+export async function sendInternal(to: string, replyTo: string, subject: string, text: string): Promise<{ ok: boolean; id?: string; error?: string }> {
+  const key = Deno.env.get('RESEND_API_KEY');
+  if (!key) return { ok: false, error: 'RESEND_API_KEY is not set' };
+  const r = await fetch('https://api.resend.com/emails', {
+    method: 'POST',
+    headers: { Authorization: `Bearer ${key}`, 'Content-Type': 'application/json', 'Idempotency-Key': (await sha256(to + subject + text)).slice(0, 32) },
+    body: JSON.stringify({ from: 'OneSpace Website <website@onespace.live>', to: [to], reply_to: replyTo, subject, text, tags: [{ name: 'type', value: 'site_contact' }] }),
+  });
+  const b = await r.json().catch(() => ({}));
+  return r.ok ? { ok: true, id: b.id } : { ok: false, error: `${r.status} ${b.message ?? ''}` };
 }

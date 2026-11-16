@@ -24,7 +24,7 @@ Deno.serve(async (req) => {
       if (b.action === 'resend_pending') {
         const list: any[] = await rpc('founder_pending_to_resend', { p_limit: 50 });
         let sent = 0;
-        for (const m of list) if (await send(m.member_id, 'confirm', m.email, mailConfirm(m.language, m.name, m.token, false))) sent++;
+        for (const m of list) if (await send(m.member_id, 'confirm', m.email, mailConfirm(m.language, m.name, m.token, false), m.unsub)) sent++;
         return json(req, { ok: true, attempted: list.length, sent });
       }
       return json(req, { ok: false, error: 'unknown_action' }, 400);

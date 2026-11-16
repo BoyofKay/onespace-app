@@ -250,3 +250,8 @@ grant execute on function public.founder_join(jsonb), public.founder_confirm(tex
 -- no repeated confirmation emails (10 minutes / 3 a day) and the 'already' reminder at most daily —
 -- see the live definitions of founder_join / founder_stats in the database.
 alter table private.founder_members add column if not exists note text not null default '' check (length(note) <= 1500);
+
+-- 17 Nov (later): one-click unsubscribe.
+alter table private.founder_members add column if not exists unsub_token text not null default encode(extensions.gen_random_bytes(16), 'hex');
+create unique index if not exists founder_members_unsub on private.founder_members(unsub_token);
+-- public.founder_unsubscribe(p_token text) sets unsubscribed_at; join/confirm/pending functions return 'unsub' for the mailer.

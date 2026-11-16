@@ -21,10 +21,10 @@ Deno.serve(async (req) => {
     } });
     switch (r.status) {
       case 'pending':
-        await send(r.member_id, 'confirm', r.email, mailConfirm(r.language, r.name, r.token, r.partner_invite));
+        await send(r.member_id, 'confirm', r.email, mailConfirm(r.language, r.name, r.token, r.partner_invite), r.unsub);
         return json(req, { ok: true });
       case 'already':
-        if (r.send) await send(r.member_id, 'already', r.email, mailAlready(r.language, r));
+        if (r.send && !r.unsubscribed) await send(r.member_id, 'already', r.email, mailAlready(r.language, r), r.unsub);
         return json(req, { ok: true });
       case 'pending_recent':
         return json(req, { ok: true });

@@ -253,19 +253,17 @@
         }).catch(function () { say('failed', false); }).then(function () { btn.disabled = false; });
         return;
       }
-      fetch(SUPABASE + '/rest/v1/rpc/submit_public_support', {
-        method: 'POST', headers: { 'Content-Type': 'application/json', apikey: KEY, Authorization: 'Bearer ' + KEY },
-        body: JSON.stringify({ p_kind: kind, p_subject: subject.slice(0, 160), p_message: (message || subject).slice(0, 4000),
-          p_reply_email: email, p_app_version: 'website', p_platform: 'other', p_locale: lang,
-          p_diagnostics: 'Website · ' + location.pathname + ' · ' + (sget('os-src') || '-') })
-      }).then(function (res) {
-        if (res.ok) {
+      fetch(FN + 'site-contact', { method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ form: kindForm, topic: v('topic'), name: v('name'), email: email, subject: v('subject'), message: message,
+          website: v('website'), elapsed: Date.now() - loadedAt, page: location.pathname, lang: lang, src: sget('os-src') || '' }) })
+      .then(function (res) { return res.json().catch(function () { return {}; }).then(function (b) { return { res: res, b: b }; }); })
+      .then(function (x) {
+        if (x.res.ok && x.b.ok) {
           track(kindForm + '/sent');
           form.reset();
           var done = form.getAttribute('data-done') && document.getElementById(form.getAttribute('data-done'));
-          if (done) { form.hidden = true; done.classList.add('show'); done.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
-          else say('sent', true);
-        } else return res.text().then(function (b) { say(b.indexOf('Too many') >= 0 ? 'busy' : 'failed', false); });
+          if (done) { form.hidden = true; done.classList.add('show'); done.focus(); } else say('sent', true);
+        } else say(x.b.error === 'busy' ? 'busy' : x.b.error === 'email' ? 'email' : x.b.error === 'missing' ? 'missing' : 'failed', false);
       }).catch(function () { say('failed', false); }).then(function () { btn.disabled = false; });
     });
   });
@@ -352,5 +350,20 @@
         .then(function (r) { return r.json(); }).then(function (b) { out.textContent = b.ok ? 'Sent ' + b.sent + ' of ' + b.attempted + '.' : 'Failed.'; load(); });
     });
     if (key) load();
+  }
+
+  // ---------- Unsubscribe page ----------
+  var us = $('[data-unsub]');
+  if (us) {
+    var ut = (location.hash.match(/u=([0-9a-f]{32})/) || [])[1] || '';
+    if (location.hash) history.replaceState(null, '', location.pathname);
+    var ushow = function (st) { $$('.cf-state', us).forEach(function (el) { el.hidden = el.getAttribute('data-state') !== st; }); };
+    if (!ut) ushow('invalid');
+    $('[data-unsub-go]', us).addEventListener('click', function () {
+      this.disabled = true;
+      fetch(FN + 'founder-unsubscribe', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ u: ut }) })
+        .then(function (r) { return r.json(); }).then(function (b) { if (b.ok) { track('founders/unsubscribed'); ushow('done'); } else ushow('invalid'); })
+        .catch(function () { ushow('invalid'); });
+    });
   }
 })();
