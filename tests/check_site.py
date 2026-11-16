@@ -85,7 +85,7 @@ def main():
     if not (ROOT / "robots.txt").exists() or not (ROOT / "sitemap.xml").exists():
         errors.append("Missing SEO files")
     index = (ROOT / "index.html").read_text(encoding="utf-8")
-    for field in ("waitlistForm", "demoObjects", "themePreview", "early-access"):
+    for field in ("waitlistForm", "tourAppCards", "themes", "early-access", "tourNext"):
         if f'id="{field}"' not in index:
             errors.append(f"Missing interactive UI: {field}")
     if errors:
