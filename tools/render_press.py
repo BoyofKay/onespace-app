@@ -14,8 +14,8 @@ MARK = (ROOT / 'assets' / 'mark.svg').as_uri()
 
 def doc(w, h, inner, bg):
     return f'''<!doctype html><html><head><meta charset="utf-8"><base href="{ROOT.as_uri()}/">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@600;800&display=swap" rel="stylesheet"><style>{CSS} body{{margin:0;width:{w}px;height:{h}px;overflow:hidden;background:{bg}}} .phone::before{{}} .card-x{{position:absolute;inset:0}}</style>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@600;700&display=swap" rel="stylesheet"><style>{CSS} body{{margin:0;width:{w}px;height:{h}px;overflow:hidden;background:{bg}}} .phone::before{{}} .card-x{{position:absolute;inset:0}}</style>
 </head><body><div class="card-x">{inner}</div></body></html>'''
 
 
@@ -53,7 +53,7 @@ def store_images():
         for i, (shot, en, ar, bg) in enumerate(STORE, 1):
             cap = ar if lang == 'ar' else en
             d = 'rtl' if lang == 'ar' else 'ltr'
-            out[f'store-{lang}-{i}.png'] = (1080, 1920, bg, f'''<div dir="{d}" style="position:absolute;inset:0;font-family:{'Noto Kufi Arabic' if lang == 'ar' else 'Inter'}">
+            out[f'store-{lang}-{i}.png'] = (1080, 1920, bg, f'''<div dir="{d}" style="position:absolute;inset:0;font-family:{'IBM Plex Sans Arabic' if lang == 'ar' else 'Plus Jakarta Sans'}">
               <div style="position:absolute;top:110px;left:80px;right:80px;text-align:center">{brand(40)}
                 <h1 style="font-size:{82 if lang == 'en' else 76}px;line-height:1.15;margin:46px 0 0;letter-spacing:{'-.03em' if lang == 'en' else '0'}">{cap}</h1></div>
               <div style="position:absolute;left:50%;top:560px;transform:translateX(-50%)">{real_device(shot, lang, 640)}</div></div>''')
