@@ -606,3 +606,24 @@ html[dir="rtl"] .ol-arrow { transform: scaleX(-1); }
   .ol-arrow { transform: rotate(90deg); justify-self: start; margin-inline-start: 12px; }
   html[dir="rtl"] .ol-arrow { transform: rotate(90deg); }
 }
+
+/* ================= v8.4: Founder waitlist ================= */
+.invite-note { background: #FFF1EC; border: 1px solid #F3C9BB; border-radius: 12px; padding: 10px 12px; font-size: 14px; margin: 6px 0 4px; }
+.founder-badge { display: inline-flex; flex-direction: column; align-items: center; gap: 2px; background: #14213D; color: #fff; border-radius: 20px; padding: 16px 30px; margin: 16px 0 8px; }
+.founder-badge span { font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: #F3A27E; font-weight: 700; }
+.founder-badge b { font-size: 44px; line-height: 1.1; }
+.invite-url { width: 100%; font: inherit; font-size: 14px; padding: 10px 12px; border: 1px solid #D5D8E2; border-radius: 10px; background: #F5F6FA; direction: ltr; }
+.foot-mail { margin: 4px 0 12px; font-size: 14px; } .foot-mail a { color: inherit; opacity: .85; }
+.adm-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 12px; margin: 18px 0; }
+.adm-tile { background: #fff; border: 1px solid #E7E8EF; border-radius: 16px; padding: 14px 16px; }
+.adm-tile span { display: block; font-size: 13px; color: #5B6070; } .adm-tile b { font-size: 24px; }
+.adm-row { margin: 14px 0; } .adm-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+@media (max-width: 860px) { .adm-3 { grid-template-columns: 1fr; } }
+.adm-chart { display: flex; align-items: flex-end; gap: 3px; height: 160px; padding-top: 8px; }
+.adm-col { flex: 1; height: 100%; position: relative; display: flex; align-items: flex-end; }
+.adm-col i { position: absolute; bottom: 14px; left: 0; right: 0; background: #F3C9BB; border-radius: 4px 4px 0 0; max-height: calc(100% - 14px); }
+.adm-col i.c { background: #1F6E78; left: 25%; right: 25%; }
+.adm-col span { position: absolute; bottom: 0; width: 100%; text-align: center; font-size: 9px; color: #8A8FA3; }
+.adm-bar { display: grid; grid-template-columns: 90px 1fr auto; gap: 8px; align-items: center; font-size: 13px; margin: 6px 0; }
+.adm-bar i { display: block; height: 10px; border-radius: 6px; background: #E8735A; }
+.adm-bar span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
