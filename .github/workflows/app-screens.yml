@@ -1,0 +1,107 @@
+name: Real app screenshots and clips
+
+# Builds the OneSpace app (private repo, read-only token) and runs its screenshot
+# robot on an Android emulator. The robot signs in as the fictional demo couple
+# (Omar & Lina) — no real user data. Results are pushed to the `app-screens`
+# branch of this repo, ready to import with tools/import_screens.py.
+#
+# Needs repository secrets: APP_REPO_TOKEN (Contents: read on BoyofKay/OneSpace)
+# and DEMO_PASSWORD (the demo couple's login).
+on:
+  workflow_dispatch:
+    inputs:
+      sets:
+        description: 'Comma-separated: core|themes|together|video - en|ar'
+        default: 'core-en,core-ar,together-en,together-ar,themes-en,themes-ar,video-en,video-ar'
+        required: true
+
+permissions:
+  contents: write
+
+concurrency:
+  group: onespace-demo-space
+  cancel-in-progress: false
+
+jobs:
+  robot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 150
+    steps:
+      - name: Free disk space for the emulator
+        run: |
+          sudo rm -rf /usr/share/dotnet /opt/ghc /usr/local/.ghcup /usr/local/share/boost /usr/share/swift /usr/local/lib/node_modules /opt/hostedtoolcache/CodeQL /opt/hostedtoolcache/go /opt/hostedtoolcache/PyPy /usr/local/share/powershell /usr/local/share/chromium /opt/microsoft /opt/google /usr/lib/firefox || true
+          sudo docker image prune --all --force >/dev/null 2>&1 || true
+          df -h / ; free -h ; nproc
+      - name: Check out the app (private, read-only)
+        uses: actions/checkout@v4
+        with:
+          repository: BoyofKay/OneSpace
+          token: ${{ secrets.APP_REPO_TOKEN }}
+          path: app
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Configure Gradle Maven Central fallback
+        run: |
+          mkdir -p "$HOME/.gradle/init.d"
+          cat > "$HOME/.gradle/init.d/onespace-repositories.init.gradle" <<'GRADLE'
+          gradle.beforeSettings { settings ->
+            settings.pluginManagement.repositories {
+              mavenCentral()
+              google()
+              gradlePluginPortal()
+            }
+          }
+          GRADLE
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.50.0'
+          channel: stable
+          cache: true
+      - name: Build the robot app
+        working-directory: app
+        run: |
+          flutter pub get --enforce-lockfile
+          flutter build apk --debug -t integration_test/screenshots_test.dart
+          (cd android && ./gradlew --stop) || true
+      - run: sudo apt-get install -y -qq ffmpeg >/dev/null
+      - name: Enable KVM
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
+      - name: Run the robot
+        uses: reactivecircus/android-emulator-runner@v2
+        env:
+          DEMO_PASSWORD: ${{ secrets.DEMO_PASSWORD }}
+          SHOT_SETS: ${{ inputs.sets }}
+        with:
+          working-directory: app
+          api-level: 31
+          target: google_apis
+          arch: x86_64
+          profile: pixel_6
+          cores: 4
+          ram-size: 4096M
+          disk-size: 4000M
+          emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+          disable-animations: false
+          script: bash tools/screenshots/run.sh
+      - name: Publish to the app-screens branch
+        if: always()
+        run: |
+          [ -d app/build/screenshots ] || exit 0
+          out=$(mktemp -d); cd "$out"
+          git init -q
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git remote add origin "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git"
+          if git fetch -q --depth 1 origin app-screens 2>/dev/null; then git checkout -q -B app-screens FETCH_HEAD; else git checkout -q -b app-screens; fi
+          for d in screenshots videos; do
+            if [ -d "$GITHUB_WORKSPACE/app/build/$d" ]; then mkdir -p "$d"; cp -r "$GITHUB_WORKSPACE/app/build/$d/." "$d/"; fi
+          done
+          rm -f videos/*.log videos/segments_* || true
+          git add -A
+          git commit -q -m "Real app screens from run ${{ github.run_id }} (${{ inputs.sets }})" || exit 0
+          git push -q origin HEAD:app-screens
