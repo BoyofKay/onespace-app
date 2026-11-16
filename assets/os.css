@@ -523,3 +523,51 @@ html, body { overflow-x: clip; } section, .hero-xl { overflow-x: clip; }
 .how h3 { font-size: 19px; } .how p { margin: 4px 0 0; color: var(--ink-2); }
 .deep-hero .phones { flex-wrap: nowrap; } .deep-hero .phones .device.sm { margin-inline-start: -60px; transform: translateY(40px); }
 @media (max-width: 760px) { .deep-hero .phones .device.sm { display: none; } }
+
+/* ================= v8.1: calmer scale — smaller type, devices and spacing ================= */
+body { font-size: 15px; }
+h1 { font-size: clamp(32px, 4.4vw, 52px); }
+.hero-xl h1 { font-size: clamp(34px, 4.8vw, 60px); }
+h2 { font-size: clamp(24px, 2.8vw, 34px); }
+.page-hero h1 { font-size: clamp(30px, 3.8vw, 44px); }
+h3 { font-size: 17px; }
+.lead { font-size: clamp(15px, 1.25vw, 17px); }
+section { padding: 56px 0; }
+.hero-xl { padding: 44px 0 28px; }
+.page-hero { padding: 40px 0 26px; }
+.sec-head { margin-bottom: 28px; }
+.sec-head h2 { margin: 8px 0 10px; }
+.cta-row { margin-top: 22px; }
+.btn { padding: 12px 20px; font-size: 15px; }
+.card { padding: 20px; }
+.band { padding: clamp(26px, 4vw, 44px); }
+.split { gap: 44px; }
+.promise { font-size: clamp(22px, 2.6vw, 32px); }
+.numbers b { font-size: 32px; }
+.big-count { font-size: 44px; }
+.bento { grid-auto-rows: minmax(160px, auto); }
+.marquee { padding: 12px 0; } .marquee .chip { font-size: 14px; padding: 7px 14px; }
+/* devices */
+.device { width: 250px; border-radius: 38px; padding: 9px; }
+.device img, .device video { border-radius: 30px; }
+.device.lg { width: 280px; } .device.sm { width: 200px; border-radius: 32px; } .device.sm img, .device.sm video { border-radius: 25px; }
+.device.xs { width: 160px; }
+.fan { min-height: 580px; }
+.wall .device { width: 170px; }
+.phone { width: 260px; } .phone.sm { width: 215px; }
+.tour3 { grid-template-columns: 1fr 290px 1fr; }
+@media (max-width: 1050px) { .tour3 { grid-template-columns: 1fr 290px; } }
+@media (max-width: 760px) { .tour3 { grid-template-columns: 1fr; } .fan { min-height: 500px; } }
+@media (max-width: 640px) { .device.lg { width: 250px; } section { padding: 44px 0; } }
+.toast { font-size: 13px; padding: 9px 11px; } .toast b { font-size: 13px; } .toast span { font-size: 11.5px; } .toast .e { font-size: 20px; }
+.how .sn { width: 40px; height: 40px; font-size: 16px; } .how li { grid-template-columns: 40px 1fr; }
+.step { padding: 12px 14px; } .step b { font-size: 15px; } .step span { font-size: 13px; }
+.pain { padding: 18px; gap: 8px; } .msg { font-size: 14px; padding: 8px 12px; } .answer { font-size: 14px; }
+.value { padding: 18px; } .value .vi { width: 48px; height: 48px; font-size: 26px; }
+.cmp { font-size: 14px; } .cmp th, .cmp td { padding: 11px 15px; }
+.persona { padding: 26px; } .persona h3 { font-size: 21px; }
+.article { font-size: 16.5px; } .article h2 { font-size: 24px; margin: 34px 0 10px; }
+.faq-group { margin: 30px 0 10px; font-size: 20px; }
+footer { padding: 46px 0 24px; } .foot-bottom { margin-top: 30px; }
+.top .wrap { height: 62px; } .brand { font-size: 19px; } .brand img { width: 30px; height: 30px; }
+.menu { top: 62px; }
