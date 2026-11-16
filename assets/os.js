@@ -76,6 +76,14 @@
       $$('.phone[data-themable]', scope).forEach(function (p) { p.setAttribute('data-theme', theme); });
       $$('[data-theme-pick]', scope).forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
       $$('.playground', scope).forEach(function (p) { p.setAttribute('data-pg', theme); });
+      var pal = b.getAttribute('data-palette');
+      if (pal) $$('img[data-theme-img]', scope).forEach(function (img) {
+        ['en', 'ar'].forEach(function (l) {
+          var cur = img.getAttribute('data-' + l + '-src') || '';
+          img.setAttribute('data-' + l + '-src', cur.replace(/_[A-Za-z]+\.webp$/, '_' + pal + '.webp'));
+        });
+        img.setAttribute('src', img.getAttribute(lang === 'ar' ? 'data-ar-src' : 'data-en-src'));
+      });
     });
   });
 
