@@ -14,6 +14,10 @@ on:
         description: 'Sets, run in this order: core, together, themes, video'
         default: 'core,together,themes,video'
         required: true
+      langs:
+        description: 'Languages as JSON, e.g. ["en","ar"] or ["ar"]'
+        default: '["en","ar"]'
+        required: true
 
 
 permissions:
@@ -29,7 +33,7 @@ jobs:
       max-parallel: 1          # they share the demo space
       fail-fast: false
       matrix:
-        lang: [en, ar]          # one fresh emulator per language
+        lang: ${{ fromJSON(inputs.langs) }}   # one fresh emulator per language
     runs-on: ubuntu-latest
     timeout-minutes: 150
     steps:
