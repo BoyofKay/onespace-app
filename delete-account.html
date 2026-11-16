@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-ar="حذف حسابك — OneSpace">Delete your account — OneSpace</title>
+<meta name="description" content="How to delete your OneSpace account and what happens to your data.">
+<meta property="og:title" content="Delete your account — OneSpace">
+<meta property="og:description" content="How to delete your OneSpace account and what happens to your data.">
+<meta property="og:image" content="https://boyofkay.github.io/onespace-app/assets/icon-512.png">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#1F6670">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Noto+Kufi+Arabic:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <a class="brand" href="./"><img src="assets/mark.svg" alt="">OneSpace</a>
+  <nav class="nav">
+    <a class="hide-sm" href="./#features"><span data-i18n="nav.features">Features</span></a>
+    <a class="hide-sm" href="./#privacy"><span data-i18n="nav.privacy">Privacy</span></a>
+    <a href="support.html"><span data-i18n="nav.support">Support</span></a>
+    <button class="lang" type="button">العربية</button>
+  </nav>
+</div></header>
+<main class="page"><div class="wrap">
+  <h1 data-i18n="del.title">Delete your OneSpace account</h1>
+  <p class="lead" data-i18n="del.lead">You can delete your account at any time, from the app or from this page.</p>
+  <h2 data-i18n="del.h1">In the app (fastest)</h2>
+  <div data-i18n="del.steps"><ol><li>Open OneSpace and go to <b>Me</b>.</li><li>Tap <b>Your data and account</b>.</li><li>Optional: tap <b>Download my data</b> to keep a copy.</li><li>Tap <b>Delete my account</b> and confirm.</li></ol></div>
+  <h2 data-i18n="del.h2">What is deleted and what is kept</h2>
+  <div data-i18n="del.what"><ul><li>You have <b>7 days</b> to change your mind: sign in again and choose “Keep my account”.</li><li>After 7 days we delete your <b>private items and their files</b>, your <b>devices and notification tokens</b>, your <b>personal settings</b> and your <b>membership of the shared space</b>. Your sign-in is removed (your email is anonymised).</li><li><b>Shared items stay with your partner</b>, shown as written by “Former partner”, because they belong to both of you.</li><li>Messages you sent to support are kept so we can answer you — ask us and we will delete them too. Error reports (no content) are deleted after 60 days.</li></ul></div>
+  <h2 data-i18n="del.h3">Can't open the app?</h2>
+  <p data-i18n="del.web">Send this form from the email address of your OneSpace account. We will confirm by email before deleting anything, then follow the same steps as above.</p>
+  <form class="panel" data-support="account" novalidate>
+    <div class="form-row"><div>
+      <label for="email"><span data-i18n="form.email">Your email</span></label>
+      <input id="email" name="email" type="email" required autocomplete="email" maxlength="254">
+    </div><div>
+      <label for="name"><span data-i18n="form.name">Your name (optional)</span></label>
+      <input id="name" name="name" maxlength="80">
+    </div></div>
+    
+    <label for="message"><span data-i18n="form.message.account">Anything we should know (optional)</span></label>
+    <textarea id="message" name="message" maxlength="4000" required></textarea>
+    <div class="hp" aria-hidden="true"><input name="website" tabindex="-1" autocomplete="off"></div>
+    <p style="margin-top:16px"><button class="btn btn-primary" type="submit"><span data-i18n="form.send.account">Request deletion</span></button></p>
+    <p class="status" role="status"></p>
+    <p class="meta" data-i18n="form.privacy">We only use your email to reply. See the <a href="privacy.html">privacy policy</a>.</p>
+  </form>
+</div></main>
+<footer><div class="wrap">
+  <span>© <span id="year">2026</span> OneSpace</span>
+  <nav>
+    <a href="privacy.html"><span data-i18n="foot.privacy">Privacy policy</span></a>
+    <a href="terms.html"><span data-i18n="foot.terms">Terms of use</span></a>
+    <a href="delete-account.html"><span data-i18n="foot.delete">Delete your account</span></a>
+    <a href="support.html"><span data-i18n="foot.support">Support</span></a>
+  </nav>
+</div></footer>
+<script src="assets/ar.js"></script>
+<script src="assets/site.js"></script>
+</body>
+</html>
