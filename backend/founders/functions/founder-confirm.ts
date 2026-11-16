@@ -10,10 +10,10 @@ Deno.serve(async (req) => {
   try {
     const r = await rpc('founder_confirm', { p_token: token });
     if (r.status === 'confirmed') {
-      await send(r.member_id, 'welcome', r.email, mailWelcome(r.language, r, r.first_member?.name ?? ''));
-      if (r.partner_joined && r.first_member) {
+      await send(r.member_id, 'welcome', r.email, mailWelcome(r.language, r, r.first_member?.name ?? ''), r.unsub);
+      if (r.partner_joined && r.first_member && !r.first_member.unsubscribed) {
         await send(r.first_member.member_id, 'partner_joined', r.first_member.email,
-          mailPartnerJoined(r.first_member.language, r.first_member.name, r.name, r.founder_number));
+          mailPartnerJoined(r.first_member.language, r.first_member.name, r.name, r.founder_number), r.first_member.unsub);
       }
     }
     if (r.status !== 'confirmed' && r.status !== 'already') return json(req, { ok: false, status: r.status });

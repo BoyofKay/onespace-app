@@ -9,6 +9,8 @@ Runs in the OneSpace Supabase project, isolated from the app: its own `private.f
 | `functions/founder-join.ts` | `POST /functions/v1/founder-join` — form endpoint: spam traps, rate limits, consent, sends the confirmation email |
 | `functions/founder-confirm.ts` | `POST /functions/v1/founder-confirm` — confirmation link; gives the Founder number, sends welcome / partner-joined emails |
 | `functions/founder-admin.ts` | `GET/POST /functions/v1/founder-admin` — numbers for `/founders-admin.html` (needs `x-admin-key`) |
+| `functions/founder-unsubscribe.ts` | One-click unsubscribe (RFC 8058 POST from mail apps; GET redirects to `/unsubscribe.html`) |
+| `functions/site-contact.ts` | Support and Delete-account forms: saves the request and emails it to support@ / privacy@ (Reply-To = visitor) |
 | `functions/_lib.ts` | Shared: Resend sending + delivery log, branded EN/AR email templates |
 
 Rules: one Founder number per couple, first 250 confirmed couples (500 people); number given only after the
