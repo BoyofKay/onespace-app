@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-ar="الدعم — OneSpace">Support — OneSpace</title>
+<meta name="description" content="Help, contact and joining the OneSpace test.">
+<meta property="og:title" content="Support — OneSpace">
+<meta property="og:description" content="Help, contact and joining the OneSpace test.">
+<meta property="og:image" content="https://boyofkay.github.io/onespace-app/assets/icon-512.png">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#1F6670">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Noto+Kufi+Arabic:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <a class="brand" href="./"><img src="assets/mark.svg" alt="">OneSpace</a>
+  <nav class="nav">
+    <a class="hide-sm" href="./#features"><span data-i18n="nav.features">Features</span></a>
+    <a class="hide-sm" href="./#privacy"><span data-i18n="nav.privacy">Privacy</span></a>
+    <a href="support.html"><span data-i18n="nav.support">Support</span></a>
+    <button class="lang" type="button">العربية</button>
+  </nav>
+</div></header>
+<main class="page"><div class="wrap">
+  <h1 data-i18n="sup.title">How can we help?</h1>
+  <p class="lead" data-i18n="sup.lead">Ask a question, report a problem, share an idea or ask to join the test. You don't need to be signed in. We reply by email.</p>
+  <form class="panel" data-support="contact" novalidate>
+    <div class="form-row"><div>
+      <label for="email"><span data-i18n="form.email">Your email</span></label>
+      <input id="email" name="email" type="email" required autocomplete="email" maxlength="254">
+    </div><div>
+      <label for="name"><span data-i18n="form.name">Your name (optional)</span></label>
+      <input id="name" name="name" maxlength="80">
+    </div></div>
+    <label for="topic"><span data-i18n="form.topic">What is it about?</span></label>
+    <select id="topic" name="topic">
+      <option value="question" data-i18n="form.t1">A question</option>
+      <option value="beta" data-i18n="form.t2">I'd like to join the test</option>
+      <option value="signin" data-i18n="form.t3">I can't sign in</option>
+      <option value="issue" data-i18n="form.t4">Something isn't working</option>
+      <option value="idea" data-i18n="form.t5">An idea</option>
+    </select>
+    <label for="subject"><span data-i18n="form.subject">Subject</span></label>
+    <input id="subject" name="subject" maxlength="140">
+    <label for="message"><span data-i18n="form.message.contact">Your message</span></label>
+    <textarea id="message" name="message" maxlength="4000" required></textarea>
+    <div class="hp" aria-hidden="true"><input name="website" tabindex="-1" autocomplete="off"></div>
+    <p style="margin-top:16px"><button class="btn btn-primary" type="submit"><span data-i18n="form.send.contact">Send</span></button></p>
+    <p class="status" role="status"></p>
+    <p class="meta" data-i18n="form.privacy">We only use your email to reply. See the <a href="privacy.html">privacy policy</a>.</p>
+  </form>
+  <h2 data-i18n="sup.faq">Quick answers</h2>
+  <details><summary><span data-i18n="sup.q1">I can't sign in</span></summary><p data-i18n="sup.a1">Use “Forgot your password?” on the sign-in screen and open the email on the same phone. If you signed up with Google or Apple, use the same button again. Still stuck? Send the form above with “I can't sign in”.</p></details>
+  <details><summary><span data-i18n="sup.q2">I didn't get the confirmation email</span></summary><p data-i18n="sup.a2">Look in Spam or Promotions, then tap “Resend confirmation” on the sign-in screen.</p></details>
+  <details><summary><span data-i18n="sup.q3">How do I invite my partner?</span></summary><p data-i18n="sup.a3">In the app, create your space and tap Invite. Send the link by WhatsApp, SMS or email — or let your partner scan the QR code from your screen.</p></details>
+  <details><summary><span data-i18n="sup.q4">How do I install the Android test version?</span></summary><p data-i18n="sup.a4">Open the file we send you and allow “install unknown apps” when your phone asks. For updates, install the new file over the old one — never uninstall first, so nothing is lost.</p></details>
+  <details><summary><span data-i18n="sup.q5">How do I delete my account?</span></summary><p data-i18n="sup.a5">See <a href="delete-account.html">Delete your account</a>.</p></details>
+</div></main>
+<script>
+  (function () {
+    var p = new URLSearchParams(location.search).get('topic');
+    var s = document.getElementById('topic');
+    if (p && s) s.value = p;
+  })();
+</script>
+<footer><div class="wrap">
+  <span>© <span id="year">2026</span> OneSpace</span>
+  <nav>
+    <a href="privacy.html"><span data-i18n="foot.privacy">Privacy policy</span></a>
+    <a href="terms.html"><span data-i18n="foot.terms">Terms of use</span></a>
+    <a href="delete-account.html"><span data-i18n="foot.delete">Delete your account</span></a>
+    <a href="support.html"><span data-i18n="foot.support">Support</span></a>
+  </nav>
+</div></footer>
+<script src="assets/ar.js"></script>
+<script src="assets/site.js"></script>
+</body>
+</html>
