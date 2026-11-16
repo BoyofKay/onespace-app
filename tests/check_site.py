@@ -7,6 +7,7 @@ ROOT = Path(__file__).resolve().parents[1]
 PAGES = ["index.html", "compare.html", "smart-sharing.html", "decide-together.html", "trips.html", "occasions.html", "watchlists.html", "memories.html", "everyday.html", "features.html", "long-distance.html", "living-together.html",
          "how-it-works.html", "tutorials.html", "whats-new.html", "faq.html", "join.html",
          "support.html", "share-kit.html", "guides.html", "guide-long-distance-ideas.html", "guide-mental-load.html", "guide-anniversary-planning.html", "privacy.html", "terms.html", "delete-account.html", "404.html"]
+PAGES += ["ar/" + p for p in PAGES if p != "404.html"]  # server-rendered Arabic twins
 REDIRECTS = ["v4.html", "v4-tutorial.html"]
 # Claims the app does not make (D1: automatic gestures retired; D55: voice hidden) and private data.
 FORBIDDEN = ["automatically at the right moment", "Automatic gestures", "voice command", "Kandice", "ph.ahmed"]
@@ -68,12 +69,17 @@ def main():
             if url.scheme or ref.startswith("//") or ref.startswith("mailto:"):
                 continue
             clean = url.path
+            here = (ROOT / name).parent
             if clean == "":
                 target = ROOT / name
+            elif clean.startswith("/"):
+                target = ROOT / clean.lstrip("/")
+                if clean.endswith("/"):
+                    target = target / "index.html"
             elif clean in (".", "./"):
-                target = ROOT / "index.html"
+                target = here / "index.html"
             else:
-                target = ROOT / clean.removeprefix("./")
+                target = here / clean.removeprefix("./")
                 if target.is_dir():
                     target = target / "index.html"
             if not target.exists():
@@ -93,7 +99,7 @@ def main():
             errors.append(f"Missing interactive UI on the homepage: {marker}")
     sitemap = (ROOT / "sitemap.xml").read_text(encoding="utf-8")
     for path in PAGES:
-        if path != "404.html" and (ROOT / path).exists() and ("/" + path if path != "index.html" else "/</loc>") not in sitemap:
+        if path != "404.html" and (ROOT / path).exists() and ("/" + path.removesuffix("index.html") + "</loc>") not in sitemap:
             errors.append(f"sitemap.xml is missing {path}")
     for path in REDIRECTS:
         if 'http-equiv="refresh"' not in (ROOT / path).read_text(encoding="utf-8"):

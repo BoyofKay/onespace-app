@@ -584,3 +584,25 @@ html[lang="ar"] h1, html[lang="ar"] h2, html[lang="ar"] h3 { font-weight: 700; l
 .brand { font-weight: 700; letter-spacing: -0.01em; }
 .big-count, .stat b, .numbers b { font-weight: 700; letter-spacing: -0.01em; }
 .eyebrow { letter-spacing: .06em; }
+
+/* ================= v8.3: one list per kind ================= */
+.ol { display: grid; gap: 12px; max-width: 1080px; margin: 0 auto; }
+.ol-row { display: grid; grid-template-columns: 170px 1fr 28px minmax(220px, 300px); gap: 14px; align-items: center;
+  background: var(--card, #fff); border: 1px solid var(--line, #E7E8EF); border-radius: 18px; padding: 14px 16px; }
+.ol-kind { display: flex; align-items: center; gap: 10px; font-size: 15px; }
+.ol-ico { font-size: 22px; width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center; background: var(--bg-soft, #F5F6FA); flex: none; }
+.ol-apps { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.ol-app { font-size: 12.5px; padding: 5px 9px; border-radius: 999px; background: var(--bg-soft, #F5F6FA); color: var(--muted, #5B6070); border: 1px dashed #D5D8E2; white-space: nowrap; }
+.ol-app b { color: var(--ink, #1D2030); font-weight: 600; }
+.ol-x { font-size: 12px; color: #C2410C; font-weight: 600; margin-inline-start: 4px; }
+.ol-arrow { font-size: 22px; color: var(--accent, #E8735A); text-align: center; font-weight: 700; }
+html[dir="rtl"] .ol-arrow { transform: scaleX(-1); }
+.ol-one { display: block; text-decoration: none; color: var(--ink, #1D2030); font-weight: 600; font-size: 14px; line-height: 1.4;
+  padding: 12px 14px; border-radius: 14px; background: linear-gradient(135deg, #FFF1EC, #EAF6F7); border: 1px solid #F3C9BB; }
+.ol-one:hover { border-color: var(--accent, #E8735A); }
+.ol-badge { display: table; font-size: 11px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: #fff; background: var(--accent, #E8735A); border-radius: 999px; padding: 2px 8px; margin-bottom: 5px; }
+@media (max-width: 860px) {
+  .ol-row { grid-template-columns: 1fr; gap: 10px; }
+  .ol-arrow { transform: rotate(90deg); justify-self: start; margin-inline-start: 12px; }
+  html[dir="rtl"] .ol-arrow { transform: rotate(90deg); }
+}

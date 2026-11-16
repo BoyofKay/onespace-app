@@ -1,0 +1,24 @@
+# Tells Bing, Yandex, Seznam and Naver (IndexNow) about every page after the site changes.
+# Google does not use IndexNow; it reads sitemap.xml (submit it once in Google Search Console).
+name: indexnow
+on:
+  push:
+    branches: [main]
+    paths: ['**.html', 'sitemap.xml']
+  workflow_dispatch:
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Wait for GitHub Pages to publish
+        run: sleep 120
+      - name: Submit the sitemap URLs
+        run: |
+          KEY=$(python3 -c "import re;print(re.search(r\"INDEXNOW_KEY = '([0-9a-f]+)'\", open('build.py').read()).group(1))")
+          python3 - "$KEY" > body.json <<'PY'
+          import json, re, sys
+          urls = re.findall(r'<loc>([^<]+)</loc>', open('sitemap.xml').read())
+          print(json.dumps({'host': 'onespace.live', 'key': sys.argv[1], 'keyLocation': f'https://onespace.live/{sys.argv[1]}.txt', 'urlList': urls}))
+          PY
+          curl -sS -o /dev/null -w 'IndexNow: HTTP %{http_code}\n' -H 'Content-Type: application/json; charset=utf-8' --data @body.json https://api.indexnow.org/indexnow
