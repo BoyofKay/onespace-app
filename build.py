@@ -18,7 +18,7 @@ ROOT = Path(__file__).parent
 BASE = 'https://onespace.live/'
 TODAY = date.today().isoformat()
 # Privacy-friendly, cookieless analytics (https://www.goatcounter.com, free). Set to your code, e.g. 'onespace', then rebuild.
-GOATCOUNTER = ''
+GOATCOUNTER = 'onespace'
 # Search engine ownership checks. Paste the content="..." value Google Search Console / Bing Webmaster Tools gives you
 # for the "HTML tag" method (or verify by DNS and leave these empty).
 GOOGLE_VERIFY = ''
@@ -89,7 +89,9 @@ def head(page, title, title_ar, desc, desc_ar=''):
         {'@type': 'Organization', '@id': BASE + '#org', 'name': 'OneSpace', 'url': BASE, 'logo': BASE + 'assets/icon-512.png',
          'slogan': 'Two of us. One Space.'},
         {'@type': 'WebSite', '@id': BASE + '#site', 'name': 'OneSpace', 'url': BASE, 'inLanguage': ['en', 'ar'], 'publisher': {'@id': BASE + '#org'}}]})
-    analytics = f'\n<script data-goatcounter="https://{GOATCOUNTER}.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>' if GOATCOUNTER else ''
+    # Paths are counted without the query string or #fragment, so nothing typed into a URL (or a confirmation token) is sent.
+    analytics = ('\n<script>window.goatcounter={path:function(){return location.pathname}};</script>'
+                 f'\n<script data-goatcounter="https://{GOATCOUNTER}.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>') if GOATCOUNTER else ''
     return f'''<!doctype html>
 <html lang="en" dir="ltr">
 <head>
