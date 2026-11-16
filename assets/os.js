@@ -19,19 +19,40 @@
     if (ref === location.hostname) ref = '';
     try { sessionStorage.setItem('os-src', (src || 'direct') + (ref ? ' via ' + ref : '') + ' · landed ' + location.pathname); } catch (_) {}
   }
-  // Optional privacy-friendly analytics: set GOATCOUNTER in build.py to enable.
-  function track(name) { var gc = window.goatcounter; if (gc && gc.count) gc.count({ path: 'event/' + name, title: name, event: true }); }
-  // Conversion clicks, named by where they happened: cta_join@/watchlists.html, outbound_play.google.com …
+  // ---------- Analytics (GoatCounter, cookieless) ----------
+  // Events are fixed names only — never form values, emails or tokens. Queued until count.js has loaded.
+  var gcQueue = [];
+  function flush() {
+    var gc = window.goatcounter;
+    if (!(gc && gc.count)) return false;
+    while (gcQueue.length) { var n = gcQueue.shift(); gc.count({ path: n, title: n, event: true }); }
+    return true;
+  }
+  function track(name) {
+    name = String(name).replace(/[^\w\/@.\-]/g, '-').slice(0, 120);
+    gcQueue.push(name);
+    if (!flush()) { var tries = 0, t = setInterval(function () { if (flush() || ++tries > 40) clearInterval(t); }, 250); }
+  }
+  window.osTrack = track;
+  var here = '@' + location.pathname.replace(/^\/ar\//, '/');
+  // Conversion clicks, named by where they happened: cta/join@/watchlists.html, outbound/play.google.com …
   document.addEventListener('click', function (e) {
-    var a = e.target.closest && e.target.closest('a[href]'); if (!a || a.hasAttribute('data-track')) return;
-    var h = a.getAttribute('href') || '', where = '@' + location.pathname;
-    if (/join\.html/.test(h)) track('cta_join' + where);
-    else if (/how-it-works\.html|#tour/.test(h)) track('cta_demo' + where);
-    else if (/^mailto:/.test(h)) track('email' + where);
-    else if (/^https?:/.test(h) && a.host !== location.host) track('outbound_' + a.host);
+    var t = e.target.closest && e.target.closest('[data-track],[data-theme-pick],[data-view],[data-next],a[href]');
+    if (!t) return;
+    if (t.hasAttribute('data-track')) return track('cta/' + t.getAttribute('data-track') + here);
+    if (t.hasAttribute('data-theme-pick')) return track('theme/' + t.getAttribute('data-theme-pick'));
+    if (t.hasAttribute('data-view')) {
+      if (!e.isTrusted) return;  // 'Next step' clicks the tab itself; counted once as -next
+      var g = t.closest('[data-views]');
+      return track('demo/' + (g ? g.getAttribute('data-views') : 'view') + '-' + t.getAttribute('data-view'));
+    }
+    if (t.hasAttribute('data-next')) return track('demo/' + t.getAttribute('data-next') + '-next');
+    var h = t.getAttribute('href') || '';
+    if (/join\.html|#founding/.test(h)) track('cta/join' + here);
+    else if (/how-it-works\.html|#tour/.test(h)) track('cta/demo' + here);
+    else if (/^mailto:/.test(h)) track('email/' + h.slice(7).split('@')[0].replace(/[^a-z]/gi, '') + here);
+    else if (/^https?:/.test(h) && t.host !== location.host) track('outbound/' + t.host);
   }, true);
-  document.addEventListener('click', function (e) { var t = e.target.closest && e.target.closest('[data-track],[data-theme-pick],[data-view]'); if (!t) return;
-    track(t.getAttribute('data-track') || (t.hasAttribute('data-theme-pick') ? 'theme_' + t.getAttribute('data-theme-pick') : 'view_' + t.getAttribute('data-view'))); });
 
   // ---------- Language ----------
   var english = new WeakMap();
@@ -74,7 +95,7 @@
     if (t && t.dataset.ar) { if (!t.dataset.en) t.dataset.en = t.textContent; t.textContent = lang === 'ar' ? t.dataset.ar : t.dataset.en; }
   }
   if (lang === 'ar') apply();  // already rendered in Arabic on the server; this only fills script-made text
-  $$('.lang').forEach(function (b) { b.addEventListener('click', function () { var to = lang === 'ar' ? 'en' : 'ar'; put('os-lang', to); track('lang_' + to); location.href = twin(to); }); });
+  $$('.lang').forEach(function (b) { b.addEventListener('click', function () { var to = lang === 'ar' ? 'en' : 'ar'; put('os-lang', to); track('lang/' + to); location.href = twin(to); }); });
 
   // ---------- Menu ----------
   var burger = $('.burger'), menu = $('.menu');
@@ -110,6 +131,7 @@
     var buttons = $$('[data-view]', group);
     function show(v) {
       buttons.forEach(function (b) { b.setAttribute('aria-selected', b.getAttribute('data-view') === v ? 'true' : 'false'); });
+      if (buttons.length > 2 && buttons[buttons.length - 1].getAttribute('data-view') === v && !group.dataset.finished) { group.dataset.finished = '1'; track('demo/' + name + '-finished'); }
       $$('[data-view-of="' + name + '"]').forEach(function (el) { el.hidden = el.getAttribute('data-view-name') !== v; });
     }
     buttons.forEach(function (b) { b.addEventListener('click', function () { show(b.getAttribute('data-view')); }); });
@@ -170,12 +192,15 @@
     consent: 'Please tick the box so we may email you.', busy: 'Too many messages from this email. Please try again in an hour.',
     failed: 'Could not send. Please check your connection and try again.', sent: 'Thank you — we got it and will reply by email.' };
   $$('form[data-form]').forEach(function (form) {
+    var fname = form.getAttribute('data-form') === 'join' ? 'founders' : form.getAttribute('data-form');
+    form.addEventListener('focusin', function () { if (!form.dataset.started) { form.dataset.started = '1'; track(fname + '/form-start' + here); } });
     var topic = new URLSearchParams(location.search).get('topic');
     if (topic && form.elements.topic) form.elements.topic.value = topic;
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       var status = $('.status', form);
-      function say(k, ok) { status.textContent = tr('form.' + k, msgs[k]); status.className = 'status ' + (ok === true ? 'ok' : ok === false ? 'err' : ''); }
+      function say(k, ok) { status.textContent = tr('form.' + k, msgs[k]); status.className = 'status ' + (ok === true ? 'ok' : ok === false ? 'err' : '');
+        if (ok === false) track(fname + '/error-' + k); }
       if (form.elements.website && form.elements.website.value) return;
       function v(n) { var el = form.elements[n]; if (!el) return ''; if (el.length && !el.tagName) { var c = Array.prototype.find.call(el, function (x) { return x.checked; }); return c ? c.value : ''; } return String(el.value || '').trim(); }
       var kindForm = form.getAttribute('data-form');
@@ -204,7 +229,7 @@
           p_diagnostics: 'Website · ' + location.pathname + ' · ' + (sget('os-src') || '-') })
       }).then(function (res) {
         if (res.ok) {
-          track(kindForm + '_sent');
+          track(kindForm === 'join' ? 'founders/sent' : kindForm + '/sent');
           form.reset();
           var done = form.getAttribute('data-done') && document.getElementById(form.getAttribute('data-done'));
           if (done) { form.hidden = true; done.classList.add('show'); done.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
