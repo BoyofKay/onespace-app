@@ -45,17 +45,20 @@
   <div>
     <div class="crumbs"><a href="./"><span data-i18n="k70f8bb9a8a">Home</span></a> › <span data-i18n="ke0d73143de">Join</span></div>
     <h1 data-i18n="kaab9e70034">Join the Founding 500.</h1>
-    <p class="lead" data-i18n="k9ca6341c89">We are opening OneSpace to a small number of couples at a time so we can listen closely. The first 500 sign-ups become Founder Members — benefits will be announced before any pricing. It is free during early access.</p>
+    <p class="lead" data-i18n="k31d221ed3b">We are opening OneSpace to a small number of couples at a time so we can listen closely. The first 250 couples — 500 people — become Founder Members, with one Founder number for the two of you. Benefits will be announced before any pricing. It is free during early access.</p>
     <ul class="ticks">
       <li><span data-i18n="k61c7f1ac37"><b>1. Tell us about you two</b> — 30 seconds.</span></li>
-      <li><span data-i18n="k62fefb9af2"><b>2. We email you the invite</b> — Android now, iPhone via TestFlight soon.</span></li>
-      <li><span data-i18n="kf026bb7d84"><b>3. Create your space</b> and invite your partner with a QR code.</span></li>
+      <li><span data-i18n="ka1540686bc"><b>2. Confirm your email</b> — that is when your couple gets its Founder number.</span></li>
+      <li><span data-i18n="k1953110646"><b>3. Invite your partner</b> with your link — they join under the same number.</span></li>
+      <li><span data-i18n="k9e0867f0fb"><b>4. Get the app first</b> — Android now, iPhone via TestFlight soon.</span></li>
     </ul>
-    <div class="note-box" style="margin-top:24px"><span data-i18n="kd7488d19a8">We only use your email to send the invite and test updates. No marketing lists, no sharing. <a href="privacy.html">Privacy</a></span></div>
+    <div class="note-box" style="margin-top:24px"><span data-i18n="kdc3acf1e89">We only use your email for your Founder membership and the launch updates you agree to. No marketing lists, no sharing. Questions: <a href="mailto:founders@onespace.live">founders@onespace.live</a> · <a href="privacy.html">Privacy</a></span></div>
   </div>
   <div class="panel">
     <form data-form="join" data-done="j-done" novalidate>
       <h3 style="font-size:22px" data-i18n="k12c36406f3">Reserve your Founder spot</h3>
+      <div class="invite-note" hidden>💞 <span data-i18n="k8ab860768e">Your partner invited you — you will join their Founder couple number.</span></div>
+      <input type="hidden" name="invite" value="">
       <label for="j-email"><span data-i18n="k604e4bff22">Email *</span></label><input id="j-email" name="email" type="email" required autocomplete="email" placeholder="you@example.com" data-i18n-attr="placeholder:k50e2b46ef8">
       <label><span data-i18n="k8b1c7089ab">Your phone</span></label>
       <div class="radio-cards"><label><input type="radio" name="platform" value="android" checked> <span data-i18n="k1928f95c59">Android</span></label><label><input type="radio" name="platform" value="iphone"> <span data-i18n="k97f2142cbb">iPhone</span></label><label><input type="radio" name="platform" value="both"> <span data-i18n="kfed7587419">We use both</span></label><label><input type="radio" name="platform" value="unsure"> <span data-i18n="k1cef1a2ff9">Not sure yet</span></label></div>
@@ -72,13 +75,10 @@
       <p class="muted" style="font-size:13px;margin:6px 0 0"><span data-i18n="kf59813e133">We never share your email. <a href="privacy.html">Privacy</a></span></p>
     </form>
     <div id="j-done" class="done" tabindex="-1">
-      <div style="font-size:46px">🎉</div>
-      <h3 style="font-size:24px" data-i18n="k0765772772">You’re in! Welcome, Founder.</h3>
-      <p class="muted" data-i18n="k64ecca8de4">We will email your invite. OneSpace is for two — send this to your partner so you can start together.</p>
-      <div class="cta-row" style="justify-content:center">
-  <a class="btn btn-primary" data-share="whatsapp" href="https://wa.me/" target="_blank" rel="noopener"><span data-i18n="kf1c7b5796a">Send on WhatsApp</span></a>
-  <a class="btn btn-ghost" data-share="email" href="mailto:"><span data-i18n="k6ec82549f3">Send by email</span></a>
-  <a class="btn btn-ghost" data-share="native" href="#"><span data-i18n="kf9e0744648">Copy / share link</span></a></div>
+      <div style="font-size:46px">📬</div>
+      <h3 style="font-size:24px" data-i18n="k48faa67c34">Check your inbox</h3>
+      <p class="muted" data-i18n="k1ca38c3b40">We sent you a link from <b>founders@onespace.live</b>. Confirm your email and your couple gets its Founder number — then you can invite your partner.</p>
+      <p class="muted" style="font-size:14px" data-i18n="kc4a8075e34">Nothing after a few minutes? Check spam or Promotions, then try again.</p>
       <p style="margin-top:16px"><a href="how-it-works.html"><span data-i18n="kf6526312c0">While you wait: try the demo →</span></a></p>
     </div>
   </div>
@@ -94,6 +94,7 @@
     <div>
       <a class="brand" href="./"><img src="assets/mark.svg" alt="" width="34" height="34">OneSpace</a>
       <p data-i18n="k65f170b3ff">Two of us. One Space. A private home for the life you share — near or far.</p>
+      <p class="foot-mail"><a href="mailto:hello@onespace.live">hello@onespace.live</a></p>
       <a class="btn btn-primary btn-sm" href="join.html"><span data-i18n="kc7abe01c9e">Join the Founding 500</span></a>
     </div>
     <div><h4 data-i18n="kdd3b86d1ef">Product</h4><ul><li><a href="features.html"><span data-i18n="kfc338f87a0">Features</span></a></li><li><a href="how-it-works.html"><span data-i18n="k5aee1a0a7c">Interactive demo</span></a></li><li><a href="tutorials.html"><span data-i18n="k654171647b">Tutorials</span></a></li><li><a href="whats-new.html"><span data-i18n="k4d8dc5fe41">What's new</span></a></li><li><a href="whats-new.html#status"><span data-i18n="k681b5b5ae1">Availability</span></a></li></ul></div>

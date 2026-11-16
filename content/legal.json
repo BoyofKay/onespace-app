@@ -2,15 +2,21 @@
  "privacy": [
   [
    "Who we are",
-   "<p>OneSpace is an app for couples. In this policy “we” means the OneSpace team. You can reach us any time from <a href=\"support.html\">Support</a>, from the sign-in screen of the app, or from Me → Help in the app.</p>",
+   "<p>OneSpace is an app for couples. In this policy “we” means the OneSpace team. You can reach us any time from <a href=\"support.html\">Support</a>, from the sign-in screen of the app, or from Me → Help in the app. For privacy questions or requests, email <a href=\"mailto:privacy@onespace.live\">privacy@onespace.live</a>.</p>",
    "من نحن",
-   "<p>OneSpace تطبيق للأزواج. في هذه السياسة تعني «نحن» فريق OneSpace. يمكنك التواصل معنا في أي وقت من <a href=\"support.html\">الدعم</a>، أو من شاشة الدخول في التطبيق، أو من «أنا» ← «المساعدة».</p>"
+   "<p>OneSpace تطبيق للأزواج. في هذه السياسة تعني «نحن» فريق OneSpace. يمكنك التواصل معنا في أي وقت من <a href=\"support.html\">الدعم</a>، أو من شاشة الدخول في التطبيق، أو من «أنا» ← «المساعدة». ولأسئلة الخصوصية وطلباتها راسلنا على <a href=\"mailto:privacy@onespace.live\">privacy@onespace.live</a>.</p>"
   ],
   [
    "What we collect",
    "<ul><li><b>Your account:</b> name, email address, language, time zone and the settings you choose (for example sleep hours, preferred currency, how you live).</li><li><b>What you create:</b> notes, lists, reminders, events, activities, trips and travel documents, occasions, memories and photos, letters, check-ins, gestures, places and counters.</li><li><b>Your device for notifications:</b> a push token so we can deliver notifications to your phone.</li><li><b>Messages to support:</b> what you write to us, your email for the reply, and technical details only when you allow it.</li><li><b>Error reports:</b> when the app hits an error it sends the error message, app version and platform — never your content. They are deleted after 60 days.</li></ul><p>We do <b>not</b> collect your location, contacts, call logs, browsing or advertising identifiers. If you choose a contact or a calendar on your phone, that happens on your phone; only what you save in OneSpace is stored.</p>",
    "ما الذي نجمعه",
    "<ul><li><b>حسابك:</b> الاسم والبريد الإلكتروني واللغة والمنطقة الزمنية والإعدادات التي تختارها (مثل ساعات النوم والعملة المفضلة وطريقة عيشكما).</li><li><b>ما تنشئه:</b> الملاحظات والقوائم والتذكيرات والمواعيد والأنشطة والرحلات ومستندات السفر والمناسبات والذكريات والصور والرسائل والتواصل اليومي واللفتات والأماكن والعدّادات.</li><li><b>جهازك للإشعارات:</b> رمز إشعارات لإيصال الإشعارات إلى هاتفك.</li><li><b>رسائل الدعم:</b> ما تكتبه لنا وبريدك للرد، والتفاصيل التقنية فقط عند سماحك بذلك.</li><li><b>تقارير الأخطاء:</b> عند حدوث خطأ يرسل التطبيق رسالة الخطأ وإصدار التطبيق والمنصة — ولا يرسل محتواك أبدًا. وتُحذف بعد 60 يومًا.</li></ul><p><b>لا</b> نجمع موقعك أو جهات اتصالك أو سجل مكالماتك أو تصفحك أو معرّفات الإعلانات. إذا اخترت جهة اتصال أو تقويمًا على هاتفك فذلك يتم على هاتفك، ولا يُحفظ إلا ما تحفظه في OneSpace.</p>"
+  ],
+  [
+   "The website and the Founder waitlist",
+   "<ul><li><b>Founder sign-up:</b> your email, first name (optional), phone type, how you live, language, how you heard about us, the page you arrived on, your consent and its time. Your network address is kept only as a one-way code to stop abuse. We use it to confirm your email, give your couple a Founder number, link your partner and send launch updates you agreed to.</li><li><b>Emails</b> are sent for us by Resend, from founders@onespace.live. Replies reach our own inbox.</li><li><b>Visitor statistics</b> come from GoatCounter: page addresses, the site you came from, screen size and anonymous events such as “demo finished”. No cookies, no personal data, nothing you type.</li><li>To leave the waitlist or delete your sign-up, reply “unsubscribe” to any email or write to privacy@onespace.live.</li></ul>",
+   "الموقع وقائمة المؤسسين",
+   "<ul><li><b>تسجيل المؤسسين:</b> بريدك واسمك الأول (اختياري) ونوع هاتفك وطريقة عيشكما واللغة وكيف عرفت عنا والصفحة التي وصلت منها وموافقتك ووقتها. يُحفظ عنوان شبكتك كرمز أحادي الاتجاه فقط لمنع الإساءة. نستخدم ذلك لتأكيد بريدك ومنح زوجكما رقم المؤسس وربط شريكك وإرسال تحديثات الإطلاق التي وافقت عليها.</li><li><b>الرسائل</b> ترسلها لنا خدمة Resend من founders@onespace.live، والردود تصل إلى صندوقنا.</li><li><b>إحصاءات الزوار</b> من GoatCounter: عناوين الصفحات والموقع الذي جئت منه وحجم الشاشة وأحداث مجهولة مثل «أنهى العرض». بلا ملفات تعريف ارتباط ولا بيانات شخصية ولا أي شيء تكتبه.</li><li>لمغادرة القائمة أو حذف تسجيلك ردّ بكلمة «إلغاء» على أي رسالة أو راسل privacy@onespace.live.</li></ul>"
   ],
   [
    "Who can see it",

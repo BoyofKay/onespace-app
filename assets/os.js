@@ -18,6 +18,8 @@
     var ref = ''; try { ref = document.referrer ? new URL(document.referrer).hostname : ''; } catch (_) {}
     if (ref === location.hostname) ref = '';
     try { sessionStorage.setItem('os-src', (src || 'direct') + (ref ? ' via ' + ref : '') + ' · landed ' + location.pathname); } catch (_) {}
+    try { var u = {}; ['utm_source', 'utm_medium', 'utm_campaign'].forEach(function (k) { if (params.get(k)) u[k] = params.get(k).slice(0, 60); });
+      sessionStorage.setItem('os-utm', JSON.stringify(u)); sessionStorage.setItem('os-landing', location.pathname); sessionStorage.setItem('os-ref', ref); } catch (_) {}
   }
   // ---------- Analytics (GoatCounter, cookieless) ----------
   // Events are fixed names only — never form values, emails or tokens. Queued until count.js has loaded.
@@ -188,8 +190,16 @@
   });
 
   // ---------- Forms (same support inbox as the app) ----------
+  var FN = SUPABASE + '/functions/v1/';
+  var loadedAt = Date.now();
+  // A partner's invite link (?invite=…) is kept for the visit and shown on the form.
+  var invite = (params.get('invite') || sget('os-invite') || '').replace(/[^a-f0-9]/g, '').slice(0, 20);
+  if (invite) { try { sessionStorage.setItem('os-invite', invite); } catch (_) {}
+    if (params.get('invite')) track('founders/invite-landing');
+    $$('form[data-form="join"]').forEach(function (f) { if (f.elements.invite) f.elements.invite.value = invite; var n = $('.invite-note', f); if (n) n.hidden = false; }); }
+  $$('form[data-form="join"] select[name="language"]').forEach(function (sel) { sel.value = lang; });
   var msgs = { sending: 'Sending…', missing: 'Please fill in the fields marked *.', email: 'Please check the email address.',
-    consent: 'Please tick the box so we may email you.', busy: 'Too many messages from this email. Please try again in an hour.',
+    consent: 'Please tick the box so we may email you.', busy: 'Too many tries. Please wait a few minutes and try again.',
     failed: 'Could not send. Please check your connection and try again.', sent: 'Thank you — we got it and will reply by email.' };
   $$('form[data-form]').forEach(function (form) {
     var fname = form.getAttribute('data-form') === 'join' ? 'founders' : form.getAttribute('data-form');
@@ -222,6 +232,27 @@
         if (v('name')) message = 'Name: ' + v('name') + '\n\n' + message;
       }
       var btn = $('button[type=submit]', form); btn.disabled = true; say('sending');
+      if (kindForm === 'join') {
+        var sj = function (k) { try { return sessionStorage.getItem(k) || ''; } catch (_) { return ''; } };
+        var utm = {}; try { utm = JSON.parse(sj('os-utm') || '{}'); } catch (_) {}
+        var language = v('language'); if (language !== 'ar' && language !== 'en') language = lang;
+        fetch(FN + 'founder-join', { method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: email, name: v('name'), platform: v('platform'), living: v('living'), language: language,
+            source: v('source'), note: v('message'), consent: true, website: v('website'), elapsed: Date.now() - loadedAt,
+            invite: v('invite') || invite, landing: sj('os-landing'), referrer: sj('os-ref'), utm: utm }) })
+        .then(function (res) { return res.json().catch(function () { return {}; }).then(function (b) { return { res: res, b: b }; }); })
+        .then(function (x) {
+          if (x.res.ok && x.b.ok) {
+            track('founders/sent');
+            var pl = v('platform'); if (pl) track('founders/platform-' + pl);
+            if (v('invite') || invite) track('founders/sent-partner');
+            form.reset();
+            var done = form.getAttribute('data-done') && document.getElementById(form.getAttribute('data-done'));
+            if (done) { form.hidden = true; done.classList.add('show'); done.focus(); } else say('sent', true);
+          } else say(x.b.error === 'rate_limited' ? 'busy' : x.b.error === 'invalid_email' ? 'email' : x.b.error === 'consent_required' ? 'consent' : 'failed', false);
+        }).catch(function () { say('failed', false); }).then(function () { btn.disabled = false; });
+        return;
+      }
       fetch(SUPABASE + '/rest/v1/rpc/submit_public_support', {
         method: 'POST', headers: { 'Content-Type': 'application/json', apikey: KEY, Authorization: 'Bearer ' + KEY },
         body: JSON.stringify({ p_kind: kind, p_subject: subject.slice(0, 160), p_message: (message || subject).slice(0, 4000),
@@ -229,7 +260,7 @@
           p_diagnostics: 'Website · ' + location.pathname + ' · ' + (sget('os-src') || '-') })
       }).then(function (res) {
         if (res.ok) {
-          track(kindForm === 'join' ? 'founders/sent' : kindForm + '/sent');
+          track(kindForm + '/sent');
           form.reset();
           var done = form.getAttribute('data-done') && document.getElementById(form.getAttribute('data-done'));
           if (done) { form.hidden = true; done.classList.add('show'); done.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
@@ -252,4 +283,74 @@
       else if (navigator.clipboard) navigator.clipboard.writeText(text).then(function () { a.textContent = tr('kit.copied', 'Copied'); });
     });
   });
+
+  // ---------- Founder confirmation page ----------
+  var cf = $('[data-confirm]');
+  if (cf) {
+    var tok = (location.hash.match(/t=([0-9a-f]{48})/) || [])[1] || '';
+    if (location.hash) history.replaceState(null, '', location.pathname);  // keep the token out of history and analytics
+    var showState = function (st) { $$('.cf-state', cf).forEach(function (el) { el.hidden = el.getAttribute('data-state') !== st; }); };
+    if (!tok) showState('invalid');
+    else fetch(FN + 'founder-confirm', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ token: tok }) })
+      .then(function (r) { return r.json(); }).then(function (b) {
+        if (!b.ok) { track('founders/confirm-' + (b.status === 'expired' ? 'expired' : 'invalid')); return showState(b.status === 'expired' ? 'expired' : 'invalid'); }
+        if (b.couple_status !== 'founder') { track('founders/confirmed-waitlist'); return showState('waitlist'); }
+        if (b.status === 'confirmed') track(b.role === 'partner' ? 'founders/confirmed-partner' : 'founders/confirmed');
+        $('[data-number]', cf).textContent = '#' + b.founder_number;
+        $('[data-role-first]', cf).hidden = b.role === 'partner';
+        $('[data-role-partner]', cf).hidden = b.role !== 'partner';
+        if (b.role !== 'partner' && !b.couple_full && b.invite_url) {
+          var box = $('[data-invite]', cf), url = b.invite_url;
+          box.hidden = false; $('[data-invite-url]', box).value = url;
+          var msg = (lang === 'ar' ? 'انضم إليّ في OneSpace — رقمنا كزوجين مؤسسين: ' : 'Join me on OneSpace — we are a Founder Couple: ') + url;
+          $('[data-invite-wa]', box).href = 'https://wa.me/?text=' + encodeURIComponent(msg);
+          $('[data-invite-wa]', box).addEventListener('click', function () { track('founders/invite-whatsapp'); });
+          $('[data-invite-copy]', box).addEventListener('click', function () {
+            var i = $('[data-invite-url]', box); i.select();
+            (navigator.clipboard ? navigator.clipboard.writeText(url) : Promise.resolve(document.execCommand('copy'))).then(function () {});
+            this.textContent = lang === 'ar' ? 'تم النسخ' : 'Copied'; track('founders/invite-copied');
+          });
+        }
+        showState('ok');
+      }).catch(function () { showState('invalid'); });
+  }
+
+  // ---------- Private waitlist dashboard ----------
+  var adm = $('[data-admin]');
+  if (adm) {
+    var key = sget('os-admin') || '';
+    var esc = function (t) { return String(t).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
+    var bars = function (obj) { var tot = 0, k; for (k in obj) tot += obj[k]; if (!tot) return '<p class="muted">No data yet</p>';
+      return Object.keys(obj).sort(function (a, b) { return obj[b] - obj[a]; }).map(function (k) { var pc = Math.round(100 * obj[k] / tot);
+        return '<div class="adm-bar"><span>' + esc(k) + '</span><i style="width:' + pc + '%"></i><b>' + obj[k] + ' · ' + pc + '%</b></div>'; }).join(''); };
+    var load = function () {
+      fetch(FN + 'founder-admin?days=30', { headers: { 'x-admin-key': key } }).then(function (r) { return r.json().then(function (b) { return { r: r, b: b }; }); })
+      .then(function (x) {
+        var st = $('[data-admin-login] .status');
+        if (!x.r.ok) { try { sessionStorage.removeItem('os-admin'); } catch (_) {} st.textContent = 'Wrong key.'; return; }
+        var s = x.b.stats;
+        $('[data-admin-login]').hidden = true; $('[data-admin-body]').hidden = false;
+        var tiles = [['Founder couples', s.founder_couples + ' / ' + s.capacity_couples], ['Founder places left', s.capacity_couples - s.founder_couples],
+          ['Sign-ups', s.signups_total], ['Confirmed', s.confirmed], ['Waiting to confirm', s.pending], ['Confirm rate', s.confirm_rate == null ? '—' : s.confirm_rate + '%'],
+          ['Partners joined', s.partners_joined], ['Waitlist couples', s.waitlist_couples]];
+        if (s.visitors != null) tiles.push(['Visitors → sign-up', s.visitors ? (100 * s.signups_total / s.visitors).toFixed(1) + '% of ' + s.visitors : '—']);
+        if (!s.mail_key_set) tiles.push(['Email', '⚠ RESEND_API_KEY missing']);
+        $('[data-tiles]').innerHTML = tiles.map(function (t) { return '<div class="adm-tile"><span>' + t[0] + '</span><b>' + esc(t[1]) + '</b></div>'; }).join('');
+        var max = Math.max.apply(null, s.daily.map(function (d) { return d.signups; }).concat([1]));
+        $('[data-chart]').innerHTML = s.daily.map(function (d) {
+          return '<div class="adm-col" title="' + d.day + ': ' + d.signups + ' signed up, ' + d.confirmed + ' confirmed"><i style="height:' + (100 * d.signups / max) + '%"></i><i class="c" style="height:' + (100 * d.confirmed / max) + '%"></i><span>' + d.day.slice(8) + '</span></div>'; }).join('');
+        ['platform', 'living', 'language', 'emails'].forEach(function (k) { $('[data-bars="' + k + '"]').innerHTML = bars(s[k] || {}); });
+        ['sources', 'landing'].forEach(function (k) { $('[data-list="' + k + '"]').innerHTML = (s[k] || []).map(function (r) { return '<div class="adm-bar"><span>' + esc(r.source || r.page) + '</span><b>' + r.n + '</b></div>'; }).join('') || '<p class="muted">No data yet</p>'; });
+        $('[data-failures]').innerHTML = (s.email_failures || []).slice(0, 5).map(function (f) { return '<p class="muted" style="font-size:12px">⚠ ' + esc(f.at.slice(0, 16).replace('T', ' ') + ' · ' + f.kind + ' · ' + (f.error || '')) + '</p>'; }).join('');
+        $('[data-updated]').textContent = 'Updated ' + new Date(s.generated_at).toLocaleString();
+      }).catch(function () { $('[data-admin-login] .status').textContent = 'Could not load.'; });
+    };
+    $('[data-admin-login]').addEventListener('submit', function (e) { e.preventDefault(); key = $('#ak').value.trim(); try { sessionStorage.setItem('os-admin', key); } catch (_) {} load(); });
+    $('[data-resend]').addEventListener('click', function () {
+      var out = $('[data-resend-status]'); out.textContent = 'Sending…';
+      fetch(FN + 'founder-admin', { method: 'POST', headers: { 'x-admin-key': key, 'Content-Type': 'application/json' }, body: JSON.stringify({ action: 'resend_pending' }) })
+        .then(function (r) { return r.json(); }).then(function (b) { out.textContent = b.ok ? 'Sent ' + b.sent + ' of ' + b.attempted + '.' : 'Failed.'; load(); });
+    });
+    if (key) load();
+  }
 })();

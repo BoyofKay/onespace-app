@@ -2,5 +2,8 @@ User-agent: *
 Allow: /
 Disallow: /v4.html
 Disallow: /v4-tutorial.html
+Disallow: /confirm.html
+Disallow: /ar/confirm.html
+Disallow: /founders-admin.html
 
 Sitemap: https://onespace.live/sitemap.xml

@@ -145,6 +145,7 @@ def foot():
     <div>
       <a class="brand" href="./"><img src="assets/mark.svg" alt="" width="34" height="34">OneSpace</a>
       {T('Two of us. One Space. A private home for the life you share — near or far.', 'نحن الاثنان. مساحة واحدة. بيت خاص للحياة التي تتشاركانها — قريبين أو بعيدين.', 'p')}
+      <p class="foot-mail"><a href="mailto:hello@onespace.live">hello@onespace.live</a></p>
       <a class="btn btn-primary btn-sm" href="join.html">{T('Join the Founding 500', 'انضم إلى المؤسسين الـ500')}</a>
     </div>
     {col('Product', 'المنتج', [('features.html', 'Features', 'المزايا'), ('how-it-works.html', 'Interactive demo', 'العرض التفاعلي'), ('tutorials.html', 'Tutorials', 'الدروس'), ('whats-new.html', "What's new", 'الجديد'), ('whats-new.html#status', 'Availability', 'التوفر')])}
@@ -175,8 +176,8 @@ def page_hero(eyebrow, eyebrow_ar, h1, h1_ar, lead, lead_ar, crumbs=True, extra=
 
 
 def cta_band(h2='Ready when you two are.', h2_ar='جاهزون متى كنتما مستعدين.',
-             lead='OneSpace is in an early test. The first 500 sign-ups become Founder Members — free, first in line, and with a say in what we build.',
-             lead_ar='OneSpace في تجربة مبكرة. أول 500 تسجيل يصبحون أعضاء مؤسسين — مجانًا، وفي أول الصف، ولهم رأي فيما نبنيه.'):
+             lead='OneSpace is in an early test. The first 250 couples — 500 people — become Founder Members: free, first in line, and with a say in what we build.',
+             lead_ar='OneSpace في تجربة مبكرة. أول 250 زوجًا — 500 شخص — يصبحون أعضاء مؤسسين: مجانًا، وفي أول الصف، ولهم رأي فيما نبنيه.'):
     return f'''<section><div class="wrap"><div class="band reveal"><div class="cta-band">
   <div>{T(h2, h2_ar, 'h2')}{T(lead, lead_ar, 'p', 'lead')}</div>
   <div class="cta-row" style="justify-content:flex-end">
@@ -837,8 +838,8 @@ def page_index():
 <section id="founding"><div class="wrap"><div class="band"><div class="cta-band" style="align-items:start">
   <div>
     {T('The Founding 500', 'المؤسسون الـ500', 'span', 'eyebrow')}
-    <h2>{T('Be one of the', 'كونا من')} <span class="serif" style="color:#F3A27E">{T('first 500 couples.', 'أول 500 زوج.')}</span></h2>
-    {T('OneSpace is opening to a small group first. The first 500 sign-ups become Founder Members: you get the app first, a direct line to the team, and a say in what we build. Founder benefits will be announced before any pricing is introduced.', 'يُفتح OneSpace لمجموعة صغيرة أولًا. أول 500 تسجيل يصبحون أعضاء مؤسسين: تحصلون على التطبيق أولًا، وخط مباشر مع الفريق، ورأي فيما نبنيه. وسنعلن مزايا المؤسسين قبل تقديم أي أسعار.', 'p', 'lead')}
+    <h2>{T('Be one of the', 'كونا من')} <span class="serif" style="color:#F3A27E">{T('first 250 couples.', 'أول 250 زوجًا.')}</span></h2>
+    {T('OneSpace is opening to a small group first. The first 250 couples to confirm become Founder Members — one Founder number for the two of you. You get the app first, a direct line to the team, and a say in what we build. Founder benefits will be announced before any pricing is introduced.', 'يُفتح OneSpace لمجموعة صغيرة أولًا. أول 250 زوجًا يؤكدون تسجيلهم يصبحون أعضاء مؤسسين — رقم مؤسس واحد لكما معًا. تحصلون على التطبيق أولًا، وخط مباشر مع الفريق، ورأي فيما نبنيه. وسنعلن مزايا المؤسسين قبل تقديم أي أسعار.', 'p', 'lead')}
     <ul class="ticks"><li>{T('<b>Free</b> during early access', '<b>مجاني</b> خلال الوصول المبكر')}</li><li>{T('<b>Android now</b>, iPhone next', '<b>أندرويد الآن</b> وiPhone بعده')}</li><li>{T('<b>Your email only</b> for the invite and launch updates', '<b>بريدك فقط</b> للدعوة وتحديثات الإطلاق')}</li></ul>
   </div>
   {founding_form('h')}
@@ -860,6 +861,8 @@ def founding_form(prefix, full=False):
     return f"""<div class="panel">
     <form data-form="join" data-done="{prefix}-done" novalidate>
       {T('Reserve your Founder spot', 'احجز مكانك كمؤسس', 'h3', '', 'style="font-size:22px"')}
+      <div class="invite-note" hidden>💞 {T('Your partner invited you — you will join their Founder couple number.', 'دعاك شريكك — ستنضم إلى رقم المؤسس الخاص بزوجكما.')}</div>
+      <input type="hidden" name="invite" value="">
       <label for="{prefix}-email">{T('Email *', 'البريد الإلكتروني *')}</label><input id="{prefix}-email" name="email" type="email" required autocomplete="email" placeholder="you@example.com" data-i18n-attr="placeholder:{ek}">
       <label>{T('Your phone', 'هاتفك')}</label>
       {radio('platform', [('android', 'Android', 'أندرويد'), ('iphone', 'iPhone', 'iPhone'), ('both', 'We use both', 'نستخدم الاثنين'), ('unsure', 'Not sure yet', 'لست متأكدًا')])}
@@ -871,10 +874,10 @@ def founding_form(prefix, full=False):
       <p class="muted" style="font-size:13px;margin:6px 0 0">{T('We never share your email. <a href="privacy.html">Privacy</a>', 'لا نشارك بريدك أبدًا. <a href="privacy.html">الخصوصية</a>')}</p>
     </form>
     <div id="{prefix}-done" class="done" tabindex="-1">
-      <div style="font-size:46px">🎉</div>
-      {T('You’re in! Welcome, Founder.', 'أنت معنا! أهلًا بك أيها المؤسس.', 'h3', '', 'style="font-size:24px"')}
-      {T('We will email your invite. OneSpace is for two — send this to your partner so you can start together.', 'سنرسل دعوتك بالبريد. OneSpace لشخصين — أرسل هذا لشريكك لتبدآ معًا.', 'p', 'muted')}
-      {share_buttons()}
+      <div style="font-size:46px">📬</div>
+      {T('Check your inbox', 'تفقّد بريدك', 'h3', '', 'style="font-size:24px"')}
+      {T('We sent you a link from <b>founders@onespace.live</b>. Confirm your email and your couple gets its Founder number — then you can invite your partner.', 'أرسلنا لك رابطًا من <b>founders@onespace.live</b>. أكّد بريدك ليحصل زوجكما على رقم المؤسس — ثم ادعُ شريكك.', 'p', 'muted')}
+      {T('Nothing after a few minutes? Check spam or Promotions, then try again.', 'لم يصل شيء بعد دقائق؟ تفقّد البريد العشوائي أو العروض ثم حاول مجددًا.', 'p', 'muted', 'style="font-size:14px"')}
       <p style="margin-top:16px"><a href="how-it-works.html">{T('While you wait: try the demo →', 'أثناء الانتظار: جرّب العرض ←')}</a></p>
     </div>
   </div>"""
@@ -1393,13 +1396,14 @@ def page_join():
   <div>
     <div class="crumbs"><a href="./">{T('Home', 'الرئيسية')}</a> › {T('Join', 'انضم')}</div>
     {T('Join the Founding 500.', 'انضم إلى المؤسسين الـ500.', 'h1')}
-    {T('We are opening OneSpace to a small number of couples at a time so we can listen closely. The first 500 sign-ups become Founder Members — benefits will be announced before any pricing. It is free during early access.', 'نفتح OneSpace لعدد قليل من الأزواج في كل مرة حتى نستمع جيدًا. أول 500 تسجيل يصبحون أعضاء مؤسسين — وسنعلن المزايا قبل أي أسعار. وهو مجاني خلال الوصول المبكر.', 'p', 'lead')}
+    {T('We are opening OneSpace to a small number of couples at a time so we can listen closely. The first 250 couples — 500 people — become Founder Members, with one Founder number for the two of you. Benefits will be announced before any pricing. It is free during early access.', 'نفتح OneSpace لعدد قليل من الأزواج في كل مرة حتى نستمع جيدًا. أول 250 زوجًا — 500 شخص — يصبحون أعضاء مؤسسين، برقم مؤسس واحد لكما معًا. وسنعلن المزايا قبل أي أسعار. وهو مجاني خلال الوصول المبكر.', 'p', 'lead')}
     <ul class="ticks">
       <li>{T('<b>1. Tell us about you two</b> — 30 seconds.', '<b>1. أخبرنا عنكما</b> — 30 ثانية.')}</li>
-      <li>{T('<b>2. We email you the invite</b> — Android now, iPhone via TestFlight soon.', '<b>2. نرسل لك الدعوة بالبريد</b> — أندرويد الآن وiPhone عبر TestFlight قريبًا.')}</li>
-      <li>{T('<b>3. Create your space</b> and invite your partner with a QR code.', '<b>3. أنشئ مساحتكما</b> وادعُ شريكك برمز QR.')}</li>
+      <li>{T('<b>2. Confirm your email</b> — that is when your couple gets its Founder number.', '<b>2. أكّد بريدك</b> — وعندها يحصل زوجكما على رقم المؤسس.')}</li>
+      <li>{T('<b>3. Invite your partner</b> with your link — they join under the same number.', '<b>3. ادعُ شريكك</b> برابطك — لينضم بالرقم نفسه.')}</li>
+      <li>{T('<b>4. Get the app first</b> — Android now, iPhone via TestFlight soon.', '<b>4. احصلا على التطبيق أولًا</b> — أندرويد الآن وiPhone عبر TestFlight قريبًا.')}</li>
     </ul>
-    <div class="note-box" style="margin-top:24px">{T('We only use your email to send the invite and test updates. No marketing lists, no sharing. <a href="privacy.html">Privacy</a>', 'نستخدم بريدك فقط لإرسال الدعوة وتحديثات التجربة. لا قوائم تسويق ولا مشاركة. <a href="privacy.html">الخصوصية</a>')}</div>
+    <div class="note-box" style="margin-top:24px">{T('We only use your email for your Founder membership and the launch updates you agree to. No marketing lists, no sharing. Questions: <a href="mailto:founders@onespace.live">founders@onespace.live</a> · <a href="privacy.html">Privacy</a>', 'نستخدم بريدك فقط لعضويتك كمؤسس وتحديثات الإطلاق التي توافق عليها. لا قوائم تسويق ولا مشاركة. للأسئلة: <a href="mailto:founders@onespace.live">founders@onespace.live</a> · <a href="privacy.html">الخصوصية</a>')}</div>
   </div>
   {founding_form('j', True)}
 </div></section>
@@ -1416,7 +1420,7 @@ def page_support():
              'Contact OneSpace, report a problem or get help signing in — no account needed.',
              'تواصل مع OneSpace أو أبلغ عن مشكلة أو احصل على مساعدة في الدخول — دون حساب.')
     ek = K('you@example.com', 'you@example.com')
-    return h + page_hero('Support', 'الدعم', 'How can we help?', 'كيف نساعدك؟', 'Messages from this page go to the same inbox as the app. No account needed.', 'الرسائل من هذه الصفحة تصل إلى صندوق الوارد نفسه في التطبيق. دون حساب.') + f'''
+    return h + page_hero('Support', 'الدعم', 'How can we help?', 'كيف نساعدك؟', 'Messages from this page go to the same inbox as the app. No account needed. Prefer email? Write to <a href="mailto:support@onespace.live">support@onespace.live</a>.', 'الرسائل من هذه الصفحة تصل إلى صندوق الوارد نفسه في التطبيق. دون حساب. تفضّل البريد؟ راسلنا على <a href="mailto:support@onespace.live">support@onespace.live</a>.') + f'''
 <section style="padding-top:20px"><div class="wrap">
   <div class="grid g3">
     <a class="card link" href="faq.html"><div class="ico i-blue">❓</div>{T('Read the FAQ', 'اقرأ الأسئلة الشائعة', 'h3')}{T('Most answers are there.', 'معظم الإجابات هناك.', 'p')}</a>
@@ -1454,7 +1458,7 @@ def page_delete():
   {T('What is deleted', 'ما الذي يُحذف', 'h2')}
   {T('Your account, your profile and the items only you created are deleted. If your partner stays, the shared space and what they created remain theirs. If you are the last member, the whole space is deleted, including its photos and files.', 'يُحذف حسابك وملفك والعناصر التي أنشأتها وحدك. إذا بقي شريكك، تبقى المساحة المشتركة وما أنشأه له. وإذا كنت آخر عضو تُحذف المساحة بالكامل بما فيها الصور والملفات.', 'p')}
   {T('Can’t sign in?', 'لا تستطيع الدخول؟', 'h2', '', 'id="request"')}
-  {T('Send a request from the email on your account. We will confirm it is you, then delete the account and reply.', 'أرسل طلبًا من البريد المسجل في حسابك. سنتأكد من هويتك ثم نحذف الحساب ونرد عليك.', 'p')}
+  {T('Send a request below — or email <a href="mailto:privacy@onespace.live">privacy@onespace.live</a> — from the email on your account. We will confirm it is you, then delete the account and reply.', 'أرسل طلبًا من الأسفل — أو راسل <a href="mailto:privacy@onespace.live">privacy@onespace.live</a> — من البريد المسجل في حسابك. سنتأكد من هويتك ثم نحذف الحساب ونرد عليك.', 'p')}
   <div class="panel"><form data-form="account" novalidate>
     <label for="d-email">{T('Account email *', 'بريد الحساب *')}</label><input id="d-email" name="email" type="email" required autocomplete="email" placeholder="you@example.com" data-i18n-attr="placeholder:{ek}">
     <label for="d-msg">{T('Anything we should know? *', 'هل هناك ما يجب أن نعرفه؟ *')}</label><textarea id="d-msg" name="message" required maxlength="2000" style="min-height:90px"></textarea>
@@ -1535,6 +1539,73 @@ def page_share_kit():
   <div class="note-box" style="margin-top:28px">{T('Please write the name as <b>OneSpace</b> — one word, capital O and S. Don’t change the logo’s colours or shape. Questions? <a href="support.html">Contact us</a>.', 'يُرجى كتابة الاسم <b>OneSpace</b> — كلمة واحدة بحرفي O وS كبيرين. لا تغيّر ألوان الشعار أو شكله. أسئلة؟ <a href="support.html">تواصل معنا</a>.')}</div>
 </div></section>
 ''' + foot()
+
+
+def page_confirm():
+    h = head('confirm.html', 'Confirm your email — OneSpace Founders', 'تأكيد بريدك — مؤسسو OneSpace',
+             'Confirm your email to claim your OneSpace Founder couple number.', 'أكّد بريدك لتحصل على رقمكما كزوجين مؤسسين في OneSpace.')
+    h = h.replace('<meta charset="utf-8">', '<meta charset="utf-8">\n<meta name="robots" content="noindex">', 1)
+    return h + f"""
+<section class="page-hero"><div class="narrow center" data-confirm>
+  <div class="cf-state" data-state="loading"><div style="font-size:46px">⏳</div>{T('Confirming your email…', 'جارٍ تأكيد بريدك…', 'h1')}</div>
+  <div class="cf-state" data-state="ok" hidden>
+    <div style="font-size:46px">🎉</div>
+    {T('Welcome, Founders!', 'أهلًا بكما أيها المؤسسان!', 'h1')}
+    <div class="founder-badge"><span>{T('Founder Couple', 'الزوجان المؤسسان')}</span><b data-number>#—</b></div>
+    <p class="lead" data-role-first>{T('Your email is confirmed and this number belongs to the two of you. We sent the details to your inbox.', 'تأكد بريدك وهذا الرقم لكما معًا. أرسلنا التفاصيل إلى بريدك.')}</p>
+    <p class="lead" data-role-partner hidden>{T('You have joined your partner — together you hold this Founder number.', 'انضممت إلى شريكك — هذا رقمكما معًا كمؤسسين.')}</p>
+    <div class="panel" data-invite hidden style="text-align:start;margin-top:20px">
+      {T('Now invite your partner', 'الآن ادعُ شريكك', 'h3')}
+      {T('OneSpace is for two. Your partner joins under the same number with this link:', 'OneSpace لشخصين. ينضم شريكك بالرقم نفسه عبر هذا الرابط:', 'p', 'muted')}
+      <input class="invite-url" readonly data-invite-url value="">
+      <div class="cta-row" style="margin-top:12px"><a class="btn btn-primary" data-invite-wa href="#" target="_blank" rel="noopener">{T('Send on WhatsApp', 'أرسل عبر واتساب')}</a>
+      <button class="btn btn-ghost" type="button" data-invite-copy>{T('Copy link', 'انسخ الرابط')}</button></div>
+    </div>
+    <p style="margin-top:22px"><a class="btn btn-ghost" href="how-it-works.html">{T('While you wait: try the demo →', 'أثناء الانتظار: جرّب العرض ←')}</a></p>
+  </div>
+  <div class="cf-state" data-state="waitlist" hidden>
+    <div style="font-size:46px">🕊</div>{T('You’re on the waitlist', 'أنتما على قائمة الانتظار', 'h1')}
+    {T('Your email is confirmed. All 250 Founder places are taken, so we’ll invite you as soon as more places open.', 'تأكد بريدك. اكتملت أماكن المؤسسين الـ250، وسندعوكما فور فتح أماكن جديدة.', 'p', 'lead')}</div>
+  <div class="cf-state" data-state="expired" hidden>
+    <div style="font-size:46px">⌛</div>{T('This link has expired', 'انتهت صلاحية هذا الرابط', 'h1')}
+    {T('Links last 7 days. Sign up again with the same email and we’ll send a fresh one.', 'تصلح الروابط 7 أيام. سجّل مجددًا بالبريد نفسه وسنرسل رابطًا جديدًا.', 'p', 'lead')}
+    <a class="btn btn-primary" href="join.html">{T('Sign up again', 'سجّل مجددًا')}</a></div>
+  <div class="cf-state" data-state="invalid" hidden>
+    <div style="font-size:46px">🔗</div>{T('We couldn’t use this link', 'لم نتمكن من استخدام هذا الرابط', 'h1')}
+    {T('Open the newest email from founders@onespace.live, or sign up again.', 'افتح أحدث رسالة من founders@onespace.live، أو سجّل مجددًا.', 'p', 'lead')}
+    <a class="btn btn-primary" href="join.html">{T('Go to sign-up', 'إلى التسجيل')}</a></div>
+</div></section>""" + foot()
+
+
+def page_founders_admin():
+    h = head('founders-admin.html', 'Founder waitlist — dashboard', 'لوحة قائمة المؤسسين', 'Private dashboard.', 'لوحة خاصة.')
+    h = h.replace('<meta charset="utf-8">', '<meta charset="utf-8">\n<meta name="robots" content="noindex, nofollow">', 1)
+    return h + """
+<section class="page-hero"><div class="wrap" data-admin>
+  <h1>Founder waitlist</h1>
+  <form class="panel admin-login" data-admin-login style="max-width:440px">
+    <label for="ak">Admin key</label><input id="ak" type="password" autocomplete="current-password" required>
+    <div class="cta-row" style="margin-top:12px"><button class="btn btn-primary" type="submit">Open dashboard</button></div>
+    <p class="status" role="status"></p>
+    <p class="muted" style="font-size:13px">Counts only — no email addresses are shown here. For individual sign-ups use Supabase › Table editor › private.founder_members.</p>
+  </form>
+  <div data-admin-body hidden>
+    <div class="adm-grid" data-tiles></div>
+    <div class="adm-row"><div class="panel"><h3>Sign-ups per day (30 days)</h3><div data-chart class="adm-chart"></div><p class="muted" style="font-size:13px">■ signed up &nbsp; <span style="color:#1F6E78">■</span> confirmed</p></div></div>
+    <div class="adm-row adm-3">
+      <div class="panel"><h3>Phone (confirmed)</h3><div data-bars="platform"></div></div>
+      <div class="panel"><h3>How they live</h3><div data-bars="living"></div></div>
+      <div class="panel"><h3>Language</h3><div data-bars="language"></div></div>
+    </div>
+    <div class="adm-row adm-3">
+      <div class="panel"><h3>Where they came from</h3><div data-list="sources"></div></div>
+      <div class="panel"><h3>Landing page</h3><div data-list="landing"></div></div>
+      <div class="panel"><h3>Emails</h3><div data-bars="emails"></div><div data-failures></div>
+        <button class="btn btn-ghost btn-sm" type="button" data-resend style="margin-top:10px">Send missing confirmation emails</button><p class="status" data-resend-status></p></div>
+    </div>
+    <p class="muted" style="font-size:13px">Visitors and click events: <a href="https://onespace.goatcounter.com" target="_blank" rel="noopener">onespace.goatcounter.com</a>. <span data-updated></span></p>
+  </div>
+</div></section>""" + foot()
 
 
 def page_404():
@@ -1635,6 +1706,9 @@ def main():
         (ROOT / name).write_text(redirect(target, title), encoding='utf-8')
     (ROOT / 'assets' / 'ar.js').write_text('window.ONESPACE_AR=' + json.dumps(AR, ensure_ascii=False, sort_keys=True) + ';\n', encoding='utf-8')
     (ROOT / 'ar').mkdir(exist_ok=True)
+    (ROOT / 'confirm.html').write_text(page_confirm(), encoding='utf-8')
+    (ROOT / 'ar' / 'confirm.html').write_text(arabic_page((ROOT / 'confirm.html').read_text(encoding='utf-8'), 'confirm.html'), encoding='utf-8')
+    (ROOT / 'founders-admin.html').write_text(page_founders_admin(), encoding='utf-8')
     for name in PAGES:
         (ROOT / 'ar' / name).write_text(arabic_page((ROOT / name).read_text(encoding='utf-8'), name), encoding='utf-8')
     urls = ''
@@ -1646,7 +1720,7 @@ def main():
             urls += f'  <url><loc>{loc}</loc><lastmod>{TODAY}</lastmod><changefreq>{c}</changefreq><priority>{pr}</priority>{alt}</url>\n'
     (ROOT / 'sitemap.xml').write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" '
                                       f'xmlns:xhtml="http://www.w3.org/1999/xhtml">\n{urls}</urlset>\n', encoding='utf-8')
-    (ROOT / 'robots.txt').write_text(f'User-agent: *\nAllow: /\nDisallow: /v4.html\nDisallow: /v4-tutorial.html\n\nSitemap: {BASE}sitemap.xml\n', encoding='utf-8')
+    (ROOT / 'robots.txt').write_text(f'User-agent: *\nAllow: /\nDisallow: /v4.html\nDisallow: /v4-tutorial.html\nDisallow: /confirm.html\nDisallow: /ar/confirm.html\nDisallow: /founders-admin.html\n\nSitemap: {BASE}sitemap.xml\n', encoding='utf-8')
     (ROOT / f'{INDEXNOW_KEY}.txt').write_text(INDEXNOW_KEY + '\n', encoding='utf-8')
     (ROOT / 'llms.txt').write_text(llms_txt(), encoding='utf-8')
     (ROOT / 'site.webmanifest').write_text(json.dumps({'name': 'OneSpace', 'short_name': 'OneSpace', 'start_url': './', 'display': 'standalone',
