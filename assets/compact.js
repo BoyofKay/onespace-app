@@ -9,10 +9,10 @@ if(menu&&nav){menu.addEventListener('click',()=>{const open=menu.getAttribute('a
 const themes=['midnight','mono','clean','rose'];
 function setTheme(theme){if(!themes.includes(theme))theme='clean';document.body.dataset.theme=theme;
 ['#heroApp','#tourApp'].forEach(s=>{const el=$(s);if(el)el.dataset.appTheme=theme});
-$$('.swatch').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.theme===theme)));safeSet('onespace-website-theme',theme);
+$$('.swatch').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.theme===theme)));safeSet('onespace-web-theme',theme);
 }
 $$('.swatch').forEach(b=>b.addEventListener('click',()=>setTheme(b.dataset.theme)));
-setTheme(safeGet('onespace-website-theme')||'clean');
+setTheme(safeGet('onespace-web-theme')||'clean');
 const steps=[
 {title:'Start with your day',body:"See what needs attention, what’s happening together, and the details you don't want to forget.",chips:['☑ Needs attention','📅 Coming up','♡ Stay close'],app:'Today',sub:'Your space, at a glance',cards:[['Since you were away',"You're all caught up."],['Needs your attention',"Friday · Choose our plans"],['Coming up together','Friday · Movie night']]},
 {title:'Remember the little things',body:"Keep a calendar, to-do lists, reminders, notes, and the people and places that matter. Choose Shared or Only me when you add something.",chips:['📅 Shared calendar','☑ To-do lists','📝 Notes'],app:'Remember',sub:'A home for everything coming up',cards:[['Shared calendar','Our plans in one place'],['To-do lists','Things we want to get done'],['Notes','Details worth keeping']]},
