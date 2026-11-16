@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://boyofkay.github.io/onespace-app/sitemap.xml
