@@ -498,3 +498,5 @@ html[dir="rtl"] .city b, html[dir="rtl"] .clocks b, html[dir="rtl"] .slot time {
 .playground[data-pg="midnight"] .step span, .playground[data-pg="mono"] .step span { color: #B9C3D8; }
 .store-grid { grid-template-columns: repeat(6, 1fr); gap: 12px; }
 @media (max-width: 900px) { .store-grid { grid-template-columns: repeat(3, 1fr); } }
+html, body { overflow-x: clip; } section, .hero-xl { overflow-x: clip; }
+.split > *, .tour > *, .hero-grid > * { min-width: 0; } @media (max-width: 640px) { .device.lg { width: 300px; } }
