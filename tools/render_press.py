@@ -15,7 +15,7 @@ MARK = (ROOT / 'assets' / 'mark.svg').as_uri()
 def doc(w, h, inner, bg):
     return f'''<!doctype html><html><head><meta charset="utf-8"><base href="{ROOT.as_uri()}/">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
-<style>{CSS} body{{margin:0;width:{w}px;height:{h}px;overflow:hidden;background:{bg}}} .phone::before{{}} .card-x{{position:absolute;inset:0}}</style>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@600;800&display=swap" rel="stylesheet"><style>{CSS} body{{margin:0;width:{w}px;height:{h}px;overflow:hidden;background:{bg}}} .phone::before{{}} .card-x{{position:absolute;inset:0}}</style>
 </head><body><div class="card-x">{inner}</div></body></html>'''
 
 
@@ -29,6 +29,36 @@ def tag(text, color='#1F6E78'):
 
 HERO_BG = 'radial-gradient(700px 500px at 85% 15%, rgba(232,116,90,.25), transparent 70%), radial-gradient(600px 500px at 5% 95%, rgba(31,110,120,.18), transparent 70%), #FFF8F3'
 P = lambda fn, th, scale: f'<div style="transform:scale({scale});transform-origin:top left">{build.phone(fn(), th)}</div>'
+
+def real_device(name, lang, width, extra=''):
+    src = (ROOT / 'assets' / 'app' / lang / f'{name}.webp')
+    if not src.exists():
+        src = ROOT / 'assets' / 'app' / 'en' / f'{name}.webp'
+    return f'<div class="device" style="width:{width}px;{extra}"><img src="{src.as_uri()}" loading="eager"></div>'
+
+
+STORE = [  # (screen, English caption, Arabic caption, background)
+    ('today', 'Your shared day, at a glance', 'يومكما المشترك في لمحة', '#FFF1EA'),
+    ('counters', 'Count the days that matter', 'عدّا الأيام المهمة', '#F0EBFB'),
+    ('activity', 'Decide together, calmly', 'قرّرا معًا بهدوء', '#E6F3F3'),
+    ('trip', 'Every trip, planned for two', 'كل رحلة مُخطط لها لشخصين', '#FFF4DC'),
+    ('letters', 'Letters that wait for the right day', 'رسائل تنتظر اليوم المناسب', '#FCE7EE'),
+    ('places_map', 'Your places on your own map', 'أماكنكما على خريطتكما', '#E5F2E7'),
+]
+
+
+def store_images():
+    out = {}
+    for lang in ('en', 'ar'):
+        for i, (shot, en, ar, bg) in enumerate(STORE, 1):
+            cap = ar if lang == 'ar' else en
+            d = 'rtl' if lang == 'ar' else 'ltr'
+            out[f'store-{lang}-{i}.png'] = (1080, 1920, bg, f'''<div dir="{d}" style="position:absolute;inset:0;font-family:{'Noto Kufi Arabic' if lang == 'ar' else 'Inter'}">
+              <div style="position:absolute;top:110px;left:80px;right:80px;text-align:center">{brand(40)}
+                <h1 style="font-size:{82 if lang == 'en' else 76}px;line-height:1.15;margin:46px 0 0;letter-spacing:{'-.03em' if lang == 'en' else '0'}">{cap}</h1></div>
+              <div style="position:absolute;left:50%;top:560px;transform:translateX(-50%)">{real_device(shot, lang, 640)}</div></div>''')
+    return out
+
 
 IMAGES = {
     'og-image.png': (1200, 630, HERO_BG, f'''
@@ -57,6 +87,17 @@ IMAGES = {
       <div style="position:absolute;left:620px;top:40px">{P(lambda: build.scr_ourspace(), 'coral', 0.72)}</div>
       <div style="position:absolute;left:790px;top:110px">{P(lambda: build.scr_arabic(), 'midnight', 0.66)}</div>'''),
 }
+
+
+if (ROOT / 'assets' / 'app' / 'en' / 'today.webp').exists():
+    IMAGES.update(store_images())
+    IMAGES['og-image.png'] = (1200, 630, HERO_BG, f'''
+      <div style="position:absolute;left:70px;top:70px;width:600px">{brand(34)}
+        <div style="height:46px"></div>{tag('Two of us. One Space.')}
+        <h1 style="font-size:62px;margin:16px 0 18px">The private home for the life <span class="accent">you share.</span></h1>
+        <p class="lead" style="font-size:24px">The couples app for plans, love and memories — near or far.</p></div>
+      <div style="position:absolute;left:690px;top:120px;transform:rotate(-6deg)">{real_device('counters', 'en', 230)}</div>
+      <div style="position:absolute;left:880px;top:50px">{real_device('today', 'en', 270)}</div>''')
 
 
 async def main():

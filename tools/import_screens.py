@@ -19,6 +19,31 @@ ROOT = Path(__file__).resolve().parent.parent
 WIDTH = 720
 
 
+# Small real pieces of screens for the "Sound familiar?" answers: (source, top, bottom) as
+# fractions of the screen height. Tune after a robot run if a layout moves.
+CROPS = {
+    'lists': ('lists', 0.36, 0.57),
+    'places': ('places', 0.165, 0.37),
+    'clocks': ('today', 0.17, 0.43),
+    'options': ('decision', 0.235, 0.56),
+    'counter': ('counters', 0.085, 0.36),
+    'trip': ('trip', 0.07, 0.34),
+}
+SKIP = {'checkins', 'experiences', 'appearance', 'video_done'}  # empty or with debug overflow marks
+
+
+def crops():
+    for lang in ('en', 'ar'):
+        for name, (source, top, bottom) in CROPS.items():
+            f = ROOT / 'assets' / 'app' / lang / f'{source}.webp'
+            if not f.exists():
+                continue
+            im = Image.open(f)
+            out = ROOT / 'assets' / 'app' / lang / 'snip'
+            out.mkdir(parents=True, exist_ok=True)
+            im.crop((0, round(im.height * top), im.width, round(im.height * bottom))).save(out / f'{name}.webp', 'WEBP', quality=88, method=6)
+
+
 def main(src: Path):
     shots = sorted((src / 'screenshots').glob('*.png'))
     for png in shots:
@@ -26,6 +51,8 @@ def main(src: Path):
         if len(parts) < 3:
             continue
         group, lang, name = parts
+        if name in SKIP:
+            continue
         folder = ROOT / 'assets' / 'app' / lang / ('' if group == 'core' else group)
         folder.mkdir(parents=True, exist_ok=True)
         im = Image.open(png).convert('RGB')
@@ -36,9 +63,13 @@ def main(src: Path):
     for mp4 in vids:
         vdir.mkdir(parents=True, exist_ok=True)
         (vdir / mp4.name).write_bytes(mp4.read_bytes())
-        jpg = mp4.with_suffix('.jpg')
-        if jpg.exists():
-            (vdir / jpg.name).write_bytes(jpg.read_bytes())
+        # Poster: a frame from the middle of the clip (the start is often the same screen).
+        import subprocess
+        dur = float(subprocess.run(['ffprobe', '-v', 'error', '-show_entries', 'format=duration', '-of', 'csv=p=0', str(mp4)],
+                                   capture_output=True, text=True).stdout.strip() or 1)
+        subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-ss', f'{dur * 0.55:.2f}', '-i', str(mp4), '-frames:v', '1', '-q:v', '4',
+                        str(vdir / mp4.with_suffix('.jpg').name)], check=True)
+    crops()
     print(f'imported {len(shots)} screens and {len(vids)} clips')
 
 

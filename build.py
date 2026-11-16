@@ -427,6 +427,19 @@ def device(name, alt, alt_ar, cls='', fallback='', themed=False):
             f'data-i18n-attr="alt:{k}" width="720" height="1600" loading="lazy" decoding="async"></div>')
 
 
+REAL = {  # illustration key -> robot screenshot name
+    'today': 'today', 'ourspace': 'connect', 'quickadd': 'quickadd', 'counters': 'counters', 'places': 'places_map',
+    'trip': 'trip', 'love': 'love', 'letter': 'letters', 'occasion': 'occasion', 'activity': 'decision',
+    'memories': 'memories', 'demo_note': 'notes', 'demo_activity': 'activity', 'demo_chat': 'activity_chat',
+    'demo_decision': 'decision', 'demo_connect': 'love'}
+
+
+def screen(key, theme, alt, alt_ar, cls='', real=None):
+    """Real screenshot when the robot has made it, else the HTML illustration."""
+    name = real or REAL.get(key, key)
+    return device(name, alt, alt_ar, cls, fallback=phone(SCREENS[key](), theme, cls, alt, alt_ar))
+
+
 def clip(name, alt, alt_ar, cls=''):
     """A short tutorial clip recorded from the real app (muted, looping)."""
     if not (APP / 'video' / f'en_{name}.mp4').exists():
@@ -441,10 +454,20 @@ def clip(name, alt, alt_ar, cls=''):
 
 
 # ------------------------------------------------------------------ pages
-def pain(them, them_ar, me, me_ar, ans, ans_ar, who='Lina', who_ar='لينا'):
+def snip(name, alt, alt_ar):
+    if not has_shot(f'snip/{name}'):
+        return ''
+    en = f'assets/app/en/snip/{name}.webp'
+    ar = f'assets/app/ar/snip/{name}.webp' if has_shot(f'snip/{name}', 'ar') else en
+    k = K(alt, alt_ar)
+    return (f'<div class="snip"><img src="{en}" data-en-src="{en}" data-ar-src="{ar}" alt="{escape(alt)}" '
+            f'data-i18n-attr="alt:{k}" loading="lazy" decoding="async"></div>')
+
+
+def pain(them, them_ar, me, me_ar, ans, ans_ar, who='Lina', who_ar='لينا', shot=''):
     return f"""<div class="pain reveal"><div class="msg them">{T(them, them_ar)}<small>{T(who, who_ar)}</small></div>
   <div class="msg me">{T(me, me_ar)}</div>
-  <div class="answer"><b>OneSpace</b>{T(ans, ans_ar)}</div></div>"""
+  <div class="answer"><b>OneSpace</b>{T(ans, ans_ar)}</div>{snip(shot, ans, ans_ar) if shot else ''}</div>"""
 
 
 def slot(time, text, text_ar):
@@ -469,7 +492,7 @@ def cities_panel():
 
 def home_panel():
     return f"""<div class="split">
-    <div class="stage">{phone(scr_today(False), 'coral', label='Today for a couple living together', label_ar='اليوم لزوجين يعيشان معًا', themable=False)}</div>
+    <div class="stage">{device('together/today', 'Today for a couple living together', 'اليوم لزوجين يعيشان معًا', fallback=phone(scr_today(False), 'coral', label='Today for a couple living together', label_ar='اليوم لزوجين يعيشان معًا', themable=False))}</div>
     <div>{T('One home, shared load', 'بيت واحد وعبء مشترك', 'span', 'eyebrow')}{T('Nobody has to be the household’s memory.', 'لا أحد مضطر لأن يكون ذاكرة البيت.', 'h3', '', 'style="font-size:30px;margin:10px 0 18px"')}
       <div class="day" style="margin-top:0">
         <div class="slot"><time style="color:var(--coral)">08:00</time><div class="card" style="padding:12px 16px">{T('Shared grocery list — Omar grabs milk on the way to work.', 'قائمة المشتريات المشتركة — عمر يشتري الحليب في طريقه للعمل.')}</div></div>
@@ -478,6 +501,46 @@ def home_panel():
         <div class="slot"><time style="color:var(--coral)">22:00</time><div class="card" style="padding:12px 16px">{T('Movie night saved to Experiences, rated ★★★★ and ★★★★★.', 'سهرة الفيلم محفوظة في التجارب، بتقييم ★★★★ و★★★★★.')}</div></div>
       </div><a class="btn btn-primary" style="margin-top:22px" href="living-together.html">{T('OneSpace for living together →', 'OneSpace للحياة المشتركة ←')}</a></div>
   </div>"""
+
+
+PALETTES = [('clean', 'cleanLight'), ('coral', 'oneSpace'), ('rose', 'softRose'), ('teal', 'oceanTeal'), ('sage', 'sageGarden'),
+            ('lavender', 'lavenderDusk'), ('sand', 'desertSand'), ('midnight', 'midnightBlue'), ('mono', 'monochrome')]
+
+
+def hero_devices():
+    if not has_shot('today'):
+        return phone(scr_today(True), 'clean', label='OneSpace Today screen for a couple living apart',
+                     label_ar='شاشة اليوم في OneSpace لزوجين متباعدين', themable=False)
+    return ('<div class="fan">'
+            + device('counters', 'Counters', 'العدّادات', 'd2')
+            + device('places_map', 'Our places on a map', 'أماكننا على الخريطة', 'd3')
+            + device('today', 'OneSpace Today screen for a couple living apart', 'شاشة اليوم في OneSpace لزوجين متباعدين', 'd1 lg')
+            + '</div>')
+
+
+def theme_wall():
+    if not has_shot('themes/today_cleanLight'):
+        return ''
+    figs = ''.join(f'<figure>{device("themes/today_" + p, "Today in " + n, "اليوم بسمة " + na, "")}<figcaption>{T(n, na)}</figcaption></figure>'
+                   for (k, p), (n, na) in zip(PALETTES, [('Clean Light', 'فاتح نقي'), ('Coral & Teal', 'مرجاني وفيروزي'), ('Soft Rose', 'وردي ناعم'),
+                                                       ('Ocean Teal', 'فيروزي المحيط'), ('Sage Garden', 'حديقة المريمية'), ('Lavender Dusk', 'غسق الخزامى'),
+                                                       ('Desert Sand', 'رمال الصحراء'), ('Midnight Blue', 'أزرق منتصف الليل'), ('Monochrome', 'أحادي اللون')]))
+    return f'''<section class="tint"><div class="wrap"><div class="sec-head center">{T('Nine themes, the real app', 'تسع سمات من التطبيق الحقيقي', 'span', 'eyebrow')}{T('Which one feels like you two?', 'أيها يشبهكما؟', 'h2')}</div>
+  <div class="wall reveal">{figs}</div></div></section>'''
+
+
+def watch_section():
+    tour = clip('tour', 'A short tour of the OneSpace app', 'جولة قصيرة في تطبيق OneSpace', 'lg')
+    if not tour:
+        return ''
+    small = ''.join(f'<figure>{clip(n, e, a, "sm")}<figcaption>{T(e, a)}</figcaption></figure>' for n, e, a in [
+        ('plan', 'Decide together', 'قررا معًا'), ('counters', 'Count the days', 'عدّا الأيام'), ('themes', 'Change the mood', 'غيّرا المزاج')] if clip(n, e, a))
+    return f'''<section class="warm"><div class="wrap split">
+  <div class="stage">{tour}</div>
+  <div>{T('See it move', 'شاهده يتحرك', 'span', 'eyebrow')}{T('This is the real app — not a mock-up.', 'هذا هو التطبيق الحقيقي — وليس تصميمًا تخيليًا.', 'h2')}
+  {T('Recorded on a phone with our fictional couple, Omar and Lina. What you see is exactly what you get.', 'سُجّل على هاتف مع زوجينا الافتراضيين عمر ولينا. ما تراه هو ما ستحصل عليه تمامًا.', 'p', 'lead')}
+  <div class="wall" style="margin-top:20px">{small}</div></div>
+</div></section>'''
 
 
 def page_index():
@@ -498,7 +561,7 @@ def page_index():
     ]
     btns = ''.join(f'<button class="step" type="button" role="tab" data-view="{k}" aria-selected="{"true" if i == 0 else "false"}"><b>{ic} {T(e, ar)}</b>{T(t, tar)}</button>'
                    for i, (k, ic, e, ar, t, tar, _, _, _) in enumerate(tabs))
-    views = ''.join(f'<div data-view-of="tabs" data-view-name="{k}"{" hidden" if i else ""}>{phone(SCREENS[sc](), "clean", label=e + " tab", label_ar=ar)}'
+    views = ''.join(f'<div data-view-of="tabs" data-view-name="{k}"{" hidden" if i else ""}>{(device("themes/today_cleanLight", "Today tab", ar, themed=True) if k == "today" and has_shot("themes/today_cleanLight") else device(k, e + " tab", ar, fallback=phone(SCREENS[sc](), "clean", label=e + " tab", label_ar=ar)))}'
                     f'<ul class="ticks" style="max-width:320px">{"".join(f"<li>{T(x, y)}</li>" for x, y in pts)}</ul><a class="more" href="{href}" style="font-weight:700">{T("More about " + e + " →", "المزيد عن " + ar + " ←")}</a></div>'
                     for i, (k, ic, e, ar, t, tar, pts, sc, href) in enumerate(tabs))
     marquee_items = [('🛒', 'Groceries for Friday · 4 left', 'مشتريات الجمعة · بقي 4'), ('💍', 'Anniversary in 12 days', 'الذكرى بعد 12 يومًا'), ('💌', 'A letter opens on Saturday', 'رسالة تُفتح يوم السبت'),
@@ -529,23 +592,24 @@ def page_index():
     <div class="trust">{T('Only you two', 'أنتما فقط')}{T('No ads, no data selling', 'بلا إعلانات ولا بيع للبيانات')}{T('English & العربية', 'العربية والإنجليزية')}</div>
   </div>
   <div class="stage">
-    {phone(scr_today(True), 'clean', label='OneSpace Today screen for a couple living apart', label_ar='شاشة اليوم في OneSpace لزوجين متباعدين', themable=False)}
+    {hero_devices()}
     <div class="toast t1 live" data-toast-slot></div>{toast_data}
     <div class="toast t2"><span class="e">✈️</span><div>{T('Istanbul in 6 days', 'إسطنبول بعد 6 أيام', 'b')}{T('Packing 7 of 12', 'التجهيز 7 من 12')}</div></div>
   </div>
 </div></section>
 <div class="marquee" aria-hidden="true"><div class="marquee-track">{chips}{chips}</div></div>
+{watch_section()}
 
 <section><div class="wrap">
   <div class="sec-head center">{T('Sound familiar?', 'هل يبدو هذا مألوفًا؟', 'span', 'eyebrow')}<h2>{T('Love is easy.', 'الحب سهل.')} <span class="serif accent">{T('Logistics aren’t.', 'التفاصيل ليست كذلك.')}</span></h2>
   {T('Every couple has these conversations. OneSpace quietly takes care of them, so your chats can be about you again.', 'كل زوجين يمرّان بهذه المحادثات. يتولاها OneSpace بهدوء، لتعود محادثاتكما عنكما من جديد.', 'p', 'lead')}</div>
   <div class="pains">
-    {pain('Did you book the dentist? 🦷', 'هل حجزت موعد طبيب الأسنان؟ 🦷', 'I thought YOU were doing it 😅', 'ظننت أنكِ ستحجزينه 😅', 'Reminders that belong to someone — and show up in their Today.', 'تذكيرات لها صاحب — وتظهر في «اليوم» لديه.')}
-    {pain('What was that restaurant we loved in Jeddah?', 'ما اسم المطعم الذي أحببناه في جدة؟', 'No idea… it had blue chairs?', 'لا أذكر… كانت كراسيه زرقاء؟', 'Our places: every spot you loved, pinned on your own map.', 'أماكننا: كل مكان أحببتماه، على خريطتكما الخاصة.')}
-    {pain('Sorry, did I wake you? 🙈', 'آسفة، هل أيقظتك؟ 🙈', 'It’s 3 a.m. here…', 'الساعة 3 فجرًا هنا…', 'Two clocks and two weathers on Today — know before you call.', 'ساعتان وطقسان في «اليوم» — اعرف قبل أن تتصل.')}
-    {pain('Which sofa did we say? The grey one?', 'أي أريكة اتفقنا عليها؟ الرمادية؟', 'I sent you 14 links last week…', 'أرسلت لكِ 14 رابطًا الأسبوع الماضي…', 'Activities: options side by side, both your picks, one decision.', 'الأنشطة: خيارات جنبًا إلى جنب، واختيار كل منكما، وقرار واحد.')}
-    {pain('Is it our anniversary this month?!', 'هل ذكرانا هذا الشهر؟!', '…it was last Tuesday 💔', '…كانت الثلاثاء الماضي 💔', 'Counters and occasions that remind you weeks before — with gift ideas.', 'عدّادات ومناسبات تذكّرك قبلها بأسابيع — مع أفكار هدايا.')}
-    {pain('Who has the passports?', 'من معه الجوازات؟', 'Me? I thought they were in your bag', 'أنا؟ ظننتها في حقيبتك', 'Trips with a shared packing list — who brings what, ticked off.', 'رحلات بقائمة تجهيز مشتركة — من يحضر ماذا، مع علامة الإنجاز.')}
+    {pain('Did you book the dentist? 🦷', 'هل حجزت موعد طبيب الأسنان؟ 🦷', 'I thought YOU were doing it 😅', 'ظننت أنكِ ستحجزينه 😅', 'Reminders that belong to someone — and show up in their Today.', 'تذكيرات لها صاحب — وتظهر في «اليوم» لديه.', shot='lists')}
+    {pain('What was that restaurant we loved in Jeddah?', 'ما اسم المطعم الذي أحببناه في جدة؟', 'No idea… it had blue chairs?', 'لا أذكر… كانت كراسيه زرقاء؟', 'Our places: every spot you loved, pinned on your own map.', 'أماكننا: كل مكان أحببتماه، على خريطتكما الخاصة.', shot='places')}
+    {pain('Sorry, did I wake you? 🙈', 'آسفة، هل أيقظتك؟ 🙈', 'It’s 3 a.m. here…', 'الساعة 3 فجرًا هنا…', 'Two clocks and two weathers on Today — know before you call.', 'ساعتان وطقسان في «اليوم» — اعرف قبل أن تتصل.', shot='clocks')}
+    {pain('Which sofa did we say? The grey one?', 'أي أريكة اتفقنا عليها؟ الرمادية؟', 'I sent you 14 links last week…', 'أرسلت لكِ 14 رابطًا الأسبوع الماضي…', 'Activities: options side by side, both your picks, one decision.', 'الأنشطة: خيارات جنبًا إلى جنب، واختيار كل منكما، وقرار واحد.', shot='options')}
+    {pain('Is it our anniversary this month?!', 'هل ذكرانا هذا الشهر؟!', '…it was last Tuesday 💔', '…كانت الثلاثاء الماضي 💔', 'Counters and occasions that remind you weeks before — with gift ideas.', 'عدّادات ومناسبات تذكّرك قبلها بأسابيع — مع أفكار هدايا.', shot='counter')}
+    {pain('Who has the passports?', 'من معه الجوازات؟', 'Me? I thought they were in your bag', 'أنا؟ ظننتها في حقيبتك', 'Trips with a shared packing list — who brings what, ticked off.', 'رحلات بقائمة تجهيز مشتركة — من يحضر ماذا، مع علامة الإنجاز.', shot='trip')}
   </div>
 </div></section>
 
@@ -581,10 +645,12 @@ def page_index():
   <div class="tour tour3">
     <div class="steps" role="tablist" data-views="tabs">{btns}</div>
     <div class="stage" style="padding-top:0">{views}</div>
-    <div><h3 style="margin-bottom:12px">{T('Pick a theme', 'اختر سمة')}</h3><div class="swatches">{swatches()}</div></div>
+    <div><h3 style="margin-bottom:12px">{T('Pick a theme', 'اختر سمة')}</h3><div class="swatches">{swatches()}</div>
+    {('<div style="margin-top:20px">' + device('themes/love_cleanLight', 'A little love in the chosen theme', 'لمسة حب بالسمة المختارة', 'sm', themed=True) + '</div>') if has_shot('themes/love_cleanLight') else ''}</div>
   </div>
 </div></div></section>
 
+{theme_wall()}
 <section class="warm"><div class="wrap">
   <p class="promise reveal">{T('“Your relationship isn’t content. Nothing you put in OneSpace is shown to anyone but the two of you — no feed, no followers, no ads, and never sold.”', '«علاقتكما ليست محتوى. لا يُعرض شيء تضعانه في OneSpace إلا لكما — بلا منشورات ولا متابعين ولا إعلانات، ولا يُباع أبدًا.»')}</p>
   <p class="center muted" style="margin-top:14px">— {T('Our promise', 'وعدنا')}</p>
@@ -649,18 +715,19 @@ def swatches():
     themes = [('clean', '#3768BA', 'Clean Light', 'فاتح نقي'), ('coral', '#E8745A', 'Coral & Teal', 'مرجاني وفيروزي'), ('rose', '#BA688B', 'Soft Rose', 'وردي ناعم'),
               ('teal', '#1F6E78', 'Ocean Teal', 'فيروزي المحيط'), ('sage', '#5E8C61', 'Sage Garden', 'حديقة المريمية'), ('lavender', '#8A6FC2', 'Lavender Dusk', 'غسق الخزامى'),
               ('sand', '#B98348', 'Desert Sand', 'رمال الصحراء'), ('midnight', '#4A80D8', 'Midnight Blue', 'أزرق منتصف الليل'), ('mono', '#62646B', 'Monochrome', 'أحادي اللون')]
-    return ''.join(f'<button class="swatch" type="button" data-theme-pick="{k}" aria-pressed="{"true" if k == "clean" else "false"}"><i style="background:{c}"></i>{T(e, a)}</button>' for k, c, e, a in themes)
+    pal = dict(PALETTES)
+    return ''.join(f'<button class="swatch" type="button" data-theme-pick="{k}" data-palette="{pal[k]}" aria-pressed="{"true" if k == "clean" else "false"}"><i style="background:{c}"></i>{T(e, a)}</button>' for k, c, e, a in themes)
 
 
 def trust_card(i, c, h, har, p, par):
     return f'<div class="card reveal"><div class="ico {c}">{i}</div>{T(h, har, "h3")}{T(p, par, "p")}</div>'
 
 
-def feature_block(anchor, eyebrow, eyebrow_ar, h2, h2_ar, lead, lead_ar, items, screen, theme, rev=False, tint=False, label=''):
+def feature_block(anchor, eyebrow, eyebrow_ar, h2, h2_ar, lead, lead_ar, items, screen_key, theme, rev=False, tint=False, label=''):
     lis = ''.join(f'<li>{T(f"<b>{a}</b> — {b}", f"<b>{c}</b> — {d}")}</li>' for a, b, c, d in items)
     cls = ' class="tint"' if tint else ''
     return f'''<section id="{anchor}"{cls}><div class="wrap split{' rev' if rev else ''}">
-  <div class="stage">{phone(SCREENS[screen](), theme, label=label or h2, label_ar=h2_ar)}</div>
+  <div class="stage">{screen(screen_key, theme, label or h2, h2_ar)}</div>
   <div>{T(eyebrow, eyebrow_ar, 'span', 'eyebrow')}{T(h2, h2_ar, 'h2')}{T(lead, lead_ar, 'p', 'lead')}<ul class="ticks">{lis}</ul></div>
 </div></section>'''
 
@@ -727,7 +794,7 @@ def page_features():
   <div class="swatches" style="margin-top:24px">{swatches()}</div>
   <ul class="ticks"><li>{T('<b>Notifications that explain themselves</b> — who, what and when, grouped by day.', '<b>إشعارات واضحة</b> — من وماذا ومتى، مجمعة حسب اليوم.')}</li>
   <li>{T('<b>Help without signing in</b> — contact us even if you are locked out.', '<b>مساعدة دون تسجيل الدخول</b> — تواصل معنا حتى لو لم تستطع الدخول.')}</li></ul></div>
-  <div class="phones">{phone(scr_quickadd(), 'clean', 'sm', 'Quick add sheet', 'نافذة الإضافة السريعة')}{phone(scr_memories(), 'clean', 'sm', 'Memories screen', 'شاشة الذكريات')}</div>
+  <div class="phones">{screen('quickadd', 'clean', 'Appearance and themes', 'المظهر والسمات', 'sm', real='appearance')}{screen('memories', 'clean', 'Me tab', 'تبويب أنا', 'sm', real='me')}</div>
 </div></section>''' + cta_band() + foot()
 
 
@@ -778,7 +845,7 @@ def persona_page(page, apart):
 <section class="tint"><div class="wrap"><div class="sec-head center">{T('Sound familiar?', 'هل يبدو هذا مألوفًا؟', 'span', 'eyebrow')}{T('The conversations OneSpace quietly handles.', 'المحادثات التي يتولاها OneSpace بهدوء.', 'h2')}</div>
 <div class="pains">{pains_html}</div></div></section>
 <section><div class="wrap split">
-  <div class="stage">{phone(scr, theme, label='Today screen', label_ar='شاشة اليوم')}</div>
+  <div class="stage">{device('trip' if apart else 'together/lists', 'The trip to Istanbul' if apart else 'Shared to-do lists', 'رحلة إسطنبول' if apart else 'قوائم المهام المشتركة', fallback=phone(scr, theme, label='Today screen', label_ar='شاشة اليوم'))}</div>
   <div><div class="grid g2">{cards}</div></div>
 </div></section>
 <section class="tint"><div class="narrow center">
@@ -805,7 +872,7 @@ def page_how():
     ]
     btns = ''.join(f'<button class="step" type="button" role="tab" data-view="s{i}" aria-selected="{"true" if i == 0 else "false"}">{T(e, ar, "b")}{T(d, dar)}</button>'
                    for i, (e, ar, d, dar, _, _) in enumerate(steps))
-    views = ''.join(f'<div data-view-of="tour" data-view-name="s{i}"{" hidden" if i else ""}>{phone(SCREENS[s](), th, label=e, label_ar=ar)}</div>'
+    views = ''.join(f'<div data-view-of="tour" data-view-name="s{i}"{" hidden" if i else ""}>{screen(s, th, e, ar)}</div>'
                     for i, (e, ar, d, dar, s, th) in enumerate(steps))
     faqs = ''.join(f'<details>{T(q, qa, "summary")}{T(a, aa, "p")}</details>' for q, qa, a, aa in [
         ('Does my partner need the app too?', 'هل يحتاج شريكي التطبيق أيضًا؟', 'Yes — OneSpace is built for two. You each have your own account and join the same space.', 'نعم — صُمم OneSpace لشخصين. لكلٍّ منكما حسابه وتنضمان إلى المساحة نفسها.'),
@@ -896,6 +963,11 @@ TUTORIALS = [
 ]
 
 
+TUT_CLIPS = {'Add anything in two taps': 'quickadd', 'Decide together with an activity': 'plan', 'Plan a trip': 'trip',
+             'Save a place from Google Maps': 'places', 'Send a little love': 'love', 'Choose your language and theme': 'themes',
+             'Count down (or up) to a special date': 'counters'}
+
+
 def page_tutorials():
     h = head('tutorials.html', 'OneSpace tutorials — step-by-step guides', 'دروس OneSpace — أدلة خطوة بخطوة',
              'Step-by-step OneSpace guides: invite your partner, quick add, phone calendar, activities, trips, surprises, counters, places from Google Maps, scrapbooks and privacy.',
@@ -906,7 +978,10 @@ def page_tutorials():
         items = ''
         for t, tar, steps in guides:
             ol = ''.join(f'<li>{T(x, y)}</li>' for x, y in steps)
-            items += f'<details data-faq>{T(t, tar, "summary")}<div><ol style="padding-inline-start:22px;margin:0">{ol}</ol></div></details>'
+            v = clip(TUT_CLIPS[t], t, tar, 'xs') if t in TUT_CLIPS else ''
+            body_html = (f'<div style="display:flex;gap:22px;align-items:flex-start;flex-wrap:wrap">{v}<ol style="padding-inline-start:22px;margin:0;flex:1;min-width:220px">{ol}</ol></div>'
+                         if v else f'<ol style="padding-inline-start:22px;margin:0">{ol}</ol>')
+            items += f'<details data-faq>{T(t, tar, "summary")}<div>{body_html}</div></details>'
         body += f'<h2 class="faq-group" id="{k}">{i} {T(e, a)}</h2><div>{items}</div>'
     sk = K('Search tutorials…', 'ابحث في الدروس…')
     return h + page_hero('Tutorials', 'الدروس', 'Step-by-step guides.', 'أدلة خطوة بخطوة.',
@@ -1241,6 +1316,14 @@ def legal_page(page, kind):
 </div></section>''' + foot()
 
 
+def store_shots():
+    if not (ROOT / 'assets' / 'press' / 'store-en-1.png').exists():
+        return ''
+    imgs = ''.join(f'<a href="assets/press/store-en-{i}.png" download data-ar-href="assets/press/store-ar-{i}.png"><img src="assets/press/store-en-{i}.png" data-en-src="assets/press/store-en-{i}.png" data-ar-src="assets/press/store-ar-{i}.png" alt="Store screenshot {i}" loading="lazy" width="1080" height="1920"></a>' for i in range(1, 7))
+    return f'''<section><div class="wrap"><div class="sec-head">{T('App store screenshots', 'لقطات متجر التطبيقات', 'h2')}{T('Real screens from the app with the fictional couple Omar and Lina. 1080×1920, English and Arabic (switch the page language).', 'شاشات حقيقية من التطبيق مع الزوجين الافتراضيين عمر ولينا. 1080×1920 بالعربية والإنجليزية (بدّل لغة الصفحة).', 'p', 'muted')}</div>
+  <div class="grid assets-grid store-grid">{imgs}</div></div></section>'''
+
+
 def page_share_kit():
     h = head('share-kit.html', 'OneSpace share kit', 'مواد مشاركة OneSpace',
              'Logos, colours, descriptions in English and Arabic, social images and ready-to-send messages for telling people about OneSpace.',
@@ -1276,6 +1359,7 @@ def page_share_kit():
     <a href="assets/mark.svg" download><img src="assets/mark.svg" alt="OneSpace mark (SVG)" loading="lazy" width="200" height="200" style="max-width:200px;margin:auto">{T('Logo mark · SVG', 'رمز الشعار · SVG', 'p', 'muted')}</a>
   </div>
 </div></section>
+{store_shots()}
 <section><div class="wrap">
   <div class="sec-head">{T('Colours', 'الألوان', 'h2')}</div>
   <div class="grid g3" style="grid-template-columns:repeat(auto-fit,minmax(150px,1fr))">{col_html}</div>
