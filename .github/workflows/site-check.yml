@@ -12,6 +12,8 @@ jobs:
       contents: read
     steps:
       - uses: actions/checkout@v4
+      - name: Build tools
+        run: pip install --quiet beautifulsoup4==4.15.0
       - name: Verify HTML, internal links and accessibility basics
         run: python3 tests/check_site.py
       - name: Verify browser JavaScript syntax
