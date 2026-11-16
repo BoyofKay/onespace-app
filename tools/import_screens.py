@@ -67,7 +67,7 @@ def main(src: Path):
         import subprocess
         dur = float(subprocess.run(['ffprobe', '-v', 'error', '-show_entries', 'format=duration', '-of', 'csv=p=0', str(mp4)],
                                    capture_output=True, text=True).stdout.strip() or 1)
-        subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-ss', f'{dur * 0.55:.2f}', '-i', str(mp4), '-frames:v', '1', '-q:v', '4',
+        subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-ss', f'{dur * 0.72:.2f}', '-i', str(mp4), '-frames:v', '1', '-q:v', '4',
                         str(vdir / mp4.with_suffix('.jpg').name)], check=True)
     crops()
     print(f'imported {len(shots)} screens and {len(vids)} clips')
