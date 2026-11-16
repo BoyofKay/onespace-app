@@ -1575,17 +1575,17 @@ def arabic_page(html, name):
     """The same page, rendered in Arabic on the server so search engines can index it at /ar/."""
     from bs4 import BeautifulSoup
     soup = BeautifulSoup(html, 'html.parser')
-    for el in soup.select('[data-i18n]'):
+    for el in soup.find_all(attrs={'data-i18n': True}):
         k = el.get('data-i18n')
         if k in AR:
             el.clear()
             el.append(BeautifulSoup(AR[k], 'html.parser'))
-    for el in soup.select('[data-i18n-attr]'):
+    for el in soup.find_all(attrs={'data-i18n-attr': True}):
         for pair in el['data-i18n-attr'].split(';'):
             attr, k = pair.split(':')
             if k in AR:
                 el[attr] = AR[k]
-    for el in soup.select('[data-ar-src]'):
+    for el in soup.find_all(attrs={'data-ar-src': True}):
         el['src'] = el['data-ar-src']
         if el.get('data-ar-poster'):
             el['poster'] = el['data-ar-poster']
@@ -1604,7 +1604,7 @@ def arabic_page(html, name):
     og = soup.find('meta', property='og:type')
     if og is not None:
         og.insert_after(soup.new_tag('meta', property='og:locale', content='ar_AR'))
-    for b in soup.select('button.lang'):
+    for b in soup.find_all('button', class_='lang'):
         b.string = 'English'
         b['aria-label'] = 'Switch to English'
     out = str(soup)
