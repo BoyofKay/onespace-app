@@ -1,16 +1,20 @@
 {
-  "name": "OneSpace",
-  "short_name": "OneSpace",
-  "description": "A shared life for two",
-  "icons": [
-    {
-      "src": "assets/icon-512.png",
-      "sizes": "512x512",
-      "type": "image/png"
-    }
-  ],
-  "start_url": "./",
-  "display": "browser",
-  "background_color": "#151e34",
-  "theme_color": "#151e34"
+ "name": "OneSpace",
+ "short_name": "OneSpace",
+ "start_url": "./",
+ "display": "standalone",
+ "background_color": "#FFFFFF",
+ "theme_color": "#14213D",
+ "icons": [
+  {
+   "src": "assets/icon-512.png",
+   "sizes": "512x512",
+   "type": "image/png"
+  },
+  {
+   "src": "assets/apple-touch-icon.png",
+   "sizes": "180x180",
+   "type": "image/png"
+  }
+ ]
 }

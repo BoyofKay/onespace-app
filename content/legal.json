@@ -1,0 +1,116 @@
+{
+ "privacy": [
+  [
+   "Who we are",
+   "<p>OneSpace is an app for couples. In this policy “we” means the OneSpace team. You can reach us any time from <a href=\"support.html\">Support</a>, from the sign-in screen of the app, or from Me → Help in the app.</p>",
+   "من نحن",
+   "<p>OneSpace تطبيق للأزواج. في هذه السياسة تعني «نحن» فريق OneSpace. يمكنك التواصل معنا في أي وقت من <a href=\"support.html\">الدعم</a>، أو من شاشة الدخول في التطبيق، أو من «أنا» ← «المساعدة».</p>"
+  ],
+  [
+   "What we collect",
+   "<ul><li><b>Your account:</b> name, email address, language, time zone and the settings you choose (for example sleep hours, preferred currency, how you live).</li><li><b>What you create:</b> notes, lists, reminders, events, activities, trips and travel documents, occasions, memories and photos, letters, check-ins, gestures, places and counters.</li><li><b>Your device for notifications:</b> a push token so we can deliver notifications to your phone.</li><li><b>Messages to support:</b> what you write to us, your email for the reply, and technical details only when you allow it.</li><li><b>Error reports:</b> when the app hits an error it sends the error message, app version and platform — never your content. They are deleted after 60 days.</li></ul><p>We do <b>not</b> collect your location, contacts, call logs, browsing or advertising identifiers. If you choose a contact or a calendar on your phone, that happens on your phone; only what you save in OneSpace is stored.</p>",
+   "ما الذي نجمعه",
+   "<ul><li><b>حسابك:</b> الاسم والبريد الإلكتروني واللغة والمنطقة الزمنية والإعدادات التي تختارها (مثل ساعات النوم والعملة المفضلة وطريقة عيشكما).</li><li><b>ما تنشئه:</b> الملاحظات والقوائم والتذكيرات والمواعيد والأنشطة والرحلات ومستندات السفر والمناسبات والذكريات والصور والرسائل والتواصل اليومي واللفتات والأماكن والعدّادات.</li><li><b>جهازك للإشعارات:</b> رمز إشعارات لإيصال الإشعارات إلى هاتفك.</li><li><b>رسائل الدعم:</b> ما تكتبه لنا وبريدك للرد، والتفاصيل التقنية فقط عند سماحك بذلك.</li><li><b>تقارير الأخطاء:</b> عند حدوث خطأ يرسل التطبيق رسالة الخطأ وإصدار التطبيق والمنصة — ولا يرسل محتواك أبدًا. وتُحذف بعد 60 يومًا.</li></ul><p><b>لا</b> نجمع موقعك أو جهات اتصالك أو سجل مكالماتك أو تصفحك أو معرّفات الإعلانات. إذا اخترت جهة اتصال أو تقويمًا على هاتفك فذلك يتم على هاتفك، ولا يُحفظ إلا ما تحفظه في OneSpace.</p>"
+  ],
+  [
+   "Who can see it",
+   "<p>Everything in your space is visible only to you and your partner. Each item is either <b>Shared</b> (both of you) or <b>Only me</b> (just you). These rules are enforced by our database for every item, not only by the app. We do not access your content except to keep the service running, to answer a request you make, or when the law requires it.</p>",
+   "من يمكنه رؤيته",
+   "<p>كل ما في مساحتكما لا يراه سواكما. كل عنصر إما <b>مشترك</b> (لكما) أو <b>أنا فقط</b> (لك وحدك). وتُطبّق قاعدة البيانات هذه القواعد على كل عنصر، وليس التطبيق وحده. لا نطّلع على محتواكما إلا لتشغيل الخدمة أو للرد على طلب منك أو عندما يلزم القانون بذلك.</p>"
+  ],
+  [
+   "Services we use",
+   "<ul><li><b>Supabase</b> — our database, sign-in and file storage (hosted in the Asia-Pacific region).</li><li><b>Firebase Cloud Messaging (Google)</b> — to deliver notifications to your phone.</li><li><b>OpenStreetMap</b> — map tiles for “Our map”, and place search: when you look up a place, its name, city and country are sent to OpenStreetMap’s search service.</li><li><b>Google or Apple sign-in</b> — only if you choose to sign in that way.</li><li><b>Weather and public-holiday services</b> — receive only a city or a country, never who you are.</li></ul><p>We never sell your data or share it for advertising.</p>",
+   "الخدمات التي نستخدمها",
+   "<ul><li><b>Supabase</b> — قاعدة البيانات وتسجيل الدخول وتخزين الملفات (مستضافة في منطقة آسيا والمحيط الهادئ).</li><li><b>Firebase Cloud Messaging (Google)</b> — لإيصال الإشعارات إلى هاتفك.</li><li><b>OpenStreetMap</b> — بلاطات الخريطة في «خريطتنا» والبحث عن الأماكن: عند البحث عن مكان يُرسل اسمه ومدينته ودولته إلى خدمة البحث في OpenStreetMap.</li><li><b>تسجيل الدخول عبر Google أو Apple</b> — فقط إذا اخترت ذلك.</li><li><b>خدمات الطقس والعطلات الرسمية</b> — تستقبل مدينة أو دولة فقط، ولا تعرف من أنت.</li></ul><p>لا نبيع بياناتك ولا نشاركها لأغراض إعلانية أبدًا.</p>"
+  ],
+  [
+   "How long we keep it",
+   "<p>We keep your data while your account exists. When you delete your account there is a 7-day period to change your mind; after that, your private items, files, devices and settings are deleted, and shared items stay with your partner with you shown as “Former partner”. Error reports are deleted after 60 days.</p>",
+   "مدة الاحتفاظ",
+   "<p>نحتفظ ببياناتك ما دام حسابك موجودًا. عند حذف حسابك لديك 7 أيام للتراجع، وبعدها تُحذف عناصرك الخاصة وملفاتك وأجهزتك وإعداداتك، وتبقى العناصر المشتركة مع شريكك ويظهر اسمك «شريك سابق». وتُحذف تقارير الأخطاء بعد 60 يومًا.</p>"
+  ],
+  [
+   "Your rights and choices",
+   "<ul><li><b>Download</b> everything you created: Me → Your data and account → Download my data.</li><li><b>Correct</b> your details in Me → Profile.</li><li><b>Delete</b> your account in the app, or ask us on the <a href=\"delete-account.html\">Delete your account</a> page.</li><li><b>Notifications</b> can be turned off at any time in the app or in your phone settings.</li></ul>",
+   "حقوقك وخياراتك",
+   "<ul><li><b>نزّل</b> كل ما أنشأته: «أنا» ← «بياناتك وحسابك» ← «تنزيل بياناتي».</li><li><b>صحّح</b> بياناتك من «أنا» ← «الملف الشخصي».</li><li><b>احذف</b> حسابك من التطبيق، أو اطلب ذلك من صفحة <a href=\"delete-account.html\">حذف حسابك</a>.</li><li>يمكنك إيقاف <b>الإشعارات</b> في أي وقت من التطبيق أو من إعدادات هاتفك.</li></ul>"
+  ],
+  [
+   "Security",
+   "<p>Data travels encrypted (HTTPS). Access is checked on the server for every item. On your phone you can lock the app with your fingerprint or phone PIN. No system is perfect; if something goes wrong that affects you, we will tell you.</p>",
+   "الأمان",
+   "<p>تنتقل البيانات مشفّرة (HTTPS). ويُتحقق من صلاحية الوصول على الخادم لكل عنصر. ويمكنك قفل التطبيق على هاتفك ببصمتك أو رمز هاتفك. لا يوجد نظام مثالي؛ وإذا حدث ما يمسّك فسنخبرك.</p>"
+  ],
+  [
+   "Children",
+   "<p>OneSpace is for adults aged 18 and over. We do not knowingly collect data from children.</p>",
+   "الأطفال",
+   "<p>OneSpace للبالغين من عمر 18 عامًا فأكثر. ولا نجمع بيانات الأطفال عن علم.</p>"
+  ],
+  [
+   "Changes",
+   "<p>If we change this policy in a way that matters, we will tell you in the app before it applies.</p>",
+   "التغييرات",
+   "<p>إذا غيّرنا هذه السياسة تغييرًا مهمًا فسنخبرك في التطبيق قبل تطبيقه.</p>"
+  ]
+ ],
+ "privacy_intro": [
+  "In short: your space is private to you and your partner, we don’t sell data or show ads, and you can download or delete everything at any time.",
+  "باختصار: مساحتكما خاصة بكما، ولا نبيع البيانات ولا نعرض إعلانات، ويمكنك تنزيل كل شيء أو حذفه في أي وقت."
+ ],
+ "terms": [
+  [
+   "Your account",
+   "<p>You need to be at least 18. Give a real email address and keep your sign-in private. You are responsible for what happens under your account. One shared space connects exactly two people.</p>",
+   "حسابك",
+   "<p>يجب أن يكون عمرك 18 عامًا على الأقل. استخدم بريدًا حقيقيًا وحافظ على سرية تسجيل دخولك. أنت مسؤول عمّا يحدث في حسابك. المساحة المشتركة تجمع شخصين فقط.</p>"
+  ],
+  [
+   "Your content",
+   "<p>What you write and upload stays yours. You give OneSpace only the permission needed to store it, show it to you and your partner, and send you notifications about it. We do not sell it, show ads or use it to profile you.</p>",
+   "محتواك",
+   "<p>ما تكتبه وترفعه يبقى ملكك. تمنح OneSpace فقط الإذن اللازم لحفظه وعرضه لك ولشريكك وإرسال إشعارات عنه. لا نبيعه ولا نعرض إعلانات ولا نستخدمه لبناء ملف عنك.</p>"
+  ],
+  [
+   "Sharing with your partner",
+   "<p>Items marked “Shared” are visible to your partner and may notify them. “Only me” items are visible only to you. If one of you leaves or deletes the account, shared items stay with the other person.</p>",
+   "المشاركة مع شريكك",
+   "<p>العناصر «المشتركة» يراها شريكك وقد تصله إشعارات عنها. عناصر «أنا فقط» تراها وحدك. إذا غادر أحدكما أو حذف حسابه، تبقى العناصر المشتركة مع الآخر.</p>"
+  ],
+  [
+   "Acceptable use",
+   "<p>Do not use OneSpace to harass, threaten or spy on anyone, to store illegal material, or to break into other accounts or the service. We may suspend accounts that do.</p>",
+   "الاستخدام المقبول",
+   "<p>لا تستخدم OneSpace للمضايقة أو التهديد أو التجسس على أحد، أو لحفظ مواد غير قانونية، أو لاختراق حسابات أخرى أو الخدمة. قد نوقف الحسابات المخالفة.</p>"
+  ],
+  [
+   "Test version",
+   "<p>OneSpace is in an early test with a small group of people. Features may change and something may break. Please keep your own copy of anything important and tell us about problems.</p>",
+   "نسخة تجريبية",
+   "<p>OneSpace في تجربة مبكرة مع مجموعة صغيرة. قد تتغير الميزات وقد يتعطل شيء. احتفظ بنسخة من كل ما هو مهم، وأخبرنا بأي مشكلة.</p>"
+  ],
+  [
+   "Ending",
+   "<p>You can download your data and delete your account at any time (Me → Your data and account). We may end the test or the service with notice by email.</p>",
+   "الإنهاء",
+   "<p>يمكنك تنزيل بياناتك وحذف حسابك في أي وقت («أنا» ← «بياناتك وحسابك»). قد ننهي التجربة أو الخدمة بإشعار عبر البريد.</p>"
+  ],
+  [
+   "Liability",
+   "<p>OneSpace is provided “as is”. To the extent the law allows, we are not liable for indirect losses or for missed reminders or notifications.</p>",
+   "المسؤولية",
+   "<p>يُقدَّم OneSpace «كما هو». وبالقدر الذي يسمح به القانون، لسنا مسؤولين عن الخسائر غير المباشرة أو عن تذكيرات أو إشعارات لم تصل.</p>"
+  ],
+  [
+   "Privacy",
+   "<p>How we handle data is explained in the <a href=\"privacy.html\">privacy policy</a>.</p>",
+   "الخصوصية",
+   "<p>طريقة تعاملنا مع البيانات موضحة في <a href=\"privacy.html\">سياسة الخصوصية</a>.</p>"
+  ]
+ ],
+ "terms_intro": [
+  "The short version: OneSpace is a private space for you and your partner. Use it kindly and lawfully, keep your password safe, and remember that what you mark “Shared” is seen by your partner.",
+  "باختصار: OneSpace مساحة خاصة لك ولشريكك. استخدمه بلطف وبما يوافق القانون، واحفظ كلمة مرورك، وتذكّر أن ما تجعله «مشتركًا» يراه شريكك."
+ ]
+}

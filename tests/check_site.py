@@ -5,8 +5,11 @@ from urllib.parse import urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
 PAGES = ["index.html", "features.html", "long-distance.html", "living-together.html",
-         "tutorials.html", "faq.html", "privacy.html", "terms.html", "support.html",
-         "delete-account.html", "404.html"]
+         "how-it-works.html", "tutorials.html", "whats-new.html", "faq.html", "join.html",
+         "support.html", "share-kit.html", "privacy.html", "terms.html", "delete-account.html", "404.html"]
+REDIRECTS = ["v4.html", "v4-tutorial.html"]
+# Claims the app does not make (D1: automatic gestures retired; D55: voice hidden) and private data.
+FORBIDDEN = ["automatically at the right moment", "Automatic gestures", "voice command", "Kandice", "ph.ahmed"]
 
 
 class Inspect(HTMLParser):
@@ -85,9 +88,21 @@ def main():
     if not (ROOT / "robots.txt").exists() or not (ROOT / "sitemap.xml").exists():
         errors.append("Missing SEO files")
     index = (ROOT / "index.html").read_text(encoding="utf-8")
-    for field in ("waitlistForm", "demoObjects", "themePreview", "early-access"):
-        if f'id="{field}"' not in index:
-            errors.append(f"Missing interactive UI: {field}")
+    for marker in ('id="founding"', 'data-form="join"', 'data-views="tabs"', 'data-theme-pick='):
+        if marker not in index:
+            errors.append(f"Missing interactive UI on the homepage: {marker}")
+    sitemap = (ROOT / "sitemap.xml").read_text(encoding="utf-8")
+    for path in PAGES:
+        if path != "404.html" and (ROOT / path).exists() and ("/" + path if path != "index.html" else "onespace-app/</loc>") not in sitemap:
+            errors.append(f"sitemap.xml is missing {path}")
+    for path in REDIRECTS:
+        if 'http-equiv="refresh"' not in (ROOT / path).read_text(encoding="utf-8"):
+            errors.append(f"{path} should redirect")
+    for path in PAGES + ["assets/ar.js", "assets/os.js"]:
+        text = (ROOT / path).read_text(encoding="utf-8")
+        for word in FORBIDDEN:
+            if word.lower() in text.lower():
+                errors.append(f"{path}: contains forbidden text '{word}'")
     if errors:
         print("\n".join(errors))
         raise SystemExit(1)

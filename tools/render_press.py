@@ -1,0 +1,80 @@
+#!/usr/bin/env python3
+"""Render the marketing images in assets/press/ (needs Playwright + Chrome).
+    python3 tools/render_press.py
+"""
+import asyncio, sys
+from pathlib import Path
+ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(ROOT))
+import build  # noqa: E402
+
+CSS = (ROOT / 'assets' / 'os.css').read_text()
+MARK = (ROOT / 'assets' / 'mark.svg').as_uri()
+
+
+def doc(w, h, inner, bg):
+    return f'''<!doctype html><html><head><meta charset="utf-8"><base href="{ROOT.as_uri()}/">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>{CSS} body{{margin:0;width:{w}px;height:{h}px;overflow:hidden;background:{bg}}} .phone::before{{}} .card-x{{position:absolute;inset:0}}</style>
+</head><body><div class="card-x">{inner}</div></body></html>'''
+
+
+def brand(size=30, color='#14213D'):
+    return f'<div style="display:flex;align-items:center;gap:12px;font-weight:800;font-size:{size}px;color:{color};letter-spacing:-.02em"><img src="assets/mark.svg" style="width:{size*1.3}px">OneSpace</div>'
+
+
+def tag(text, color='#1F6E78'):
+    return f'<div style="color:{color};font-weight:800;letter-spacing:.12em;text-transform:uppercase;font-size:20px">● {text}</div>'
+
+
+HERO_BG = 'radial-gradient(700px 500px at 85% 15%, rgba(232,116,90,.25), transparent 70%), radial-gradient(600px 500px at 5% 95%, rgba(31,110,120,.18), transparent 70%), #FFF8F3'
+P = lambda fn, th, scale: f'<div style="transform:scale({scale});transform-origin:top left">{build.phone(fn(), th)}</div>'
+
+IMAGES = {
+    'og-image.png': (1200, 630, HERO_BG, f'''
+      <div style="position:absolute;left:70px;top:70px;width:640px">{brand(34)}
+        <div style="height:46px"></div>{tag('Two of us. One Space.')}
+        <h1 style="font-size:66px;margin:16px 0 18px">The private home for the life <span class="accent">you share.</span></h1>
+        <p class="lead" style="font-size:24px">Plans, reminders, trips, little gestures and memories — for couples near or far.</p></div>
+      <div style="position:absolute;left:800px;top:60px">{P(lambda: build.scr_today(True), 'clean', 0.95)}</div>'''),
+    'social-square.png': (1080, 1080, HERO_BG, f'''
+      <div style="position:absolute;left:80px;top:80px;width:520px">{brand(36)}
+        <div style="height:60px"></div>{tag('Founding 500')}
+        <h1 style="font-size:76px;margin:18px 0 22px">Be one of the first 500 couples.</h1>
+        <p class="lead" style="font-size:28px">One private app for the two of you. Free early access.</p>
+        <div class="btn btn-primary" style="margin-top:30px;font-size:24px;padding:20px 30px">Free early access · link in bio</div></div>
+      <div style="position:absolute;left:640px;top:170px">{P(scr := build.scr_counters, 'lavender', 1.15)}</div>'''),
+    'social-story.png': (1080, 1920, HERO_BG, f'''
+      <div style="position:absolute;left:90px;top:130px;right:90px">{brand(44)}
+        <div style="height:70px"></div>{tag('Two of us. One Space.')}
+        <h1 style="font-size:96px;margin:20px 0 26px">Plan together. Stay close.</h1>
+        <p class="lead" style="font-size:36px">The private couples app — near or far.</p></div>
+      <div style="position:absolute;left:255px;top:790px">{P(lambda: build.scr_love(), 'rose', 1.85)}</div>'''),
+    'store-feature.png': (1024, 500, 'linear-gradient(135deg,#14213D,#1E3354)', f'''
+      <div style="position:absolute;left:60px;top:80px;width:560px">{brand(32, '#fff')}
+        <h1 style="font-size:58px;margin:30px 0 16px;color:#fff">Two of us.<br><span class="accent">One Space.</span></h1>
+        <p style="font-size:23px;color:#C3CCDD;margin:0">Plans, love and memories — just for the two of you.</p></div>
+      <div style="position:absolute;left:620px;top:40px">{P(lambda: build.scr_ourspace(), 'coral', 0.72)}</div>
+      <div style="position:absolute;left:790px;top:110px">{P(lambda: build.scr_arabic(), 'midnight', 0.66)}</div>'''),
+}
+
+
+async def main():
+    from playwright.async_api import async_playwright
+    async with async_playwright() as p:
+        b = await p.chromium.launch(executable_path='/usr/bin/google-chrome')
+        for name, (w, h, bg, inner) in IMAGES.items():
+            pg = await b.new_page(viewport={'width': w, 'height': h})
+            tmp = ROOT / '_press_tmp.html'
+            tmp.write_text(doc(w, h, inner, bg), encoding='utf-8')
+            await pg.goto(tmp.as_uri(), wait_until='networkidle')
+            tmp.unlink()
+            await pg.wait_for_timeout(300)
+            await pg.screenshot(path=str(ROOT / 'assets' / 'press' / name))
+            await pg.close()
+        await b.close()
+    print('rendered', list(IMAGES))
+
+
+if __name__ == '__main__':
+    asyncio.run(main())
