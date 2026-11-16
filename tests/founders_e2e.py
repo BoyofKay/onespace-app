@@ -38,7 +38,7 @@ async def main(email, token, lang):
             num = await page.locator('[data-number]').inner_text()
             inv = await page.locator('[data-invite-url]').input_value()
             print('confirmation page state:', vis, '· number:', num, '· invite link:', inv, '· address now:', page.url)
-            ok &= vis == ['ok'] and '#' in page.url is False
+            ok &= vis == ['ok'] and '#t=' not in page.url
         await page.screenshot(path='e2e.png', full_page=False)
         for c in calls:
             print('  ', c[0], c[1].split('?')[0])
