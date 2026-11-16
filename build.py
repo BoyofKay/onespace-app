@@ -405,6 +405,41 @@ SCREENS.update({'demo_note': scr_demo_note, 'demo_activity': scr_demo_activity, 
                 'demo_decision': scr_demo_decision, 'demo_connect': scr_demo_connect})
 
 
+# ------------------------------------------------------------------ real app screenshots (v7)
+APP = ROOT / 'assets' / 'app'
+
+
+def has_shot(name, lang='en'):
+    return (APP / lang / f'{name}.webp').exists()
+
+
+def device(name, alt, alt_ar, cls='', fallback='', themed=False):
+    """A real app screenshot (made by the demo-couple robot) in a phone frame.
+    Switches to the Arabic screenshot when the page is in Arabic. Falls back to
+    the HTML illustration while the robot hasn't produced that screen yet."""
+    if not has_shot(name):
+        return fallback
+    en = f'assets/app/en/{name}.webp'
+    ar = f'assets/app/ar/{name}.webp' if has_shot(name, 'ar') else en
+    k = K(alt, alt_ar)
+    t = ' data-theme-img' if themed else ''
+    return (f'<div class="device {cls}"><img src="{en}" data-en-src="{en}" data-ar-src="{ar}"{t} alt="{escape(alt)}" '
+            f'data-i18n-attr="alt:{k}" width="720" height="1600" loading="lazy" decoding="async"></div>')
+
+
+def clip(name, alt, alt_ar, cls=''):
+    """A short tutorial clip recorded from the real app (muted, looping)."""
+    if not (APP / 'video' / f'en_{name}.mp4').exists():
+        return ''
+    en, ar = f'assets/app/video/en_{name}', f'assets/app/video/ar_{name}'
+    if not (APP / 'video' / f'ar_{name}.mp4').exists():
+        ar = en
+    k = K(alt, alt_ar)
+    return (f'<div class="device {cls}"><video src="{en}.mp4" poster="{en}.jpg" data-en-src="{en}.mp4" data-ar-src="{ar}.mp4" '
+            f'data-en-poster="{en}.jpg" data-ar-poster="{ar}.jpg" muted loop playsinline autoplay preload="metadata" '
+            f'aria-label="{escape(alt)}" data-i18n-attr="aria-label:{k}"></video></div>')
+
+
 # ------------------------------------------------------------------ pages
 def pain(them, them_ar, me, me_ar, ans, ans_ar, who='Lina', who_ar='لينا'):
     return f"""<div class="pain reveal"><div class="msg them">{T(them, them_ar)}<small>{T(who, who_ar)}</small></div>

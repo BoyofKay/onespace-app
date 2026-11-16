@@ -467,3 +467,23 @@ html[dir="rtl"] .city b, html[dir="rtl"] .clocks b, html[dir="rtl"] .slot time {
   .city-row { grid-template-columns: 1fr 1fr; gap: 10px; } .city b { font-size: 24px; }
   .floaty { display: none; }
 }
+
+/* ================= v7: real app screenshots in a device frame ================= */
+.device { position: relative; width: 300px; max-width: 100%; aspect-ratio: 1080 / 2400; border-radius: 44px; padding: 10px;
+  background: linear-gradient(145deg, #1B2333, #0B111D); box-shadow: 0 50px 90px -40px rgba(20,33,61,.6), inset 0 0 0 2px #2E3A52, inset 0 0 0 5px #0B111D; flex: none; }
+.device::after { content: ""; position: absolute; top: 18px; left: 50%; transform: translateX(-50%); width: 14px; height: 14px; border-radius: 50%; background: #05080F; box-shadow: inset 0 0 0 2px #1B2333; z-index: 2; }
+.device img { width: 100%; height: 100%; object-fit: cover; object-position: top; border-radius: 35px; display: block; background: #F6F8FC; }
+.device.sm { width: 240px; } .device.xs { width: 190px; border-radius: 32px; padding: 7px; } .device.xs img { border-radius: 26px; } .device.xs::after { top: 13px; width: 10px; height: 10px; }
+.device.lg { width: 340px; }
+.tilt-l { transform: perspective(1400px) rotateY(16deg) rotateZ(-2deg); } .tilt-r { transform: perspective(1400px) rotateY(-16deg) rotateZ(2deg); }
+.fan { position: relative; display: grid; place-items: center; min-height: 640px; }
+.fan .device { position: absolute; }
+.fan .d1 { z-index: 3; } .fan .d2 { z-index: 2; transform: translateX(-62%) scale(.82) rotate(-7deg); opacity: .96; } .fan .d3 { z-index: 1; transform: translateX(62%) scale(.82) rotate(7deg); opacity: .96; }
+@media (max-width: 760px) { .fan { min-height: 560px; } .fan .d2 { transform: translateX(-38%) scale(.74) rotate(-6deg); } .fan .d3 { transform: translateX(38%) scale(.74) rotate(6deg); } }
+.crop { border-radius: 18px; overflow: hidden; box-shadow: var(--shadow); background: #fff; }
+.crop img { display: block; width: 100%; }
+.wall { display: flex; gap: 22px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 10px 4px 26px; }
+.wall figure { margin: 0; scroll-snap-align: center; text-align: center; flex: none; }
+.wall figcaption { margin-top: 12px; font-weight: 700; font-size: 14px; }
+.wall .device { width: 200px; }
+.device video { width: 100%; height: 100%; object-fit: cover; object-position: top; border-radius: 35px; display: block; background: #F6F8FC; }

@@ -47,6 +47,12 @@
     });
     $$('.lang').forEach(function (b) { b.textContent = lang === 'ar' ? 'English' : 'العربية';
       b.setAttribute('aria-label', lang === 'ar' ? 'Switch to English' : 'التبديل إلى العربية'); });
+    $$('[data-ar-src]').forEach(function (m) {
+      var src = m.getAttribute(lang === 'ar' ? 'data-ar-src' : 'data-en-src');
+      if (src && m.getAttribute('src') !== src) m.setAttribute('src', src);
+      var poster = m.getAttribute(lang === 'ar' ? 'data-ar-poster' : 'data-en-poster');
+      if (poster) m.setAttribute('poster', poster);
+    });
     var t = document.querySelector('title');
     if (t && t.dataset.ar) { if (!t.dataset.en) t.dataset.en = t.textContent; t.textContent = lang === 'ar' ? t.dataset.ar : t.dataset.en; }
   }
