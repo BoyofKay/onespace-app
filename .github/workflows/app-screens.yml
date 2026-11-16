@@ -11,9 +11,10 @@ on:
   workflow_dispatch:
     inputs:
       sets:
-        description: 'Comma-separated: core|themes|together|video - en|ar'
-        default: 'core-en,core-ar,together-en,together-ar,themes-en,themes-ar,video-en,video-ar'
+        description: 'Sets, run in this order: core, together, themes, video'
+        default: 'core,together,themes,video'
         required: true
+
 
 permissions:
   contents: write
@@ -24,6 +25,11 @@ concurrency:
 
 jobs:
   robot:
+    strategy:
+      max-parallel: 1          # they share the demo space
+      fail-fast: false
+      matrix:
+        lang: [en, ar]          # one fresh emulator per language
     runs-on: ubuntu-latest
     timeout-minutes: 150
     steps:
@@ -75,7 +81,8 @@ jobs:
         uses: reactivecircus/android-emulator-runner@v2
         env:
           DEMO_PASSWORD: ${{ secrets.DEMO_PASSWORD }}
-          SHOT_SETS: ${{ inputs.sets }}
+          SETS: ${{ inputs.sets }}
+          LANG_CODE: ${{ matrix.lang }}
         with:
           working-directory: app
           api-level: 31
@@ -87,7 +94,7 @@ jobs:
           disk-size: 4000M
           emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: false
-          script: bash tools/screenshots/run.sh
+          script: SHOT_SETS=$(echo "$SETS" | tr ',' '\n' | sed "s/\$/-$LANG_CODE/" | paste -sd, -) bash tools/screenshots/run.sh
       - name: Publish to the app-screens branch
         if: always()
         run: |
@@ -103,5 +110,5 @@ jobs:
           done
           rm -f videos/*.log videos/segments_* || true
           git add -A
-          git commit -q -m "Real app screens from run ${{ github.run_id }} (${{ inputs.sets }})" || exit 0
+          git commit -q -m "Real app screens from run ${{ github.run_id }} (${{ matrix.lang }}: ${{ inputs.sets }})" || exit 0
           git push -q origin HEAD:app-screens
