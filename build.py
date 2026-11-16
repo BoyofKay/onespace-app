@@ -43,25 +43,32 @@ NAV = [
     ('features.html', 'Features', 'المزايا'),
     ('how-it-works.html', 'Demo', 'العرض'),
     ('tutorials.html', 'Tutorials', 'الدروس'),
+    ('guides.html', 'Guides', 'الأدلة'),
     ('faq.html', 'FAQ', 'الأسئلة'),
 ]
 
 
 def head(page, title, title_ar, desc, desc_ar=''):
     canonical = BASE + ('' if page == 'index.html' else page)
-    menu = []
-    for href, en, ar in NAV[:1]:
+    def link(href, en, ar):
         cur = ' aria-current="page"' if href == page else ''
-        menu.append(f'<a href="{href}"{cur}>{T(en, ar)}</a>')
-    cur_c = ' aria-current="page"' if page in ('long-distance.html', 'living-together.html') else ''
-    menu.append(f'''<div class="drop"><button type="button" aria-expanded="false"{cur_c}>{T('For couples', 'للأزواج')} ▾</button>
-      <div class="drop-panel">
-        <a href="long-distance.html"><span class="e">🌍</span><span>{T('Living apart', 'متباعدان', 'b')}{T('Two cities, two clocks, one life', 'مدينتان وساعتان وحياة واحدة', 'small')}</span></a>
-        <a href="living-together.html"><span class="e">🏡</span><span>{T('Living together', 'تحت سقف واحد', 'b')}{T('One home, so much to share', 'بيت واحد وكثير لنتشاركه', 'small')}</span></a>
-      </div></div>''')
-    for href, en, ar in NAV[1:]:
-        cur = ' aria-current="page"' if href == page else ''
-        menu.append(f'<a href="{href}"{cur}>{T(en, ar)}</a>')
+        return f'<a href="{href}"{cur}>{T(en, ar)}</a>'
+
+    def drop(label, label_ar, items, pages):
+        cur = ' aria-current="page"' if page in pages else ''
+        inner = ''.join(f'<a href="{h}"><span class="e">{e}</span><span>{T(t, ta, "b")}{T(d, da, "small")}</span></a>' for h, e, t, ta, d, da in items)
+        return f'<div class="drop"><button type="button" aria-expanded="false"{cur}>{T(label, label_ar)} ▾</button><div class="drop-panel">{inner}</div></div>'
+    menu = [link('features.html', 'Features', 'المزايا'),
+            drop('For couples', 'للأزواج', [
+                ('long-distance.html', '🌍', 'Living apart', 'متباعدان', 'Two cities, two clocks, one life', 'مدينتان وساعتان وحياة واحدة'),
+                ('living-together.html', '🏡', 'Living together', 'تحت سقف واحد', 'One home, so much to share', 'بيت واحد وكثير لنتشاركه')], ('long-distance.html', 'living-together.html')),
+            link('how-it-works.html', 'Demo', 'العرض'),
+            drop('Learn', 'تعلّم', [
+                ('guides.html', '💡', 'Guides for couples', 'أدلة للأزواج', 'Ideas for a shared life', 'أفكار لحياة مشتركة'),
+                ('tutorials.html', '🧭', 'Tutorials', 'الدروس', 'Step-by-step how-tos', 'شروحات خطوة بخطوة'),
+                ('faq.html', '❓', 'FAQ', 'الأسئلة الشائعة', 'Privacy, pricing, help', 'الخصوصية والأسعار والمساعدة'),
+                ('whats-new.html', '✨', "What's new", 'الجديد', 'Updates and availability', 'التحديثات والتوفر')],
+                 ('guides.html', 'tutorials.html', 'faq.html', 'whats-new.html') + tuple(g['slug'] for g in GUIDES))]
     dk = K(desc, desc_ar or desc)
     analytics = f'\n<script data-goatcounter="https://{GOATCOUNTER}.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>' if GOATCOUNTER else ''
     return f'''<!doctype html>
@@ -85,7 +92,7 @@ def head(page, title, title_ar, desc, desc_ar=''):
 <link rel="manifest" href="site.webmanifest">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Kufi+Arabic:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@1,9..144,600&family=Inter:wght@400;500;600;700;800&family=Noto+Kufi+Arabic:wght@400;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/os.css">{analytics}
 </head>
 <body>
@@ -117,7 +124,7 @@ def foot():
     </div>
     {col('Product', 'المنتج', [('features.html', 'Features', 'المزايا'), ('how-it-works.html', 'Interactive demo', 'العرض التفاعلي'), ('tutorials.html', 'Tutorials', 'الدروس'), ('whats-new.html', "What's new", 'الجديد'), ('whats-new.html#status', 'Availability', 'التوفر')])}
     {col('For couples', 'للأزواج', [('long-distance.html', 'Living apart', 'متباعدان'), ('living-together.html', 'Living together', 'تحت سقف واحد'), ('join.html', 'Founding 500', 'المؤسسون الـ500'), ('share-kit.html', 'Share kit', 'مواد المشاركة')])}
-    {col('Help', 'المساعدة', [('faq.html', 'FAQ', 'الأسئلة الشائعة'), ('support.html', 'Contact & support', 'التواصل والدعم'), ('support.html#signin', "Can't sign in?", 'لا تستطيع الدخول؟')])}
+    {col('Help', 'المساعدة', [('guides.html', 'Guides for couples', 'أدلة للأزواج'), ('faq.html', 'FAQ', 'الأسئلة الشائعة'), ('support.html', 'Contact & support', 'التواصل والدعم'), ('support.html#signin', "Can't sign in?", 'لا تستطيع الدخول؟')])}
     {col('Legal', 'قانوني', [('privacy.html', 'Privacy policy', 'سياسة الخصوصية'), ('terms.html', 'Terms of use', 'شروط الاستخدام'), ('delete-account.html', 'Delete your account', 'حذف حسابك')])}
   </div>
   <div class="foot-bottom">
@@ -399,6 +406,45 @@ SCREENS.update({'demo_note': scr_demo_note, 'demo_activity': scr_demo_activity, 
 
 
 # ------------------------------------------------------------------ pages
+def pain(them, them_ar, me, me_ar, ans, ans_ar, who='Lina', who_ar='لينا'):
+    return f"""<div class="pain reveal"><div class="msg them">{T(them, them_ar)}<small>{T(who, who_ar)}</small></div>
+  <div class="msg me">{T(me, me_ar)}</div>
+  <div class="answer"><b>OneSpace</b>{T(ans, ans_ar)}</div></div>"""
+
+
+def slot(time, text, text_ar):
+    return f'<div class="slot reveal"><time>{time}</time><div class="bubble">{T(text, text_ar)}</div></div>'
+
+
+def cities_panel():
+    return f"""<div class="cities">
+    <div class="split" style="gap:40px;align-items:start">
+      <div>{T('A day in two cities', 'يوم في مدينتين', 'span', 'eyebrow')}{T('3,000 km, one shared day.', '3,000 كم، ويوم مشترك واحد.', 'h3', '', 'style="font-size:30px;margin:10px 0 0"')}
+        <svg class="route" viewBox="0 0 400 120" aria-hidden="true"><path class="arc" d="M30 95 Q200 -20 370 95" fill="none" stroke="#F3A27E" stroke-width="2.5"/><circle cx="30" cy="95" r="7" fill="#F3A27E"/><circle cx="370" cy="95" r="7" fill="#7FC4CC"/><text x="200" y="40" text-anchor="middle" font-size="22">✈️</text></svg>
+        <div class="city-row"><div class="city">{T('Riyadh · Omar', 'الرياض · عمر')}<b>8:14 PM</b><span>☀️ 31° · {T('evening', 'مساءً')}</span></div><div class="city">{T('London · Lina', 'لندن · لينا')}<b>5:14 PM</b><span>🌧 9° · {T('good time to talk', 'وقت مناسب للحديث')}</span></div></div>
+        <a class="btn btn-primary" style="margin-top:24px" href="long-distance.html">{T('OneSpace for long distance →', 'OneSpace للعلاقات عن بُعد ←')}</a></div>
+      <div class="day">
+        {slot('07:40', '<b>Lina</b> wakes up to “Good morning ☀️” Omar sent at his lunch break.', '<b>لينا</b> تستيقظ على «صباح الخير ☀️» أرسلها عمر في استراحة غدائه.')}
+        {slot('12:10', '<b>Omar</b> adds the flight to Istanbul — RUH → IST, Saturday 07:40.', '<b>عمر</b> يضيف رحلة إسطنبول — الرياض ← إسطنبول، السبت 07:40.')}
+        {slot('17:14', 'Today says it is <b>a good time to talk</b> in London. They call.', '«اليوم» يقول إنه <b>وقت مناسب للحديث</b> في لندن. يتصلان.')}
+        {slot('21:30', '<b>Lina</b> ticks “Passports” on the packing list. 7 of 12 done.', '<b>لينا</b> تضع علامة على «الجوازات» في قائمة التجهيز. 7 من 12.')}
+        {slot('23:55', 'The reunion counter flips to <b>5 days</b>. ✈️', 'عدّاد اللقاء يصبح <b>5 أيام</b>. ✈️')}
+      </div></div></div>"""
+
+
+def home_panel():
+    return f"""<div class="split">
+    <div class="stage">{phone(scr_today(False), 'coral', label='Today for a couple living together', label_ar='اليوم لزوجين يعيشان معًا', themable=False)}</div>
+    <div>{T('One home, shared load', 'بيت واحد وعبء مشترك', 'span', 'eyebrow')}{T('Nobody has to be the household’s memory.', 'لا أحد مضطر لأن يكون ذاكرة البيت.', 'h3', '', 'style="font-size:30px;margin:10px 0 18px"')}
+      <div class="day" style="margin-top:0">
+        <div class="slot"><time style="color:var(--coral)">08:00</time><div class="card" style="padding:12px 16px">{T('Shared grocery list — Omar grabs milk on the way to work.', 'قائمة المشتريات المشتركة — عمر يشتري الحليب في طريقه للعمل.')}</div></div>
+        <div class="slot"><time style="color:var(--coral)">13:00</time><div class="card" style="padding:12px 16px">{T('Internet bill reminder, assigned to Lina. Paid ✓', 'تذكير فاتورة الإنترنت، مُسند إلى لينا. تم الدفع ✓')}</div></div>
+        <div class="slot"><time style="color:var(--coral)">19:30</time><div class="card" style="padding:12px 16px">{T('They finally decide on the sofa — both picked the velvet one.', 'قرّرا أخيرًا الأريكة — كلاهما اختار المخملية.')}</div></div>
+        <div class="slot"><time style="color:var(--coral)">22:00</time><div class="card" style="padding:12px 16px">{T('Movie night saved to Experiences, rated ★★★★ and ★★★★★.', 'سهرة الفيلم محفوظة في التجارب، بتقييم ★★★★ و★★★★★.')}</div></div>
+      </div><a class="btn btn-primary" style="margin-top:22px" href="living-together.html">{T('OneSpace for living together →', 'OneSpace للحياة المشتركة ←')}</a></div>
+  </div>"""
+
+
 def page_index():
     h = head('index.html', 'OneSpace — the private couples app for plans, love and memories', 'OneSpace — تطبيق الأزواج الخاص للخطط والحب والذكريات',
              'OneSpace is a private couples app: shared calendar, lists, trips, little gestures, letters, counters and memories — for couples living together or long distance.',
@@ -420,45 +466,108 @@ def page_index():
     views = ''.join(f'<div data-view-of="tabs" data-view-name="{k}"{" hidden" if i else ""}>{phone(SCREENS[sc](), "clean", label=e + " tab", label_ar=ar)}'
                     f'<ul class="ticks" style="max-width:320px">{"".join(f"<li>{T(x, y)}</li>" for x, y in pts)}</ul><a class="more" href="{href}" style="font-weight:700">{T("More about " + e + " →", "المزيد عن " + ar + " ←")}</a></div>'
                     for i, (k, ic, e, ar, t, tar, pts, sc, href) in enumerate(tabs))
+    marquee_items = [('🛒', 'Groceries for Friday · 4 left', 'مشتريات الجمعة · بقي 4'), ('💍', 'Anniversary in 12 days', 'الذكرى بعد 12 يومًا'), ('💌', 'A letter opens on Saturday', 'رسالة تُفتح يوم السبت'),
+                     ('🏜', 'Lina picked AlUla', 'اختارت لينا العُلا'), ('🤗', 'Omar sent a hug', 'أرسل عمر حضنًا'), ('✈️', 'RUH → IST · packing 7/12', 'الرياض ← إسطنبول · التجهيز 7/12'),
+                     ('🧾', 'Internet bill due Thursday', 'فاتورة الإنترنت الخميس'), ('📍', 'Santorini added to the bucket list', 'أُضيفت سانتوريني إلى قائمة الأحلام'), ('🎂', 'Gift ideas: 3 shortlisted', 'أفكار هدايا: 3 في القائمة'),
+                     ('😊', 'Lina felt great today', 'شعرت لينا اليوم بأنها رائعة'), ('🎬', 'Movie night · Friday 9 PM', 'سهرة فيلم · الجمعة 9 م'), ('☕', 'Our café · 12 visits', 'مقهانا · 12 زيارة')]
+    chips = ''.join(f'<span class="chip">{i} {T(e, a)}</span>' for i, e, a in marquee_items)
     app_ld = {'@context': 'https://schema.org', '@type': 'MobileApplication', 'name': 'OneSpace', 'operatingSystem': 'Android',
               'applicationCategory': 'LifestyleApplication', 'description': 'A private app for couples: shared calendar, lists, trips, gestures, letters, counters and memories.',
               'offers': {'@type': 'Offer', 'price': '0', 'priceCurrency': 'USD'}, 'inLanguage': ['en', 'ar'], 'url': BASE}
+    rot = ''.join(f'<span class="{"on" if i == 0 else ""}">{T(e, a)}</span>' for i, (e, a) in enumerate([
+        ('living together', 'يعيشان معًا'), ('3,000 km apart', 'على بُعد 3,000 كم'), ('just married', 'تزوّجا حديثًا'), ('planning a wedding', 'يخططان لزفاف'), ('with busy weeks', 'أسابيعهم مزدحمة')]))
+    toasts = [('🤍', 'Lina sent you a hug', 'أرسلت لك لينا حضنًا', 'just now', 'الآن'), ('💌', 'A letter is waiting for you', 'رسالة تنتظرك', 'opens Saturday', 'تُفتح السبت'),
+              ('✅', 'Lina ticked “Buy flowers”', 'أنهت لينا «شراء الورد»', '2 min ago', 'قبل دقيقتين'), ('🏜', 'You both picked AlUla', 'اخترتما العُلا كلاكما', 'decision saved', 'حُفظ القرار')]
+    toast_data = ''.join(f'<template data-toast><span class="e">{i}</span><div>{T(a, b, "b")}{T(c, d)}</div></template>' for i, a, b, c, d in toasts)
     return h + f"""
-<section class="hero"><div class="wrap hero-grid">
+<section class="hero-xl"><div class="wrap hero-grid">
+  <span class="floaty" style="left:4%;top:12%">♥</span><span class="floaty" style="left:44%;top:78%;animation-delay:-3s">✦</span><span class="floaty" style="right:4%;top:70%;animation-delay:-6s;color:var(--coral)">♥</span>
   <div>
     {T('Two of us. One Space.', 'نحن الاثنان. مساحة واحدة.', 'span', 'eyebrow')}
-    <h1>{T('The private home for the life', 'البيت الخاص للحياة')} <span class="accent">{T('you share.', 'التي تتشاركانها.')}</span></h1>
-    {T('Plan together, remember what matters and stay close — in one calm app only the two of you can open. For couples living together or miles apart.', 'خططا معًا، وتذكّرا ما يهم، وابقيا قريبين — في تطبيق هادئ واحد لا يفتحه سواكما. للأزواج معًا أو على بُعد أميال.', 'p', 'lead')}
+    <h1>{T('The private home for the life', 'البيت الخاص للحياة')} <span class="serif accent">{T('you share.', 'التي تتشاركانها.')}</span></h1>
+    <p class="lead">{T('Plans, little gestures, letters and memories in one calm app only the two of you can open. Made for couples', 'خطط ولمسات صغيرة ورسائل وذكريات في تطبيق هادئ لا يفتحه سواكما. صُمم لأزواج')} <b class="rotator" style="color:var(--teal)">{rot}</b></p>
     <div class="cta-row">
-      <a class="btn btn-primary" href="#founding" data-track="hero_join">{T('Join the Founding 500', 'انضم إلى المؤسسين الـ500')}</a>
-      <a class="btn btn-ghost" href="how-it-works.html" data-track="hero_demo">{T('Try the demo', 'جرّب العرض')}</a>
+      <a class="btn btn-primary" href="#founding" data-track="hero_join">{T('Join the Founding 500 — free', 'انضم إلى المؤسسين الـ500 — مجانًا')}</a>
+      <a class="btn btn-ghost" href="how-it-works.html" data-track="hero_demo">▶ {T('Try the demo', 'جرّب العرض')}</a>
     </div>
-    <div class="trust">{T('Only you two', 'أنتما فقط')}{T('No ads, no data selling', 'بلا إعلانات ولا بيع للبيانات')}{T('English & العربية', 'العربية والإنجليزية')}{T('Free early access', 'وصول مبكر مجاني')}</div>
-    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:22px">
-      <a class="chip" href="long-distance.html">🌍 {T('We live apart →', 'نعيش متباعدين ←')}</a><a class="chip" href="living-together.html">🏡 {T('We live together →', 'نعيش معًا ←')}</a></div>
+    <div class="avatars" style="max-width:360px;margin-top:30px"><span class="av o">O</span><span class="av-line"></span><span class="av l">L</span></div>
+    <div class="trust">{T('Only you two', 'أنتما فقط')}{T('No ads, no data selling', 'بلا إعلانات ولا بيع للبيانات')}{T('English & العربية', 'العربية والإنجليزية')}</div>
   </div>
   <div class="stage">
     {phone(scr_today(True), 'clean', label='OneSpace Today screen for a couple living apart', label_ar='شاشة اليوم في OneSpace لزوجين متباعدين', themable=False)}
-    <div class="toast t1"><span class="e">🤍</span><div>{T('Lina sent you a hug', 'أرسلت لك لينا حضنًا', 'b')}{T('just now', 'الآن')}</div></div>
+    <div class="toast t1 live" data-toast-slot></div>{toast_data}
     <div class="toast t2"><span class="e">✈️</span><div>{T('Istanbul in 6 days', 'إسطنبول بعد 6 أيام', 'b')}{T('Packing 7 of 12', 'التجهيز 7 من 12')}</div></div>
   </div>
 </div></section>
+<div class="marquee" aria-hidden="true"><div class="marquee-track">{chips}{chips}</div></div>
 
-<section class="tint" id="tour" data-theme-scope><div class="wrap">
-  <div class="sec-head center">{T('See it in action', 'شاهده أثناء العمل', 'span', 'eyebrow')}{T('Five tabs. Your whole life together.', 'خمسة تبويبات. حياتكما معًا كلها.', 'h2')}
-  {T('Tap a tab, then pick a theme — the phone changes like the real app.', 'انقر على تبويب ثم اختر سمة — يتغير الهاتف كما في التطبيق.', 'p', 'lead')}</div>
+<section><div class="wrap">
+  <div class="sec-head center">{T('Sound familiar?', 'هل يبدو هذا مألوفًا؟', 'span', 'eyebrow')}<h2>{T('Love is easy.', 'الحب سهل.')} <span class="serif accent">{T('Logistics aren’t.', 'التفاصيل ليست كذلك.')}</span></h2>
+  {T('Every couple has these conversations. OneSpace quietly takes care of them, so your chats can be about you again.', 'كل زوجين يمرّان بهذه المحادثات. يتولاها OneSpace بهدوء، لتعود محادثاتكما عنكما من جديد.', 'p', 'lead')}</div>
+  <div class="pains">
+    {pain('Did you book the dentist? 🦷', 'هل حجزت موعد طبيب الأسنان؟ 🦷', 'I thought YOU were doing it 😅', 'ظننت أنكِ ستحجزينه 😅', 'Reminders that belong to someone — and show up in their Today.', 'تذكيرات لها صاحب — وتظهر في «اليوم» لديه.')}
+    {pain('What was that restaurant we loved in Jeddah?', 'ما اسم المطعم الذي أحببناه في جدة؟', 'No idea… it had blue chairs?', 'لا أذكر… كانت كراسيه زرقاء؟', 'Our places: every spot you loved, pinned on your own map.', 'أماكننا: كل مكان أحببتماه، على خريطتكما الخاصة.')}
+    {pain('Sorry, did I wake you? 🙈', 'آسفة، هل أيقظتك؟ 🙈', 'It’s 3 a.m. here…', 'الساعة 3 فجرًا هنا…', 'Two clocks and two weathers on Today — know before you call.', 'ساعتان وطقسان في «اليوم» — اعرف قبل أن تتصل.')}
+    {pain('Which sofa did we say? The grey one?', 'أي أريكة اتفقنا عليها؟ الرمادية؟', 'I sent you 14 links last week…', 'أرسلت لكِ 14 رابطًا الأسبوع الماضي…', 'Activities: options side by side, both your picks, one decision.', 'الأنشطة: خيارات جنبًا إلى جنب، واختيار كل منكما، وقرار واحد.')}
+    {pain('Is it our anniversary this month?!', 'هل ذكرانا هذا الشهر؟!', '…it was last Tuesday 💔', '…كانت الثلاثاء الماضي 💔', 'Counters and occasions that remind you weeks before — with gift ideas.', 'عدّادات ومناسبات تذكّرك قبلها بأسابيع — مع أفكار هدايا.')}
+    {pain('Who has the passports?', 'من معه الجوازات؟', 'Me? I thought they were in your bag', 'أنا؟ ظننتها في حقيبتك', 'Trips with a shared packing list — who brings what, ticked off.', 'رحلات بقائمة تجهيز مشتركة — من يحضر ماذا، مع علامة الإنجاز.')}
+  </div>
+</div></section>
+
+<section class="tint"><div class="wrap">
+  <div class="sec-head center">{T('Everything for two', 'كل شيء لاثنين', 'span', 'eyebrow')}<h2>{T('One app instead of', 'تطبيق واحد بدل')} <span class="serif accent">{T('ten chats, three lists and a lost calendar.', 'عشر محادثات وثلاث قوائم وتقويم ضائع.')}</span></h2></div>
+  <div class="bento">
+    <div class="bx b-2 b-tall peach reveal"><div class="ico i-coral">⏳</div>{T('Counters that understand dates', 'عدّادات تفهم التواريخ', 'h3')}{T('The day itself and its anniversary — with progress all the way there.', 'اليوم نفسه وذكراه — مع تقدّم حتى الوصول.', 'p')}
+      <div class="viz"><div class="big-count">164 <small>{T('days', 'يومًا')}</small></div>{T('until our 6th anniversary', 'حتى ذكرانا السادسة', 'p')}<div class="bar"><i style="--w:58%"></i></div>
+      <div style="height:16px"></div><div class="big-count" style="font-size:38px">8 <small>{T('years since we met', 'سنوات منذ التقينا')}</small></div></div></div>
+    <div class="bx b-2 reveal"><div class="ico i-rose">💌</div>{T('Letters that wait', 'رسائل تنتظر', 'h3')}{T('Write today, sealed until a birthday, a landing or a hard day.', 'اكتب اليوم، مغلقة حتى عيد ميلاد أو يوم وصول أو يوم صعب.', 'p')}<div class="viz"><div class="envelope"><span class="seal">♥</span></div></div></div>
+    <div class="bx b-2 mint reveal"><div class="ico i-teal">📍</div>{T('Our places, on a map', 'أماكننا على خريطة', 'h3')}{T('Been there and bucket list. Share straight from Google Maps.', 'ما زرتماه وقائمة الأحلام. شارك مباشرة من خرائط Google.', 'p')}
+      <div class="viz"><div class="mini-map"><span class="pin" style="left:28%;top:50%">❤️</span><span class="pin" style="left:58%;top:40%;animation-delay:.3s">❤️</span><span class="pin" style="left:78%;top:78%;animation-delay:.6s">🧭</span><span class="pin" style="left:42%;top:86%;animation-delay:.9s">🧭</span></div></div></div>
+    <div class="bx b-2 sun reveal"><div class="ico i-gold">🧳</div>{T('Trips, packed together', 'رحلات نجهّزها معًا', 'h3')}<div class="viz"><ul class="check-list">
+      <li class="d">{T('Passports — Lina', 'الجوازات — لينا')}</li><li class="d">{T('Hotel booking — Omar', 'حجز الفندق — عمر')}</li><li>{T('Travel adapter — Omar', 'محوّل الكهرباء — عمر')}</li></ul></div></div>
+    <div class="bx b-2 lilac reveal"><div class="ico i-violet">🌤</div>{T('A one-minute check-in', 'تواصل يومي في دقيقة', 'h3')}{T('How was today, really? Pick a face, add one honest line.', 'كيف كان يومك حقًا؟ اختر وجهًا وأضف سطرًا صادقًا.', 'p')}<div class="viz"><div class="faces"><span>😞</span><span>😕</span><span>🙂</span><span class="on">😊</span><span>🤩</span></div></div></div>
+    <div class="bx b-4 ink reveal"><div class="ico" style="background:rgba(255,255,255,.1)">🌙</div>{T('Arabic and English, side by side', 'العربية والإنجليزية جنبًا إلى جنب', 'h3')}{T('Each of you picks your language. Every screen works right to left.', 'يختار كل منكما لغته. وكل شاشة تعمل من اليمين لليسار.', 'p')}
+      <div class="viz lang-pair"><div>🤗 <b style="color:#fff">Lina sent you a hug</b><br><span style="color:#B9C3D8">“Sending you a big, warm hug.”</span></div><div dir="rtl" style="font-family:var(--font-ar)">🤗 <b style="color:#fff">أرسل لكِ عمر حضنًا</b><br><span style="color:#B9C3D8">«أرسل لكِ حضنًا كبيرًا ودافئًا.»</span></div></div></div>
+    <div class="bx b-2 reveal"><div class="ico i-green">🎁</div>{T('Surprises stay secret', 'المفاجآت تبقى سرًا', 'h3')}{T('Mark a gift or an occasion “Only me”. Your partner never sees it.', 'اجعل الهدية أو المناسبة «أنا فقط». لن يراها شريكك أبدًا.', 'p')}<div class="viz"><span class="chip">🔒 {T('Only me', 'أنا فقط')}</span> <span class="chip">💰 SAR 1,240 {T('left', 'متبقٍ')}</span></div></div>
+  </div>
+  <p class="center" style="margin-top:28px"><a class="btn btn-ghost" href="features.html">{T('See every feature →', 'شاهد كل المزايا ←')}</a></p>
+</div></section>
+
+<section><div class="wrap">
+  <div class="sec-head center">{T('However you live', 'أيًّا كانت طريقتكما في العيش', 'span', 'eyebrow')}<h2>{T('Apart or together,', 'متباعدين أو معًا،')} <span class="serif accent">{T('it fits your life.', 'يناسب حياتكما.')}</span></h2>
+  <div class="seg" role="tablist" data-views="live" style="margin-top:18px"><button type="button" role="tab" data-view="apart" aria-selected="true">🌍 {T('Living apart', 'متباعدان')}</button><button type="button" role="tab" data-view="together" aria-selected="false">🏡 {T('Living together', 'معًا')}</button></div></div>
+  <div data-view-of="live" data-view-name="apart">{cities_panel()}</div>
+  <div data-view-of="live" data-view-name="together" hidden>{home_panel()}</div>
+</div></section>
+
+<section id="tour" data-theme-scope><div class="wrap"><div class="playground" data-pg="clean">
+  <div class="sec-head center">{T('Try it right here', 'جرّبه هنا', 'span', 'eyebrow')}<h2>{T('Five tabs.', 'خمسة تبويبات.')} <span class="serif accent">{T('Nine moods.', 'تسعة أمزجة.')}</span></h2>
+  {T('Tap a tab, then pick a theme — the phone and this whole section change, just like the real app.', 'انقر على تبويب ثم اختر سمة — يتغير الهاتف وهذا القسم كله، تمامًا كما في التطبيق.', 'p', 'lead')}</div>
   <div class="tour tour3">
     <div class="steps" role="tablist" data-views="tabs">{btns}</div>
-    <div class="stage" style="padding-top:0">{views.replace('data-theme="clean"', 'data-theme="clean"')}</div>
-    <div><h3 style="margin-bottom:12px">{T('Pick a theme', 'اختر سمة')}</h3><div class="swatches">{swatches()}</div>
-    <p class="muted" style="margin-top:16px">{T('Every screen also works fully in Arabic. Use the العربية button above.', 'كل شاشة تعمل بالكامل بالعربية أيضًا.')}</p></div>
+    <div class="stage" style="padding-top:0">{views}</div>
+    <div><h3 style="margin-bottom:12px">{T('Pick a theme', 'اختر سمة')}</h3><div class="swatches">{swatches()}</div></div>
   </div>
+</div></div></section>
+
+<section class="warm"><div class="wrap">
+  <p class="promise reveal">{T('“Your relationship isn’t content. Nothing you put in OneSpace is shown to anyone but the two of you — no feed, no followers, no ads, and never sold.”', '«علاقتكما ليست محتوى. لا يُعرض شيء تضعانه في OneSpace إلا لكما — بلا منشورات ولا متابعين ولا إعلانات، ولا يُباع أبدًا.»')}</p>
+  <p class="center muted" style="margin-top:14px">— {T('Our promise', 'وعدنا')}</p>
+  <div class="numbers">
+    <div class="reveal"><b>2</b>{T('people per space', 'شخصان لكل مساحة')}</div><div class="reveal"><b>5</b>{T('simple tabs', 'تبويبات بسيطة')}</div>
+    <div class="reveal"><b>9</b>{T('themes', 'سمات')}</div><div class="reveal"><b>2</b>{T('languages', 'لغتان')}</div><div class="reveal"><b>0</b>{T('ads, ever', 'إعلانات، أبدًا')}</div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="sec-head" style="display:flex;justify-content:space-between;align-items:end;max-width:none;gap:20px;flex-wrap:wrap"><div>{T('Guides for couples', 'أدلة للأزواج', 'span', 'eyebrow')}{T('Ideas worth stealing.', 'أفكار تستحق التجربة.', 'h2', '', 'style="margin-top:10px"')}</div><a class="btn btn-ghost" href="guides.html">{T('All guides →', 'كل الأدلة ←')}</a></div>
+  <div class="grid g3">{guide_cards()}</div>
 </div></section>
 
 <section id="founding"><div class="wrap"><div class="band"><div class="cta-band" style="align-items:start">
   <div>
     {T('The Founding 500', 'المؤسسون الـ500', 'span', 'eyebrow')}
-    {T('Be one of the first 500 couples.', 'كونا من أول 500 زوج.', 'h2')}
+    <h2>{T('Be one of the', 'كونا من')} <span class="serif" style="color:#F3A27E">{T('first 500 couples.', 'أول 500 زوج.')}</span></h2>
     {T('OneSpace is opening to a small group first. The first 500 sign-ups become Founder Members: you get the app first, a direct line to the team, and a say in what we build. Founder benefits will be announced before any pricing is introduced.', 'يُفتح OneSpace لمجموعة صغيرة أولًا. أول 500 تسجيل يصبحون أعضاء مؤسسين: تحصلون على التطبيق أولًا، وخط مباشر مع الفريق، ورأي فيما نبنيه. وسنعلن مزايا المؤسسين قبل تقديم أي أسعار.', 'p', 'lead')}
     <ul class="ticks"><li>{T('<b>Free</b> during early access', '<b>مجاني</b> خلال الوصول المبكر')}</li><li>{T('<b>Android now</b>, iPhone next', '<b>أندرويد الآن</b> وiPhone بعده')}</li><li>{T('<b>Your email only</b> for the invite and launch updates', '<b>بريدك فقط</b> للدعوة وتحديثات الإطلاق')}</li></ul>
   </div>
@@ -618,7 +727,21 @@ def persona_page(page, apart):
         scr, theme = scr_today(False), 'coral'
     cards = ''.join(trust_card(*p) for p in points)
     other = ('living-together.html', 'Living together instead?', 'تعيشان معًا؟') if apart else ('long-distance.html', 'Living apart instead?', 'متباعدان؟')
+    if apart:
+        pains_html = (pain('Can you call now?', 'هل يمكنك الاتصال الآن؟', 'In a meeting till 6 — your 9 PM 😕', 'في اجتماع حتى 6 — أي 9 مساءً عندك 😕', 'Two clocks on Today show the best time to talk.', 'ساعتان في «اليوم» تُظهران أفضل وقت للحديث.')
+                      + pain('When do we see each other again?', 'متى نلتقي مرة أخرى؟', 'Let me check… March? April?', 'دعيني أتحقق… مارس؟ أبريل؟', 'A reunion counter with progress, on both your phones.', 'عدّاد للقاء بتقدّم، على هاتفيكما.')
+                      + pain('I miss you today 🥺', 'أفتقدك اليوم 🥺', '(at 3 a.m., asleep)', '(في الثالثة فجرًا، نائم)', 'A letter you wrote weeks ago, sealed for exactly this kind of day.', 'رسالة كتبتها قبل أسابيع، مغلقة لمثل هذا اليوم تمامًا.'))
+        panel, gslug = cities_panel(), 'guide-long-distance-ideas.html'
+    else:
+        pains_html = (pain('Did you pay the internet?', 'هل دفعت فاتورة الإنترنت؟', 'Wasn’t that your turn?', 'أليس دورك؟', 'Bills with an owner and a monthly repeat.', 'فواتير لها صاحب وتكرار شهري.')
+                      + pain('What do we need from the store?', 'ماذا نحتاج من المتجر؟', 'I’ll just buy everything twice', 'سأشتري كل شيء مرتين', 'One live grocery list — ticked as you shop.', 'قائمة مشتريات حيّة — تُعلَّم أثناء التسوق.')
+                      + pain('Are we doing anything for my mum’s birthday?', 'هل سنفعل شيئًا لعيد ميلاد أمي؟', 'Wait — that’s this week?!', 'لحظة — هذا الأسبوع؟!', 'Occasions that remind you weeks ahead, with gift ideas and a budget.', 'مناسبات تذكّرك قبلها بأسابيع، مع أفكار هدايا وميزانية.'))
+        panel, gslug = home_panel(), 'guide-mental-load.html'
+    g = next(x for x in GUIDES if x['slug'] == gslug)
     return h + hero + f'''
+<section style="padding-top:20px"><div class="wrap">{panel}</div></section>
+<section class="tint"><div class="wrap"><div class="sec-head center">{T('Sound familiar?', 'هل يبدو هذا مألوفًا؟', 'span', 'eyebrow')}{T('The conversations OneSpace quietly handles.', 'المحادثات التي يتولاها OneSpace بهدوء.', 'h2')}</div>
+<div class="pains">{pains_html}</div></div></section>
 <section><div class="wrap split">
   <div class="stage">{phone(scr, theme, label='Today screen', label_ar='شاشة اليوم')}</div>
   <div><div class="grid g2">{cards}</div></div>
@@ -629,6 +752,7 @@ def persona_page(page, apart):
   {T('Create your space, invite your partner with a QR code or link, choose how you live — and Today does the rest.', 'أنشئ مساحتكما، وادعُ شريكك برمز QR أو رابط، واختر كيف تعيشان — ويتولى «اليوم» الباقي.', 'p', 'lead')}
   <div class="cta-row" style="justify-content:center"><a class="btn btn-primary" href="join.html">{T('Join the Founding 500', 'انضم إلى المؤسسين الـ500')}</a><a class="btn btn-ghost" href="{other[0]}">{T(other[1], other[2])}</a></div>
 </div></section>
+<section><div class="narrow"><a class="card link art-card" href="{g['slug']}" style="flex-direction:row;align-items:center;gap:20px"><div class="cover" style="background:{g['bg']};width:120px;height:120px;flex:none;margin:0">{g['emoji']}</div><div>{T('Guide', 'دليل', 'span', 'eyebrow')}{T(g['title'][0], g['title'][1], 'h3')}{T(g['desc'][0], g['desc'][1], 'p')}</div></a></div></section>
 ''' + cta_band() + foot()
 
 
@@ -772,6 +896,126 @@ def availability():
     cards = ''.join(f'<div class="card"><div class="ico {c}">{"✅" if c == "i-green" else "🧪" if c == "i-gold" else "🗺"}</div>{T(t, ta, "h3")}<ul class="ticks" style="margin-top:12px">{"".join(f"<li>{T(x, y)}</li>" for x, y in zip(en, ar))}</ul></div>'
                     for t, ta, c, en, ar in AVAILABILITY)
     return f'<section class="tint" id="status"><div class="wrap"><div class="sec-head">{T("Where things stand", "أين وصلنا", "h2")}{T("What you can use today, what is being tested and what is planned.", "ما يمكنك استخدامه اليوم، وما يُختبر، وما هو مخطط له.", "p", "muted")}</div><div class="grid g3">{cards}</div></div></section>'
+
+
+GUIDES = [
+    {'slug': 'guide-long-distance-ideas.html', 'emoji': '🌍', 'bg': 'linear-gradient(135deg,#E6F3F3,#CFE6E8)', 'mins': 6,
+     'title': ('15 small ways to feel close in a long-distance relationship', '15 طريقة صغيرة للشعور بالقرب في علاقة عن بُعد'),
+     'desc': ('Practical, low-effort rituals that make the distance feel smaller — from time-zone etiquette to letters that open on the right day.', 'عادات عملية وسهلة تجعل المسافة أصغر — من آداب فروق التوقيت إلى رسائل تُفتح في اليوم المناسب.'),
+     'intro': ('Distance rarely breaks a relationship in one big moment. It wears it down in small ones: a missed call, a day you couldn’t share, a plan that drifted. The fix is also small — a handful of rituals you can keep up for months. Here are fifteen that couples actually stick to.',
+               'نادرًا ما تكسر المسافة العلاقة في لحظة كبيرة. إنها تُتعبها في لحظات صغيرة: مكالمة فائتة، ويوم لم تتشاركاه، وخطة تلاشت. والحل صغير أيضًا — بضع عادات يمكنكما الاستمرار عليها لأشهر. إليكما خمس عشرة عادة يلتزم بها الأزواج فعلًا.'),
+     'sections': [
+        ('Respect each other’s clock', 'احترما ساعة كلٍّ منكما', [
+            ('Know the time there before you call. A quick glance saves a lot of “sorry, did I wake you?”', 'اعرف الوقت هناك قبل أن تتصل. نظرة سريعة توفّر كثيرًا من «آسف، هل أيقظتك؟»'),
+            ('Agree on one “golden hour” a day when you are both awake and free — and protect it.', 'اتفقا على «ساعة ذهبية» يوميًا تكونان فيها مستيقظين ومتفرغين — واحمياها.'),
+            ('Send messages that don’t need an answer, like “thinking of you”. They land without pressure.', 'أرسل رسائل لا تحتاج ردًا مثل «أفكر فيك». تصل دون ضغط.')]),
+        ('Share the boring parts', 'تشاركا التفاصيل العادية', [
+            ('Keep one shared list — groceries, errands, gifts. Seeing each other’s ordinary day is surprisingly intimate.', 'احتفظا بقائمة مشتركة واحدة — مشتريات ومشاوير وهدايا. رؤية اليوم العادي للآخر حميمية بشكل مفاجئ.'),
+            ('Do a one-minute daily check-in: a mood and one honest line about your day.', 'قوما بتواصل يومي في دقيقة: شعور وسطر صادق عن يومك.'),
+            ('Swap a daily selfie. In a month you have a diary of the distance.', 'تبادلا سيلفي يوميًا. بعد شهر ستكون لديكما يوميات المسافة.')]),
+        ('Always have the next date', 'ليكن هناك موعد قادم دائمًا', [
+            ('Never end a visit without the next one on the calendar, even if it’s tentative.', 'لا تُنهيا زيارة دون أن تكون التالية في التقويم، ولو مبدئيًا.'),
+            ('Count it down together. Watching a number shrink is a real comfort on hard days.', 'عُدّا لها تنازليًا معًا. رؤية الرقم يصغر عزاء حقيقي في الأيام الصعبة.'),
+            ('Plan the trip together — flights, packing, what you’ll do first. Planning is half the joy.', 'خططا للرحلة معًا — الطيران والتجهيز وأول ما ستفعلانه. التخطيط نصف المتعة.')]),
+        ('Make love tangible', 'اجعلا الحب ملموسًا', [
+            ('Write a letter that opens on a specific day: their birthday, their exam, the day they land.', 'اكتب رسالة تُفتح في يوم محدد: عيد ميلاده، أو امتحانه، أو يوم وصوله.'),
+            ('Keep a bucket list of places you’ll visit together, and add to it after every call.', 'احتفظا بقائمة أحلام للأماكن التي ستزورانها معًا، وأضيفا إليها بعد كل مكالمة.'),
+            ('Watch the same film at the same time, then rate it separately and compare.', 'شاهدا الفيلم نفسه في الوقت نفسه، ثم قيّماه كلٌّ وحده وقارنا.')]),
+        ('Protect the relationship from logistics', 'احميا العلاقة من الأعباء', [
+            ('Move decisions out of chat. Compare options in one place so calls can be about you.', 'أخرجا القرارات من المحادثة. قارنا الخيارات في مكان واحد لتكون المكالمات عنكما.'),
+            ('Remember the dates that matter — and the ones that matter only to the two of you.', 'تذكّرا التواريخ المهمة — وتلك التي لا تهم سواكما.'),
+            ('Say thank you for the small things. A “proud of you” travels further than you think.', 'قولا شكرًا على الأشياء الصغيرة. «فخور بك» تصل أبعد مما تظن.')]),
+     ],
+     'how': ('In OneSpace: Today shows both clocks and weathers, counters count down to the reunion, letters stay sealed until their day, and trips keep flights and packing in one place.',
+             'في OneSpace: يعرض «اليوم» الساعتين والطقسين، وتعدّ العدّادات حتى اللقاء، وتبقى الرسائل مغلقة حتى يومها، وتجمع الرحلات الطيران والتجهيز في مكان واحد.')},
+    {'slug': 'guide-mental-load.html', 'emoji': '🏡', 'bg': 'linear-gradient(135deg,#FDECE6,#F9D7CB)', 'mins': 5,
+     'title': ('How to share the mental load at home (without a spreadsheet fight)', 'كيف تتقاسمان العبء الذهني في البيت (دون شجار على جدول)'),
+     'desc': ('The invisible work of remembering, planning and noticing — and a simple system to split it fairly.', 'العمل غير المرئي من التذكّر والتخطيط والانتباه — ونظام بسيط لتقسيمه بعدل.'),
+     'intro': ('The mental load is not the chores themselves. It is remembering that they exist: noticing the milk is low, knowing the car needs a service, keeping track of whose birthday is next. When one person carries all of it, resentment grows quietly. Here is a calm way to share it.',
+               'العبء الذهني ليس الأعمال المنزلية نفسها، بل تذكّر وجودها: ملاحظة أن الحليب أوشك على النفاد، ومعرفة أن السيارة تحتاج صيانة، ومتابعة عيد ميلاد من القادم. حين يحمل شخص واحد كل ذلك، يكبر الاستياء بصمت. إليكما طريقة هادئة لتقاسمه.'),
+     'sections': [
+        ('Make the invisible visible', 'اجعلا غير المرئي مرئيًا', [
+            ('For one week, both of you jot down every “I need to remember…” thought.', 'لمدة أسبوع، يدوّن كل منكما كل فكرة «يجب أن أتذكّر…».'),
+            ('Put everything in one shared place, not in two heads and five chats.', 'ضعا كل شيء في مكان مشترك واحد، لا في رأسين وخمس محادثات.'),
+            ('Look at the list together without blame. Most couples are surprised.', 'انظرا إلى القائمة معًا دون لوم. يتفاجأ معظم الأزواج.')]),
+        ('Own outcomes, not tasks', 'تولَّيا النتائج لا المهام', [
+            ('Split by area: “bills are yours, school forms are mine” — including the remembering.', 'قسّما حسب المجال: «الفواتير لك ونماذج المدرسة لي» — بما في ذلك التذكّر.'),
+            ('Give every reminder an owner. A reminder for “someone” is a reminder for no one.', 'اجعلا لكل تذكير صاحبًا. التذكير لـ«أحد ما» تذكير لا أحد.'),
+            ('Use repeats for anything recurring, so nobody re-remembers the same thing monthly.', 'استخدما التكرار لكل ما يتكرر، حتى لا يتذكر أحد الشيء نفسه كل شهر.')]),
+        ('Decide once, together', 'قررا مرة واحدة، معًا', [
+            ('Big purchases and plans go in one place with options side by side.', 'المشتريات الكبيرة والخطط في مكان واحد مع الخيارات جنبًا إلى جنب.'),
+            ('Each of you marks what you like; talk only about the gap.', 'يحدد كل منكما ما يعجبه؛ وتحدثا فقط عن نقاط الاختلاف.'),
+            ('Record the decision and link the reminder that follows from it.', 'سجّلا القرار واربطا التذكير الذي يترتب عليه.')]),
+        ('Keep a weekly 10-minute reset', 'خصصا 10 دقائق أسبوعيًا للمراجعة', [
+            ('Sunday evening: look at the next seven days together.', 'مساء الأحد: انظرا معًا إلى الأيام السبعة القادمة.'),
+            ('Move anything stuck, reassign anything unfair.', 'حرّكا ما تعثّر، وأعيدا توزيع ما ليس عادلًا.'),
+            ('End with one fun plan — the relationship is not a to-do list.', 'اختما بخطة ممتعة واحدة — العلاقة ليست قائمة مهام.')]),
+     ],
+     'how': ('In OneSpace: lists and reminders have an owner and repeats, Today shows what needs each of you, and activities let you compare options and record a decision with its linked reminder.',
+             'في OneSpace: للقوائم والتذكيرات صاحب وتكرار، ويعرض «اليوم» ما يحتاجه كل منكما، وتتيح الأنشطة مقارنة الخيارات وتسجيل القرار مع تذكيره المرتبط.')},
+    {'slug': 'guide-anniversary-planning.html', 'emoji': '💍', 'bg': 'linear-gradient(135deg,#F0EBFB,#E0D6F6)', 'mins': 5,
+     'title': ('Never forget an anniversary again: a gentle planning system', 'لن تنسى ذكرى بعد اليوم: نظام تخطيط لطيف'),
+     'desc': ('Which dates to track, how early to start, gift-idea habits and how to keep a surprise a surprise.', 'أي التواريخ تتابع، ومتى تبدأ، وعادات أفكار الهدايا، وكيف تبقى المفاجأة مفاجأة.'),
+     'intro': ('Forgetting an important date rarely means you don’t care — it usually means it lived only in your head. A tiny system fixes that for good, and makes the day itself better, because you have time to plan.',
+               'نسيان تاريخ مهم نادرًا ما يعني أنك لا تهتم — بل غالبًا أنه كان في رأسك فقط. نظام صغير يحل ذلك نهائيًا، ويجعل اليوم نفسه أجمل لأن لديك وقتًا للتخطيط.'),
+     'sections': [
+        ('Write down the dates that matter', 'دوّن التواريخ المهمة', [
+            ('The obvious ones: birthdays, wedding anniversary, engagement.', 'الواضحة: أعياد الميلاد وذكرى الزواج والخطوبة.'),
+            ('The quiet ones: the day you met, your first trip, the day you moved in.', 'الهادئة: يوم التقيتما، وأول رحلة، ويوم انتقلتما للعيش معًا.'),
+            ('Track both the date itself and its yearly anniversary — “8 years since” feels different from “in 12 days”.', 'تابع التاريخ نفسه وذكراه السنوية — «8 سنوات مضت» تختلف عن «بعد 12 يومًا».')]),
+        ('Start earlier than you think', 'ابدأ أبكر مما تظن', [
+            ('Set a “start preparing” reminder three weeks ahead for big dates, one week for small ones.', 'اضبط تذكير «ابدأ التحضير» قبل ثلاثة أسابيع للتواريخ الكبيرة، وأسبوع للصغيرة.'),
+            ('Book anything that sells out — restaurants, flights, hotels — first.', 'احجز أولًا ما ينفد — المطاعم والطيران والفنادق.'),
+            ('Set a budget so the day is joyful, not stressful.', 'حدد ميزانية ليكون اليوم مبهجًا لا مرهقًا.')]),
+        ('Keep a running gift-idea list', 'احتفظ بقائمة أفكار هدايا دائمة', [
+            ('When your partner mentions something they like, save it that minute.', 'حين يذكر شريكك شيئًا يحبه، احفظه في الدقيقة نفسها.'),
+            ('Note price and how sure you are; mark it bought when it is.', 'دوّن السعر ومدى تأكدك؛ وعلّمه «تم الشراء» عند شرائه.'),
+            ('Keep the list private — some things are better as surprises.', 'اجعل القائمة خاصة — بعض الأشياء أجمل كمفاجآت.')]),
+        ('Turn the day into a memory', 'حوّل اليوم إلى ذكرى', [
+            ('Write a letter in advance that opens that morning.', 'اكتب رسالة مسبقًا تُفتح صباح ذلك اليوم.'),
+            ('Take one photo of both of you, every year, in the same pose.', 'التقطا صورة واحدة لكما كل عام بالوضعية نفسها.'),
+            ('Save it to a scrapbook — in ten years you’ll be glad you did.', 'احفظاها في ألبوم — بعد عشر سنوات ستكونان ممتنين لذلك.')]),
+     ],
+     'how': ('In OneSpace: counters show the day itself and its next anniversary, occasions hold gift ideas, a budget and an “Only me” option, and letters can be sealed until the morning of.',
+             'في OneSpace: تعرض العدّادات اليوم نفسه وذكراه القادمة، وتضم المناسبات أفكار الهدايا والميزانية وخيار «أنا فقط»، ويمكن إغلاق الرسائل حتى صباح اليوم.')},
+]
+
+
+def guide_cards():
+    return ''.join(f"""<a class="card link art-card reveal" href="{g['slug']}"><div class="cover" style="background:{g['bg']}">{g['emoji']}</div>
+  {T(g['title'][0], g['title'][1], 'h3')}{T(g['desc'][0], g['desc'][1], 'p')}<span class="muted" style="font-size:13px">{g['mins']} {T('min read', 'دقائق قراءة')}</span></a>""" for g in GUIDES)
+
+
+def page_guides():
+    h = head('guides.html', 'Relationship guides for couples — OneSpace', 'أدلة العلاقات للأزواج — OneSpace',
+             'Practical guides for couples: long-distance ideas, sharing the mental load at home, and never forgetting an anniversary.',
+             'أدلة عملية للأزواج: أفكار للعلاقات عن بُعد، وتقاسم العبء الذهني في البيت، وعدم نسيان الذكرى أبدًا.')
+    return h + page_hero('Guides', 'الأدلة', 'Small ideas for a shared life.', 'أفكار صغيرة لحياة مشتركة.',
+                         'Practical, kind and short. Written for real couples — whether you share a sofa or a time difference.',
+                         'عملية ولطيفة وقصيرة. مكتوبة لأزواج حقيقيين — سواء تتشاركان أريكة أو فرق توقيت.') + \
+        f'<section style="padding-top:20px"><div class="wrap"><div class="grid g3">{guide_cards()}</div></div></section>' + cta_band() + foot()
+
+
+def guide_page(g):
+    t_en, t_ar = g['title']
+    h = head(g['slug'], t_en + ' — OneSpace', t_ar + ' — OneSpace', g['desc'][0], g['desc'][1])
+    body = ''
+    for st, st_ar, tips in g['sections']:
+        body += f'{T(st, st_ar, "h2")}<ol>{"".join(f"<li>{T(x, y)}</li>" for x, y in tips)}</ol>'
+    ld = {'@context': 'https://schema.org', '@type': 'Article', 'headline': t_en, 'description': g['desc'][0], 'inLanguage': ['en', 'ar'],
+          'publisher': {'@type': 'Organization', 'name': 'OneSpace'}, 'datePublished': '2026-11-16', 'mainEntityOfPage': BASE + g['slug']}
+    others = ''.join(f'<li><a href="{o["slug"]}">{T(o["title"][0], o["title"][1])}</a></li>' for o in GUIDES if o is not g)
+    return h + f"""<section class="page-hero"><div class="narrow">
+  <div class="crumbs"><a href="./">{T('Home', 'الرئيسية')}</a> › <a href="guides.html">{T('Guides', 'الأدلة')}</a></div>
+  <div style="font-size:56px;margin-top:16px">{g['emoji']}</div>{T(t_en, t_ar, 'h1')}
+  <p class="muted">{g['mins']} {T('min read', 'دقائق قراءة')} · OneSpace</p></div></section>
+<section style="padding-top:10px"><div class="narrow article">
+  {T(g['intro'][0], g['intro'][1], 'p', 'lead')}{body}
+  <div class="tip">💡 {T(g['how'][0], g['how'][1])}</div>
+  {T('More guides', 'أدلة أخرى', 'h2')}<ul>{others}</ul>
+</div></section>
+<script type="application/ld+json">{json.dumps(ld, ensure_ascii=False)}</script>
+""" + cta_band() + foot()
 
 
 WHATS_NEW = [
@@ -1028,12 +1272,14 @@ PAGES = {
     'long-distance.html': (lambda: persona_page('long-distance.html', True), '0.8', 'monthly'),
     'living-together.html': (lambda: persona_page('living-together.html', False), '0.8', 'monthly'),
     'how-it-works.html': (page_how, '0.8', 'monthly'), 'whats-new.html': (page_whats_new, '0.7', 'weekly'),
-    'faq.html': (page_faq, '0.7', 'monthly'), 'tutorials.html': (page_tutorials, '0.7', 'monthly'), 'join.html': (page_join, '0.9', 'monthly'),
+    'faq.html': (page_faq, '0.7', 'monthly'), 'tutorials.html': (page_tutorials, '0.7', 'monthly'), 'guides.html': (page_guides, '0.8', 'weekly'), 'join.html': (page_join, '0.9', 'monthly'),
     'support.html': (page_support, '0.6', 'monthly'), 'share-kit.html': (page_share_kit, '0.4', 'monthly'),
     'privacy.html': (lambda: legal_page('privacy.html', 'privacy'), '0.4', 'yearly'),
     'terms.html': (lambda: legal_page('terms.html', 'terms'), '0.4', 'yearly'),
     'delete-account.html': (page_delete, '0.4', 'yearly'),
 }
+for _g in GUIDES:
+    PAGES[_g['slug']] = ((lambda g=_g: guide_page(g)), '0.7', 'monthly')
 REDIRECTS = {'v4.html': ('./', 'Home'), 'v4-tutorial.html': ('how-it-works.html', 'How it works')}
 
 

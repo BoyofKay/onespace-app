@@ -69,6 +69,7 @@
       var scope = b.closest('[data-theme-scope]') || document;
       $$('.phone[data-themable]', scope).forEach(function (p) { p.setAttribute('data-theme', theme); });
       $$('[data-theme-pick]', scope).forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+      $$('.playground', scope).forEach(function (p) { p.setAttribute('data-pg', theme); });
     });
   });
 
@@ -88,6 +89,19 @@
       buttons[(i + 1) % buttons.length].focus();
     });
   });
+
+  // ---------- Hero: rotating words and live notifications ----------
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  $$('.rotator').forEach(function (r) {
+    var items = $$('span', r); var i = 0; if (reduce || items.length < 2) return;
+    setInterval(function () { items[i].classList.remove('on'); i = (i + 1) % items.length; items[i].classList.add('on'); }, 2400);
+  });
+  var slot = $('[data-toast-slot]'), tpls = $$('template[data-toast]');
+  if (slot && tpls.length) {
+    var ti = 0; var showT = function () { slot.innerHTML = tpls[ti].innerHTML; apply(); slot.classList.remove('out'); };
+    showT();
+    if (!reduce) setInterval(function () { slot.classList.add('out'); setTimeout(function () { ti = (ti + 1) % tpls.length; showT(); }, 500); }, 3600);
+  }
 
   // ---------- Reveal on scroll ----------
   if ('IntersectionObserver' in window) {

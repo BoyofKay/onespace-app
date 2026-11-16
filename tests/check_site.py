@@ -6,7 +6,7 @@ from urllib.parse import urlsplit
 ROOT = Path(__file__).resolve().parents[1]
 PAGES = ["index.html", "features.html", "long-distance.html", "living-together.html",
          "how-it-works.html", "tutorials.html", "whats-new.html", "faq.html", "join.html",
-         "support.html", "share-kit.html", "privacy.html", "terms.html", "delete-account.html", "404.html"]
+         "support.html", "share-kit.html", "guides.html", "guide-long-distance-ideas.html", "guide-mental-load.html", "guide-anniversary-planning.html", "privacy.html", "terms.html", "delete-account.html", "404.html"]
 REDIRECTS = ["v4.html", "v4-tutorial.html"]
 # Claims the app does not make (D1: automatic gestures retired; D55: voice hidden) and private data.
 FORBIDDEN = ["automatically at the right moment", "Automatic gestures", "voice command", "Kandice", "ph.ahmed"]
