@@ -345,12 +345,13 @@
         if (!s.traffic_connected) tr.innerHTML = '<div class="panel adm-note"><b>Connect GoatCounter to see traffic here.</b> In GoatCounter: your name (top right) → API → New API key, tick only “Read statistics”. Then in Supabase › Edge Functions › Secrets add <code>GOATCOUNTER_TOKEN</code>. Until then, open <a href="https://onespace.goatcounter.com" target="_blank" rel="noopener">onespace.goatcounter.com</a>.</div>';
         else if (s.traffic_error) tr.innerHTML = '<div class="panel adm-note">GoatCounter did not answer: ' + esc(s.traffic_error) + '</div>';
         else {
+          var warn = (s.traffic_warnings || []).length ? '<p class="muted" style="font-size:12px">Some GoatCounter lists could not load: ' + esc(s.traffic_warnings.join(' · ')) + '</p>' : '';
           var f = s.funnel || [], top = Math.max(1, (f[0] || {}).n || 1);
           var funnel = f.map(function (st, i) { var pc = i === 0 ? 100 : Math.round(100 * st.n / top); var step = i > 0 && f[i - 1].n ? Math.round(100 * st.n / f[i - 1].n) + '% of previous' : '';
             return '<div class="adm-funnel"><span>' + esc(st.step) + '</span><i style="width:' + Math.max(pc, 1) + '%"></i><b>' + st.n + '</b><small>' + (i ? pc + '% of visitors · ' + step : '') + '</small></div>'; }).join('');
           var list = function (rows, k) { return (rows || []).map(function (r) { return '<div class="adm-bar"><span>' + esc(r[k]) + '</span><b>' + r.n + '</b></div>'; }).join('') || '<p class="muted">No data yet</p>'; };
           var d = s.demo || {};
-          tr.innerHTML = '<div class="adm-row"><div class="panel"><h3>Funnel</h3>' + funnel + '<p class="muted" style="font-size:12px">Clicks and form steps are counted as events; confirmed sign-ups below come from the database.</p></div></div>' +
+          tr.innerHTML = warn + '<div class="adm-row"><div class="panel"><h3>Funnel</h3>' + funnel + '<p class="muted" style="font-size:12px">Clicks and form steps are counted as events; confirmed sign-ups below come from the database.</p></div></div>' +
             '<div class="adm-grid"><div class="adm-tile"><span>Visitors</span><b>' + s.visitors + '</b></div><div class="adm-tile"><span>Visitor → confirmed</span><b>' + (s.visitors ? (100 * s.confirmed / s.visitors).toFixed(1) + '%' : '—') + '</b></div>' +
             '<div class="adm-tile"><span>Demo tours finished</span><b>' + (d.tour_finished || 0) + '</b></div><div class="adm-tile"><span>Theme picks</span><b>' + (d.theme_picks || 0) + '</b></div></div>' +
             '<div class="adm-row adm-3"><div class="panel"><h3>Top pages</h3>' + list(s.top_pages, 'page') + '</div><div class="panel"><h3>Where visitors came from</h3>' + list(s.referrers, 'source') + '</div><div class="panel"><h3>Countries</h3>' + list(s.countries, 'source') + '</div></div>' +
