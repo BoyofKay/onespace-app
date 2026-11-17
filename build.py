@@ -1595,11 +1595,11 @@ def page_confirm():
 
 
 def page_founders_admin():
-    h = head('founders-admin.html', 'Founder waitlist — dashboard', 'لوحة قائمة المؤسسين', 'Private dashboard.', 'لوحة خاصة.')
+    h = head('founders-admin.html', 'OneSpace admin — traffic, sign-ups and email', 'لوحة إدارة OneSpace', 'Private dashboard.', 'لوحة خاصة.')
     h = h.replace('<meta charset="utf-8">', '<meta charset="utf-8">\n<meta name="robots" content="noindex, nofollow">', 1)
     return h + """
 <section class="page-hero"><div class="wrap" data-admin>
-  <h1>Founder waitlist</h1>
+  <h1>OneSpace admin</h1>
   <form class="panel admin-login" data-admin-login style="max-width:440px">
     <label for="ak">Admin key</label><input id="ak" type="password" autocomplete="current-password" required>
     <div class="cta-row" style="margin-top:12px"><button class="btn btn-primary" type="submit">Open dashboard</button></div>
@@ -1607,8 +1607,12 @@ def page_founders_admin():
     <p class="muted" style="font-size:13px">Counts only — no email addresses are shown here. For individual sign-ups use Supabase › Table editor › private.founder_members.</p>
   </form>
   <div data-admin-body hidden>
+    <div class="adm-range">Period: <button type="button" class="chip" data-days="7">7 days</button><button type="button" class="chip" data-days="30" aria-pressed="true">30 days</button><button type="button" class="chip" data-days="90">90 days</button></div>
+    <h2 class="adm-h">Website traffic and conversion</h2>
+    <div data-traffic></div>
+    <h2 class="adm-h">Founder sign-ups</h2>
     <div class="adm-grid" data-tiles></div>
-    <div class="adm-row"><div class="panel"><h3>Sign-ups per day (30 days)</h3><div data-chart class="adm-chart"></div><p class="muted" style="font-size:13px">■ signed up &nbsp; <span style="color:#1F6E78">■</span> confirmed</p></div></div>
+    <div class="adm-row"><div class="panel"><h3>Sign-ups per day</h3><div data-chart class="adm-chart"></div><p class="muted" style="font-size:13px">■ signed up &nbsp; <span style="color:#1F6E78">■</span> confirmed</p></div></div>
     <div class="adm-row adm-3">
       <div class="panel"><h3>Phone (confirmed)</h3><div data-bars="platform"></div></div>
       <div class="panel"><h3>How they live</h3><div data-bars="living"></div></div>
@@ -1620,7 +1624,16 @@ def page_founders_admin():
       <div class="panel"><h3>Emails</h3><div data-bars="emails"></div><div data-failures></div>
         <button class="btn btn-ghost btn-sm" type="button" data-resend style="margin-top:10px">Send missing confirmation emails</button><p class="status" data-resend-status></p></div>
     </div>
-    <p class="muted" style="font-size:13px">Visitors and click events: <a href="https://onespace.goatcounter.com" target="_blank" rel="noopener">onespace.goatcounter.com</a>. <span data-updated></span></p>
+    <h2 class="adm-h">Everything else, in one place</h2>
+    <div class="grid g3 adm-links">
+      <a class="card link" href="https://onespace.goatcounter.com" target="_blank" rel="noopener"><h3>📈 Visitors (GoatCounter)</h3><p>Every page, source, country, device and click event, by day.</p></a>
+      <a class="card link" href="https://search.google.com/search-console?resource_id=sc-domain:onespace.live" target="_blank" rel="noopener"><h3>🔎 Google Search Console</h3><p>Searches that show OneSpace, clicks, position, indexed pages.</p></a>
+      <a class="card link" href="https://www.bing.com/webmasters" target="_blank" rel="noopener"><h3>🔎 Bing Webmaster Tools</h3><p>Bing and Copilot search performance.</p></a>
+      <a class="card link" href="https://resend.com/emails" target="_blank" rel="noopener"><h3>✉️ Resend</h3><p>Each email sent: delivered, opened, bounced, complained.</p></a>
+      <a class="card link" href="https://supabase.com/dashboard/project/ugwrpeduzyzrujkizqfo/editor" target="_blank" rel="noopener"><h3>🗄 Supabase tables</h3><p><code>private.founder_members</code> (people), <code>founder_couples</code> (numbers), <code>founder_email_log</code>, <code>public.public_support_requests</code> (website messages).</p></a>
+      <a class="card link" href="https://mail.zoho.com" target="_blank" rel="noopener"><h3>📥 Zoho Mail</h3><p>Replies to founders@, messages to support@, hello@ and privacy@.</p></a>
+    </div>
+    <p class="muted" style="font-size:13px"><span data-updated></span></p>
   </div>
 </div></section>""" + foot()
 
