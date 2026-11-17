@@ -31,7 +31,6 @@
     return true;
   }
   function track(name) {
-    if (/founders-admin/.test(location.pathname)) return; // the private admin page is never counted
     name = String(name).replace(/[^\w\/@.\-]/g, '-').slice(0, 120);
     gcQueue.push(name);
     if (!flush()) { var tries = 0, t = setInterval(function () { if (flush() || ++tries > 40) clearInterval(t); }, 250); }
@@ -367,185 +366,6 @@
       }).catch(function () { showState('invalid'); });
   }
 
-  // ---------- Private admin dashboard ----------
-  var adm = $('[data-admin]');
-  if (adm) {
-    var key = sget('os-admin') || '', days = 30;
-    var esc = function (t) { return String(t == null ? '' : t).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
-    var num = function (n) { return (n == null ? '—' : Number(n).toLocaleString('en')); };
-    var pct = function (a, b) { if (!b) return null; var v = 100 * a / b; return v >= 10 || v === 0 ? Math.round(v) : Math.round(v * 10) / 10; };
-    var NAMES = {
-      android: 'Android', ios: 'iPhone', both: 'One Android, one iPhone', unknown: 'Not given',
-      honeypot: 'Robot field filled — dropped', checked: 'Too fast — asked for the check', passed: 'Passed the check — accepted',
-      blocked: 'Failed the check — refused', unavailable: 'Check could not load — accepted', unverified: 'Cloudflare not reachable — accepted',
-      apart: 'Living apart', together: 'Living together', en: 'English', ar: 'Arabic',
-      friend: 'A friend told them', direct: 'Came straight to the site', search: 'Search', social: 'Social media', other: 'Other',
-      'confirm:sent': 'Confirm-your-email · sent', 'welcome:sent': 'Welcome + Founder number · sent', 'already:sent': '“You’re already in” reminder · sent',
-      'partner_joined:sent': 'Your partner joined · sent', 'confirm:failed': 'Confirm-your-email · FAILED', 'welcome:failed': 'Welcome · FAILED', 'confirm:skipped': 'Confirm-your-email · not sent'
-    };
-    var label = function (k) { return NAMES[k] || k; };
-    var pageName = function (p) {
-      if (!p) return '?'; var ar = /^\/ar(\/|$)/.test(p), q = p.replace(/^\/ar/, '').replace(/^\//, '').replace(/\.html$/, '');
-      var nice = { '': 'Home', join: 'Join — Founding 500', 'how-it-works': 'Interactive demo', features: 'Features', faq: 'FAQ', tutorials: 'Tutorials',
-        'living-apart': 'Living apart', 'living-together': 'Living together', 'share-kit': 'Share kit', support: 'Support', confirm: 'Email confirmed page', 'whats-new': 'What’s new' }[q];
-      return (nice || q.replace(/-/g, ' ').replace(/^./, function (c) { return c.toUpperCase(); })) + (ar ? ' (Arabic)' : '');
-    };
-    var trend = function (cur, prev, noun) {
-      if (prev == null || cur == null) return '';
-      if (!prev && !cur) return '<span class="tr flat">Same as the previous ' + days + ' days</span>';
-      if (!prev) return '<span class="tr up">▲ None in the previous ' + days + ' days</span>';
-      var d = Math.round(100 * (cur - prev) / prev);
-      if (!d) return '<span class="tr flat">Same as the previous ' + days + ' days</span>';
-      return '<span class="tr ' + (d > 0 ? 'up' : 'down') + '">' + (d > 0 ? '▲ ' + d + '% more ' : '▼ ' + Math.abs(d) + '% fewer ') + noun + ' than the previous ' + days + ' days</span>';
-    };
-    var evName = function (k) {
-      var parts = String(k).split('@'), e = parts[0], where = parts[1] ? ' (' + pageName('/' + parts[1].replace(/^\//, '') + (/\.html$|^$/.test(parts[1]) ? '' : '.html')) + ')' : '';
-      var pre = { cta: 'Button', founders: 'Join form', demo: 'Demo', theme: 'Theme', lang: 'Language switch', outbound: 'Left to', email: 'Email link' }, i = e.indexOf('/');
-      var head = i > 0 ? pre[e.slice(0, i)] || e.slice(0, i) : '', rest = (i > 0 ? e.slice(i + 1) : e).replace(/[-_\/]+/g, ' ');
-      return (head ? head + ': ' : '') + rest + where;
-    };
-    var bars = function (obj, f, keep) { var tot = 0, k; for (k in obj) tot += obj[k]; if (!tot) return '<p class="muted">No data yet</p>';
-      var ks = Object.keys(obj); if (!keep) ks.sort(function (a, b) { return obj[b] - obj[a]; });
-      return ks.map(function (k) { var pc = Math.round(100 * obj[k] / tot);
-        return '<div class="adm-bar"><span>' + esc((f || label)(k)) + '</span><i style="width:' + pc + '%"></i><b>' + obj[k] + ' · ' + pc + '%</b></div>'; }).join(''); };
-    // GoatCounter breakdowns (sources, countries, devices, systems) also count clicks, so only their shares are meaningful.
-    var shares = function (obj, f) { var tot = 0, k; for (k in obj) tot += obj[k]; if (!tot) return '<p class="muted">No data yet</p>';
-      return Object.keys(obj).sort(function (a, b) { return obj[b] - obj[a]; }).map(function (k) { var pc = Math.round(100 * obj[k] / tot);
-        return '<div class="adm-bar"><span>' + esc((f || label)(k)) + '</span><i style="width:' + pc + '%"></i><b>' + pc + '%</b></div>'; }).join(''); };
-    var srows = function (list, k, f) { var obj = {}; (list || []).forEach(function (r) { if (r[k] !== '(unknown)') obj[r[k]] = (obj[r[k]] || 0) + r.n; }); return shares(obj, f); };
-    var rows = function (list, k, f) { var obj = {}; (list || []).forEach(function (r) { obj[r[k]] = (obj[r[k]] || 0) + r.n; }); return bars(obj, f); };
-    var card = function (o) {
-      return '<div class="kpi' + (o.tone ? ' ' + o.tone : '') + '"><h3>' + o.title + '</h3><b>' + o.big + '</b>' + (o.bar != null ? '<div class="kpi-bar"><i style="width:' + Math.max(o.bar, o.bar ? 1 : 0) + '%"></i></div>' : '') +
-        '<p>' + o.sub + '</p>' + (o.trend || '') + '<small>' + o.help + '</small></div>';
-    };
-    var load = function () {
-      fetch(FN + 'founder-admin?days=' + days, { headers: { 'x-admin-key': key } }).then(function (r) { return r.json().then(function (b) { return { r: r, b: b }; }); })
-      .then(function (x) {
-        var st = $('[data-admin-login] .status');
-        if (!x.r.ok) { try { sessionStorage.removeItem('os-admin'); } catch (_) {} st.textContent = x.b && x.b.error === 'key_not_set' ? 'FOUNDER_ADMIN_KEY is not set in Supabase › Edge Functions › Secrets.' : x.r.status === 401 ? 'That key does not match FOUNDER_ADMIN_KEY in Supabase.' : 'Could not load (' + x.r.status + ').'; return; }
-        var s = x.b.stats, P = s.period || {}, cap = s.capacity_couples || 250, fc = s.founder_couples || 0, left = Math.max(0, cap - fc);
-        var traffic = s.traffic_connected && !s.traffic_error && s.visitors != null;
-        $('[data-admin-login]').hidden = true; $('[data-admin-body]').hidden = false;
-        $('[data-updated]').textContent = 'Updated ' + new Date(s.generated_at).toLocaleString();
-
-        // 1. Headline KPIs
-        var pace = P.new_founder_couples >= 3 ? Math.ceil(left / (P.new_founder_couples / days)) : null;
-        var conv = traffic ? pct(P.signups || 0, s.visitors) : null;
-        var both = pct(s.couples_complete || 0, fc);
-        $('[data-kpis]').innerHTML = [
-          card({ title: 'Founder places taken', big: num(fc) + ' <em>of ' + cap + '</em>', bar: 100 * fc / cap,
-            sub: left ? '<strong>' + num(left) + '</strong> places left' : '<strong>Full</strong> — new couples go to the waitlist (' + num(s.waitlist_couples) + ')',
-            trend: P.new_founder_couples != null ? '<span class="tr ' + (P.new_founder_couples ? 'up' : 'flat') + '">+' + P.new_founder_couples + ' couples in the last ' + days + ' days</span>' : '',
-            help: pace ? (pace > 365 ? 'At this pace it would take over a year to fill — more sharing needed.' : 'At this pace, all places are taken in about ' + num(pace) + ' days.') : 'A couple takes a place when the first partner confirms their email.' }),
-          card({ title: 'New sign-ups', big: num(P.signups), sub: num(P.confirmed) + ' confirmed their email', trend: trend(P.signups, P.prev_signups, 'sign-ups'),
-            help: 'People (not couples) who sent the Join form in the last ' + days + ' days.' }),
-          card({ title: 'Visitors who sign up', big: conv == null ? '—' : conv + '%', tone: traffic ? '' : 'muted',
-            sub: traffic ? num(P.signups) + ' sign-ups from ' + num(s.visitors) + ' page visits' + (P.signups ? ' · about 1 in ' + Math.max(1, Math.round(s.visitors / P.signups)) : '') : 'Needs the GoatCounter connection',
-            trend: traffic ? trend(s.visitors, s.prev_visitors, 'page visits') : '',
-            help: 'Your main website number: sign-ups compared with page visits.' }),
-          card({ title: 'Couples with both partners', big: both == null ? '—' : both + '%', bar: both,
-            sub: num(s.couples_complete) + ' complete · ' + num(s.couples_waiting_partner) + ' waiting for a partner',
-            help: 'OneSpace needs two people. Every waiting couple is one invite away from complete.' })
-        ].join('');
-
-        // 2. Attention list
-        var todo = [];
-        if (s.turnstile_key_set === false) todo.push(['bad', 'The spam check can’t verify people: <code>TURNSTILE_SECRET_KEY</code> is missing in Supabase secrets, so fast sign-ups are accepted unchecked.']);
-        if (!s.mail_key_set) todo.push(['bad', 'Emails are not being sent: <code>RESEND_API_KEY</code> is missing in Supabase secrets.']);
-        if ((s.email_failures || []).length) todo.push(['bad', s.email_failures.length + ' email' + (s.email_failures.length > 1 ? 's' : '') + ' failed recently. Details under “Emails we sent”, or in <a href="https://resend.com/emails" target="_blank" rel="noopener">Resend</a>.']);
-        if (s.pending_stale) todo.push(['warn', num(s.pending_stale) + ' ' + (s.pending_stale > 1 ? 'people' : 'person') + ' signed up over a day ago but never confirmed. <button class="btn btn-ghost btn-sm" type="button" data-resend>Send the confirmation email again</button> <span class="status" data-resend-status></span>']);
-        if (s.couples_waiting_partner) todo.push(['info', num(s.couples_waiting_partner) + ' Founder couple' + (s.couples_waiting_partner > 1 ? 's have' : ' has') + ' only one partner so far. Their welcome email has an invite link — a reminder from the Command Center would help.']);
-        if (!s.traffic_connected) todo.push(['info', 'Connect GoatCounter to see visitors here: GoatCounter → your name → API → new key with only “Read statistics”, then add it in Supabase secrets as <code>GOATCOUNTER_TOKEN</code>.']);
-        if (s.traffic_error) todo.push(['warn', 'GoatCounter did not answer: ' + esc(s.traffic_error)]);
-        if ((s.traffic_warnings || []).length) todo.push(['info', 'Some traffic lists could not load this time: ' + esc(s.traffic_warnings.map(function (w) { return w.replace(/^Error: /, ''); }).filter(function (w, i, a) { return a.indexOf(w) === i; }).join(' · ')) + '. Reload in a minute.']);
-        $('[data-attention]').innerHTML = todo.length ? '<ul class="adm-todo">' + todo.map(function (t) { return '<li class="' + t[0] + '">' + t[1] + '</li>'; }).join('') + '</ul>'
-          : '<ul class="adm-todo"><li class="ok">Nothing needs your attention. Emails are sending and nobody is stuck.</li></ul>';
-        var rb = $('[data-resend]');
-        if (rb) rb.addEventListener('click', function () {
-          var out = $('[data-resend-status]'); out.textContent = 'Sending…'; rb.disabled = true;
-          fetch(FN + 'founder-admin', { method: 'POST', headers: { 'x-admin-key': key, 'Content-Type': 'application/json' }, body: JSON.stringify({ action: 'resend_pending' }) })
-            .then(function (r) { return r.json(); }).then(function (b) { out.textContent = b.ok ? 'Sent ' + b.sent + ' of ' + b.attempted + '.' : 'Failed.'; });
-        });
-
-        // 3. Funnel
-        var tr = $('[data-traffic]');
-        if (!traffic) tr.innerHTML = '<div class="panel adm-note">Visitor numbers appear here once GoatCounter is connected (see above). Meanwhile: <a href="https://onespace.goatcounter.com" target="_blank" rel="noopener">open GoatCounter</a>.</div>';
-        else {
-          var f = (s.funnel || []).slice(), top = Math.max(1, (f[0] || {}).n || 1), worst = null;
-          f.forEach(function (st, i) { if (i && f[i - 1].n) { var lost = f[i - 1].n - st.n, r = lost / f[i - 1].n; if (lost > 0 && (!worst || r > worst.r)) worst = { r: r, from: f[i - 1].step, to: st.step, lost: lost }; } });
-          var steps = f.map(function (st, i) {
-            var w = Math.max(100 * st.n / top, st.n ? 2 : 0), kept = i && f[i - 1].n ? pct(st.n, f[i - 1].n) : null;
-            return '<div class="fn-step"><div class="fn-head"><span>' + (i + 1) + '. ' + esc(st.step === 'Visitors' ? 'Page visits' : st.step) + '</span><b>' + num(st.n) + '</b></div><div class="fn-bar"><i style="width:' + w + '%"></i></div>' +
-              (i ? '<small>' + (kept == null ? '—' : kept + '% continued from the step before') + '</small>' : '<small>pages opened (each page counted once per visit)</small>') + '</div>'; }).join('');
-          var d = s.demo || {}, T = s.time || {}, TL = { '0-10s': 'under 10 sec', '10-30s': '10–30 sec', '30-60s': '30–60 sec', '1-3m': '1–3 min', '3-10m': '3–10 min', '10m-plus': 'over 10 min' };
-          var dv = s.devices || {}, dvT = 0, k; for (k in dv) if (k !== 'Unknown') dvT += dv[k];
-          var phone = dvT ? Math.round(100 * (dv.Phone || 0) / dvT) : null, c0 = (s.countries || [])[0], cTot = (s.countries || []).reduce(function (a, c) { return a + c.n; }, 0);
-          var mini = function (o) { return '<div class="kpi kpi-s"><h3>' + o.t + '</h3><b>' + o.b + '</b><p>' + o.p + '</p>' + (o.tr || '') + '<small>' + o.h + '</small></div>'; };
-          var glance = '<div class="kpi-grid kpi-6">' + [
-            mini({ t: 'Page visits', b: num(s.visitors), p: (s.arabic_share != null ? s.arabic_share + '% of them in Arabic' : 'in the last ' + days + ' days'), tr: trend(s.visitors, s.prev_visitors, 'page visits'),
-              h: 'Each page counted once per person per visit, without cookies. One person reading 3 pages = 3. Exact people can’t be counted without tracking.' }),
-            mini({ t: 'Clicked Join', b: s.visitors ? pct((s.funnel || [])[1] ? s.funnel[1].n : 0, s.visitors) + '%' : '—', p: num((s.funnel || [])[1] ? s.funnel[1].n : 0) + ' clicks on a Join button',
-              h: 'How often a page visit leads to a Join click. Low means the pages don’t make people want to join yet.' }),
-            mini({ t: 'Time on a page', b: T.median ? TL[T.median] : '—', p: T.measured ? T.engaged_share + '% stayed 30 sec or more · ' + T.quick_exit_share + '% left within 10 sec' : 'Measuring started today — check back tomorrow',
-              h: 'Typical (median) time a visitor actively looks at a page; only time with the tab visible counts.' }),
-            mini({ t: 'Countries', b: num(s.country_count), p: c0 ? 'Top: ' + esc(c0.source) + ' · ' + Math.round(100 * c0.n / Math.max(1, cTot)) + '% of visits' : 'No data yet',
-              h: 'Countries with at least one visitor, from the visitor’s network — no exact location is ever stored.' }),
-            mini({ t: 'On a phone', b: phone == null ? '—' : phone + '%', p: dvT ? Math.round(100 * (dv.Computer || 0) / dvT) + '% on a computer · ' + Math.round(100 * (dv.Tablet || 0) / dvT) + '% on a tablet' : 'No data yet',
-              h: 'Share of visitors on phone-sized screens. Your Join page must work perfectly on a phone.' }),
-            mini({ t: 'Read to the end', b: s.visitors ? pct(s.read_to_end || 0, s.visitors) + '%' : '—', p: num(s.read_to_end) + ' page visits scrolled to the bottom',
-              h: 'A sign of real interest. Measuring started today.' })
-          ].join('') + '</div>';
-          var vd = s.visitors_daily || [], vmx = Math.max.apply(null, vd.map(function (x) { return x.n; }).concat([1])), every2 = vd.length > 40 ? 10 : vd.length > 14 ? 5 : 1;
-          var vchart = vd.length ? '<div class="panel"><h3>Page visits per day</h3><div class="adm-chart">' + '<div class="adm-y"><span>' + vmx + '</span><span>0</span></div>' + vd.map(function (x, i) {
-            var lbl = (i % every2 === 0 || i === vd.length - 1) ? new Date(x.day + 'T12:00:00').toLocaleDateString('en', { month: 'short', day: 'numeric' }) : '';
-            return '<div class="adm-col" title="' + x.day + ': ' + x.n + ' page visits"><i class="v" style="height:' + (100 * x.n / vmx) + '%"></i><span>' + lbl + '</span></div>'; }).join('') + '</div></div>' : '';
-          var timeObj = {}; (T.buckets || []).forEach(function (b) { if (b.n) timeObj[TL[b.bucket]] = b.n; });
-          tr.innerHTML = glance + '<div class="adm-row">' + vchart + '</div>' +
-            '<div class="adm-row adm-2"><div class="panel"><h3>The path to joining</h3>' + steps +
-            (worst ? '<p class="adm-insight">Biggest drop: <strong>' + esc(worst.from) + ' → ' + esc(worst.to) + '</strong> — ' + Math.round(100 * worst.r) + '% stop here (' + num(worst.lost) + ' people). This is the step to improve first.</p>' : '') +
-            '<p class="muted" style="font-size:12px">Steps 2–5 are counted as clicks, so one person can count more than once. Confirmed Founders below come from the database.</p></div>' +
-            '<div class="panel"><h3>Interest in the product</h3><div class="mini-grid">' +
-            '<div><b>' + num(d.demo_clicks) + '</b><span>opened the demo from a button</span></div><div><b>' + num(d.tour_finished) + '</b><span>finished the guided demo tour</span></div>' +
-            '<div><b>' + num(d.theme_picks) + '</b><span>tried a colour theme</span></div><div><b>' + num(d.outbound_store) + '</b><span>went to Google Play / App Store</span></div></div>' +
-            '<h3 style="margin-top:18px">Time on a page</h3>' + bars(timeObj, String, true) + '</div></div>' +
-            '<div class="adm-row adm-3"><div class="panel"><h3>Where visitors come from</h3>' + srows(s.referrers, 'source', function (k) { return k === '(direct)' ? 'Typed the address / bookmark / app' : k; }) +
-            ((s.campaigns || []).length ? '<h3 style="margin-top:18px">Campaign links (utm)</h3>' + rows(s.campaigns, 'source', String) : '') + '</div>' +
-            '<div class="panel"><h3>Countries</h3>' + srows(s.countries, 'source', String) + '</div>' +
-            '<div class="panel"><h3>Devices</h3>' + shares((function () { var o = {}; for (var k in dv) if (k !== 'Unknown' && dv[k]) o[k] = dv[k]; return o; })(), String) + '<h3 style="margin-top:18px">Phone / computer system</h3>' + srows(s.systems, 'source', String) +
-            ((s.languages || []).some(function (r) { return r.source !== '(unknown)'; }) ? '<h3 style="margin-top:18px">Browser language</h3>' + srows(s.languages, 'source', String) : '') + '</div></div>' +
-            '<div class="adm-row adm-2"><div class="panel"><h3>Most-viewed pages</h3>' + rows(s.top_pages, 'page', pageName) + '</div>' +
-            '<div class="panel"><h3>Most-clicked buttons and actions</h3>' + rows(s.top_events, 'event', evName) + '</div></div>';
-        }
-
-        // 4. Sign-ups chart
-        var dl = s.daily || [], mx = Math.max.apply(null, dl.map(function (d) { return d.signups; }).concat([1]));
-        var tS = dl.reduce(function (a, d) { return a + d.signups; }, 0), tC = dl.reduce(function (a, d) { return a + d.confirmed; }, 0);
-        var best = dl.reduce(function (a, d) { return d.signups > (a ? a.signups : 0) ? d : a; }, null);
-        $('[data-chart-sum]').innerHTML = '<strong>' + num(tS) + '</strong> signed up and <strong>' + num(tC) + '</strong> confirmed in the last ' + days + ' days' +
-          (best ? ' · best day: ' + new Date(best.day + 'T12:00:00').toLocaleDateString('en', { month: 'short', day: 'numeric' }) + ' (' + best.signups + ')' : '') + '.';
-        var every = dl.length > 40 ? 10 : dl.length > 14 ? 5 : 1;
-        $('[data-chart]').innerHTML = '<div class="adm-y"><span>' + mx + '</span><span>0</span></div>' + dl.map(function (d, i) {
-          var lbl = (i % every === 0 || i === dl.length - 1) ? new Date(d.day + 'T12:00:00').toLocaleDateString('en', { month: 'short', day: 'numeric' }) : '';
-          return '<div class="adm-col" title="' + d.day + ': ' + d.signups + ' signed up, ' + d.confirmed + ' confirmed"><i style="height:' + (100 * d.signups / mx) + '%"></i><i class="c" style="height:' + (100 * d.confirmed / mx) + '%"></i><span>' + lbl + '</span></div>'; }).join('');
-
-        // 5. Who
-        $('[data-bars="platform"]').innerHTML = bars(s.platform || {});
-        $('[data-bars="living"]').innerHTML = bars(s.living || {});
-        $('[data-bars="language"]').innerHTML = bars(s.language || {});
-        $('[data-bars="emails"]').innerHTML = bars(s.emails || {});
-        var spamEl = $('[data-bars="spam"]');
-        if (spamEl) spamEl.innerHTML = s.spam && Object.keys(s.spam).length ? bars(s.spam) : '<p class="muted">No spam checks in this period.</p>';
-        $('[data-list="sources"]').innerHTML = rows(s.sources, 'source');
-        $('[data-list="landing"]').innerHTML = rows(s.landing, 'page', pageName);
-        $('[data-failures]').innerHTML = (s.email_failures || []).slice(0, 5).map(function (f) { return '<p class="muted" style="font-size:12px">⚠ ' + esc(f.at.slice(0, 16).replace('T', ' ') + ' · ' + label(f.kind) + ' · ' + (f.error || '')) + '</p>'; }).join('');
-      }).catch(function () { $('[data-admin-login] .status').textContent = 'Could not load.'; });
-    };
-    $$('[data-days]').forEach(function (b) { b.addEventListener('click', function () { days = +b.getAttribute('data-days');
-      $$('[data-days]').forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); }); load(); }); });
-    $('[data-admin-login]').addEventListener('submit', function (e) { e.preventDefault(); key = $('#ak').value.trim(); try { sessionStorage.setItem('os-admin', key); } catch (_) {} load(); });
-    if (key) load();
-  }
-
   // ---------- Unsubscribe page ----------
   var us = $('[data-unsub]');
   if (us) {
@@ -576,7 +396,7 @@
 
   // ---------- Mobile: a Join bar once you scroll, hidden near any join form ----------
   var bar = $('[data-sticky-cta]');
-  var noBar = /\/(ar\/)?(join|confirm|unsubscribe|founders-admin)\.html$/.test(location.pathname);
+  var noBar = /\/(ar\/)?(join|confirm|unsubscribe)\.html$/.test(location.pathname);
   if (bar && !noBar && 'IntersectionObserver' in window) {
     var forms = $$('form[data-form="join"], #founding, footer');
     if ($('#founding')) $('a', bar).setAttribute('href', '#founding');
