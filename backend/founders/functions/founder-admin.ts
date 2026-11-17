@@ -54,16 +54,32 @@ Deno.serve(async (req) => {
       const safe = (path: string, a = start, b = end) => get(path, a, b).catch((e) => { (stats.traffic_warnings ??= []).push(String(e).slice(0, 120)); return {}; });
       const n = (x: any) => Number(x?.count ?? x?.count_unique ?? 0);
       try {
-        const [total, hits, refs, locs, prevTotal] = await Promise.all([get('stats/total'), safe('stats/hits?limit=100'), safe('stats/toprefs?limit=10'),
-          safe('stats/locations?limit=8'), safe('stats/total', prevStart, start)]);
-        // `total` counts visitors including events; events are clicks, not people.
+        const [total, hits, refs, locs, prevTotal, sizes, systems, langs, camps] = await Promise.all([get('stats/total'), safe('stats/hits?limit=100'),
+          safe('stats/toprefs?limit=10'), safe('stats/locations?limit=100'), safe('stats/total', prevStart, start), safe('stats/sizes?limit=10'),
+          safe('stats/systems?limit=8'), safe('stats/languages?limit=8'), safe('stats/campaigns?limit=10')]);
+        // GoatCounter counts unique visitors (no cookies). `total` includes events; events are clicks, not people.
         stats.visitors = Math.max(0, Number(total.total ?? 0) - Number(total.total_events ?? 0));
         stats.prev_visitors = prevTotal.total == null ? null : Math.max(0, Number(prevTotal.total) - Number(prevTotal.total_events ?? 0));
+        stats.visitors_daily = (total.stats ?? []).map((d: any) => ({ day: String(d.day).slice(0, 10), n: Number(d.daily ?? 0) }));
         const all: any[] = hits.hits ?? [];
-        stats.top_pages = all.filter((h) => !h.event).slice(0, 10).map((h) => ({ page: h.path, n: n(h) }));
+        const pages = all.filter((h) => !h.event);
+        stats.top_pages = pages.slice(0, 10).map((h) => ({ page: h.path, n: n(h) }));
+        const pageViews = pages.reduce((a, h) => a + n(h), 0);
+        stats.pages_per_visitor = stats.visitors ? Math.round(10 * pageViews / stats.visitors) / 10 : null;
+        const arViews = pages.filter((h) => /^\/ar(\/|$)/.test(h.path)).reduce((a, h) => a + n(h), 0);
+        stats.arabic_share = pageViews ? Math.round(100 * arViews / pageViews) : null;
         const ev: Record<string, number> = {};
         for (const h of all.filter((h) => h.event)) ev[h.path] = (ev[h.path] ?? 0) + n(h);
         const sum = (re: RegExp) => Object.entries(ev).filter(([k]) => re.test(k)).reduce((s, [, v]) => s + v, 0);
+        // Time on page: one bucket per page visit, sent by the site when the visitor leaves (only visible time counts).
+        const order = ['0-10s', '10-30s', '30-60s', '1-3m', '3-10m', '10m-plus'];
+        const time = order.map((b) => ({ bucket: b, n: ev[`time/${b}`] ?? 0 }));
+        const tTot = time.reduce((a, t) => a + t.n, 0);
+        let acc = 0, median: string | null = null;
+        for (const t of time) { acc += t.n; if (!median && tTot && acc >= tTot / 2) median = t.bucket; }
+        stats.time = { buckets: time, measured: tTot, median, engaged_share: tTot ? Math.round(100 * time.slice(2).reduce((a, t) => a + t.n, 0) / tTot) : null,
+          quick_exit_share: tTot ? Math.round(100 * time[0].n / tTot) : null };
+        stats.read_to_end = sum(/^read\/end/);
         stats.funnel = [
           { step: 'Visitors', n: stats.visitors },
           { step: 'Clicked Join', n: sum(/^cta\/(join|hero_join|sticky_join)/) },
@@ -71,10 +87,24 @@ Deno.serve(async (req) => {
           { step: 'Sent the form', n: sum(/^founders\/sent$/) },
           { step: 'Confirmed email', n: sum(/^founders\/confirmed$/) },
         ];
-        stats.demo = { tour_finished: sum(/^demo\/tour-finished/), demo_clicks: sum(/^cta\/demo|^cta\/hero_demo/), theme_picks: sum(/^theme\//) };
-        stats.top_events = Object.entries(ev).sort((a, b) => b[1] - a[1]).slice(0, 12).map(([k, v]) => ({ event: k, n: v }));
+        stats.demo = { tour_finished: sum(/^demo\/tour-finished/), demo_clicks: sum(/^cta\/demo|^cta\/hero_demo/), theme_picks: sum(/^theme\//),
+          outbound_store: sum(/^outbound\/(play\.google\.com|apps\.apple\.com)/), lang_switch: sum(/^lang\//) };
+        stats.top_events = Object.entries(ev).filter(([k]) => !/^(time|read)\//.test(k)).sort((a, b) => b[1] - a[1]).slice(0, 12).map(([k, v]) => ({ event: k, n: v }));
         stats.referrers = (refs.stats ?? []).slice(0, 10).map((r: any) => ({ source: r.name || '(direct)', n: n(r) }));
-        stats.countries = (locs.stats ?? []).slice(0, 8).map((r: any) => ({ source: r.name || r.id || '?', n: n(r) }));
+        const countries = (locs.stats ?? []).map((r: any) => ({ source: r.name || r.id || '?', n: n(r) }));
+        stats.countries = countries.slice(0, 10);
+        stats.country_count = countries.filter((c: any) => c.n > 0 && c.source !== '(unknown)').length;
+        // Screen sizes → phone / tablet / computer.
+        const dev: Record<string, number> = {};
+        for (const r of sizes.stats ?? []) {
+          const id = String(r.id || r.name || '').toLowerCase();
+          const k = /phone/.test(id) ? 'Phone' : /tablet/.test(id) ? 'Tablet' : /desktop|monitor|computer|laptop/.test(id) ? 'Computer' : 'Unknown';
+          dev[k] = (dev[k] ?? 0) + n(r);
+        }
+        stats.devices = dev;
+        stats.systems = (systems.stats ?? []).map((r: any) => ({ source: r.name || '?', n: n(r) }));
+        stats.languages = (langs.stats ?? []).map((r: any) => ({ source: r.name || '?', n: n(r) }));
+        stats.campaigns = (camps.stats ?? []).map((r: any) => ({ source: r.name || '?', n: n(r) }));
       } catch (e) {
         stats.traffic_error = String(e).slice(0, 160);
       }

@@ -36,6 +36,20 @@
     if (!flush()) { var tries = 0, t = setInterval(function () { if (flush() || ++tries > 40) clearInterval(t); }, 250); }
   }
   window.osTrack = track;
+  // Engagement, measured without cookies or IDs: one time bucket per page visit (only while the tab is visible),
+  // and one event when a visitor reaches the end of a page.
+  (function () {
+    var active = 0, since = document.visibilityState === 'visible' ? Date.now() : 0, sent = false, read = false;
+    var add = function () { if (since) { active += Date.now() - since; since = 0; } };
+    var bucket = function (ms) { var s = ms / 1000; return s < 10 ? '0-10s' : s < 30 ? '10-30s' : s < 60 ? '30-60s' : s < 180 ? '1-3m' : s < 600 ? '3-10m' : '10m-plus'; };
+    var send = function () { add(); if (sent || active < 500) return; sent = true; track('time/' + bucket(active)); };
+    document.addEventListener('visibilitychange', function () { if (document.visibilityState === 'hidden') send(); else if (!sent) since = Date.now(); });
+    window.addEventListener('pagehide', send);
+    window.addEventListener('scroll', function () {
+      if (read) return; var h = document.documentElement, max = h.scrollHeight - h.clientHeight;
+      if (max > 400 && (h.scrollTop || window.scrollY) / max > 0.9) { read = true; track('read/end@' + location.pathname.replace(/^\/ar\//, '/')); }
+    }, { passive: true });
+  })();
   var here = '@' + location.pathname.replace(/^\/ar\//, '/');
   // Conversion clicks, named by where they happened: cta/join@/watchlists.html, outbound/play.google.com …
   document.addEventListener('click', function (e) {
@@ -348,8 +362,9 @@
       var head = i > 0 ? pre[e.slice(0, i)] || e.slice(0, i) : '', rest = (i > 0 ? e.slice(i + 1) : e).replace(/[-_\/]+/g, ' ');
       return (head ? head + ': ' : '') + rest + where;
     };
-    var bars = function (obj, f) { var tot = 0, k; for (k in obj) tot += obj[k]; if (!tot) return '<p class="muted">No data yet</p>';
-      return Object.keys(obj).sort(function (a, b) { return obj[b] - obj[a]; }).map(function (k) { var pc = Math.round(100 * obj[k] / tot);
+    var bars = function (obj, f, keep) { var tot = 0, k; for (k in obj) tot += obj[k]; if (!tot) return '<p class="muted">No data yet</p>';
+      var ks = Object.keys(obj); if (!keep) ks.sort(function (a, b) { return obj[b] - obj[a]; });
+      return ks.map(function (k) { var pc = Math.round(100 * obj[k] / tot);
         return '<div class="adm-bar"><span>' + esc((f || label)(k)) + '</span><i style="width:' + pc + '%"></i><b>' + obj[k] + ' · ' + pc + '%</b></div>'; }).join(''); };
     var rows = function (list, k, f) { var obj = {}; (list || []).forEach(function (r) { obj[r[k]] = (obj[r[k]] || 0) + r.n; }); return bars(obj, f); };
     var card = function (o) {
@@ -414,15 +429,42 @@
             var w = Math.max(100 * st.n / top, st.n ? 2 : 0), kept = i && f[i - 1].n ? pct(st.n, f[i - 1].n) : null;
             return '<div class="fn-step"><div class="fn-head"><span>' + (i + 1) + '. ' + esc(st.step) + '</span><b>' + num(st.n) + '</b></div><div class="fn-bar"><i style="width:' + w + '%"></i></div>' +
               (i ? '<small>' + (kept == null ? '—' : kept + '% continued from the step before') + '</small>' : '<small>people who opened any page</small>') + '</div>'; }).join('');
-          var d = s.demo || {};
-          tr.innerHTML = '<div class="adm-row adm-2"><div class="panel"><h3>The path to joining</h3>' + steps +
+          var d = s.demo || {}, T = s.time || {}, TL = { '0-10s': 'under 10 sec', '10-30s': '10–30 sec', '30-60s': '30–60 sec', '1-3m': '1–3 min', '3-10m': '3–10 min', '10m-plus': 'over 10 min' };
+          var dv = s.devices || {}, dvT = 0, k; for (k in dv) if (k !== 'Unknown') dvT += dv[k];
+          var phone = dvT ? Math.round(100 * (dv.Phone || 0) / dvT) : null, c0 = (s.countries || [])[0], cTot = (s.countries || []).reduce(function (a, c) { return a + c.n; }, 0);
+          var mini = function (o) { return '<div class="kpi kpi-s"><h3>' + o.t + '</h3><b>' + o.b + '</b><p>' + o.p + '</p>' + (o.tr || '') + '<small>' + o.h + '</small></div>'; };
+          var glance = '<div class="kpi-grid kpi-6">' + [
+            mini({ t: 'Unique visitors', b: num(s.visitors), p: (s.arabic_share != null ? s.arabic_share + '% of page views in Arabic' : 'in the last ' + days + ' days'), tr: trend(s.visitors, s.prev_visitors, 'visitors'),
+              h: 'Different people who opened the site. Counted without cookies, so one person on two devices counts twice.' }),
+            mini({ t: 'Pages per visitor', b: s.pages_per_visitor == null ? '—' : s.pages_per_visitor, p: s.pages_per_visitor >= 2 ? 'People look around' : 'Most see one page and decide',
+              h: 'Average number of pages each visitor opened. Above 2 means they explore.' }),
+            mini({ t: 'Time on a page', b: T.median ? TL[T.median] : '—', p: T.measured ? T.engaged_share + '% stayed 30 sec or more · ' + T.quick_exit_share + '% left within 10 sec' : 'Measuring started today — check back tomorrow',
+              h: 'Typical (median) time a visitor actively looks at a page; only time with the tab visible counts.' }),
+            mini({ t: 'Countries', b: num(s.country_count), p: c0 ? 'Top: ' + esc(c0.source) + ' · ' + Math.round(100 * c0.n / Math.max(1, cTot)) + '%' : 'No data yet',
+              h: 'Countries with at least one visitor, from the visitor’s network — no exact location is ever stored.' }),
+            mini({ t: 'On a phone', b: phone == null ? '—' : phone + '%', p: dvT ? num(dv.Computer || 0) + ' on a computer · ' + num(dv.Tablet || 0) + ' on a tablet' : 'No data yet',
+              h: 'Share of visitors on phone-sized screens. Your Join page must work perfectly on a phone.' }),
+            mini({ t: 'Read to the end', b: s.visitors ? pct(s.read_to_end || 0, s.visitors) + '%' : '—', p: num(s.read_to_end) + ' visitors scrolled to the bottom of a page',
+              h: 'A sign of real interest. Measuring started today.' })
+          ].join('') + '</div>';
+          var vd = s.visitors_daily || [], vmx = Math.max.apply(null, vd.map(function (x) { return x.n; }).concat([1])), every2 = vd.length > 40 ? 10 : vd.length > 14 ? 5 : 1;
+          var vchart = vd.length ? '<div class="panel"><h3>Visitors per day</h3><div class="adm-chart">' + '<div class="adm-y"><span>' + vmx + '</span><span>0</span></div>' + vd.map(function (x, i) {
+            var lbl = (i % every2 === 0 || i === vd.length - 1) ? new Date(x.day + 'T12:00:00').toLocaleDateString('en', { month: 'short', day: 'numeric' }) : '';
+            return '<div class="adm-col" title="' + x.day + ': ' + x.n + ' visitors"><i class="v" style="height:' + (100 * x.n / vmx) + '%"></i><span>' + lbl + '</span></div>'; }).join('') + '</div></div>' : '';
+          var timeObj = {}; (T.buckets || []).forEach(function (b) { if (b.n) timeObj[TL[b.bucket]] = b.n; });
+          tr.innerHTML = glance + '<div class="adm-row">' + vchart + '</div>' +
+            '<div class="adm-row adm-2"><div class="panel"><h3>The path to joining</h3>' + steps +
             (worst ? '<p class="adm-insight">Biggest drop: <strong>' + esc(worst.from) + ' → ' + esc(worst.to) + '</strong> — ' + Math.round(100 * worst.r) + '% stop here (' + num(worst.lost) + ' people). This is the step to improve first.</p>' : '') +
             '<p class="muted" style="font-size:12px">Steps 2–5 are counted as clicks, so one person can count more than once. Confirmed Founders below come from the database.</p></div>' +
             '<div class="panel"><h3>Interest in the product</h3><div class="mini-grid">' +
             '<div><b>' + num(d.demo_clicks) + '</b><span>opened the demo from a button</span></div><div><b>' + num(d.tour_finished) + '</b><span>finished the guided demo tour</span></div>' +
-            '<div><b>' + num(d.theme_picks) + '</b><span>tried a colour theme</span></div><div><b>' + num(s.visitors) + '</b><span>visitors in ' + days + ' days</span></div></div>' +
-            '<h3 style="margin-top:18px">Where visitors come from</h3>' + rows(s.referrers, 'source', function (k) { return k === '(direct)' ? 'Typed the address / bookmark / app' : k; }) +
-            '<h3 style="margin-top:18px">Countries</h3>' + rows(s.countries, 'source', String) + '</div></div>' +
+            '<div><b>' + num(d.theme_picks) + '</b><span>tried a colour theme</span></div><div><b>' + num(d.outbound_store) + '</b><span>went to Google Play / App Store</span></div></div>' +
+            '<h3 style="margin-top:18px">Time on a page</h3>' + bars(timeObj, String, true) + '</div></div>' +
+            '<div class="adm-row adm-3"><div class="panel"><h3>Where visitors come from</h3>' + rows(s.referrers, 'source', function (k) { return k === '(direct)' ? 'Typed the address / bookmark / app' : k; }) +
+            ((s.campaigns || []).length ? '<h3 style="margin-top:18px">Campaign links (utm)</h3>' + rows(s.campaigns, 'source', String) : '') + '</div>' +
+            '<div class="panel"><h3>Countries</h3>' + rows(s.countries, 'source', String) + '</div>' +
+            '<div class="panel"><h3>Devices</h3>' + bars(dv, String) + '<h3 style="margin-top:18px">Phone / computer system</h3>' + rows(s.systems, 'source', String) +
+            '<h3 style="margin-top:18px">Browser language</h3>' + rows(s.languages, 'source', String) + '</div></div>' +
             '<div class="adm-row adm-2"><div class="panel"><h3>Most-viewed pages</h3>' + rows(s.top_pages, 'page', pageName) + '</div>' +
             '<div class="panel"><h3>Most-clicked buttons and actions</h3>' + rows(s.top_events, 'event', evName) + '</div></div>';
         }
