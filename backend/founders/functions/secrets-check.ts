@@ -4,7 +4,7 @@
 //   select net.http_post('https://letcgxbnblohhfyeuigz.supabase.co/functions/v1/secrets-check', '{}'::jsonb, '{}'::jsonb,
 //     jsonb_build_object('x-onespace-push-secret', (select decrypted_secret from vault.decrypted_secrets where name='onespace_push_worker_secret')));
 const env = (k: string) => (Deno.env.get(k) ?? '').trim();
-const NAMES = ['RESEND_API_KEY', 'FOUNDER_ADMIN_KEY', 'GOATCOUNTER_TOKEN', 'ONESPACE_FIREBASE_SERVICE_ACCOUNT_JSON'];
+const NAMES = ['RESEND_API_KEY', 'FOUNDER_ADMIN_KEY', 'GOATCOUNTER_TOKEN', 'ONESPACE_FIREBASE_SERVICE_ACCOUNT_JSON', 'TURNSTILE_SECRET_KEY'];
 Deno.serve(async (req) => {
   const url = env('SUPABASE_URL'), key = env('SUPABASE_SERVICE_ROLE_KEY');
   const r = await fetch(`${url}/rest/v1/rpc/push_worker_secret`, { method: 'POST', headers: { apikey: key, Authorization: `Bearer ${key}`, 'Content-Type': 'application/json' }, body: '{}' });

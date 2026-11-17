@@ -12,6 +12,8 @@ Runs in the **OneSpace Production** Supabase project (`letcgxbnblohhfyeuigz`, Fr
 | `functions/founder-unsubscribe.ts` | One-click unsubscribe (RFC 8058 POST from mail apps; GET redirects to `/unsubscribe.html`) |
 | `functions/site-contact.ts` | Support and Delete-account forms: saves the request and emails it to support@ / privacy@ (Reply-To = visitor) |
 | `0137_founder_spam_counts.sql` | Spam-protection counters per day (counts only) + `founder_spam_count` / `founder_spam_stats` |
+| `0139_ops_secret_status.sql` | Production only: every 30 min stores true/false per Edge secret (from `secrets-check`) in `private.ops_secret_status` for the Command Center |
+| `functions/secrets-check.ts` | Health check: which secrets exist (booleans), callable only with the Vault worker secret |
 | `functions/_lib.ts` | Shared: Resend sending + delivery log, branded EN/AR email templates, spam protection (`guard`) |
 
 Rules: one Founder number per couple, first 250 confirmed couples (500 people); number given only after the

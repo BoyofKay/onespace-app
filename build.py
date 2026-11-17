@@ -1445,7 +1445,7 @@ def page_support():
   <form data-form="support" novalidate>
     {T('Send us a message', 'أرسل لنا رسالة', 'h2', '', 'style="font-size:28px"')}
     <label for="s-topic">{T('Topic', 'الموضوع')}</label>
-    <select id="s-topic" name="topic">{T('A question', 'سؤال', 'option', attrs='value="question"')}{T('Report a problem', 'الإبلاغ عن مشكلة', 'option', attrs='value="issue"')}{T('I can’t sign in', 'لا أستطيع الدخول', 'option', attrs='value="signin"')}{T('Suggest a feature', 'اقتراح ميزة', 'option', attrs='value="idea"')}{T('Something else', 'شيء آخر', 'option', attrs='value="other"')}</select>
+    <select id="s-topic" name="topic">{T('A question', 'سؤال', 'option', attrs='value="question"')}{T('Report a problem', 'الإبلاغ عن مشكلة', 'option', attrs='value="issue"')}{T('I can’t sign in', 'لا أستطيع الدخول', 'option', attrs='value="signin"')}{T('Suggest a feature', 'اقتراح ميزة', 'option', attrs='value="idea"')}{T('Make a complaint', 'تقديم شكوى', 'option', attrs='value="complaint"')}{T('Something else', 'شيء آخر', 'option', attrs='value="other"')}</select>
     <div class="f2"><div><label for="s-name">{T('Name', 'الاسم')}</label><input id="s-name" name="name" maxlength="60" autocomplete="name"></div>
     <div><label for="s-email">{T('Email for our reply *', 'بريدك لنرد عليك *')}</label><input id="s-email" name="email" type="email" required autocomplete="email" placeholder="you@example.com" data-i18n-attr="placeholder:{ek}"></div></div>
     <label for="s-subject">{T('Subject', 'العنوان')}</label><input id="s-subject" name="subject" maxlength="120">

@@ -288,7 +288,7 @@
       } else if (kindForm === 'account') {
         kind = 'account'; subject = 'Delete my account';
       } else {
-        var t = v('topic'); kind = t === 'issue' ? 'issue' : (t === 'signin' ? 'account' : 'contact');
+        var t = v('topic'); kind = t === 'issue' ? 'issue' : t === 'signin' ? 'account' : t === 'complaint' ? 'complaint' : 'contact';
         subject = ((t ? t + ' · ' : '') + (v('subject') || 'Website message')).slice(0, 160);
         if (v('name')) message = 'Name: ' + v('name') + '\n\n' + message;
       }

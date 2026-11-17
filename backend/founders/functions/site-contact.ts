@@ -15,7 +15,7 @@ Deno.serve(async (req) => {
   if (!/^[^@\s]+@[^@\s]+\.[^@\s]{2,}$/.test(email)) return json(req, { ok: false, error: 'email' }, 422);
   const account = b.form === 'account';
   const topic = s(b.topic, 20);
-  const kind = account ? 'account' : topic === 'issue' ? 'issue' : topic === 'signin' ? 'account' : 'contact';
+  const kind = account ? 'account' : topic === 'issue' ? 'issue' : topic === 'signin' ? 'account' : topic === 'complaint' ? 'complaint' : 'contact';
   const subject = account ? 'Delete my account' : s((topic ? topic + ' · ' : '') + (s(b.subject, 120) || 'Website message'), 160);
   const message = s(b.message, 4000);
   if (!message) return json(req, { ok: false, error: 'missing' }, 422);
