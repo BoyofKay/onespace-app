@@ -1,0 +1,37 @@
+# Branch-only helper: generate the checked-in HTML/Arabic twins from build.py.
+# This file is removed from the PR after it successfully commits the outputs.
+name: Generate OneSpace website pages for megamenu PR
+on:
+  push:
+    branches: [feature/type-megamenu-stores-nov2026]
+    paths:
+      - .github/workflows/regen-one-time-megamenu.yml
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: feature/type-megamenu-stores-nov2026
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - run: pip install --quiet beautifulsoup4==4.15.0
+      - name: Rebuild all generated site pages and translations
+        run: |
+          python3 -m py_compile build.py
+          python3 build.py
+          python3 tests/check_site.py
+          node --check assets/os.js
+      - name: Commit generated pages onto this feature branch only
+        run: |
+          git config user.name "OneSpace site build"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- '*.html' ar/*.html assets/ar.js sitemap.xml robots.txt llms.txt site.webmanifest
+          if ! git diff --cached --quiet; then
+            git commit -m "build(site): regenerate English and Arabic pages, translations and cache hashes"
+            git push origin HEAD:refs/heads/feature/type-megamenu-stores-nov2026
+          fi
