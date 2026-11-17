@@ -90,7 +90,8 @@ def head(page, title, title_ar, desc, desc_ar=''):
          'slogan': 'Two of us. One Space.'},
         {'@type': 'WebSite', '@id': BASE + '#site', 'name': 'OneSpace', 'url': BASE, 'inLanguage': ['en', 'ar'], 'publisher': {'@id': BASE + '#org'}}]})
     # Paths are counted without the query string or #fragment, so nothing typed into a URL (or a confirmation token) is sent.
-    analytics = ('\n<script>window.goatcounter={path:function(){return location.pathname}};</script>'
+    # The private admin page is never counted, so Ahmed's own checks don't inflate the numbers.
+    analytics = ('\n<script>window.goatcounter={path:function(){return location.pathname},no_onload:/founders-admin/.test(location.pathname)};</script>'
                  f'\n<script data-goatcounter="https://{GOATCOUNTER}.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>') if GOATCOUNTER else ''
     return f'''<!doctype html>
 <html lang="en" dir="ltr">
