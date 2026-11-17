@@ -11,6 +11,10 @@ async function same(a: string, b: string): Promise<boolean> {
   return d === 0;
 }
 
+// Short-lived cache of GoatCounter answers (kept while this function instance is warm).
+const CACHE = new Map<string, { until: number; body: any }>();
+let lane: Promise<void> = Promise.resolve(), lastCall = 0;
+
 Deno.serve(async (req) => {
   if (req.method === 'OPTIONS') return json(req, {});
   // Trim both sides: a pasted secret often carries a trailing space or newline. Any length is accepted.
@@ -42,13 +46,27 @@ Deno.serve(async (req) => {
       const start = new Date(Date.now() - days * 864e5).toISOString().slice(0, 10) + 'T00:00:00Z';
       const end = new Date(Date.now() + 36e5).toISOString().slice(0, 13) + ':00:00Z';
       const prevStart = new Date(Date.now() - 2 * days * 864e5).toISOString().slice(0, 10) + 'T00:00:00Z';
+      // GoatCounter allows 4 API requests a second (and 500 an hour): send them one after another, ~300 ms apart,
+      // retry once on 429, and reuse answers for 5 minutes.
       const get = async (path: string, a = start, b = end) => {
-        const r = await fetch(`https://onespace.goatcounter.com/api/v0/${path}${path.includes('?') ? '&' : '?'}start=${a}&end=${b}`,
-          { headers: { Authorization: `Bearer ${gc}`, 'Content-Type': 'application/json' } });
-        // GoatCounter answers 404 when a list has no rows yet (e.g. no referrers): treat that as empty.
-        if (r.status === 404) return {};
-        if (!r.ok) throw new Error(`goatcounter ${path.split('?')[0]}: ${r.status}`);
-        return r.json();
+        const url = `https://onespace.goatcounter.com/api/v0/${path}${path.includes('?') ? '&' : '?'}start=${a}&end=${b}`;
+        const hit = CACHE.get(url);
+        if (hit && hit.until > Date.now()) return hit.body;
+        for (let attempt = 0; attempt < 2; attempt++) {
+          const turn = lane; let done!: () => void; lane = new Promise<void>((r) => (done = r));
+          await turn;
+          const wait = 300 - (Date.now() - lastCall); if (wait > 0) await new Promise((r) => setTimeout(r, wait));
+          lastCall = Date.now();
+          let r: Response;
+          try { r = await fetch(url, { headers: { Authorization: `Bearer ${gc}`, 'Content-Type': 'application/json' } }); } finally { done(); }
+          if (r.status === 429 && attempt === 0) { await new Promise((res) => setTimeout(res, 1200)); continue; }
+          // GoatCounter answers 404 when a list has no rows yet (e.g. no referrers): treat that as empty.
+          const body = r.status === 404 ? {} : r.ok ? await r.json() : null;
+          if (body === null) throw new Error(r.status === 429 ? 'GoatCounter is busy (too many requests) — reload in a minute' : `goatcounter ${path.split('?')[0]}: ${r.status}`);
+          CACHE.set(url, { until: Date.now() + 5 * 60e3, body });
+          return body;
+        }
+        throw new Error('GoatCounter is busy (too many requests) — reload in a minute');
       };
       // One failing source never hides the others.
       const safe = (path: string, a = start, b = end) => get(path, a, b).catch((e) => { (stats.traffic_warnings ??= []).push(String(e).slice(0, 120)); return {}; });

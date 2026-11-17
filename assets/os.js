@@ -382,14 +382,14 @@
         $('[data-updated]').textContent = 'Updated ' + new Date(s.generated_at).toLocaleString();
 
         // 1. Headline KPIs
-        var pace = P.new_founder_couples ? Math.ceil(left / (P.new_founder_couples / days)) : null;
+        var pace = P.new_founder_couples >= 3 ? Math.ceil(left / (P.new_founder_couples / days)) : null;
         var conv = traffic ? pct(P.signups || 0, s.visitors) : null;
         var both = pct(s.couples_complete || 0, fc);
         $('[data-kpis]').innerHTML = [
           card({ title: 'Founder places taken', big: num(fc) + ' <em>of ' + cap + '</em>', bar: 100 * fc / cap,
             sub: left ? '<strong>' + num(left) + '</strong> places left' : '<strong>Full</strong> — new couples go to the waitlist (' + num(s.waitlist_couples) + ')',
             trend: P.new_founder_couples != null ? '<span class="tr ' + (P.new_founder_couples ? 'up' : 'flat') + '">+' + P.new_founder_couples + ' couples in the last ' + days + ' days</span>' : '',
-            help: pace ? 'At this pace, all places are taken in about ' + num(pace) + ' days.' : 'A couple takes a place when the first partner confirms their email.' }),
+            help: pace ? (pace > 365 ? 'At this pace it would take over a year to fill — more sharing needed.' : 'At this pace, all places are taken in about ' + num(pace) + ' days.') : 'A couple takes a place when the first partner confirms their email.' }),
           card({ title: 'New sign-ups', big: num(P.signups), sub: num(P.confirmed) + ' confirmed their email', trend: trend(P.signups, P.prev_signups, 'sign-ups'),
             help: 'People (not couples) who sent the Join form in the last ' + days + ' days.' }),
           card({ title: 'Visitors who sign up', big: conv == null ? '—' : conv + '%', tone: traffic ? '' : 'muted',
@@ -409,7 +409,7 @@
         if (s.couples_waiting_partner) todo.push(['info', num(s.couples_waiting_partner) + ' Founder couple' + (s.couples_waiting_partner > 1 ? 's have' : ' has') + ' only one partner so far. Their welcome email has an invite link — a reminder from the Command Center would help.']);
         if (!s.traffic_connected) todo.push(['info', 'Connect GoatCounter to see visitors here: GoatCounter → your name → API → new key with only “Read statistics”, then add it in Supabase secrets as <code>GOATCOUNTER_TOKEN</code>.']);
         if (s.traffic_error) todo.push(['warn', 'GoatCounter did not answer: ' + esc(s.traffic_error)]);
-        (s.traffic_warnings || []).forEach(function (w) { todo.push(['info', 'Part of the traffic data is missing: ' + esc(w)]); });
+        if ((s.traffic_warnings || []).length) todo.push(['info', 'Some traffic lists could not load this time: ' + esc(s.traffic_warnings.map(function (w) { return w.replace(/^Error: /, ''); }).filter(function (w, i, a) { return a.indexOf(w) === i; }).join(' · ')) + '. Reload in a minute.']);
         $('[data-attention]').innerHTML = todo.length ? '<ul class="adm-todo">' + todo.map(function (t) { return '<li class="' + t[0] + '">' + t[1] + '</li>'; }).join('') + '</ul>'
           : '<ul class="adm-todo"><li class="ok">Nothing needs your attention. Emails are sending and nobody is stuck.</li></ul>';
         var rb = $('[data-resend]');
