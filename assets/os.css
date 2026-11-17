@@ -627,3 +627,64 @@ html[dir="rtl"] .ol-arrow { transform: scaleX(-1); }
 .adm-bar { display: grid; grid-template-columns: 90px 1fr auto; gap: 8px; align-items: center; font-size: 13px; margin: 6px 0; }
 .adm-bar i { display: block; height: 10px; border-radius: 6px; background: #E8735A; }
 .adm-bar span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+/* ================= v8.5: tighter mobile, menu, compare, clips ================= */
+.menu-cta { display: none; }
+.sticky-cta { display: none; }
+.brand { padding: 6px 0; }
+@media (max-width: 980px) {
+  .menu { max-height: calc(100vh - 80px); overflow-y: auto; gap: 2px; }
+  .menu .drop > button { display: flex; width: 100%; justify-content: space-between; align-items: center; padding: 14px 6px; font-size: 16px; border-radius: 12px; }
+  .menu .drop-panel { display: none; padding: 0 0 8px; }
+  .menu .drop.open > .drop-panel { display: block; }
+  .menu .drop:hover .drop-panel, .menu .drop:focus-within .drop-panel { display: none; }
+  .menu .drop.open:hover .drop-panel, .menu .drop.open:focus-within .drop-panel { display: block; }
+  .menu > a:not(.btn) { padding: 14px 6px; font-size: 16px; }
+  .menu .drop + .drop, .menu > a:not(.btn) { border-top: 1px solid var(--line); }
+  .menu-cta { display: inline-flex; justify-content: center; margin-top: 14px; }
+  .sticky-cta { position: fixed; inset-inline: 10px; bottom: 10px; z-index: 40; display: flex; align-items: center; justify-content: space-between; gap: 10px;
+    background: rgba(20, 33, 61, .96); color: #fff; padding: 10px 10px 10px 16px; border-radius: 18px; box-shadow: 0 12px 30px rgba(20, 33, 61, .28); font-size: 14px; font-weight: 600; }
+  html[dir="rtl"] .sticky-cta { padding: 10px 16px 10px 10px; }
+  .sticky-cta[hidden] { display: none; }
+}
+
+/* Compare table → cards on phones, so the OneSpace column is never cut off */
+@media (max-width: 640px) {
+  .cmp-wrap { overflow: visible; }
+  .cmp, .cmp tbody, .cmp tr, .cmp th, .cmp td { display: block; width: auto; }
+  .cmp thead { display: none; }
+  .cmp tr { background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 12px 14px; margin-bottom: 10px; }
+  .cmp th[scope="row"] { font-size: 16px; padding: 0 0 6px; border: 0; background: none; }
+  .cmp td { padding: 6px 0 0; border: 0; background: none !important; font-size: 14px; }
+  .cmp td::before { content: attr(data-label); display: block; font-size: 11px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: var(--muted); }
+  .cmp td.new { color: var(--ink); font-weight: 600; } .cmp td.new::before { color: var(--coral); }
+}
+
+/* "Eleven things" — compact two-column grid on phones */
+@media (max-width: 640px) {
+  .values { grid-template-columns: 1fr 1fr !important; gap: 10px !important; }
+  .values .card { padding: 14px 12px !important; }
+  .values .card h3 { font-size: 15px; line-height: 1.3; margin: 8px 0 4px; }
+  .values .card p { font-size: 12.5px; line-height: 1.45; margin: 0; }
+  .values .card .more { display: none; }
+  .values .vi { font-size: 22px; }
+}
+
+/* Theme playground: the second phone is redundant on phones */
+@media (max-width: 760px) { .tour3 > div:last-child > div[style*="margin-top:20px"] { display: none; } }
+
+/* Five numbers: the last one spans the row on phones */
+@media (max-width: 760px) { .numbers div:last-child:nth-child(odd) { grid-column: 1 / -1; } }
+/* Homepage on phones: show the strongest items, link to the rest */
+@media (max-width: 640px) {
+  .bento .bx:nth-child(n+5) { display: none; }
+  .ol-apps .ol-app:nth-child(n+4) { display: none; }
+  .ol-row { padding: 12px; gap: 8px; }
+  .ol-arrow { display: none; }
+  .art-card:nth-child(n+3) { display: none; }
+}
+@media (max-width: 980px) {
+  .menu > a.menu-cta { background: var(--coral); color: #fff; border-top: 0; padding: 14px; font-size: 16px; }
+  .sticky-cta .btn { white-space: nowrap; flex: none; }
+  .sticky-cta span { line-height: 1.3; }
+}
