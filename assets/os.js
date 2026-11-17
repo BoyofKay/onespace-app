@@ -215,7 +215,53 @@
   $$('form[data-form="join"] select[name="language"]').forEach(function (sel) { sel.value = lang; });
   var msgs = { sending: 'Sending…', missing: 'Please fill in the fields marked *.', email: 'Please check the email address.',
     consent: 'Please tick the box so we may email you.', busy: 'Too many tries. Please wait a few minutes and try again.',
-    failed: 'Could not send. Please check your connection and try again.', sent: 'Thank you — we got it and will reply by email.' };
+    failed: 'Could not send. Please check your connection and try again.', sent: 'Thank you — we got it and will reply by email.',
+    verify: 'That was quick! One short check that you’re human, then we’ll send it.', verify_failed: 'We couldn’t complete the check. Please reload the page and try again.' };
+  var msgsAr = { verify: 'كان ذلك سريعًا! تحقّق قصير من أنك إنسان، ثم نرسل النموذج.', verify_failed: 'تعذّر إكمال التحقق. أعد تحميل الصفحة وحاول مرة أخرى.' };
+
+  // ---------- Spam check (Cloudflare Turnstile) ----------
+  // Shown only when the server asks for it (the form was sent within 2.5 s of the page opening — robots
+  // do that, but so can a person using autofill). If the check cannot load, the form is sent anyway:
+  // the email confirmation step is what really stops fake sign-ups.
+  var TS_KEY = '0x4AAAAAAGFSBBh0y5giCOsV', tsWait = [];
+  function loadTurnstile(cb) {
+    if (window.turnstile) return cb(window.turnstile);
+    tsWait.push(cb);
+    if (tsWait.length > 1) return;
+    var settle = function (t) { var w = tsWait; tsWait = []; w.forEach(function (f) { f(t); }); };
+    window.osTurnstileReady = function () { settle(window.turnstile); };
+    var sc = document.createElement('script');
+    sc.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=osTurnstileReady';
+    sc.async = true; sc.onerror = function () { settle(null); };
+    document.head.appendChild(sc);
+    setTimeout(function () { if (!window.turnstile && tsWait.length) settle(null); }, 10000);
+  }
+  function guardedPost(form, btn, say, fn, payload, onOk, onErr, name) {
+    var send = function (extra) {
+      var body = {}; Object.keys(payload).forEach(function (k) { body[k] = payload[k]; });
+      Object.keys(extra || {}).forEach(function (k) { body[k] = extra[k]; });
+      fetch(FN + fn, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) })
+        .then(function (res) { return res.json().catch(function () { return {}; }).then(function (b) { return { res: res, b: b }; }); })
+        .then(function (x) {
+          if (x.res.ok && x.b.ok) return onOk();
+          if (x.b.error === 'verify' && !(extra && (extra.turnstile || extra.turnstile_unavailable))) return check();
+          onErr(x.b.error);
+        }).catch(function () { onErr('failed'); });
+    };
+    var check = function () {
+      say('verify'); track(name + '/check-shown');
+      var box = $('.ts-box', form);
+      if (!box) { box = document.createElement('div'); box.className = 'ts-box'; btn.parentNode.insertBefore(box, btn); }
+      box.hidden = false; box.innerHTML = '';
+      loadTurnstile(function (ts) {
+        if (!ts) { box.hidden = true; say('sending'); return send({ turnstile_unavailable: true }); }
+        ts.render(box, { sitekey: TS_KEY, language: lang === 'ar' ? 'ar' : 'en', theme: 'auto',
+          callback: function (token) { track(name + '/check-passed'); box.hidden = true; say('sending'); send({ turnstile: token }); },
+          'error-callback': function () { box.hidden = true; say('sending'); send({ turnstile_unavailable: true }); return true; } });
+      });
+    };
+    send();
+  }
   $$('form[data-form]').forEach(function (form) {
     var fname = form.getAttribute('data-form') === 'join' ? 'founders' : form.getAttribute('data-form');
     form.addEventListener('focusin', function () { if (!form.dataset.started) { form.dataset.started = '1'; track(fname + '/form-start' + here); } });
@@ -224,7 +270,7 @@
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       var status = $('.status', form);
-      function say(k, ok) { status.textContent = tr('form.' + k, msgs[k]); status.className = 'status ' + (ok === true ? 'ok' : ok === false ? 'err' : '');
+      function say(k, ok) { status.textContent = lang === 'ar' && msgsAr[k] ? msgsAr[k] : tr('form.' + k, msgs[k]); status.className = 'status ' + (ok === true ? 'ok' : ok === false ? 'err' : '');
         if (ok === false) track(fname + '/error-' + k); }
       if (form.elements.website && form.elements.website.value) return;
       function v(n) { var el = form.elements[n]; if (!el) return ''; if (el.length && !el.tagName) { var c = Array.prototype.find.call(el, function (x) { return x.checked; }); return c ? c.value : ''; } return String(el.value || '').trim(); }
@@ -247,39 +293,32 @@
         if (v('name')) message = 'Name: ' + v('name') + '\n\n' + message;
       }
       var btn = $('button[type=submit]', form); btn.disabled = true; say('sending');
+      var finish = function () { btn.disabled = false; };
+      var done = function () {
+        form.reset();
+        var box = form.getAttribute('data-done') && document.getElementById(form.getAttribute('data-done'));
+        if (box) { form.hidden = true; box.classList.add('show'); box.focus(); } else say('sent', true);
+      };
       if (kindForm === 'join') {
         var sj = function (k) { try { return sessionStorage.getItem(k) || ''; } catch (_) { return ''; } };
         var utm = {}; try { utm = JSON.parse(sj('os-utm') || '{}'); } catch (_) {}
         var language = v('language'); if (language !== 'ar' && language !== 'en') language = lang;
-        fetch(FN + 'founder-join', { method: 'POST', headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email: email, name: v('name'), platform: v('platform'), living: v('living'), language: language,
+        guardedPost(form, btn, say, 'founder-join', { email: email, name: v('name'), platform: v('platform'), living: v('living'), language: language,
             source: v('source'), note: v('message'), consent: true, website: v('website'), elapsed: Date.now() - loadedAt,
-            invite: v('invite') || invite, landing: sj('os-landing'), referrer: sj('os-ref'), utm: utm }) })
-        .then(function (res) { return res.json().catch(function () { return {}; }).then(function (b) { return { res: res, b: b }; }); })
-        .then(function (x) {
-          if (x.res.ok && x.b.ok) {
+            invite: v('invite') || invite, landing: sj('os-landing'), referrer: sj('os-ref'), utm: utm },
+          function () {
             track('founders/sent');
             var pl = v('platform'); if (pl) track('founders/platform-' + pl);
             if (v('invite') || invite) track('founders/sent-partner');
-            form.reset();
-            var done = form.getAttribute('data-done') && document.getElementById(form.getAttribute('data-done'));
-            if (done) { form.hidden = true; done.classList.add('show'); done.focus(); } else say('sent', true);
-          } else say(x.b.error === 'rate_limited' ? 'busy' : x.b.error === 'invalid_email' ? 'email' : x.b.error === 'consent_required' ? 'consent' : 'failed', false);
-        }).catch(function () { say('failed', false); }).then(function () { btn.disabled = false; });
+            done(); finish();
+          },
+          function (err) { say(err === 'rate_limited' ? 'busy' : err === 'invalid_email' ? 'email' : err === 'consent_required' ? 'consent' : err === 'verify_failed' ? 'verify_failed' : 'failed', false); finish(); }, fname);
         return;
       }
-      fetch(FN + 'site-contact', { method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ form: kindForm, topic: v('topic'), name: v('name'), email: email, subject: v('subject'), message: message,
-          website: v('website'), elapsed: Date.now() - loadedAt, page: location.pathname, lang: lang, src: sget('os-src') || '' }) })
-      .then(function (res) { return res.json().catch(function () { return {}; }).then(function (b) { return { res: res, b: b }; }); })
-      .then(function (x) {
-        if (x.res.ok && x.b.ok) {
-          track(kindForm + '/sent');
-          form.reset();
-          var done = form.getAttribute('data-done') && document.getElementById(form.getAttribute('data-done'));
-          if (done) { form.hidden = true; done.classList.add('show'); done.focus(); } else say('sent', true);
-        } else say(x.b.error === 'busy' ? 'busy' : x.b.error === 'email' ? 'email' : x.b.error === 'missing' ? 'missing' : 'failed', false);
-      }).catch(function () { say('failed', false); }).then(function () { btn.disabled = false; });
+      guardedPost(form, btn, say, 'site-contact', { form: kindForm, topic: v('topic'), name: v('name'), email: email, subject: v('subject'), message: message,
+          website: v('website'), elapsed: Date.now() - loadedAt, page: location.pathname, lang: lang, src: sget('os-src') || '' },
+        function () { track(kindForm + '/sent'); done(); finish(); },
+        function (err) { say(err === 'busy' ? 'busy' : err === 'email' ? 'email' : err === 'missing' ? 'missing' : err === 'verify_failed' ? 'verify_failed' : 'failed', false); finish(); }, kindForm);
     });
   });
 
@@ -337,6 +376,8 @@
     var pct = function (a, b) { if (!b) return null; var v = 100 * a / b; return v >= 10 || v === 0 ? Math.round(v) : Math.round(v * 10) / 10; };
     var NAMES = {
       android: 'Android', ios: 'iPhone', both: 'One Android, one iPhone', unknown: 'Not given',
+      honeypot: 'Robot field filled — dropped', checked: 'Too fast — asked for the check', passed: 'Passed the check — accepted',
+      blocked: 'Failed the check — refused', unavailable: 'Check could not load — accepted', unverified: 'Cloudflare not reachable — accepted',
       apart: 'Living apart', together: 'Living together', en: 'English', ar: 'Arabic',
       friend: 'A friend told them', direct: 'Came straight to the site', search: 'Search', social: 'Social media', other: 'Other',
       'confirm:sent': 'Confirm-your-email · sent', 'welcome:sent': 'Welcome + Founder number · sent', 'already:sent': '“You’re already in” reminder · sent',
@@ -409,6 +450,7 @@
 
         // 2. Attention list
         var todo = [];
+        if (s.turnstile_key_set === false) todo.push(['bad', 'The spam check can’t verify people: <code>TURNSTILE_SECRET_KEY</code> is missing in Supabase secrets, so fast sign-ups are accepted unchecked.']);
         if (!s.mail_key_set) todo.push(['bad', 'Emails are not being sent: <code>RESEND_API_KEY</code> is missing in Supabase secrets.']);
         if ((s.email_failures || []).length) todo.push(['bad', s.email_failures.length + ' email' + (s.email_failures.length > 1 ? 's' : '') + ' failed recently. Details under “Emails we sent”, or in <a href="https://resend.com/emails" target="_blank" rel="noopener">Resend</a>.']);
         if (s.pending_stale) todo.push(['warn', num(s.pending_stale) + ' ' + (s.pending_stale > 1 ? 'people' : 'person') + ' signed up over a day ago but never confirmed. <button class="btn btn-ghost btn-sm" type="button" data-resend>Send the confirmation email again</button> <span class="status" data-resend-status></span>']);
@@ -491,6 +533,8 @@
         $('[data-bars="living"]').innerHTML = bars(s.living || {});
         $('[data-bars="language"]').innerHTML = bars(s.language || {});
         $('[data-bars="emails"]').innerHTML = bars(s.emails || {});
+        var spamEl = $('[data-bars="spam"]');
+        if (spamEl) spamEl.innerHTML = s.spam && Object.keys(s.spam).length ? bars(s.spam) : '<p class="muted">No spam checks in this period.</p>';
         $('[data-list="sources"]').innerHTML = rows(s.sources, 'source');
         $('[data-list="landing"]').innerHTML = rows(s.landing, 'page', pageName);
         $('[data-failures]').innerHTML = (s.email_failures || []).slice(0, 5).map(function (f) { return '<p class="muted" style="font-size:12px">⚠ ' + esc(f.at.slice(0, 16).replace('T', ' ') + ' · ' + label(f.kind) + ' · ' + (f.error || '')) + '</p>'; }).join('');
