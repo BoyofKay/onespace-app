@@ -1611,7 +1611,7 @@ def page_founders_admin():
     <div class="kpi-grid" data-kpis></div>
     <h2 class="adm-h">Needs your attention</h2>
     <div data-attention></div>
-    <h2 class="adm-h">How visitors become Founders</h2>
+    <h2 class="adm-h">The website: visitors and how they become Founders</h2>
     <div data-traffic></div>
     <h2 class="adm-h">Sign-ups over time</h2>
     <div class="panel"><p class="adm-sum" data-chart-sum></p><div data-chart class="adm-chart"></div><p class="adm-legend"><i></i> signed up <i class="c"></i> confirmed email</p></div>

@@ -754,3 +754,8 @@ html[dir="rtl"] .ol-arrow { transform: scaleX(-1); }
 .adm-legend { font-size: 13px; color: var(--muted); display: flex; align-items: center; gap: 6px; }
 .adm-legend i { display: inline-block; width: 12px; height: 12px; border-radius: 3px; background: #F3C9BB; }
 .adm-legend i.c { background: #1F6E78; margin-inline-start: 10px; }
+.kpi-6 { grid-template-columns: repeat(3, 1fr); margin-bottom: 14px; }
+@media (max-width: 860px) { .kpi-6 { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .kpi-6 { grid-template-columns: 1fr; } }
+.kpi-s > b { font-size: 28px; }
+.adm-col i.v { background: #9DC7CC; left: 10%; right: 10%; }
