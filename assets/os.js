@@ -325,7 +325,7 @@
       fetch(FN + 'founder-admin?days=' + days, { headers: { 'x-admin-key': key } }).then(function (r) { return r.json().then(function (b) { return { r: r, b: b }; }); })
       .then(function (x) {
         var st = $('[data-admin-login] .status');
-        if (!x.r.ok) { try { sessionStorage.removeItem('os-admin'); } catch (_) {} st.textContent = 'Wrong key.'; return; }
+        if (!x.r.ok) { try { sessionStorage.removeItem('os-admin'); } catch (_) {} st.textContent = x.b && x.b.error === 'key_not_set' ? 'FOUNDER_ADMIN_KEY is not set in Supabase › Edge Functions › Secrets.' : x.r.status === 401 ? 'That key does not match FOUNDER_ADMIN_KEY in Supabase.' : 'Could not load (' + x.r.status + ').'; return; }
         var s = x.b.stats;
         $('[data-admin-login]').hidden = true; $('[data-admin-body]').hidden = false;
         var tiles = [['Founder couples', s.founder_couples + ' / ' + s.capacity_couples], ['Founder places left', s.capacity_couples - s.founder_couples],
