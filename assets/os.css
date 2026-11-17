@@ -708,3 +708,49 @@ html[dir="rtl"] .ol-arrow { transform: scaleX(-1); }
 .pw-eye:hover, .pw-eye:focus-visible { color: var(--ink, #14213D); background: rgba(0,0,0,.05); }
 .pw-eye .eye-slash { display: none; }
 .pw-eye[aria-pressed="true"] .eye-slash { display: inline; }
+/* Admin v2: readable KPIs */
+.adm-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; margin: 4px 0 16px; font-size: 13px; }
+.kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+@media (max-width: 1060px) { .kpi-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .kpi-grid { grid-template-columns: 1fr; } }
+.kpi { background: #fff; border: 1px solid #E7E8EF; border-radius: 18px; padding: 18px 18px 16px; display: flex; flex-direction: column; gap: 6px; }
+.kpi h3 { font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: .05em; color: #5B6070; margin: 0; }
+.kpi > b { font-size: 34px; line-height: 1.1; color: #14213D; }
+.kpi > b em { font-style: normal; font-size: 18px; color: #8A8FA3; font-weight: 600; }
+.kpi p { margin: 0; font-size: 14px; color: #3B4055; }
+.kpi small { margin-top: auto; padding-top: 8px; border-top: 1px dashed #E7E8EF; font-size: 12.5px; color: #6B7083; line-height: 1.45; }
+.kpi.muted > b { color: #B5B8C5; }
+.kpi-bar { height: 8px; border-radius: 6px; background: #F0F1F5; overflow: hidden; }
+.kpi-bar i { display: block; height: 100%; background: linear-gradient(90deg, #E8735A, #1F6E78); border-radius: 6px; }
+.tr { font-size: 12.5px; font-weight: 600; }
+.tr.up { color: #1F7A4D; } .tr.down { color: #C0392B; } .tr.flat { color: #8A8FA3; }
+.adm-h small { font-size: 13px; font-weight: 500; color: var(--muted); margin-inline-start: 8px; }
+.adm-todo { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.adm-todo li { background: #fff; border: 1px solid #E7E8EF; border-inline-start: 5px solid #8A8FA3; border-radius: 12px; padding: 12px 14px; font-size: 14.5px; line-height: 1.5; }
+.adm-todo li.bad { border-inline-start-color: #C0392B; background: #FFF6F5; }
+.adm-todo li.warn { border-inline-start-color: #E8A33A; background: #FFFBF2; }
+.adm-todo li.info { border-inline-start-color: #1F6E78; }
+.adm-todo li.ok { border-inline-start-color: #1F7A4D; background: #F3FBF6; }
+.adm-todo .btn { margin-inline-start: 6px; }
+.adm-2 { display: grid; grid-template-columns: 1.2fr 1fr; gap: 14px; }
+@media (max-width: 860px) { .adm-2 { grid-template-columns: 1fr; } }
+.fn-step { margin: 12px 0; }
+.fn-head { display: flex; justify-content: space-between; font-size: 14.5px; margin-bottom: 4px; }
+.fn-head b { font-size: 16px; }
+.fn-bar { height: 14px; background: #F0F1F5; border-radius: 7px; overflow: hidden; }
+.fn-bar i { display: block; height: 100%; background: linear-gradient(90deg, #E8735A, #1F6E78); border-radius: 7px; }
+.fn-step small { color: var(--muted); font-size: 12.5px; }
+.adm-insight { background: #FFF1EC; border-radius: 12px; padding: 10px 12px; font-size: 14px; margin: 14px 0 8px; }
+.mini-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.mini-grid div { background: #F7F8FB; border-radius: 12px; padding: 10px 12px; }
+.mini-grid b { display: block; font-size: 22px; color: #14213D; } .mini-grid span { font-size: 12.5px; color: #5B6070; }
+.adm-bar { grid-template-columns: 1fr auto; row-gap: 3px; }
+.adm-bar span { grid-column: 1; white-space: normal; } .adm-bar b { grid-column: 2; grid-row: 1; font-size: 12.5px; color: #3B4055; }
+.adm-bar i { grid-column: 1 / -1; grid-row: 2; height: 8px; }
+.adm-sum { margin: 0 0 6px; font-size: 14.5px; }
+.adm-chart { position: relative; padding-inline-start: 26px; height: 180px; }
+.adm-y { position: absolute; inset-inline-start: 0; top: 8px; bottom: 14px; display: flex; flex-direction: column; justify-content: space-between; font-size: 11px; color: #8A8FA3; }
+.adm-col span { white-space: nowrap; overflow: visible; }
+.adm-legend { font-size: 13px; color: var(--muted); display: flex; align-items: center; gap: 6px; }
+.adm-legend i { display: inline-block; width: 12px; height: 12px; border-radius: 3px; background: #F3C9BB; }
+.adm-legend i.c { background: #1F6E78; margin-inline-start: 10px; }
