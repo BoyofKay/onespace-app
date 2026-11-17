@@ -697,3 +697,7 @@ html[dir="rtl"] .ol-arrow { transform: scaleX(-1); }
 .adm-funnel b { text-align: end; }
 .adm-funnel small { grid-column: 2 / -1; color: var(--muted); font-size: 12px; margin-top: -6px; }
 .adm-links .card h3 { font-size: 16px; margin: 0 0 4px; } .adm-links .card p { font-size: 13px; margin: 0; }
+/* Share kit: images keep their own proportions */
+.assets-grid img { width: 100%; height: auto; object-fit: contain; display: block; }
+.assets-grid a { display: block; text-decoration: none; }
+.store-grid img { aspect-ratio: 9 / 16; }

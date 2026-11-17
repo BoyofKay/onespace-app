@@ -12,10 +12,15 @@ CSS = (ROOT / 'assets' / 'os.css').read_text()
 MARK = (ROOT / 'assets' / 'mark.svg').as_uri()
 
 
+# Brand fonts bundled in tools/fonts (SIL Open Font License), so images never fall back to a default serif.
+FONT_DIR = Path(__file__).resolve().parent / 'fonts'
+FONTS = ''.join(f"@font-face{{font-family:'Plus Jakarta Sans';font-weight:{w};src:url('{(FONT_DIR / f'plus-jakarta-sans-latin-{w}-normal.woff2').as_uri()}') format('woff2')}}" for w in (400, 500, 600, 700, 800)) + \
+    ''.join(f"@font-face{{font-family:'IBM Plex Sans Arabic';font-weight:{w};src:url('{(FONT_DIR / f'ibm-plex-sans-arabic-arabic-{w}-normal.woff2').as_uri()}') format('woff2')}}" for w in (400, 600, 700))
+
+
 def doc(w, h, inner, bg):
     return f'''<!doctype html><html><head><meta charset="utf-8"><base href="{ROOT.as_uri()}/">
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@600;700&display=swap" rel="stylesheet"><style>{CSS} body{{margin:0;width:{w}px;height:{h}px;overflow:hidden;background:{bg}}} .phone::before{{}} .card-x{{position:absolute;inset:0}}</style>
+<style>{FONTS}{CSS} body{{font-family:'Plus Jakarta Sans','IBM Plex Sans Arabic',sans-serif}} body{{margin:0;width:{w}px;height:{h}px;overflow:hidden;background:{bg}}} .phone::before{{}} .card-x{{position:absolute;inset:0}}</style>
 </head><body><div class="card-x">{inner}</div></body></html>'''
 
 
@@ -53,7 +58,7 @@ def store_images():
         for i, (shot, en, ar, bg) in enumerate(STORE, 1):
             cap = ar if lang == 'ar' else en
             d = 'rtl' if lang == 'ar' else 'ltr'
-            out[f'store-{lang}-{i}.png'] = (1080, 1920, bg, f'''<div dir="{d}" style="position:absolute;inset:0;font-family:{'IBM Plex Sans Arabic' if lang == 'ar' else 'Plus Jakarta Sans'}">
+            out[f'store-{lang}-{i}.png'] = (1080, 1920, bg, f'''<div dir="{d}" style="position:absolute;inset:0;font-family:{"'IBM Plex Sans Arabic','Plus Jakarta Sans',sans-serif" if lang == 'ar' else "'Plus Jakarta Sans',sans-serif"}">
               <div style="position:absolute;top:110px;left:80px;right:80px;text-align:center">{brand(40)}
                 <h1 style="font-size:{82 if lang == 'en' else 76}px;line-height:1.15;margin:46px 0 0;letter-spacing:{'-.03em' if lang == 'en' else '0'}">{cap}</h1></div>
               <div style="position:absolute;left:50%;top:560px;transform:translateX(-50%)">{real_device(shot, lang, 640)}</div></div>''')
@@ -70,9 +75,9 @@ IMAGES = {
     'social-square.png': (1080, 1080, HERO_BG, f'''
       <div style="position:absolute;left:80px;top:80px;width:520px">{brand(36)}
         <div style="height:60px"></div>{tag('Founding 500')}
-        <h1 style="font-size:76px;margin:18px 0 22px">Be one of the first 500 couples.</h1>
-        <p class="lead" style="font-size:28px">One private app for the two of you. Free early access.</p>
-        <div class="btn btn-primary" style="margin-top:30px;font-size:24px;padding:20px 30px">Free early access · link in bio</div></div>
+        <h1 style="font-size:76px;margin:18px 0 22px">Be one of the first 250 couples.</h1>
+        <p class="lead" style="font-size:28px">The first 250 couples become Founder Members. Free early access.</p>
+        <div class="btn btn-primary" style="margin-top:30px;font-size:24px;padding:20px 30px">Join at onespace.live</div></div>
       <div style="position:absolute;left:640px;top:170px">{P(scr := build.scr_counters, 'lavender', 1.15)}</div>'''),
     'social-story.png': (1080, 1920, HERO_BG, f'''
       <div style="position:absolute;left:90px;top:130px;right:90px">{brand(44)}
@@ -109,6 +114,7 @@ async def main():
             tmp = ROOT / '_press_tmp.html'
             tmp.write_text(doc(w, h, inner, bg), encoding='utf-8')
             await pg.goto(tmp.as_uri(), wait_until='networkidle')
+            await pg.evaluate('document.fonts.ready')
             tmp.unlink()
             await pg.wait_for_timeout(300)
             await pg.screenshot(path=str(ROOT / 'assets' / 'press' / name))
