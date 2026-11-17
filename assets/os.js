@@ -121,11 +121,11 @@
   if (menu) document.body.appendChild(backdrop);
   var lastMenuTrigger = null;
   function syncBackdrop() {
-    var expanded = $('.drop.open', menu || document).length > 0;
+    var expanded = $$('.drop.open', menu || document).length > 0;
     backdrop.hidden = !(expanded || (menu && menu.classList.contains('open')));
   }
   function closeMega(focusTrigger) {
-    $('.drop.open', menu || document).forEach(function (d) {
+    $$('.drop.open', menu || document).forEach(function (d) {
       d.classList.remove('open');
       var b = $('button[aria-expanded]', d);
       if (b) b.setAttribute('aria-expanded', 'false');
@@ -141,10 +141,10 @@
     if (!wasOpen) { menu.classList.add('open'); burger.setAttribute('aria-expanded', 'true'); }
     syncBackdrop();
   });
-  $('.drop > button').forEach(function (b) {
+  $$('.drop > button').forEach(function (b) {
     b.addEventListener('click', function () {
       var drop = b.parentElement, wasOpen = drop.classList.contains('open');
-      $('.drop.open').forEach(function (d) {
+      $$('.drop.open', menu || document).forEach(function (d) {
         d.classList.remove('open');
         var other = $('button[aria-expanded]', d);
         if (other) other.setAttribute('aria-expanded', 'false');
