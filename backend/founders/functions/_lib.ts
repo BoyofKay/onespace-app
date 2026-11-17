@@ -159,7 +159,7 @@ export function mailAlready(lang: string, r: any): Mail {
 }
 
 // ------------------------------------------------------------------ sending
-const FN_URL = 'https://ugwrpeduzyzrujkizqfo.supabase.co/functions/v1';
+const FN_URL = `${Deno.env.get('SUPABASE_URL') ?? ''}/functions/v1`;
 export const unsubPage = (lang: string, token?: string) => token ? `${SITE}${lang === 'ar' ? '/ar/' : '/'}unsubscribe.html#u=${token}` : `mailto:founders@onespace.live?subject=unsubscribe`;
 
 export async function send(memberId: string, kind: string, to: string, m: Mail, unsub?: string): Promise<boolean> {

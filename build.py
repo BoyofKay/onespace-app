@@ -1632,7 +1632,7 @@ def page_founders_admin():
       <a class="card link" href="https://search.google.com/search-console?resource_id=sc-domain:onespace.live" target="_blank" rel="noopener"><h3>🔎 Google Search Console</h3><p>Searches that show OneSpace, clicks, position, indexed pages.</p></a>
       <a class="card link" href="https://www.bing.com/webmasters" target="_blank" rel="noopener"><h3>🔎 Bing Webmaster Tools</h3><p>Bing and Copilot search performance.</p></a>
       <a class="card link" href="https://resend.com/emails" target="_blank" rel="noopener"><h3>✉️ Resend</h3><p>Each email sent: delivered, opened, bounced, complained.</p></a>
-      <a class="card link" href="https://supabase.com/dashboard/project/ugwrpeduzyzrujkizqfo/editor" target="_blank" rel="noopener"><h3>🗄 Supabase tables</h3><p><code>private.founder_members</code> (people), <code>founder_couples</code> (numbers), <code>founder_email_log</code>, <code>public.public_support_requests</code> (website messages).</p></a>
+      <a class="card link" href="https://supabase.com/dashboard/project/letcgxbnblohhfyeuigz/editor" target="_blank" rel="noopener"><h3>🗄 Supabase tables</h3><p><code>private.founder_members</code> (people), <code>founder_couples</code> (numbers), <code>founder_email_log</code>, <code>public.public_support_requests</code> (website messages).</p></a>
       <a class="card link" href="https://mail.zoho.com" target="_blank" rel="noopener"><h3>📥 Zoho Mail</h3><p>Replies to founders@, messages to support@, hello@ and privacy@.</p></a>
     </div>
   </div>

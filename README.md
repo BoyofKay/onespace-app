@@ -24,7 +24,7 @@ Not indexed: `confirm.html`, `unsubscribe.html`, `founders-admin.html`. `v4.html
 ## Founder Members waitlist
 - One Founder number **per couple**; the first **250 confirmed couples (500 people)** are Founders, later couples go on a waitlist.
 - Sign-up → confirmation email (Resend, from `founders@onespace.live`) → `confirm.html` gives the number and the partner invite link (`join.html?invite=…`).
-- Data: Supabase `private.founder_*` tables (service role only). Details: `backend/founders/README.md`.
+- Data: Supabase project **OneSpace Production** (`letcgxbnblohhfyeuigz`), `private.founder_*` tables (service role only). Details: `backend/founders/README.md`.
 - Invite waves, nudges and surveys are run from the private Command Center repo (`Onespace_command`).
 
 ## Admin: where the data is

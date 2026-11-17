@@ -1,8 +1,8 @@
 // OneSpace website behaviour (no dependencies).
 (function () {
   'use strict';
-  var SUPABASE = 'https://ugwrpeduzyzrujkizqfo.supabase.co';
-  var KEY = 'sb_publishable_TtW_uUboFxD4adF5o7FSfA_cpjojMCe';
+  var SUPABASE = 'https://letcgxbnblohhfyeuigz.supabase.co'; // OneSpace Production (D77)
+  var KEY = 'sb_publishable_eAeTViXIscberKyVhCQiWg_h3rivqwo';
   var AR = window.ONESPACE_AR || {};
   var root = document.documentElement;
   function get(k) { try { return localStorage.getItem(k); } catch (_) { return null; } }
