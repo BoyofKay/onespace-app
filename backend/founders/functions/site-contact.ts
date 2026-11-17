@@ -1,4 +1,4 @@
-import { json, rpc, sendInternal } from './_lib.ts';
+import { guard, guardReply, json, rpc, sendInternal } from './_lib.ts';
 
 // POST /site-contact — the Support and Delete-account forms on onespace.live.
 // Saves the request (same table and limits as before) and emails it to support@ or privacy@,
@@ -8,7 +8,8 @@ Deno.serve(async (req) => {
   if (req.method !== 'POST') return json(req, { ok: false }, 405);
   let b: any;
   try { b = await req.json(); } catch { return json(req, { ok: false, error: 'bad_request' }, 400); }
-  if (b.website || (typeof b.elapsed === 'number' && b.elapsed < 2500)) return json(req, { ok: true });
+  const g = await guard(req, b, 'contact');
+  if (g !== 'ok') return guardReply(req, g);
   const s = (v: unknown, n: number) => String(v ?? '').trim().slice(0, n);
   const email = s(b.email, 254);
   if (!/^[^@\s]+@[^@\s]+\.[^@\s]{2,}$/.test(email)) return json(req, { ok: false, error: 'email' }, 422);

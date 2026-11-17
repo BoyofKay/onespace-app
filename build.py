@@ -1495,7 +1495,8 @@ def legal_page(page, kind):
     for i, (t, html_en, t_ar, html_ar) in enumerate(sections):
         toc.append(f'<a href="#s{i + 1}">{T(t, t_ar)}</a>')
         body.append(f'<h2 id="s{i + 1}">{T(t, t_ar)}</h2>{T(html_en, html_ar, "div")}')
-    updated = T('Last updated: 16 November 2026', 'آخر تحديث: 16 نوفمبر 2026', 'p', 'muted')
+    updated = (T('Last updated: 17 November 2026', 'آخر تحديث: 17 نوفمبر 2026', 'p', 'muted') if kind == 'privacy'
+               else T('Last updated: 16 November 2026', 'آخر تحديث: 16 نوفمبر 2026', 'p', 'muted'))
     return h + hero + f'''<section style="padding-top:20px"><div class="wrap with-toc">
   <nav class="toc" aria-label="On this page">{''.join(toc)}</nav>
   <div class="legal">{updated}{''.join(body)}</div>
@@ -1626,6 +1627,9 @@ def page_founders_admin():
       <div class="panel"><h3>How they heard about us</h3><div data-list="sources"></div></div>
       <div class="panel"><h3>First page they saw</h3><div data-list="landing"></div></div>
       <div class="panel"><h3>Emails we sent</h3><div data-bars="emails"></div><div data-failures></div></div>
+    </div>
+    <div class="adm-row adm-3">
+      <div class="panel"><h3>Spam protection</h3><div data-bars="spam"></div><p class="muted" style="font-size:12px">Forms sent within 2.5 s of the page opening get a Cloudflare Turnstile check. Counts only — never who.</p></div>
     </div>
     <h2 class="adm-h">Everything else, in one place</h2>
     <div class="grid g3 adm-links">

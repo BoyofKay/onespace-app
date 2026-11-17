@@ -759,3 +759,5 @@ html[dir="rtl"] .ol-arrow { transform: scaleX(-1); }
 @media (max-width: 560px) { .kpi-6 { grid-template-columns: 1fr; } }
 .kpi-s > b { font-size: 28px; }
 .adm-col i.v { background: #9DC7CC; left: 10%; right: 10%; }
+.ts-box { margin: 10px 0 12px; min-height: 65px; }
+.ts-box[hidden] { display: none; }

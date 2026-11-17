@@ -38,6 +38,8 @@ Deno.serve(async (req) => {
     const days = Math.max(7, Math.min(180, Number(new URL(req.url).searchParams.get('days') ?? 30)));
     const stats = await rpc('founder_stats', { p_days: days });
     stats.mail_key_set = Boolean(Deno.env.get('RESEND_API_KEY'));
+    stats.turnstile_key_set = Boolean(Deno.env.get('TURNSTILE_SECRET_KEY'));
+    try { stats.spam = await rpc('founder_spam_stats', { p_days: days }); } catch { stats.spam = null; }
     // Website traffic from GoatCounter (needs GOATCOUNTER_TOKEN, a read-only API key). Never fails the dashboard.
     const gc = Deno.env.get('GOATCOUNTER_TOKEN');
     stats.traffic_connected = Boolean(gc);
