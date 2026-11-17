@@ -38,18 +38,24 @@ Deno.serve(async (req) => {
     const gc = Deno.env.get('GOATCOUNTER_TOKEN');
     stats.traffic_connected = Boolean(gc);
     if (gc) {
-      const start = new Date(Date.now() - days * 864e5).toISOString().slice(0, 10);
-      const end = new Date(Date.now() + 864e5).toISOString().slice(0, 10);
+      // GoatCounter wants full RFC 3339 times, rounded to the hour.
+      const start = new Date(Date.now() - days * 864e5).toISOString().slice(0, 10) + 'T00:00:00Z';
+      const end = new Date(Date.now() + 36e5).toISOString().slice(0, 13) + ':00:00Z';
       const get = async (path: string) => {
         const r = await fetch(`https://onespace.goatcounter.com/api/v0/${path}${path.includes('?') ? '&' : '?'}start=${start}&end=${end}`,
           { headers: { Authorization: `Bearer ${gc}`, 'Content-Type': 'application/json' } });
-        if (!r.ok) throw new Error(`goatcounter ${path}: ${r.status}`);
+        // GoatCounter answers 404 when a list has no rows yet (e.g. no referrers): treat that as empty.
+        if (r.status === 404) return {};
+        if (!r.ok) throw new Error(`goatcounter ${path.split('?')[0]}: ${r.status}`);
         return r.json();
       };
+      // One failing source never hides the others.
+      const safe = (path: string) => get(path).catch((e) => { (stats.traffic_warnings ??= []).push(String(e).slice(0, 120)); return {}; });
       const n = (x: any) => Number(x?.count ?? x?.count_unique ?? 0);
       try {
-        const [total, hits, refs, locs] = await Promise.all([get('stats/total'), get('stats/hits?limit=200'), get('stats/toprefs?limit=10'), get('stats/locations?limit=8')]);
-        stats.visitors = Number(total.total ?? total.total_utc ?? 0);
+        const [total, hits, refs, locs] = await Promise.all([get('stats/total'), safe('stats/hits?limit=100'), safe('stats/toprefs?limit=10'), safe('stats/locations?limit=8')]);
+        // `total` counts visitors including events; events are clicks, not people.
+        stats.visitors = Math.max(0, Number(total.total ?? 0) - Number(total.total_events ?? 0));
         const all: any[] = hits.hits ?? [];
         stats.top_pages = all.filter((h) => !h.event).slice(0, 10).map((h) => ({ page: h.path, n: n(h) }));
         const ev: Record<string, number> = {};
