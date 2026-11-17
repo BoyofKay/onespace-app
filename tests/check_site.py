@@ -1,4 +1,5 @@
 """OneSpace static-site smoke checks — no external dependencies."""
+import re
 from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import urlsplit
@@ -124,6 +125,11 @@ def main():
         for word in FORBIDDEN:
             if word.lower() in text.lower():
                 errors.append(f"{path}: contains forbidden text '{word}'")
+    # A single-element selector ($) must never be iterated like a list ($).
+    # Such a runtime error used to stop the mega menu and all later page widgets.
+    js_source = (ROOT / "assets/os.js").read_text(encoding="utf-8")
+    if re.search(r"(?<!\$)\$\([^;\n]+\)\.(?:forEach|length)\b", js_source):
+        errors.append("assets/os.js: singleton $() selector treated as a list; use $()")
     if errors:
         print("\n".join(errors))
         raise SystemExit(1)
