@@ -1,6 +1,6 @@
 # Founder Members waitlist — backend (website only)
 
-Runs in the OneSpace Supabase project, isolated from the app: its own `private.founder_*` tables and
+Runs in the **OneSpace Production** Supabase project (`letcgxbnblohhfyeuigz`, Frankfurt — since 17 Nov 2026; the old project `ugwrpeduzyzrujkizqfo` is now the app's QA backend), isolated from the app: its own `private.founder_*` tables and
 `public.founder_*` functions that only the service role can call. Nothing here touches app tables.
 
 | Piece | What it does |
