@@ -67,7 +67,8 @@ def head(page, title, title_ar, desc, desc_ar=''):
     def drop(label, label_ar, items, pages):
         cur = ' aria-current="page"' if page in pages else ''
         inner = ''.join(f'<a href="{h}"><span class="e">{e}</span><span>{T(t, ta, "b")}{T(d, da, "small")}</span></a>' for h, e, t, ta, d, da in items)
-        return f'<div class="drop"><button type="button" aria-expanded="false"{cur}>{T(label, label_ar)} ▾</button><div class="drop-panel">{inner}</div></div>'
+        panel_id = 'mega-' + ('features' if label == 'Features' else 'couples' if label == 'For couples' else 'learn')
+        return f'<div class="drop"><button type="button" aria-expanded="false" aria-controls="{panel_id}"{cur}>{T(label, label_ar)} <span aria-hidden="true">▾</span></button><div class="drop-panel" id="{panel_id}" role="group" aria-label="{escape(label)}">{inner}</div></div>'
     feat_items = [('features.html', '✨', 'All features', 'كل المزايا', 'The five tabs, one by one', 'التبويبات الخمسة واحدًا تلو الآخر')] + \
         [(d['slug'], d['icon'], d['nav'][0], d['nav'][1], d['navd'][0], d['navd'][1]) for d in DEEP] + \
         [('compare.html', '🆚', 'Compare', 'مقارنة', 'vs. chat, notes and calendars', 'مقارنة بالمحادثة والملاحظات والتقويمات')]
