@@ -13,8 +13,10 @@ async function same(a: string, b: string): Promise<boolean> {
 
 Deno.serve(async (req) => {
   if (req.method === 'OPTIONS') return json(req, {});
-  const want = Deno.env.get('FOUNDER_ADMIN_KEY') ?? '';
-  if (want.length < 16 || !(await same(req.headers.get('x-admin-key') ?? '', want))) {
+  // Trim both sides: a pasted secret often carries a trailing space or newline. Any length is accepted.
+  const want = (Deno.env.get('FOUNDER_ADMIN_KEY') ?? '').trim();
+  if (!want) return json(req, { ok: false, error: 'key_not_set' }, 503);
+  if (!(await same((req.headers.get('x-admin-key') ?? '').trim(), want))) {
     await new Promise((r) => setTimeout(r, 600));
     return json(req, { ok: false, error: 'unauthorized' }, 401);
   }
@@ -32,14 +34,41 @@ Deno.serve(async (req) => {
     const days = Math.max(7, Math.min(180, Number(new URL(req.url).searchParams.get('days') ?? 30)));
     const stats = await rpc('founder_stats', { p_days: days });
     stats.mail_key_set = Boolean(Deno.env.get('RESEND_API_KEY'));
-    // Optional: visitors from GoatCounter (set GOATCOUNTER_TOKEN, a read-only API key) for a visitors → sign-ups rate.
+    // Website traffic from GoatCounter (needs GOATCOUNTER_TOKEN, a read-only API key). Never fails the dashboard.
     const gc = Deno.env.get('GOATCOUNTER_TOKEN');
+    stats.traffic_connected = Boolean(gc);
     if (gc) {
+      const start = new Date(Date.now() - days * 864e5).toISOString().slice(0, 10);
+      const end = new Date(Date.now() + 864e5).toISOString().slice(0, 10);
+      const get = async (path: string) => {
+        const r = await fetch(`https://onespace.goatcounter.com/api/v0/${path}${path.includes('?') ? '&' : '?'}start=${start}&end=${end}`,
+          { headers: { Authorization: `Bearer ${gc}`, 'Content-Type': 'application/json' } });
+        if (!r.ok) throw new Error(`goatcounter ${path}: ${r.status}`);
+        return r.json();
+      };
+      const n = (x: any) => Number(x?.count ?? x?.count_unique ?? 0);
       try {
-        const start = new Date(Date.now() - days * 864e5).toISOString().slice(0, 10);
-        const r = await fetch(`https://onespace.goatcounter.com/api/v0/stats/total?start=${start}`, { headers: { Authorization: `Bearer ${gc}` } });
-        if (r.ok) { const t = await r.json(); stats.visitors = t.total_utc ?? t.total ?? null; }
-      } catch { /* optional */ }
+        const [total, hits, refs, locs] = await Promise.all([get('stats/total'), get('stats/hits?limit=200'), get('stats/toprefs?limit=10'), get('stats/locations?limit=8')]);
+        stats.visitors = Number(total.total ?? total.total_utc ?? 0);
+        const all: any[] = hits.hits ?? [];
+        stats.top_pages = all.filter((h) => !h.event).slice(0, 10).map((h) => ({ page: h.path, n: n(h) }));
+        const ev: Record<string, number> = {};
+        for (const h of all.filter((h) => h.event)) ev[h.path] = (ev[h.path] ?? 0) + n(h);
+        const sum = (re: RegExp) => Object.entries(ev).filter(([k]) => re.test(k)).reduce((s, [, v]) => s + v, 0);
+        stats.funnel = [
+          { step: 'Visitors', n: stats.visitors },
+          { step: 'Clicked Join', n: sum(/^cta\/(join|hero_join|sticky_join)/) },
+          { step: 'Started the form', n: sum(/^founders\/form-start/) },
+          { step: 'Sent the form', n: sum(/^founders\/sent$/) },
+          { step: 'Confirmed email', n: sum(/^founders\/confirmed$/) },
+        ];
+        stats.demo = { tour_finished: sum(/^demo\/tour-finished/), demo_clicks: sum(/^cta\/demo|^cta\/hero_demo/), theme_picks: sum(/^theme\//) };
+        stats.top_events = Object.entries(ev).sort((a, b) => b[1] - a[1]).slice(0, 12).map(([k, v]) => ({ event: k, n: v }));
+        stats.referrers = (refs.stats ?? []).slice(0, 10).map((r: any) => ({ source: r.name || '(direct)', n: n(r) }));
+        stats.countries = (locs.stats ?? []).slice(0, 8).map((r: any) => ({ source: r.name || r.id || '?', n: n(r) }));
+      } catch (e) {
+        stats.traffic_error = String(e).slice(0, 160);
+      }
     }
     return json(req, { ok: true, stats });
   } catch (e) {

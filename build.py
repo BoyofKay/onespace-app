@@ -1773,6 +1773,12 @@ def main():
     (ROOT / 'site.webmanifest').write_text(json.dumps({'name': 'OneSpace', 'short_name': 'OneSpace', 'start_url': './', 'display': 'standalone',
         'background_color': '#FFFFFF', 'theme_color': '#14213D', 'icons': [{'src': 'assets/icon-512.png', 'sizes': '512x512', 'type': 'image/png'},
         {'src': 'assets/apple-touch-icon.png', 'sizes': '180x180', 'type': 'image/png'}]}, indent=1) + '\n', encoding='utf-8')
+    # Cache-busting: each page asks for os.css / os.js / ar.js by content hash, so a change reaches browsers at once.
+    ver = {a: hashlib.sha256((ROOT / 'assets' / a).read_bytes()).hexdigest()[:10] for a in ('os.css', 'os.js', 'ar.js')}
+    for f in list(ROOT.glob('*.html')) + list((ROOT / 'ar').glob('*.html')):
+        t = f.read_text(encoding='utf-8')
+        u = re.sub(r'assets/(os\.css|os\.js|ar\.js)(\?v=[0-9a-f]+)?"', lambda m: f'assets/{m.group(1)}?v={ver[m.group(1)]}"', t)
+        if u != t: f.write_text(u, encoding='utf-8')
     print(f'{len(PAGES)} pages, {len(REDIRECTS)} redirects, {len(AR)} Arabic strings')
 
 
