@@ -97,6 +97,21 @@ def main():
     for marker in ('id="founding"', 'data-form="join"', 'data-views="tabs"', 'data-theme-pick='):
         if marker not in index:
             errors.append(f"Missing interactive UI on the homepage: {marker}")
+    # Ensure new marketing UI and original protected flows survive regeneration.
+    for locale in ("index.html", "ar/index.html"):
+        page = (ROOT / locale).read_text(encoding="utf-8")
+        for marker in ('id="get-the-app"', 'Google Play', 'App Store',
+                       'aria-controls="mega-features"', 'id="mega-features"',
+                       'aria-controls="mega-couples"', 'aria-controls="mega-learn"',
+                       'family=Inter:wght'):
+            if marker not in page:
+                errors.append(f"{locale}: missing generated navigation/store marker: {marker}")
+        if "store_android_waitlist" not in page or "store_iphone_waitlist" not in page:
+            errors.append(f"{locale}: store cards must link to Founder waitlist")
+        if 'id="founding"' not in page or 'data-theme-pick=' not in page:
+            errors.append(f"{locale}: founder area or theme wizard missing")
+    if 'href="https://play.google.com/store/apps/' in index or 'href="https://apps.apple.com/app/' in index:
+        errors.append("Do not link to unpublished store listings")
     sitemap = (ROOT / "sitemap.xml").read_text(encoding="utf-8")
     for path in PAGES:
         if path != "404.html" and (ROOT / path).exists() and ("/" + path.removesuffix("index.html") + "</loc>") not in sitemap:

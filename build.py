@@ -67,7 +67,8 @@ def head(page, title, title_ar, desc, desc_ar=''):
     def drop(label, label_ar, items, pages):
         cur = ' aria-current="page"' if page in pages else ''
         inner = ''.join(f'<a href="{h}"><span class="e">{e}</span><span>{T(t, ta, "b")}{T(d, da, "small")}</span></a>' for h, e, t, ta, d, da in items)
-        return f'<div class="drop"><button type="button" aria-expanded="false"{cur}>{T(label, label_ar)} ▾</button><div class="drop-panel">{inner}</div></div>'
+        panel_id = 'mega-' + ('features' if label == 'Features' else 'couples' if label == 'For couples' else 'learn')
+        return f'<div class="drop"><button type="button" aria-expanded="false" aria-controls="{panel_id}"{cur}>{T(label, label_ar)} <span aria-hidden="true">▾</span></button><div class="drop-panel" id="{panel_id}" role="group" aria-label="{escape(label)}">{inner}</div></div>'
     feat_items = [('features.html', '✨', 'All features', 'كل المزايا', 'The five tabs, one by one', 'التبويبات الخمسة واحدًا تلو الآخر')] + \
         [(d['slug'], d['icon'], d['nav'][0], d['nav'][1], d['navd'][0], d['navd'][1]) for d in DEEP] + \
         [('compare.html', '🆚', 'Compare', 'مقارنة', 'vs. chat, notes and calendars', 'مقارنة بالمحادثة والملاحظات والتقويمات')]
@@ -81,7 +82,8 @@ def head(page, title, title_ar, desc, desc_ar=''):
                 ('tutorials.html', '🧭', 'Tutorials', 'الدروس', 'Step-by-step how-tos', 'شروحات خطوة بخطوة'),
                 ('faq.html', '❓', 'FAQ', 'الأسئلة الشائعة', 'Privacy, pricing, help', 'الخصوصية والأسعار والمساعدة'),
                 ('whats-new.html', '✨', "What's new", 'الجديد', 'Updates and availability', 'التحديثات والتوفر')],
-                 ('guides.html', 'tutorials.html', 'faq.html', 'whats-new.html') + tuple(g['slug'] for g in GUIDES))]
+                 ('guides.html', 'tutorials.html', 'faq.html', 'whats-new.html') + tuple(g['slug'] for g in GUIDES)),
+            link('index.html#get-the-app', 'Get the app', 'حمّل التطبيق')]
     dk = K(desc, desc_ar or desc)
     verify = (f'\n<meta name="google-site-verification" content="{GOOGLE_VERIFY}">' if GOOGLE_VERIFY else '') + \
              (f'\n<meta name="msvalidate.01" content="{BING_VERIFY}">' if BING_VERIFY else '')
@@ -116,7 +118,7 @@ def head(page, title, title_ar, desc, desc_ar=''):
 <link rel="manifest" href="site.webmanifest">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/os.css">{analytics}
 <script type="application/ld+json">{site_ld}</script>
 </head>
@@ -174,6 +176,45 @@ def page_hero(eyebrow, eyebrow_ar, h1, h1_ar, lead, lead_ar, crumbs=True, extra=
   {T(lead, lead_ar, 'p', 'lead')}
   {extra}
 </div></section>'''
+
+
+
+def store_section():
+    """Honest availability cards; no non-existent live store URLs or false launch claims."""
+    return f'''<section id="get-the-app" class="store-arrival" aria-labelledby="get-app-title">
+  <div class="wrap">
+    <div class="sec-head center">
+      {T('YOUR SPACE, SOON ON YOUR PHONE', 'مساحتكما قريبًا على هاتفكما', 'span', 'eyebrow')}
+      <h2 id="get-app-title">{T('Find OneSpace on', 'ستجد OneSpace على')} <span class="serif accent">{T('your favorite phone.', 'هاتفك المفضّل.')}</span></h2>
+      {T('Android early access is being prepared, with iPhone support planned. Join the waitlist and we’ll share the official download links when each version is available.', 'نجهّز الوصول المبكر لأندرويد، ونعمل على توفير نسخة آيفون لاحقًا. سجّل في قائمة الانتظار وسنرسل روابط التحميل الرسمية عند توفر كل نسخة.', 'p', 'lead')}
+    </div>
+    <div class="store-arrival-grid">
+      <article class="store-arrival-card android">
+        <div class="store-arrival-head">
+          <span class="store-emblem" aria-hidden="true">▶</span>
+          <div>{T('ANDROID · FIRST', 'أندرويد · أولاً', 'span', 'store-eyebrow')}
+            <h3>Google Play</h3></div>
+        </div>
+        <span class="store-status"><span aria-hidden="true">●</span>{T('Closed testing in preparation', 'نجهّز التجربة المغلقة')}</span>
+        {T('We’re getting OneSpace ready for invited testers on Android. Official Google Play access will appear here when testing opens.', 'بنجهّز OneSpace للمختبرين المدعوين على أندرويد. هنضيف رابط Google Play الرسمي هنا لما تفتح التجربة.', 'p')}
+        <a href="join.html" class="btn btn-primary" data-track="store_android_waitlist">{T('Join Android early access →', 'سجّل لتجربة أندرويد ←')}</a>
+        {T('Not publicly available for download yet.', 'غير متاح للتحميل العام حتى الآن.', 'small', 'store-disclaimer')}
+      </article>
+      <article class="store-arrival-card iphone">
+        <div class="store-arrival-head">
+          <span class="store-emblem apple" aria-hidden="true">✦</span>
+          <div>{T('IPHONE · COMING NEXT', 'آيفون · لاحقاً', 'span', 'store-eyebrow')}
+            <h3>App Store</h3></div>
+        </div>
+        <span class="store-status"><span aria-hidden="true">●</span>{T('iPhone version planned', 'نسخة آيفون قيد التخطيط')}</span>
+        {T('OneSpace is planned for iPhone too. Leave your email and we’ll let you know when the App Store version is ready.', 'بنخطط نوفر OneSpace على آيفون كمان. سيب بريدك الإلكتروني وهنبلغك لما نسخة App Store تبقى جاهزة.', 'p')}
+        <a href="join.html" class="btn btn-ghost" data-track="store_iphone_waitlist">{T('Get iPhone launch updates →', 'تابع أخبار إطلاق آيفون ←')}</a>
+        {T('App Store link will be added after release.', 'هنضيف رابط App Store بعد الإطلاق.', 'small', 'store-disclaimer')}
+      </article>
+    </div>
+    <p class="store-arrival-note">{T('No app store listing is live yet. These buttons lead to the existing Founder waitlist, not a download.', 'لسه ما فيش رابط تحميل مباشر على المتاجر. الأزرار دي بتوصلك لقائمة انتظار المؤسسين.', 'span')}</p>
+  </div>
+</section>'''
 
 
 def cta_band(h2='Ready when you two are.', h2_ar='جاهزون متى كنتما مستعدين.',
@@ -835,6 +876,8 @@ def page_index():
   <div class="sec-head" style="display:flex;justify-content:space-between;align-items:end;max-width:none;gap:20px;flex-wrap:wrap"><div>{T('Guides for couples', 'أدلة للأزواج', 'span', 'eyebrow')}{T('Ideas worth stealing.', 'أفكار تستحق التجربة.', 'h2', '', 'style="margin-top:10px"')}</div><a class="btn btn-ghost" href="guides.html">{T('All guides →', 'كل الأدلة ←')}</a></div>
   <div class="grid g3">{guide_cards()}</div>
 </div></section>
+
+{store_section()}
 
 <section id="founding"><div class="wrap"><div class="band"><div class="cta-band" style="align-items:start">
   <div>

@@ -8,7 +8,7 @@
   --shadow: 0 24px 60px -30px rgba(20, 33, 61, .35);
   --shadow-s: 0 10px 30px -18px rgba(20, 33, 61, .35);
   --font: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  --font-ar: "Noto Kufi Arabic", "Inter", system-ui, sans-serif;
+  --font-ar: "IBM Plex Sans Arabic", system-ui, sans-serif;
 }
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
@@ -687,3 +687,97 @@ html[dir="rtl"] .ol-arrow { transform: scaleX(-1); }
 @media (max-width: 560px) { .kpi-6 { grid-template-columns: 1fr; } }
 .ts-box { margin: 10px 0 12px; min-height: 65px; }
 .ts-box[hidden] { display: none; }
+
+
+/* ---- Nov 2026 typography refresh: the concept's Inter + editorial Georgia accents. ---- */
+:root { --font: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif; --serif: Georgia, "Times New Roman", serif; }
+body { font-family:var(--font); }
+h1,h2,h3,h4,.brand,.btn { letter-spacing:-.025em; }
+.serif, .promise { font-family:var(--serif); font-style:italic; font-weight:500; letter-spacing:-.025em; }
+html[lang="ar"] .serif, html[lang="ar"] .promise { font-family:var(--font-ar); font-style:normal; font-weight:650; letter-spacing:normal; }
+
+/* Click-only full-width mega navigation (never opens on hover). */
+.mega-backdrop {position:fixed;inset:70px 0 0;z-index:29;background:rgba(13,29,43,.40);backdrop-filter:blur(2px);}
+.mega-backdrop[hidden] {display:none!important;}
+.menu .drop > button[aria-expanded="true"] {background:var(--teal-l);color:var(--teal);}
+@media (min-width:981px) {
+  .top .wrap{position:relative;}
+  .menu .drop{position:static;}
+  .menu .drop-panel{
+    display:none;position:fixed;inset-inline:0;top:70px;left:0;right:0;width:100vw;min-width:0;
+    max-height:calc(100dvh - 86px);overflow-y:auto;overscroll-behavior:contain;
+    border:1px solid var(--line);border-top:0;border-radius:0 0 22px 22px;
+    background:#fff;box-shadow:0 28px 65px -20px rgba(20,33,61,.26);
+    padding:29px max(30px,calc((100vw - 1160px) / 2)) 37px;
+    grid-template-columns:repeat(3,minmax(0,1fr));align-items:stretch;gap:10px 19px;
+    z-index:32;
+  }
+  .menu .drop:hover > .drop-panel,.menu .drop:focus-within > .drop-panel{display:none;}
+  .menu .drop.open > .drop-panel,
+  .menu .drop.open:hover > .drop-panel,
+  .menu .drop.open:focus-within > .drop-panel{display:grid;}
+  .menu .drop-panel::before{
+    content:"Explore OneSpace";display:block;grid-column:1/-1;align-self:start;
+    color:var(--teal);font-family:var(--font);font-weight:800;font-size:22px;
+    letter-spacing:-.04em;padding:0 0 14px;border-bottom:1px solid var(--line);margin-bottom:6px;
+  }
+  .menu .drop:nth-child(2) .drop-panel::before {content:"Made for your way of living";}
+  .menu .drop:nth-child(4) .drop-panel::before {content:"Learn and get inspired";}
+  html[lang="ar"] .menu .drop:nth-child(1) .drop-panel::before{content:"اكتشف مزايا OneSpace";}
+  html[lang="ar"] .menu .drop:nth-child(2) .drop-panel::before{content:"مصمم ليناسب حياتكما";}
+  html[lang="ar"] .menu .drop:nth-child(4) .drop-panel::before{content:"تعلّم واستكشف";}
+  .menu .drop-panel a{
+    display:flex;min-width:0;gap:14px;align-items:flex-start;
+    border:1px solid var(--line);border-radius:15px;padding:17px 15px;
+    color:var(--ink);text-decoration:none;
+    transition:border-color .14s ease,background .14s ease,transform .14s ease;
+  }
+  .menu .drop-panel a:hover,.menu .drop-panel a:focus-visible{
+    border-color:#b8dad9;background:var(--teal-l);transform:translateY(-1px);
+  }
+  .menu .drop-panel a .e{
+    flex:0 0 40px;width:40px;height:40px;display:grid;place-items:center;
+    border-radius:12px;background:var(--soft);font-size:23px;
+  }
+  .menu .drop-panel a > span:last-child{flex:1;min-width:0;}
+  .menu .drop-panel a b{font-size:15px;line-height:1.4;letter-spacing:-.02em;}
+  .menu .drop-panel a small{display:block;margin-top:5px;font-size:12px;line-height:1.55;color:var(--muted);}
+  .menu .drop:nth-child(2) .drop-panel{grid-template-columns:repeat(2,minmax(0,1fr));}
+  .menu .drop:nth-child(4) .drop-panel{grid-template-columns:repeat(2,minmax(0,1fr));}
+}
+/* Mobile navigation remains an explicit click-to-expand accordion. */
+@media (max-width:980px){
+  .mega-backdrop{inset:62px 0 0;}
+  .menu .drop-panel{display:none;max-height:none;background:transparent;border:0;border-radius:0;box-shadow:none;}
+  .menu .drop-panel::before{content:none;}
+  .menu .drop.open > .drop-panel{display:block;}
+  .menu .drop:hover:not(.open) > .drop-panel,.menu .drop:focus-within:not(.open) > .drop-panel{display:none;}
+  .menu .drop-panel a{border-bottom:1px solid var(--line);}
+  .menu .drop-panel a:last-child{border-bottom:0;}
+  .top .menu.open{z-index:33;max-height:calc(100dvh - 80px);}
+}
+@media(prefers-reduced-motion:reduce){.menu .drop-panel a{transition:none;}}
+
+/* Clear store availability — no false Google Play or App Store download promises. */
+.store-arrival{padding:87px 0 93px;background:linear-gradient(155deg,#F8FBF9 0%,#FFF8F4 100%);scroll-margin-top:90px;}
+.store-arrival .sec-head{max-width:860px;margin:0 auto 36px;}
+.store-arrival .sec-head h2{line-height:1.13;margin:14px auto;}
+.store-arrival .lead{max-width:730px;margin:0 auto;}
+.store-arrival-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;max-width:960px;margin:auto;}
+.store-arrival-card{min-width:0;display:flex;flex-direction:column;align-items:flex-start;
+  padding:32px;background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);
+  box-shadow:0 18px 45px -33px rgba(20,33,61,.3);}
+.store-arrival-head{display:flex;align-items:center;gap:16px;margin-bottom:24px;}
+.store-emblem{width:62px;height:62px;border-radius:19px;display:grid;place-items:center;
+  background:#e7f3ee;color:#2e806e;font-size:29px;line-height:1;font-weight:850;}
+.store-emblem.apple{background:#e8e8f8;color:#6763a5;font-size:31px;}
+.store-eyebrow{display:block;color:var(--muted);font-size:11px;letter-spacing:.10em;font-weight:800;}
+.store-arrival-head h3{font-size:28px;line-height:1.2;margin:4px 0 0;letter-spacing:-.04em;}
+.store-status{display:flex;align-items:center;gap:9px;color:var(--teal);font-size:13px;font-weight:800;}
+.store-status>span{color:#55b2a4;font-size:12px;}
+.store-arrival-card.iphone .store-status>span{color:#9880ce;}
+.store-arrival-card>p{font-size:14px;line-height:1.8;color:var(--ink-2);margin:14px 0 22px;flex:1;}
+.store-arrival-card>.btn{margin-top:auto;}
+.store-arrival-card .store-disclaimer{display:block;margin-top:16px;font-size:12px;color:var(--muted);line-height:1.5;}
+.store-arrival-note{font-size:12px;color:var(--muted);text-align:center;margin:22px 0 0;line-height:1.7;}
+@media(max-width:720px){.store-arrival{padding:65px 0 72px}.store-arrival-grid{grid-template-columns:1fr;gap:14px}.store-arrival-card{padding:26px}.store-arrival-head h3{font-size:25px}}
