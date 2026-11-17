@@ -4,7 +4,6 @@ Disallow: /v4.html
 Disallow: /v4-tutorial.html
 Disallow: /confirm.html
 Disallow: /ar/confirm.html
-Disallow: /founders-admin.html
 Disallow: /unsubscribe.html
 Disallow: /ar/unsubscribe.html
 

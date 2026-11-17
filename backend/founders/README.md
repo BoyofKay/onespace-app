@@ -8,7 +8,7 @@ Runs in the **OneSpace Production** Supabase project (`letcgxbnblohhfyeuigz`, Fr
 | `0134_founder_members.sql` | Tables (couples, members, email log, attempts) and functions: join, confirm, stats, email log, resend list |
 | `functions/founder-join.ts` | `POST /functions/v1/founder-join` — form endpoint: spam traps, rate limits, consent, sends the confirmation email |
 | `functions/founder-confirm.ts` | `POST /functions/v1/founder-confirm` — confirmation link; gives the Founder number, sends welcome / partner-joined emails |
-| `functions/founder-admin.ts` | `GET/POST /functions/v1/founder-admin` — numbers for `/founders-admin.html` (needs `x-admin-key`) |
+| `functions/founder-admin.ts` | `GET/POST /functions/v1/founder-admin` — numbers for the Command Center Website tab (needs `x-admin-key`; the public admin page was retired 17 Nov 2026) |
 | `functions/founder-unsubscribe.ts` | One-click unsubscribe (RFC 8058 POST from mail apps; GET redirects to `/unsubscribe.html`) |
 | `functions/site-contact.ts` | Support and Delete-account forms: saves the request and emails it to support@ / privacy@ (Reply-To = visitor) |
 | `0137_founder_spam_counts.sql` | Spam-protection counters per day (counts only) + `founder_spam_count` / `founder_spam_stats` |

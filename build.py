@@ -90,8 +90,7 @@ def head(page, title, title_ar, desc, desc_ar=''):
          'slogan': 'Two of us. One Space.'},
         {'@type': 'WebSite', '@id': BASE + '#site', 'name': 'OneSpace', 'url': BASE, 'inLanguage': ['en', 'ar'], 'publisher': {'@id': BASE + '#org'}}]})
     # Paths are counted without the query string or #fragment, so nothing typed into a URL (or a confirmation token) is sent.
-    # The private admin page is never counted, so Ahmed's own checks don't inflate the numbers.
-    analytics = ('\n<script>window.goatcounter={path:function(){return location.pathname},no_onload:/founders-admin/.test(location.pathname)};</script>'
+    analytics = ('\n<script>window.goatcounter={path:function(){return location.pathname}};</script>'
                  f'\n<script data-goatcounter="https://{GOATCOUNTER}.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>') if GOATCOUNTER else ''
     return f'''<!doctype html>
 <html lang="en" dir="ltr">
@@ -1596,54 +1595,6 @@ def page_confirm():
 </div></section>""" + foot()
 
 
-def page_founders_admin():
-    h = head('founders-admin.html', 'OneSpace admin — traffic, sign-ups and email', 'لوحة إدارة OneSpace', 'Private dashboard.', 'لوحة خاصة.')
-    h = h.replace('<meta charset="utf-8">', '<meta charset="utf-8">\n<meta name="robots" content="noindex, nofollow">', 1)
-    return h + """
-<section class="page-hero"><div class="wrap" data-admin>
-  <h1>OneSpace admin</h1>
-  <form class="panel admin-login" data-admin-login style="max-width:440px">
-    <label for="ak">Admin key</label><div class="pw-wrap"><input id="ak" type="password" autocomplete="current-password" required><button type="button" class="pw-eye" data-pw-toggle aria-controls="ak" aria-pressed="false" aria-label="Show key" title="Show key"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path class="eye-open" d="M1.5 12S5.5 4.5 12 4.5 22.5 12 22.5 12 18.5 19.5 12 19.5 1.5 12 1.5 12Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="12" cy="12" r="3.2" fill="none" stroke="currentColor" stroke-width="1.8"/><path class="eye-slash" d="M3 3l18 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button></div>
-    <div class="cta-row" style="margin-top:12px"><button class="btn btn-primary" type="submit">Open dashboard</button></div>
-    <p class="status" role="status"></p>
-    <p class="muted" style="font-size:13px">Counts only — no email addresses are shown here. For individual sign-ups use Supabase › Table editor › private.founder_members.</p>
-  </form>
-  <div data-admin-body hidden>
-    <div class="adm-top"><div class="adm-range">Show the last <button type="button" class="chip" data-days="7">7 days</button><button type="button" class="chip" data-days="30" aria-pressed="true">30 days</button><button type="button" class="chip" data-days="90">90 days</button></div><span class="muted" data-updated></span></div>
-    <div class="kpi-grid" data-kpis></div>
-    <h2 class="adm-h">Needs your attention</h2>
-    <div data-attention></div>
-    <h2 class="adm-h">The website: visitors and how they become Founders</h2>
-    <div data-traffic></div>
-    <h2 class="adm-h">Sign-ups over time</h2>
-    <div class="panel"><p class="adm-sum" data-chart-sum></p><div data-chart class="adm-chart"></div><p class="adm-legend"><i></i> signed up <i class="c"></i> confirmed email</p></div>
-    <h2 class="adm-h">Who is signing up <small>all confirmed Founders so far</small></h2>
-    <div class="adm-row adm-3">
-      <div class="panel"><h3>Their phones</h3><div data-bars="platform"></div></div>
-      <div class="panel"><h3>How they live</h3><div data-bars="living"></div></div>
-      <div class="panel"><h3>Language</h3><div data-bars="language"></div></div>
-    </div>
-    <div class="adm-row adm-3">
-      <div class="panel"><h3>How they heard about us</h3><div data-list="sources"></div></div>
-      <div class="panel"><h3>First page they saw</h3><div data-list="landing"></div></div>
-      <div class="panel"><h3>Emails we sent</h3><div data-bars="emails"></div><div data-failures></div></div>
-    </div>
-    <div class="adm-row adm-3">
-      <div class="panel"><h3>Spam protection</h3><div data-bars="spam"></div><p class="muted" style="font-size:12px">Forms sent within 2.5 s of the page opening get a Cloudflare Turnstile check. Counts only — never who.</p></div>
-    </div>
-    <h2 class="adm-h">Everything else, in one place</h2>
-    <div class="grid g3 adm-links">
-      <a class="card link" href="https://onespace.goatcounter.com" target="_blank" rel="noopener"><h3>📈 Visitors (GoatCounter)</h3><p>Every page, source, country, device and click event, by day.</p></a>
-      <a class="card link" href="https://search.google.com/search-console?resource_id=sc-domain:onespace.live" target="_blank" rel="noopener"><h3>🔎 Google Search Console</h3><p>Searches that show OneSpace, clicks, position, indexed pages.</p></a>
-      <a class="card link" href="https://www.bing.com/webmasters" target="_blank" rel="noopener"><h3>🔎 Bing Webmaster Tools</h3><p>Bing and Copilot search performance.</p></a>
-      <a class="card link" href="https://resend.com/emails" target="_blank" rel="noopener"><h3>✉️ Resend</h3><p>Each email sent: delivered, opened, bounced, complained.</p></a>
-      <a class="card link" href="https://supabase.com/dashboard/project/letcgxbnblohhfyeuigz/editor" target="_blank" rel="noopener"><h3>🗄 Supabase tables</h3><p><code>private.founder_members</code> (people), <code>founder_couples</code> (numbers), <code>founder_email_log</code>, <code>public.public_support_requests</code> (website messages).</p></a>
-      <a class="card link" href="https://mail.zoho.com" target="_blank" rel="noopener"><h3>📥 Zoho Mail</h3><p>Replies to founders@, messages to support@, hello@ and privacy@.</p></a>
-    </div>
-  </div>
-</div></section>""" + foot()
-
-
 def page_unsubscribe():
     h = head('unsubscribe.html', 'Unsubscribe — OneSpace', 'إلغاء الاشتراك — OneSpace', 'Stop OneSpace Founder emails.', 'أوقف رسائل مؤسسي OneSpace.')
     h = h.replace('<meta charset="utf-8">', '<meta charset="utf-8">\n<meta name="robots" content="noindex">', 1)
@@ -1759,7 +1710,6 @@ def main():
     (ROOT / 'ar').mkdir(exist_ok=True)
     (ROOT / 'confirm.html').write_text(page_confirm(), encoding='utf-8')
     (ROOT / 'ar' / 'confirm.html').write_text(arabic_page((ROOT / 'confirm.html').read_text(encoding='utf-8'), 'confirm.html'), encoding='utf-8')
-    (ROOT / 'founders-admin.html').write_text(page_founders_admin(), encoding='utf-8')
     (ROOT / 'unsubscribe.html').write_text(page_unsubscribe(), encoding='utf-8')
     (ROOT / 'ar' / 'unsubscribe.html').write_text(arabic_page((ROOT / 'unsubscribe.html').read_text(encoding='utf-8'), 'unsubscribe.html'), encoding='utf-8')
     for name in PAGES:
@@ -1773,7 +1723,7 @@ def main():
             urls += f'  <url><loc>{loc}</loc><lastmod>{TODAY}</lastmod><changefreq>{c}</changefreq><priority>{pr}</priority>{alt}</url>\n'
     (ROOT / 'sitemap.xml').write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" '
                                       f'xmlns:xhtml="http://www.w3.org/1999/xhtml">\n{urls}</urlset>\n', encoding='utf-8')
-    (ROOT / 'robots.txt').write_text(f'User-agent: *\nAllow: /\nDisallow: /v4.html\nDisallow: /v4-tutorial.html\nDisallow: /confirm.html\nDisallow: /ar/confirm.html\nDisallow: /founders-admin.html\nDisallow: /unsubscribe.html\nDisallow: /ar/unsubscribe.html\n\nSitemap: {BASE}sitemap.xml\n', encoding='utf-8')
+    (ROOT / 'robots.txt').write_text(f'User-agent: *\nAllow: /\nDisallow: /v4.html\nDisallow: /v4-tutorial.html\nDisallow: /confirm.html\nDisallow: /ar/confirm.html\nDisallow: /unsubscribe.html\nDisallow: /ar/unsubscribe.html\n\nSitemap: {BASE}sitemap.xml\n', encoding='utf-8')
     (ROOT / f'{INDEXNOW_KEY}.txt').write_text(INDEXNOW_KEY + '\n', encoding='utf-8')
     (ROOT / 'llms.txt').write_text(llms_txt(), encoding='utf-8')
     (ROOT / 'site.webmanifest').write_text(json.dumps({'name': 'OneSpace', 'short_name': 'OneSpace', 'start_url': './', 'display': 'standalone',
