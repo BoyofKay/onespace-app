@@ -113,13 +113,65 @@
   if (lang === 'ar') apply();  // already rendered in Arabic on the server; this only fills script-made text
   $$('.lang').forEach(function (b) { b.addEventListener('click', function () { var to = lang === 'ar' ? 'en' : 'ar'; put('os-lang', to); track('lang/' + to); location.href = twin(to); }); });
 
-  // ---------- Menu ----------
+  // ---------- Click-to-open full-width mega navigation (mobile: accordion) ----------
   var burger = $('.burger'), menu = $('.menu');
+  var backdrop = document.createElement('div');
+  backdrop.className = 'mega-backdrop'; backdrop.hidden = true;
+  backdrop.setAttribute('aria-hidden', 'true');
+  if (menu) document.body.appendChild(backdrop);
+  var lastMenuTrigger = null;
+  function syncBackdrop() {
+    var expanded = $('.drop.open', menu || document).length > 0;
+    backdrop.hidden = !(expanded || (menu && menu.classList.contains('open')));
+  }
+  function closeMega(focusTrigger) {
+    $('.drop.open', menu || document).forEach(function (d) {
+      d.classList.remove('open');
+      var b = $('button[aria-expanded]', d);
+      if (b) b.setAttribute('aria-expanded', 'false');
+    });
+    if (menu) menu.classList.remove('open');
+    if (burger) burger.setAttribute('aria-expanded', 'false');
+    syncBackdrop();
+    if (focusTrigger && lastMenuTrigger && document.contains(lastMenuTrigger)) lastMenuTrigger.focus();
+  }
   if (burger && menu) burger.addEventListener('click', function () {
-    var open = menu.classList.toggle('open'); burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    var wasOpen = menu.classList.contains('open');
+    closeMega(false);
+    if (!wasOpen) { menu.classList.add('open'); burger.setAttribute('aria-expanded', 'true'); }
+    syncBackdrop();
   });
-  $$('.drop > button').forEach(function (b) { b.addEventListener('click', function () {
-    var d = b.parentElement; var open = d.classList.toggle('open'); b.setAttribute('aria-expanded', open ? 'true' : 'false'); }); });
+  $('.drop > button').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var drop = b.parentElement, wasOpen = drop.classList.contains('open');
+      $('.drop.open').forEach(function (d) {
+        d.classList.remove('open');
+        var other = $('button[aria-expanded]', d);
+        if (other) other.setAttribute('aria-expanded', 'false');
+      });
+      if (!wasOpen) {
+        drop.classList.add('open'); b.setAttribute('aria-expanded', 'true');
+        lastMenuTrigger = b;
+      }
+      syncBackdrop();
+    });
+  });
+  if (menu) {
+    menu.addEventListener('click', function (event) {
+      if (event.target.closest('a')) closeMega(false);
+    });
+    backdrop.addEventListener('click', function () { closeMega(false); });
+    document.addEventListener('click', function (event) {
+      if (!event.target.closest('.top') && !event.target.closest('.mega-backdrop')) closeMega(false);
+    });
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape' && !backdrop.hidden) {
+        event.preventDefault();
+        closeMega(true);
+      }
+    });
+    window.addEventListener('resize', function () { if (!backdrop.hidden) closeMega(false); });
+  }
   var y = $('#year'); if (y) y.textContent = new Date().getFullYear();
 
   // ---------- Theme switcher (phones) ----------
