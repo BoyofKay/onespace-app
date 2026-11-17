@@ -31,6 +31,7 @@
     return true;
   }
   function track(name) {
+    if (/founders-admin/.test(location.pathname)) return; // the private admin page is never counted
     name = String(name).replace(/[^\w\/@.\-]/g, '-').slice(0, 120);
     gcQueue.push(name);
     if (!flush()) { var tries = 0, t = setInterval(function () { if (flush() || ++tries > 40) clearInterval(t); }, 250); }
@@ -366,6 +367,11 @@
       var ks = Object.keys(obj); if (!keep) ks.sort(function (a, b) { return obj[b] - obj[a]; });
       return ks.map(function (k) { var pc = Math.round(100 * obj[k] / tot);
         return '<div class="adm-bar"><span>' + esc((f || label)(k)) + '</span><i style="width:' + pc + '%"></i><b>' + obj[k] + ' · ' + pc + '%</b></div>'; }).join(''); };
+    // GoatCounter breakdowns (sources, countries, devices, systems) also count clicks, so only their shares are meaningful.
+    var shares = function (obj, f) { var tot = 0, k; for (k in obj) tot += obj[k]; if (!tot) return '<p class="muted">No data yet</p>';
+      return Object.keys(obj).sort(function (a, b) { return obj[b] - obj[a]; }).map(function (k) { var pc = Math.round(100 * obj[k] / tot);
+        return '<div class="adm-bar"><span>' + esc((f || label)(k)) + '</span><i style="width:' + pc + '%"></i><b>' + pc + '%</b></div>'; }).join(''); };
+    var srows = function (list, k, f) { var obj = {}; (list || []).forEach(function (r) { if (r[k] !== '(unknown)') obj[r[k]] = (obj[r[k]] || 0) + r.n; }); return shares(obj, f); };
     var rows = function (list, k, f) { var obj = {}; (list || []).forEach(function (r) { obj[r[k]] = (obj[r[k]] || 0) + r.n; }); return bars(obj, f); };
     var card = function (o) {
       return '<div class="kpi' + (o.tone ? ' ' + o.tone : '') + '"><h3>' + o.title + '</h3><b>' + o.big + '</b>' + (o.bar != null ? '<div class="kpi-bar"><i style="width:' + Math.max(o.bar, o.bar ? 1 : 0) + '%"></i></div>' : '') +
@@ -393,9 +399,9 @@
           card({ title: 'New sign-ups', big: num(P.signups), sub: num(P.confirmed) + ' confirmed their email', trend: trend(P.signups, P.prev_signups, 'sign-ups'),
             help: 'People (not couples) who sent the Join form in the last ' + days + ' days.' }),
           card({ title: 'Visitors who sign up', big: conv == null ? '—' : conv + '%', tone: traffic ? '' : 'muted',
-            sub: traffic ? num(P.signups) + ' sign-ups from ' + num(s.visitors) + ' visitors' + (P.signups ? ' · about 1 in ' + Math.max(1, Math.round(s.visitors / P.signups)) : '') : 'Needs the GoatCounter connection',
-            trend: traffic ? trend(s.visitors, s.prev_visitors, 'visitors') : '',
-            help: 'Your main website number: of everyone who visits, how many join.' }),
+            sub: traffic ? num(P.signups) + ' sign-ups from ' + num(s.visitors) + ' page visits' + (P.signups ? ' · about 1 in ' + Math.max(1, Math.round(s.visitors / P.signups)) : '') : 'Needs the GoatCounter connection',
+            trend: traffic ? trend(s.visitors, s.prev_visitors, 'page visits') : '',
+            help: 'Your main website number: sign-ups compared with page visits.' }),
           card({ title: 'Couples with both partners', big: both == null ? '—' : both + '%', bar: both,
             sub: num(s.couples_complete) + ' complete · ' + num(s.couples_waiting_partner) + ' waiting for a partner',
             help: 'OneSpace needs two people. Every waiting couple is one invite away from complete.' })
@@ -427,30 +433,30 @@
           f.forEach(function (st, i) { if (i && f[i - 1].n) { var lost = f[i - 1].n - st.n, r = lost / f[i - 1].n; if (lost > 0 && (!worst || r > worst.r)) worst = { r: r, from: f[i - 1].step, to: st.step, lost: lost }; } });
           var steps = f.map(function (st, i) {
             var w = Math.max(100 * st.n / top, st.n ? 2 : 0), kept = i && f[i - 1].n ? pct(st.n, f[i - 1].n) : null;
-            return '<div class="fn-step"><div class="fn-head"><span>' + (i + 1) + '. ' + esc(st.step) + '</span><b>' + num(st.n) + '</b></div><div class="fn-bar"><i style="width:' + w + '%"></i></div>' +
-              (i ? '<small>' + (kept == null ? '—' : kept + '% continued from the step before') + '</small>' : '<small>people who opened any page</small>') + '</div>'; }).join('');
+            return '<div class="fn-step"><div class="fn-head"><span>' + (i + 1) + '. ' + esc(st.step === 'Visitors' ? 'Page visits' : st.step) + '</span><b>' + num(st.n) + '</b></div><div class="fn-bar"><i style="width:' + w + '%"></i></div>' +
+              (i ? '<small>' + (kept == null ? '—' : kept + '% continued from the step before') + '</small>' : '<small>pages opened (each page counted once per visit)</small>') + '</div>'; }).join('');
           var d = s.demo || {}, T = s.time || {}, TL = { '0-10s': 'under 10 sec', '10-30s': '10–30 sec', '30-60s': '30–60 sec', '1-3m': '1–3 min', '3-10m': '3–10 min', '10m-plus': 'over 10 min' };
           var dv = s.devices || {}, dvT = 0, k; for (k in dv) if (k !== 'Unknown') dvT += dv[k];
           var phone = dvT ? Math.round(100 * (dv.Phone || 0) / dvT) : null, c0 = (s.countries || [])[0], cTot = (s.countries || []).reduce(function (a, c) { return a + c.n; }, 0);
           var mini = function (o) { return '<div class="kpi kpi-s"><h3>' + o.t + '</h3><b>' + o.b + '</b><p>' + o.p + '</p>' + (o.tr || '') + '<small>' + o.h + '</small></div>'; };
           var glance = '<div class="kpi-grid kpi-6">' + [
-            mini({ t: 'Unique visitors', b: num(s.visitors), p: (s.arabic_share != null ? s.arabic_share + '% of page views in Arabic' : 'in the last ' + days + ' days'), tr: trend(s.visitors, s.prev_visitors, 'visitors'),
-              h: 'Different people who opened the site. Counted without cookies, so one person on two devices counts twice.' }),
-            mini({ t: 'Pages per visitor', b: s.pages_per_visitor == null ? '—' : s.pages_per_visitor, p: s.pages_per_visitor >= 2 ? 'People look around' : 'Most see one page and decide',
-              h: 'Average number of pages each visitor opened. Above 2 means they explore.' }),
+            mini({ t: 'Page visits', b: num(s.visitors), p: (s.arabic_share != null ? s.arabic_share + '% of them in Arabic' : 'in the last ' + days + ' days'), tr: trend(s.visitors, s.prev_visitors, 'page visits'),
+              h: 'Each page counted once per person per visit, without cookies. One person reading 3 pages = 3. Exact people can’t be counted without tracking.' }),
+            mini({ t: 'Clicked Join', b: s.visitors ? pct((s.funnel || [])[1] ? s.funnel[1].n : 0, s.visitors) + '%' : '—', p: num((s.funnel || [])[1] ? s.funnel[1].n : 0) + ' clicks on a Join button',
+              h: 'How often a page visit leads to a Join click. Low means the pages don’t make people want to join yet.' }),
             mini({ t: 'Time on a page', b: T.median ? TL[T.median] : '—', p: T.measured ? T.engaged_share + '% stayed 30 sec or more · ' + T.quick_exit_share + '% left within 10 sec' : 'Measuring started today — check back tomorrow',
               h: 'Typical (median) time a visitor actively looks at a page; only time with the tab visible counts.' }),
-            mini({ t: 'Countries', b: num(s.country_count), p: c0 ? 'Top: ' + esc(c0.source) + ' · ' + Math.round(100 * c0.n / Math.max(1, cTot)) + '%' : 'No data yet',
+            mini({ t: 'Countries', b: num(s.country_count), p: c0 ? 'Top: ' + esc(c0.source) + ' · ' + Math.round(100 * c0.n / Math.max(1, cTot)) + '% of visits' : 'No data yet',
               h: 'Countries with at least one visitor, from the visitor’s network — no exact location is ever stored.' }),
-            mini({ t: 'On a phone', b: phone == null ? '—' : phone + '%', p: dvT ? num(dv.Computer || 0) + ' on a computer · ' + num(dv.Tablet || 0) + ' on a tablet' : 'No data yet',
+            mini({ t: 'On a phone', b: phone == null ? '—' : phone + '%', p: dvT ? Math.round(100 * (dv.Computer || 0) / dvT) + '% on a computer · ' + Math.round(100 * (dv.Tablet || 0) / dvT) + '% on a tablet' : 'No data yet',
               h: 'Share of visitors on phone-sized screens. Your Join page must work perfectly on a phone.' }),
-            mini({ t: 'Read to the end', b: s.visitors ? pct(s.read_to_end || 0, s.visitors) + '%' : '—', p: num(s.read_to_end) + ' visitors scrolled to the bottom of a page',
+            mini({ t: 'Read to the end', b: s.visitors ? pct(s.read_to_end || 0, s.visitors) + '%' : '—', p: num(s.read_to_end) + ' page visits scrolled to the bottom',
               h: 'A sign of real interest. Measuring started today.' })
           ].join('') + '</div>';
           var vd = s.visitors_daily || [], vmx = Math.max.apply(null, vd.map(function (x) { return x.n; }).concat([1])), every2 = vd.length > 40 ? 10 : vd.length > 14 ? 5 : 1;
-          var vchart = vd.length ? '<div class="panel"><h3>Visitors per day</h3><div class="adm-chart">' + '<div class="adm-y"><span>' + vmx + '</span><span>0</span></div>' + vd.map(function (x, i) {
+          var vchart = vd.length ? '<div class="panel"><h3>Page visits per day</h3><div class="adm-chart">' + '<div class="adm-y"><span>' + vmx + '</span><span>0</span></div>' + vd.map(function (x, i) {
             var lbl = (i % every2 === 0 || i === vd.length - 1) ? new Date(x.day + 'T12:00:00').toLocaleDateString('en', { month: 'short', day: 'numeric' }) : '';
-            return '<div class="adm-col" title="' + x.day + ': ' + x.n + ' visitors"><i class="v" style="height:' + (100 * x.n / vmx) + '%"></i><span>' + lbl + '</span></div>'; }).join('') + '</div></div>' : '';
+            return '<div class="adm-col" title="' + x.day + ': ' + x.n + ' page visits"><i class="v" style="height:' + (100 * x.n / vmx) + '%"></i><span>' + lbl + '</span></div>'; }).join('') + '</div></div>' : '';
           var timeObj = {}; (T.buckets || []).forEach(function (b) { if (b.n) timeObj[TL[b.bucket]] = b.n; });
           tr.innerHTML = glance + '<div class="adm-row">' + vchart + '</div>' +
             '<div class="adm-row adm-2"><div class="panel"><h3>The path to joining</h3>' + steps +
@@ -460,11 +466,11 @@
             '<div><b>' + num(d.demo_clicks) + '</b><span>opened the demo from a button</span></div><div><b>' + num(d.tour_finished) + '</b><span>finished the guided demo tour</span></div>' +
             '<div><b>' + num(d.theme_picks) + '</b><span>tried a colour theme</span></div><div><b>' + num(d.outbound_store) + '</b><span>went to Google Play / App Store</span></div></div>' +
             '<h3 style="margin-top:18px">Time on a page</h3>' + bars(timeObj, String, true) + '</div></div>' +
-            '<div class="adm-row adm-3"><div class="panel"><h3>Where visitors come from</h3>' + rows(s.referrers, 'source', function (k) { return k === '(direct)' ? 'Typed the address / bookmark / app' : k; }) +
+            '<div class="adm-row adm-3"><div class="panel"><h3>Where visitors come from</h3>' + srows(s.referrers, 'source', function (k) { return k === '(direct)' ? 'Typed the address / bookmark / app' : k; }) +
             ((s.campaigns || []).length ? '<h3 style="margin-top:18px">Campaign links (utm)</h3>' + rows(s.campaigns, 'source', String) : '') + '</div>' +
-            '<div class="panel"><h3>Countries</h3>' + rows(s.countries, 'source', String) + '</div>' +
-            '<div class="panel"><h3>Devices</h3>' + bars(dv, String) + '<h3 style="margin-top:18px">Phone / computer system</h3>' + rows(s.systems, 'source', String) +
-            '<h3 style="margin-top:18px">Browser language</h3>' + rows(s.languages, 'source', String) + '</div></div>' +
+            '<div class="panel"><h3>Countries</h3>' + srows(s.countries, 'source', String) + '</div>' +
+            '<div class="panel"><h3>Devices</h3>' + shares((function () { var o = {}; for (var k in dv) if (k !== 'Unknown' && dv[k]) o[k] = dv[k]; return o; })(), String) + '<h3 style="margin-top:18px">Phone / computer system</h3>' + srows(s.systems, 'source', String) +
+            ((s.languages || []).some(function (r) { return r.source !== '(unknown)'; }) ? '<h3 style="margin-top:18px">Browser language</h3>' + srows(s.languages, 'source', String) : '') + '</div></div>' +
             '<div class="adm-row adm-2"><div class="panel"><h3>Most-viewed pages</h3>' + rows(s.top_pages, 'page', pageName) + '</div>' +
             '<div class="panel"><h3>Most-clicked buttons and actions</h3>' + rows(s.top_events, 'event', evName) + '</div></div>';
         }
