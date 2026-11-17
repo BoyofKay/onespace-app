@@ -1607,22 +1607,24 @@ def page_founders_admin():
     <p class="muted" style="font-size:13px">Counts only — no email addresses are shown here. For individual sign-ups use Supabase › Table editor › private.founder_members.</p>
   </form>
   <div data-admin-body hidden>
-    <div class="adm-range">Period: <button type="button" class="chip" data-days="7">7 days</button><button type="button" class="chip" data-days="30" aria-pressed="true">30 days</button><button type="button" class="chip" data-days="90">90 days</button></div>
-    <h2 class="adm-h">Website traffic and conversion</h2>
+    <div class="adm-top"><div class="adm-range">Show the last <button type="button" class="chip" data-days="7">7 days</button><button type="button" class="chip" data-days="30" aria-pressed="true">30 days</button><button type="button" class="chip" data-days="90">90 days</button></div><span class="muted" data-updated></span></div>
+    <div class="kpi-grid" data-kpis></div>
+    <h2 class="adm-h">Needs your attention</h2>
+    <div data-attention></div>
+    <h2 class="adm-h">How visitors become Founders</h2>
     <div data-traffic></div>
-    <h2 class="adm-h">Founder sign-ups</h2>
-    <div class="adm-grid" data-tiles></div>
-    <div class="adm-row"><div class="panel"><h3>Sign-ups per day</h3><div data-chart class="adm-chart"></div><p class="muted" style="font-size:13px">■ signed up &nbsp; <span style="color:#1F6E78">■</span> confirmed</p></div></div>
+    <h2 class="adm-h">Sign-ups over time</h2>
+    <div class="panel"><p class="adm-sum" data-chart-sum></p><div data-chart class="adm-chart"></div><p class="adm-legend"><i></i> signed up <i class="c"></i> confirmed email</p></div>
+    <h2 class="adm-h">Who is signing up <small>all confirmed Founders so far</small></h2>
     <div class="adm-row adm-3">
-      <div class="panel"><h3>Phone (confirmed)</h3><div data-bars="platform"></div></div>
+      <div class="panel"><h3>Their phones</h3><div data-bars="platform"></div></div>
       <div class="panel"><h3>How they live</h3><div data-bars="living"></div></div>
       <div class="panel"><h3>Language</h3><div data-bars="language"></div></div>
     </div>
     <div class="adm-row adm-3">
-      <div class="panel"><h3>Where they came from</h3><div data-list="sources"></div></div>
-      <div class="panel"><h3>Landing page</h3><div data-list="landing"></div></div>
-      <div class="panel"><h3>Emails</h3><div data-bars="emails"></div><div data-failures></div>
-        <button class="btn btn-ghost btn-sm" type="button" data-resend style="margin-top:10px">Send missing confirmation emails</button><p class="status" data-resend-status></p></div>
+      <div class="panel"><h3>How they heard about us</h3><div data-list="sources"></div></div>
+      <div class="panel"><h3>First page they saw</h3><div data-list="landing"></div></div>
+      <div class="panel"><h3>Emails we sent</h3><div data-bars="emails"></div><div data-failures></div></div>
     </div>
     <h2 class="adm-h">Everything else, in one place</h2>
     <div class="grid g3 adm-links">
@@ -1633,7 +1635,6 @@ def page_founders_admin():
       <a class="card link" href="https://supabase.com/dashboard/project/ugwrpeduzyzrujkizqfo/editor" target="_blank" rel="noopener"><h3>🗄 Supabase tables</h3><p><code>private.founder_members</code> (people), <code>founder_couples</code> (numbers), <code>founder_email_log</code>, <code>public.public_support_requests</code> (website messages).</p></a>
       <a class="card link" href="https://mail.zoho.com" target="_blank" rel="noopener"><h3>📥 Zoho Mail</h3><p>Replies to founders@, messages to support@, hello@ and privacy@.</p></a>
     </div>
-    <p class="muted" style="font-size:13px"><span data-updated></span></p>
   </div>
 </div></section>""" + foot()
 

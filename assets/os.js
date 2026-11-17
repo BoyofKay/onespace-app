@@ -313,60 +313,144 @@
       }).catch(function () { showState('invalid'); });
   }
 
-  // ---------- Private waitlist dashboard ----------
+  // ---------- Private admin dashboard ----------
   var adm = $('[data-admin]');
   if (adm) {
     var key = sget('os-admin') || '', days = 30;
-    var esc = function (t) { return String(t).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
-    var bars = function (obj) { var tot = 0, k; for (k in obj) tot += obj[k]; if (!tot) return '<p class="muted">No data yet</p>';
+    var esc = function (t) { return String(t == null ? '' : t).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
+    var num = function (n) { return (n == null ? '—' : Number(n).toLocaleString('en')); };
+    var pct = function (a, b) { if (!b) return null; var v = 100 * a / b; return v >= 10 || v === 0 ? Math.round(v) : Math.round(v * 10) / 10; };
+    var NAMES = {
+      android: 'Android', ios: 'iPhone', both: 'One Android, one iPhone', unknown: 'Not given',
+      apart: 'Living apart', together: 'Living together', en: 'English', ar: 'Arabic',
+      friend: 'A friend told them', direct: 'Came straight to the site', search: 'Search', social: 'Social media', other: 'Other',
+      'confirm:sent': 'Confirm-your-email · sent', 'welcome:sent': 'Welcome + Founder number · sent', 'already:sent': '“You’re already in” reminder · sent',
+      'partner_joined:sent': 'Your partner joined · sent', 'confirm:failed': 'Confirm-your-email · FAILED', 'welcome:failed': 'Welcome · FAILED', 'confirm:skipped': 'Confirm-your-email · not sent'
+    };
+    var label = function (k) { return NAMES[k] || k; };
+    var pageName = function (p) {
+      if (!p) return '?'; var ar = /^\/ar(\/|$)/.test(p), q = p.replace(/^\/ar/, '').replace(/^\//, '').replace(/\.html$/, '');
+      var nice = { '': 'Home', join: 'Join — Founding 500', 'how-it-works': 'Interactive demo', features: 'Features', faq: 'FAQ', tutorials: 'Tutorials',
+        'living-apart': 'Living apart', 'living-together': 'Living together', 'share-kit': 'Share kit', support: 'Support', confirm: 'Email confirmed page', 'whats-new': 'What’s new' }[q];
+      return (nice || q.replace(/-/g, ' ').replace(/^./, function (c) { return c.toUpperCase(); })) + (ar ? ' (Arabic)' : '');
+    };
+    var trend = function (cur, prev, noun) {
+      if (prev == null || cur == null) return '';
+      if (!prev && !cur) return '<span class="tr flat">Same as the previous ' + days + ' days</span>';
+      if (!prev) return '<span class="tr up">▲ None in the previous ' + days + ' days</span>';
+      var d = Math.round(100 * (cur - prev) / prev);
+      if (!d) return '<span class="tr flat">Same as the previous ' + days + ' days</span>';
+      return '<span class="tr ' + (d > 0 ? 'up' : 'down') + '">' + (d > 0 ? '▲ ' + d + '% more ' : '▼ ' + Math.abs(d) + '% fewer ') + noun + ' than the previous ' + days + ' days</span>';
+    };
+    var evName = function (k) {
+      var parts = String(k).split('@'), e = parts[0], where = parts[1] ? ' (' + pageName('/' + parts[1].replace(/^\//, '') + (/\.html$|^$/.test(parts[1]) ? '' : '.html')) + ')' : '';
+      var pre = { cta: 'Button', founders: 'Join form', demo: 'Demo', theme: 'Theme', lang: 'Language switch', outbound: 'Left to', email: 'Email link' }, i = e.indexOf('/');
+      var head = i > 0 ? pre[e.slice(0, i)] || e.slice(0, i) : '', rest = (i > 0 ? e.slice(i + 1) : e).replace(/[-_\/]+/g, ' ');
+      return (head ? head + ': ' : '') + rest + where;
+    };
+    var bars = function (obj, f) { var tot = 0, k; for (k in obj) tot += obj[k]; if (!tot) return '<p class="muted">No data yet</p>';
       return Object.keys(obj).sort(function (a, b) { return obj[b] - obj[a]; }).map(function (k) { var pc = Math.round(100 * obj[k] / tot);
-        return '<div class="adm-bar"><span>' + esc(k) + '</span><i style="width:' + pc + '%"></i><b>' + obj[k] + ' · ' + pc + '%</b></div>'; }).join(''); };
+        return '<div class="adm-bar"><span>' + esc((f || label)(k)) + '</span><i style="width:' + pc + '%"></i><b>' + obj[k] + ' · ' + pc + '%</b></div>'; }).join(''); };
+    var rows = function (list, k, f) { var obj = {}; (list || []).forEach(function (r) { obj[r[k]] = (obj[r[k]] || 0) + r.n; }); return bars(obj, f); };
+    var card = function (o) {
+      return '<div class="kpi' + (o.tone ? ' ' + o.tone : '') + '"><h3>' + o.title + '</h3><b>' + o.big + '</b>' + (o.bar != null ? '<div class="kpi-bar"><i style="width:' + Math.max(o.bar, o.bar ? 1 : 0) + '%"></i></div>' : '') +
+        '<p>' + o.sub + '</p>' + (o.trend || '') + '<small>' + o.help + '</small></div>';
+    };
     var load = function () {
       fetch(FN + 'founder-admin?days=' + days, { headers: { 'x-admin-key': key } }).then(function (r) { return r.json().then(function (b) { return { r: r, b: b }; }); })
       .then(function (x) {
         var st = $('[data-admin-login] .status');
         if (!x.r.ok) { try { sessionStorage.removeItem('os-admin'); } catch (_) {} st.textContent = x.b && x.b.error === 'key_not_set' ? 'FOUNDER_ADMIN_KEY is not set in Supabase › Edge Functions › Secrets.' : x.r.status === 401 ? 'That key does not match FOUNDER_ADMIN_KEY in Supabase.' : 'Could not load (' + x.r.status + ').'; return; }
-        var s = x.b.stats;
+        var s = x.b.stats, P = s.period || {}, cap = s.capacity_couples || 250, fc = s.founder_couples || 0, left = Math.max(0, cap - fc);
+        var traffic = s.traffic_connected && !s.traffic_error && s.visitors != null;
         $('[data-admin-login]').hidden = true; $('[data-admin-body]').hidden = false;
-        var tiles = [['Founder couples', s.founder_couples + ' / ' + s.capacity_couples], ['Founder places left', s.capacity_couples - s.founder_couples],
-          ['Sign-ups', s.signups_total], ['Confirmed', s.confirmed], ['Waiting to confirm', s.pending], ['Confirm rate', s.confirm_rate == null ? '—' : s.confirm_rate + '%'],
-          ['Partners joined', s.partners_joined], ['Waitlist couples', s.waitlist_couples]];
-        if (s.visitors != null) tiles.push(['Visitors → sign-up', s.visitors ? (100 * s.signups_total / s.visitors).toFixed(1) + '% of ' + s.visitors : '—']);
-        if (!s.mail_key_set) tiles.push(['Email', '⚠ RESEND_API_KEY missing']);
-        $('[data-tiles]').innerHTML = tiles.map(function (t) { return '<div class="adm-tile"><span>' + t[0] + '</span><b>' + esc(t[1]) + '</b></div>'; }).join('');
-        var max = Math.max.apply(null, s.daily.map(function (d) { return d.signups; }).concat([1]));
-        $('[data-chart]').innerHTML = s.daily.map(function (d) {
-          return '<div class="adm-col" title="' + d.day + ': ' + d.signups + ' signed up, ' + d.confirmed + ' confirmed"><i style="height:' + (100 * d.signups / max) + '%"></i><i class="c" style="height:' + (100 * d.confirmed / max) + '%"></i><span>' + d.day.slice(8) + '</span></div>'; }).join('');
-        ['platform', 'living', 'language', 'emails'].forEach(function (k) { $('[data-bars="' + k + '"]').innerHTML = bars(s[k] || {}); });
-        ['sources', 'landing'].forEach(function (k) { $('[data-list="' + k + '"]').innerHTML = (s[k] || []).map(function (r) { return '<div class="adm-bar"><span>' + esc(r.source || r.page) + '</span><b>' + r.n + '</b></div>'; }).join('') || '<p class="muted">No data yet</p>'; });
-        $('[data-failures]').innerHTML = (s.email_failures || []).slice(0, 5).map(function (f) { return '<p class="muted" style="font-size:12px">⚠ ' + esc(f.at.slice(0, 16).replace('T', ' ') + ' · ' + f.kind + ' · ' + (f.error || '')) + '</p>'; }).join('');
         $('[data-updated]').textContent = 'Updated ' + new Date(s.generated_at).toLocaleString();
+
+        // 1. Headline KPIs
+        var pace = P.new_founder_couples ? Math.ceil(left / (P.new_founder_couples / days)) : null;
+        var conv = traffic ? pct(P.signups || 0, s.visitors) : null;
+        var both = pct(s.couples_complete || 0, fc);
+        $('[data-kpis]').innerHTML = [
+          card({ title: 'Founder places taken', big: num(fc) + ' <em>of ' + cap + '</em>', bar: 100 * fc / cap,
+            sub: left ? '<strong>' + num(left) + '</strong> places left' : '<strong>Full</strong> — new couples go to the waitlist (' + num(s.waitlist_couples) + ')',
+            trend: P.new_founder_couples != null ? '<span class="tr ' + (P.new_founder_couples ? 'up' : 'flat') + '">+' + P.new_founder_couples + ' couples in the last ' + days + ' days</span>' : '',
+            help: pace ? 'At this pace, all places are taken in about ' + num(pace) + ' days.' : 'A couple takes a place when the first partner confirms their email.' }),
+          card({ title: 'New sign-ups', big: num(P.signups), sub: num(P.confirmed) + ' confirmed their email', trend: trend(P.signups, P.prev_signups, 'sign-ups'),
+            help: 'People (not couples) who sent the Join form in the last ' + days + ' days.' }),
+          card({ title: 'Visitors who sign up', big: conv == null ? '—' : conv + '%', tone: traffic ? '' : 'muted',
+            sub: traffic ? num(P.signups) + ' sign-ups from ' + num(s.visitors) + ' visitors' + (P.signups ? ' · about 1 in ' + Math.max(1, Math.round(s.visitors / P.signups)) : '') : 'Needs the GoatCounter connection',
+            trend: traffic ? trend(s.visitors, s.prev_visitors, 'visitors') : '',
+            help: 'Your main website number: of everyone who visits, how many join.' }),
+          card({ title: 'Couples with both partners', big: both == null ? '—' : both + '%', bar: both,
+            sub: num(s.couples_complete) + ' complete · ' + num(s.couples_waiting_partner) + ' waiting for a partner',
+            help: 'OneSpace needs two people. Every waiting couple is one invite away from complete.' })
+        ].join('');
+
+        // 2. Attention list
+        var todo = [];
+        if (!s.mail_key_set) todo.push(['bad', 'Emails are not being sent: <code>RESEND_API_KEY</code> is missing in Supabase secrets.']);
+        if ((s.email_failures || []).length) todo.push(['bad', s.email_failures.length + ' email' + (s.email_failures.length > 1 ? 's' : '') + ' failed recently. Details under “Emails we sent”, or in <a href="https://resend.com/emails" target="_blank" rel="noopener">Resend</a>.']);
+        if (s.pending_stale) todo.push(['warn', num(s.pending_stale) + ' ' + (s.pending_stale > 1 ? 'people' : 'person') + ' signed up over a day ago but never confirmed. <button class="btn btn-ghost btn-sm" type="button" data-resend>Send the confirmation email again</button> <span class="status" data-resend-status></span>']);
+        if (s.couples_waiting_partner) todo.push(['info', num(s.couples_waiting_partner) + ' Founder couple' + (s.couples_waiting_partner > 1 ? 's have' : ' has') + ' only one partner so far. Their welcome email has an invite link — a reminder from the Command Center would help.']);
+        if (!s.traffic_connected) todo.push(['info', 'Connect GoatCounter to see visitors here: GoatCounter → your name → API → new key with only “Read statistics”, then add it in Supabase secrets as <code>GOATCOUNTER_TOKEN</code>.']);
+        if (s.traffic_error) todo.push(['warn', 'GoatCounter did not answer: ' + esc(s.traffic_error)]);
+        (s.traffic_warnings || []).forEach(function (w) { todo.push(['info', 'Part of the traffic data is missing: ' + esc(w)]); });
+        $('[data-attention]').innerHTML = todo.length ? '<ul class="adm-todo">' + todo.map(function (t) { return '<li class="' + t[0] + '">' + t[1] + '</li>'; }).join('') + '</ul>'
+          : '<ul class="adm-todo"><li class="ok">Nothing needs your attention. Emails are sending and nobody is stuck.</li></ul>';
+        var rb = $('[data-resend]');
+        if (rb) rb.addEventListener('click', function () {
+          var out = $('[data-resend-status]'); out.textContent = 'Sending…'; rb.disabled = true;
+          fetch(FN + 'founder-admin', { method: 'POST', headers: { 'x-admin-key': key, 'Content-Type': 'application/json' }, body: JSON.stringify({ action: 'resend_pending' }) })
+            .then(function (r) { return r.json(); }).then(function (b) { out.textContent = b.ok ? 'Sent ' + b.sent + ' of ' + b.attempted + '.' : 'Failed.'; });
+        });
+
+        // 3. Funnel
         var tr = $('[data-traffic]');
-        if (!s.traffic_connected) tr.innerHTML = '<div class="panel adm-note"><b>Connect GoatCounter to see traffic here.</b> In GoatCounter: your name (top right) → API → New API key, tick only “Read statistics”. Then in Supabase › Edge Functions › Secrets add <code>GOATCOUNTER_TOKEN</code>. Until then, open <a href="https://onespace.goatcounter.com" target="_blank" rel="noopener">onespace.goatcounter.com</a>.</div>';
-        else if (s.traffic_error) tr.innerHTML = '<div class="panel adm-note">GoatCounter did not answer: ' + esc(s.traffic_error) + '</div>';
+        if (!traffic) tr.innerHTML = '<div class="panel adm-note">Visitor numbers appear here once GoatCounter is connected (see above). Meanwhile: <a href="https://onespace.goatcounter.com" target="_blank" rel="noopener">open GoatCounter</a>.</div>';
         else {
-          var warn = (s.traffic_warnings || []).length ? '<p class="muted" style="font-size:12px">Some GoatCounter lists could not load: ' + esc(s.traffic_warnings.join(' · ')) + '</p>' : '';
-          var f = s.funnel || [], top = Math.max(1, (f[0] || {}).n || 1);
-          var funnel = f.map(function (st, i) { var pc = i === 0 ? 100 : Math.round(100 * st.n / top); var step = i > 0 && f[i - 1].n ? Math.round(100 * st.n / f[i - 1].n) + '% of previous' : '';
-            return '<div class="adm-funnel"><span>' + esc(st.step) + '</span><i style="width:' + Math.max(pc, 1) + '%"></i><b>' + st.n + '</b><small>' + (i ? pc + '% of visitors · ' + step : '') + '</small></div>'; }).join('');
-          var list = function (rows, k) { return (rows || []).map(function (r) { return '<div class="adm-bar"><span>' + esc(r[k]) + '</span><b>' + r.n + '</b></div>'; }).join('') || '<p class="muted">No data yet</p>'; };
+          var f = (s.funnel || []).slice(), top = Math.max(1, (f[0] || {}).n || 1), worst = null;
+          f.forEach(function (st, i) { if (i && f[i - 1].n) { var lost = f[i - 1].n - st.n, r = lost / f[i - 1].n; if (lost > 0 && (!worst || r > worst.r)) worst = { r: r, from: f[i - 1].step, to: st.step, lost: lost }; } });
+          var steps = f.map(function (st, i) {
+            var w = Math.max(100 * st.n / top, st.n ? 2 : 0), kept = i && f[i - 1].n ? pct(st.n, f[i - 1].n) : null;
+            return '<div class="fn-step"><div class="fn-head"><span>' + (i + 1) + '. ' + esc(st.step) + '</span><b>' + num(st.n) + '</b></div><div class="fn-bar"><i style="width:' + w + '%"></i></div>' +
+              (i ? '<small>' + (kept == null ? '—' : kept + '% continued from the step before') + '</small>' : '<small>people who opened any page</small>') + '</div>'; }).join('');
           var d = s.demo || {};
-          tr.innerHTML = warn + '<div class="adm-row"><div class="panel"><h3>Funnel</h3>' + funnel + '<p class="muted" style="font-size:12px">Clicks and form steps are counted as events; confirmed sign-ups below come from the database.</p></div></div>' +
-            '<div class="adm-grid"><div class="adm-tile"><span>Visitors</span><b>' + s.visitors + '</b></div><div class="adm-tile"><span>Visitor → confirmed</span><b>' + (s.visitors ? (100 * s.confirmed / s.visitors).toFixed(1) + '%' : '—') + '</b></div>' +
-            '<div class="adm-tile"><span>Demo tours finished</span><b>' + (d.tour_finished || 0) + '</b></div><div class="adm-tile"><span>Theme picks</span><b>' + (d.theme_picks || 0) + '</b></div></div>' +
-            '<div class="adm-row adm-3"><div class="panel"><h3>Top pages</h3>' + list(s.top_pages, 'page') + '</div><div class="panel"><h3>Where visitors came from</h3>' + list(s.referrers, 'source') + '</div><div class="panel"><h3>Countries</h3>' + list(s.countries, 'source') + '</div></div>' +
-            '<div class="adm-row"><div class="panel"><h3>Top events</h3>' + list(s.top_events, 'event') + '</div></div>';
+          tr.innerHTML = '<div class="adm-row adm-2"><div class="panel"><h3>The path to joining</h3>' + steps +
+            (worst ? '<p class="adm-insight">Biggest drop: <strong>' + esc(worst.from) + ' → ' + esc(worst.to) + '</strong> — ' + Math.round(100 * worst.r) + '% stop here (' + num(worst.lost) + ' people). This is the step to improve first.</p>' : '') +
+            '<p class="muted" style="font-size:12px">Steps 2–5 are counted as clicks, so one person can count more than once. Confirmed Founders below come from the database.</p></div>' +
+            '<div class="panel"><h3>Interest in the product</h3><div class="mini-grid">' +
+            '<div><b>' + num(d.demo_clicks) + '</b><span>opened the demo from a button</span></div><div><b>' + num(d.tour_finished) + '</b><span>finished the guided demo tour</span></div>' +
+            '<div><b>' + num(d.theme_picks) + '</b><span>tried a colour theme</span></div><div><b>' + num(s.visitors) + '</b><span>visitors in ' + days + ' days</span></div></div>' +
+            '<h3 style="margin-top:18px">Where visitors come from</h3>' + rows(s.referrers, 'source', function (k) { return k === '(direct)' ? 'Typed the address / bookmark / app' : k; }) +
+            '<h3 style="margin-top:18px">Countries</h3>' + rows(s.countries, 'source', String) + '</div></div>' +
+            '<div class="adm-row adm-2"><div class="panel"><h3>Most-viewed pages</h3>' + rows(s.top_pages, 'page', pageName) + '</div>' +
+            '<div class="panel"><h3>Most-clicked buttons and actions</h3>' + rows(s.top_events, 'event', evName) + '</div></div>';
         }
+
+        // 4. Sign-ups chart
+        var dl = s.daily || [], mx = Math.max.apply(null, dl.map(function (d) { return d.signups; }).concat([1]));
+        var tS = dl.reduce(function (a, d) { return a + d.signups; }, 0), tC = dl.reduce(function (a, d) { return a + d.confirmed; }, 0);
+        var best = dl.reduce(function (a, d) { return d.signups > (a ? a.signups : 0) ? d : a; }, null);
+        $('[data-chart-sum]').innerHTML = '<strong>' + num(tS) + '</strong> signed up and <strong>' + num(tC) + '</strong> confirmed in the last ' + days + ' days' +
+          (best ? ' · best day: ' + new Date(best.day + 'T12:00:00').toLocaleDateString('en', { month: 'short', day: 'numeric' }) + ' (' + best.signups + ')' : '') + '.';
+        var every = dl.length > 40 ? 10 : dl.length > 14 ? 5 : 1;
+        $('[data-chart]').innerHTML = '<div class="adm-y"><span>' + mx + '</span><span>0</span></div>' + dl.map(function (d, i) {
+          var lbl = (i % every === 0 || i === dl.length - 1) ? new Date(d.day + 'T12:00:00').toLocaleDateString('en', { month: 'short', day: 'numeric' }) : '';
+          return '<div class="adm-col" title="' + d.day + ': ' + d.signups + ' signed up, ' + d.confirmed + ' confirmed"><i style="height:' + (100 * d.signups / mx) + '%"></i><i class="c" style="height:' + (100 * d.confirmed / mx) + '%"></i><span>' + lbl + '</span></div>'; }).join('');
+
+        // 5. Who
+        $('[data-bars="platform"]').innerHTML = bars(s.platform || {});
+        $('[data-bars="living"]').innerHTML = bars(s.living || {});
+        $('[data-bars="language"]').innerHTML = bars(s.language || {});
+        $('[data-bars="emails"]').innerHTML = bars(s.emails || {});
+        $('[data-list="sources"]').innerHTML = rows(s.sources, 'source');
+        $('[data-list="landing"]').innerHTML = rows(s.landing, 'page', pageName);
+        $('[data-failures]').innerHTML = (s.email_failures || []).slice(0, 5).map(function (f) { return '<p class="muted" style="font-size:12px">⚠ ' + esc(f.at.slice(0, 16).replace('T', ' ') + ' · ' + label(f.kind) + ' · ' + (f.error || '')) + '</p>'; }).join('');
       }).catch(function () { $('[data-admin-login] .status').textContent = 'Could not load.'; });
     };
     $$('[data-days]').forEach(function (b) { b.addEventListener('click', function () { days = +b.getAttribute('data-days');
       $$('[data-days]').forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); }); load(); }); });
     $('[data-admin-login]').addEventListener('submit', function (e) { e.preventDefault(); key = $('#ak').value.trim(); try { sessionStorage.setItem('os-admin', key); } catch (_) {} load(); });
-    $('[data-resend]').addEventListener('click', function () {
-      var out = $('[data-resend-status]'); out.textContent = 'Sending…';
-      fetch(FN + 'founder-admin', { method: 'POST', headers: { 'x-admin-key': key, 'Content-Type': 'application/json' }, body: JSON.stringify({ action: 'resend_pending' }) })
-        .then(function (r) { return r.json(); }).then(function (b) { out.textContent = b.ok ? 'Sent ' + b.sent + ' of ' + b.attempted + '.' : 'Failed.'; load(); });
-    });
     if (key) load();
   }
 
