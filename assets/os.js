@@ -366,4 +366,32 @@
         .catch(function () { ushow('invalid'); });
     });
   }
+
+  // ---------- Clips: play only while on screen ----------
+  var clips = $$('video[data-autoplay]');
+  if (clips.length) {
+    if ('IntersectionObserver' in window && !reduce) {
+      var vio = new IntersectionObserver(function (es) { es.forEach(function (e) {
+        var v = e.target;
+        if (e.isIntersecting) { if (v.preload === 'none') v.preload = 'auto'; var pr = v.play(); if (pr && pr.catch) pr.catch(function () {}); }
+        else v.pause();
+      }); }, { threshold: 0.35 });
+      clips.forEach(function (v) { vio.observe(v); });
+    } else clips.forEach(function (v) { v.controls = true; });
+  }
+
+  // ---------- Mobile: a Join bar once you scroll, hidden near any join form ----------
+  var bar = $('[data-sticky-cta]');
+  var noBar = /\/(ar\/)?(join|confirm|unsubscribe|founders-admin)\.html$/.test(location.pathname);
+  if (bar && !noBar && 'IntersectionObserver' in window) {
+    var forms = $$('form[data-form="join"], #founding, footer');
+    if ($('#founding')) $('a', bar).setAttribute('href', '#founding');
+    var scrolled = false;
+    var upd = function () { bar.hidden = !(scrolled && !forms.some(function (x) { return x._in; })) || (menu && menu.classList.contains('open')); };
+    if (burger) burger.addEventListener('click', function () { setTimeout(upd, 0); });
+    forms.forEach(function (f) {
+      new IntersectionObserver(function (es) { es.forEach(function (e) { f._in = e.isIntersecting; }); upd(); }).observe(f);
+    });
+    window.addEventListener('scroll', function () { var s = window.scrollY > 700; if (s !== scrolled) { scrolled = s; upd(); } }, { passive: true });
+  }
 })();

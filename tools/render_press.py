@@ -114,7 +114,19 @@ async def main():
             await pg.screenshot(path=str(ROOT / 'assets' / 'press' / name))
             await pg.close()
         await b.close()
+    previews()
     print('rendered', list(IMAGES))
+
+
+def previews():
+    """Light WebP copies for showing on the Share kit page; the full PNGs stay the downloads."""
+    from PIL import Image
+    out = ROOT / 'assets' / 'press' / 'preview'
+    out.mkdir(exist_ok=True)
+    for png in sorted((ROOT / 'assets' / 'press').glob('*.png')):
+        im = Image.open(png).convert('RGB')
+        im.thumbnail((720, 720 if 'story' not in png.name else 1280))
+        im.save(out / (png.stem + '.webp'), 'WEBP', quality=82, method=6)
 
 
 if __name__ == '__main__':

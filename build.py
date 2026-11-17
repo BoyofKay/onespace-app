@@ -124,7 +124,7 @@ def head(page, title, title_ar, desc, desc_ar=''):
 <a class="skip" href="#main">{T('Skip to content', 'انتقل إلى المحتوى')}</a>
 <header class="top"><div class="wrap">
   <a class="brand" href="./"><img src="assets/mark.svg" alt="" width="34" height="34">OneSpace</a>
-  <nav class="menu" aria-label="Main">{''.join(menu)}</nav>
+  <nav class="menu" aria-label="Main">{''.join(menu)}<a class="btn btn-primary menu-cta" href="join.html">{T('Join the Founding 500', 'انضم إلى المؤسسين الـ500')}</a></nav>
   <div class="actions">
     <button class="lang" type="button">العربية</button>
     <a class="btn btn-primary btn-sm" href="join.html">{T('Join the Founding 500', 'انضم إلى المؤسسين الـ500')}</a>
@@ -158,6 +158,7 @@ def foot():
     <span>{T('No ads. No data selling. Ever.', 'بلا إعلانات. بلا بيع للبيانات. أبدًا.')}</span>
   </div>
 </div></footer>
+<div class="sticky-cta" data-sticky-cta hidden><span>{T('The Founding 500 · free early access', 'المؤسسون الـ500 · وصول مبكر مجاني')}</span><a class="btn btn-primary btn-sm" href="join.html" data-track="sticky_join">{T('Join free', 'انضم مجانًا')}</a></div>
 <script src="assets/ar.js" defer></script>
 <script src="assets/os.js" defer></script>
 </body>
@@ -510,7 +511,7 @@ def clip(name, alt, alt_ar, cls=''):
         ar = en
     k = K(alt, alt_ar)
     return (f'<div class="device {cls}"><video src="{en}.mp4" poster="{en}.jpg" data-en-src="{en}.mp4" data-ar-src="{ar}.mp4" '
-            f'data-en-poster="{en}.jpg" data-ar-poster="{ar}.jpg" muted loop playsinline autoplay preload="metadata" '
+            f'data-en-poster="{en}.jpg" data-ar-poster="{ar}.jpg" muted loop playsinline data-autoplay preload="none" '
             f'aria-label="{escape(alt)}" data-i18n-attr="aria-label:{k}"></video></div>')
 
 
@@ -634,7 +635,9 @@ def watch_section():
 
 def compare_rows(limit=None):
     rows = COMPARE[:limit] if limit else COMPARE
-    return ''.join(f'<tr><th scope="row">{T(n, na)}</th><td class="old">{T(u, ua)}</td><td class="new">✓ {T(o, oa)}</td></tr>' for n, na, u, ua, o, oa in rows)
+    lo, ln = K('The usual mix', 'الخليط المعتاد'), K('OneSpace', 'OneSpace')
+    return ''.join(f'<tr><th scope="row">{T(n, na)}</th><td class="old" data-label="The usual mix" data-i18n-attr="data-label:{lo}">{T(u, ua)}</td>'
+                   f'<td class="new" data-label="OneSpace" data-i18n-attr="data-label:{ln}">✓ {T(o, oa)}</td></tr>' for n, na, u, ua, o, oa in rows)
 
 
 def compare_table(limit=None):
@@ -819,8 +822,6 @@ def page_index():
 </div></div></section>
 
 {theme_wall()}
-<section><div class="narrow"><div class="sec-head center">{T('Compare', 'قارن', 'span', 'eyebrow')}{T('One app instead of five.', 'تطبيق واحد بدل خمسة.', 'h2')}</div>{compare_table(6)}
-<p class="center" style="margin-top:22px"><a class="btn btn-ghost" href="compare.html">{T('See the full comparison →', 'شاهد المقارنة الكاملة ←')}</a></p></div></section>
 <section class="warm"><div class="wrap">
   <p class="promise reveal">{T('“Your relationship isn’t content. Nothing you put in OneSpace is shown to anyone but the two of you — no feed, no followers, no ads, and never sold.”', '«علاقتكما ليست محتوى. لا يُعرض شيء تضعانه في OneSpace إلا لكما — بلا منشورات ولا متابعين ولا إعلانات، ولا يُباع أبدًا.»')}</p>
   <p class="center muted" style="margin-top:14px">— {T('Our promise', 'وعدنا')}</p>
@@ -1301,6 +1302,9 @@ def guide_page(g):
 
 
 WHATS_NEW = [
+    ('November 2026', 'نوفمبر 2026', 'The Founding 500 is open', 'باب المؤسسين الـ500 مفتوح',
+     ['Join with your email and confirm it to get your Founder couple number.', 'Invite your partner with your own link — you share one number.', 'The reunion counter is right in every “living apart” setting; theme previews fit smaller phones.'],
+     ['انضم ببريدك وأكّده لتحصل على رقمكما كزوجين مؤسسين.', 'ادعُ شريكك برابطك الخاص — رقم واحد لكما.', 'عدّاد اللقاء صحيح في كل إعدادات «متباعدان»، ومعاينات السمات تناسب الهواتف الأصغر.']),
     ('November 2026', 'نوفمبر 2026', 'Places, counters and a map', 'الأماكن والعدّادات والخريطة',
      ['Our places: been there and bucket list, pinned on a map, shared from Google Maps.', 'Counters that tell the date itself from its anniversary, with progress bars and a Today line.', 'Plan a trip from the bucket-list places you pick.'],
      ['أماكننا: ما زرتماه وقائمة الأحلام على خريطة، ومشاركة من خرائط Google.', 'عدّادات تفرّق بين التاريخ نفسه وذكراه، مع أشرطة تقدّم وخط اليوم.', 'خطط لرحلة من أماكن قائمة الأحلام التي تختارها.']),
@@ -1331,9 +1335,17 @@ def page_whats_new():
 FAQ = [
     ('Getting started', 'البدء', [
         ('What is OneSpace?', 'ما هو OneSpace؟', 'A private app for two people in a relationship: a shared calendar, lists, reminders, trips, occasions, letters, little gestures, counters, places and memories in one place.', 'تطبيق خاص لشخصين في علاقة: تقويم وقوائم وتذكيرات ورحلات ومناسبات ورسائل ولمسات صغيرة وعدّادات وأماكن وذكريات في مكان واحد.'),
-        ('How do I get it?', 'كيف أحصل عليه؟', 'OneSpace is in an early test on Android. <a href="join.html">Join early access</a> and we will send both of you an invite. iPhone is coming next.', 'OneSpace في تجربة مبكرة على أندرويد. <a href="join.html">انضم مبكرًا</a> وسنرسل لكما دعوة. ويأتي iPhone بعد ذلك.'),
+        ('How do I get it?', 'كيف أحصل عليه؟', 'OneSpace is in an early test on Android. <a href="join.html">Join the Founding 500</a>, confirm your email, and we will invite couples in small groups. iPhone is coming next.', 'OneSpace في تجربة مبكرة على أندرويد. <a href="join.html">انضم إلى المؤسسين الـ500</a> وأكّد بريدك، وسندعو الأزواج على دفعات صغيرة. ويأتي iPhone بعد ذلك.'),
         ('How do I invite my partner?', 'كيف أدعو شريكي؟', 'After creating your space, share your invite code or its QR code. Your partner signs up and taps “Scan your partner’s QR code”. A space holds exactly two people.', 'بعد إنشاء المساحة، شارك رمز الدعوة أو رمز QR الخاص به. يسجّل شريكك وينقر «امسح رمز QR الخاص بشريكك». المساحة تتسع لشخصين فقط.'),
         ('Is it free?', 'هل هو مجاني؟', 'Yes, during the early test. If that ever changes, we will tell you clearly and in advance.', 'نعم، خلال التجربة المبكرة. وإذا تغيّر ذلك سنخبرك بوضوح ومسبقًا.'),
+    ]),
+    ('Founder Members', 'الأعضاء المؤسسون', [
+        ('What is the Founding 500?', 'ما هم المؤسسون الـ500؟', 'The first 250 couples — 500 people — who join and confirm their email become Founder Members. You get the app first, a direct line to the team and a say in what we build.', 'أول 250 زوجًا — 500 شخص — ينضمون ويؤكدون بريدهم يصبحون أعضاء مؤسسين: تحصلون على التطبيق أولًا، وخط مباشر مع الفريق، ورأي فيما نبنيه.'),
+        ('Do we both need to sign up?', 'هل يجب أن نسجّل كلانا؟', 'One of you is enough to claim a place. After confirming, you get an invite link for your partner — they join under the same Founder number.', 'يكفي أحدكما لحجز المكان. بعد التأكيد تحصل على رابط دعوة لشريكك لينضم بالرقم نفسه.'),
+        ('When does our Founder number come?', 'متى نحصل على رقم المؤسس؟', 'When you click the link in the confirmation email from founders@onespace.live. Numbers go in the order emails are confirmed.', 'عند النقر على الرابط في رسالة التأكيد من founders@onespace.live. تُمنح الأرقام بترتيب تأكيد البريد.'),
+        ('The confirmation email didn’t arrive.', 'لم تصل رسالة التأكيد.', 'Check spam or Promotions for founders@onespace.live. Still nothing after 10 minutes? Sign up again with the same email and we will send a fresh link.', 'تفقّد البريد العشوائي أو العروض بحثًا عن founders@onespace.live. لم يصل شيء بعد 10 دقائق؟ سجّل مجددًا بالبريد نفسه وسنرسل رابطًا جديدًا.'),
+        ('What do Founder Members get?', 'ماذا يحصل الأعضاء المؤسسون؟', 'Early access, a direct line to the team and a say in what we build. Founder benefits will be announced before any pricing is introduced.', 'وصول مبكر، وخط مباشر مع الفريق، ورأي فيما نبنيه. وسنعلن مزايا المؤسسين قبل تقديم أي أسعار.'),
+        ('Can I stop the emails?', 'هل يمكنني إيقاف الرسائل؟', 'Yes — every email has an Unsubscribe link, and your Founder number stays yours.', 'نعم — في كل رسالة رابط لإلغاء الاشتراك، ويبقى رقمك كمؤسس لك.'),
     ]),
     ('Using OneSpace', 'استخدام OneSpace', [
         ('Does it work for couples who live together?', 'هل يناسب الأزواج الذين يعيشون معًا؟', 'Yes. Choose “Together” and Today focuses on your home and shared plans. Distance-only messages are never sent.', 'نعم. اختر «معًا» فيركز «اليوم» على البيت والخطط المشتركة. ولا تُرسل رسائل البعد أبدًا.'),
@@ -1497,6 +1509,11 @@ def store_shots():
   <div class="grid assets-grid store-grid">{imgs}</div></div></section>'''
 
 
+def _press_previews(html):
+    # Show light previews; the links still download the full-size PNGs.
+    return re.sub(r'((?:src|data-en-src|data-ar-src)=")assets/press/([\w-]+)\.png"', r'\1assets/press/preview/\2.webp"', html)
+
+
 def page_share_kit():
     h = head('share-kit.html', 'OneSpace share kit', 'مواد مشاركة OneSpace',
              'Logos, colours, descriptions in English and Arabic, social images and ready-to-send messages for telling people about OneSpace.',
@@ -1647,7 +1664,7 @@ PAGES = {
     'living-together.html': (lambda: persona_page('living-together.html', False), '0.8', 'monthly'),
     'how-it-works.html': (page_how, '0.8', 'monthly'), 'whats-new.html': (page_whats_new, '0.7', 'weekly'),
     'faq.html': (page_faq, '0.7', 'monthly'), 'compare.html': (page_compare, '0.8', 'monthly'), 'tutorials.html': (page_tutorials, '0.7', 'monthly'), 'guides.html': (page_guides, '0.8', 'weekly'), 'join.html': (page_join, '0.9', 'monthly'),
-    'support.html': (page_support, '0.6', 'monthly'), 'share-kit.html': (page_share_kit, '0.4', 'monthly'),
+    'support.html': (page_support, '0.6', 'monthly'), 'share-kit.html': ((lambda: _press_previews(page_share_kit())), '0.4', 'monthly'),
     'privacy.html': (lambda: legal_page('privacy.html', 'privacy'), '0.4', 'yearly'),
     'terms.html': (lambda: legal_page('terms.html', 'terms'), '0.4', 'yearly'),
     'delete-account.html': (page_delete, '0.4', 'yearly'),
