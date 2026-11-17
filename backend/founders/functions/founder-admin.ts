@@ -78,9 +78,12 @@ Deno.serve(async (req) => {
         // GoatCounter counts unique visitors (no cookies). `total` includes events; events are clicks, not people.
         stats.visitors = Math.max(0, Number(total.total ?? 0) - Number(total.total_events ?? 0));
         stats.prev_visitors = prevTotal.total == null ? null : Math.max(0, Number(prevTotal.total) - Number(prevTotal.total_events ?? 0));
-        stats.visitors_daily = (total.stats ?? []).map((d: any) => ({ day: String(d.day).slice(0, 10), n: Number(d.daily ?? 0) }));
         const all: any[] = hits.hits ?? [];
         const pages = all.filter((h) => !h.event);
+        // Daily page visits = sum of each page's daily count (the site total's daily series also counts clicks).
+        const perDay: Record<string, number> = {};
+        for (const h of pages) for (const d of (h.stats ?? [])) { const k = String(d.day).slice(0, 10); perDay[k] = (perDay[k] ?? 0) + Number(d.daily ?? 0); }
+        stats.visitors_daily = (total.stats ?? []).map((d: any) => { const k = String(d.day).slice(0, 10); return { day: k, n: perDay[k] ?? 0 }; });
         stats.top_pages = pages.slice(0, 10).map((h) => ({ page: h.path, n: n(h) }));
         const pageViews = pages.reduce((a, h) => a + n(h), 0);
         stats.pages_per_visitor = stats.visitors ? Math.round(10 * pageViews / stats.visitors) / 10 : null;
