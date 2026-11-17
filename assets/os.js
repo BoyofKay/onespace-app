@@ -412,3 +412,12 @@
     window.addEventListener('scroll', function () { var s = window.scrollY > 700; if (s !== scrolled) { scrolled = s; upd(); } }, { passive: true });
   }
 })();
+/* Show / hide a password field */
+document.querySelectorAll('[data-pw-toggle]').forEach(function(b){
+  var inp=document.getElementById(b.getAttribute('aria-controls')); if(!inp) return;
+  b.addEventListener('click',function(){
+    var show=inp.type==='password'; inp.type=show?'text':'password';
+    b.setAttribute('aria-pressed',show?'true':'false');
+    var l=show?'Hide key':'Show key'; b.setAttribute('aria-label',l); b.title=l; inp.focus();
+  });
+});
