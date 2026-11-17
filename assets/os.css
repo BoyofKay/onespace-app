@@ -701,3 +701,10 @@ html[dir="rtl"] .ol-arrow { transform: scaleX(-1); }
 .assets-grid img { width: 100%; height: auto; object-fit: contain; display: block; }
 .assets-grid a { display: block; text-decoration: none; }
 .store-grid img { aspect-ratio: 9 / 16; }
+/* Password field with show/hide eye */
+.pw-wrap { position: relative; }
+.pw-wrap input { width: 100%; padding-inline-end: 48px; }
+.pw-eye { position: absolute; inset-inline-end: 4px; top: 50%; transform: translateY(-50%); width: 40px; height: 40px; display: grid; place-items: center; border: 0; background: transparent; color: var(--muted, #667); border-radius: 10px; cursor: pointer; }
+.pw-eye:hover, .pw-eye:focus-visible { color: var(--ink, #14213D); background: rgba(0,0,0,.05); }
+.pw-eye .eye-slash { display: none; }
+.pw-eye[aria-pressed="true"] .eye-slash { display: inline; }

@@ -45,7 +45,7 @@
 <section class="page-hero"><div class="wrap" data-admin>
   <h1>OneSpace admin</h1>
   <form class="panel admin-login" data-admin-login style="max-width:440px">
-    <label for="ak">Admin key</label><input id="ak" type="password" autocomplete="current-password" required>
+    <label for="ak">Admin key</label><div class="pw-wrap"><input id="ak" type="password" autocomplete="current-password" required><button type="button" class="pw-eye" data-pw-toggle aria-controls="ak" aria-pressed="false" aria-label="Show key" title="Show key"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path class="eye-open" d="M1.5 12S5.5 4.5 12 4.5 22.5 12 22.5 12 18.5 19.5 12 19.5 1.5 12 1.5 12Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="12" cy="12" r="3.2" fill="none" stroke="currentColor" stroke-width="1.8"/><path class="eye-slash" d="M3 3l18 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button></div>
     <div class="cta-row" style="margin-top:12px"><button class="btn btn-primary" type="submit">Open dashboard</button></div>
     <p class="status" role="status"></p>
     <p class="muted" style="font-size:13px">Counts only — no email addresses are shown here. For individual sign-ups use Supabase › Table editor › private.founder_members.</p>
