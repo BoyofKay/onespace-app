@@ -4,67 +4,82 @@
   "privacy": {
     "en": {
       "date": "2026-11-18",
-      "version": "1.1"
+      "version": "1.1",
+      "content_hash": "ed0e4400bc272e7a47cb1dc5a12ef42ec7a994e7f2d66dca0791a4790adcbfe7"
     },
     "ar": {
       "date": "2026-11-18",
-      "version": "1.1"
+      "version": "1.1",
+      "content_hash": "23c90290deefeef48f4f9e4598a088f994beb0cb4c1285c2aa14f2995471cacb"
     },
     "es": {
       "date": "2026-11-18",
-      "version": "1.1"
+      "version": "1.1",
+      "content_hash": "6cfd001fbaa53f92ca7317dcfbd7c2ac567eeda83be31f55edc8bf9765f394dc"
     },
     "fr": {
       "date": "2026-11-18",
-      "version": "1.1"
+      "version": "1.1",
+      "content_hash": "808cf333e2e04108c257636854db87290a37e0b2ec4907895e8e1a12fd465dbc"
     },
     "de": {
       "date": "2026-11-18",
-      "version": "1.1"
+      "version": "1.1",
+      "content_hash": "5e9d327b396234a1794a3a80dc3794c1ffb480fece5f62ef6c71a70656f83e27"
     }
   },
   "terms": {
     "en": {
       "date": "2026-11-16",
-      "version": "1.0"
+      "version": "1.0",
+      "content_hash": "5770dcdeefcecb93a8145a09607538316c43d8e0fb0b3e3a1923e46cc5c6b845"
     },
     "ar": {
       "date": "2026-11-16",
-      "version": "1.0"
+      "version": "1.0",
+      "content_hash": "7596d3441db763ef89772d25cbb3d2356b7299c0d1d6ff12ecaa8a5e2673a1e8"
     },
     "es": {
       "date": "2026-11-16",
-      "version": "1.0"
+      "version": "1.0",
+      "content_hash": "05193d47fbd5a174f30fc595fe51c0a465300c1cb0fe9aafab30eb27a2518c66"
     },
     "fr": {
       "date": "2026-11-16",
-      "version": "1.0"
+      "version": "1.0",
+      "content_hash": "9f2023e0dab96a4a5605385169752bf2730523a9d668dec18d75593f43e40615"
     },
     "de": {
       "date": "2026-11-16",
-      "version": "1.0"
+      "version": "1.0",
+      "content_hash": "68909500db1e7e7414afec15371eea89d17c771a2649b86b4948e7e76ba48da7"
     }
   },
   "delete-account": {
     "en": {
       "date": "2026-11-18",
-      "version": "1.0"
+      "version": "1.0",
+      "content_hash": "a36304c616d35bd51ff39d30eb9e04f76b8fba327771557619bb3fcb43ce8188"
     },
     "ar": {
       "date": "2026-11-18",
-      "version": "1.0"
+      "version": "1.0",
+      "content_hash": "06241ef10178e037c82e9bcd7ea748638a6c071d08aa3af7c2e5ca7d8591926d"
     },
     "es": {
       "date": "2026-11-18",
-      "version": "1.0"
+      "version": "1.0",
+      "content_hash": "ee4b913edf5c17772f6834b162b4986cb06ce40af4324afe05bd84ada504c848"
     },
     "fr": {
       "date": "2026-11-18",
-      "version": "1.0"
+      "version": "1.0",
+      "content_hash": "6789b3b9b5e6a624389784f4d5d53186bb5efd99771058e59801ffd9b877677c"
     },
     "de": {
       "date": "2026-11-18",
-      "version": "1.0"
+      "version": "1.0",
+      "content_hash": "de19c0d5bb726779dd2b732b5c8df944a4ab9ff934d9a68559463a377a04f32f"
     }
   }
 }
