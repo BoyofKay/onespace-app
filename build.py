@@ -255,11 +255,11 @@ def foot():
 '''
 
 
-def page_hero(eyebrow, eyebrow_ar, h1, h1_ar, lead, lead_ar, crumbs=True, extra=''):
+def page_hero(eyebrow, eyebrow_ar, h1, h1_ar, lead, lead_ar, crumbs=True, extra='', headline_html=None):
     c = f'<div class="crumbs"><a href="./">{T("Home", "الرئيسية")}</a> › {T(eyebrow, eyebrow_ar)}</div>' if crumbs else ''
     return f'''<section class="page-hero"><div class="wrap">
   {c}
-  {T(h1, h1_ar, 'h1')}
+  {f'<h1 class="editorial-hero-title">{headline_html}</h1>' if headline_html else T(h1, h1_ar, 'h1')}
   {T(lead, lead_ar, 'p', 'lead')}
   {extra}
 </div></section>'''
@@ -273,8 +273,7 @@ def store_section():
     <div class="sec-head center">
       {T('YOUR SPACE, SOON ON YOUR PHONE', 'مساحتكما قريبًا على هاتفكما', 'span', 'eyebrow')}
       <h2 id="get-app-title">{T('Find OneSpace on', 'ستجد OneSpace على')} <span class="serif accent">{T('your favorite phone.', 'هاتفك المفضّل.')}</span></h2>
-      {T('Founding 500 registration is OPEN to Android and iPhone users now. “iOS coming soon” refers to the app release, not registration. Register today, and we will invite you when your platform is ready.', 'التسجيل في عضوية المؤسسين مفتوح الآن لمستخدمي أندرويد وآيفون. عبارة «iOS قريبًا» تخص موعد إصدار التطبيق، لا التسجيل. سجّل اليوم وسنرسل الدعوة عند جاهزية نسختك.', 'p', 'lead')}
-    <p class="founder-platform-notice">{T('✓ Android or iPhone? You can reserve your Founder place today.', '✓ أندرويد أم آيفون؟ يمكنك حجز مكانك بين المؤسسين اليوم.')}</p>
+      {T('Join the Founding 500 today — registration is open to both Android and iPhone users. We will invite you when your version is ready.', 'انضم الآن إلى المؤسسين الـ500. التسجيل مفتوح لمستخدمي أندرويد وآيفون، وسنرسل دعوتك عند جاهزية نسختك.', 'p', 'lead')}
     </div>
     <div class="store-arrival-grid">
       <article class="store-arrival-card android">
@@ -755,11 +754,11 @@ def watch_section():
         return ''
     small = ''.join(f'<figure>{clip(n, e, a, "sm")}<figcaption>{T(e, a)}</figcaption></figure>' for n, e, a in [
         ('plan', 'Decide together', 'قررا معًا'), ('counters', 'Count the days', 'عدّا الأيام'), ('themes', 'Change the mood', 'غيّرا المزاج')] if clip(n, e, a))
-    return f'''<section class="warm"><div class="wrap split">
+    return f'''<section class="warm"><div class="wrap split watch-real-layout">
   <div class="stage">{tour}</div>
   <div>{T('See it move', 'شاهده يتحرك', 'span', 'eyebrow')}{T('This is the real app — not a mock-up.', 'هذا هو التطبيق الحقيقي — وليس تصميمًا تخيليًا.', 'h2')}
   {T('Recorded on a phone with our fictional couple, Omar and Lina. What you see is exactly what you get.', 'سُجّل على هاتف مع زوجينا الافتراضيين عمر ولينا. ما تراه هو ما ستحصل عليه تمامًا.', 'p', 'lead')}
-  <div class="wall" style="margin-top:20px">{small}</div></div>
+  <div class="wall watch-clips" style="margin-top:20px">{small}</div></div>
 </div></section>'''
 
 
@@ -800,15 +799,22 @@ def deep_page(d):
     details = ''.join(trust_card(i, 'i-teal', a, b, c, e) for i, a, b, c, e in d['details'])
     vs = ''.join(f'<tr><th scope="row">{T(n, na)}</th><td class="old">{T(u, ua)}</td><td class="new">✓ {T(o, oa)}</td></tr>' for n, na, u, ua, o, oa in d['vs'])
     faq = ''.join(f'<details>{T(q, qa, "summary")}{T(a, aa, "p")}</details>' for q, qa, a, aa in d['faq'])
-    side = device(second, d['nav'][0], d['nav'][1], 'sm', fallback='') if second else ''
+    side = device(second, 'Shared list in OneSpace', 'قائمة مشتركة في OneSpace', 'sm', fallback='') if slug == 'smart-sharing.html' and second else (device(second, d['nav'][0], d['nav'][1], 'sm', fallback='') if second else '')
+    if slug == 'smart-sharing.html':
+        main_dev = '<div class="sharing-preview-wrap">' + main_dev + '<span class="sharing-preview-label">' + T('Illustration of the share flow', 'تصور توضيحي لعملية المشاركة') + '</span></div>'
     illus = phone(SCREENS[d['illus']](), d['theme'], label=d['nav'][0], label_ar=d['nav'][1])
+    hero_headline = (
+        '<h1 class="editorial-hero-title">' + T('Share anything from any app', 'شارك أي شيء من أي تطبيق') +
+        ' <span class="serif accent">' + T('OneSpace knows where it goes', 'وOneSpace يعرف أين يضعه') + '</span></h1>'
+        if slug == 'smart-sharing.html' else T(t_en, t_ar, 'h1')
+    )
     others = ''.join(f'<a class="chip" href="{o["slug"]}">{o["icon"]} {T(o["nav"][0], o["nav"][1])}</a>' for o in DEEP if o is not d)
     ld = {'@context': 'https://schema.org', '@type': 'WebPage', 'name': t_en, 'description': d['seo'][0], 'url': BASE + slug,
           'about': {'@type': 'MobileApplication', 'name': 'OneSpace'}}
     return h + f"""
 <section class="page-hero deep-hero"><div class="wrap split">
   <div><div class="crumbs"><a href="./">{T('Home', 'الرئيسية')}</a> › <a href="features.html">{T('Features', 'المزايا')}</a> › {T(d['nav'][0], d['nav'][1])}</div>
-    <div style="font-size:44px;margin-top:14px">{d['icon']}</div>{T(t_en, t_ar, 'h1')}{T(d['lead'][0], d['lead'][1], 'p', 'lead')}
+    <div style="font-size:44px;margin-top:14px">{d['icon']}</div>{hero_headline}{T(d['lead'][0], d['lead'][1], 'p', 'lead')}
     <div class="cta-row"><a class="btn btn-primary" href="join.html">{T('Join the Founding 500', 'انضم إلى المؤسسين الـ500')}</a><a class="btn btn-ghost" href="#how">{T('How it works', 'كيف يعمل')}</a></div></div>
   <div class="stage"><div class="phones">{main_dev}{side}</div></div>
 </div></section>
@@ -837,7 +843,7 @@ SHOW_AI_REVIEW_PREVIEW = True
 
 def connect_care_preview():
     return f'''<section class="connection-showcase" id="connect-care-showcase">
-      <div class="wrap connection-layout">
+      <div class="wrap connection-layout" id="connect">
         <div class="connection-copy">
           {T('CONNECT & CARE', 'التواصل والاهتمام', 'span', 'eyebrow')}
           {T('Stay close. Plan life together.', 'ابقيا قريبين، وخططا لحياتكما معًا.', 'h2')}
@@ -882,6 +888,14 @@ def page_connect_care():
         [('Your words','add a personal message to a gesture.','كلماتك','أضف رسالة شخصية إلى اللفتة.'),
          ('Shared history','look back at the gestures you have sent and received.','سجل اللفتات','ارجع إلى ما أرسلتماه وتلقيتماه.')],
         'love','lavender',rev=True,label='OneSpace A little love screenshot') + \
+      '<section class="gesture-extra"><div class="wrap gesture-extra-layout"><div>' +
+        T('THE COMPLETE GESTURE JOURNEY', 'تجربة اللمسة كاملة', 'span','eyebrow') +
+        T('A gesture, its moment and its history.', 'لفتة ولحظتها وسجلّها.', 'h3') +
+        T('The gesture picker is shown above from the real app. Dedicated captures of the sending popup and sent/received history are still being prepared.', 'تظهر شاشة اختيار اللفتة أعلاه من التطبيق الحقيقي. ما زلنا نجهز لقطتي نافذة الإرسال وسجل اللفتات المرسلة والمستلمة.', 'p') +
+      '</div><div class="gesture-capture-slots"><div class="capture-pending capture-small"><strong>' +
+      T('Gesture popup','نافذة اللمسة') + '</strong><small>' + T('Real screenshot pending','اللقطة الحقيقية قيد الانتظار') +
+      '</small></div><div class="capture-pending capture-small"><strong>' + T('Sent & received history','سجل المرسلة والمستلمة') +
+      '</strong><small>' + T('Real screenshot pending','اللقطة الحقيقية قيد الانتظار') + '</small></div></div></div></section>' + \
       feature_block('checkins','DAILY CHECK-INS','التواصل اليومي',
         'A little space to say how you really are.','مساحة صغيرة لتعبّر عما تشعر به.',
         'Share how you are feeling and what is on your mind, even when you are busy or apart.',
@@ -891,11 +905,11 @@ def page_connect_care():
         'ourspace','teal',tint=True,label='Real daily check-in screenshot from the demo couple',real='checkins.png') + \
       feature_block('journal','FEELINGS JOURNAL','يوميات المشاعر',
         'Give your feelings somewhere to live.','امنح مشاعرك مكانًا تحتفظ به.',
-        'Record thoughts and moods over time. This section uses a general Connect screenshot until a dedicated journal capture is available.',
-        'دوّن أفكارك ومشاعرك مع مرور الوقت. يعرض هذا القسم لقطة عامة من التواصل حتى تتوفر لقطة خاصة باليوميات.',
+        'Record thoughts and moods over time, and revisit them when you want to reflect on your day.',
+        'دوّن أفكارك ومشاعرك، وعُد إليها حين ترغب في التأمل في يومك.',
         [('Reflect over time','revisit your earlier notes and feelings.','تأمل مع الوقت','عد إلى ملاحظاتك ومشاعرك السابقة.'),
          ('Your context','keep what you want to remember without losing it in chat.','احتفظ بالسياق','احفظ ما يهمك دون أن يضيع في المحادثة.')],
-        'ourspace','sage',rev=True,label='OneSpace Connect overview, not a feelings journal capture') + \
+        'ourspace','sage',rev=True,visual='<div class="capture-pending" role="img" aria-label="Journal screen capture pending"><span aria-hidden="true">✎</span><strong>' + T('Feelings journal', 'يوميات المشاعر') + '</strong><small>' + T('Real app screenshot coming soon', 'لقطة حقيقية من التطبيق قريبًا') + '</small></div>') + \
       f'''<section class="connection-followup"><div class="wrap center">
         {T('Emotional connection is only the beginning.', 'التواصل العاطفي ليس إلا البداية.', 'h2')}
         {T('OneSpace also brings two-way editing, comparison, discussion and shared planning into the same space.', 'يجمع OneSpace أيضًا التعديل المتبادل والمقارنة والنقاش والتخطيط المشترك في المساحة نفسها.', 'p','lead')}
@@ -986,7 +1000,7 @@ def ai_review_preview():
          f'<span class="store-rating-pending">—</span></div>'
          for star in (5,4,3,2,1))
       return f'''<article class="review-preview-store">
-        <div class="review-store-head"><h4>{name}</h4><span class="review-test-tag">{T('TEST PREVIEW','معاينة تجريبية')}</span></div>
+        <div class="review-store-head"><h4 class="review-brand">{name == 'Google Play' ? "<span class=\"review-brand-icon\" aria-hidden=\"true\"><svg viewBox=\"0 0 48 48\" focusable=\"false\"><path d=\"M8 4.5v39l21-19.5z\" fill=\"#34A853\"/><path d=\"M8 4.5 32 17 29 24z\" fill=\"#4285F4\"/><path d=\"m29 24 3-7 11 5.8a3.5 3.5 0 0 1 0 6.2L32 31z\" fill=\"#FBBC04\"/><path d=\"m8 43.5 24-12.5-3-7z\" fill=\"#EA4335\"/></svg></span>" : "<span class=\"review-brand-icon\" aria-hidden=\"true\"><svg viewBox=\"0 0 48 48\" focusable=\"false\"><rect x=\"2\" y=\"2\" width=\"44\" height=\"44\" rx=\"10\" fill=\"#1677ED\"/><path d=\"M18.2 11.5 34 37.6M31.4 11.5 15.2 37.6M10.6 29.3h26.9\" stroke=\"#fff\" stroke-width=\"4.7\" stroke-linecap=\"round\"/><path d=\"m18.2 11.5 2.3 3.9\" stroke=\"#fff\" stroke-width=\"4.7\" stroke-linecap=\"round\"/></svg></span>"}<span>{name}</span></h4><span class="review-test-tag">{T('TEST PREVIEW','معاينة تجريبية')}</span></div>
         <div class="review-store-metrics">
           <div><strong>— / 5</strong>{T('Average rating','متوسط التقييم','span')}</div>
           <div><strong>—</strong>{T('Ratings & reviews','التقييمات والمراجعات','span')}</div>
@@ -1300,11 +1314,11 @@ def trust_card(i, c, h, har, p, par):
     return f'<div class="card reveal"><div class="ico {c}">{i}</div>{T(h, har, "h3")}{T(p, par, "p")}</div>'
 
 
-def feature_block(anchor, eyebrow, eyebrow_ar, h2, h2_ar, lead, lead_ar, items, screen_key, theme, rev=False, tint=False, label='', real=None):
+def feature_block(anchor, eyebrow, eyebrow_ar, h2, h2_ar, lead, lead_ar, items, screen_key, theme, rev=False, tint=False, label='', real=None, visual=None):
     lis = ''.join(f'<li>{T(f"<b>{a}</b> — {b}", f"<b>{c}</b> — {d}")}</li>' for a, b, c, d in items)
     cls = ' class="tint"' if tint else ''
     return f'''<section id="{anchor}"{cls}><div class="wrap split{' rev' if rev else ''}">
-  <div class="stage">{screen(screen_key, theme, label or h2, h2_ar, real=real)}</div>
+  <div class="stage">{visual if visual is not None else screen(screen_key, theme, label or h2, h2_ar, real=real)}</div>
   <div>{T(eyebrow, eyebrow_ar, 'span', 'eyebrow')}{T(h2, h2_ar, 'h2')}{T(lead, lead_ar, 'p', 'lead')}<ul class="ticks">{lis}</ul></div>
 </div></section>'''
 
@@ -1319,7 +1333,8 @@ def page_features():
     return h + page_hero('Features', 'المزايا', 'Everything the two of you need, nothing you don’t.', 'كل ما تحتاجانه، ولا شيء زائد.',
                          'OneSpace is organised the way a couple actually lives: what is happening today, what you want to remember, what you need to coordinate, how you stay close, and how you like things set up.',
                          'نُظّم OneSpace بالطريقة التي يعيش بها الزوجان فعلًا: ما يحدث اليوم، وما تريدان تذكّره، وما تحتاجان إلى تنسيقه، وكيف تبقيان قريبين، وكيف تحبان ضبط الأشياء.',
-                         extra=f'<div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:22px">{jump}</div>') + \
+                         extra=f'<div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:22px">{jump}</div>',
+                         headline_html=T('Everything the two of you need,', 'كل ما تحتاجانه،', 'span') + ' <span class="serif accent">' + T('nothing you don’t.', 'ولا شيء زائد.') + '</span>') + \
         differentiation_section() + \
         feature_block('today', 'Today', 'اليوم', 'Open the app, know what matters.', 'افتح التطبيق واعرف ما يهم.',
                       'Today brings together what your partner sent, what needs your answer, and the next seven days — shaped by whether you live together or apart.',
@@ -1360,15 +1375,6 @@ def page_features():
                        ('Only me', 'surprises stay hidden from your partner.', 'أنا فقط', 'المفاجآت تبقى مخفية عن شريكك.')],
                       'occasion', 'rose') + \
         connect_care_preview() + \
-        feature_block('connect', 'Connect', 'تواصل', 'Small, daily ways to feel close.', 'طرق يومية صغيرة للشعور بالقرب.',
-                      'A little love in one tap, letters that wait for the right day, and a daily check-in that takes less than a minute.',
-                      'لمسة حب بنقرة، ورسائل تنتظر اليوم المناسب، وتواصل يومي يستغرق أقل من دقيقة.',
-                      [('A little love', 'a hug, a kiss or kind words in one tap — with your own message or a built-in one.', 'لمسة حب', 'حضن أو قبلة أو كلمات طيبة بنقرة — برسالتك أو برسالة جاهزة.'),
-                       ('Letters', 'sealed until a date, with a countdown.', 'الرسائل', 'مغلقة حتى تاريخ معيّن، مع عد تنازلي.'),
-                       ('Daily check-ins', 'say how you feel and what is on your mind.', 'التواصل اليومي', 'عبّرا عن مشاعركما وما يشغل بالكما.'),
-                       ('Feelings journal', 'keep a record of thoughts and moods over time.', 'يوميات المشاعر', 'احتفظا بالأفكار والمشاعر مع مرور الوقت.'),
-                       ('Shared experiences', 'movies, books or places you enjoy together.', 'التجارب المشتركة', 'الأفلام والكتب والأماكن التي تستمتعان بها معًا.')],
-                      'letter', 'lavender', rev=True, tint=True) + \
         smart_utilities() + \
         f'''<section id="me" class="dark" data-theme-scope><div class="wrap split">
   <div>{T('Me', 'أنا', 'span', 'eyebrow')}{T('Set it up your way.', 'اضبطه على طريقتك.', 'h2')}
@@ -1462,7 +1468,7 @@ def page_how():
       f'<div id="demo-panel-{i}" role="tabpanel" aria-labelledby="demo-tab-{i}" '
       f'data-view-of="tour" data-view-name="s{i}" {"hidden" if i else ""}>'
       f'<div class="demo-panel-context">{T(en,ar,"h3")}{T(detail,detail_ar,"p")}</div>'
-      f'<div class="demo-panel-device">{screen(screen_key,theme,en,ar)}</div></div>'
+      f'<div class="demo-panel-device">{device("themes/today_cleanLight",en,ar,themed=True) if i == 0 else (device("themes/love_cleanLight",en,ar,themed=True) if i == 5 else screen(screen_key,theme,en,ar))}</div></div>'
       for i,(en,ar,detail,detail_ar,screen_key,theme) in enumerate(steps))
     faqs = ''.join(f'<details>{T(q,qa,"summary")}{T(answer,answer_ar,"p")}</details>'
       for q,qa,answer,answer_ar in [
@@ -1493,17 +1499,14 @@ def page_how():
           <button class="btn btn-dark" type="button" data-next="tour">{T('Next →', 'التالي ←')}</button>
         </div>
       </div>
-      <div class="demo-wizard-stage"><div class="demo-wizard-panels">{panels}</div></div>
-    </div>
-    <div class="demo-theme-picker">
-      <div class="demo-theme-heading">
-        <div>{T('MAKE IT YOURS', 'اجعله على ذوقك', 'span', 'eyebrow')}
-          {T('Nine themes. Your mood.', 'تسع سمات تناسب ذوقك.', 'h3')}</div>
-        {T('Choose a theme without resetting the demo.', 'غيّر السمة دون إعادة العرض إلى البداية.', 'p')}
-      </div>
-      <div class="demo-theme-body">
-        <div class="swatches demo-theme-grid" aria-label="App theme examples">{swatches()}</div>
-        {device('themes/today_cleanLight','App theme preview','معاينة سمة التطبيق','demo-theme-device',themed=True)}
+      <div class="demo-wizard-stage"><div class="demo-wizard-panels">{panels}</div>
+        <aside class="demo-theme-inline">
+          <span class="eyebrow">{T('MAKE IT YOURS', 'اجعله على ذوقك')}</span>
+          <h3>{T('Pick a theme', 'اختر سمة')}</h3>
+          <div class="swatches demo-theme-grid" aria-label="App theme examples">{swatches()}</div>
+          <p class="demo-theme-note">{T('The same app, nine looks. Switch any time.', 'التطبيق نفسه بتسع سمات. غيّرها متى شئت.')}</p>
+          {device('themes/today_cleanLight','App theme preview','معاينة سمة التطبيق','demo-theme-device',themed=True)}
+        </aside>
       </div>
     </div>
   </div>
