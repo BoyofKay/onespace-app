@@ -83,8 +83,14 @@ GLOSSARY = {
 }
 
 from locale_editorial import CURATED
+from locale_legal_review import LEGAL_EDITORIAL
+from locale_faq_review import FAQ_EDITORIAL
+from locale_guides_review import GUIDE_EDITORIAL
 for _locale in NEW_LANGS:
     GLOSSARY[_locale].update(CURATED[_locale])
+    GLOSSARY[_locale].update(LEGAL_EDITORIAL[_locale])
+    GLOSSARY[_locale].update(FAQ_EDITORIAL[_locale])
+    GLOSSARY[_locale].update(GUIDE_EDITORIAL[_locale])
 
 def eligible(raw):
     s = str(raw).strip()
@@ -155,6 +161,16 @@ def root_href(path, locale):
 
 def localize_html(src, name, locale, translated):
     soup=BeautifulSoup(src,'html.parser')
+    # Translate bold-emphasis legal sentences as complete clauses: machine
+    # translation of "We do <b>not</b> collect ..." made nonsensical fragments.
+    privacy_no_collect = None
+    if name == 'privacy.html':
+        for paragraph in soup.select('.legal p'):
+            if paragraph.get_text(' ', strip=True).startswith('We do not collect'):
+                privacy_no_collect = paragraph
+                break
+        if privacy_no_collect is None:
+            raise RuntimeError('Privacy policy noncollection clause missing')
     missing=set()
     def tr(s):
         if not eligible(s): return s
@@ -179,6 +195,13 @@ def localize_html(src, name, locale, translated):
     for m in soup.find_all('meta'):
         if m.get('name')=='description':
             m['content']=tr(m.get('content',''))
+    if privacy_no_collect is not None:
+        legal_clause = {
+          'es': '<p><b>No recopilamos</b> tu ubicación, tus contactos, tu historial de llamadas, tu actividad de navegación ni identificadores publicitarios. Si eliges un contacto o un calendario en tu teléfono, esa selección se realiza en el dispositivo; solo almacenamos lo que guardas en OneSpace.</p>',
+          'fr': '<p>Nous ne recueillons <b>pas</b> votre position, vos contacts, votre historique d’appels, votre navigation ni vos identifiants publicitaires. Lorsque vous sélectionnez un contact ou un calendrier sur votre téléphone, l’opération reste sur l’appareil ; seules les informations enregistrées dans OneSpace sont conservées.</p>',
+          'de': '<p>Wir erfassen <b>keine</b> Standortdaten, Kontakte, Anruflisten, Browserverläufe oder Werbe-IDs. Wenn du auf deinem Smartphone einen Kontakt oder Kalender auswählst, erfolgt dies auf dem Gerät. Gespeichert wird nur, was du in OneSpace übernimmst.</p>'
+        }
+        privacy_no_collect.replace_with(BeautifulSoup(legal_clause[locale], 'html.parser').p)
     if missing:
         sample=' | '.join(sorted(missing)[:15])
         raise RuntimeError(f'Missing {locale} translations in {name}: {len(missing)} entries: {sample}')
