@@ -131,6 +131,8 @@ def root_href(path, locale):
     if u.scheme or u.netloc:
         return path
     p=u.path
+    if not p and (u.query or u.fragment):
+        return path  # Preserve same-page support links such as ?topic=signin#contact.
     if p.startswith('/assets/') or p in ('/site.webmanifest', '/sitemap.xml'):
         return path
     if p.startswith('assets/'):
