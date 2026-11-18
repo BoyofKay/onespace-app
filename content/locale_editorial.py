@@ -471,3 +471,21 @@ CURATED["de"].update({
   "Start preparing weeks before, start saving in time — in your Reminders.": "Plant frühzeitig eine Erinnerung ein, damit genug Zeit für Vorbereitungen und Budget bleibt.",
   "OneSpace is in an early test. Here is what changed recently — and how to tell us what to build next.": "OneSpace befindet sich in der Testphase. Hier findet ihr die neuesten Änderungen und könnt uns eure Wünsche mitteilen."
 })
+
+# Fine polish on product-theme naming, app-store messaging and privacy headline.
+CURATED["es"].update({
+  "Clean Light": "Claro y limpio",
+  "Get iPhone launch updates →": "Novedades para iPhone",
+  "Share from any app into the right place": "Comparte lo que encuentres en cualquier app y guárdalo en el lugar adecuado",
+  "OneSpace is planned for iPhone too. Leave your email and we’ll let you know when the App Store version is ready.": "También queremos llevar OneSpace al iPhone. Déjanos tu correo y te avisaremos cuando esté disponible en App Store."
+})
+CURATED["fr"].update({
+  "Get iPhone launch updates →": "Actualités de la version iPhone",
+  "Share from any app into the right place": "Partagez depuis vos applications et retrouvez tout au bon endroit"
+})
+CURATED["de"].update({
+  "Clean Light": "Klar & Hell",
+  "Get iPhone launch updates →": "Infos zur iPhone-Version",
+  "Your relationship isn’t content. Nothing you put in OneSpace is shown to anyone but the two of you — no feed, no followers, no ads, and never sold.": "Eure Beziehung gehört nicht in einen öffentlichen Feed. Was ihr in OneSpace speichert, bleibt zwischen euch beiden – ohne Follower, ohne Werbung und ohne Verkauf eurer Daten.",
+  "“Your relationship isn’t content. Nothing you put in OneSpace is shown to anyone but the two of you — no feed, no followers, no ads, and never sold.”": "„Eure Beziehung gehört nicht in einen öffentlichen Feed. Alles, was ihr in OneSpace teilt, bleibt zwischen euch beiden – ohne Follower, ohne Werbung und ohne Verkauf eurer Daten.“"
+})
