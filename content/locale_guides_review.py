@@ -164,3 +164,77 @@ GUIDE_ROWS = [
   ]
 ]
 GUIDE_EDITORIAL = {locale: {row[0]:row[i+1] for row in GUIDE_ROWS} for i,locale in enumerate(("es","fr","de"))}
+
+# Complete follow-up editorial review of all advice bullet points.
+GUIDE_EDITORIAL["es"].update({
+  "Swap a daily selfie. In a month you have a diary of the distance.": "Intercambien una foto cada día. Al cabo de un mes tendrán un pequeño diario de su vida a distancia.",
+  "Count it down together. Watching a number shrink is a real comfort on hard days.": "Sigan juntos la cuenta atrás, si deciden añadirla. En los días difíciles, ver que falta menos puede dar ánimo.",
+  "Write a letter that opens on a specific day: their birthday, their exam, the day they land.": "Escriban una carta que se abra en una fecha elegida: un cumpleaños, un examen o el día del reencuentro.",
+  "Keep a bucket list of places you’ll visit together, and add to it after every call.": "Creen una lista de lugares que sueñan visitar juntos y añadan nuevas ideas después de hablar.",
+  "Watch the same film at the same time, then rate it separately and compare.": "Vean la misma película a la vez, aunque estén lejos, y después comparen sus opiniones.",
+  "Remember the dates that matter — and the ones that matter only to the two of you.": "Anoten las fechas importantes y también esos aniversarios que solo tienen sentido para ustedes.",
+  "Say thank you for the small things. A “proud of you” travels further than you think.": "Agradezcan los pequeños gestos. Un «Estoy orgulloso de ti» puede acercarlos más de lo que imaginan.",
+  "Split by area: “bills are yours, school forms are mine” — including the remembering.": "Repartan responsabilidades completas: «Tú te encargas de las facturas y yo de los formularios del colegio». Eso incluye acordarse de hacerlo.",
+  "Use repeats for anything recurring, so nobody re-remembers the same thing monthly.": "Configuren las tareas que se repiten para que nadie tenga que volver a acordarse de programarlas cada mes.",
+  "Each of you marks what you like; talk only about the gap.": "Cada uno señala las opciones que le gustan y después conversan sobre las diferencias.",
+  "Record the decision and link the reminder that follows from it.": "Guarden el acuerdo y vinculen el recordatorio o la tarea que haya que realizar.",
+  "Move anything stuck, reassign anything unfair.": "Revisen lo que se haya quedado pendiente y vuelvan a repartir lo que no esté equilibrado.",
+  "End with one fun plan — the relationship is not a to-do list.": "Terminen con un plan que les haga ilusión. Su relación es mucho más que una lista de tareas.",
+  "The quiet ones: the day you met, your first trip, the day you moved in.": "No olviden las fechas pequeñas: cuando se conocieron, su primer viaje o el día que comenzaron a vivir juntos.",
+  "Track both the date itself and its yearly anniversary — “8 years since” feels different from “in 12 days”.": "Pueden recordar tanto el día original como el próximo aniversario: «Hace ocho años» y «Faltan doce días» cuentan historias distintas.",
+  "Book anything that sells out — restaurants, flights, hotels — first.": "Reserven primero lo que pueda agotarse: restaurantes, vuelos o alojamiento.",
+  "Set a budget so the day is joyful, not stressful.": "Fijen un presupuesto para disfrutar del día sin preocupaciones económicas.",
+  "When your partner mentions something they like, save it that minute.": "Si tu pareja menciona algo que le gusta, guárdalo en cuanto lo recuerdes.",
+  "Note price and how sure you are; mark it bought when it is.": "Anoten el precio y cuánto les convence cada idea. Cuando compren algo, márquenlo como adquirido.",
+  "Write a letter in advance that opens that morning.": "Escriban una carta con antelación para que se abra la mañana de la fecha especial.",
+  "Take one photo of both of you, every year, in the same pose.": "Hagan una foto juntos cada año, en la misma postura. Verán cómo crece su historia.",
+  "Save it to a scrapbook — in ten years you’ll be glad you did.": "Guárdenla en un álbum de recuerdos. Dentro de diez años les encantará volver a verla."
+})
+GUIDE_EDITORIAL["fr"].update({
+  "Swap a daily selfie. In a month you have a diary of the distance.": "Échangez un selfie par jour. Au bout d’un mois, vous aurez un petit journal de votre vie à distance.",
+  "Count it down together. Watching a number shrink is a real comfort on hard days.": "Suivez ensemble un compte à rebours, si vous choisissez d’en créer un. Voir les jours diminuer peut réconforter lorsque la distance pèse.",
+  "Write a letter that opens on a specific day: their birthday, their exam, the day they land.": "Écrivez une lettre à ouvrir à une date précise : un anniversaire, un examen ou le jour des retrouvailles.",
+  "Keep a bucket list of places you’ll visit together, and add to it after every call.": "Créez une liste des lieux que vous aimeriez découvrir ensemble et complétez-la au fil de vos échanges.",
+  "Watch the same film at the same time, then rate it separately and compare.": "Regardez le même film au même moment, même à distance, puis comparez vos avis.",
+  "Remember the dates that matter — and the ones that matter only to the two of you.": "Gardez une trace des dates importantes, y compris de celles qui n’ont de sens que pour vous deux.",
+  "Say thank you for the small things. A “proud of you” travels further than you think.": "Remerciez-vous pour les petites choses. Un simple « Je suis fier de toi » peut faire beaucoup de bien.",
+  "Split by area: “bills are yours, school forms are mine” — including the remembering.": "Répartissez les domaines de responsabilité : « Tu gères les factures, je m’occupe des papiers de l’école. » Penser à les faire en fait partie.",
+  "Use repeats for anything recurring, so nobody re-remembers the same thing monthly.": "Programmez les tâches récurrentes pour ne pas avoir à y repenser chaque mois.",
+  "Each of you marks what you like; talk only about the gap.": "Chacun indique ses préférences ; discutez ensuite seulement de ce qui vous sépare.",
+  "Record the decision and link the reminder that follows from it.": "Notez la décision et associez-lui le rappel correspondant.",
+  "Move anything stuck, reassign anything unfair.": "Relancez ce qui est resté bloqué et répartissez autrement ce qui semble injuste.",
+  "End with one fun plan — the relationship is not a to-do list.": "Terminez par un projet agréable à deux. Votre relation ne se résume pas à une liste de tâches.",
+  "The quiet ones: the day you met, your first trip, the day you moved in.": "N’oubliez pas les dates discrètes : votre rencontre, votre premier voyage ou votre emménagement.",
+  "Track both the date itself and its yearly anniversary — “8 years since” feels different from “in 12 days”.": "Suivez la date d’origine et son prochain anniversaire : « Il y a huit ans » ne raconte pas la même chose que « Dans douze jours ».",
+  "Book anything that sells out — restaurants, flights, hotels — first.": "Réservez d’abord ce qui risque d’afficher complet : restaurants, vols ou hébergements.",
+  "Set a budget so the day is joyful, not stressful.": "Définissez un budget pour profiter de la journée sans stress financier.",
+  "When your partner mentions something they like, save it that minute.": "Si votre partenaire mentionne quelque chose qui lui plaît, notez l’idée tout de suite.",
+  "Note price and how sure you are; mark it bought when it is.": "Notez le prix et votre degré d’intérêt pour chaque idée, puis indiquez les cadeaux achetés.",
+  "Write a letter in advance that opens that morning.": "Écrivez une lettre à l’avance, à ouvrir le matin du grand jour.",
+  "Take one photo of both of you, every year, in the same pose.": "Prenez chaque année une photo de vous deux dans la même pose. Elle racontera votre histoire.",
+  "Save it to a scrapbook — in ten years you’ll be glad you did.": "Conservez-la dans un album-souvenir. Dans dix ans, vous serez heureux de la retrouver."
+})
+GUIDE_EDITORIAL["de"].update({
+  "Swap a daily selfie. In a month you have a diary of the distance.": "Tauscht täglich ein Selfie aus. Nach einem Monat habt ihr ein kleines Tagebuch eurer Zeit auf Distanz.",
+  "Count it down together. Watching a number shrink is a real comfort on hard days.": "Zählt die Tage bis zum Wiedersehen, wenn ihr einen Countdown anlegen möchtet. An schweren Tagen kann es helfen, die verbleibende Zeit schwinden zu sehen.",
+  "Write a letter that opens on a specific day: their birthday, their exam, the day they land.": "Schreibt einen Brief, der sich erst an einem bestimmten Tag öffnen lässt – etwa zum Geburtstag, vor einer Prüfung oder bei der Ankunft.",
+  "Keep a bucket list of places you’ll visit together, and add to it after every call.": "Legt eine Wunschliste mit Orten an, die ihr gemeinsam besuchen möchtet, und ergänzt sie nach euren Gesprächen.",
+  "Watch the same film at the same time, then rate it separately and compare.": "Schaut denselben Film zur gleichen Zeit und vergleicht anschließend eure Bewertungen.",
+  "Remember the dates that matter — and the ones that matter only to the two of you.": "Haltet wichtige Daten fest – auch die kleinen Jahrestage, die nur euch beiden etwas bedeuten.",
+  "Say thank you for the small things. A “proud of you” travels further than you think.": "Bedankt euch für die kleinen Dinge. Ein „Ich bin stolz auf dich“ kann über große Entfernung viel bedeuten.",
+  "Split by area: “bills are yours, school forms are mine” — including the remembering.": "Teilt ganze Verantwortungsbereiche auf: „Du kümmerst dich um Rechnungen, ich um Schulformulare.“ Auch das Erinnern gehört dazu.",
+  "Use repeats for anything recurring, so nobody re-remembers the same thing monthly.": "Richtet wiederkehrende Aufgaben ein, damit niemand jeden Monat neu daran denken muss.",
+  "Each of you marks what you like; talk only about the gap.": "Markiert beide eure Favoriten und besprecht nur noch die unterschiedlichen Wünsche.",
+  "Record the decision and link the reminder that follows from it.": "Haltet die Entscheidung fest und verknüpft die passende Erinnerung.",
+  "Move anything stuck, reassign anything unfair.": "Bringt liegen gebliebene Aufgaben wieder in Gang und verteilt Unausgewogenes neu.",
+  "End with one fun plan — the relationship is not a to-do list.": "Schließt mit einem schönen gemeinsamen Plan ab. Eure Beziehung ist schließlich keine To-do-Liste.",
+  "The quiet ones: the day you met, your first trip, the day you moved in.": "Denkt auch an die stillen Jahrestage: euer Kennenlernen, die erste gemeinsame Reise oder euren Einzug.",
+  "Track both the date itself and its yearly anniversary — “8 years since” feels different from “in 12 days”.": "Merkt euch sowohl das ursprüngliche Datum als auch den nächsten Jahrestag. „Vor acht Jahren“ fühlt sich anders an als „In zwölf Tagen“.",
+  "Book anything that sells out — restaurants, flights, hotels — first.": "Bucht zuerst, was schnell ausgebucht sein kann – Restaurants, Flüge oder Unterkünfte.",
+  "Set a budget so the day is joyful, not stressful.": "Legt ein Budget fest, damit der Tag schön und nicht finanziell stressig wird.",
+  "When your partner mentions something they like, save it that minute.": "Wenn dein Lieblingsmensch etwas erwähnt, das ihm gefällt, halte die Idee direkt fest.",
+  "Note price and how sure you are; mark it bought when it is.": "Notiert Preis und Interesse an jeder Idee. Wenn ein Geschenk gekauft ist, markiert es entsprechend.",
+  "Write a letter in advance that opens that morning.": "Schreibt frühzeitig einen Brief, der sich am Morgen des besonderen Tages öffnen lässt.",
+  "Take one photo of both of you, every year, in the same pose.": "Macht jedes Jahr ein Foto von euch beiden in derselben Pose. So entsteht mit der Zeit eine kleine Tradition.",
+  "Save it to a scrapbook — in ten years you’ll be glad you did.": "Bewahrt das Foto in einem Erinnerungsalbum auf. In zehn Jahren werdet ihr euch darüber freuen."
+})
