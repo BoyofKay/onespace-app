@@ -30,6 +30,8 @@ LEGAL = json.loads((ROOT / 'content' / 'legal.json').read_text(encoding='utf-8')
 import sys as _sys
 _sys.path.insert(0, str(ROOT / 'content'))
 from deep_pages import DEEP, COMPARE  # noqa: E402
+from arabic_copy_overrides import revise
+from international import LOCALES, make_page
 
 
 def T(en, ar, tag='span', cls='', attrs=''):
@@ -90,7 +92,7 @@ def head(page, title, title_ar, desc, desc_ar=''):
     site_ld = json.dumps({'@context': 'https://schema.org', '@graph': [
         {'@type': 'Organization', '@id': BASE + '#org', 'name': 'OneSpace', 'url': BASE, 'logo': BASE + 'assets/icon-512.png',
          'slogan': 'Two of us. One Space.'},
-        {'@type': 'WebSite', '@id': BASE + '#site', 'name': 'OneSpace', 'url': BASE, 'inLanguage': ['en', 'ar'], 'publisher': {'@id': BASE + '#org'}}]})
+        {'@type': 'WebSite', '@id': BASE + '#site', 'name': 'OneSpace', 'url': BASE, 'inLanguage': ['en', 'ar', 'es', 'fr', 'de'], 'publisher': {'@id': BASE + '#org'}}]})
     # Paths are counted without the query string or #fragment, so nothing typed into a URL (or a confirmation token) is sent.
     analytics = ('\n<script>window.goatcounter={path:function(){return location.pathname}};</script>'
                  f'\n<script data-goatcounter="https://{GOATCOUNTER}.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>') if GOATCOUNTER else ''
@@ -104,6 +106,7 @@ def head(page, title, title_ar, desc, desc_ar=''):
 <link rel="canonical" href="{canonical}">
 <link rel="alternate" hreflang="en" href="{canonical}">
 <link rel="alternate" hreflang="ar" href="{BASE}ar/{'' if page == 'index.html' else page}">
+{''.join(f'<link rel="alternate" hreflang="{k}" href="{BASE}{k}/">' for k in ('es', 'fr', 'de')) if page == 'index.html' else ''}
 <link rel="alternate" hreflang="x-default" href="{canonical}">{verify}
 <meta property="og:site_name" content="OneSpace">
 <meta property="og:title" content="{escape(title)}">
@@ -128,7 +131,7 @@ def head(page, title, title_ar, desc, desc_ar=''):
   <a class="brand" href="./"><img src="assets/mark.svg" alt="" width="34" height="34">OneSpace</a>
   <nav class="menu" aria-label="Main">{''.join(menu)}<a class="btn btn-primary menu-cta" href="join.html">{T('Join the Founding 500', 'انضم إلى المؤسسين الـ500')}</a></nav>
   <div class="actions">
-    <button class="lang" type="button">العربية</button>
+    <details class="os-intl-languages"><summary aria-label="Languages / اللغات">🌐 Language</summary><div class="os-intl-languages-list"><a href="{canonical}" data-language-switch="en" lang="en">English</a><a href="{BASE}ar/{'' if page == 'index.html' else page}" data-language-switch="ar" lang="ar">العربية</a><a href="{BASE}es/" data-language-switch="es" lang="es">Español</a><a href="{BASE}fr/" data-language-switch="fr" lang="fr">Français</a><a href="{BASE}de/" data-language-switch="de" lang="de">Deutsch</a></div></details>
     <a class="btn btn-primary btn-sm" href="join.html">{T('Join the Founding 500', 'انضم إلى المؤسسين الـ500')}</a>
     <button class="burger" type="button" aria-label="Menu" aria-expanded="false">☰</button>
   </div>
@@ -1711,7 +1714,7 @@ def arabic_page(html, name):
     hroot['lang'], hroot['dir'] = 'ar', 'rtl'
     t = soup.find('title')
     if t and t.get('data-ar'):
-        t.string = t['data-ar']
+        t.string = revise(t['data-ar'])
     slug = '' if name == 'index.html' else name
     soup.find('link', rel='canonical')['href'] = BASE + 'ar/' + slug
     desc = soup.find('meta', attrs={'name': 'description'})
@@ -1725,7 +1728,7 @@ def arabic_page(html, name):
     for b in soup.find_all('button', class_='lang'):
         b.string = 'English'
         b['aria-label'] = 'Switch to English'
-    out = str(soup)
+    out = revise(str(soup))
     # Shared files live at the site root, one level up from /ar/.
     return re.sub(r'((?:src|href|poster|data-en-src|data-ar-src|data-en-poster|data-ar-poster|srcset)=")(assets/|site\.webmanifest)', r'\1/\2', out)
 
@@ -1749,6 +1752,8 @@ def main():
     (ROOT / '404.html').write_text(page_404(), encoding='utf-8')
     for name, (target, title) in REDIRECTS.items():
         (ROOT / name).write_text(redirect(target, title), encoding='utf-8')
+    # The approved editorial language review is applied after all original copy is registered.
+    AR.update({k: revise(v) for k, v in AR.items()})
     (ROOT / 'assets' / 'ar.js').write_text('window.ONESPACE_AR=' + json.dumps(AR, ensure_ascii=False, sort_keys=True) + ';\n', encoding='utf-8')
     (ROOT / 'ar').mkdir(exist_ok=True)
     (ROOT / 'confirm.html').write_text(page_confirm(), encoding='utf-8')
@@ -1757,13 +1762,23 @@ def main():
     (ROOT / 'ar' / 'unsubscribe.html').write_text(arabic_page((ROOT / 'unsubscribe.html').read_text(encoding='utf-8'), 'unsubscribe.html'), encoding='utf-8')
     for name in PAGES:
         (ROOT / 'ar' / name).write_text(arabic_page((ROOT / name).read_text(encoding='utf-8'), name), encoding='utf-8')
+    for code in LOCALES:
+        (ROOT / code).mkdir(exist_ok=True)
+        (ROOT / code / 'index.html').write_text(make_page(code, BASE), encoding='utf-8')
     urls = ''
     for n, (_, p, c) in PAGES.items():
         slug = '' if n == 'index.html' else n
         alt = (f'<xhtml:link rel="alternate" hreflang="en" href="{BASE}{slug}"/><xhtml:link rel="alternate" hreflang="ar" href="{BASE}ar/{slug}"/>'
+               (''.join(f'<xhtml:link rel="alternate" hreflang="{code}" href="{BASE}{code}/"/>' for code in ('es', 'fr', 'de')) if n == 'index.html' else '') +
                f'<xhtml:link rel="alternate" hreflang="x-default" href="{BASE}{slug}"/>')
         for loc, pr in ((BASE + slug, p), (BASE + 'ar/' + slug, f'{max(float(p) - 0.1, 0.1):.1f}')):
             urls += f'  <url><loc>{loc}</loc><lastmod>{TODAY}</lastmod><changefreq>{c}</changefreq><priority>{pr}</priority>{alt}</url>\n'
+    home_alts = (f'<xhtml:link rel="alternate" hreflang="en" href="{BASE}"/>' +
+                 f'<xhtml:link rel="alternate" hreflang="ar" href="{BASE}ar/">' +
+                 ''.join(f'<xhtml:link rel="alternate" hreflang="{code}" href="{BASE}{code}/">' for code in ('es', 'fr', 'de')) +
+                 f'<xhtml:link rel="alternate" hreflang="x-default" href="{BASE}"/>')
+    for code in LOCALES:
+        urls += f'  <url><loc>{BASE}{code}/</loc><lastmod>{TODAY}</lastmod><changefreq>weekly</changefreq><priority>0.9</priority>{home_alts}</url>\\n'
     (ROOT / 'sitemap.xml').write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" '
                                       f'xmlns:xhtml="http://www.w3.org/1999/xhtml">\n{urls}</urlset>\n', encoding='utf-8')
     (ROOT / 'robots.txt').write_text(f'User-agent: *\nAllow: /\nDisallow: /v4.html\nDisallow: /v4-tutorial.html\nDisallow: /confirm.html\nDisallow: /ar/confirm.html\nDisallow: /unsubscribe.html\nDisallow: /ar/unsubscribe.html\n\nSitemap: {BASE}sitemap.xml\n', encoding='utf-8')
@@ -1774,7 +1789,7 @@ def main():
         {'src': 'assets/apple-touch-icon.png', 'sizes': '180x180', 'type': 'image/png'}]}, indent=1) + '\n', encoding='utf-8')
     # Cache-busting: each page asks for os.css / os.js / ar.js by content hash, so a change reaches browsers at once.
     ver = {a: hashlib.sha256((ROOT / 'assets' / a).read_bytes()).hexdigest()[:10] for a in ('os.css', 'os.js', 'ar.js')}
-    for f in list(ROOT.glob('*.html')) + list((ROOT / 'ar').glob('*.html')):
+    for f in list(ROOT.glob('*.html')) + list((ROOT / 'ar').glob('*.html')) + [ROOT / code / 'index.html' for code in LOCALES]:
         t = f.read_text(encoding='utf-8')
         u = re.sub(r'assets/(os\.css|os\.js|ar\.js)(\?v=[0-9a-f]+)?"', lambda m: f'assets/{m.group(1)}?v={ver[m.group(1)]}"', t)
         if u != t: f.write_text(u, encoding='utf-8')
