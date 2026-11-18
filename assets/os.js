@@ -87,7 +87,7 @@
   if (/^(en|ar|es|fr|de)$/.test(want || '') && want !== lang && location.protocol !== 'file:') {
     location.replace(twin(want)); return;
   }
-  function tr(key, en) { return lang === 'ar' && AR[key] ? AR[key] : en; }
+  function tr(key, en) { var local = window.ONESPACE_SITE_STRINGS || {}; return local[key] || (lang === 'ar' && AR[key] ? AR[key] : en); }
   function apply() {
     root.lang = lang; root.dir = lang === 'ar' ? 'rtl' : 'ltr';
     $$('[data-i18n]').forEach(function (el) {
@@ -424,7 +424,7 @@
           $('[data-invite-copy]', box).addEventListener('click', function () {
             var i = $('[data-invite-url]', box); i.select();
             (navigator.clipboard ? navigator.clipboard.writeText(url) : Promise.resolve(document.execCommand('copy'))).then(function () {});
-            this.textContent = lang === 'ar' ? 'تم النسخ' : 'Copied'; track('founders/invite-copied');
+            this.textContent = tr('founders.invite-copied', lang === 'ar' ? 'تم النسخ' : 'Copied'); track('founders/invite-copied');
           });
         }
         showState('ok');
@@ -480,6 +480,6 @@ document.querySelectorAll('[data-pw-toggle]').forEach(function(b){
   b.addEventListener('click',function(){
     var show=inp.type==='password'; inp.type=show?'text':'password';
     b.setAttribute('aria-pressed',show?'true':'false');
-    var l=show?'Hide key':'Show key'; b.setAttribute('aria-label',l); b.title=l; inp.focus();
+    var l=show?tr('password.hide','Hide key'):tr('password.show','Show key'); b.setAttribute('aria-label',l); b.title=l; inp.focus();
   });
 });
