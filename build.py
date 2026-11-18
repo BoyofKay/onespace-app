@@ -1169,7 +1169,7 @@ def page_index():
     chips = ''.join(f'<span class="chip">{i} {T(e, a)}</span>' for i, e, a in marquee_items)
     app_ld = {'@context': 'https://schema.org', '@type': 'MobileApplication', 'name': 'OneSpace', 'operatingSystem': 'Android',
               'applicationCategory': 'LifestyleApplication', 'description': 'A private app for couples: shared calendar, lists, trips, gestures, letters, counters and memories.',
-              'offers': {'@type': 'Offer', 'price': '0', 'priceCurrency': 'USD'}, 'inLanguage': ['en', 'ar'], 'url': BASE}
+              'inLanguage': ['en', 'ar'], 'url': BASE}
     rot = ''.join(f'<span class="{"on" if i == 0 else ""}">{T(e, a)}</span>' for i, (e, a) in enumerate([
         ('living together', 'يعيشان معًا'), ('5,700 km apart', 'على بُعد 5,700 كم'), ('just married', 'تزوّجا حديثًا'), ('planning a wedding', 'يخططان لزفاف'), ('with busy weeks', 'أسابيعهم مزدحمة')]))
     toasts = [('🤍', 'Lina sent you a hug', 'أرسلت لك لينا حضنًا', 'just now', 'الآن'), ('💌', 'A letter is waiting for you', 'رسالة تنتظرك', 'opens Saturday', 'تُفتح السبت'),
