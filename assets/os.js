@@ -168,7 +168,7 @@
       if (!entry || !new RegExp('^[0-9]{4}-[0-9]{2}-[0-9]{2}$').test(entry.date)) return;
       var container = $('.legal');
       if (!container) return;
-      var el = $('.legal > p.muted');
+      var el = $('.legal > p.legal-revision, .legal > p.muted');
       if (!el) {
         el = document.createElement('p');
         container.insertBefore(el, container.firstChild);
