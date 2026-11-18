@@ -819,6 +819,113 @@ def deep_page(d):
 
 
 
+
+# Preview is deliberately visible for design sign-off; switch off after review.
+# No ratings, testimonials or customer names here are verified customer feedback.
+SHOW_AI_REVIEW_PREVIEW = True
+
+
+def connect_care_preview():
+    return f'''<section class="connection-showcase" id="connect-care-showcase">
+      <div class="wrap connection-layout">
+        <div class="connection-copy">
+          {T('CONNECT & CARE', 'التواصل والاهتمام', 'span', 'eyebrow')}
+          {T('Stay close. Plan life together.', 'ابقيا قريبين، وخططا لحياتكما معًا.', 'h2')}
+          {T('Love letters, personal gestures, daily check-ins and a feelings journal help you connect. OneSpace goes further — share ideas, discuss options and make plans together.', 'رسائل الحب ولمسات الاهتمام والتواصل اليومي ويوميات المشاعر تبقيكما على تواصل. ويذهب OneSpace أبعد من ذلك لتتشاركا الأفكار وتناقشا الخيارات وتخططا معًا.', 'p', 'lead')}
+          <div class="connection-links">
+            <a href="connect-care.html#letters">{T('Letters', 'الرسائل')}</a>
+            <a href="connect-care.html#gestures">{T('Love gestures', 'لمسات الحب')}</a>
+            <a href="connect-care.html#checkins">{T('Daily check-ins', 'التواصل اليومي')}</a>
+            <a href="connect-care.html#journal">{T('Feelings journal', 'يوميات المشاعر')}</a>
+          </div>
+          <a class="btn btn-ghost" href="connect-care.html">{T('Explore Connect & Care', 'اكتشفا التواصل والاهتمام')}</a>
+        </div>
+        <div class="connection-devices">
+          {device('letters','OneSpace love letters — real app screenshot','رسائل الحب — لقطة حقيقية من التطبيق','sm')}
+          {device('love','OneSpace love gestures — real app screenshot','لمسات الحب — لقطة حقيقية من التطبيق','sm')}
+        </div>
+      </div>
+    </section>'''
+
+
+def page_connect_care():
+    h = head('connect-care.html', 'Connect & Care | OneSpace letters, gestures and feelings',
+             'التواصل والاهتمام | رسائل OneSpace ومشاعره',
+             'Love letters, personal gestures, daily check-ins and feelings journal in one couples app, alongside shared planning and decisions.',
+             'رسائل الحب ولمسات الاهتمام والتواصل اليومي ويوميات المشاعر إلى جانب التخطيط والقرارات المشتركة في تطبيق للأزواج.')
+    return h + page_hero('Connect & Care','التواصل والاهتمام',
+      'The heart of your relationship, with room for everything else.',
+      'مساحة لمشاعركما، ولكل تفاصيل حياتكما.',
+      'Emotional connection is important. OneSpace combines it with planning, conversations, comparisons and decisions — so it supports the whole life you share.',
+      'التواصل العاطفي مهم. ويجمعه OneSpace مع التخطيط والمحادثات والمقارنات والقرارات، ليدعم حياتكما المشتركة بكل تفاصيلها.') + \
+      feature_block('letters', 'LOVE LETTERS','رسائل الحب',
+        'Words worth waiting for.','كلمات تستحق الانتظار.',
+        'Write a letter today and choose when your partner can open it, with a countdown until that moment.',
+        'اكتب رسالة اليوم، واختر موعد فتحها لشريكك مع عد تنازلي حتى تلك اللحظة.',
+        [('Timed opening','for birthdays, anniversaries and special days.','موعد الفتح','لأعياد الميلاد والذكريات والمناسبات الخاصة.'),
+         ('Private message','the letter stays for its intended recipient.','رسالة خاصة','تبقى الرسالة لمن أرسلت إليه.')],
+        'letter','rose',tint=True,label='OneSpace letters screenshot') + \
+      feature_block('gestures','A LITTLE LOVE','لمسة حب',
+        'A small gesture can change a day.','لفتة صغيرة قد تغيّر اليوم.',
+        'Send a hug, a kiss, encouragement or your own words. A personal moment, not an automated ritual.',
+        'أرسل حضنًا أو قبلة أو تشجيعًا أو كلماتك الخاصة. لفتة شخصية وليست رسالة آلية.',
+        [('Your words','add a personal message to a gesture.','كلماتك','أضف رسالة شخصية إلى اللفتة.'),
+         ('Shared history','look back at the gestures you have sent and received.','سجل اللفتات','ارجع إلى ما أرسلتماه وتلقيتماه.')],
+        'love','lavender',rev=True,label='OneSpace A little love screenshot') + \
+      feature_block('checkins','DAILY CHECK-INS','التواصل اليومي',
+        'A little space to say how you really are.','مساحة صغيرة لتعبّر عما تشعر به.',
+        'Share how you are feeling and what is on your mind, even when you are busy or apart.',
+        'عبّر عن شعورك وما يشغل بالك حتى مع الانشغال أو البعد.',
+        [('Daily reflection','take a moment to name how your day feels.','تأمل يومي','توقف قليلًا لتصف شعورك اليوم.'),
+         ('Share what matters','give your partner context beyond a quick reply.','مشاركة مهمة','امنح شريكك صورة أوضح من مجرد رد سريع.')],
+        'ourspace','teal',tint=True,label='OneSpace Connect overview') + \
+      feature_block('journal','FEELINGS JOURNAL','يوميات المشاعر',
+        'Give your feelings somewhere to live.','امنح مشاعرك مكانًا تحتفظ به.',
+        'Record thoughts and moods over time. This section uses a general Connect screenshot until a dedicated journal capture is available.',
+        'دوّن أفكارك ومشاعرك مع مرور الوقت. يعرض هذا القسم لقطة عامة من التواصل حتى تتوفر لقطة خاصة باليوميات.',
+        [('Reflect over time','revisit your earlier notes and feelings.','تأمل مع الوقت','عد إلى ملاحظاتك ومشاعرك السابقة.'),
+         ('Your context','keep what you want to remember without losing it in chat.','احتفظ بالسياق','احفظ ما يهمك دون أن يضيع في المحادثة.')],
+        'ourspace','sage',rev=True,label='OneSpace Connect overview, not a feelings journal capture') + \
+      f'''<section class="connection-followup"><div class="wrap center">
+        {T('Emotional connection is only the beginning.', 'التواصل العاطفي ليس إلا البداية.', 'h2')}
+        {T('OneSpace also brings two-way editing, comparison, discussion and shared planning into the same space.', 'يجمع OneSpace أيضًا التعديل المتبادل والمقارنة والنقاش والتخطيط المشترك في المساحة نفسها.', 'p','lead')}
+        <a class="btn btn-primary" href="decide-together.html">{T('See how we decide together', 'اكتشفا كيف تقرران معًا')}</a>
+      </div></section>''' + value_grid() + cta_band() + foot()
+
+
+def ai_review_preview():
+    """Testing-only mockups: clearly fictional, no published review or rating data."""
+    if not SHOW_AI_REVIEW_PREVIEW:
+        return ''
+    quotes = ''.join(f'''<div class="review-preview-quote">
+       <span class="review-fake-tag">{T('AI-generated example — NOT A REAL TESTIMONIAL','مثال مولّد بالذكاء الاصطناعي — ليس شهادة حقيقية')}</span>
+       {T(en,ar,'p','review-quote')}
+       {T('Fictional example for design testing only.','مثال افتراضي لمراجعة التصميم فقط.','p','review-context')}
+       </div>''' for en,ar in [
+       ('“We save ideas together instead of losing them in our messages.”','«نجمع الأفكار معًا بدل أن تضيع بين رسائلنا.»'),
+       ('“We finally have a place to discuss our plans and decide together.”','«أصبح لدينا مكان نناقش فيه خططنا ونتخذ قراراتنا معًا.»')])
+    stores = ''.join(f'''<div class="review-preview-store">
+       <h3>{name}</h3><p class="review-stars" aria-hidden="true">☆ ☆ ☆ ☆ ☆</p>
+       {T('No verified rating yet','لا يوجد تقييم موثّق بعد','p','review-unrated')}
+       {T('AI-generated app review placeholder for testing only.','نموذج مراجعة مولّد بالذكاء الاصطناعي للاختبار فقط.','p')}
+       </div>''' for name in ('Google Play','App Store'))
+    return f'''<section class="review-preview" id="reviews-preview" data-review-preview="test-only" data-nosnippet><div class="wrap">
+      <p class="review-preview-warning">{T('TEST ONLY · AI-GENERATED PLACEHOLDERS · NOT REAL CUSTOMER REVIEWS OR RATINGS',
+        'للاختبار فقط · نماذج مولّدة بالذكاء الاصطناعي · ليست مراجعات أو تقييمات حقيقية')}</p>
+      <div class="sec-head center">
+        {T('Testimonials & app ratings — design preview', 'شهادات وتقييمات التطبيق — معاينة التصميم','h2')}
+        {T('These examples are fictional and created by AI for testing. They do not represent actual customers or published app-store ratings.',
+           'هذه أمثلة افتراضية أنشأها الذكاء الاصطناعي للاختبار، ولا تمثل مستخدمين حقيقيين أو تقييمات منشورة في متاجر التطبيقات.','p','lead')}
+      </div>
+      <div class="review-preview-grid">{quotes}</div>
+      <h3 class="review-preview-subhead">{T('Store review placeholders', 'نماذج مراجعات المتاجر')}</h3>
+      <div class="review-preview-grid">{stores}</div>
+      <p class="review-preview-note">{T('Replace these examples only after genuine, verified, permissioned reviews are available.',
+        'لا تستبدل هذه الأمثلة إلا بمراجعات حقيقية موثّقة ومصرّح باستخدامها.')}</p>
+    </div></section>'''
+
+
+
 def differentiation_section():
     """Editorial value story: connected workflows, not generic feature tiles."""
     pillars = [
@@ -940,6 +1047,7 @@ def page_index():
 {differentiation_section()}
 {watch_section()}
 {one_list_section()}
+{connect_care_preview()}
 
 <section><div class="wrap">
   <div class="sec-head center">{T('Sound familiar?', 'هل يبدو هذا مألوفًا؟', 'span', 'eyebrow')}<h2>{T('Love is easy.', 'الحب جميل…')} <span class="serif accent">{T('Logistics aren’t.', 'لكن التفاصيل محتاجة تنظيم.')}</span></h2>
@@ -1008,6 +1116,7 @@ def page_index():
   <div class="grid g3">{guide_cards()}</div>
 </div></section>
 
+{ai_review_preview()}
 {store_section()}
 
 <section id="founding"><div class="wrap"><div class="band"><div class="cta-band" style="align-items:start">
@@ -1141,6 +1250,7 @@ def page_features():
                        ('Occasion budget', 'see what is spent and what is left.', 'ميزانية المناسبة', 'شاهد ما صُرف وما تبقى.'),
                        ('Only me', 'surprises stay hidden from your partner.', 'أنا فقط', 'المفاجآت تبقى مخفية عن شريكك.')],
                       'occasion', 'rose') + \
+        connect_care_preview() + \
         feature_block('connect', 'Connect', 'تواصل', 'Small, daily ways to feel close.', 'طرق يومية صغيرة للشعور بالقرب.',
                       'A little love in one tap, letters that wait for the right day, and a daily check-in that takes less than a minute.',
                       'لمسة حب بنقرة، ورسائل تنتظر اليوم المناسب، وتواصل يومي يستغرق أقل من دقيقة.',
@@ -1816,7 +1926,7 @@ def redirect(target, title):
 
 
 PAGES = {
-    'index.html': (page_index, '1.0', 'weekly'), 'features.html': (page_features, '0.9', 'weekly'),
+    'index.html': (page_index, '1.0', 'weekly'), 'features.html': (page_features, '0.9', 'weekly'), 'connect-care.html': (page_connect_care, '0.9', 'weekly'),
     'long-distance.html': (lambda: persona_page('long-distance.html', True), '0.8', 'monthly'),
     'living-together.html': (lambda: persona_page('living-together.html', False), '0.8', 'monthly'),
     'how-it-works.html': (page_how, '0.8', 'monthly'), 'whats-new.html': (page_whats_new, '0.7', 'weekly'),
