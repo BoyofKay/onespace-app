@@ -70,6 +70,18 @@ for locale in NEW_LANGS:
                 # when the rest of the batch is valid. Retry that text alone.
                 result=translate_many([source],locale)[0]
             if not result.strip():
+                # Fallback for individual phrases that the batch endpoint silently
+                # drops; this does not permit an English placeholder in the release.
+                fallback='https://api.mymemory.translated.net/get?'+urllib.parse.urlencode({
+                    'q':source[:450], 'langpair':'en|'+locale})
+                try:
+                    with urllib.request.urlopen(urllib.request.Request(fallback,headers={'User-Agent':'Mozilla/5.0'}),timeout=20) as fr:
+                        body=json.loads(fr.read().decode('utf8'))
+                    result=str(body.get('responseData',{}).get('translatedText') or '')
+                    print('Fallback translated',locale,source[:55],flush=True)
+                except Exception as exc:
+                    print('Fallback unavailable',locale,source[:55],str(exc)[:140],flush=True)
+            if not result.strip():
                 raise RuntimeError(f'Invalid {locale} translation for {source!r}: {result!r}')
             data[source]=result
         if i%20==0 or i+1==len(work):
