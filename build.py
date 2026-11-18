@@ -1332,34 +1332,75 @@ def persona_page(page, apart):
 
 
 def page_how():
-    h = head('how-it-works.html', 'Try the OneSpace demo — plan together in 6 steps', 'جرّب عرض OneSpace — خططا معًا في 6 خطوات',
-             'A guided tour of OneSpace: create your space, invite your partner, set how you live, then plan, remember and stay close.',
-             'جولة إرشادية في OneSpace: أنشئ مساحتكما، وادعُ شريكك، واضبط كيف تعيشان، ثم خططا وتذكّرا وابقيا قريبين.')
+    """Six-step guided product tour, preserving real app captures and all themes."""
+    h = head('how-it-works.html', 'Try OneSpace — guided demo in six steps', 'جرّب OneSpace — عرض تفاعلي في ست خطوات',
+             'Experience shared planning, discussion and decisions in a guided six-step OneSpace product demo.',
+             'جرّب التخطيط والنقاش والقرارات المشتركة في عرض تفاعلي من ست خطوات داخل OneSpace.')
     steps = [
-        ('Spot what needs you', 'اكتشف ما يحتاجك', 'Today shows Lina wants to choose your weekend plan.', 'يُظهر «اليوم» أن لينا تريد اختيار خطة عطلتكما.', 'today', 'clean'),
-        ('Save the idea', 'احفظ الفكرة', 'Jot your ideas in a shared note in Remember.', 'دوّن أفكارك في ملاحظة مشتركة في «تذكّر».', 'demo_note', 'clean'),
-        ('Make it an activity', 'اجعلها نشاطًا', 'Create an activity in Coordinate with options to compare.', 'أنشئ نشاطًا في «نسّق» بخيارات للمقارنة.', 'demo_activity', 'clean'),
-        ('Talk it through', 'تناقشا', 'Discuss in the conversation — @mention, voice notes, picks.', 'تناقشا في المحادثة — إشارات ورسائل صوتية واختيارات.', 'demo_chat', 'clean'),
-        ('Decide and link', 'قررا واربطا', 'Record the decision; the calendar event and reminder stay linked.', 'سجّلا القرار؛ ويبقى الموعد والتذكير مرتبطين.', 'demo_decision', 'clean'),
-        ('Share the love', 'شارك الحب', 'Send a little love now, keep the memory afterwards.', 'أرسل لمسة حب الآن واحفظا الذكرى بعدها.', 'demo_connect', 'clean'),
+        ('Notice what matters', 'لاحظ ما يهمكما', 'See what needs your attention in Today.', 'اطّلع على ما يحتاج انتباهك في «اليوم».', 'today', 'clean'),
+        ('Save the idea', 'احفظ الفكرة', 'Capture an idea in a shared note so it does not get lost.', 'دوّن الفكرة في ملاحظة مشتركة حتى لا تضيع.', 'demo_note', 'clean'),
+        ('Compare options', 'قارن الخيارات', 'Collect links, prices and possibilities in Coordinate.', 'اجمع الروابط والأسعار والخيارات في «نسّق».', 'demo_activity', 'clean'),
+        ('Talk it through', 'تناقشا معًا', 'Discuss the options together, right next to their details.', 'ناقشا الخيارات معًا بجانب تفاصيلها مباشرة.', 'demo_chat', 'clean'),
+        ('Decide & follow up', 'قرّرا وتابعا', 'Keep your decision, reminders and dates connected.', 'احتفظا بالقرار والتذكيرات والمواعيد مترابطة.', 'demo_decision', 'clean'),
+        ('Stay close', 'ابقيا قريبين', 'Finish with a thoughtful gesture — planning is not all you share.', 'اختتما بلفتة لطيفة؛ فالتخطيط ليس كل ما تتشاركانه.', 'demo_connect', 'clean'),
     ]
-    btns = ''.join(f'<button class="step" type="button" role="tab" data-view="s{i}" aria-selected="{"true" if i == 0 else "false"}">{T(e, ar, "b")}{T(d, dar)}</button>'
-                   for i, (e, ar, d, dar, _, _) in enumerate(steps))
-    views = ''.join(f'<div data-view-of="tour" data-view-name="s{i}"{" hidden" if i else ""}>{screen(s, th, e, ar)}</div>'
-                    for i, (e, ar, d, dar, s, th) in enumerate(steps))
-    faqs = ''.join(f'<details>{T(q, qa, "summary")}{T(a, aa, "p")}</details>' for q, qa, a, aa in [
-        ('Does my partner need the app too?', 'هل يحتاج شريكي التطبيق أيضًا؟', 'Yes — OneSpace is built for two. You each have your own account and join the same space.', 'نعم — صُمم OneSpace لشخصين. لكلٍّ منكما حسابه وتنضمان إلى المساحة نفسها.'),
-        ('Can we use it in Arabic?', 'هل يمكننا استخدامه بالعربية؟', 'Yes. Each of you can choose Arabic or English independently.', 'نعم. يستطيع كل منكما اختيار العربية أو الإنجليزية بشكل مستقل.'),
-        ('What does it cost?', 'كم يكلف؟', 'The early test is free. We will tell you clearly before anything changes.', 'التجربة المبكرة مجانية. وسنخبرك بوضوح قبل أي تغيير.')])
-    return h + page_hero('Demo', 'العرض', 'Try it: plan a weekend away together.', 'جرّبه: خططا لعطلة نهاية أسبوع معًا.',
-                         'Six steps, one real workflow — from noticing something on Today to a decision on your calendar. Tap a step or press Next. The people are examples: Omar and Lina.', 'ست خطوات وسير عمل حقيقي واحد — من ملاحظة شيء في «اليوم» إلى قرار في تقويمكما. انقر على خطوة أو اضغط «التالي». الأشخاص افتراضيون: عمر ولينا.') + f'''
-<section style="padding-top:30px" data-theme-scope><div class="wrap tour">
-  <div class="stage">{views}</div>
-  <div><div class="steps" role="tablist" data-views="tour">{btns}</div>
-  <div class="swatches" style="margin-top:18px">{swatches()}</div>
-  <div class="cta-row"><button class="btn btn-dark" type="button" data-next="tour">{T('Next step →', 'الخطوة التالية ←')}</button><a class="btn btn-primary" href="join.html">{T('Join the Founding 500', 'انضم إلى المؤسسين الـ500')}</a></div></div>
-</div></section>
-<section class="tint"><div class="narrow">{T('Quick questions', 'أسئلة سريعة', 'h2')}<div style="height:20px"></div>{faqs}<p><a href="faq.html">{T('All questions →', 'كل الأسئلة ←')}</a></p></div></section>
+    tabs = ''.join(
+      f'<button class="demo-step" id="demo-tab-{i}" type="button" role="tab" '
+      f'data-view="s{i}" aria-controls="demo-panel-{i}" aria-selected="{"true" if i == 0 else "false"}" tabindex="{"0" if i == 0 else "-1"}">'
+      f'<span class="demo-step-number">{i+1:02d}</span>{T(en,ar,"span","demo-step-label")}</button>'
+      for i,(en,ar,detail,detail_ar,screen_key,theme) in enumerate(steps))
+    panels = ''.join(
+      f'<div id="demo-panel-{i}" role="tabpanel" aria-labelledby="demo-tab-{i}" '
+      f'data-view-of="tour" data-view-name="s{i}" {"hidden" if i else ""}>'
+      f'<div class="demo-panel-context">{T(en,ar,"h3")}{T(detail,detail_ar,"p")}</div>'
+      f'<div class="demo-panel-device">{screen(screen_key,theme,en,ar)}</div></div>'
+      for i,(en,ar,detail,detail_ar,screen_key,theme) in enumerate(steps))
+    faqs = ''.join(f'<details>{T(q,qa,"summary")}{T(answer,answer_ar,"p")}</details>'
+      for q,qa,answer,answer_ar in [
+        ('Does my partner need the app too?', 'هل يحتاج شريكي إلى التطبيق أيضًا؟', 'Yes. Each of you has an account in the same shared space.', 'نعم. لكل منكما حساب في المساحة المشتركة نفسها.'),
+        ('Can we use different languages?', 'هل يمكننا استخدام لغتين مختلفتين؟', 'Yes. Each partner chooses their own app language.', 'نعم. يختار كل شريك لغة التطبيق الخاصة به.'),
+        ('Can iPhone users sign up now?', 'هل يستطيع مستخدمو آيفون التسجيل الآن؟', 'Absolutely. Founder registration is open to Android and iPhone couples now. The iOS app comes later.', 'بالتأكيد. التسجيل في عضوية المؤسسين مفتوح الآن لأزواج أندرويد وآيفون، أما تطبيق iOS فسيصدر لاحقًا.')
+      ])
+    return h + page_hero('Demo', 'العرض',
+        'One idea. Two perspectives. One shared plan.', 'فكرة واحدة، ورأيان، وخطة مشتركة.',
+        'Follow six real app screens, from spotting something important to planning together and sending a little love. Choose a step or use Previous and Next.',
+        'استكشف ست شاشات حقيقية من التطبيق، من ملاحظة ما يهمكما إلى التخطيط معًا وإرسال لمسة حب. اختر أي خطوة أو استخدم السابق والتالي.') + f'''
+<section class="demo-wizard-section" data-theme-scope data-demo-wizard>
+  <div class="wrap">
+    <div class="demo-wizard-shell">
+      <div class="demo-wizard-sidebar">
+        <span class="eyebrow">{T('GUIDED EXPERIENCE', 'تجربة إرشادية')}</span>
+        <h2>{T('Explore at your pace.', 'استكشف على راحتك.')}</h2>
+        <div class="demo-progress-row" aria-live="polite">
+          <span>{T('Step', 'الخطوة')} <strong data-demo-current>1</strong> {T('of', 'من')} 6</span>
+          <span>{T('Your journey', 'رحلتكما')}</span>
+        </div>
+        <div class="demo-progress-track" role="progressbar" aria-label="Demo progress" aria-valuenow="1" aria-valuemin="1" aria-valuemax="6">
+          <span data-demo-progress style="width:16.667%"></span>
+        </div>
+        <div class="demo-step-grid" role="tablist" aria-label="Demo steps" data-views="tour">{tabs}</div>
+        <div class="demo-wizard-actions">
+          <button class="btn btn-ghost" type="button" data-demo-prev disabled>{T('← Previous', 'السابق ←')}</button>
+          <button class="btn btn-dark" type="button" data-next="tour">{T('Next →', 'التالي ←')}</button>
+        </div>
+      </div>
+      <div class="demo-wizard-stage"><div class="demo-wizard-panels">{panels}</div></div>
+    </div>
+    <div class="demo-theme-picker">
+      <div class="demo-theme-heading">
+        <div>{T('MAKE IT YOURS', 'اجعله على ذوقك', 'span', 'eyebrow')}
+          {T('Nine themes. Your mood.', 'تسع سمات تناسب ذوقك.', 'h3')}</div>
+        {T('Choose a theme without resetting the demo.', 'غيّر السمة دون إعادة العرض إلى البداية.', 'p')}
+      </div>
+      <div class="demo-theme-body">
+        <div class="swatches demo-theme-grid" aria-label="App theme examples">{swatches()}</div>
+        {device('themes/today_cleanLight','App theme preview','معاينة سمة التطبيق','demo-theme-device',themed=True)}
+      </div>
+    </div>
+  </div>
+</section>
+<section class="tint"><div class="narrow">{T('Quick questions','أسئلة سريعة','h2')}<div style="height:20px"></div>{faqs}
+  <p><a href="faq.html">{T('All questions →','كل الأسئلة ←')}</a></p></div></section>
 ''' + cta_band() + foot()
 
 
