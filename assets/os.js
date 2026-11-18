@@ -71,18 +71,23 @@
   }, true);
 
   // ---------- Language ----------
+  // English/Arabic share the full page tree. Spanish, French and German have
+  // indexable localized landing pages; never navigate to a non-existent twin.
   var english = new WeakMap();
-  // Each language has its own address: /page.html (English) and /ar/page.html (Arabic).
-  var lang = root.getAttribute('lang') === 'ar' ? 'ar' : 'en';
+  var lang = /^(en|ar|es|fr|de)$/.test(root.lang) ? root.lang : 'en';
   function twin(to) {
-    var p = location.pathname, isAr = p.indexOf('/ar/') === 0 || p === '/ar';
-    var rest = isAr ? p.replace(/^\/ar\/?/, '/') : p;
-    return (to === 'ar' ? '/ar' + rest : rest) + location.search.replace(/[?&]lang=(ar|en)/, '').replace(/^&/, '?') + location.hash;
+    var p = location.pathname, rest = p.replace(/^\/(ar|es|fr|de)(?=\/|$)/, '') || '/';
+    var dest = (to === 'en' ? rest : (to === 'ar' ? '/ar' + rest : '/' + to + '/'));
+    if (/^(es|fr|de)$/.test(lang) && /^(en|ar)$/.test(to)) dest = to === 'ar' ? '/ar/' : '/';
+    return dest + location.search.replace(/[?&]lang=(en|ar|es|fr|de)/, '').replace(/^&/, '?') + location.hash;
   }
+  var browserLang = (navigator.language || '').toLowerCase().slice(0, 2);
   var want = new URLSearchParams(location.search).get('lang') || get('os-lang') ||
-    (!get('os-lang-seen') && (navigator.language || '').toLowerCase().indexOf('ar') === 0 ? 'ar' : null);
+    (!get('os-lang-seen') && /^(ar|es|fr|de)$/.test(browserLang) ? browserLang : null);
   put('os-lang-seen', '1');
-  if ((want === 'ar' || want === 'en') && want !== lang && location.protocol !== 'file:') { location.replace(twin(want)); return; }
+  if (/^(en|ar|es|fr|de)$/.test(want || '') && want !== lang && location.protocol !== 'file:') {
+    location.replace(twin(want)); return;
+  }
   function tr(key, en) { return lang === 'ar' && AR[key] ? AR[key] : en; }
   function apply() {
     root.lang = lang; root.dir = lang === 'ar' ? 'rtl' : 'ltr';
@@ -93,14 +98,11 @@
     });
     $$('[data-i18n-attr]').forEach(function (el) {
       el.getAttribute('data-i18n-attr').split(';').forEach(function (pair) {
-        var p = pair.split(':'); var attr = p[0], k = p[1];
-        var store = 'data-en-' + attr;
+        var p = pair.split(':'); var attr = p[0], k = p[1], store = 'data-en-' + attr;
         if (!el.hasAttribute(store)) el.setAttribute(store, el.getAttribute(attr) || '');
         el.setAttribute(attr, lang === 'ar' && AR[k] ? AR[k] : el.getAttribute(store));
       });
     });
-    $$('.lang').forEach(function (b) { b.textContent = lang === 'ar' ? 'English' : 'العربية';
-      b.setAttribute('aria-label', lang === 'ar' ? 'Switch to English' : 'التبديل إلى العربية'); });
     $$('[data-ar-src]').forEach(function (m) {
       var src = m.getAttribute(lang === 'ar' ? 'data-ar-src' : 'data-en-src');
       if (src && m.getAttribute('src') !== src) m.setAttribute('src', src);
@@ -110,8 +112,20 @@
     var t = document.querySelector('title');
     if (t && t.dataset.ar) { if (!t.dataset.en) t.dataset.en = t.textContent; t.textContent = lang === 'ar' ? t.dataset.ar : t.dataset.en; }
   }
-  if (lang === 'ar') apply();  // already rendered in Arabic on the server; this only fills script-made text
-  $$('.lang').forEach(function (b) { b.addEventListener('click', function () { var to = lang === 'ar' ? 'en' : 'ar'; put('os-lang', to); track('lang/' + to); location.href = twin(to); }); });
+  if (lang === 'ar') apply();
+  $$('[data-language-switch]').forEach(function (link) {
+    link.addEventListener('click', function (e) {
+      var to = link.getAttribute('data-language-switch');
+      if (!/^(en|ar|es|fr|de)$/.test(to || '')) return;
+      put('os-lang', to); track('lang/' + to);
+      var target = new URL(link.href, location.href);
+      // Campaign identifiers survive a language switch without adding personal tokens.
+      ['utm_source','utm_medium','utm_campaign','utm_content','utm_term','ref'].forEach(function (k) {
+        if (params.get(k) && !target.searchParams.has(k)) target.searchParams.set(k, params.get(k).slice(0, 80));
+      });
+      if (target.href !== link.href) { e.preventDefault(); location.href = target.href; }
+    });
+  });
 
   // ---------- Click-to-open full-width mega navigation (mobile: accordion) ----------
   var burger = $('.burger'), menu = $('.menu');
@@ -306,7 +320,7 @@
       box.hidden = false; box.innerHTML = '';
       loadTurnstile(function (ts) {
         if (!ts) { box.hidden = true; say('sending'); return send({ turnstile_unavailable: true }); }
-        ts.render(box, { sitekey: TS_KEY, language: lang === 'ar' ? 'ar' : 'en', theme: 'auto',
+        ts.render(box, { sitekey: TS_KEY, language: lang, theme: 'auto',
           callback: function (token) { track(name + '/check-passed'); box.hidden = true; say('sending'); send({ turnstile: token }); },
           'error-callback': function () { box.hidden = true; say('sending'); send({ turnstile_unavailable: true }); return true; } });
       });
@@ -321,7 +335,7 @@
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       var status = $('.status', form);
-      function say(k, ok) { status.textContent = lang === 'ar' && msgsAr[k] ? msgsAr[k] : tr('form.' + k, msgs[k]); status.className = 'status ' + (ok === true ? 'ok' : ok === false ? 'err' : '');
+      function say(k, ok) { var local = window.ONESPACE_FORM_MESSAGES || {}; status.textContent = local[k] || (lang === 'ar' && msgsAr[k] ? msgsAr[k] : tr('form.' + k, msgs[k])); status.className = 'status ' + (ok === true ? 'ok' : ok === false ? 'err' : '');
         if (ok === false) track(fname + '/error-' + k); }
       if (form.elements.website && form.elements.website.value) return;
       function v(n) { var el = form.elements[n]; if (!el) return ''; if (el.length && !el.tagName) { var c = Array.prototype.find.call(el, function (x) { return x.checked; }); return c ? c.value : ''; } return String(el.value || '').trim(); }
