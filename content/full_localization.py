@@ -110,6 +110,9 @@ def content_nodes(soup):
         # The product wordmark is deliberately in English in every locale.
         if any('brand-name' in p.get('class', []) for p in node.parents):
             continue
+        # Social icons and named social networks are visual identity marks.
+        if any('footer-social-item' in p.get('class', []) for p in node.parents):
+            continue
         if eligible(node):
             yield node
 
