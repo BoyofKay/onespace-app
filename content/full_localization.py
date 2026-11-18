@@ -93,6 +93,11 @@ from journeys_apart_02 import JOURNEYS as JA2
 from journeys_together_01 import JOURNEYS as JT1
 from journeys_together_02 import JOURNEYS as JT2
 from journeys_ui import UI as JOURNEY_UI, FEATURES as JOURNEY_FEATURES
+from faq_additions import FAQ_ADDITIONS
+from tutorial_additions import TUTORIAL_ADDITIONS
+from tutorial_journeys import JOURNEY_TUTORIAL_ADDITIONS, JOURNEY_LABEL
+from guide_additions_1 import GUIDE_ADDITIONS_1
+from guide_additions_2 import GUIDE_ADDITIONS_2
 for _locale in NEW_LANGS:
     GLOSSARY[_locale].update(CURATED[_locale])
     GLOSSARY[_locale].update(MENU_EDITORIAL[_locale])
@@ -110,6 +115,46 @@ for _j in JA1 + JA2 + JT1 + JT2:
 for _entry in list(JOURNEY_UI.values()) + list(JOURNEY_FEATURES.values()):
     for _index, _language in enumerate(('es', 'fr', 'de'), 2):
         GLOSSARY[_language][_entry[0]] = _entry[_index]
+
+# All additional long-form FAQ, tutorial, and guide copy must be provided in
+# every shipped website language; no machine translation or English fallback.
+for _locale_index, _locale in enumerate(('es','fr','de'), 2):
+    _lex = GLOSSARY[_locale]
+    def _add(entry):
+        if entry[0] != entry[_locale_index]:
+            _lex[entry[0]] = entry[_locale_index]
+    for _entries in FAQ_ADDITIONS.values():
+        for _q, _answer in _entries:
+            _add(_q)
+            _add(_answer)
+    for _items in [*TUTORIAL_ADDITIONS.values(), *JOURNEY_TUTORIAL_ADDITIONS.values()]:
+        for _tutorial in _items:
+            _add(_tutorial['t'])
+            for _step in _tutorial['steps']:
+                # HTML link inside a translated step is segmented into two
+                # text nodes by BeautifulSoup; translate both pieces exactly.
+                if '<a href=' in _step[0]:
+                    _src_parts = [str(s) for s in BeautifulSoup(_step[0], 'html.parser').stripped_strings]
+                    _dst_parts = [str(s) for s in BeautifulSoup(_step[_locale_index], 'html.parser').stripped_strings]
+                    if len(_src_parts) != len(_dst_parts):
+                        raise RuntimeError('Localized tutorial link segments mismatch')
+                    for _source, _translated in zip(_src_parts, _dst_parts):
+                        _lex[_source] = _translated
+                else:
+                    _add(_step)
+    _add(JOURNEY_LABEL)
+    _add(['Explore 9 more practical guides',
+          'استكشف 9 أدلة عملية أخرى',
+          'Explora otras 9 guías prácticas',
+          'Découvrez 9 autres guides pratiques',
+          'Entdecke 9 weitere praktische Ratgeber'])
+    for _guide in GUIDE_ADDITIONS_1 + GUIDE_ADDITIONS_2:
+        for _field in ('title','desc','intro','how'):
+            _add(_guide[_field])
+        for _heading, _tips in _guide['sections']:
+            _add(_heading)
+            for _tip in _tips:
+                _add(_tip)
 
 def eligible(raw):
     s = str(raw).strip()

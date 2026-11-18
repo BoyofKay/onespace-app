@@ -8,6 +8,11 @@ ROOT = Path(__file__).resolve().parents[1]
 PAGES = ["index.html", "compare.html", "smart-sharing.html", "decide-together.html", "trips.html", "occasions.html", "watchlists.html", "memories.html", "everyday.html", "features.html", "connect-care.html", "long-distance.html", "living-together.html",
          "how-it-works.html", "tutorials.html", "whats-new.html", "faq.html", "join.html",
          "support.html", "share-kit.html", "guides.html", "guide-long-distance-ideas.html", "guide-mental-load.html", "guide-anniversary-planning.html", "privacy.html", "terms.html", "delete-account.html", "404.html"]
+import sys
+sys.path.insert(0, str(ROOT / "content"))
+from guide_additions_1 import GUIDE_ADDITIONS_1
+from guide_additions_2 import GUIDE_ADDITIONS_2
+PAGES += [g["slug"] for g in GUIDE_ADDITIONS_1 + GUIDE_ADDITIONS_2]
 PAGES += ["ar/" + p for p in PAGES if p != "404.html"]  # server-rendered Arabic twins
 EN_PAGES = [p for p in PAGES if not p.startswith("ar/") and p != "404.html"]
 PAGES += [f"{lang}/{p}" for lang in ("es", "fr", "de") for p in EN_PAGES]  # full site mirrors

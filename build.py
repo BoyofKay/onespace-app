@@ -38,6 +38,14 @@ from journeys_apart_02 import JOURNEYS as J_APART_2
 from journeys_together_01 import JOURNEYS as J_TOGETHER_1
 from journeys_together_02 import JOURNEYS as J_TOGETHER_2
 from journeys_ui import UI as JOURNEY_UI, FEATURES as JOURNEY_FEATURES
+from faq_additions import FAQ_ADDITIONS
+from tutorial_additions import TUTORIAL_ADDITIONS
+from tutorial_journeys import JOURNEY_TUTORIAL_ADDITIONS, JOURNEY_LABEL
+from guide_additions_1 import GUIDE_ADDITIONS_1
+from guide_additions_2 import GUIDE_ADDITIONS_2
+# New content is additive; previously approved sections and pages remain unchanged.
+for _group, _entries in FAQ_ADDITIONS.items():
+    FAQ_MORE.setdefault(_group, []).extend([(q[:2], answer[:2]) for q, answer in _entries])
 from journey_links import linkify_journeys
 
 JOURNEYS = J_APART_1 + J_APART_2 + J_TOGETHER_1 + J_TOGETHER_2
@@ -1717,6 +1725,17 @@ TUTORIALS = [
 ]
 
 
+# Additional native-language step-by-step guides stay inside existing accordion groups.
+for _index, (_key, _icon, _en, _ar, _guides) in enumerate(TUTORIALS):
+    _additions = TUTORIAL_ADDITIONS.get(_key, [])
+    TUTORIALS[_index] = (_key, _icon, _en, _ar, _guides + [
+        (entry['t'][0], entry['t'][1], [(step[0], step[1]) for step in entry['steps']])
+        for entry in _additions])
+TUTORIALS.append(('journey', '🎬', JOURNEY_LABEL[0], JOURNEY_LABEL[1], [
+    (entry['t'][0], entry['t'][1], [(step[0], step[1]) for step in entry['steps']])
+    for entry in JOURNEY_TUTORIAL_ADDITIONS['journey']
+]))
+
 TUT_CLIPS = {'Add anything in two taps': 'quickadd', 'Decide together with an activity': 'plan', 'Plan a trip': 'trip',
              'Save a place from Google Maps': 'places', 'Send a little love': 'love', 'Choose your language and theme': 'themes',
              'Count down (or up) to a special date': 'counters'}
@@ -1845,9 +1864,22 @@ GUIDES = [
 ]
 
 
-def guide_cards():
+# Nine optional new reading resources: keep the guide hub concise by hiding
+# the additional cards until the visitor explicitly asks to explore them.
+def _from_localized_guide(entry):
+    return {'slug': entry['slug'], 'emoji': entry['emoji'], 'bg': entry['bg'],
+            'mins': entry['mins'], 'title': entry['title'][:2],
+            'desc': entry['desc'][:2], 'intro': entry['intro'][:2],
+            'how': entry['how'][:2],
+            'sections': [(heading[0], heading[1],
+                         [(tip[0], tip[1]) for tip in tips])
+                         for heading, tips in entry['sections']]}
+GUIDES.extend([_from_localized_guide(g) for g in GUIDE_ADDITIONS_1 + GUIDE_ADDITIONS_2])
+
+
+def guide_cards(guides=None):
     return ''.join(f"""<a class="card link art-card reveal" href="{g['slug']}"><div class="cover" style="background:{g['bg']}">{g['emoji']}</div>
-  {T(g['title'][0], g['title'][1], 'h3')}{T(g['desc'][0], g['desc'][1], 'p')}<span class="muted" style="font-size:13px">{g['mins']} {T('min read', 'دقائق قراءة')}</span></a>""" for g in GUIDES)
+  {T(g['title'][0], g['title'][1], 'h3')}{T(g['desc'][0], g['desc'][1], 'p')}<span class="muted" style="font-size:13px">{g['mins']} {T('min read', 'دقائق قراءة')}</span></a>""" for g in (GUIDES if guides is None else guides))
 
 
 def page_guides():
@@ -1857,7 +1889,12 @@ def page_guides():
     return h + page_hero('Guides', 'الأدلة', 'Small ideas for a shared life.', 'أفكار صغيرة لحياة مشتركة.',
                          'Practical, kind and short. Written for real couples — whether you share a sofa or a time difference.',
                          'عملية ولطيفة وقصيرة. مكتوبة لأزواج حقيقيين — سواء تتشاركان أريكة أو فرق توقيت.') + \
-        f'<section style="padding-top:20px"><div class="wrap"><div class="grid g3">{guide_cards()}</div></div></section>' + cta_band() + foot()
+        f'<section style="padding-top:20px"><div class="wrap"><div class="grid g3">{guide_cards(GUIDES[:3])}</div>'
+        + '<details class="journey-show-more guide-show-more"><summary>'
+        + T('Explore 9 more practical guides', 'استكشف 9 أدلة عملية أخرى')
+        + '</summary><div class="grid g3" style="margin-top:22px">'
+        + guide_cards(GUIDES[3:]) + '</div></details></div></section>'
+        + cta_band() + foot()
 
 
 def guide_page(g):
@@ -1868,7 +1905,7 @@ def guide_page(g):
         body += f'{T(st, st_ar, "h2")}<ol>{"".join(f"<li>{T(x, y)}</li>" for x, y in tips)}</ol>'
     ld = {'@context': 'https://schema.org', '@type': 'Article', 'headline': t_en, 'description': g['desc'][0], 'inLanguage': ['en', 'ar'],
           'publisher': {'@type': 'Organization', 'name': 'OneSpace'}, 'datePublished': '2026-11-16', 'mainEntityOfPage': BASE + g['slug']}
-    others = ''.join(f'<li><a href="{o["slug"]}">{T(o["title"][0], o["title"][1])}</a></li>' for o in GUIDES if o is not g)
+    others = ''.join(f'<li><a href="{o["slug"]}">{T(o["title"][0], o["title"][1])}</a></li>' for o in [other for other in GUIDES if other is not g][:4])
     return h + f"""<section class="page-hero"><div class="narrow">
   <div class="crumbs"><a href="./">{T('Home', 'الرئيسية')}</a> › <a href="guides.html">{T('Guides', 'الأدلة')}</a></div>
   <div style="font-size:56px;margin-top:16px">{g['emoji']}</div>{T(t_en, t_ar, 'h1')}
