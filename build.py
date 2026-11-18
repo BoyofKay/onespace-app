@@ -98,13 +98,22 @@ def head(page, title, title_ar, desc, desc_ar=''):
                 '</div></div>')
 
     feature_by_slug = {d['slug']: (d['slug'], d['icon'], d['nav'][0], d['nav'][1], d['navd'][0], d['navd'][1]) for d in DEEP}
+    # Feature navigation describes the in-app workflows. Competitive positioning
+    # is a separate top-level "Why OneSpace" destination, not a feature.
     groups_features = [
-        ('Planning together', 'خططا معًا', [feature_by_slug[slug] for slug in
-            ('smart-sharing.html','decide-together.html','trips.html','everyday.html')]),
-        ('Staying connected', 'ابقيا قريبين', [feature_by_slug[slug] for slug in
-            ('occasions.html','watchlists.html','memories.html')] +
-            [('compare.html','', 'Compare', 'مقارنة',
-              'vs. chat, notes and calendars','مقارنة بالمحادثة والملاحظات والتقويمات')]),
+        ('Collect & share', 'اجمعا وشاركا', [
+            ('smart-sharing.html','', 'Smart sharing & unified lists', 'مشاركة ذكية وقوائم موحّدة',
+             'From any app into one list for both', 'من أي تطبيق إلى قائمة واحدة لكليكما'),
+            feature_by_slug['watchlists.html'],
+            feature_by_slug['everyday.html'],
+            feature_by_slug['memories.html'],
+        ]),
+        ('Plan & decide', 'خططا وقررا', [
+            ('decide-together.html','', 'Compare options together', 'قارنا الخيارات معًا',
+             'Prices, specs, both opinions, one decision', 'الأسعار والمواصفات ورأي كل منكما وقرار واحد'),
+            feature_by_slug['trips.html'],
+            feature_by_slug['occasions.html'],
+        ]),
     ]
     groups_couples = [
         ('Find your rhythm', 'اختارا ما يناسب حياتكما', [
@@ -126,10 +135,11 @@ def head(page, title, title_ar, desc, desc_ar=''):
     ]
     menu = [
         drop('Features','المزايا',groups_features,
-             ('features.html','compare.html') + tuple(d['slug'] for d in DEEP),
+             ('features.html',) + tuple(d['slug'] for d in DEEP),
              'Explore the app','اكتشف التطبيق',
              'Everything, in one shared space','كل تفاصيل حياتكما في مساحة واحدة',
              ('features.html','See all features','عرض كل المزايا')),
+        link('compare.html','Why OneSpace','لماذا OneSpace'),
         drop('For couples','للأزواج',groups_couples,
              ('long-distance.html','living-together.html'),
              'Built for both of you','مصمم لحياتكما معًا',
@@ -800,16 +810,68 @@ def deep_page(d):
 """ + cta_band() + foot()
 
 
+
+def differentiation_section():
+    """Editorial value story: connected workflows, not generic feature tiles."""
+    pillars = [
+      ('01', 'Share anywhere. Keep one list together.', 'شاركا من أي مكان، واجمعا كل شيء.',
+       'Share from another app and OneSpace suggests where the item belongs — a shared watchlist, a place, an option or a gift idea. Both of you know where to find it.',
+       'شاركا من أي تطبيق، وسيقترح OneSpace مكان العنصر المناسب: قائمة مشاهدة مشتركة أو مكان أو خيار أو فكرة هدية. ليعرف كل منكما أين يجده.',
+       'smart-sharing.html', 'Explore smart sharing', 'اكتشفا المشاركة الذكية'),
+      ('02', 'Two people. One evolving decision.', 'رأيان وقرار واحد يتطور معكما.',
+       'Both partners can contribute to shared activities: add or edit details, discuss options, see changes and keep the final choice beside the conversation.',
+       'يمكن لكليكما المشاركة في الأنشطة المشتركة: إضافة التفاصيل وتعديلها ومناقشة الخيارات ومراجعة التغييرات، مع حفظ القرار بجانب النقاش.',
+       'decide-together.html', 'Explore shared decisions', 'اكتشفا القرارات المشتركة'),
+      ('03', 'Plan the whole journey, not just the date.', 'خططا للتفاصيل، لا للموعد وحده.',
+       'Compare prices and specifications, organise flights and packing, and prepare occasions with gift ideas and budgets — all connected to the plan.',
+       'قارنا الأسعار والمواصفات، ونظّما الرحلات والتجهيز، وخططا للمناسبات بأفكار الهدايا والميزانيات، مع بقاء التفاصيل مرتبطة بالخطة.',
+       'trips.html', 'Explore trip planning', 'اكتشفا تخطيط الرحلات'),
+      ('04', 'Familiar features, thoughtfully extended.', 'مزايا مألوفة بتفاصيل أذكى.',
+       'Counters can follow anniversaries, map links can become saved places, and letters can wait until a chosen date. The details make each feature more useful.',
+       'العدّادات تتابع الذكريات السنوية، وروابط الخرائط تتحول إلى أماكن محفوظة، والرسائل تنتظر موعد فتحها. تفاصيل صغيرة تزيد الفائدة.',
+       'features.html', 'Explore every feature', 'اكتشفا كل المزايا'),
+    ]
+    lines = ''.join(
+      f'<article class="difference-row">'
+      f'<span class="difference-no" aria-hidden="true">{n}</span>'
+      f'<div class="difference-copy">{T(title, title_ar, "h3")}'
+      f'{T(desc, desc_ar, "p")}'
+      f'<a href="{href}" class="difference-link">{T(link, link_ar)} <span aria-hidden="true">↗</span></a>'
+      f'</div></article>'
+      for n,title,title_ar,desc,desc_ar,href,link,link_ar in pillars)
+    return f'''<section class="difference" id="the-difference"><div class="wrap">
+      <div class="difference-lead">
+        <div>
+          {T('WHAT MAKES ONESPACE DIFFERENT', 'ما الذي يميّز OneSpace', 'span', 'eyebrow')}
+          {T('Not just more features. A smarter way to share life.', 'ليست مزايا أكثر فحسب، بل حياة مشتركة أسهل.', 'h2')}
+        </div>
+        {T('OneSpace connects what you share, edit, decide and plan. Each feature works with the others instead of sending you back through scattered apps and messages.', 'يربط OneSpace ما تتشاركانه وتعدّلانه وتقرّرانه وتخططان له. تتكامل المزايا بدل العودة إلى تطبيقات ورسائل متفرقة.', 'p', 'lead')}
+      </div>
+      <div class="difference-grid">{lines}</div>
+      <div class="difference-outro"><a href="compare.html" class="btn btn-ghost">{T('Discover why OneSpace is different', 'اكتشفا الفرق مع OneSpace')}</a></div>
+    </div></section>'''
+
+
+
 def page_compare():
-    h = head('compare.html', 'OneSpace vs. chat apps, notes and shared calendars', 'OneSpace مقارنة بتطبيقات المحادثة والملاحظات والتقويمات',
-             'Why couples use OneSpace instead of a chat thread, a notes app, two calendars and a spreadsheet: decisions, links, trips, gifts, watchlists, memories and privacy in one app.',
-             'لماذا يستخدم الأزواج OneSpace بدل محادثة وتطبيق ملاحظات وتقويمين وجدول: القرارات والروابط والرحلات والهدايا وقوائم المشاهدة والذكريات والخصوصية في تطبيق واحد.')
-    return h + page_hero('Compare', 'مقارنة', 'One app instead of five.', 'تطبيق واحد بدل خمسة.',
-                         'Most couples run their life across a chat app, a notes app, two calendars, a spreadsheet and a camera roll. Here is what changes when it all lives in one private space.',
-                         'يدير معظم الأزواج حياتهم عبر تطبيق محادثة وتطبيق ملاحظات وتقويمين وجدول وألبوم صور. إليك ما يتغير حين يجتمع كل ذلك في مساحة خاصة واحدة.') + f"""
-<section style="padding-top:20px"><div class="wrap">{compare_table()}
-<p class="muted center" style="margin-top:18px">{T('Chat apps are great for talking. OneSpace is for the life you organise together — and it keeps the talking next to the plans.', 'تطبيقات المحادثة رائعة للحديث. OneSpace للحياة التي تنظمانها معًا — ويبقي الحديث بجانب الخطط.')}</p></div></section>
-{value_grid()}""" + cta_band() + foot()
+    h = head('compare.html', 'Why OneSpace is different — connected sharing, planning and decisions', 'لماذا يختلف OneSpace — مشاركة وتخطيط وقرارات مترابطة',
+             'Discover the difference: smart sharing into unified lists, two-way collaboration, side-by-side choices, trips and occasion budgets in one private couples app.',
+             'اكتشف الفرق: مشاركة ذكية إلى قوائم موحدة، وتعاون بين الشريكين، ومقارنة الخيارات، وتخطيط الرحلات وميزانيات المناسبات في تطبيق خاص للأزواج.')
+    return h + page_hero('Why OneSpace', 'لماذا OneSpace',
+                         'The difference is how it all connects.', 'الفرق في ترابط كل شيء.',
+                         'A link becomes an option. An option becomes a shared decision. A decision becomes part of a plan. Instead of juggling separate tools, keep that whole journey in one private space for two.',
+                         'رابط يتحوّل إلى خيار، والخيار إلى قرار مشترك، والقرار إلى جزء من خطة. بدل التنقل بين أدوات متفرقة، تجتمع الرحلة كلها في مساحة خاصة لكما.') + \
+       differentiation_section() + f"""
+<section class="difference-compare" aria-labelledby="compare-tools-title"><div class="wrap">
+  <div class="sec-head center">
+    {T('The real comparison', 'المقارنة الفعلية', 'span', 'eyebrow')}
+    {T('Separate tools or one connected space?', 'أدوات متفرقة أم مساحة مترابطة؟', 'h2', '', 'id="compare-tools-title"')}
+    {T('Chats, notes and calendars are useful on their own. OneSpace is designed to keep a couple’s decisions and follow-up alongside the details.', 'المحادثات والملاحظات والتقويمات مفيدة كلٌّ على حدة. أما OneSpace فيربط قراراتكما ومتابعتها بالتفاصيل التي تخصها.', 'p', 'lead')}
+  </div>
+  {compare_table()}
+  <p class="muted center" style="margin-top:18px">{T('This compares everyday workflows, not an exhaustive audit of other apps. Features and integrations can vary by product.', 'هذه مقارنة لطرق الاستخدام اليومية، وليست مراجعة شاملة للتطبيقات الأخرى. قد تختلف المزايا والتكاملات من تطبيق لآخر.')}</p>
+</div></section>
+""" + value_grid() + cta_band() + foot()
 
 
 def page_index():
@@ -852,7 +914,7 @@ def page_index():
   <div>
     {T('Two of us. One Space.', 'نحن الاثنان. مساحة واحدة.', 'span', 'eyebrow')}
     <h1>{T('The private home for the life', 'مساحتكما الخاصة')} <span class="serif accent">{T('you share.', 'لكل تفاصيل حياتكما.')}</span></h1>
-    <p class="lead">{T('Plans, little gestures, letters and memories in one calm app only the two of you can open. Made for couples', 'خططكما ومواعيدكما ورسائلكما وذكرياتكما… كلها في مساحة خاصة تجمعكما. مناسبة لأزواج')} <b class="rotator" style="color:var(--teal)">{rot}</b></p>
+    <p class="lead">{T('From a link shared in another app to a decision made together, keep your lists, plans, conversations and memories connected in one private space. Made for couples', 'من رابط تشاركانه من تطبيق آخر إلى قرار تتخذانه معًا، تبقى قوائمكما وخططكما ونقاشاتكما وذكرياتكما مترابطة في مساحة خاصة واحدة. مناسب لأزواج')} <b class="rotator" style="color:var(--teal)">{rot}</b></p>
     <div class="cta-row">
       <a class="btn btn-primary" href="#founding" data-track="hero_join">{T('Join the Founding 500 — free', 'انضم إلى المؤسسين الـ500 — مجانًا')}</a>
       <a class="btn btn-ghost" href="how-it-works.html" data-track="hero_demo">▶ {T('Try the demo', 'جرّب العرض')}</a>
@@ -867,6 +929,7 @@ def page_index():
   </div>
 </div></section>
 <div class="marquee" aria-hidden="true"><div class="marquee-track">{chips}{chips}</div></div>
+{differentiation_section()}
 {watch_section()}
 {one_list_section()}
 
@@ -1031,6 +1094,7 @@ def page_features():
                          'OneSpace is organised the way a couple actually lives: what is happening today, what you want to remember, what you need to coordinate, how you stay close, and how you like things set up.',
                          'نُظّم OneSpace بالطريقة التي يعيش بها الزوجان فعلًا: ما يحدث اليوم، وما تريدان تذكّره، وما تحتاجان إلى تنسيقه، وكيف تبقيان قريبين، وكيف تحبان ضبط الأشياء.',
                          extra=f'<div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:22px">{jump}</div>') + \
+        differentiation_section() + \
         feature_block('today', 'Today', 'اليوم', 'Open the app, know what matters.', 'افتح التطبيق واعرف ما يهم.',
                       'Today brings together what your partner sent, what needs your answer, and the next seven days — shaped by whether you live together or apart.',
                       'يجمع «اليوم» ما أرسله شريكك وما يحتاج ردّك والأيام السبعة القادمة — بحسب ما إذا كنتما معًا أو متباعدين.',
