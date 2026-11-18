@@ -95,6 +95,8 @@
   // Landing-page interest goes through one canonical Founder form at /join.html.
   // Keep the partner invite and campaign parameters in the destination URL.
   (function simplifyFounderSignup() {
+    var founderEntry = $('[data-founder-entry] a[href="join.html"]');
+    if (founderEntry && location.search) founderEntry.href = 'join.html' + location.search;
     var homeForm = $('#founding form[data-form="join"]');
     if (homeForm) {
       var panel = homeForm.closest('.panel');
