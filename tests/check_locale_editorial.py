@@ -23,6 +23,7 @@ CHECKS = {
     'privacy': ['Qué datos recopilamos','No recopilamos','60 días','180 días','siete días',
                 'privacy@onespace.live', 'founders@onespace.live', 'unsubscribe'],
     'terms': ['18 años','contenido','elementos compartidos','OneSpace'],
+    'account': ['Me → Your data and account', 'Correo de tu cuenta', 'privacy@onespace.live'],
     'faq': ['¿Qué son los primeros 500 miembros fundadores?', 'unidireccional', 'Google'],
     'guide': ['Respeten los horarios del otro', 'Compartan también lo cotidiano'],
   },
@@ -30,6 +31,7 @@ CHECKS = {
     'privacy': ['Quelles données recueillons-nous ?', 'Nous ne recueillons pas',
                 '60 jours','180 jours','sept jours','privacy@onespace.live','founders@onespace.live','unsubscribe'],
     'terms': ['18 ans','contenus','Partagé','OneSpace'],
+    'account': ['Me → Your data and account', 'Adresse e-mail du compte', 'privacy@onespace.live'],
     'faq': ['Les 500 membres fondateurs', 'un seul sens', 'Google'],
     'guide': ['Respecter le rythme de l’autre', 'Partager aussi le quotidien'],
   },
@@ -37,6 +39,7 @@ CHECKS = {
     'privacy': ['Welche Daten wir erfassen', 'Wir erfassen keine','60 Tagen','180 Tagen',
                 'sieben Tage','privacy@onespace.live','founders@onespace.live','unsubscribe'],
     'terms': ['18 Jahre','Inhalte','Geteilt','OneSpace'],
+    'account': ['Me → Your data and account', 'E-Mail-Adresse deines Kontos', 'privacy@onespace.live'],
     'faq': ['500 Gründungsmitglieder','nur in eine Richtung','Google'],
     'guide': ['Nehmt Rücksicht auf eure Tageszeiten', 'Teilt auch die alltäglichen Dinge'],
   },
@@ -47,7 +50,8 @@ for lang, paths in CHECKS.items():
       'privacy': 'privacy.html',
       'terms': 'terms.html',
       'faq': 'faq.html',
-      'guide': 'guide-long-distance-ideas.html'
+      'guide': 'guide-long-distance-ideas.html',
+      'account': 'delete-account.html'
     }[category]
     page = ROOT / lang / relative
     assert page.exists(), page
