@@ -46,6 +46,12 @@ SITE_MESSAGES = {
   }
 }
 
+MAIL_LANGUAGE_HINT = {
+    'es':'Por ahora, los correos de confirmación y acceso anticipado se envían en inglés o árabe.',
+    'fr':'Pour le moment, les e-mails de confirmation et d’accès anticipé sont envoyés en anglais ou en arabe.',
+    'de':'Bestätigungs- und Frühzugangs-E-Mails werden derzeit auf Englisch oder Arabisch versendet.'
+}
+
 GLOSSARY = {
  'es': {'Today':'Hoy','Remember':'Recordar','Coordinate':'Organizar','Connect':'Conectar','Me':'Yo','Home':'Inicio',
         'Features':'Funciones','Demo':'Demostración','Tutorials':'Tutoriales','Guides':'Guías','FAQ':'Preguntas frecuentes',
@@ -210,6 +216,13 @@ def localize_html(src, name, locale, translated):
             # Keep English as the email preference until localized email templates exist.
             inp=el.find('input',attrs={'name':'language'})
             if inp:inp['value']='en'
+            chooser=el.find('select',attrs={'name':'language'})
+            if chooser:
+                hint=soup.new_tag('p')
+                hint['class']='muted'
+                hint['style']='font-size:12px;margin-top:6px'
+                hint.string=MAIL_LANGUAGE_HINT[locale]
+                chooser.insert_after(hint)
     # Browser dynamic feedback uses the same localized language as the visible form.
     bootstrap=soup.new_tag('script')
     bootstrap.string=('window.ONESPACE_FORM_MESSAGES='+json.dumps(FORM_MESSAGES[locale],ensure_ascii=False)+';'
