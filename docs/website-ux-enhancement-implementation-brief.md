@@ -1,9 +1,9 @@
 # OneSpace — Website UX Enhancement Implementation Brief
 
-**Status:** Approved design direction, implementation specification for the next website iteration  
+**Status:** Proposed implementation specification, pending detailed design review  
 **Date:** 18 November 2026  
 **Scope:** Marketing website only; **no Flutter release** or changes to the app's production data.  
-**Source of truth:** \`build.py\`, \`assets/os.css\`, \`assets/os.js\`, existing screenshot assets, and the approved website sitemap.  
+**Source of truth:** `build.py`, `assets/os.css`, `assets/os.js`, existing screenshot assets, and the approved website sitemap.  
 **Product identity:** **OneSpace · Two of Us. One Space.** Use the **original** symbol and wordmark artwork unchanged.
 
 ## 1. Objective and positioning
@@ -13,7 +13,7 @@
 **Headline:** “Stay close. Build a life together.”  
 **Subheadline:** “One private space for two people to share ideas, talk through options, make decisions, plan what’s next, and keep the little moments that matter.”  
 **Supporting line:** “For couples living together or miles apart.”  
-**Actions:** “Explore how it works” → \`how-it-works.html\`; “Join free” → \`join.html\`.
+**Actions:** “Explore how it works” → `how-it-works.html`; “Join free” → `join.html`.
 
 **Core differentiation:** Emotional-connection features are the foundation, not the unique selling point on their own. OneSpace goes **beyond letters, gestures, and check-ins** by connecting **smart share, unified collective lists, two-way editing, in-context discussion, side-by-side comparisons, decisions, follow-ups, trips, occasions and budgets**. Phrase competitive claims positively; do not assert other products lack capabilities without verified evidence.
 
@@ -41,12 +41,12 @@ The new elements are **additions or refinements**, not grounds for redesigning e
 | Primary navigation | Content |
 |---|---|
 | **Features** | Three mega-menu groups: **Collect & Share**, **Plan & Decide**, **Connect & Care** |
-| **Why OneSpace** | Competitive positioning and connected workflows (\`compare.html\`) |
+| **Why OneSpace** | Competitive positioning and connected workflows (`compare.html`) |
 | **For couples** | Living apart / Living together |
-| **Demo** | Guided six-step product wizard (\`how-it-works.html\`) |
+| **Demo** | Guided six-step product wizard (`how-it-works.html`) |
 | **Learn** | Tutorials, guides, FAQ, updates |
 | **Get the app** | Honest Google Play / App Store availability |
-| **Join free** | Single Founder signup (\`join.html\`) |
+| **Join free** | Single Founder signup (`join.html`) |
 
 **Features mega menu:**
 - **Collect & Share:** Smart Sharing & Unified Lists; Watchlists & Music; Lists, Reminders & Contacts; Memories & Scrapbooks.
@@ -80,7 +80,7 @@ Placement may vary if responsive constraints require, but the protected blocks m
 
 ## 4. Demo page — six-step guided wizard
 
-**Route:** \`how-it-works.html\`. Reuse all six existing views and existing real app screenshot switching; do not build a fake app simulator.
+**Route:** `how-it-works.html`. Reuse all six existing views and existing real app screenshot switching; do not build a fake app simulator.
 
 **Eyebrow:** “TRY ONESPACE TOGETHER”  
 **H1:** “One idea. Two perspectives. One shared plan.”  
@@ -88,7 +88,7 @@ Placement may vary if responsive constraints require, but the protected blocks m
 
 **Desktop layout:** two columns, approximately **42% controls / 58% device preview**. Left side includes progress label, a **2 × 3 grid** of compact selectable step tabs (at widths ≥ 1080px) or a single-column vertical list if the available width would force text overflow. Right side holds one prominent phone and a short caption. This avoids the current six oversized stacked cards. Do **not** use side-by-side long explanations in every tab.
 
-**At a glance:** “Step 2 of 6” with accessible \`<progress>\` or \`aria-valuenow/min/max\` status and a slim coral progress track.
+**At a glance:** “Step 2 of 6” with accessible `<progress>` or `aria-valuenow/min/max` status and a slim coral progress track.
 
 **Exact six tab labels and descriptions:**
 
@@ -101,9 +101,9 @@ Placement may vary if responsive constraints require, but the protected blocks m
 | 5 | **Decide and follow up** | “Record your choice and keep next steps, reminders and dates linked.” |
 | 6 | **Stay close** | “Finish with a thoughtful gesture, because planning isn’t all you share.” |
 
-**Wizard behavior:** Select any step; it updates the selected style, title, detailed copy, progress, phone screenshot and URL hash (\`#step-1\` … \`#step-6\`) without reloading. Provide **Previous** and **Next** buttons. On step 1, Previous is disabled; on step 6, Next becomes **“Explore again”** and resets explicitly (no unexpected circular loop). Support arrow-key navigation, Enter/Space, clear focus, \`aria-selected\`, \`aria-controls\`, and accessible announcements when the displayed view changes.
+**Wizard behavior:** Select any step; it updates the selected style, title, detailed copy, progress, phone screenshot and URL hash (`#step-1` … `#step-6`) without reloading. Provide **Previous** and **Next** buttons. On step 1, Previous is disabled; on step 6, Next becomes **“Explore again”** and resets explicitly (no unexpected circular loop). Support arrow-key navigation, Enter/Space, clear focus, `aria-selected`, `aria-controls`, and accessible announcements when the displayed view changes.
 
-**Theme selector:** clearly separate from navigation, under heading **“Make it yours”**, subtitle “Try a theme without changing the story.” Arrange all **nine existing themes** into equal-width chips (desktop 3 columns; tablet 3 columns; narrow mobile 2 columns). A swatch and label must not wrap awkwardly or change chip height. Selected theme has a visible ring plus \`aria-pressed\`; minimum touch target 44px. Keep all current theme keys, screenshot behavior, and theme-switching logic. Changing the theme must **not** reset wizard progress.
+**Theme selector:** clearly separate from navigation, under heading **“Make it yours”**, subtitle “Try a theme without changing the story.” Arrange all **nine existing themes** into equal-width chips (desktop 3 columns; tablet 3 columns; narrow mobile 2 columns). A swatch and label must not wrap awkwardly or change chip height. Selected theme has a visible ring plus `aria-pressed`; minimum touch target 44px. Keep all current theme keys, screenshot behavior, and theme-switching logic. Changing the theme must **not** reset wizard progress.
 
 **Mobile:** single column; progress + active step first, phone second, navigation third. Step tabs may be a horizontal scrollable row with a clear active state rather than a cramped 2 × 3 grid. Ensure long German/French labels do not overflow.
 
@@ -123,7 +123,7 @@ Placement may vary if responsive constraints require, but the protected blocks m
 
 **Disclosure:** Search categories and permissions must be checked against the actual mobile build. Do not claim search covers letters, message bodies, attachments or every private field unless verified by app QA. Search results should respect **Shared / Only me** privacy. When confirmed, list actual indexed object types on the website.
 
-**Screen:** Dedicated real \`global_search.webp\` screenshot still needs capturing. Use the current general search explanation with a neutral empty screenshot frame or omit the visual until captured; do not relabel a different screenshot as Search.
+**Screen:** Dedicated real `global_search.webp` screenshot still needs capturing. Use the current general search explanation with a neutral empty screenshot frame or omit the visual until captured; do not relabel a different screenshot as Search.
 
 ### Notifications
 
@@ -131,13 +131,13 @@ Placement may vary if responsive constraints require, but the protected blocks m
 **Copy:** “Know who shared something, what changed and which decisions or reminders need your attention. Open the relevant item instead of searching for it later.”  
 **Bullets:** “Who, what and when”; “Grouped updates”; “A direct path to what needs attention.”
 
-**Screen:** Reuse existing real \`assets/app/en/notifications.webp\` (and Arabic if present) in the phone frame. Validate the explanation against the current notification center and only promise behavior actually implemented.
+**Screen:** Reuse existing real `assets/app/en/notifications.webp` (and Arabic if present) in the phone frame. Validate the explanation against the current notification center and only promise behavior actually implemented.
 
-**Placement:** homepage editorial pair after the existing theme showcase, plus dedicated “Search & Notifications” section on \`features.html\`. Neither feature replaces the Today/Remember/Coordinate/Connect/Me stories.
+**Placement:** homepage editorial pair after the existing theme showcase, plus dedicated “Search & Notifications” section on `features.html`. Neither feature replaces the Today/Remember/Coordinate/Connect/Me stories.
 
 ## 6. Love-gesture popup and additional captures
 
-**Existing genuine assets:** \`assets/app/en/letters.webp\`, \`assets/app/en/love.webp\`, \`assets/app/en/notifications.webp\`. Arabic counterparts must be checked before use.
+**Existing genuine assets:** `assets/app/en/letters.webp`, `assets/app/en/love.webp`, `assets/app/en/notifications.webp`. Arabic counterparts must be checked before use.
 
 **Capture required:** Love Gesture **popup/modal**, global search, and (if available) focused daily check-in + feelings journal screens.
 
@@ -147,7 +147,7 @@ Placement may vary if responsive constraints require, but the protected blocks m
 
 Do not recreate a screenshot with CSS or AI and present it as real.
 
-**Robot:** Existing GitHub Actions screenshot workflow \`.github/workflows/app-screens.yml\` is **manual dispatch**. It builds the private Flutter app and runs a demo-couple emulator against \`integration_test/screenshots_test.dart\`, publishing outputs to the \`app-screens\` branch. Verify that the screenshot script actually supports the extra states; extend robot steps if needed, then run only with the fictional Omar/Lina demo environment. Never expose production accounts or private content. Import approved EN and AR captures through the existing importer; no mobile release is needed.
+**Robot:** Existing GitHub Actions screenshot workflow `.github/workflows/app-screens.yml` is **manual dispatch**. It builds the private Flutter app and runs a demo-couple emulator against `integration_test/screenshots_test.dart`, publishing outputs to the `app-screens` branch. Verify that the screenshot script actually supports the extra states; extend robot steps if needed, then run only with the fictional Omar/Lina demo environment. Never expose production accounts or private content. Import approved EN and AR captures through the existing importer; no mobile release is needed.
 
 **Fallback:** If a capture cannot be produced, ship accurate text and existing screenshots, leaving a labeled image slot for later; do not delay the rest of the site iteration.
 
@@ -184,14 +184,14 @@ Use editorial cards and a subtle partial-card peek; avoid oversized testimonial 
 - A short review excerpt region that can show an authentic review later.
 - Optional “View on Google Play / App Store” link **only when a verified live store listing exists**.
 
-**Before launch:** show \`—\` and **“Not available yet”** instead of fictional live metrics. Show gray empty histogram tracks with captions “Awaiting verified data.” Keep visual completeness through layout, not fabricated numeric scores.
+**Before launch:** show `—` and **“Not available yet”** instead of fictional live metrics. Show gray empty histogram tracks with captions “Awaiting verified data.” Keep visual completeness through layout, not fabricated numeric scores.
 
-**Optional internal prototype mode:** Simulated example metrics (such as “SAMPLE 4.8 / 5”, “SAMPLE 128 reviews”, “SAMPLE 10K downloads”, with 82/11/4/2/1 percentage bars) may be used only inside a **clearly watermarked test-only preview**, never as production store results. Label **every simulated number**, not just the section header. Do not publish fake \`AggregateRating\` or review schema data. For Apple, do not assume Apple publishes download counts; if unavailable, show \`—\` even after launch.
+**Optional internal prototype mode:** Simulated example metrics (such as “SAMPLE 4.8 / 5”, “SAMPLE 128 reviews”, “SAMPLE 10K downloads”, with 82/11/4/2/1 percentage bars) may be used only inside a **clearly watermarked test-only preview**, never as production store results. Label **every simulated number**, not just the section header. Do not publish fake `AggregateRating` or review schema data. For Apple, do not assume Apple publishes download counts; if unavailable, show `—` even after launch.
 
 **Required permanent preview disclosure (all languages):**  
 “**TEST ONLY — AI-GENERATED PLACEHOLDER CONTENT. THESE ARE NOT REAL CUSTOMER TESTIMONIALS, REVIEWS OR APP-STORE RATINGS.**”
 
-**Gating:** Keep the existing \`SHOW_AI_REVIEW_PREVIEW\` toggle in \`build.py\`. This controls the whole review/testimonial section without deleting the component code; configure it off when design approval is finished. Do not use examples in SEO metadata, social preview snippets, search review snippets or paid marketing.
+**Gating:** Keep the existing `SHOW_AI_REVIEW_PREVIEW` toggle in `build.py`. This controls the whole review/testimonial section without deleting the component code; configure it off when design approval is finished. Do not use examples in SEO metadata, social preview snippets, search review snippets or paid marketing.
 
 ## 9. Footer — social media placeholders
 
@@ -203,11 +203,11 @@ Keep existing readable original OneSpace identity. Do **not** add another Join b
 3. **Help & Resources:** Guides, FAQ, Contact & Support, Can’t sign in?, Share Kit.
 4. **Legal:** Privacy, Terms, Delete Account.
 
-**Social placeholder row:** Place compact official-style icons under the footer brand/email, in one line wrapping as needed: **Instagram, Facebook, YouTube, TikTok, LinkedIn**. Labels/hover or focus text: **“Coming soon”**. While URLs are unknown, render **non-interactive placeholders** with a disabled appearance and accessible text—not dead \`href="#"\` links, fabricated profile URLs or clickable inert controls. Once authentic channels exist, turn those placeholders into real links with \`rel="noopener noreferrer"\`.
+**Social placeholder row:** Place compact official-style icons under the footer brand/email, in one line wrapping as needed: **Instagram, Facebook, YouTube, TikTok, LinkedIn**. Labels/hover or focus text: **“Coming soon”**. While URLs are unknown, render **non-interactive placeholders** with a disabled appearance and accessible text—not dead `href="#"` links, fabricated profile URLs or clickable inert controls. Once authentic channels exist, turn those placeholders into real links with `rel="noopener noreferrer"`.
 
 ## 10. Type scale and UI system
 
-Use a single responsive typography hierarchy in \`assets/os.css\`, scoped consistently across marketing pages. Keep existing **Inter** for Latin and **IBM Plex Sans Arabic** for Arabic. Do not change the official logo or redesign the brand typeface.
+Use a single responsive typography hierarchy in `assets/os.css`, scoped consistently across marketing pages. Keep existing **Inter** for Latin and **IBM Plex Sans Arabic** for Arabic. Do not change the official logo or redesign the brand typeface.
 
 | Token | Desktop | Tablet | Mobile | Recommended line-height |
 |---|---:|---:|---:|---:|
@@ -221,7 +221,7 @@ Use a single responsive typography hierarchy in \`assets/os.css\`, scoped consis
 | Eyebrow/metadata | 12–13px | 12–13px | 12px | 1.45–1.6 |
 | Button label | 15px | 15px | 15px | 1.3–1.45 |
 
-Implement via CSS custom properties and \`clamp()\`, minimizing page-specific inline font declarations. For Arabic, use natural line heights (often 1.65+) and **no letter-spacing on Arabic text**. Nav dropdown labels must not exceed the size of top-level nav. Text buttons should grow modestly in width or wrap to two balanced lines—not become enormous blocks. Maintain accessible contrast, 44px touch targets, stable heights, real focus styles and consistent container radius.
+Implement via CSS custom properties and `clamp()`, minimizing page-specific inline font declarations. For Arabic, use natural line heights (often 1.65+) and **no letter-spacing on Arabic text**. Nav dropdown labels must not exceed the size of top-level nav. Text buttons should grow modestly in width or wrap to two balanced lines—not become enormous blocks. Maintain accessible contrast, 44px touch targets, stable heights, real focus styles and consistent container radius.
 
 ## 11. Responsive, accessibility and UX tests
 
@@ -240,7 +240,7 @@ Implement via CSS custom properties and \`clamp()\`, minimizing page-specific in
 - Translation: no missing EN/AR/ES/FR/DE strings; natural localization and RTL alignment. Localize all new labels and data disclaimers, not just headings.
 - Quality: no horizontal overflow, clipped CTAs, giant translated buttons, inaccessible icons, broken links, broken image assets or console exceptions.
 
-**Technical integration:** \`build.py\` (page generation), \`assets/os.js\` (wizard & carousel behavior), \`assets/os.css\` (type scale/layout), \`content/locale_editorial.py\` / existing translation catalogs, \`tests/check_site.py\` / \`tests/check_megamenu.py\`; existing screenshot workflow and importer.
+**Technical integration:** `build.py` (page generation), `assets/os.js` (wizard & carousel behavior), `assets/os.css` (type scale/layout), `content/locale_editorial.py` / existing translation catalogs, `tests/check_site.py` / `tests/check_megamenu.py`; existing screenshot workflow and importer.
 
 ## 12. Delivery sequence
 
