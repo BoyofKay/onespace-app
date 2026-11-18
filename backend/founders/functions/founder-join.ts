@@ -7,7 +7,7 @@ Deno.serve(async (req) => {
   if (req.method !== 'POST') return json(req, { ok: false, error: 'method' }, 405);
   let b: any;
   try { b = await req.json(); } catch { return json(req, { ok: false, error: 'bad_request' }, 400); }
-  // Spam protection (see guard in _lib.ts): hidden robot field → dropped; too fast → Turnstile check.
+  // Spam protection (see guard in _lib.ts): hidden robot field → dropped; fresh verified Turnstile token required.
   const g = await guard(req, b, 'join');
   if (g !== 'ok') return guardReply(req, g);
   const s = (v: unknown, n: number) => String(v ?? '').slice(0, n);

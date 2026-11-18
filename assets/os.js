@@ -495,13 +495,13 @@
   var msgs = { sending: 'Sending…', missing: 'Please fill in the fields marked *.', email: 'Please check the email address.',
     consent: 'Please tick the box so we may email you.', busy: 'Too many tries. Please wait a few minutes and try again.',
     failed: 'Could not send. Please check your connection and try again.', sent: 'Thank you — we got it and will reply by email.',
-    verify: 'That was quick! One short check that you’re human, then we’ll send it.', verify_failed: 'We couldn’t complete the check. Please reload the page and try again.' };
-  var msgsAr = { verify: 'كان ذلك سريعًا! تحقّق قصير من أنك إنسان، ثم نرسل النموذج.', verify_failed: 'تعذّر إكمال التحقق. أعد تحميل الصفحة وحاول مرة أخرى.' };
+    verify: 'One quick security check, then we’ll send your request.', verify_failed: 'We couldn’t complete the check. Please reload the page and try again.' };
+  var msgsAr = { verify: 'تحقّق أمني سريع، ثم نرسل طلبك.', verify_failed: 'تعذّر إكمال التحقق. أعد تحميل الصفحة وحاول مرة أخرى.' };
 
   // ---------- Spam check (Cloudflare Turnstile) ----------
-  // Shown only when the server asks for it (the form was sent within 2.5 s of the page opening — robots
-  // do that, but so can a person using autofill). If the check cannot load, the form is sent anyway:
-  // the email confirmation step is what really stops fake sign-ups.
+  // A fresh, server-verified Cloudflare Turnstile token is required for each
+  // public form submission. Verification cannot be skipped by client-supplied
+  // timing or an "unavailable" flag; show a useful retry message if blocked.
   var TS_KEY = '0x4AAAAAAGFSBBh0y5giCOsV', tsWait = [];
   function loadTurnstile(cb) {
     if (window.turnstile) return cb(window.turnstile);

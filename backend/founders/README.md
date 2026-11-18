@@ -23,7 +23,7 @@ email is confirmed; a partner joins through `join.html?invite=<code>` and shares
 - `RESEND_API_KEY` — Resend API key with sending access (domain onespace.live verified in Resend).
 - `FOUNDER_ADMIN_KEY` — password for the private dashboard (16+ characters).
 - `TURNSTILE_SECRET_KEY` — Cloudflare Turnstile secret for the spam check (site key `0x4AAAAAAGFSBBh0y5giCOsV` is public, in `assets/os.js`).
-  Without it, fast forms are accepted unchecked (and the admin page says so).
+  Required for website Founder and Support forms. If missing, verification fails closed and users see a retry message; never accept unchecked requests.
 - `GOATCOUNTER_TOKEN` (optional) — read-only GoatCounter API key, adds visitors → sign-up rate to the dashboard.
 
 To rotate a key: create the new one in Resend, replace the secret value, then revoke the old key. No redeploy needed.
@@ -33,6 +33,6 @@ Functions are deployed with `verify_jwt = false` (public form endpoints); `_lib.
 
 ## Spam protection
 - Hidden `website` field filled (robots only) → answered OK, nothing saved, counted as `honeypot`.
-- Sent < 2.5 s after the page opened → server answers `428 verify`; the form shows a Cloudflare Turnstile check and sends again with its token.
-  Passed → accepted. Failed → visitor sees "couldn't complete the check". Check can't load / Cloudflare unreachable / no secret → accepted.
+- Every public Founder and Support form requires a fresh Cloudflare Turnstile token verified by Siteverify, including matching the onespace.live hostname.
+  Valid token → accepted if database limits allow. Missing token → HTTP 428; invalid/reused/expired token or verification outage → request denied with a retry message. There is no client-timing bypass.
 - Nothing is ever discarded silently except the robot field. Counts appear on the admin page and the Command Center Website tab.
