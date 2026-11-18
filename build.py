@@ -1909,12 +1909,12 @@ def page_faq():
              'إجابات عن OneSpace: البدء ودعوة الشريك والخصوصية ومزامنة التقويم واللغات والتصدير والحذف والمساعدة.')
     body = ''
     for g, gar, qs in FAQ:
-        qs = qs + FAQ_MORE.get(g, [])
+        qs = qs + [(*q, *a) for q, a in FAQ_MORE.get(g, [])]
         items = ''.join(f'<details data-faq>{T(q, qa, "summary")}{T(a, aa, "div")}</details>' for q, qa, a, aa in qs)
         body += f'{T(g, gar, "h2", "faq-group")}<div>{items}</div>'
     sk = K('Search questions…', 'ابحث في الأسئلة…')
     jsonld = {'@context': 'https://schema.org', '@type': 'FAQPage', 'mainEntity': [
-        {'@type': 'Question', 'name': q, 'acceptedAnswer': {'@type': 'Answer', 'text': a}} for g, _, qs in FAQ for q, _, a, _ in (qs + FAQ_MORE.get(g, []))]}
+        {'@type': 'Question', 'name': q, 'acceptedAnswer': {'@type': 'Answer', 'text': a}} for g, _, qs in FAQ for q, _, a, _ in (qs + [(*q0, *a0) for q0, a0 in FAQ_MORE.get(g, [])])]}
     return h + page_hero('FAQ', 'الأسئلة الشائعة', 'Questions, answered.', 'أسئلة وأجوبتها.', 'Can’t find it? <a href="support.html">Contact us</a> — even without an account.',
                          'لم تجد ما تبحث عنه؟ <a href="support.html">تواصل معنا</a> — حتى دون حساب.',
                          extra=f'<div style="max-width:560px;margin-top:24px"><label class="sr" for="faq-search">Search</label><input id="faq-search" class="search" type="search" placeholder="Search questions…" data-i18n-attr="placeholder:{sk}"></div>') + f'''
