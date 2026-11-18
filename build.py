@@ -1803,6 +1803,99 @@ def llms_txt():
     return '\n'.join(lines)
 
 
+
+def refresh_legal_revisions():
+    """Keep document/version dates independent for every published language.
+
+    Each legal page's semantic content is fingerprinted after localization.
+    A changed fingerprint after its first recorded build bumps only that
+    locale/document revision; routine site builds never change legal dates.
+    """
+    from bs4 import BeautifulSoup
+    manifest_path = ROOT / 'assets' / 'legal-revisions.json'
+    revisions = json.loads(manifest_path.read_text(encoding='utf-8'))
+    labels = {
+        'en': ('Last updated: ', 'Version '),
+        'ar': ('آخر تحديث: ', 'الإصدار '),
+        'es': ('Última actualización: ', 'Versión '),
+        'fr': ('Dernière mise à jour : ', 'Version '),
+        'de': ('Zuletzt aktualisiert: ', 'Version '),
+    }
+    months = {
+        'ar': ('يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو', 'يوليو',
+               'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'),
+        'es': ('enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio',
+               'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'),
+        'fr': ('janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet',
+               'août', 'septembre', 'octobre', 'novembre', 'décembre'),
+        'de': ('Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli',
+               'August', 'September', 'Oktober', 'November', 'Dezember'),
+    }
+    for document in ('privacy', 'terms', 'delete-account'):
+        doc_versions = revisions.setdefault(document, {})
+        for locale in LANGS:
+            html_path = ROOT / ('' if locale == 'en' else locale) / (document + '.html')
+            soup = BeautifulSoup(html_path.read_text(encoding='utf-8'), 'html.parser')
+            legal = soup.select_one('.legal')
+            if legal is None:
+                raise ValueError(f'No .legal content: {html_path}')
+            intro = soup.select_one('.page-hero .lead')
+            meaningful = []
+            for child in legal.children:
+                if getattr(child, 'name', None) == 'p' and (
+                    'muted' in child.get('class', []) or
+                    'legal-revision' in child.get('class', [])
+                ):
+                    continue
+                meaningful.append(str(child))
+            digest = hashlib.sha256((str(intro or '') + ''.join(meaningful)).encode('utf-8')).hexdigest()
+            entry = doc_versions.setdefault(locale, {'date': TODAY, 'version': '1.0'})
+            previous_digest = entry.get('content_hash')
+            if previous_digest and previous_digest != digest:
+                try:
+                    major, minor = (int(x) for x in entry['version'].split('.'))
+                    entry['version'] = f'{major}.{minor + 1}'
+                except (KeyError, ValueError):
+                    entry['version'] = '1.1'
+                entry['date'] = TODAY
+            entry['content_hash'] = digest
+
+            for child in list(legal.children):
+                if getattr(child, 'name', None) == 'p' and (
+                    'muted' in child.get('class', []) or
+                    'legal-revision' in child.get('class', [])
+                ):
+                    child.decompose()
+            revised_on = date.fromisoformat(entry['date'])
+            if locale == 'en':
+                printed = revised_on.strftime('%-d %B %Y')
+            elif locale == 'ar':
+                printed = f'{revised_on.day} {months[locale][revised_on.month - 1]} {revised_on.year}'
+            elif locale == 'es':
+                printed = f'{revised_on.day} de {months[locale][revised_on.month - 1]} de {revised_on.year}'
+            elif locale == 'fr':
+                printed = f'{revised_on.day} {months[locale][revised_on.month - 1]} {revised_on.year}'
+            else:
+                printed = f'{revised_on.day}. {months[locale][revised_on.month - 1]} {revised_on.year}'
+
+            p = soup.new_tag('p', attrs={'class': 'legal-revision'})
+            p.append(labels[locale][0])
+            t = soup.new_tag('time')
+            t['datetime'] = entry['date']
+            t.string = printed
+            p.append(t)
+            p.append(' · ' + labels[locale][1] + entry['version'])
+            legal.insert(0, p)
+            meta = soup.new_tag('meta')
+            meta['name'] = 'last-modified'
+            meta['content'] = entry['date']
+            if soup.head:
+                soup.head.append(meta)
+            html_path.write_text(str(soup), encoding='utf-8')
+    manifest_path.write_text(json.dumps(revisions, ensure_ascii=False, indent=2) + '\n',
+                             encoding='utf-8')
+
+
 def main():
     for name, (fn, _, _) in PAGES.items():
         (ROOT / name).write_text(fn(), encoding='utf-8')
@@ -1823,6 +1916,7 @@ def main():
     # demo, theme preview, interactive forms and all original product pages.
     count = build_locales(ROOT, list(PAGES) + ['confirm.html', 'unsubscribe.html'])
     print(f'Localized {count} complete pages from source')
+    refresh_legal_revisions()
     urls = ''
     for n, (_, p, c) in PAGES.items():
         slug = '' if n == 'index.html' else n
