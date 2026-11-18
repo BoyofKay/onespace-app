@@ -148,7 +148,7 @@ def head(page, title, title_ar, desc, desc_ar=''):
              (f'\n<meta name="msvalidate.01" content="{BING_VERIFY}">' if BING_VERIFY else '')
     site_ld = json.dumps({'@context': 'https://schema.org', '@graph': [
         {'@type': 'Organization', '@id': BASE + '#org', 'name': 'OneSpace', 'url': BASE, 'logo': BASE + 'assets/icon-512.png',
-         'slogan': 'Two of us. One Space.'},
+         'slogan': 'Two of Us. One Space.'},
         {'@type': 'WebSite', '@id': BASE + '#site', 'name': 'OneSpace', 'url': BASE, 'inLanguage': ['en', 'ar', 'es', 'fr', 'de'], 'publisher': {'@id': BASE + '#org'}}]})
     # Paths are counted without the query string or #fragment, so nothing typed into a URL (or a confirmation token) is sent.
     analytics = ('\n<script>window.goatcounter={path:function(){return location.pathname}};</script>'
@@ -185,7 +185,7 @@ def head(page, title, title_ar, desc, desc_ar=''):
 <body>
 <a class="skip" href="#main">{T('Skip to content', 'انتقل إلى المحتوى')}</a>
 <header class="top"><div class="wrap">
-  <a class="brand" href="./"><img src="assets/mark.svg" alt="" width="34" height="34">OneSpace</a>
+  <a class="brand" href="./"><img src="assets/mark.svg" alt="" width="48" height="48"><span class="brand-name"><span>One</span><span>Space</span></span></a>
   <nav class="menu" aria-label="Main">{''.join(menu)}<a class="btn btn-primary menu-cta" href="join.html">{T('Join the Founding 500', 'انضم إلى المؤسسين الـ500')}</a></nav>
   <div class="actions">
     <details class="os-intl-languages"><summary aria-label="Languages / اللغات">🌐 Language</summary><div class="os-intl-languages-list"><a href="{canonical}" data-language-switch="en" lang="en">English</a><a href="{BASE}ar/{'' if page == 'index.html' else page}" data-language-switch="ar" lang="ar">العربية</a><a href="{BASE}es/{'' if page == 'index.html' else page}" data-language-switch="es" lang="es">Español</a><a href="{BASE}fr/{'' if page == 'index.html' else page}" data-language-switch="fr" lang="fr">Français</a><a href="{BASE}de/{'' if page == 'index.html' else page}" data-language-switch="de" lang="de">Deutsch</a></div></details>
@@ -205,7 +205,7 @@ def foot():
 <footer><div class="wrap">
   <div class="foot">
     <div>
-      <a class="brand" href="./"><img src="assets/mark.svg" alt="" width="34" height="34">OneSpace</a>
+      <a class="brand" href="./"><img src="assets/mark.svg" alt="" width="48" height="48"><span class="brand-name"><span>One</span><span>Space</span></span></a>
       {T('Two of us. One Space. A private home for the life you share — near or far.', 'نحن الاثنان. مساحة واحدة. بيت خاص للحياة التي تتشاركانها — قريبين أو بعيدين.', 'p')}
       <p class="foot-mail"><a href="mailto:hello@onespace.live">hello@onespace.live</a></p>
       <a class="btn btn-primary btn-sm" href="join.html">{T('Join the Founding 500', 'انضم إلى المؤسسين الـ500')}</a>
