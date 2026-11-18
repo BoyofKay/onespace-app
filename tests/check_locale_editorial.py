@@ -1,0 +1,60 @@
+#!/usr/bin/env python3
+"""Regression checks for reviewed website legal, FAQ and relationship guide translations."""
+from pathlib import Path
+from bs4 import BeautifulSoup
+
+ROOT = Path(__file__).resolve().parents[1]
+CHECKS = {
+  'es': {
+    'privacy': ['Qué datos recopilamos','No recopilamos','60 días','180 días','siete días',
+                'privacy@onespace.live', 'founders@onespace.live', 'unsubscribe'],
+    'terms': ['18 años','contenido','elementos compartidos','OneSpace'],
+    'faq': ['¿Qué son los primeros 500 miembros fundadores?', 'unidireccional', 'Google'],
+    'guide': ['Respeten los horarios del otro', 'Compartan también lo cotidiano'],
+  },
+  'fr': {
+    'privacy': ['Quelles données recueillons-nous ?', 'Nous ne recueillons pas',
+                '60 jours','180 jours','sept jours','privacy@onespace.live','founders@onespace.live','unsubscribe'],
+    'terms': ['18 ans','contenus','Partagé','OneSpace'],
+    'faq': ['Les 500 membres fondateurs', 'un seul sens', 'Google'],
+    'guide': ['Respecter le rythme de l’autre', 'Partager aussi le quotidien'],
+  },
+  'de': {
+    'privacy': ['Welche Daten wir erfassen', 'Wir erfassen keine','60 Tagen','180 Tagen',
+                'sieben Tage','privacy@onespace.live','founders@onespace.live','unsubscribe'],
+    'terms': ['18 Jahre','Inhalte','Geteilt','OneSpace'],
+    'faq': ['500 Gründungsmitglieder','nur in eine Richtung','Google'],
+    'guide': ['Nehmt Rücksicht auf eure Tageszeiten', 'Teilt auch die alltäglichen Dinge'],
+  },
+}
+for lang, paths in CHECKS.items():
+  for category, phrases in paths.items():
+    relative = {
+      'privacy': 'privacy.html',
+      'terms': 'terms.html',
+      'faq': 'faq.html',
+      'guide': 'guide-long-distance-ideas.html'
+    }[category]
+    page = ROOT / lang / relative
+    assert page.exists(), page
+    soup = BeautifulSoup(page.read_text(encoding='utf8'), 'html.parser')
+    content = soup.get_text(' ',strip=True)
+    for phrase in phrases:
+      assert phrase in content, f'{page}: missing reviewed copy {phrase!r}'
+    if category == 'privacy':
+      assert content.count('60') >= 1 and content.count('180') >= 1 and content.count('7') >= 1, page
+      assert 'mailto:privacy@onespace.live' in page.read_text(), page
+      assert soup.find('b', string=lambda s: bool(s and s.strip().lower() in
+                           {'no recopilamos','pas','keine'})), f'{page}: legally vital negative emphasis lost'
+    if category == 'faq':
+      assert len(soup.select('details[data-faq]')) == 22, f'{page}: FAQ coverage'
+  # Critical untranslated or dangerously mistranslated legal fragments must never return.
+  privacy = (ROOT/lang/'privacy.html').read_text(encoding='utf8')
+  banned = {
+    'es':['nosotros hacemos <b>no</b>', 'mostradores', 'cheques, nunca'],
+    'fr':['Nous faisons <b>pas</b>', 'They are deleted after 60 days', 'comptoirs'],
+    'de':['Das tun wir <b>nicht</b>', 'Schecks durch', 'Schalter.</li>']
+  }[lang]
+  for expression in banned:
+    assert expression not in privacy, f'Outdated {lang} mistranslation reappeared: {expression}'
+print('PASS: reviewed privacy, legal, FAQ and relationship guide copy present in ES, FR and DE.')
