@@ -1818,7 +1818,7 @@ def guide_page(g):
     t_en, t_ar = g['title']
     h = head(g['slug'], t_en + ' — OneSpace', t_ar + ' — OneSpace', g['desc'][0], g['desc'][1])
     body = ''
-    for st, st_ar, tips in g['sections'] + GUIDE_MORE.get(g['slug'], []):
+    for st, st_ar, tips in g['sections'] + [(*heading, tips) for heading, tips in GUIDE_MORE.get(g['slug'], [])]:
         body += f'{T(st, st_ar, "h2")}<ol>{"".join(f"<li>{T(x, y)}</li>" for x, y in tips)}</ol>'
     ld = {'@context': 'https://schema.org', '@type': 'Article', 'headline': t_en, 'description': g['desc'][0], 'inLanguage': ['en', 'ar'],
           'publisher': {'@type': 'Organization', 'name': 'OneSpace'}, 'datePublished': '2026-11-16', 'mainEntityOfPage': BASE + g['slug']}
