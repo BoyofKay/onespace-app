@@ -265,7 +265,8 @@ def store_section():
     <div class="sec-head center">
       {T('YOUR SPACE, SOON ON YOUR PHONE', 'مساحتكما قريبًا على هاتفكما', 'span', 'eyebrow')}
       <h2 id="get-app-title">{T('Find OneSpace on', 'ستجد OneSpace على')} <span class="serif accent">{T('your favorite phone.', 'هاتفك المفضّل.')}</span></h2>
-      {T('Android early access is being prepared, with iPhone support planned. Join the waitlist and we’ll share the official download links when each version is available.', 'نجهّز الوصول المبكر لأندرويد، ونعمل على توفير نسخة آيفون لاحقًا. سجّل في قائمة الانتظار وسنرسل روابط التحميل الرسمية عند توفر كل نسخة.', 'p', 'lead')}
+      {T('Founding 500 registration is OPEN to Android and iPhone users now. “iOS coming soon” refers to the app release, not registration. Register today, and we will invite you when your platform is ready.', 'التسجيل في عضوية المؤسسين مفتوح الآن لمستخدمي أندرويد وآيفون. عبارة «iOS قريبًا» تخص موعد إصدار التطبيق، لا التسجيل. سجّل اليوم وسنرسل الدعوة عند جاهزية نسختك.', 'p', 'lead')}
+    <p class="founder-platform-notice">{T('✓ Android or iPhone? You can reserve your Founder place today.', '✓ أندرويد أم آيفون؟ يمكنك حجز مكانك بين المؤسسين اليوم.')}</p>
     </div>
     <div class="store-arrival-grid">
       <article class="store-arrival-card android">
@@ -275,7 +276,7 @@ def store_section():
             <h3>Google Play</h3></div>
         </div>
         <span class="store-status"><span aria-hidden="true">●</span>{T('Closed testing in preparation', 'نجهّز التجربة المغلقة')}</span>
-        {T('We’re getting OneSpace ready for invited testers on Android. Official Google Play access will appear here when testing opens.', 'بنجهّز OneSpace للمختبرين المدعوين على أندرويد. هنضيف رابط Google Play الرسمي هنا لما تفتح التجربة.', 'p')}
+        {T('Android testing is being prepared. Join the Founding 500 today and we will send your Google Play invitation when ready. iPhone users are equally welcome to register.', 'نجهّز تجربة أندرويد. سجّل في عضوية المؤسسين اليوم وسنرسل دعوتك إلى Google Play عندما تصبح جاهزة. والتسجيل مفتوح أيضًا لمستخدمي آيفون.', 'p')}
         <a href="join.html" class="btn btn-primary" data-track="store_android_waitlist">{T('Join Android early access →', 'سجّل لتجربة أندرويد ←')}</a>
         {T('Not publicly available for download yet.', 'غير متاح للتحميل العام حتى الآن.', 'small', 'store-disclaimer')}
       </article>
@@ -286,19 +287,19 @@ def store_section():
             <h3>App Store</h3></div>
         </div>
         <span class="store-status"><span aria-hidden="true">●</span>{T('iPhone version planned', 'نسخة آيفون قيد التخطيط')}</span>
-        {T('OneSpace is planned for iPhone too. Leave your email and we’ll let you know when the App Store version is ready.', 'بنخطط نوفر OneSpace على آيفون كمان. سيب بريدك الإلكتروني وهنبلغك لما نسخة App Store تبقى جاهزة.', 'p')}
-        <a href="join.html" class="btn btn-ghost" data-track="store_iphone_waitlist">{T('Get iPhone launch updates →', 'تابع أخبار إطلاق آيفون ←')}</a>
+        {T('Have an iPhone? Founder registration is open now. You do not need an Android phone to reserve a place; we will email you when the iOS app becomes available.', 'هل تستخدم آيفون؟ التسجيل في عضوية المؤسسين مفتوح الآن. لا تحتاج إلى هاتف أندرويد لحجز مكانك؛ سنراسلك عندما تتوفر نسخة iOS.', 'p')}
+        <a href="join.html" class="btn btn-ghost" data-track="store_iphone_waitlist">{T('Join as an iPhone Founder →', 'انضم كمؤسس على آيفون ←')}</a>
         {T('App Store link will be added after release.', 'هنضيف رابط App Store بعد الإطلاق.', 'small', 'store-disclaimer')}
       </article>
     </div>
-    <p class="store-arrival-note">{T('No app store listing is live yet. These buttons lead to the existing Founder waitlist, not a download.', 'لسه ما فيش رابط تحميل مباشر على المتاجر. الأزرار دي بتوصلك لقائمة انتظار المؤسسين.', 'span')}</p>
+    <p class="store-arrival-note">{T('Both buttons open Founder registration, not a download. You can register on either platform now, even though the release schedules differ.', 'كلا الزرين يؤدي إلى تسجيل المؤسسين لا إلى تنزيل التطبيق. يمكنك التسجيل الآن على أي من المنصتين رغم اختلاف مواعيد الإصدار.', 'span')}</p>
   </div>
 </section>'''
 
 
 def cta_band(h2='Ready when you two are.', h2_ar='جاهزون متى كنتما مستعدين.',
-             lead='OneSpace is in an early test. The first 250 couples — 500 people — become Founder Members: free, first in line, and with a say in what we build.',
-             lead_ar='OneSpace في تجربة مبكرة. أول 250 زوجًا — 500 شخص — يصبحون أعضاء مؤسسين: مجانًا، وفي أول الصف، ولهم رأي فيما نبنيه.'):
+             lead='Founder signup is open NOW to Android and iPhone couples. The first 250 couples — 500 people — can register free and help shape OneSpace; the iOS app itself is coming later.',
+             lead_ar='التسجيل في عضوية المؤسسين مفتوح الآن لأزواج أندرويد وآيفون. يمكن لأول 250 زوجًا — 500 شخص — التسجيل مجانًا والمشاركة في تطوير OneSpace؛ ويأتي تطبيق iOS لاحقًا.'):
     return f'''<section><div class="wrap"><div class="band reveal"><div class="cta-band">
   <div>{T(h2, h2_ar, 'h2')}{T(lead, lead_ar, 'p', 'lead')}</div>
   <div class="cta-row" style="justify-content:flex-end">
@@ -1123,8 +1124,8 @@ def page_index():
   <div>
     {T('The Founding 500', 'المؤسسون الـ500', 'span', 'eyebrow')}
     <h2>{T('Be one of the', 'كونا من')} <span class="serif" style="color:#F3A27E">{T('first 250 couples.', 'أول 250 زوجًا.')}</span></h2>
-    {T('OneSpace is opening to a small group first. The first 250 couples to confirm become Founder Members — one Founder number for the two of you. You get the app first, a direct line to the team, and a say in what we build. Founder benefits will be announced before any pricing is introduced.', 'يُفتح OneSpace لمجموعة صغيرة أولًا. أول 250 زوجًا يؤكدون تسجيلهم يصبحون أعضاء مؤسسين — رقم مؤسس واحد لكما معًا. تحصلون على التطبيق أولًا، وخط مباشر مع الفريق، ورأي فيما نبنيه. وسنعلن مزايا المؤسسين قبل تقديم أي أسعار.', 'p', 'lead')}
-    <ul class="ticks"><li>{T('<b>Free</b> during early access', '<b>مجاني</b> خلال الوصول المبكر')}</li><li>{T('<b>Android now</b>, iPhone next', '<b>أندرويد الآن</b> وiPhone بعده')}</li><li>{T('<b>Your email only</b> for the invite and launch updates', '<b>بريدك فقط</b> للدعوة وتحديثات الإطلاق')}</li></ul>
+    {T('Registration is open now for Android and iPhone couples. The first 250 couples to confirm get one Founder number for both partners, free early access when their version is ready, and a say in what we build. Founder benefits will be announced before any pricing.', 'التسجيل مفتوح الآن لأزواج أندرويد وآيفون. يحصل أول 250 زوجًا يؤكدون تسجيلهم على رقم مؤسس مشترك ووصول مبكر مجاني عند جاهزية نسختهم وفرصة للمشاركة في تطوير التطبيق. سنعلن مزايا العضوية قبل أي أسعار.', 'p', 'lead')}
+    <ul class="ticks"><li>{T('<b>Free</b> during early access', '<b>مجاني</b> خلال الوصول المبكر')}</li><li>{T('<b>Registration now:</b> Android and iPhone', '<b>التسجيل مفتوح الآن:</b> أندرويد وآيفون')}</li><li>{T('<b>Your email only</b> for the invite and launch updates', '<b>بريدك فقط</b> للدعوة وتحديثات الإطلاق')}</li></ul>
   </div>
   {founding_entry()}
 </div></div></div></section>
@@ -1156,11 +1157,11 @@ def founding_form(prefix, full=False):
       <label for="{prefix}-m">{T('Anything you hope OneSpace helps with? (optional)', 'ما الذي تأمل أن يساعدكما فيه OneSpace؟ (اختياري)')}</label><textarea id="{prefix}-m" name="message" maxlength="1500" style="min-height:80px"></textarea>"""
     return f"""<div class="panel">
     <form data-form="join" data-done="{prefix}-done" novalidate>
-      {T('Reserve your Founder spot', 'احجز مكانك كمؤسس', 'h3', '', 'style="font-size:22px"')}
+      {T('Reserve a Founder spot — Android or iPhone', 'احجز مكانك بين المؤسسين — أندرويد أو آيفون', 'h3')}
       <div class="invite-note" hidden>💞 {T('Your partner invited you — you will join their Founder couple number.', 'دعاك شريكك — ستنضم إلى رقم المؤسس الخاص بزوجكما.')}</div>
       <input type="hidden" name="invite" value="">
       <label for="{prefix}-email">{T('Email *', 'البريد الإلكتروني *')}</label><input id="{prefix}-email" name="email" type="email" required autocomplete="email" placeholder="you@example.com" data-i18n-attr="placeholder:{ek}">
-      <label>{T('Your phone', 'هاتفك')}</label>
+      <label>{T('Your phone — both platforms can register now', 'نوع هاتفك — التسجيل مفتوح للمنصتين الآن')}</label>
       {radio('platform', [('android', 'Android', 'أندرويد'), ('iphone', 'iPhone', 'iPhone'), ('both', 'We use both', 'نستخدم الاثنين'), ('unsure', 'Not sure yet', 'لست متأكدًا')])}
       {extra}
       <input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
@@ -1707,12 +1708,13 @@ def page_join():
   <div>
     <div class="crumbs"><a href="./">{T('Home', 'الرئيسية')}</a> › {T('Join', 'انضم')}</div>
     {T('Join the Founding 500.', 'انضم إلى المؤسسين الـ500.', 'h1')}
-    {T('We are opening OneSpace to a small number of couples at a time so we can listen closely. The first 250 couples — 500 people — become Founder Members, with one Founder number for the two of you. Benefits will be announced before any pricing. It is free during early access.', 'نفتح OneSpace لعدد قليل من الأزواج في كل مرة حتى نستمع جيدًا. أول 250 زوجًا — 500 شخص — يصبحون أعضاء مؤسسين، برقم مؤسس واحد لكما معًا. وسنعلن المزايا قبل أي أسعار. وهو مجاني خلال الوصول المبكر.', 'p', 'lead')}
+    {T('Founder registration is open to Android and iPhone couples NOW — there is no need to wait for iOS to launch. The first 250 couples — 500 people — can reserve one Founder number together. Early access is free, and benefits will be announced before pricing.', 'التسجيل في عضوية المؤسسين مفتوح الآن للأزواج من مستخدمي أندرويد وآيفون؛ لا حاجة إلى انتظار إصدار iOS. يستطيع أول 250 زوجًا — 500 شخص — حجز رقم مؤسس مشترك. الوصول المبكر مجاني، وسنعلن مزايا العضوية قبل الأسعار.', 'p', 'lead')}
+    <p class="founder-platform-notice">{T('✓ iPhone owners can register today. “iOS coming soon” only describes app availability.', '✓ يمكنك التسجيل اليوم حتى لو كان هاتفك آيفون. عبارة «iOS قريبًا» تخص توفر التطبيق فقط.')}</p>
     <ul class="ticks">
       <li>{T('<b>1. Tell us about you two</b> — 30 seconds.', '<b>1. أخبرنا عنكما</b> — 30 ثانية.')}</li>
       <li>{T('<b>2. Confirm your email</b> — that is when your couple gets its Founder number.', '<b>2. أكّد بريدك</b> — وعندها يحصل زوجكما على رقم المؤسس.')}</li>
       <li>{T('<b>3. Invite your partner</b> with your link — they join under the same number.', '<b>3. ادعُ شريكك</b> برابطك — لينضم بالرقم نفسه.')}</li>
-      <li>{T('<b>4. Get the app first</b> — Android now, iPhone via TestFlight soon.', '<b>4. احصلا على التطبيق أولًا</b> — أندرويد الآن وiPhone عبر TestFlight قريبًا.')}</li>
+      <li>{T('<b>4. Get the invitation when your app is ready</b> — Android first, iPhone later. Registration is open for both today.', '<b>4. استلما الدعوة عند جاهزية التطبيق</b> — أندرويد أولًا وآيفون لاحقًا. التسجيل مفتوح لكليهما اليوم.')}</li>
     </ul>
     <div class="note-box" style="margin-top:24px">{T('We only use your email for your Founder membership and the launch updates you agree to. No marketing lists, no sharing. Questions: <a href="mailto:founders@onespace.live">founders@onespace.live</a> · <a href="privacy.html">Privacy</a>', 'نستخدم بريدك فقط لعضويتك كمؤسس وتحديثات الإطلاق التي توافق عليها. لا قوائم تسويق ولا مشاركة. للأسئلة: <a href="mailto:founders@onespace.live">founders@onespace.live</a> · <a href="privacy.html">الخصوصية</a>')}</div>
   </div>
