@@ -864,6 +864,22 @@ def connect_care_preview():
     </section>'''
 
 
+
+def gesture_extra():
+    """Truthful screen gallery: real gesture picker plus unavailable captures clearly identified."""
+    return f'''<section class="gesture-extra"><div class="wrap gesture-extra-layout">
+      <div>{T('THE COMPLETE GESTURE JOURNEY', 'تجربة اللمسة كاملة', 'span','eyebrow')}
+      {T('A gesture, its moment and its history.', 'لفتة ولحظتها وسجلّها.', 'h3')}
+      {T('The gesture picker is shown above from the real app. Dedicated captures of the sending popup and sent/received history are still being prepared.', 'تظهر شاشة اختيار اللفتة أعلاه من التطبيق الحقيقي. ما زلنا نجهز لقطتي نافذة الإرسال وسجل اللفتات المرسلة والمستلمة.', 'p')}</div>
+      <div class="gesture-capture-slots">
+        <div class="capture-pending capture-small"><strong>{T('Gesture popup','نافذة اللمسة')}</strong>
+          <small>{T('Real screenshot pending','اللقطة الحقيقية قيد الانتظار')}</small></div>
+        <div class="capture-pending capture-small"><strong>{T('Sent & received history','سجل المرسلة والمستلمة')}</strong>
+          <small>{T('Real screenshot pending','اللقطة الحقيقية قيد الانتظار')}</small></div>
+      </div>
+    </div></section>'''
+
+
 def page_connect_care():
     h = head('connect-care.html', 'Connect & Care | OneSpace letters, gestures and feelings',
              'التواصل والاهتمام | رسائل OneSpace ومشاعره',
@@ -888,14 +904,7 @@ def page_connect_care():
         [('Your words','add a personal message to a gesture.','كلماتك','أضف رسالة شخصية إلى اللفتة.'),
          ('Shared history','look back at the gestures you have sent and received.','سجل اللفتات','ارجع إلى ما أرسلتماه وتلقيتماه.')],
         'love','lavender',rev=True,label='OneSpace A little love screenshot') + \
-      '<section class="gesture-extra"><div class="wrap gesture-extra-layout"><div>' +
-        T('THE COMPLETE GESTURE JOURNEY', 'تجربة اللمسة كاملة', 'span','eyebrow') +
-        T('A gesture, its moment and its history.', 'لفتة ولحظتها وسجلّها.', 'h3') +
-        T('The gesture picker is shown above from the real app. Dedicated captures of the sending popup and sent/received history are still being prepared.', 'تظهر شاشة اختيار اللفتة أعلاه من التطبيق الحقيقي. ما زلنا نجهز لقطتي نافذة الإرسال وسجل اللفتات المرسلة والمستلمة.', 'p') +
-      '</div><div class="gesture-capture-slots"><div class="capture-pending capture-small"><strong>' +
-      T('Gesture popup','نافذة اللمسة') + '</strong><small>' + T('Real screenshot pending','اللقطة الحقيقية قيد الانتظار') +
-      '</small></div><div class="capture-pending capture-small"><strong>' + T('Sent & received history','سجل المرسلة والمستلمة') +
-      '</strong><small>' + T('Real screenshot pending','اللقطة الحقيقية قيد الانتظار') + '</small></div></div></div></section>' + \
+      gesture_extra() + \
       feature_block('checkins','DAILY CHECK-INS','التواصل اليومي',
         'A little space to say how you really are.','مساحة صغيرة لتعبّر عما تشعر به.',
         'Share how you are feeling and what is on your mind, even when you are busy or apart.',
