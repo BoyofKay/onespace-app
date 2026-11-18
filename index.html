@@ -237,29 +237,12 @@
     <p class="lead" data-i18n="k1bb96bce8e">OneSpace is opening to a small group first. The first 250 couples to confirm become Founder Members — one Founder number for the two of you. You get the app first, a direct line to the team, and a say in what we build. Founder benefits will be announced before any pricing is introduced.</p>
     <ul class="ticks"><li><span data-i18n="ka2bdcb4b76"><b>Free</b> during early access</span></li><li><span data-i18n="kbbdb00ebc8"><b>Android now</b>, iPhone next</span></li><li><span data-i18n="kf82c6964d3"><b>Your email only</b> for the invite and launch updates</span></li></ul>
   </div>
-  <div class="panel">
-    <form data-form="join" data-done="h-done" novalidate>
-      <h3 style="font-size:22px" data-i18n="k12c36406f3">Reserve your Founder spot</h3>
-      <div class="invite-note" hidden>💞 <span data-i18n="k8ab860768e">Your partner invited you — you will join their Founder couple number.</span></div>
-      <input type="hidden" name="invite" value="">
-      <label for="h-email"><span data-i18n="k604e4bff22">Email *</span></label><input id="h-email" name="email" type="email" required autocomplete="email" placeholder="you@example.com" data-i18n-attr="placeholder:k50e2b46ef8">
-      <label><span data-i18n="k8b1c7089ab">Your phone</span></label>
-      <div class="radio-cards"><label><input type="radio" name="platform" value="android" checked> <span data-i18n="k1928f95c59">Android</span></label><label><input type="radio" name="platform" value="iphone"> <span data-i18n="k97f2142cbb">iPhone</span></label><label><input type="radio" name="platform" value="both"> <span data-i18n="kfed7587419">We use both</span></label><label><input type="radio" name="platform" value="unsure"> <span data-i18n="k1cef1a2ff9">Not sure yet</span></label></div>
-      
-      <input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
-      <label class="check"><input type="checkbox" name="consent" required> <span data-i18n="kb20f723d68">I agree to receive OneSpace product and launch updates by email.</span></label>
-      <div class="cta-row" style="margin-top:16px"><button class="btn btn-primary" type="submit" data-track="join_submit"><span data-i18n="kc7abe01c9e">Join the Founding 500</span></button></div>
-      <p class="status" role="status" aria-live="polite"></p>
-      <p class="muted" style="font-size:13px;margin:6px 0 0"><span data-i18n="kf59813e133">We never share your email. <a href="privacy.html">Privacy</a></span></p>
-    </form>
-    <div id="h-done" class="done" tabindex="-1">
-      <div style="font-size:46px">📬</div>
-      <h3 style="font-size:24px" data-i18n="k48faa67c34">Check your inbox</h3>
-      <p class="muted" data-i18n="k1ca38c3b40">We sent you a link from <b>founders@onespace.live</b>. Confirm your email and your couple gets its Founder number — then you can invite your partner.</p>
-      <p class="muted" style="font-size:14px" data-i18n="kc4a8075e34">Nothing after a few minutes? Check spam or Promotions, then try again.</p>
-      <p style="margin-top:16px"><a href="how-it-works.html"><span data-i18n="kf6526312c0">While you wait: try the demo →</span></a></p>
-    </div>
-  </div>
+  <div class="panel"><div class="join-entry" data-founder-entry>
+      <span class="join-entry-icon" aria-hidden="true">♡</span>
+      <h3 data-i18n="k12c36406f3">Reserve your Founder spot</h3>
+      <a class="btn btn-primary" href="join.html" data-track="founder_join_canonical"><span data-i18n="kc7abe01c9e">Join the Founding 500</span></a>
+      <p data-i18n="kf59813e133">We never share your email. <a href="privacy.html">Privacy</a></p>
+    </div></div>
 </div></div></div></section>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "MobileApplication", "name": "OneSpace", "operatingSystem": "Android", "applicationCategory": "LifestyleApplication", "description": "A private app for couples: shared calendar, lists, trips, gestures, letters, counters and memories.", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "inLanguage": ["en", "ar"], "url": "https://onespace.live/"}</script>
 </main>
@@ -283,6 +266,6 @@
 </div></footer>
 <div class="sticky-cta" data-sticky-cta hidden><span><span data-i18n="k56e7a5e9bb">The Founding 500 · free early access</span></span><a class="btn btn-primary btn-sm" href="join.html" data-track="sticky_join"><span data-i18n="kae1f08a4ab">Join free</span></a></div>
 <script src="assets/ar.js?v=b06f1de6dd" defer></script>
-<script src="assets/os.js?v=c821d6ba21" defer></script>
+<script src="assets/os.js?v=9a9fd8f366" defer></script>
 </body>
 </html>
