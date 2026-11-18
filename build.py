@@ -324,7 +324,7 @@ def app_head(sub='Two of us, One Space', sub_ar='نحن الاثنان، مسا�
 
 def nav_bar(on='today'):
     items = [('today', '📅', 'Today', 'اليوم'), ('remember', '🔖', 'Remember', 'تذكّر'), ('coordinate', '🧭', 'Coordinate', 'نسّق'),
-             ('connect', '♡', 'Connect', 'تواصل'), ('me', '👤', 'Me', 'أنا')]
+             ('connect', '♡', 'Connect', 'تواصل'), ('smart-details', '⌕', 'Search & Notifications', 'البحث والإشعارات'), ('me', '👤', 'Me', 'أنا')]
     return '<div class="nav-b">' + ''.join(
         f'<span class="{"on" if k == on else ""}"><i>{i}</i>{T(e, a)}</span>' for k, i, e, a in items) + '</div>'
 
@@ -894,6 +894,61 @@ def page_connect_care():
       </div></section>''' + value_grid() + cta_band() + foot()
 
 
+
+def smart_utilities():
+    """Verified capabilities: global search plus schedule-aware notifications."""
+    notification = device('notifications', 'Real OneSpace notifications screen',
+      'لقطة حقيقية من شاشة إشعارات OneSpace', 'sm')
+    return f'''<section class="smart-utilities" id="smart-details">
+      <div class="wrap">
+        <div class="sec-head center">
+          {T('SMART DETAILS', 'تفاصيل ذكية', 'span','eyebrow')}
+          {T('Find it fast. Know what matters.', 'اعثر على ما تريد. واعرف ما يهم.', 'h2')}
+          {T('Your shared life needs more than another list of alerts. OneSpace keeps information and daily rhythms in context.',
+             'حياتكما المشتركة تحتاج إلى أكثر من قائمة تنبيهات. يحفظ OneSpace المعلومات وينظمها وفق سياق يومكما.', 'p','lead')}
+        </div>
+        <div class="smart-utility-grid">
+          <article class="smart-utility-panel">
+            <div class="smart-utility-copy">
+              <span class="eyebrow">{T('GLOBAL SEARCH','البحث الشامل')}</span>
+              {T('One search across your shared space.','بحث واحد في مساحتكما المشتركة.','h3')}
+              {T('Forgot where you saved that link, note, place, trip or decision? Search across the information you can access, then open the original item. Private content stays protected by your account permissions.',
+                 'هل نسيت أين حفظت رابطًا أو ملاحظة أو مكانًا أو رحلة أو قرارًا؟ ابحث في المعلومات المتاحة لحسابك وافتح العنصر الأصلي مباشرة. وتبقى العناصر الخاصة محمية بصلاحيات حسابك.', 'p')}
+              <ul class="ticks">
+                <li>{T('Find information without opening every list','اعثر على المعلومات دون فتح كل قائمة')}</li>
+                <li>{T('Searchable categories and filtered results','فئات بحث ونتائج يمكن تصفيتها')}</li>
+                <li>{T('Respect private and shared visibility','احترام خصوصية العناصر المشتركة والخاصة')}</li>
+              </ul>
+            </div>
+            <div class="smart-search-preview" role="img" aria-label="Illustrative global search layout, not a screenshot from the app">
+              <span class="smart-preview-label">{T('Illustrative layout · real screenshot pending', 'تصور توضيحي · اللقطة الحقيقية قيد الانتظار')}</span>
+              <div class="smart-search-box"><span aria-hidden="true">⌕</span>{T('Search our space', 'ابحث في مساحتنا')}</div>
+              <div class="smart-search-sample">
+                <span>{T('Example categories', 'أمثلة للفئات')}</span>
+                <span class="smart-search-tags">{T('Notes · Trips · Places · Activities', 'ملاحظات · رحلات · أماكن · أنشطة')}</span>
+              </div>
+            </div>
+          </article>
+          <article class="smart-utility-panel smart-notifications">
+            <div class="smart-utility-copy">
+              <span class="eyebrow">{T('THOUGHTFUL NOTIFICATIONS','إشعارات تراعي وقتك')}</span>
+              {T('Notifications that know your rhythm.', 'إشعارات تفهم إيقاع يومك.', 'h3')}
+              {T('OneSpace uses the work and sleep schedule you set, including days off. Non-urgent partner pushes can wait while you sleep and arrive as a morning summary; urgent reminders can still alert you. Your usual working hours also help the app understand your daily routine.',
+                 'يعتمد OneSpace على مواعيد عملك ونومك التي تحددها، بما فيها أيام الإجازة. يمكن أن تنتظر إشعارات الشريك غير العاجلة أثناء نومك ثم تصلك مجمّعة صباحًا، بينما تظل التذكيرات العاجلة قادرة على تنبيهك. وتساعد ساعات العمل المعتادة التطبيق على مراعاة روتين يومك.', 'p')}
+              <ul class="ticks">
+                <li>{T('Sleep-aware quiet hours and morning summary','هدوء أثناء النوم وملخص عند الاستيقاظ')}</li>
+                <li>{T('Work schedule and days-off awareness','مراعاة أوقات العمل وأيام الإجازة')}</li>
+                <li>{T('Grouped updates with context and direct links','تحديثات مجمعة مع سياق وروابط مباشرة')}</li>
+              </ul>
+            </div>
+            <div class="smart-notification-visual">{notification}</div>
+          </article>
+        </div>
+      </div>
+    </section>'''
+
+
+
 def ai_review_preview():
     """AI-generated fictional examples: review layouts, never social-proof claims."""
     if not SHOW_AI_REVIEW_PREVIEW:
@@ -1146,6 +1201,7 @@ def page_index():
 </div></div></section>
 
 {theme_wall()}
+{smart_utilities()}
 <section class="warm"><div class="wrap">
   <p class="promise reveal">{T('“Your relationship isn’t content. Nothing you put in OneSpace is shown to anyone but the two of you — no feed, no followers, no ads, and never sold.”', '«علاقتكما ليست محتوى. لا يُعرض شيء تضعانه في OneSpace إلا لكما — بلا منشورات ولا متابعين ولا إعلانات، ولا يُباع أبدًا.»')}</p>
   <p class="center muted" style="margin-top:14px">— {T('Our promise', 'وعدنا')}</p>
@@ -1304,6 +1360,7 @@ def page_features():
                        ('Feelings journal', 'keep a record of thoughts and moods over time.', 'يوميات المشاعر', 'احتفظا بالأفكار والمشاعر مع مرور الوقت.'),
                        ('Shared experiences', 'movies, books or places you enjoy together.', 'التجارب المشتركة', 'الأفلام والكتب والأماكن التي تستمتعان بها معًا.')],
                       'letter', 'lavender', rev=True, tint=True) + \
+        smart_utilities() + \
         f'''<section id="me" class="dark" data-theme-scope><div class="wrap split">
   <div>{T('Me', 'أنا', 'span', 'eyebrow')}{T('Set it up your way.', 'اضبطه على طريقتك.', 'h2')}
   {T('Nine themes, Arabic or English, notifications grouped by day, privacy controls and a full export.', 'تسع سمات، والعربية أو الإنجليزية، وإشعارات مجمعة حسب اليوم، وإعدادات خصوصية، وتصدير كامل.', 'p', 'lead')}
