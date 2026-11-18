@@ -107,6 +107,9 @@ def content_nodes(soup):
             continue  # Never translate the HTML doctype into visible text (e.g. 'HTML').
         if any(p.name in INERT for p in node.parents):
             continue
+        # The product wordmark is deliberately in English in every locale.
+        if any('brand-name' in p.get('class', []) for p in node.parents):
+            continue
         if eligible(node):
             yield node
 
