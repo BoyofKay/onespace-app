@@ -946,10 +946,22 @@ def page_index():
     {T('OneSpace is opening to a small group first. The first 250 couples to confirm become Founder Members — one Founder number for the two of you. You get the app first, a direct line to the team, and a say in what we build. Founder benefits will be announced before any pricing is introduced.', 'يُفتح OneSpace لمجموعة صغيرة أولًا. أول 250 زوجًا يؤكدون تسجيلهم يصبحون أعضاء مؤسسين — رقم مؤسس واحد لكما معًا. تحصلون على التطبيق أولًا، وخط مباشر مع الفريق، ورأي فيما نبنيه. وسنعلن مزايا المؤسسين قبل تقديم أي أسعار.', 'p', 'lead')}
     <ul class="ticks"><li>{T('<b>Free</b> during early access', '<b>مجاني</b> خلال الوصول المبكر')}</li><li>{T('<b>Android now</b>, iPhone next', '<b>أندرويد الآن</b> وiPhone بعده')}</li><li>{T('<b>Your email only</b> for the invite and launch updates', '<b>بريدك فقط</b> للدعوة وتحديثات الإطلاق')}</li></ul>
   </div>
-  {founding_form('h')}
+  {founding_entry()}
 </div></div></div></section>
 <script type="application/ld+json">{json.dumps(app_ld)}</script>
 """ + foot()
+
+
+
+def founding_entry():
+    """One conversion destination: the full Founder form lives on join.html."""
+    return f'''<div class="panel"><div class="join-entry" data-founder-entry>
+      <span class="join-entry-icon" aria-hidden="true">♡</span>
+      {T('Reserve your Founder spot', 'احجز مكانك كمؤسس', 'h3')}
+      <a class="btn btn-primary" href="join.html" data-track="founder_join_canonical">{T('Join the Founding 500', 'انضم إلى المؤسسين الـ500')}</a>
+      {T('We never share your email. <a href="privacy.html">Privacy</a>', 'لا نشارك بريدك أبدًا. <a href="privacy.html">الخصوصية</a>', 'p')}
+    </div></div>'''
+
 
 
 def founding_form(prefix, full=False):
