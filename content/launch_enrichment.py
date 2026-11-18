@@ -637,6 +637,74 @@ FAQ_MORE = {
     ]
   ]
 }
+GUIDE_MORE = {
+  "guide-long-distance-ideas.html": [
+    [
+      [
+        "Make the next reunion a shared plan",
+        "اجعلا اللقاء القادم خطة مشتركة"
+      ],
+      [
+        [
+          "Save flights and packing tasks early, not the night before.",
+          "احفظا تفاصيل الرحلة ومهام التجهيز مبكرًا، لا في الليلة السابقة."
+        ],
+        [
+          "Choose a realistic shared call window across your time zones.",
+          "اختارا وقتًا واقعيًا لمكالمة مشتركة عبر فروق التوقيت."
+        ],
+        [
+          "Add a reunion counter deliberately if you want one; it never appears automatically.",
+          "أضيفا عدّاد لقاء باختياركما إن أردتما؛ فهو لا يظهر تلقائيًا."
+        ]
+      ]
+    ]
+  ],
+  "guide-mental-load.html": [
+    [
+      [
+        "Share ownership, not just instructions",
+        "تشاركا المسؤولية لا التعليمات فقط"
+      ],
+      [
+        [
+          "Agree on the outcome of a task before assigning it.",
+          "اتفقا على النتيجة المطلوبة قبل توزيع المهمة."
+        ],
+        [
+          "Let each person update the shared checklist without constant reminders.",
+          "دعوا كل شخص يحدّث القائمة المشتركة دون تذكيرات مستمرة."
+        ],
+        [
+          "Spend ten minutes once a week reviewing what is done and what can wait.",
+          "اقضيا عشر دقائق أسبوعيًا لمراجعة ما أُنجز وما يمكن تأجيله."
+        ]
+      ]
+    ]
+  ],
+  "guide-anniversary-planning.html": [
+    [
+      [
+        "Keep the surprise thoughtful and private",
+        "اجعل المفاجأة مدروسة وخاصة"
+      ],
+      [
+        [
+          "Create an Only me occasion for gift ideas, budget and preparation reminders.",
+          "أنشئ مناسبة «أنا فقط» لأفكار الهدايا والميزانية وتذكيرات التحضير."
+        ],
+        [
+          "Write a love letter to open on the special morning.",
+          "اكتب رسالة حب لتُفتح صباح المناسبة."
+        ],
+        [
+          "Save a photo and story afterward; add an annual counter only if you choose to.",
+          "احفظا صورة وحكاية بعد الاحتفال؛ وأضيفا عدّادًا سنويًا إذا اخترتما ذلك فقط."
+        ]
+      ]
+    ]
+  ]
+}
 EXTRA_TRANSLATIONS = {
   "es": {
     "Tuesday across two time zones": "Un martes entre dos husos horarios",
@@ -769,7 +837,19 @@ EXTRA_TRANSLATIONS = {
     "I changed phones. Will our space disappear?": "He cambiado de móvil. ¿Desaparecerá nuestro espacio?",
     "No. Your space belongs to your accounts, not to one device. Sign in with your existing account and follow the device security checks.": "No. El espacio está vinculado a las cuentas, no al dispositivo. Inicia sesión con tu cuenta y supera las comprobaciones de seguridad.",
     "What should I check if notifications stop arriving?": "¿Qué hago si dejan de llegar notificaciones?",
-    "Check internet access, phone notification permissions and OneSpace preferences. iPhone push also needs completed Apple/Firebase configuration before testing. Contact Support if the problem continues.": "Comprueba la conexión, los permisos y los ajustes de OneSpace. En iPhone también debe completarse Apple/Firebase antes de probarlo. Si sigue fallando, contacta con Soporte."
+    "Check internet access, phone notification permissions and OneSpace preferences. iPhone push also needs completed Apple/Firebase configuration before testing. Contact Support if the problem continues.": "Comprueba la conexión, los permisos y los ajustes de OneSpace. En iPhone también debe completarse Apple/Firebase antes de probarlo. Si sigue fallando, contacta con Soporte.",
+    "Make the next reunion a shared plan": "Convertid el próximo encuentro en un plan",
+    "Save flights and packing tasks early, not the night before.": "Guardad vuelos y tareas de equipaje con tiempo.",
+    "Choose a realistic shared call window across your time zones.": "Elegid una franja realista para hablar en ambas zonas horarias.",
+    "Add a reunion counter deliberately if you want one; it never appears automatically.": "Añadid una cuenta atrás solo si queréis; nunca aparece sola.",
+    "Share ownership, not just instructions": "Repartid responsabilidades, no instrucciones",
+    "Agree on the outcome of a task before assigning it.": "Acordad el resultado antes de repartir la tarea.",
+    "Let each person update the shared checklist without constant reminders.": "Dejad que cada uno actualice la lista sin recordatorios constantes.",
+    "Spend ten minutes once a week reviewing what is done and what can wait.": "Dedicad diez minutos semanales a revisar lo hecho y lo que puede esperar.",
+    "Keep the surprise thoughtful and private": "Una sorpresa atenta y privada",
+    "Create an Only me occasion for gift ideas, budget and preparation reminders.": "Cread una ocasión Solo yo con regalos, presupuesto y recordatorios.",
+    "Write a love letter to open on the special morning.": "Escribid una carta de amor para abrir esa mañana.",
+    "Save a photo and story afterward; add an annual counter only if you choose to.": "Guardad una foto e historia; añadid un contador anual solo si queréis."
   },
   "fr": {
     "Tuesday across two time zones": "Un mardi entre deux fuseaux horaires",
@@ -902,7 +982,19 @@ EXTRA_TRANSLATIONS = {
     "I changed phones. Will our space disappear?": "J’ai changé de téléphone. Notre espace va-t-il disparaître ?",
     "No. Your space belongs to your accounts, not to one device. Sign in with your existing account and follow the device security checks.": "Non. Votre espace est lié à vos comptes, pas à un appareil. Reconnectez-vous et suivez les contrôles de sécurité.",
     "What should I check if notifications stop arriving?": "Que vérifier si les notifications n’arrivent plus ?",
-    "Check internet access, phone notification permissions and OneSpace preferences. iPhone push also needs completed Apple/Firebase configuration before testing. Contact Support if the problem continues.": "Vérifiez la connexion, les autorisations et les préférences OneSpace. Les notifications iPhone nécessitent aussi la configuration Apple/Firebase. Contactez le support si nécessaire."
+    "Check internet access, phone notification permissions and OneSpace preferences. iPhone push also needs completed Apple/Firebase configuration before testing. Contact Support if the problem continues.": "Vérifiez la connexion, les autorisations et les préférences OneSpace. Les notifications iPhone nécessitent aussi la configuration Apple/Firebase. Contactez le support si nécessaire.",
+    "Make the next reunion a shared plan": "Faites des retrouvailles un projet commun",
+    "Save flights and packing tasks early, not the night before.": "Enregistrez vols et préparatifs à l’avance.",
+    "Choose a realistic shared call window across your time zones.": "Choisissez un créneau d’appel réaliste dans vos fuseaux horaires.",
+    "Add a reunion counter deliberately if you want one; it never appears automatically.": "Ajoutez un compteur si vous le souhaitez ; il n’apparaît pas tout seul.",
+    "Share ownership, not just instructions": "Partagez la responsabilité, pas les consignes",
+    "Agree on the outcome of a task before assigning it.": "Mettez-vous d’accord sur le résultat attendu.",
+    "Let each person update the shared checklist without constant reminders.": "Laissez chacun actualiser la liste sans rappels incessants.",
+    "Spend ten minutes once a week reviewing what is done and what can wait.": "Consacrez dix minutes par semaine au bilan des tâches.",
+    "Keep the surprise thoughtful and private": "Une surprise attentionnée et privée",
+    "Create an Only me occasion for gift ideas, budget and preparation reminders.": "Créez une occasion « Moi uniquement » avec cadeaux, budget et rappels.",
+    "Write a love letter to open on the special morning.": "Écrivez une lettre d’amour à ouvrir le matin.",
+    "Save a photo and story afterward; add an annual counter only if you choose to.": "Gardez photo et récit ; ajoutez un compteur annuel uniquement si vous le souhaitez."
   },
   "de": {
     "Tuesday across two time zones": "Ein Dienstag in zwei Zeitzonen",
@@ -1035,6 +1127,18 @@ EXTRA_TRANSLATIONS = {
     "I changed phones. Will our space disappear?": "Ich habe ein neues Handy. Verschwindet unser Bereich?",
     "No. Your space belongs to your accounts, not to one device. Sign in with your existing account and follow the device security checks.": "Nein. Der Bereich gehört zu euren Konten, nicht zu einem Gerät. Melde dich mit deinem bestehenden Konto an und bestätige die Geräteprüfung.",
     "What should I check if notifications stop arriving?": "Was tun, wenn Benachrichtigungen ausbleiben?",
-    "Check internet access, phone notification permissions and OneSpace preferences. iPhone push also needs completed Apple/Firebase configuration before testing. Contact Support if the problem continues.": "Prüfe Internet, Systemberechtigungen und OneSpace-Einstellungen. iPhone-Push setzt außerdem die Apple-/Firebase-Konfiguration voraus. Bei Problemen hilft der Support."
+    "Check internet access, phone notification permissions and OneSpace preferences. iPhone push also needs completed Apple/Firebase configuration before testing. Contact Support if the problem continues.": "Prüfe Internet, Systemberechtigungen und OneSpace-Einstellungen. iPhone-Push setzt außerdem die Apple-/Firebase-Konfiguration voraus. Bei Problemen hilft der Support.",
+    "Make the next reunion a shared plan": "Macht das nächste Wiedersehen zum gemeinsamen Plan",
+    "Save flights and packing tasks early, not the night before.": "Speichert Flüge und Packaufgaben rechtzeitig.",
+    "Choose a realistic shared call window across your time zones.": "Wählt ein realistisches Zeitfenster für Gespräche.",
+    "Add a reunion counter deliberately if you want one; it never appears automatically.": "Legt einen Countdown bewusst an; er erscheint nie automatisch.",
+    "Share ownership, not just instructions": "Teilt Verantwortung statt Anweisungen",
+    "Agree on the outcome of a task before assigning it.": "Vereinbart das Ziel, bevor ihr Aufgaben verteilt.",
+    "Let each person update the shared checklist without constant reminders.": "Lasst jeden die Liste aktualisieren, ohne ständige Erinnerungen.",
+    "Spend ten minutes once a week reviewing what is done and what can wait.": "Nehmt euch wöchentlich zehn Minuten für Erledigtes und Offenes.",
+    "Keep the surprise thoughtful and private": "Eine liebevolle Überraschung privat planen",
+    "Create an Only me occasion for gift ideas, budget and preparation reminders.": "Erstelle einen privaten Anlass für Geschenke, Budget und Erinnerungen.",
+    "Write a love letter to open on the special morning.": "Schreibe einen Liebesbrief für den besonderen Morgen.",
+    "Save a photo and story afterward; add an annual counter only if you choose to.": "Haltet Foto und Geschichte fest; einen Jahreszähler erstellt ihr nur bewusst."
   }
 }

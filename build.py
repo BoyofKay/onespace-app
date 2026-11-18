@@ -32,7 +32,7 @@ _sys.path.insert(0, str(ROOT / 'content'))
 from deep_pages import DEEP, COMPARE  # noqa: E402
 from arabic_copy_overrides import revise
 from full_localization import NEW_LANGS, LANGS, build_locales
-from launch_enrichment import STORIES, STORY_UI, FAQ_MORE
+from launch_enrichment import STORIES, STORY_UI, FAQ_MORE, GUIDE_MORE
 
 
 def T(en, ar, tag='span', cls='', attrs=''):
@@ -1818,7 +1818,7 @@ def guide_page(g):
     t_en, t_ar = g['title']
     h = head(g['slug'], t_en + ' — OneSpace', t_ar + ' — OneSpace', g['desc'][0], g['desc'][1])
     body = ''
-    for st, st_ar, tips in g['sections']:
+    for st, st_ar, tips in g['sections'] + GUIDE_MORE.get(g['slug'], []):
         body += f'{T(st, st_ar, "h2")}<ol>{"".join(f"<li>{T(x, y)}</li>" for x, y in tips)}</ol>'
     ld = {'@context': 'https://schema.org', '@type': 'Article', 'headline': t_en, 'description': g['desc'][0], 'inLanguage': ['en', 'ar'],
           'publisher': {'@type': 'Organization', 'name': 'OneSpace'}, 'datePublished': '2026-11-16', 'mainEntityOfPage': BASE + g['slug']}
