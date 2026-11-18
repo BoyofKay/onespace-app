@@ -25,6 +25,8 @@ jobs:
         run: python3 tests/check_megamenu.py
       - name: Verify public website security and technical SEO
         run: python3 tests/check_security_seo.py
+      - name: Verify complete couple journeys in five languages
+        run: python3 tests/check_journeys.py
       - name: Verify browser JavaScript syntax
         run: |
           node --check assets/os.js

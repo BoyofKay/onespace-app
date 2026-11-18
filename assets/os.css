@@ -1487,3 +1487,50 @@ html[dir="rtl"] .editorial-hero-title{letter-spacing:0!important}
 .story-feature a{display:inline-block;margin-inline-start:12px;font-weight:700}
 @media(max-width:800px){.story-preview-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:520px){.story-preview-grid{grid-template-columns:1fr}.story-preview-section{padding:42px 0}.story-preview{padding:17px}.story-episode summary{padding:18px}.story-script{padding:0 16px 18px}.story-scene{padding:14px}}
+
+/* Twenty-four true-to-life fictional workflows: elegant reading, not screenplay boxes. */
+.journey-switch{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:10px;margin:0 auto 16px}
+.journey-switch a{border:1px solid var(--line);background:var(--paper);border-radius:999px;padding:13px 20px;font-size:14px;font-weight:750;color:var(--teal);text-decoration:none;box-shadow:var(--shadow-s)}
+.journey-switch a:hover,.journey-switch a:focus-visible{border-color:var(--teal);background:var(--teal-l)}
+.journey-season{scroll-margin-top:90px}
+.journey-season .story-season-head{margin-bottom:22px}
+.journey-episodes{display:grid;gap:11px}
+.journey-episode{margin:0;border-radius:18px}
+.journey-episode summary{padding:23px;gap:17px}
+.journey-number{display:grid;place-items:center;flex:none;width:40px;height:40px;border-radius:12px;background:var(--teal-l);color:var(--teal);font-size:13px;font-weight:800;font-variant-numeric:tabular-nums}
+.journey-episode .story-summary-copy{flex:1;gap:6px}
+.journey-episode[open]{border-color:#B7D6D3;box-shadow:0 16px 40px -28px rgba(20,33,61,.35)}
+.journey-episode[open] summary{border-bottom:1px solid var(--line)}
+.journey-full{padding:24px 30px 30px}
+.journey-intro-label{font-size:12px;font-weight:800;letter-spacing:.07em;color:var(--teal);text-transform:uppercase;margin:1px 0 18px}
+.journey-beats{position:relative;display:flex;flex-direction:column;gap:17px}
+.journey-beats:before{content:"";position:absolute;inset-inline-start:17px;top:18px;bottom:26px;width:1px;background:#C9DFDE}
+.journey-beat{display:flex;align-items:flex-start;gap:20px;position:relative}
+.journey-beat-no{flex:none;width:35px;height:35px;display:grid;place-items:center;background:var(--paper);border:1px solid #C2D9DA;border-radius:50%;font-size:11px;font-weight:800;color:var(--teal);z-index:1}
+.journey-beat p{flex:1;margin:2px 0 8px;font-size:16px;line-height:1.85;color:var(--ink-2);text-wrap:pretty;max-width:75ch}
+.journey-connections{margin:30px 0 0 55px;padding:20px 0 0;border-top:1px solid var(--line)}
+.journey-connections h3{font-size:15px;line-height:1.35;margin:0 0 13px;color:var(--ink)}
+.journey-feature-links{display:flex;flex-wrap:wrap;gap:8px}
+.journey-feature-chip{display:inline-flex;align-items:center;padding:8px 12px;border:1px solid #CAD9E0;border-radius:999px;text-decoration:none;font-weight:650;font-size:12.5px;color:var(--teal);background:var(--paper)}
+.journey-feature-chip:hover,.journey-feature-chip:focus-visible{background:var(--teal-l);border-color:var(--teal)}
+.journey-preview .journey-preview-number{font-size:12px;color:var(--muted);font-weight:800}
+.journey-previews .story-preview-grid{gap:15px}
+.journey-show-more{margin:22px auto 0}
+.journey-show-more>summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;color:var(--teal);font-weight:750;font-size:14px;padding:13px 20px;border:1px solid var(--line);border-radius:999px;background:var(--paper);width:max-content;max-width:100%}
+.journey-show-more>summary::-webkit-details-marker{display:none}
+.journey-show-more[open]>summary span{transform:rotate(45deg)}
+.journey-additional{margin-top:19px}
+.journey-view-all{text-align:center;margin:22px 0 0;font-size:14px;font-weight:750}
+.journey-view-all a{color:var(--teal)}
+@media(max-width:700px){
+ .journey-episode summary{padding:17px 15px;gap:10px}
+ .journey-number{width:32px;height:32px;font-size:11px}
+ .journey-episode .story-summary-copy strong{font-size:16px}
+ .journey-episode .story-summary-copy span{font-size:13px}
+ .journey-full{padding:19px 16px 22px}
+ .journey-beat{gap:12px}
+ .journey-beat p{font-size:15px;line-height:1.75}
+ .journey-connections{margin-inline-start:46px}
+ .journey-switch a{padding:11px 13px}
+}
+@media(prefers-reduced-motion:reduce){.journey-episode .story-toggle{transition:none}}

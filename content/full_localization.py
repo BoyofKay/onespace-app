@@ -88,6 +88,11 @@ from locale_legal_review import LEGAL_EDITORIAL
 from locale_faq_review import FAQ_EDITORIAL
 from locale_guides_review import GUIDE_EDITORIAL
 from launch_enrichment import EXTRA_TRANSLATIONS
+from journeys_apart_01 import JOURNEYS as JA1
+from journeys_apart_02 import JOURNEYS as JA2
+from journeys_together_01 import JOURNEYS as JT1
+from journeys_together_02 import JOURNEYS as JT2
+from journeys_ui import UI as JOURNEY_UI, FEATURES as JOURNEY_FEATURES
 for _locale in NEW_LANGS:
     GLOSSARY[_locale].update(CURATED[_locale])
     GLOSSARY[_locale].update(MENU_EDITORIAL[_locale])
@@ -95,6 +100,16 @@ for _locale in NEW_LANGS:
     GLOSSARY[_locale].update(FAQ_EDITORIAL[_locale])
     GLOSSARY[_locale].update(GUIDE_EDITORIAL[_locale])
     GLOSSARY[_locale].update(EXTRA_TRANSLATIONS[_locale])
+
+# Preserve every paragraph of all 24 journeys in each indexable locale,
+# not a shorter foreign-language version of the storytelling experience.
+for _j in JA1 + JA2 + JT1 + JT2:
+    for _entry in [_j['title'], _j['teaser'], *_j['stages']]:
+        for _index, _language in enumerate(('es', 'fr', 'de'), 2):
+            GLOSSARY[_language][_entry[0]] = _entry[_index]
+for _entry in list(JOURNEY_UI.values()) + list(JOURNEY_FEATURES.values()):
+    for _index, _language in enumerate(('es', 'fr', 'de'), 2):
+        GLOSSARY[_language][_entry[0]] = _entry[_index]
 
 def eligible(raw):
     s = str(raw).strip()

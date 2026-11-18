@@ -32,7 +32,14 @@ _sys.path.insert(0, str(ROOT / 'content'))
 from deep_pages import DEEP, COMPARE  # noqa: E402
 from arabic_copy_overrides import revise
 from full_localization import NEW_LANGS, LANGS, build_locales
-from launch_enrichment import STORIES, STORY_UI, FAQ_MORE, GUIDE_MORE
+from launch_enrichment import STORY_UI, FAQ_MORE, GUIDE_MORE
+from journeys_apart_01 import JOURNEYS as J_APART_1
+from journeys_apart_02 import JOURNEYS as J_APART_2
+from journeys_together_01 import JOURNEYS as J_TOGETHER_1
+from journeys_together_02 import JOURNEYS as J_TOGETHER_2
+from journeys_ui import UI as JOURNEY_UI, FEATURES as JOURNEY_FEATURES
+
+JOURNEYS = J_APART_1 + J_APART_2 + J_TOGETHER_1 + J_TOGETHER_2
 
 
 def T(en, ar, tag='span', cls='', attrs=''):
@@ -1138,7 +1145,7 @@ def page_compare():
   {compare_table()}
   <p class="muted center" style="margin-top:18px">{T('This compares everyday workflows, not an exhaustive audit of other apps. Features and integrations can vary by product.', 'هذه مقارنة لطرق الاستخدام اليومية، وليست مراجعة شاملة للتطبيقات الأخرى. قد تختلف المزايا والتكاملات من تطبيق لآخر.')}</p>
 </div></section>
-""" + story_case_cards(['the-sofa-decision', 'a-tuesday-apart']) + value_grid() + cta_band() + foot()
+""" + story_case_cards(['sofa-that-both-of-us-chose', 'course-together-across-time-zones']) + value_grid() + cta_band() + foot()
 
 
 def page_index():
@@ -1417,69 +1424,92 @@ def page_features():
 
 
 
-# -------------------------------------------------------- fictional scenario episodes
+# ------------------------------------------- rich, practical couple journeys
+def journey_text(translations, tag='span', cls=''):
+    """The localized website is built from shared English/Arabic DOM."""
+    return T(translations[0], translations[1], tag, cls)
+
+
+def journey_preview_card(journey, index):
+    return ('<a class="story-preview journey-preview reveal" href="scenarios.html#story-' + journey['slug'] + '">'
+            + '<span class="journey-preview-number" aria-hidden="true">' + f'{index:02d}' + '</span>'
+            + journey_text(journey['title'], 'h3')
+            + journey_text(journey['teaser'], 'p')
+            + '<span class="story-preview-more">' + journey_text(JOURNEY_UI['read'])
+            + ' <span aria-hidden="true">↗</span></span></a>')
+
 
 def story_case_cards(slugs):
-    """Two or three compact fictional journey examples; never fake testimonials."""
-    selected = [next(x for x in STORIES if x['slug'] == slug) for slug in slugs]
-    tiles = ''.join(
-        '<a class="story-preview" href="scenarios.html#story-' + x['slug'] + '">'
-        + T(*x['title'], 'h3') + T(*x['teaser'], 'p')
-        + '<span class="story-preview-more">' + T(*STORY_UI['read']) + ' ↗</span></a>'
-        for x in selected)
+    """Small curated taste only; never add long content to the homepage."""
+    selected = [next(j for j in JOURNEYS if j['slug'] == slug) for slug in slugs]
+    tiles = ''.join(journey_preview_card(j, i) for i, j in enumerate(selected, 1))
     return ('<section class="story-case-strip"><div class="wrap">'
-            + '<div class="sec-head center">' + T(*STORY_UI['teaserHeading'], 'h2') + '</div>'
+            + '<div class="sec-head center">' + journey_text(JOURNEY_UI['previewHeading'], 'h2') + '</div>'
             + '<div class="story-preview-grid story-cases">' + tiles + '</div>'
-            + '<p class="story-disclaimer">' + T(*STORY_UI['fiction']) + '</p></div></section>')
+            + '<p class="story-disclaimer">' + journey_text(JOURNEY_UI['fiction'])
+            + '</p></div></section>')
 
 
 def story_previews(apart):
     mode = 'apart' if apart else 'together'
-    stories = [s for s in STORIES if s['mode'] == mode]
-    title = STORY_UI['introApart'] if apart else STORY_UI['introTogether']
-    cards = ''.join(
-        '<a class="story-preview reveal" href="scenarios.html#story-' + s['slug'] + '">'
-        + T(*s['title'], 'h3') + T(*s['teaser'], 'p')
-        + '<span class="story-preview-more">' + T(*STORY_UI['read']) + ' <span aria-hidden="true">↗</span></span></a>'
-        for s in stories)
-    return ('<section class="story-preview-section"><div class="wrap"><div class="sec-head center">'
-            + T(*STORY_UI['teaserHeading'], 'h2')
-            + T(*title, 'p', 'muted') + '</div><div class="story-preview-grid">' + cards
-            + '</div><p class="story-disclaimer">' + T(*STORY_UI['fiction'])
+    journeys = [j for j in JOURNEYS if j['mode'] == mode]
+    intro = JOURNEY_UI['apartDescription'] if apart else JOURNEY_UI['togetherDescription']
+    first = ''.join(journey_preview_card(j, i + 1) for i, j in enumerate(journeys[:3]))
+    hidden = ''.join(journey_preview_card(j, i + 4) for i, j in enumerate(journeys[3:]))
+    return ('<section class="story-preview-section journey-previews"><div class="wrap">'
+            + '<div class="sec-head center">' + journey_text(JOURNEY_UI['previewHeading'], 'h2')
+            + journey_text(intro, 'p', 'muted') + '</div>'
+            + '<div class="story-preview-grid">' + first + '</div>'
+            + '<details class="journey-show-more"><summary>' + journey_text(JOURNEY_UI['more'])
+            + '<span aria-hidden="true"> +</span></summary>'
+            + '<div class="story-preview-grid journey-additional">' + hidden + '</div></details>'
+            + '<p class="journey-view-all"><a href="scenarios.html#story-season-' + mode + '">'
+            + journey_text(JOURNEY_UI['navOpen']) + ' <span aria-hidden="true">↗</span></a></p>'
+            + '<p class="story-disclaimer">' + journey_text(JOURNEY_UI['fiction'])
             + '</p></div></section>')
 
 
 def page_scenarios():
-    h = head('scenarios.html', 'OneSpace stories — a shared life in scenes',
-             'حكايات OneSpace — الحياة المشتركة في مشاهد',
-             STORY_UI['pageIntro'][0], STORY_UI['pageIntro'][1])
+    h = head('scenarios.html', *JOURNEY_UI['pageTitle'][:2], *JOURNEY_UI['description'][:2])
+    nav = ('<nav class="journey-switch" aria-label="' + JOURNEY_UI['jumpHint'][0] + '">'
+           + '<a href="#story-season-apart">' + journey_text(JOURNEY_UI['apart']) + '</a>'
+           + '<a href="#story-season-together">' + journey_text(JOURNEY_UI['together']) + '</a>'
+           + '</nav>')
     seasons = []
     for mode in ('apart', 'together'):
-        sequence = [s for s in STORIES if s['mode'] == mode]
-        label = STORY_UI['apart'] if mode == 'apart' else STORY_UI['together']
-        intro = STORY_UI['introApart'] if mode == 'apart' else STORY_UI['introTogether']
+        sequence = [j for j in JOURNEYS if j['mode'] == mode]
+        label = JOURNEY_UI['apart'] if mode == 'apart' else JOURNEY_UI['together']
+        intro = JOURNEY_UI['apartDescription'] if mode == 'apart' else JOURNEY_UI['togetherDescription']
         episodes = []
-        for s in sequence:
-            beats = ''.join(
-                '<div class="story-scene"><span class="story-scene-label">'
-                + T(*STORY_UI['scene'+str(i+1)]) + '</span>'
-                + T(*line, 'p') + '</div>'
-                for i, line in enumerate(s['acts']))
-            episodes.append('<details class="story-episode" id="story-' + s['slug'] + '">'
-                + '<summary><span class="story-summary-copy">' + T(*s['title'], 'strong')
-                + T(*s['teaser'], 'span') + '</span><span class="story-toggle" aria-hidden="true">+</span></summary>'
-                + '<div class="story-script">' + beats
-                + '<div class="story-feature"><strong>' + T(*STORY_UI['features'])
-                + '</strong> ' + T(*s['uses'])
-                + ' <a href="features.html">' + T('Explore the features', 'تعرّف إلى المزايا')
-                + '</a></div></div></details>')
-        seasons.append('<section class="story-season" id="story-season-' + mode + '"><div class="narrow">'
-            + '<div class="story-season-head">' + T(*label, 'h2') + T(*intro, 'p', 'muted') + '</div>'
-            + ''.join(episodes) + '</div></section>')
-    return (h + page_hero('Couples stories', 'حكايات الأزواج', *STORY_UI['pageHeading'],
-                          *STORY_UI['pageIntro'])
-            + '<div class="narrow"><p class="story-disclaimer">' + T(*STORY_UI['fiction']) + '</p></div>'
-            + ''.join(seasons) + cta_band() + foot())
+        for index, journey in enumerate(sequence, 1):
+            narrative = ''.join(
+                '<div class="journey-beat"><span class="journey-beat-no" aria-hidden="true">'
+                + f'{i:02d}' + '</span>' + journey_text(paragraph, 'p') + '</div>'
+                for i, paragraph in enumerate(journey['stages'], 1))
+            linked = ''.join(
+                '<a class="journey-feature-chip" href="' + JOURNEY_FEATURES[key][5] + '">'
+                + journey_text(JOURNEY_FEATURES[key]) + '</a>'
+                for key in journey['features'])
+            episodes.append(
+                '<details class="story-episode journey-episode" id="story-' + journey['slug'] + '">'
+                + '<summary><span class="journey-number" aria-hidden="true">' + f'{index:02d}'
+                + '</span><span class="story-summary-copy">' + journey_text(journey['title'], 'strong')
+                + journey_text(journey['teaser'], 'span')
+                + '</span><span class="story-toggle" aria-hidden="true">+</span></summary>'
+                + '<div class="journey-full"><div class="journey-intro-label">'
+                + journey_text(JOURNEY_UI['follow']) + '</div>'
+                + '<div class="journey-beats">' + narrative + '</div>'
+                + '<div class="journey-connections"><h3>' + journey_text(JOURNEY_UI['features'])
+                + '</h3><div class="journey-feature-links">' + linked + '</div></div></div></details>')
+        seasons.append(
+            '<section class="story-season journey-season" id="story-season-' + mode + '"><div class="narrow">'
+            + '<div class="story-season-head">' + journey_text(label, 'h2') + journey_text(intro, 'p', 'muted')
+            + '</div><div class="journey-episodes">' + ''.join(episodes)
+            + '</div></div></section>')
+    return (h + page_hero(*JOURNEY_UI['eyebrow'][:2], *JOURNEY_UI['headline'][:2], *JOURNEY_UI['subhead'][:2])
+            + '<div class="wrap">' + nav + '</div>'
+            + '<div class="narrow"><p class="story-disclaimer">' + journey_text(JOURNEY_UI['fiction'])
+            + '</p></div>' + ''.join(seasons) + cta_band() + foot())
 
 
 def persona_page(page, apart):
@@ -1712,7 +1742,7 @@ def page_tutorials():
                          'إرشادات قصيرة وعملية لأكثر ما يفعله الأزواج. تفضّل أن تراه؟ <a href="how-it-works.html">جرّب العرض</a>.',
                          extra=f'<div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:22px">{jump}</div><div style="max-width:560px;margin-top:18px"><label class="sr" for="faq-search">Search</label><input id="faq-search" class="search" type="search" placeholder="Search tutorials…" data-i18n-attr="placeholder:{sk}"></div>') + f"""
 <section style="padding-top:10px"><div class="narrow">{body}<p id="faq-empty" hidden>{T('Nothing matches. <a href="support.html">Ask us</a>.', 'لا شيء مطابق. <a href="support.html">اسألنا</a>.')}</p></div></section>
-""" + story_case_cards(['the-reunion-countdown', 'sunday-reset', 'the-sofa-decision']) + cta_band() + foot()
+""" + story_case_cards(['reunion-from-flight-to-memory', 'a-sunday-that-didnt-belong-to-chores', 'sofa-that-both-of-us-chose']) + cta_band() + foot()
 
 
 AVAILABILITY = [
