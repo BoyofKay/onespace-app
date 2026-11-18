@@ -153,9 +153,16 @@ def main():
     if not (ROOT / "robots.txt").exists() or not (ROOT / "sitemap.xml").exists():
         errors.append("Missing SEO files")
     index = (ROOT / "index.html").read_text(encoding="utf-8")
-    for marker in ('id="founding"', 'data-form="join"', 'data-views="tabs"', 'data-theme-pick='):
+    for marker in ('id="founding"', 'data-founder-entry', 'id="the-difference"', 'data-views="tabs"', 'data-theme-pick='):
         if marker not in index:
             errors.append(f"Missing interactive UI on the homepage: {marker}")
+    join_page = (ROOT / "join.html").read_text(encoding="utf-8")
+    if 'data-form="join"' not in join_page:
+        errors.append("The canonical Founder signup form is missing from join.html")
+    if 'data-form="join"' in index:
+        errors.append("The homepage must link to the single Founder signup, not duplicate it")
+    if 'href="compare.html"' not in index:
+        errors.append("Why OneSpace must be reachable from the main navigation")
     # Ensure new marketing UI and original protected flows survive regeneration.
     for locale in ("index.html", "ar/index.html"):
         page = (ROOT / locale).read_text(encoding="utf-8")
