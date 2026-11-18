@@ -1323,3 +1323,8 @@ CURATED["de"].update({
   "4. Get the invitation when your app is ready": "4. Einladung erhalten, sobald eure App bereit ist",
   "— Android first, iPhone later. Registration is open for both today.": "– zuerst Android, später iPhone. Die Anmeldung ist für beide schon jetzt offen."
 })
+
+# Search and notifications cross-feature anchor.
+CURATED["es"].update({"Search & Notifications":"Búsqueda y notificaciones"})
+CURATED["fr"].update({"Search & Notifications":"Recherche et notifications"})
+CURATED["de"].update({"Search & Notifications":"Suche & Mitteilungen"})
