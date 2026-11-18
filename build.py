@@ -38,6 +38,7 @@ from journeys_apart_02 import JOURNEYS as J_APART_2
 from journeys_together_01 import JOURNEYS as J_TOGETHER_1
 from journeys_together_02 import JOURNEYS as J_TOGETHER_2
 from journeys_ui import UI as JOURNEY_UI, FEATURES as JOURNEY_FEATURES
+from journey_links import linkify_journeys
 
 JOURNEYS = J_APART_1 + J_APART_2 + J_TOGETHER_1 + J_TOGETHER_2
 
@@ -1461,7 +1462,7 @@ def story_previews(apart):
             + journey_text(intro, 'p', 'muted') + '</div>'
             + '<div class="story-preview-grid">' + first + '</div>'
             + '<details class="journey-show-more"><summary>' + journey_text(JOURNEY_UI['more'])
-            + '<span aria-hidden="true"> +</span></summary>'
+            + '</summary>'
             + '<div class="story-preview-grid journey-additional">' + hidden + '</div></details>'
             + '<p class="journey-view-all"><a href="scenarios.html#story-season-' + mode + '">'
             + journey_text(JOURNEY_UI['navOpen']) + ' <span aria-hidden="true">↗</span></a></p>'
@@ -1495,7 +1496,7 @@ def page_scenarios():
                 + '<summary><span class="journey-number" aria-hidden="true">' + f'{index:02d}'
                 + '</span><span class="story-summary-copy">' + journey_text(journey['title'], 'strong')
                 + journey_text(journey['teaser'], 'span')
-                + '</span><span class="story-toggle" aria-hidden="true">+</span></summary>'
+                + '</span></summary>'
                 + '<div class="journey-full"><div class="journey-intro-label">'
                 + journey_text(JOURNEY_UI['follow']) + '</div>'
                 + '<div class="journey-beats">' + narrative + '</div>'
@@ -2393,6 +2394,10 @@ def main():
     # Every language reuses the identical full English DOM: screenshots, tutorial,
     # demo, theme preview, interactive forms and all original product pages.
     count = build_locales(ROOT, list(PAGES) + ['confirm.html', 'unsubscribe.html'])
+    # Link contextual feature mentions only after each narrative is fully localized.
+    # English, Arabic and ES/FR/DE retain exactly the same prose.
+    journey_links = linkify_journeys(ROOT, JOURNEYS, JOURNEY_FEATURES)
+    print('Scenario feature links by locale:', journey_links)
     print(f'Localized {count} complete pages from source')
     refresh_legal_revisions()
     urls = ''

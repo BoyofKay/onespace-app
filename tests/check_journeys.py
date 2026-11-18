@@ -8,6 +8,7 @@ from journeys_apart_01 import JOURNEYS as A1
 from journeys_apart_02 import JOURNEYS as A2
 from journeys_together_01 import JOURNEYS as T1
 from journeys_together_02 import JOURNEYS as T2
+from journeys_ui import FEATURES
 J=A1+A2+T1+T2
 assert len(J)==24,len(J)
 assert sum(j['mode']=='apart' for j in J)==12
@@ -30,12 +31,26 @@ for lang in ('en','ar','es','fr','de'):
         mode_page=BeautifulSoup((ROOT/prefix/slug).read_text(encoding='utf8'),'html.parser')
         assert len(mode_page.select('a.journey-preview'))==12,(lang,mode)
         assert len(mode_page.select('details.journey-show-more'))==1,(lang,mode)
-        assert mode_page.select_one('details.journey-show-more summary'),(lang,mode)
+        more = mode_page.select_one('details.journey-show-more summary')
+        assert more,(lang,mode)
+        assert more.get_text(' ',strip=True).strip()[-1] not in ['+','−','×','x'],(lang,mode,'extra manual icon')
     for j in J:
         ep=doc.select_one('#story-'+j['slug'])
         assert ep is not None,(lang,j['slug'])
         assert len(ep.select('.journey-beat'))==len(j['stages']),(lang,j['slug'])
         assert len(ep.select('.journey-feature-chip'))==len(j['features']),(lang,j['slug'])
+        assert not ep.select('.story-toggle'), (lang,j['slug'],'duplicate expand indicator')
+        narrative = ep.select('.journey-beat p')
+        assert len(narrative) == len(j['stages'])
+        loc = ('en','ar','es','fr','de').index(lang)
+        for i, paragraph in enumerate(narrative):
+            assert paragraph.get_text('', strip=False) == j['stages'][i][loc], (lang,j['slug'],i,'narrative changed')
+            assert len(paragraph.select('a.journey-inline-link')) <= 2, (lang,j['slug'],i,'too many links')
+            assert not paragraph.has_attr('data-i18n'), (lang,j['slug'],i,'client could wipe links')
+        links = ep.select('.journey-beat a.journey-inline-link')
+        assert len(links) >= 2, (lang,j['slug'],'too few contextual feature links')
+        assert len(links) <= 10, (lang,j['slug'],'too many contextual feature links')
+        assert all(a.get('href') in {FEATURES[key][5] for key in j['features']} for a in links), (lang,j['slug'],'unrelated link')
         if lang in ('en','ar'):
             body=ep.get_text(' ',strip=True)
             assert j['title'][0 if lang=='en' else 1] in body,(lang,j['slug'])
@@ -43,11 +58,11 @@ for lang in ('en','ar','es','fr','de'):
             body=ep.get_text(' ',strip=True)
             loc=('es','fr','de').index(lang)+2
             assert j['title'][loc] in body,(lang,j['slug'])
-            assert j['stages'][0][loc] in body,(lang,j['slug'],'missing narrative translation')
+            assert j['stages'][0][loc] == narrative[0].get_text('',strip=False),(lang,j['slug'],'missing narrative translation')
 comparison=(ROOT/'compare.html').read_text(encoding='utf8')
 tutorials=(ROOT/'tutorials.html').read_text(encoding='utf8')
 assert 'the-sofa-decision' not in comparison
 assert 'sofa-that-both-of-us-chose' in comparison
 assert 'course-together-across-time-zones' in comparison
 assert 'reunion-from-flight-to-memory' in tutorials
-print('PASS: 24 complete journeys, 12 apart + 12 together, deep-link previews, all five languages, no screenplay layout.')
+print('PASS: 24 complete journeys, contextual feature links, clean expand/collapse icons, five-language parity.')

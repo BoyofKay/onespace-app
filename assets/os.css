@@ -1477,7 +1477,8 @@ html[dir="rtl"] .editorial-hero-title{letter-spacing:0!important}
 .story-summary-copy strong{font-size:19px;color:var(--ink)}
 .story-summary-copy span{font-size:14px;color:var(--muted)}
 .story-toggle{font-size:22px;font-weight:500;color:var(--teal)}
-.story-episode[open] .story-toggle{transform:rotate(45deg)}
+.story-episode summary::after{color:var(--teal);flex:none}
+.story-episode[open] summary::after{content:"−"}
 .story-script{padding:0 24px 24px}
 .story-scene{padding:16px 18px;background:var(--soft);border-inline-start:3px solid var(--coral);border-radius:0 12px 12px 0;margin-bottom:12px}
 .story-scene-label{display:block;font-size:11px;letter-spacing:.09em;text-transform:uppercase;font-weight:800;color:var(--teal);margin-bottom:7px}
@@ -1518,7 +1519,8 @@ html[dir="rtl"] .editorial-hero-title{letter-spacing:0!important}
 .journey-show-more{margin:22px auto 0}
 .journey-show-more>summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;color:var(--teal);font-weight:750;font-size:14px;padding:13px 20px;border:1px solid var(--line);border-radius:999px;background:var(--paper);width:max-content;max-width:100%}
 .journey-show-more>summary::-webkit-details-marker{display:none}
-.journey-show-more[open]>summary span{transform:rotate(45deg)}
+.journey-show-more>summary::after{color:var(--teal);flex:none}
+.journey-show-more[open]>summary::after{content:"−"}
 .journey-additional{margin-top:19px}
 .journey-view-all{text-align:center;margin:22px 0 0;font-size:14px;font-weight:750}
 .journey-view-all a{color:var(--teal)}
@@ -1533,4 +1535,9 @@ html[dir="rtl"] .editorial-hero-title{letter-spacing:0!important}
  .journey-connections{margin-inline-start:46px}
  .journey-switch a{padding:11px 13px}
 }
-@media(prefers-reduced-motion:reduce){.journey-episode .story-toggle{transition:none}}
+/* Story headings intentionally use only the native summary + / − indicator. */
+
+/* Subtle, contextual inline feature links in localized real-life journeys. */
+.journey-beat .journey-inline-link{color:var(--teal);font-weight:700;text-decoration:underline;text-decoration-color:color-mix(in srgb,var(--teal) 48%,transparent);text-decoration-thickness:1px;text-underline-offset:3px;transition:text-decoration-color .15s}
+.journey-beat .journey-inline-link:hover,.journey-beat .journey-inline-link:focus-visible{text-decoration-color:currentColor;text-decoration-thickness:2px}
+.journey-beat .journey-inline-link:focus-visible{outline:2px solid var(--teal);outline-offset:3px;border-radius:2px}
