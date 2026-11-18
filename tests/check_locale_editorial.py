@@ -4,6 +4,20 @@ from pathlib import Path
 from bs4 import BeautifulSoup
 
 ROOT = Path(__file__).resolve().parents[1]
+import json
+import sys
+sys.path.insert(0, str(ROOT / 'content'))
+from locale_legal_review import LEGAL_EDITORIAL
+from locale_faq_review import FAQ_EDITORIAL
+from locale_guides_review import GUIDE_EDITORIAL
+catalog = json.loads((ROOT / 'content' / 'translations' / 'source_catalog.json').read_text(encoding='utf8'))
+for language in ('es', 'fr', 'de'):
+  for name, corrections in [('privacy/terms', LEGAL_EDITORIAL[language]),
+                             ('FAQ', FAQ_EDITORIAL[language]),
+                             ('guides', GUIDE_EDITORIAL[language])]:
+    unused = [key for key in corrections if key not in catalog]
+    assert not unused, f'{language}: {name} review refers to nonexistent source strings: {unused[:5]}'
+
 CHECKS = {
   'es': {
     'privacy': ['Qué datos recopilamos','No recopilamos','60 días','180 días','siete días',
@@ -57,4 +71,4 @@ for lang, paths in CHECKS.items():
   }[lang]
   for expression in banned:
     assert expression not in privacy, f'Outdated {lang} mistranslation reappeared: {expression}'
-print('PASS: reviewed privacy, legal, FAQ and relationship guide copy present in ES, FR and DE.')
+print('PASS: reviewed legal/FAQ/guides source-key coverage and translated UI assertions for ES, FR, DE.')
