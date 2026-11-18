@@ -14,7 +14,7 @@ jobs:
           python3 - <<'PY'
           import urllib.parse,urllib.request
           endpoints=[
-          'https://translate.googleapis.com/translate_a/t?'+urllib.parse.urlencode([('client','dict-chrome-ex'),('sl','en'),('tl','es'),('q','Hello, my love!'),('q','Plan your next trip together.')]),
+          'https://translate.googleapis.com/translate_a/t?'+urllib.parse.urlencode([('client','dict-chrome-ex'),('sl','en'),('tl','es'),('q','Hello, my love!'),('q','Plan your next trip together.'),('q','<b>Confirm your email</b> — then invite your partner.'),('q','We never share your email. <a href="privacy.html">Privacy</a>')]),
           'https://api.mymemory.translated.net/get?'+urllib.parse.urlencode({'q':'Plan your next trip together','langpair':'en|es'}),
           ]
           for u in endpoints:
