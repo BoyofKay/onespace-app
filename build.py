@@ -32,6 +32,7 @@ _sys.path.insert(0, str(ROOT / 'content'))
 from deep_pages import DEEP, COMPARE  # noqa: E402
 from arabic_copy_overrides import revise
 from full_localization import NEW_LANGS, LANGS, build_locales
+from launch_enrichment import STORIES, STORY_UI
 
 
 def T(en, ar, tag='span', cls='', attrs=''):
@@ -139,6 +140,7 @@ def head(page, title, title_ar, desc, desc_ar=''):
             ('guides.html','', 'Guides for couples','أدلة للأزواج','Ideas for a shared life','أفكار لحياة مشتركة'),
         ]),
         ('More to explore', 'استكشف المزيد', [
+            ('scenarios.html','', *STORY_UI['nav'], *STORY_UI['navDesc']),
             ('faq.html','', 'FAQ','الأسئلة الشائعة','Privacy, pricing, help','الخصوصية والأسعار والمساعدة'),
             ('whats-new.html','', "What's new",'الجديد','Updates and availability','التحديثات والتوفر'),
         ]),
@@ -157,7 +159,7 @@ def head(page, title, title_ar, desc, desc_ar=''):
              ('long-distance.html','Living apart','متباعدان')),
         link('how-it-works.html','Demo','العرض'),
         drop('Learn','تعلّم',groups_learn,
-             ('guides.html','tutorials.html','faq.html','whats-new.html') + tuple(g['slug'] for g in GUIDES),
+             ('guides.html','tutorials.html','scenarios.html','faq.html','whats-new.html') + tuple(g['slug'] for g in GUIDES),
              'Learn OneSpace','تعرّف على OneSpace',
              'Help, ideas and updates','مساعدة وأفكار وتحديثات',
              ('guides.html','Explore the guides','استكشف الأدلة')),
@@ -1136,7 +1138,7 @@ def page_compare():
   {compare_table()}
   <p class="muted center" style="margin-top:18px">{T('This compares everyday workflows, not an exhaustive audit of other apps. Features and integrations can vary by product.', 'هذه مقارنة لطرق الاستخدام اليومية، وليست مراجعة شاملة للتطبيقات الأخرى. قد تختلف المزايا والتكاملات من تطبيق لآخر.')}</p>
 </div></section>
-""" + value_grid() + cta_band() + foot()
+""" + '<div class="center" style="padding:30px 12px"><a href="scenarios.html" class="btn btn-ghost">' + T(*STORY_UI['nav']) + '</a></div>' + value_grid() + cta_band() + foot()
 
 
 def page_index():
@@ -1414,6 +1416,57 @@ def page_features():
 </div></section>''' + cta_band() + foot()
 
 
+
+# -------------------------------------------------------- fictional scenario episodes
+def story_previews(apart):
+    mode = 'apart' if apart else 'together'
+    stories = [s for s in STORIES if s['mode'] == mode]
+    title = STORY_UI['introApart'] if apart else STORY_UI['introTogether']
+    cards = ''.join(
+        '<a class="story-preview reveal" href="scenarios.html#story-' + s['slug'] + '">'
+        + T(*s['title'], 'h3') + T(*s['teaser'], 'p')
+        + '<span class="story-preview-more">' + T(*STORY_UI['read']) + ' <span aria-hidden="true">↗</span></span></a>'
+        for s in stories)
+    return ('<section class="story-preview-section"><div class="wrap"><div class="sec-head center">'
+            + T(*STORY_UI['teaserHeading'], 'h2')
+            + T(*title, 'p', 'muted') + '</div><div class="story-preview-grid">' + cards
+            + '</div><p class="story-disclaimer">' + T(*STORY_UI['fiction'])
+            + '</p></div></section>')
+
+
+def page_scenarios():
+    h = head('scenarios.html', 'OneSpace stories — a shared life in scenes',
+             'حكايات OneSpace — الحياة المشتركة في مشاهد',
+             STORY_UI['pageIntro'][0], STORY_UI['pageIntro'][1])
+    seasons = []
+    for mode in ('apart', 'together'):
+        sequence = [s for s in STORIES if s['mode'] == mode]
+        label = STORY_UI['apart'] if mode == 'apart' else STORY_UI['together']
+        intro = STORY_UI['introApart'] if mode == 'apart' else STORY_UI['introTogether']
+        episodes = []
+        for s in sequence:
+            beats = ''.join(
+                '<div class="story-scene"><span class="story-scene-label">'
+                + T(*STORY_UI['scene'+str(i+1)]) + '</span>'
+                + T(*line, 'p') + '</div>'
+                for i, line in enumerate(s['acts']))
+            episodes.append('<details class="story-episode" id="story-' + s['slug'] + '">'
+                + '<summary><span class="story-summary-copy">' + T(*s['title'], 'strong')
+                + T(*s['teaser'], 'span') + '</span><span class="story-toggle" aria-hidden="true">+</span></summary>'
+                + '<div class="story-script">' + beats
+                + '<div class="story-feature"><strong>' + T(*STORY_UI['features'])
+                + '</strong> ' + T(*s['uses'])
+                + ' <a href="features.html">' + T('Explore the features', 'تعرّف إلى المزايا')
+                + '</a></div></div></details>')
+        seasons.append('<section class="story-season" id="story-season-' + mode + '"><div class="narrow">'
+            + '<div class="story-season-head">' + T(*label, 'h2') + T(*intro, 'p', 'muted') + '</div>'
+            + ''.join(episodes) + '</div></section>')
+    return (h + page_hero('Couples stories', 'حكايات الأزواج', *STORY_UI['pageHeading'],
+                          *STORY_UI['pageIntro'])
+            + '<div class="narrow"><p class="story-disclaimer">' + T(*STORY_UI['fiction']) + '</p></div>'
+            + ''.join(seasons) + cta_band() + foot())
+
+
 def persona_page(page, apart):
     if apart:
         h = head(page, 'OneSpace for long-distance couples', 'OneSpace للأزواج عن بُعد',
@@ -1464,6 +1517,7 @@ def persona_page(page, apart):
   <div class="stage">{device('trip' if apart else 'together/lists', 'The trip to Istanbul' if apart else 'Shared to-do lists', 'رحلة إسطنبول' if apart else 'قوائم المهام المشتركة', fallback=phone(scr, theme, label='Today screen', label_ar='شاشة اليوم'))}</div>
   <div><div class="grid g2">{cards}</div></div>
 </div></section>
+{story_previews(apart)}
 <section class="tint"><div class="narrow center">
   {T('A real week with OneSpace', 'أسبوع حقيقي مع OneSpace', 'span', 'eyebrow')}
   {T('Set up once. It works quietly in the background.', 'اضبطه مرة واحدة. ويعمل بهدوء في الخلفية.', 'h2')}
@@ -1643,7 +1697,7 @@ def page_tutorials():
                          'إرشادات قصيرة وعملية لأكثر ما يفعله الأزواج. تفضّل أن تراه؟ <a href="how-it-works.html">جرّب العرض</a>.',
                          extra=f'<div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:22px">{jump}</div><div style="max-width:560px;margin-top:18px"><label class="sr" for="faq-search">Search</label><input id="faq-search" class="search" type="search" placeholder="Search tutorials…" data-i18n-attr="placeholder:{sk}"></div>') + f"""
 <section style="padding-top:10px"><div class="narrow">{body}<p id="faq-empty" hidden>{T('Nothing matches. <a href="support.html">Ask us</a>.', 'لا شيء مطابق. <a href="support.html">اسألنا</a>.')}</p></div></section>
-""" + cta_band() + foot()
+""" + '<section class="tint"><div class="narrow center">' + T(*STORY_UI['teaserHeading'], 'h2') + '<a class="btn btn-ghost" href="scenarios.html">' + T(*STORY_UI['nav']) + '</a></div></section>' + cta_band() + foot()
 
 
 AVAILABILITY = [
@@ -2114,7 +2168,7 @@ PAGES = {
     'long-distance.html': (lambda: persona_page('long-distance.html', True), '0.8', 'monthly'),
     'living-together.html': (lambda: persona_page('living-together.html', False), '0.8', 'monthly'),
     'how-it-works.html': (page_how, '0.8', 'monthly'), 'whats-new.html': (page_whats_new, '0.7', 'weekly'),
-    'faq.html': (page_faq, '0.7', 'monthly'), 'compare.html': (page_compare, '0.8', 'monthly'), 'tutorials.html': (page_tutorials, '0.7', 'monthly'), 'guides.html': (page_guides, '0.8', 'weekly'), 'join.html': (page_join, '0.9', 'monthly'),
+    'scenarios.html': (page_scenarios, '0.8', 'monthly'), 'faq.html': (page_faq, '0.7', 'monthly'), 'compare.html': (page_compare, '0.8', 'monthly'), 'tutorials.html': (page_tutorials, '0.7', 'monthly'), 'guides.html': (page_guides, '0.8', 'weekly'), 'join.html': (page_join, '0.9', 'monthly'),
     'support.html': (page_support, '0.6', 'monthly'), 'share-kit.html': ((lambda: _press_previews(page_share_kit())), '0.4', 'monthly'),
     'privacy.html': (lambda: legal_page('privacy.html', 'privacy'), '0.4', 'yearly'),
     'terms.html': (lambda: legal_page('terms.html', 'terms'), '0.4', 'yearly'),

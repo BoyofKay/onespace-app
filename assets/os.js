@@ -390,6 +390,16 @@
     });
   });
 
+  // Open fictional episodes on deep links without making the long page overwhelming.
+  function openStoryHash() {
+    var match = /^#story-[a-z0-9-]+$/.exec(location.hash);
+    if (!match) return;
+    var episode = document.getElementById(match[0].slice(1));
+    if (episode && episode.tagName === 'DETAILS') episode.open = true;
+  }
+  openStoryHash();
+  window.addEventListener('hashchange', openStoryHash);
+
   // ---------- Compact testimonial carousel; no auto-rotation ----------
   $$('[data-testimonial-carousel]').forEach(function (root) {
     var track = $('[data-slide-track]',root);

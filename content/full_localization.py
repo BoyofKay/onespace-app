@@ -87,12 +87,14 @@ from locale_menu import MENU_EDITORIAL
 from locale_legal_review import LEGAL_EDITORIAL
 from locale_faq_review import FAQ_EDITORIAL
 from locale_guides_review import GUIDE_EDITORIAL
+from launch_enrichment import EXTRA_TRANSLATIONS
 for _locale in NEW_LANGS:
     GLOSSARY[_locale].update(CURATED[_locale])
     GLOSSARY[_locale].update(MENU_EDITORIAL[_locale])
     GLOSSARY[_locale].update(LEGAL_EDITORIAL[_locale])
     GLOSSARY[_locale].update(FAQ_EDITORIAL[_locale])
     GLOSSARY[_locale].update(GUIDE_EDITORIAL[_locale])
+    GLOSSARY[_locale].update(EXTRA_TRANSLATIONS[_locale])
 
 def eligible(raw):
     s = str(raw).strip()

@@ -1,6 +1,4 @@
-"""OneSpace twelve fictional episode scripts — complete EN/AR/ES/FR/DE editorial copy.
-The episode text is intentionally illustrative, never presented as real user testimony.
-"""
+"""Fictional multilingual OneSpace scripts; not real customer testimonials."""
 STORIES = [
   {
     "slug": "a-tuesday-apart",
@@ -403,8 +401,8 @@ STORY_UI = {
     "لكل حياة مشتركة حكاية."
   ],
   "pageIntro": [
-    "Twelve fictional mini-episodes. Recognizable moments, honest dialogue and the OneSpace features that help two people move from a problem to a plan.",
-    "اثنتا عشرة حلقة قصيرة خيالية، فيها مواقف مألوفة وحوارات واقعية ومزايا OneSpace التي تساعد شخصين على الانتقال من المشكلة إلى الخطة."
+    "Thirteen fictional mini-episodes. Recognizable moments, honest dialogue and the OneSpace features that help two people move from a problem to a plan.",
+    "ثلاث عشرة حلقة قصيرة خيالية، فيها مواقف مألوفة وحوارات واقعية ومزايا OneSpace التي تساعد شخصين على الانتقال من المشكلة إلى الخطة."
   ],
   "fiction": [
     "Fictional couple · Illustrative workflow, not a customer testimonial",
@@ -443,8 +441,8 @@ STORY_UI = {
     "ست لحظات من حياة أزواج تفصل بينهم المسافات."
   ],
   "introTogether": [
-    "Six moments from couples who share the same home.",
-    "ست لحظات من حياة أزواج تحت سقف واحد."
+    "Seven moments from couples who share the same home.",
+    "سبع لحظات من حياة أزواج تحت سقف واحد."
   ],
   "browse": [
     "More of life's little stories",
@@ -549,7 +547,6 @@ EXTRA_TRANSLATIONS = {
     "Our places · Shared map · Memories · Bucket list": "Nuestros lugares · Mapa compartido · Recuerdos · Lista de deseos",
     "OneSpace Stories — Real-life scenarios for two": "Historias OneSpace — escenas de la vida en pareja",
     "Every shared life has a story.": "Cada vida compartida tiene una historia.",
-    "Twelve fictional mini-episodes. Recognizable moments, honest dialogue and the OneSpace features that help two people move from a problem to a plan.": "Doce episodios ficticios: momentos cotidianos, diálogos cercanos y funciones de OneSpace que ayudan a pasar del problema a un plan.",
     "Fictional couple · Illustrative workflow, not a customer testimonial": "Pareja ficticia · Ejemplo ilustrativo, no testimonio real",
     "Read the episode": "Leer el episodio",
     "Living apart": "Vivir a distancia",
@@ -559,12 +556,13 @@ EXTRA_TRANSLATIONS = {
     "Scene 03 · The payoff": "Escena 03 · El desenlace",
     "OneSpace functions in this episode": "Funciones de OneSpace en este episodio",
     "Six moments from couples who live in different places.": "Seis momentos de parejas que viven lejos.",
-    "Six moments from couples who share the same home.": "Seis momentos de parejas que comparten hogar.",
     "More of life's little stories": "Más historias de la vida en pareja",
     "Picture this: your life, with one shared space.": "Imagina vuestra vida en un espacio común.",
     "Couples' stories": "Historias de pareja",
     "Little movie-like moments, practical OneSpace workflows": "Escenas breves y usos prácticos de OneSpace",
-    "See these ideas in a story": "Ver estas ideas en una historia"
+    "See these ideas in a story": "Ver estas ideas en una historia",
+    "Thirteen fictional mini-episodes. Recognizable moments, honest dialogue and the OneSpace features that help two people move from a problem to a plan.": "Trece episodios ficticios: momentos cotidianos, diálogos cercanos y funciones de OneSpace que ayudan a pasar del problema a un plan.",
+    "Seven moments from couples who share the same home.": "Siete momentos de parejas que comparten hogar."
   },
   "fr": {
     "Tuesday across two time zones": "Un mardi entre deux fuseaux horaires",
@@ -647,7 +645,6 @@ EXTRA_TRANSLATIONS = {
     "Our places · Shared map · Memories · Bucket list": "Nos lieux · Carte partagée · Souvenirs · Liste d’envies",
     "OneSpace Stories — Real-life scenarios for two": "Histoires OneSpace — scènes de la vie à deux",
     "Every shared life has a story.": "Chaque vie à deux raconte une histoire.",
-    "Twelve fictional mini-episodes. Recognizable moments, honest dialogue and the OneSpace features that help two people move from a problem to a plan.": "Douze petits épisodes fictifs : des situations familières, des dialogues et les fonctions de OneSpace pour passer du souci au projet.",
     "Fictional couple · Illustrative workflow, not a customer testimonial": "Couple fictif · Exemple illustratif, pas un avis client",
     "Read the episode": "Lire l’épisode",
     "Living apart": "Vivre à distance",
@@ -657,12 +654,13 @@ EXTRA_TRANSLATIONS = {
     "Scene 03 · The payoff": "Scène 03 · La suite",
     "OneSpace functions in this episode": "Fonctions OneSpace dans cet épisode",
     "Six moments from couples who live in different places.": "Six instants de la vie de couples à distance.",
-    "Six moments from couples who share the same home.": "Six instants de la vie de couples sous le même toit.",
     "More of life's little stories": "D’autres petites histoires de couple",
     "Picture this: your life, with one shared space.": "Imaginez votre vie dans un espace partagé.",
     "Couples' stories": "Histoires de couple",
     "Little movie-like moments, practical OneSpace workflows": "Petites scènes et usages concrets de OneSpace",
-    "See these ideas in a story": "Retrouvez ces idées dans une histoire"
+    "See these ideas in a story": "Retrouvez ces idées dans une histoire",
+    "Thirteen fictional mini-episodes. Recognizable moments, honest dialogue and the OneSpace features that help two people move from a problem to a plan.": "Treize petits épisodes fictifs : des situations familières, des dialogues et les fonctions de OneSpace pour passer du souci au projet.",
+    "Seven moments from couples who share the same home.": "Sept instants de la vie de couples sous le même toit."
   },
   "de": {
     "Tuesday across two time zones": "Ein Dienstag in zwei Zeitzonen",
@@ -745,7 +743,6 @@ EXTRA_TRANSLATIONS = {
     "Our places · Shared map · Memories · Bucket list": "Unsere Orte · Gemeinsame Karte · Erinnerungen · Wunschliste",
     "OneSpace Stories — Real-life scenarios for two": "OneSpace-Geschichten – Alltagsszenen zu zweit",
     "Every shared life has a story.": "Jedes gemeinsame Leben hat seine Geschichten.",
-    "Twelve fictional mini-episodes. Recognizable moments, honest dialogue and the OneSpace features that help two people move from a problem to a plan.": "Zwölf erfundene Mini-Episoden: vertraute Situationen, echte Dialoge und OneSpace-Funktionen, die aus Problemen gemeinsame Pläne machen.",
     "Fictional couple · Illustrative workflow, not a customer testimonial": "Fiktives Paar · Beispielablauf, keine Kundenbewertung",
     "Read the episode": "Episode lesen",
     "Living apart": "Getrennt leben",
@@ -755,11 +752,12 @@ EXTRA_TRANSLATIONS = {
     "Scene 03 · The payoff": "Szene 03 · Das Ergebnis",
     "OneSpace functions in this episode": "OneSpace-Funktionen in dieser Episode",
     "Six moments from couples who live in different places.": "Sechs Momente aus dem Leben von Fernbeziehungspaaren.",
-    "Six moments from couples who share the same home.": "Sechs Momente von Paaren, die zusammenwohnen.",
     "More of life's little stories": "Mehr kleine Geschichten aus dem Alltag",
     "Picture this: your life, with one shared space.": "Stell dir euren Alltag mit einem gemeinsamen Ort vor.",
     "Couples' stories": "Paargeschichten",
     "Little movie-like moments, practical OneSpace workflows": "Kleine Filmszenen und praktische OneSpace-Abläufe",
-    "See these ideas in a story": "Diese Ideen in einer Geschichte erleben"
+    "See these ideas in a story": "Diese Ideen in einer Geschichte erleben",
+    "Thirteen fictional mini-episodes. Recognizable moments, honest dialogue and the OneSpace features that help two people move from a problem to a plan.": "Dreizehn erfundene Mini-Episoden: vertraute Situationen, echte Dialoge und OneSpace-Funktionen, die aus Problemen gemeinsame Pläne machen.",
+    "Seven moments from couples who share the same home.": "Sieben Momente von Paaren, die zusammenwohnen."
   }
 }
