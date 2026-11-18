@@ -228,6 +228,14 @@ def foot():
       <a class="brand" href="./"><img src="assets/mark.svg" alt="" width="48" height="48"><span class="brand-name">OneSpace</span></a>
       {T('Two of us. One Space. A private home for the life you share — near or far.', 'نحن الاثنان. مساحة واحدة. بيت خاص للحياة التي تتشاركانها — قريبين أو بعيدين.', 'p')}
       <p class="foot-mail"><a href="mailto:hello@onespace.live">hello@onespace.live</a></p>
+      <div class="footer-social" aria-label="Social media channels coming soon">
+        <span class="footer-social-item" role="img" aria-label="Instagram — coming soon"><span aria-hidden="true">◎</span><span class="footer-social-tooltip">Instagram</span></span>
+        <span class="footer-social-item" role="img" aria-label="Facebook — coming soon"><span aria-hidden="true">f</span><span class="footer-social-tooltip">Facebook</span></span>
+        <span class="footer-social-item" role="img" aria-label="YouTube — coming soon"><span aria-hidden="true">▶</span><span class="footer-social-tooltip">YouTube</span></span>
+        <span class="footer-social-item" role="img" aria-label="TikTok — coming soon"><span aria-hidden="true">♪</span><span class="footer-social-tooltip">TikTok</span></span>
+        <span class="footer-social-item" role="img" aria-label="LinkedIn — coming soon"><span aria-hidden="true">in</span><span class="footer-social-tooltip">LinkedIn</span></span>
+      </div>
+      <p class="footer-social-note">{T('Social channels coming soon', 'حسابات التواصل الاجتماعي قريبًا')}</p>
     </div>
     {col('Product', 'المنتج', [('features.html', 'Features', 'المزايا'), ('how-it-works.html', 'Interactive demo', 'العرض التفاعلي'), ('tutorials.html', 'Tutorials', 'الدروس'), ('whats-new.html', "What's new", 'الجديد'), ('whats-new.html#status', 'Availability', 'التوفر'), ('join.html', 'Founding 500', 'المؤسسون الـ500')])}
     {col('For couples', 'للأزواج', [('long-distance.html', 'Living apart', 'متباعدان'), ('living-together.html', 'Living together', 'تحت سقف واحد')])}
