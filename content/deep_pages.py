@@ -76,7 +76,7 @@ DEEP = [
               ('🗺', 'Itinerary in local time', 'برنامج بالتوقيت المحلي', 'Flights, stays, transport, activities, bookings and notes — exactly as on the booking.', 'طيران وإقامة وتنقل وأنشطة وحجوزات وملاحظات — كما في الحجز تمامًا.'),
               ('🔒', 'Private documents', 'مستندات خاصة', 'Boarding passes, visas and bookings — only the two of you can open them.', 'بطاقات الصعود والتأشيرات والحجوزات — لا يفتحها سواكما.'),
               ('🧳', 'Packing templates', 'قوالب التجهيز', 'Travel basics, leaving home, with a baby, with pets — split and ticked together.', 'أساسيات السفر ومغادرة البيت ومع رضيع ومع حيوانات أليفة — مقسّمة ومُعلّمة معًا.'),
-              ('⏳', 'Countdown & reunion', 'عدّ تنازلي ولقاء', 'The next trip and the next time together appear in Counters and on Today.', 'الرحلة القادمة واللقاء القادم يظهران في العدّادات وفي «اليوم».')],
+              ('⏳', 'Countdown & reunion', 'عدّ تنازلي ولقاء', 'Your next meeting stays on Today; add dates and trips to Counters only if you choose.', 'اللقاء القادم يظهر في «اليوم»، ويمكنكما إضافة الرحلات والتواريخ إلى «العدّادات» باختياركما.')],
   'vs': [('Flight options', 'خيارات الطيران', 'Open tabs & screenshots', 'صفحات مفتوحة ولقطات', 'Saved and compared', 'محفوظة ومقارنة'),
          ('Bookings', 'الحجوزات', 'Two inboxes', 'بريدان', 'One private place', 'مكان خاص واحد'),
          ('Packing', 'التجهيز', 'Last-minute panic', 'ذعر اللحظة الأخيرة', 'Shared, split, ticked', 'مشتركة ومقسّمة ومُعلّمة')],
