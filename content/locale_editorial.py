@@ -893,3 +893,20 @@ CURATED["de"].update({
   "— take a moment to name how your day feels.": "– nehmt euch einen Moment, um euren Tag in Worte zu fassen.",
   "— the letter stays for its intended recipient.": "– der Brief bleibt für die Person bestimmt, die ihn erhalten soll."
 })
+
+# Distinct emotional feature bullets on the Features page.
+CURATED["es"].update({
+  "— say how you feel and what is on your mind.": "— compartan cómo se sienten y qué les preocupa.",
+  "— keep a record of thoughts and moods over time.": "— guarden sus pensamientos y estados de ánimo a lo largo del tiempo.",
+  "— movies, books or places you enjoy together.": "— películas, libros y lugares para disfrutar juntos."
+})
+CURATED["fr"].update({
+  "— say how you feel and what is on your mind.": "— dites comment vous vous sentez et ce qui vous préoccupe.",
+  "— keep a record of thoughts and moods over time.": "— gardez une trace de vos pensées et de vos émotions au fil du temps.",
+  "— movies, books or places you enjoy together.": "— des films, des livres et des lieux à apprécier ensemble."
+})
+CURATED["de"].update({
+  "— say how you feel and what is on your mind.": "– sagt einander, wie ihr euch fühlt und was euch beschäftigt.",
+  "— keep a record of thoughts and moods over time.": "– haltet Gedanken und Stimmungen über längere Zeit fest.",
+  "— movies, books or places you enjoy together.": "– Filme, Bücher und Orte, die ihr gemeinsam genießt."
+})
