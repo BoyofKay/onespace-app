@@ -1,0 +1,37 @@
+name: Generate complete website translation catalogues
+on:
+  push:
+    branches: [full-localization-es-fr-de-preserve-design]
+    paths:
+      - .github/workflows/full-website-localize.yml
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: onespace-full-localization
+  cancel-in-progress: false
+jobs:
+  translate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: full-localization-es-fr-de-preserve-design
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python3 -m pip install --quiet beautifulsoup4==4.15.0
+      - name: Translate all public website strings and inspect coverage
+        run: python3 -u scripts/translate_full_site.py
+      - name: Commit reviewable locale catalogues
+        if: always()
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add content/translations
+          if ! git diff --cached --quiet; then
+            git commit -m 'Generate and retain full website language catalogues'
+            git push origin HEAD:full-localization-es-fr-de-preserve-design
+          fi
