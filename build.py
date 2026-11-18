@@ -717,7 +717,7 @@ def theme_wall():
                                                        ('Ocean Teal', 'فيروزي المحيط'), ('Sage Garden', 'حديقة المريمية'), ('Lavender Dusk', 'غسق الخزامى'),
                                                        ('Desert Sand', 'رمال الصحراء'), ('Midnight Blue', 'أزرق منتصف الليل'), ('Monochrome', 'أحادي اللون')]))
     return f'''<section class="tint"><div class="wrap"><div class="sec-head center">{T('Nine themes, the real app', 'تسع سمات من التطبيق الحقيقي', 'span', 'eyebrow')}{T('Which one feels like you two?', 'أيها يشبهكما؟', 'h2')}</div>
-  <div class="wall reveal">{figs}</div></div></section>'''
+  <div class="wall theme-wall-grid reveal">{figs}</div><p class="center" style="margin-top:22px"><a class="btn btn-ghost" href="how-it-works.html">{T('Try the demo', 'جرّب العرض')}</a></p></div></section>'''
 
 
 ONE_LIST = [  # (icon, kind, kind_ar, [(app, its list)], onespace, onespace_ar, link)
@@ -866,16 +866,26 @@ def connect_care_preview():
 
 
 def gesture_extra():
-    """Truthful screen gallery: real gesture picker plus unavailable captures clearly identified."""
+    """Honest, feature-specific popup and history diagrams pending real robot screenshots."""
     return f'''<section class="gesture-extra"><div class="wrap gesture-extra-layout">
       <div>{T('THE COMPLETE GESTURE JOURNEY', 'تجربة اللمسة كاملة', 'span','eyebrow')}
       {T('A gesture, its moment and its history.', 'لفتة ولحظتها وسجلّها.', 'h3')}
       {T('The gesture picker is shown above from the real app. Dedicated captures of the sending popup and sent/received history are still being prepared.', 'تظهر شاشة اختيار اللفتة أعلاه من التطبيق الحقيقي. ما زلنا نجهز لقطتي نافذة الإرسال وسجل اللفتات المرسلة والمستلمة.', 'p')}</div>
       <div class="gesture-capture-slots">
-        <div class="capture-pending capture-small"><strong>{T('Gesture popup','نافذة اللمسة')}</strong>
-          <small>{T('Real screenshot pending','اللقطة الحقيقية قيد الانتظار')}</small></div>
-        <div class="capture-pending capture-small"><strong>{T('Sent & received history','سجل المرسلة والمستلمة')}</strong>
-          <small>{T('Real screenshot pending','اللقطة الحقيقية قيد الانتظار')}</small></div>
+        <figure class="gesture-mockup"><figcaption>{T('Gesture popup','نافذة اللمسة')}</figcaption><div class="gesture-ui">
+          <small>{T('Illustrative layout · real screenshot pending','تصور توضيحي · اللقطة الحقيقية قيد الانتظار')}</small>
+          <b>{T('A little love','لمسة حب')}</b><span class="gesture-illustration-icon" aria-hidden="true">🤗</span>
+          <strong>{T('Send Lina a hug','أرسل لينا حضنًا')}</strong>
+          <p>{T('“Can’t wait for our stars weekend.”','«لا أطيق الانتظار لعطلة النجوم.»')}</p>
+          <span class="gesture-illustration-action">{T('Send','أرسل')}</span></div></figure>
+        <figure class="gesture-mockup"><figcaption>{T('Sent & received history','سجل المرسلة والمستلمة')}</figcaption><div class="gesture-ui gesture-history-ui">
+          <small>{T('Illustrative layout · real screenshot pending','تصور توضيحي · اللقطة الحقيقية قيد الانتظار')}</small>
+          <b>{T('Sent & received history','سجل المرسلة والمستلمة')}</b>
+          <div class="gesture-history-switch" aria-hidden="true"><span>↗</span><span>↙</span></div>
+          <div class="gesture-history-row"><span aria-hidden="true">🤗</span><span class="gesture-history-placeholder"></span></div>
+          <div class="gesture-history-row"><span aria-hidden="true">💌</span><span class="gesture-history-placeholder"></span></div>
+          <div class="gesture-history-row"><span aria-hidden="true">💖</span><span class="gesture-history-placeholder"></span></div>
+        </div></figure>
       </div>
     </div></section>'''
 
@@ -918,7 +928,13 @@ def page_connect_care():
         'دوّن أفكارك ومشاعرك، وعُد إليها حين ترغب في التأمل في يومك.',
         [('Reflect over time','revisit your earlier notes and feelings.','تأمل مع الوقت','عد إلى ملاحظاتك ومشاعرك السابقة.'),
          ('Your context','keep what you want to remember without losing it in chat.','احتفظ بالسياق','احفظ ما يهمك دون أن يضيع في المحادثة.')],
-        'ourspace','sage',rev=True,visual='<div class="capture-pending" role="img" aria-label="Journal screen capture pending"><span aria-hidden="true">✎</span><strong>' + T('Feelings journal', 'يوميات المشاعر') + '</strong><small>' + T('Real app screenshot coming soon', 'لقطة حقيقية من التطبيق قريبًا') + '</small></div>') + \
+        'ourspace','sage',rev=True,visual=f'''<div class="journal-illustration" role="img" aria-label="Illustrative feelings journal layout, not a real screenshot">
+          <small>{T('Illustrative layout · real screenshot pending', 'تصور توضيحي · اللقطة الحقيقية قيد الانتظار')}</small>
+          <div class="journal-illustration-head"><span aria-hidden="true">✎</span><strong>{T('Feelings journal','يوميات المشاعر')}</strong></div>
+          <div class="journal-illustration-moods" aria-hidden="true"><span>😞</span><span>😐</span><span class="selected">🙂</span><span>😊</span><span>🤩</span></div>
+          <p>{T('Record thoughts and moods over time, and revisit them when you want to reflect on your day.', 'دوّن أفكارك ومشاعرك، وعُد إليها حين ترغب في التأمل في يومك.')}</p>
+          <div class="journal-illustration-lines" aria-hidden="true"><i></i><i></i><i></i></div>
+        </div>''') + \
       f'''<section class="connection-followup"><div class="wrap center">
         {T('Emotional connection is only the beginning.', 'التواصل العاطفي ليس إلا البداية.', 'h2')}
         {T('OneSpace also brings two-way editing, comparison, discussion and shared planning into the same space.', 'يجمع OneSpace أيضًا التعديل المتبادل والمقارنة والنقاش والتخطيط المشترك في المساحة نفسها.', 'p','lead')}
@@ -1393,7 +1409,7 @@ def page_features():
   <ul class="ticks"><li>{T('<b>Notifications that explain themselves</b> — who, what and when, grouped by day.', '<b>إشعارات واضحة</b> — من وماذا ومتى، مجمعة حسب اليوم.')}</li>
   <li>{T('<b>Help without signing in</b> — contact us even if you are locked out.', '<b>مساعدة دون تسجيل الدخول</b> — تواصل معنا حتى لو لم تستطع الدخول.')}</li></ul></div>
   <div class="phones">{screen('quickadd', 'clean', 'Appearance and themes', 'المظهر والسمات', 'sm', real='appearance')}{screen('memories', 'clean', 'Me tab', 'تبويب أنا', 'sm', real='me')}</div>
-</div></section>''' + value_grid() + cta_band() + foot()
+</div></section>''' + cta_band() + foot()
 
 
 def persona_page(page, apart):
@@ -1872,7 +1888,6 @@ def page_join():
     <div class="crumbs"><a href="./">{T('Home', 'الرئيسية')}</a> › {T('Join', 'انضم')}</div>
     {T('Join the Founding 500.', 'انضم إلى المؤسسين الـ500.', 'h1')}
     {T('Founder registration is open to Android and iPhone couples NOW — there is no need to wait for iOS to launch. The first 250 couples — 500 people — can reserve one Founder number together. Early access is free, and benefits will be announced before pricing.', 'التسجيل في عضوية المؤسسين مفتوح الآن للأزواج من مستخدمي أندرويد وآيفون؛ لا حاجة إلى انتظار إصدار iOS. يستطيع أول 250 زوجًا — 500 شخص — حجز رقم مؤسس مشترك. الوصول المبكر مجاني، وسنعلن مزايا العضوية قبل الأسعار.', 'p', 'lead')}
-    <p class="founder-platform-notice">{T('✓ iPhone owners can register today. “iOS coming soon” only describes app availability.', '✓ يمكنك التسجيل اليوم حتى لو كان هاتفك آيفون. عبارة «iOS قريبًا» تخص توفر التطبيق فقط.')}</p>
     <ul class="ticks">
       <li>{T('<b>1. Tell us about you two</b> — 30 seconds.', '<b>1. أخبرنا عنكما</b> — 30 ثانية.')}</li>
       <li>{T('<b>2. Confirm your email</b> — that is when your couple gets its Founder number.', '<b>2. أكّد بريدك</b> — وعندها يحصل زوجكما على رقم المؤسس.')}</li>

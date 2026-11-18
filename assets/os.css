@@ -1416,3 +1416,43 @@ html[dir="rtl"] .editorial-hero-title{letter-spacing:0!important}
 .review-brand-icon{display:inline-flex;align-items:center;justify-content:center;
  width:43px;height:43px;flex:0 0 43px;background:#F5F8FA;border-radius:11px}
 .review-brand-icon svg{width:34px;height:34px}
+
+/* Website review: 9 real themes shown without any horizontal gallery slider. */
+.theme-wall-grid{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(15px,2vw,28px);overflow:visible!important;scroll-snap-type:none!important;padding:16px 0!important}
+.theme-wall-grid figure{width:100%;min-width:0;scroll-snap-align:none;display:flex;flex-direction:column;align-items:center}
+.theme-wall-grid figure .device{width:min(100%,238px);max-width:238px}
+.theme-wall-grid figure figcaption{font-size:13px;line-height:1.4}
+@media(max-width:750px){.theme-wall-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.theme-wall-grid figure .device{max-width:235px}}
+@media(max-width:450px){.theme-wall-grid{gap:8px}.theme-wall-grid figure .device{max-width:180px}.theme-wall-grid figure figcaption{font-size:11px}}
+/* Nine aligned, equal-height theme chips in the guided demo, across languages. */
+.demo-theme-inline .demo-theme-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important;align-items:stretch}
+.demo-theme-inline .demo-theme-grid .swatch{min-width:0!important;min-height:68px;display:flex!important;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:6px;font-size:11px!important;line-height:1.2;padding:9px 5px;overflow-wrap:anywhere;hyphens:auto}
+.demo-theme-inline .demo-theme-grid .swatch i{width:22px;height:22px;flex:0 0 22px}
+@media(max-width:380px){.demo-theme-inline .demo-theme-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important}}
+/* Distinct feature previews, explicitly illustrative rather than misleading photos. */
+.journal-illustration{width:min(100%,340px);margin:auto;padding:22px;border:1px solid #CDDDE0;border-radius:26px;background:linear-gradient(160deg,#F8FCFA,#F2F7FC);color:#1F354D;display:flex;flex-direction:column;gap:18px}
+.journal-illustration>small{font-size:11px;color:#546F78;text-align:center;line-height:1.4}
+.journal-illustration-head{display:flex;align-items:center;gap:13px;font-size:21px}
+.journal-illustration-head span{display:grid;place-items:center;width:41px;height:41px;border-radius:13px;background:#D7EDE9}
+.journal-illustration-moods{display:flex;align-items:center;justify-content:space-between;gap:5px}
+.journal-illustration-moods span{font-size:23px;display:grid;place-items:center;width:42px;height:42px;border-radius:50%}
+.journal-illustration-moods .selected{background:#BDE6D9;outline:2px solid #27736A}
+.journal-illustration p{line-height:1.7;font-size:14px;margin:0}
+.journal-illustration-lines{display:grid;gap:10px;background:#fff;border-radius:16px;padding:16px}
+.journal-illustration-lines i{display:block;height:8px;border-radius:999px;background:#E7EEF2}
+.journal-illustration-lines i:last-child{width:55%}
+.gesture-mockup{width:100%;min-width:0;margin:0}
+.gesture-mockup figcaption{font-weight:800;font-size:14px;margin-bottom:12px;color:#243C56}
+.gesture-ui{background:#fff;border:1px solid #D8E4E9;border-radius:22px;padding:17px;display:flex;flex-direction:column;gap:12px;min-height:310px;box-shadow:0 15px 30px -25px #253A56}
+.gesture-ui small{font-size:11px;line-height:1.4;color:#5D7287}
+.gesture-ui b{font-size:16px;color:#2B3854}
+.gesture-illustration-icon{font-size:35px;align-self:center;padding:8px 15px;border-radius:18px;background:#FFF0F4}
+.gesture-ui strong{text-align:center;color:#263C55;font-size:15px}
+.gesture-ui p{font-size:12px;line-height:1.5;padding:10px;border-radius:12px;background:#F7F9FC;margin:0!important}
+.gesture-illustration-action{align-self:stretch;text-align:center;border-radius:12px;background:#316F83;color:#fff;padding:11px 15px;font-weight:700;font-size:13px}
+.gesture-history-switch{display:grid;grid-template-columns:1fr 1fr;gap:6px;background:#EEF4F6;padding:5px;border-radius:13px}
+.gesture-history-switch span{display:grid;place-items:center;padding:8px;background:#fff;border-radius:9px;color:#2E647D;font-size:20px}
+.gesture-history-row{display:flex;align-items:center;gap:12px;padding:11px;background:#F7FAFC;border-radius:12px}
+.gesture-history-placeholder{display:block;width:80%;height:8px;background:#D9E4EB;border-radius:999px}
+@media(max-width:650px){.gesture-capture-slots{grid-template-columns:1fr 1fr;gap:9px}.gesture-ui{padding:11px;min-height:290px}.gesture-ui b{font-size:13px}.gesture-ui small{font-size:10px}.gesture-mockup figcaption{font-size:12px}}
+@media(max-width:400px){.gesture-capture-slots{grid-template-columns:1fr}}
