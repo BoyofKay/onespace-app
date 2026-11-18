@@ -98,6 +98,7 @@ from tutorial_additions import TUTORIAL_ADDITIONS
 from tutorial_journeys import JOURNEY_TUTORIAL_ADDITIONS, JOURNEY_LABEL
 from guide_additions_1 import GUIDE_ADDITIONS_1
 from guide_additions_2 import GUIDE_ADDITIONS_2
+from structured_locale import localize_structured
 for _locale in NEW_LANGS:
     GLOSSARY[_locale].update(CURATED[_locale])
     GLOSSARY[_locale].update(MENU_EDITORIAL[_locale])
@@ -331,6 +332,7 @@ def localize_html(src, name, locale, translated):
             link['href']=BASE+('' if other=='en' else other+'/')+('' if name=='index.html' else name)
             if other==locale:link['aria-current']='page'
             else:link.attrs.pop('aria-current',None)
+    localize_structured(soup, locale, canonical)
     output=str(soup)
     # Browser URLs in srcset and inline CSS must still resolve from nested /es/, /fr/, /de/ paths.
     output=re.sub(r'(?<![A-Za-z0-9/])assets/', '/assets/', output)

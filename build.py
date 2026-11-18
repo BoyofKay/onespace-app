@@ -43,6 +43,7 @@ from tutorial_additions import TUTORIAL_ADDITIONS
 from tutorial_journeys import JOURNEY_TUTORIAL_ADDITIONS, JOURNEY_LABEL
 from guide_additions_1 import GUIDE_ADDITIONS_1
 from guide_additions_2 import GUIDE_ADDITIONS_2
+from structured_locale import localize_structured
 # New content is additive; previously approved sections and pages remain unchanged.
 for _group, _entries in FAQ_ADDITIONS.items():
     FAQ_MORE.setdefault(_group, []).extend([(q[:2], answer[:2]) for q, answer in _entries])
@@ -2301,6 +2302,7 @@ def arabic_page(html, name):
     for b in soup.find_all('button', class_='lang'):
         b.string = 'English'
         b['aria-label'] = 'Switch to English'
+    localize_structured(soup, 'ar', BASE + 'ar/' + slug)
     out = revise(str(soup))
     # Shared files live at the site root, one level up from /ar/.
     return re.sub(r'((?:src|href|poster|data-en-src|data-ar-src|data-en-poster|data-ar-poster|srcset)=")(assets/|site\.webmanifest)', r'\1/\2', out)

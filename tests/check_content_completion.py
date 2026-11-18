@@ -1,6 +1,7 @@
 """Checks approved content expansion and full EN/AR/ES/FR/DE parity."""
 from pathlib import Path
 from bs4 import BeautifulSoup
+import json
 import sys
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'content'))
@@ -20,6 +21,14 @@ for lang_idx,lang in enumerate(('en','ar','es','fr','de')):
     tutorials=BeautifulSoup((ROOT/prefix/'tutorials.html').read_text(encoding='utf8'),'html.parser')
     listing=BeautifulSoup((ROOT/prefix/'guides.html').read_text(encoding='utf8'),'html.parser')
     assert len(faq.select('details[data-faq]'))==50,(lang,'FAQ count')
+    faq_schema=[json.loads(s.string) for s in faq.select('script[type="application/ld+json"]')
+                if s.string and json.loads(s.string).get('@type')=='FAQPage']
+    assert len(faq_schema)==1,(lang,'FAQ schema')
+    assert len(faq_schema[0]['mainEntity'])==50,(lang,'FAQ JSON-LD length')
+    for i,entry in enumerate(faq_schema[0]['mainEntity']):
+        card=faq.select('details[data-faq]')[i]
+        assert entry['name']==card.summary.get_text(' ',strip=True),(lang,'FAQ schema name',i)
+        assert entry['acceptedAnswer']['text']==card.find('div').get_text(' ',strip=True),(lang,'FAQ schema answer',i)
     assert len(tutorials.select('details[data-faq]'))==29,(lang,'tutorial count')
     assert len(listing.select('a.art-card'))==12,(lang,'guide cards')
     assert len(listing.select('details.guide-show-more'))==1,(lang,'extra guides are opt-in')
@@ -46,4 +55,11 @@ for lang_idx,lang in enumerate(('en','ar','es','fr','de')):
             for tip in tips:
                 assert tip[lang_idx] in content,(lang,guide['slug'],'tip')
         assert page.select_one('link[rel="canonical"]'),(lang,guide['slug'],'canonical')
+        article_schemas=[json.loads(s.string) for s in page.select('script[type="application/ld+json"]')
+                         if s.string and json.loads(s.string).get('@type')=='Article']
+        assert len(article_schemas)==1,(lang,guide['slug'],'article structured data')
+        schema=article_schemas[0]
+        assert schema['inLanguage']==lang,(lang,guide['slug'],'article wrong language')
+        assert schema['headline']==page.h1.get_text(' ',strip=True),(lang,guide['slug'],'article wrong headline')
+        assert schema['mainEntityOfPage']=='https://onespace.live/'+prefix+guide['slug'],(lang,guide['slug'],'canonical JSON-LD')
 print('PASS: 50 FAQs, 29 step-by-step tutorials with full journeys, 12 guides, all five locales.')
