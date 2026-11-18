@@ -6,5 +6,11 @@ Disallow: /confirm.html
 Disallow: /ar/confirm.html
 Disallow: /unsubscribe.html
 Disallow: /ar/unsubscribe.html
+Disallow: /es/confirm.html
+Disallow: /fr/confirm.html
+Disallow: /de/confirm.html
+Disallow: /es/unsubscribe.html
+Disallow: /fr/unsubscribe.html
+Disallow: /de/unsubscribe.html
 
 Sitemap: https://onespace.live/sitemap.xml

@@ -77,8 +77,7 @@
   var lang = /^(en|ar|es|fr|de)$/.test(root.lang) ? root.lang : 'en';
   function twin(to) {
     var p = location.pathname, rest = p.replace(/^\/(ar|es|fr|de)(?=\/|$)/, '') || '/';
-    var dest = (to === 'en' ? rest : (to === 'ar' ? '/ar' + rest : '/' + to + '/'));
-    if (/^(es|fr|de)$/.test(lang) && /^(en|ar)$/.test(to)) dest = to === 'ar' ? '/ar/' : '/';
+    var dest = (to === 'en' ? rest : '/' + to + rest);
     return dest + location.search.replace(/[?&]lang=(en|ar|es|fr|de)/, '').replace(/^&/, '?') + location.hash;
   }
   var browserLang = (navigator.language || '').toLowerCase().slice(0, 2);
@@ -88,7 +87,7 @@
   if (/^(en|ar|es|fr|de)$/.test(want || '') && want !== lang && location.protocol !== 'file:') {
     location.replace(twin(want)); return;
   }
-  function tr(key, en) { return lang === 'ar' && AR[key] ? AR[key] : en; }
+  function tr(key, en) { var local = window.ONESPACE_SITE_STRINGS || {}; return local[key] || (lang === 'ar' && AR[key] ? AR[key] : en); }
   function apply() {
     root.lang = lang; root.dir = lang === 'ar' ? 'rtl' : 'ltr';
     $$('[data-i18n]').forEach(function (el) {
@@ -277,7 +276,7 @@
   if (invite) { try { sessionStorage.setItem('os-invite', invite); } catch (_) {}
     if (params.get('invite')) track('founders/invite-landing');
     $$('form[data-form="join"]').forEach(function (f) { if (f.elements.invite) f.elements.invite.value = invite; var n = $('.invite-note', f); if (n) n.hidden = false; }); }
-  $$('form[data-form="join"] select[name="language"]').forEach(function (sel) { sel.value = lang; });
+  $$('form[data-form="join"] select[name="language"]').forEach(function (sel) { sel.value = lang === 'ar' ? 'ar' : 'en'; });
   var msgs = { sending: 'Sending…', missing: 'Please fill in the fields marked *.', email: 'Please check the email address.',
     consent: 'Please tick the box so we may email you.', busy: 'Too many tries. Please wait a few minutes and try again.',
     failed: 'Could not send. Please check your connection and try again.', sent: 'Thank you — we got it and will reply by email.',
@@ -425,7 +424,7 @@
           $('[data-invite-copy]', box).addEventListener('click', function () {
             var i = $('[data-invite-url]', box); i.select();
             (navigator.clipboard ? navigator.clipboard.writeText(url) : Promise.resolve(document.execCommand('copy'))).then(function () {});
-            this.textContent = lang === 'ar' ? 'تم النسخ' : 'Copied'; track('founders/invite-copied');
+            this.textContent = tr('founders.invite-copied', lang === 'ar' ? 'تم النسخ' : 'Copied'); track('founders/invite-copied');
           });
         }
         showState('ok');
@@ -481,6 +480,6 @@ document.querySelectorAll('[data-pw-toggle]').forEach(function(b){
   b.addEventListener('click',function(){
     var show=inp.type==='password'; inp.type=show?'text':'password';
     b.setAttribute('aria-pressed',show?'true':'false');
-    var l=show?'Hide key':'Show key'; b.setAttribute('aria-label',l); b.title=l; inp.focus();
+    var l=show?tr('password.hide','Hide key'):tr('password.show','Show key'); b.setAttribute('aria-label',l); b.title=l; inp.focus();
   });
 });

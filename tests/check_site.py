@@ -9,7 +9,8 @@ PAGES = ["index.html", "compare.html", "smart-sharing.html", "decide-together.ht
          "how-it-works.html", "tutorials.html", "whats-new.html", "faq.html", "join.html",
          "support.html", "share-kit.html", "guides.html", "guide-long-distance-ideas.html", "guide-mental-load.html", "guide-anniversary-planning.html", "privacy.html", "terms.html", "delete-account.html", "404.html"]
 PAGES += ["ar/" + p for p in PAGES if p != "404.html"]  # server-rendered Arabic twins
-PAGES += [f"{lang}/index.html" for lang in ("es", "fr", "de")]  # fully localized landing pages
+EN_PAGES = [p for p in PAGES if not p.startswith("ar/") and p != "404.html"]
+PAGES += [f"{lang}/{p}" for lang in ("es", "fr", "de") for p in EN_PAGES]  # full site mirrors
 REDIRECTS = ["v4.html", "v4-tutorial.html"]
 # Claims the app does not make (D1: automatic gestures retired; D55: voice hidden) and private data.
 FORBIDDEN = ["automatically at the right moment", "Automatic gestures", "voice command", "Kandice", "ph.ahmed"]
@@ -23,9 +24,16 @@ class Inspect(HTMLParser):
         self.h1 = 0
         self.main = 0
         self.meta_description = False
+        self.ui = {k: 0 for k in ('img','video','source','picture','form','theme','views','view','track','share')}
 
     def handle_starttag(self, tag, attrs):
         values = dict(attrs)
+        if tag in self.ui:
+            self.ui[tag] += 1
+        for marker, attr in (('theme','data-theme-pick'),('views','data-views'),
+                             ('view','data-view'),('track','data-track'),('share','data-share')):
+            if attr in values:
+                self.ui[marker] += 1
         if tag == "h1":
             self.h1 += 1
         if tag == "main":
@@ -93,22 +101,39 @@ def main():
                 if dest and url.fragment not in dest.ids:
                     errors.append(f"{name}: missing anchor {ref}")
 
-    # Each indexable homepage language variant must have its own canonical,
-    # reciprocal hreflang, visitor tracker and usable Founder registration.
+    # Localization must preserve the REAL English website design and functionality.
+    # No replacement mini-landing pages are permitted: every original feature
+    # page, screenshot, demo view, themed-phone control and form must survive.
     sitemap = (ROOT / "sitemap.xml").read_text(encoding="utf-8")
     for locale in ("es", "fr", "de"):
-        loc = ROOT / locale / "index.html"
-        if not loc.exists():
-            errors.append(f"Missing {locale} landing page")
-            continue
-        raw = loc.read_text(encoding="utf-8")
-        for expected in (f'<html lang="{locale}"', f'hreflang="{locale}"',
-                         f'href="https://onespace.live/{locale}/"', 'data-form="join"',
-                         'goatcounter.com/count', '/assets/os.js'):
-            if expected not in raw:
-                errors.append(f"{loc}: missing {expected}")
-        if f'<loc>https://onespace.live/{locale}/</loc>' not in sitemap:
-            errors.append(f"sitemap missing {locale} homepage")
+        for en in EN_PAGES:
+            localized = f"{locale}/{en}"
+            original = parsed.get(en)
+            target = parsed.get(localized)
+            if not original or not target:
+                errors.append(f"{localized}: missing full source-equivalent page")
+                continue
+            for marker in original.ui:
+                if original.ui[marker] != target.ui[marker]:
+                    errors.append(f"{localized}: {marker} parity mismatch: {target.ui[marker]} != {original.ui[marker]}")
+            doc = (ROOT / localized).read_text(encoding="utf-8")
+            slug = "" if en == "index.html" else en
+            for expected in (f'lang="{locale}"', f'hreflang="{locale}"',
+                             f'href="https://onespace.live/{locale}/{slug}"',
+                             'goatcounter.com/count', '/assets/os.js'):
+                if expected not in doc:
+                    errors.append(f"{localized}: missing {expected}")
+            if f'<loc>https://onespace.live/{locale}/{slug}</loc>' not in sitemap:
+                errors.append(f"sitemap missing {localized}")
+        for state in ("confirm.html", "unsubscribe.html"):
+            translated = ROOT / locale / state
+            if not translated.exists() or 'noindex' not in translated.read_text(encoding='utf8'):
+                errors.append(f"{locale}/{state}: must exist and stay non-indexable")
+    for lang in ("es","fr","de"):
+        import json
+        data = json.loads((ROOT / "content" / "translations" / (lang+".json")).read_text(encoding="utf-8"))
+        if len(data) < 1300:
+            errors.append(f"{lang}: translation catalogue too small ({len(data)} strings)")
     if not (ROOT / "robots.txt").exists() or not (ROOT / "sitemap.xml").exists():
         errors.append("Missing SEO files")
     index = (ROOT / "index.html").read_text(encoding="utf-8")

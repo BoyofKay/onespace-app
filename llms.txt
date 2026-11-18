@@ -1,6 +1,6 @@
 # OneSpace
 
-> OneSpace is a private app for couples — living together or apart — that keeps the shared life in one place: one shared watchlist, one place to compare things to buy, one trip with every flight option, one calendar, reminders for me, my partner or both, occasions with budgets, counters, letters and memories. English and Arabic. Android now, iPhone soon.
+> OneSpace is a private app for couples — living together or apart — that keeps the shared life in one place: one shared watchlist, one place to compare things to buy, one trip with every flight option, one calendar, reminders for me, my partner or both, occasions with budgets, counters, letters and memories. English, Arabic, Spanish, French and German on the website. Android early access; iPhone planned.
 
 ## Main pages
 - [Home](https://onespace.live/)
@@ -27,8 +27,11 @@
 - [Guide Mental Load](https://onespace.live/guide-mental-load.html)
 - [Guide Anniversary Planning](https://onespace.live/guide-anniversary-planning.html)
 
-## Arabic
+## Languages
 - [العربية](https://onespace.live/ar/)
+- [Español](https://onespace.live/es/)
+- [Français](https://onespace.live/fr/)
+- [Deutsch](https://onespace.live/de/)
 
 ## Legal
 - [Privacy](https://onespace.live/privacy.html)
