@@ -91,6 +91,105 @@
     location.replace(twin(want)); return;
   }
   function tr(key, en) { var local = window.ONESPACE_SITE_STRINGS || {}; return local[key] || (lang === 'ar' && AR[key] ? AR[key] : en); }
+
+  // Landing-page interest goes through one canonical Founder form at /join.html.
+  // Keep the partner invite and campaign parameters in the destination URL.
+  (function simplifyFounderSignup() {
+    var homeForm = $('#founding form[data-form="join"]');
+    if (homeForm) {
+      var panel = homeForm.closest('.panel');
+      var heading = homeForm.querySelector('h3');
+      var submit = homeForm.querySelector('button[type="submit"]');
+      var originalLabel = submit ? submit.textContent.trim() : 'Join the Founding 500';
+      var intro = document.createElement('div');
+      intro.className = 'join-entry';
+      var symbol = document.createElement('span');
+      symbol.className = 'join-entry-icon';
+      symbol.setAttribute('aria-hidden', 'true');
+      symbol.textContent = '♡';
+      var title = document.createElement('h3');
+      title.textContent = heading ? heading.textContent.trim() : originalLabel;
+      var link = document.createElement('a');
+      link.className = 'btn btn-primary';
+      link.href = 'join.html' + location.search;
+      link.setAttribute('data-track', 'founder_join_canonical');
+      link.textContent = originalLabel;
+      var assurance = document.createElement('p');
+      var oldAssurance = homeForm.querySelector('.muted');
+      assurance.textContent = oldAssurance ? oldAssurance.textContent.trim() : '';
+      intro.appendChild(symbol);
+      intro.appendChild(title);
+      intro.appendChild(link);
+      if (assurance.textContent) intro.appendChild(assurance);
+      if (panel) panel.replaceChildren(intro);
+    }
+    // On the single signup page, keep the questions that actually register
+    // a Founder visible. Secondary research questions are optional.
+    var signup = $('form[data-form="join"]');
+    if (signup && !homeForm) {
+      var living = signup.querySelector('input[name="living"]');
+      var group = living && living.closest('.radio-cards');
+      var first = group && group.previousElementSibling;
+      var before = signup.querySelector('input.hp');
+      if (first && before && first.parentNode === before.parentNode) {
+        var details = document.createElement('details');
+        details.className = 'join-optional';
+        var summary = document.createElement('summary');
+        summary.textContent = ({
+          en:'More about you (optional)',
+          ar:'تفاصيل إضافية (اختياري)',
+          es:'Más detalles (opcional)',
+          fr:'Quelques précisions (facultatif)',
+          de:'Weitere Angaben (optional)'
+        })[lang] || 'More about you (optional)';
+        details.appendChild(summary);
+        var node = first;
+        while (node && node !== before) {
+          var next = node.nextSibling;
+          details.appendChild(node);
+          node = next;
+        }
+        signup.insertBefore(details, before);
+      }
+    }
+  })();
+
+  // Each legal document and translation has its own explicit published date
+  // and revision number; never stamp all documents with today's visit date.
+  (function displayLegalRevision() {
+    var match = location.pathname.match(/(?:^|\\/)(privacy|terms|delete-account)\\.html$/);
+    if (!match) return;
+    var doc = match[1];
+    fetch('/assets/legal-revisions.json', {cache: 'no-cache'}).then(function (r) {
+      if (!r.ok) throw Error('revision metadata unavailable');
+      return r.json();
+    }).then(function (records) {
+      var entry = records[doc] && (records[doc][lang] || records[doc].en);
+      if (!entry || !/^\\d{4}-\\d{2}-\\d{2}$/.test(entry.date)) return;
+      var container = $('.legal');
+      if (!container) return;
+      var el = $('.legal > p.muted');
+      if (!el) {
+        el = document.createElement('p');
+        container.insertBefore(el, container.firstChild);
+      }
+      el.className = 'legal-revision';
+      var words = {
+        en:['Last updated: ','Version '],
+        ar:['آخر تحديث: ','الإصدار '],
+        es:['Última actualización: ','Versión '],
+        fr:['Dernière mise à jour : ','Version '],
+        de:['Zuletzt aktualisiert: ','Version ']
+      }[lang] || ['Last updated: ','Version '];
+      var calendar = new Date(entry.date + 'T12:00:00Z');
+      var formatted = new Intl.DateTimeFormat(lang, {day:'numeric', month:'long', year:'numeric', timeZone:'UTC'}).format(calendar);
+      var time = document.createElement('time');
+      time.dateTime = entry.date;
+      time.textContent = formatted;
+      el.replaceChildren(document.createTextNode(words[0]), time,
+        document.createTextNode(' · ' + words[1] + entry.version));
+    }).catch(function () { /* Static legal date remains available without JS/network. */ });
+  })();
   function apply() {
     root.lang = lang; root.dir = lang === 'ar' ? 'rtl' : 'ltr';
     $$('[data-i18n]').forEach(function (el) {
