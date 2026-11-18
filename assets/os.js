@@ -395,8 +395,8 @@
     var track = $('[data-slide-track]',root);
     var cards = $$('[data-testimonial-card]',root);
     var dots = $$('[data-slide-dot]',root);
-    var prev = $('[data-slide-prev]',root);
-    var next = $('[data-slide-next]',root);
+    var prev = $('[data-slide-prev]',root.closest('.review-preview'));
+    var next = $('[data-slide-next]',root.closest('.review-preview'));
     if (!track || !cards.length) return;
     var index = 0;
     function sync() {
