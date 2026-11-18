@@ -212,8 +212,34 @@ def main():
                    'name="platform"'):
         if marker not in join:
             errors.append(f"Founder sign-up must be available to iPhone owners: {marker}")
-    if 'Founding 500 registration is OPEN to Android and iPhone users now' not in index:
+    if 'Join the Founding 500 today' not in index or 'registration is open to both Android and iPhone users' not in index:
         errors.append("Public store section must not imply iPhone users must wait to register")
+    # Feedback follow-through: no unrelated map in Smart Sharing, no double Connect,
+    # the editorial headings use the existing signature coral italic, and demo themes
+    # live within the wizard shell rather than a second detached module.
+    sharing = (ROOT / 'smart-sharing.html').read_text(encoding='utf-8')
+    features = (ROOT / 'features.html').read_text(encoding='utf-8')
+    if 'assets/app/en/places_map.webp' in sharing.split('<section class="tint">',1)[0]:
+        errors.append("Smart Sharing hero cannot show an unrelated map screenshot")
+    if 'sharing-preview-wrap' not in sharing or 'assets/app/en/lists.webp' not in sharing:
+        errors.append("Smart Sharing must illustrate its share flow and show a real shared list")
+    if 'editorial-hero-title' not in sharing or 'editorial-hero-title' not in features:
+        errors.append("Key feature headlines must use established brand serif accent")
+    if features.count('id="connect"') != 1:
+        errors.append("Features page must have one Connect section, not duplicate Connect & Care")
+    if 'demo-theme-inline' not in demo or 'demo-theme-picker' in demo:
+        errors.append("Theme selector must be integrated inside the guided demo")
+    if 'class="watch-clips"' not in index and 'watch-clips' not in index:
+        errors.append("Real screenshot/clip showcase must not use the old scrolling strip")
+    if "iOS coming soon” refers to the app release" in index:
+        errors.append("Do not repeat the awkward iOS-registration clarification")
+    if 'class="review-brand-icon"' not in index:
+        errors.append("Reviews preview must include app platform artwork")
+    connect = (ROOT / 'connect-care.html').read_text(encoding='utf-8')
+    if 'assets/app/en/connect.webp' in connect.split('id="journal"',1)[-1].split('connection-followup',1)[0]:
+        errors.append("Feelings journal must not claim a generic Connect screen is the journal")
+    if 'gesture-capture-slots' not in connect:
+        errors.append("Gesture popup and history capture slots must be preserved")
     # Ensure new marketing UI and original protected flows survive regeneration.
     for locale in ("index.html", "ar/index.html"):
         page = (ROOT / locale).read_text(encoding="utf-8")
