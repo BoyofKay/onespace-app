@@ -66,26 +66,83 @@ def head(page, title, title_ar, desc, desc_ar=''):
         cur = ' aria-current="page"' if href == page else ''
         return f'<a href="{href}"{cur}>{T(en, ar)}</a>'
 
-    def drop(label, label_ar, items, pages):
-        cur = ' aria-current="page"' if page in pages else ''
-        inner = ''.join(f'<a href="{h}"><span class="e">{e}</span><span>{T(t, ta, "b")}{T(d, da, "small")}</span></a>' for h, e, t, ta, d, da in items)
+    def mega_link(item):
+        href, _icon, label_en, label_ar, detail_en, detail_ar = item
+        return (f'<a class="mega-link" href="{href}">'
+                f'<span class="mega-link-copy">{T(label_en, label_ar, "b")}'
+                f'{T(detail_en, detail_ar, "small")}</span>'
+                '<span class="mega-link-arrow" aria-hidden="true">↗</span></a>')
+
+    def drop(label, label_ar, groups, pages, intro_heading, intro_heading_ar,
+             intro_description, intro_description_ar, lead_link):
+        """One typographic navigation system — no emoji tile/card grid."""
         panel_id = 'mega-' + ('features' if label == 'Features' else 'couples' if label == 'For couples' else 'learn')
-        return f'<div class="drop"><button type="button" aria-expanded="false" aria-controls="{panel_id}"{cur}>{T(label, label_ar)} <span aria-hidden="true">▾</span></button><div class="drop-panel" id="{panel_id}" role="group" aria-label="{escape(label)}">{inner}</div></div>'
-    feat_items = [('features.html', '✨', 'All features', 'كل المزايا', 'The five tabs, one by one', 'التبويبات الخمسة واحدًا تلو الآخر')] + \
-        [(d['slug'], d['icon'], d['nav'][0], d['nav'][1], d['navd'][0], d['navd'][1]) for d in DEEP] + \
-        [('compare.html', '🆚', 'Compare', 'مقارنة', 'vs. chat, notes and calendars', 'مقارنة بالمحادثة والملاحظات والتقويمات')]
-    menu = [drop('Features', 'المزايا', feat_items, ('features.html', 'compare.html') + tuple(d['slug'] for d in DEEP)),
-            drop('For couples', 'للأزواج', [
-                ('long-distance.html', '🌍', 'Living apart', 'متباعدان', 'Two cities, two clocks, one life', 'مدينتان وساعتان وحياة واحدة'),
-                ('living-together.html', '🏡', 'Living together', 'تحت سقف واحد', 'One home, so much to share', 'بيت واحد وكثير لنتشاركه')], ('long-distance.html', 'living-together.html')),
-            link('how-it-works.html', 'Demo', 'العرض'),
-            drop('Learn', 'تعلّم', [
-                ('guides.html', '💡', 'Guides for couples', 'أدلة للأزواج', 'Ideas for a shared life', 'أفكار لحياة مشتركة'),
-                ('tutorials.html', '🧭', 'Tutorials', 'الدروس', 'Step-by-step how-tos', 'شروحات خطوة بخطوة'),
-                ('faq.html', '❓', 'FAQ', 'الأسئلة الشائعة', 'Privacy, pricing, help', 'الخصوصية والأسعار والمساعدة'),
-                ('whats-new.html', '✨', "What's new", 'الجديد', 'Updates and availability', 'التحديثات والتوفر')],
-                 ('guides.html', 'tutorials.html', 'faq.html', 'whats-new.html') + tuple(g['slug'] for g in GUIDES)),
-            link('index.html#get-the-app', 'Get the app', 'حمّل التطبيق')]
+        cur = ' aria-current="page"' if page in pages else ''
+        group_html = ''.join(
+            '<section class="mega-section">'
+            + T(heading, heading_ar, 'h3', 'mega-section-label')
+            + '<div class="mega-links">' + ''.join(mega_link(item) for item in items) + '</div></section>'
+            for heading, heading_ar, items in groups
+        )
+        href, title_en, title_ar = lead_link
+        intro = (f'<aside class="mega-intro">{T(label, label_ar, "span", "mega-eyebrow")}'
+                 f'{T(intro_heading, intro_heading_ar, "p", "mega-intro-title")}'
+                 f'{T(intro_description, intro_description_ar, "p", "mega-intro-desc")}'
+                 f'<a class="mega-intro-link" href="{href}">{T(title_en, title_ar)}'
+                 '<span aria-hidden="true">↗</span></a></aside>')
+        return (f'<div class="drop" data-menu="{panel_id}">'
+                f'<button type="button" aria-expanded="false" aria-controls="{panel_id}"{cur}>'
+                f'{T(label, label_ar)} <span aria-hidden="true">▾</span></button>'
+                f'<div class="drop-panel mega-panel" id="{panel_id}" role="group" aria-label="{escape(label)}">'
+                f'<div class="mega-inner">{intro}<div class="mega-sections">{group_html}</div></div>'
+                '</div></div>')
+
+    feature_by_slug = {d['slug']: (d['slug'], d['icon'], d['nav'][0], d['nav'][1], d['navd'][0], d['navd'][1]) for d in DEEP}
+    groups_features = [
+        ('Planning together', 'خططا معًا', [feature_by_slug[slug] for slug in
+            ('smart-sharing.html','decide-together.html','trips.html','everyday.html')]),
+        ('Staying connected', 'ابقيا قريبين', [feature_by_slug[slug] for slug in
+            ('occasions.html','watchlists.html','memories.html')] +
+            [('compare.html','', 'Compare', 'مقارنة',
+              'vs. chat, notes and calendars','مقارنة بالمحادثة والملاحظات والتقويمات')]),
+    ]
+    groups_couples = [
+        ('Find your rhythm', 'اختارا ما يناسب حياتكما', [
+            ('long-distance.html','', 'Living apart','متباعدان',
+             'Two cities, two clocks, one life','مدينتان وساعتان وحياة واحدة'),
+            ('living-together.html','', 'Living together','تحت سقف واحد',
+             'One home, so much to share','بيت واحد وكثير لنتشاركه'),
+        ]),
+    ]
+    groups_learn = [
+        ('Get started', 'ابدأ الآن', [
+            ('tutorials.html','', 'Tutorials','الدروس','Step-by-step how-tos','شروحات خطوة بخطوة'),
+            ('guides.html','', 'Guides for couples','أدلة للأزواج','Ideas for a shared life','أفكار لحياة مشتركة'),
+        ]),
+        ('More to explore', 'استكشف المزيد', [
+            ('faq.html','', 'FAQ','الأسئلة الشائعة','Privacy, pricing, help','الخصوصية والأسعار والمساعدة'),
+            ('whats-new.html','', "What's new",'الجديد','Updates and availability','التحديثات والتوفر'),
+        ]),
+    ]
+    menu = [
+        drop('Features','المزايا',groups_features,
+             ('features.html','compare.html') + tuple(d['slug'] for d in DEEP),
+             'Explore the app','اكتشف التطبيق',
+             'Everything, in one shared space','كل تفاصيل حياتكما في مساحة واحدة',
+             ('features.html','See all features','عرض كل المزايا')),
+        drop('For couples','للأزواج',groups_couples,
+             ('long-distance.html','living-together.html'),
+             'Built for both of you','مصمم لحياتكما معًا',
+             'Near or far, stay in sync','قريبين أو بعيدين، ابقيا على تواصل',
+             ('long-distance.html','Living apart','متباعدان')),
+        link('how-it-works.html','Demo','العرض'),
+        drop('Learn','تعلّم',groups_learn,
+             ('guides.html','tutorials.html','faq.html','whats-new.html') + tuple(g['slug'] for g in GUIDES),
+             'Learn OneSpace','تعرّف على OneSpace',
+             'Help, ideas and updates','مساعدة وأفكار وتحديثات',
+             ('guides.html','Explore the guides','استكشف الأدلة')),
+        link('index.html#get-the-app','Get the app','حمّل التطبيق')
+    ]
     dk = K(desc, desc_ar or desc)
     verify = (f'\n<meta name="google-site-verification" content="{GOOGLE_VERIFY}">' if GOOGLE_VERIFY else '') + \
              (f'\n<meta name="msvalidate.01" content="{BING_VERIFY}">' if BING_VERIFY else '')

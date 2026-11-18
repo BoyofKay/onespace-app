@@ -53,6 +53,36 @@ for(const route of paths){
          failures.push('Theme click did not change screenshot image palette');
      }
    }
+   if((route==='es/'||route==='fr/'||route==='de/')&&(width===375||width===1536)){
+      if(width===375)await page.locator('.burger').click();
+      const featureTrigger=page.locator('.top .menu .drop').first().locator('button').first();
+      await featureTrigger.click();
+      const featurePanel=page.locator('#mega-features');
+      if(!await featurePanel.isVisible())failures.push(route+' '+width+': Features menu not visible');
+      const details=await page.evaluate(()=>{
+        const panel=document.querySelector('#mega-features'),trigger=document.querySelector('.top .menu .drop button');
+        const label=panel?.querySelector('.mega-link b');
+        const intro=panel?.querySelector('.mega-intro-title');
+        const size=node=>node?parseFloat(getComputedStyle(node).fontSize):0;
+        const rect=panel?.getBoundingClientRect();
+        return {parentSize:size(trigger),childSize:size(label),introSize:size(intro),
+          iconCount:panel?.querySelectorAll('.e, .card, [class*="icon"], img').length??-1,
+          linkCount:panel?.querySelectorAll('.mega-link').length??0,
+          panelX:rect?.x??-999,panelRight:rect?.right??9999};
+      });
+      if(details.childSize>details.parentSize+0.5)failures.push(route+' '+width+': mega link font larger than parent navigation');
+      if(details.introSize>details.parentSize+0.5)failures.push(route+' '+width+': mega introduction font larger than parent navigation');
+      if(details.iconCount!==0)failures.push(route+' '+width+': old emoji/card/icon navigation remains');
+      if(details.linkCount<8)failures.push(route+' '+width+': lost feature destinations');
+      if(width===1536&&(details.panelX< -1||details.panelRight>1537))
+        failures.push(route+' '+width+': panel exceeds horizontal viewport');
+      await page.locator('.top .menu .drop').nth(1).locator('button').first().click();
+      if(await featurePanel.isVisible())failures.push(route+' '+width+': Features menu did not close when Couples opened');
+      if(!await page.locator('#mega-couples').isVisible())failures.push(route+' '+width+': Couples menu not visible');
+      await page.keyboard.press('Escape');
+      if(await page.locator('#mega-couples').isVisible())failures.push(route+' '+width+': Escape did not close menu');
+      console.log('MEGA',route,width,JSON.stringify(details));
+   }
    console.log('CHECK',route,width,JSON.stringify(stats));
   }catch(e){failures.push(route+' '+width+': '+e.message.slice(0,250));}
   finally{await page.close();}
