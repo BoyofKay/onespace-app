@@ -17,14 +17,16 @@ jobs:
       - uses: actions/checkout@v4
       - name: Build tools
         run: pip install --quiet beautifulsoup4==4.15.0
+      - name: Rebuild canonical and translated pages
+        run: python3 build.py
       - name: Verify HTML, internal links and accessibility basics
         run: python3 tests/check_site.py
+      - name: Verify full mega navigation across five languages
+        run: python3 tests/check_megamenu.py
       - name: Verify browser JavaScript syntax
         run: |
           node --check assets/os.js
           node --check assets/ar.js
-      - name: Rebuild canonical and translated pages
-        run: python3 build.py
       - name: Commit generated pages and legal revisions on main
         if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
         run: |
