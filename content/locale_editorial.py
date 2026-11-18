@@ -1336,3 +1336,8 @@ CURATED["de"].update({"Real daily check-in screenshot from the demo couple":"Ech
 
 # Corrected native Spanish Founder banner copy.
 CURATED["es"].update({"Founder signup is open NOW to Android and iPhone couples. The first 250 couples — 500 people — can register free and help shape OneSpace; the iOS app itself is coming later.":"Las inscripciones para los primeros 500 Fundadores están ABIERTAS para parejas con Android o iPhone. Las primeras 250 parejas, es decir, 500 personas, pueden apuntarse gratis y contribuir al desarrollo de OneSpace; la app para iOS llegará después."})
+
+# Footer: clearly distinguish registration from platform release.
+CURATED["es"].update({"Founder registration open: Android & iPhone · App releases follow separately":"Registro de Fundadores abierto: Android y iPhone · Cada app llegará a su debido tiempo"})
+CURATED["fr"].update({"Founder registration open: Android & iPhone · App releases follow separately":"Inscriptions Fondateur ouvertes : Android et iPhone · Sorties des apps à des dates différentes"})
+CURATED["de"].update({"Founder registration open: Android & iPhone · App releases follow separately":"Gründeranmeldung offen: Android & iPhone · Die Apps erscheinen zu unterschiedlichen Zeiten"})
