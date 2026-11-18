@@ -38,3 +38,13 @@ The site test checks localized links, anchors, metadata, sitemap, privacy and id
 - Run Chromium browser responsive checks (script `scripts/check_locale_layout.mjs`) at phone, tablet and desktop sizes when adjusting navigation, language copy or store cards.
 - For German marketing, address a couple as **ihr/euch** and an individual as **du/dein**; avoid unexplained switches to Sie. For French use **vous** consistently; for Spanish use broadly understood, natural language and distinguish singular visitor versus couple.
 - Do not localize proper brand names such as OneSpace, App Store, Google Play, OpenStreetMap, or app navigation identifiers into unrelated words.
+
+## Long-form editorial review (November 2026)
+- Translated legal, FAQ, guide and account-deletion copy is maintained in separate source-keyed review files: `locale_legal_review.py`, `locale_faq_review.py`, and `locale_guides_review.py`.
+- Privacy and terms pass: rewrote consent, tracking, notifications, retention, account ownership, advertising, service providers, and deletion descriptions without altering legal durations or product permissions.
+- Corrected a **critical broken negation** caused by nested bold markup in the "We do **not** collect" privacy clause. The generator now constructs complete localized sentences in each language.
+- FAQ: questions and answers were edited for natural ES/FR/DE usage while preserving Founder, calendar, privacy, notification and iPhone availability details.
+- Guides: reviewed actual bullet-point advice, not just introductory headings. Tone is warm, clear and practical; calendar/counter actions remain user-controlled where applicable.
+- The localized instructions show today's real **English mobile menu labels** alongside translated explanations. Website language support must not be misrepresented as mobile app UI support.
+- Run `python3 tests/check_locale_editorial.py` after a full build; it validates source phrase coverage, critical legal negatives, retention numbers, FAQ completeness, and account-deletion instructions.
+- Still outstanding before calling the site *professionally native-certified*: independent native-speaker line editing for all remaining pages, a jurisdiction-qualified legal review of privacy/terms, and confirmation that English policy claims precisely match production app and backend behavior. Automated coverage checks do not substitute for those reviews.
