@@ -1256,7 +1256,9 @@ def page_features():
                       'لمسة حب بنقرة، ورسائل تنتظر اليوم المناسب، وتواصل يومي يستغرق أقل من دقيقة.',
                       [('A little love', 'a hug, a kiss or kind words in one tap — with your own message or a built-in one.', 'لمسة حب', 'حضن أو قبلة أو كلمات طيبة بنقرة — برسالتك أو برسالة جاهزة.'),
                        ('Letters', 'sealed until a date, with a countdown.', 'الرسائل', 'مغلقة حتى تاريخ معيّن، مع عد تنازلي.'),
-                       ('Daily connection & experiences', 'feelings, a journal, and films, books or places you enjoy together.', 'التواصل اليومي والتجارب', 'المشاعر واليوميات، والأفلام والكتب والأماكن التي تستمتعان بها معًا.')],
+                       ('Daily check-ins', 'say how you feel and what is on your mind.', 'التواصل اليومي', 'عبّرا عن مشاعركما وما يشغل بالكما.'),
+                       ('Feelings journal', 'keep a record of thoughts and moods over time.', 'يوميات المشاعر', 'احتفظا بالأفكار والمشاعر مع مرور الوقت.'),
+                       ('Shared experiences', 'movies, books or places you enjoy together.', 'التجارب المشتركة', 'الأفلام والكتب والأماكن التي تستمتعان بها معًا.')],
                       'letter', 'lavender', rev=True, tint=True) + \
         f'''<section id="me" class="dark" data-theme-scope><div class="wrap split">
   <div>{T('Me', 'أنا', 'span', 'eyebrow')}{T('Set it up your way.', 'اضبطه على طريقتك.', 'h2')}
