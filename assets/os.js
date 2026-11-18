@@ -541,7 +541,7 @@
     };
     check();
   }
-  $('form[data-form]').forEach(function (form) {
+  $$('form[data-form]').forEach(function (form) {
     var fname = form.getAttribute('data-form') === 'join' ? 'founders' : form.getAttribute('data-form');
     form.addEventListener('focusin', function () { if (!form.dataset.started) { form.dataset.started = '1'; track(fname + '/form-start' + here); } });
     var topic = new URLSearchParams(location.search).get('topic');
