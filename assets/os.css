@@ -1064,12 +1064,10 @@ html[lang="ar"] .top .brand,html[lang="ar"] .foot .brand{
 html[dir="rtl"] .legal-revision{border-radius:9px 0 0 9px}
 
 
-/* Official two-tone lockup, stable in RTL and every translated page. */
+/* Official symbol is used unchanged; only its placement and the label scale. */
 .top .brand,.foot .brand{direction:ltr}
 .top .brand .brand-name,.foot .brand .brand-name{
-  grid-column:2;grid-row:1;display:inline-flex;white-space:nowrap;
+  grid-column:2;grid-row:1;display:inline-block;
   font:inherit;line-height:inherit;letter-spacing:inherit;
-  color:#14213D;
+  white-space:nowrap;color:inherit;
 }
-.top .brand .brand-name>span:last-child,.foot .brand .brand-name>span:last-child{color:#1F6E78}
-.top .brand:hover .brand-name>span:last-child,.foot .brand:hover .brand-name>span:last-child{color:#D5583E}
