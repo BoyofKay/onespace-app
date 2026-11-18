@@ -45,9 +45,9 @@ for lang in ('en','ar','es','fr','de'):
             assert j['title'][loc] in body,(lang,j['slug'])
             assert j['stages'][0][loc] in body,(lang,j['slug'],'missing narrative translation')
 comparison=(ROOT/'compare.html').read_text(encoding='utf8')
-demo=(ROOT/'how-it-works.html').read_text(encoding='utf8')
+tutorials=(ROOT/'tutorials.html').read_text(encoding='utf8')
 assert 'the-sofa-decision' not in comparison
 assert 'sofa-that-both-of-us-chose' in comparison
 assert 'course-together-across-time-zones' in comparison
-assert 'reunion-from-flight-to-memory' in demo
+assert 'reunion-from-flight-to-memory' in tutorials
 print('PASS: 24 complete journeys, 12 apart + 12 together, deep-link previews, all five languages, no screenplay layout.')
