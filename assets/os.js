@@ -310,22 +310,123 @@
     });
   });
 
-  // ---------- Segmented views (apart/together, tour) ----------
+  // ---------- Segmented views, including the accessible six-step wizard ----------
   $$('[data-views]').forEach(function (group) {
     var name = group.getAttribute('data-views');
     var buttons = $$('[data-view]', group);
-    function show(v) {
-      buttons.forEach(function (b) { b.setAttribute('aria-selected', b.getAttribute('data-view') === v ? 'true' : 'false'); });
-      if (buttons.length > 2 && buttons[buttons.length - 1].getAttribute('data-view') === v && !group.dataset.finished) { group.dataset.finished = '1'; track('demo/' + name + '-finished'); }
-      $$('[data-view-of="' + name + '"]').forEach(function (el) { el.hidden = el.getAttribute('data-view-name') !== v; });
-    }
-    buttons.forEach(function (b) { b.addEventListener('click', function () { show(b.getAttribute('data-view')); }); });
+    var wizard = name === 'tour' ? group.closest('[data-demo-wizard]') : null;
+    var previous = wizard && $('[data-demo-prev]', wizard);
     var next = $('[data-next="' + name + '"]');
+    function show(v, moveFocus) {
+      var index = buttons.findIndex(function (b) { return b.getAttribute('data-view') === v; });
+      if (index < 0) return;
+      buttons.forEach(function (b, n) {
+        var selected = n === index;
+        b.setAttribute('aria-selected', selected ? 'true' : 'false');
+        if (wizard) b.tabIndex = selected ? 0 : -1;
+      });
+      if (buttons.length > 2 && index === buttons.length - 1 && !group.dataset.finished) {
+        group.dataset.finished = '1'; track('demo/' + name + '-finished');
+      }
+      $$('[data-view-of="' + name + '"]').forEach(function (el) {
+        el.hidden = el.getAttribute('data-view-name') !== v;
+      });
+      if (wizard) {
+        var current = $('[data-demo-current]', wizard);
+        var progress = $('[data-demo-progress]', wizard);
+        var track = $('.demo-progress-track', wizard);
+        if (current) current.textContent = String(index + 1);
+        if (progress) progress.style.width = (100 * (index + 1) / buttons.length) + '%';
+        if (track) track.setAttribute('aria-valuenow', String(index + 1));
+        if (previous) previous.disabled = index === 0;
+        if (next) {
+          next.textContent = index === buttons.length - 1
+            ? (lang === 'ar' ? 'ابدأ مجددًا ↺' :
+              (lang === 'es' ? 'Volver a empezar ↺' : lang === 'fr' ? 'Recommencer ↺' : lang === 'de' ? 'Noch einmal ↺' : 'Explore again ↺'))
+            : (lang === 'ar' ? 'التالي ←' :
+              (lang === 'es' ? 'Siguiente →' : lang === 'fr' ? 'Suivant →' : lang === 'de' ? 'Weiter →' : 'Next →'));
+        }
+        var hash = '#step-' + (index + 1);
+        if (location.hash !== hash && window.history && window.history.replaceState) {
+          history.replaceState(null, '', location.pathname + location.search + hash);
+        }
+      }
+      if (moveFocus) buttons[index].focus();
+    }
+    buttons.forEach(function (b) {
+      b.addEventListener('click', function () { show(b.getAttribute('data-view'), false); });
+    });
+    if (wizard) {
+      group.addEventListener('keydown', function (e) {
+        if (!['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','Home','End'].includes(e.key)) return;
+        e.preventDefault();
+        var i = buttons.findIndex(function (b) { return b.getAttribute('aria-selected') === 'true'; });
+        var direction = (document.documentElement.dir === 'rtl' ? -1 : 1);
+        if (e.key === 'ArrowRight') i += direction;
+        else if (e.key === 'ArrowLeft') i -= direction;
+        else if (e.key === 'ArrowDown') i++;
+        else if (e.key === 'ArrowUp') i--;
+        else if (e.key === 'Home') i = 0;
+        else if (e.key === 'End') i = buttons.length - 1;
+        i = Math.max(0, Math.min(buttons.length - 1, i));
+        show(buttons[i].getAttribute('data-view'), true);
+      });
+      if (previous) previous.addEventListener('click', function () {
+        var i = buttons.findIndex(function (b) { return b.getAttribute('aria-selected') === 'true'; });
+        if (i > 0) show(buttons[i-1].getAttribute('data-view'), true);
+      });
+      var savedStep = /^#step-([1-6])$/.exec(location.hash);
+      if (savedStep) show('s' + (Number(savedStep[1]) - 1), false);
+      window.addEventListener('hashchange', function () {
+        var match = /^#step-([1-6])$/.exec(location.hash);
+        if (match) show('s' + (Number(match[1]) - 1), false);
+      });
+    }
     if (next) next.addEventListener('click', function () {
       var i = buttons.findIndex(function (b) { return b.getAttribute('aria-selected') === 'true'; });
-      buttons[(i + 1) % buttons.length].click();
-      buttons[(i + 1) % buttons.length].focus();
+      var j = wizard ? (i === buttons.length - 1 ? 0 : i + 1) : (i + 1) % buttons.length;
+      show(buttons[j].getAttribute('data-view'), !!wizard);
+      if (!wizard) buttons[j].focus();
     });
+  });
+
+  // ---------- Compact testimonial carousel; no auto-rotation ----------
+  $$('[data-testimonial-carousel]').forEach(function (root) {
+    var track = $('[data-slide-track]',root);
+    var cards = $$('[data-testimonial-card]',root);
+    var dots = $$('[data-slide-dot]',root);
+    var prev = $('[data-slide-prev]',root);
+    var next = $('[data-slide-next]',root);
+    if (!track || !cards.length) return;
+    var index = 0;
+    function sync() {
+      if (prev) prev.disabled = index === 0;
+      if (next) next.disabled = index === cards.length - 1;
+      dots.forEach(function (d,i) {
+        d.setAttribute('aria-current',i===index ? 'true':'false');
+        d.setAttribute('aria-label', (lang === 'ar' ? 'شهادة تجريبية ' : 'Example testimonial ') + (i+1));
+      });
+    }
+    function go(n) {
+      index = Math.max(0,Math.min(cards.length-1,n));
+      cards[index].scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth',block:'nearest',inline:'start'});
+      sync();
+    }
+    if (prev) prev.addEventListener('click', function(){go(index-1);});
+    if (next) next.addEventListener('click', function(){go(index+1);});
+    dots.forEach(function(d,i){d.addEventListener('click',function(){go(i);});});
+    track.addEventListener('keydown',function(e){
+      if(e.key==='ArrowRight'||e.key==='ArrowLeft'){
+        e.preventDefault();go(index+(e.key==='ArrowRight'?1:-1)*(document.documentElement.dir==='rtl'?-1:1));
+      }
+    });
+    var observer = typeof IntersectionObserver!=='undefined' ? new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting && e.intersectionRatio>=0.65){index=cards.indexOf(e.target);sync();}
+      });
+    },{root:track,threshold:[0.65]}) : null;
+    if(observer) cards.forEach(function(c){observer.observe(c);});
+    sync();
   });
 
   // ---------- Hero: rotating words and live notifications ----------
