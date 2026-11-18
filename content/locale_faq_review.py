@@ -262,3 +262,15 @@ FAQ_ROWS = [
   ]
 ]
 FAQ_EDITORIAL = {locale: {row[0]:row[i+1] for row in FAQ_ROWS} for i,locale in enumerate(("es","fr","de"))}
+
+# Show actual mobile navigation labels in English with a localized explanation:
+# the public website is five-language, but the Android app UI is English/Arabic.
+FAQ_EDITORIAL["es"]["In the app: Me → Your data and account. Locked out? Use"] = "En la app: «Me» (Yo) → «Your data and account» (Tus datos y cuenta). Si no puedes iniciar sesión, utiliza"
+FAQ_EDITORIAL["fr"]["In the app: Me → Your data and account. Locked out? Use"] = "Dans l’application : « Me » (Moi) → « Your data and account » (Vos données et votre compte). Si vous ne pouvez pas vous connecter, utilisez"
+FAQ_EDITORIAL["de"]["In the app: Me → Your data and account. Locked out? Use"] = "In der App: „Me“ (Ich) → „Your data and account“ (Deine Daten und dein Konto). Wenn du dich nicht anmelden kannst, nutze"
+FAQ_EDITORIAL["es"]["Either of you can leave the space at any time from Me. You can export first."] = "Cualquiera puede abandonar el espacio en cualquier momento desde «Me» (Yo). Antes puedes exportar tus datos."
+FAQ_EDITORIAL["fr"]["Either of you can leave the space at any time from Me. You can export first."] = "Chacun peut quitter l’espace à tout moment dans « Me » (Moi). Vous pouvez d’abord exporter vos données."
+FAQ_EDITORIAL["de"]["Either of you can leave the space at any time from Me. You can export first."] = "Jede Person kann den gemeinsamen Bereich jederzeit unter „Me“ (Ich) verlassen. Vorher lassen sich die eigenen Daten exportieren."
+FAQ_EDITORIAL["es"]["In the app: Me → Help and support → Report a technical issue (it can add a screenshot and the details we need). Or use the"] = "En la app: «Me» → «Help and support» (Ayuda y soporte) → «Report a technical issue» (Informar de un problema técnico). Puedes adjuntar una captura de pantalla. También puedes usar el"
+FAQ_EDITORIAL["fr"]["In the app: Me → Help and support → Report a technical issue (it can add a screenshot and the details we need). Or use the"] = "Dans l’application : « Me » → « Help and support » (Aide et assistance) → « Report a technical issue » (Signaler un problème technique). Vous pouvez joindre une capture d’écran. Vous pouvez aussi utiliser le"
+FAQ_EDITORIAL["de"]["In the app: Me → Help and support → Report a technical issue (it can add a screenshot and the details we need). Or use the"] = "In der App: „Me“ → „Help and support“ (Hilfe und Support) → „Report a technical issue“ (Technisches Problem melden). Dabei kannst du einen Screenshot beifügen. Alternativ kannst du das"
