@@ -12,7 +12,7 @@ from bs4 import BeautifulSoup, NavigableString
 
 LANGS = ('en', 'ar', 'es', 'fr', 'de')
 NEW_LANGS = ('es', 'fr', 'de')
-INERT = {'script', 'style', 'svg', 'code', 'pre', 'textarea', 'noscript'}
+INERT = {'script', 'style', 'svg', 'code', 'pre', 'textarea'}
 ATTRS = ('title', 'alt', 'placeholder', 'aria-label')
 SKIP = re.compile(r'^(?:[\W_0-9]+|[A-Za-z0-9.+-]+@[A-Za-z0-9.-]+|(?:https?://|www\.)\S+)$', re.UNICODE)
 BASE = 'https://onespace.live/'
@@ -120,7 +120,7 @@ def localize_html(src, name, locale, translated):
     def tr(s):
         if not eligible(s): return s
         result=GLOSSARY.get(locale,{}).get(s) or translated.get(s)
-        if not result or not isinstance(result,str) or result.strip()==s.strip():
+        if result is None or not isinstance(result,str) or not result.strip():
             missing.add(s)
             return s
         return result
@@ -189,7 +189,10 @@ def localize_html(src, name, locale, translated):
             link['href']=BASE+('' if other=='en' else other+'/')+('' if name=='index.html' else name)
             if other==locale:link['aria-current']='page'
             else:link.attrs.pop('aria-current',None)
-    return str(soup)
+    output=str(soup)
+    # Browser URLs in srcset and inline CSS must still resolve from nested /es/, /fr/, /de/ paths.
+    output=re.sub(r'(?<![A-Za-z0-9/])assets/', '/assets/', output)
+    return output
 
 def build_locales(root, pages):
     for lang in NEW_LANGS:
