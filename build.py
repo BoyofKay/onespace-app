@@ -1138,7 +1138,7 @@ def page_compare():
   {compare_table()}
   <p class="muted center" style="margin-top:18px">{T('This compares everyday workflows, not an exhaustive audit of other apps. Features and integrations can vary by product.', 'هذه مقارنة لطرق الاستخدام اليومية، وليست مراجعة شاملة للتطبيقات الأخرى. قد تختلف المزايا والتكاملات من تطبيق لآخر.')}</p>
 </div></section>
-""" + '<div class="center" style="padding:30px 12px"><a href="scenarios.html" class="btn btn-ghost">' + T(*STORY_UI['nav']) + '</a></div>' + value_grid() + cta_band() + foot()
+""" + story_case_cards(['the-sofa-decision', 'a-tuesday-apart']) + value_grid() + cta_band() + foot()
 
 
 def page_index():
@@ -1418,6 +1418,21 @@ def page_features():
 
 
 # -------------------------------------------------------- fictional scenario episodes
+
+def story_case_cards(slugs):
+    """Two or three compact fictional journey examples; never fake testimonials."""
+    selected = [next(x for x in STORIES if x['slug'] == slug) for slug in slugs]
+    tiles = ''.join(
+        '<a class="story-preview" href="scenarios.html#story-' + x['slug'] + '">'
+        + T(*x['title'], 'h3') + T(*x['teaser'], 'p')
+        + '<span class="story-preview-more">' + T(*STORY_UI['read']) + ' ↗</span></a>'
+        for x in selected)
+    return ('<section class="story-case-strip"><div class="wrap">'
+            + '<div class="sec-head center">' + T(*STORY_UI['teaserHeading'], 'h2') + '</div>'
+            + '<div class="story-preview-grid story-cases">' + tiles + '</div>'
+            + '<p class="story-disclaimer">' + T(*STORY_UI['fiction']) + '</p></div></section>')
+
+
 def story_previews(apart):
     mode = 'apart' if apart else 'together'
     stories = [s for s in STORIES if s['mode'] == mode]
@@ -1697,7 +1712,7 @@ def page_tutorials():
                          'إرشادات قصيرة وعملية لأكثر ما يفعله الأزواج. تفضّل أن تراه؟ <a href="how-it-works.html">جرّب العرض</a>.',
                          extra=f'<div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:22px">{jump}</div><div style="max-width:560px;margin-top:18px"><label class="sr" for="faq-search">Search</label><input id="faq-search" class="search" type="search" placeholder="Search tutorials…" data-i18n-attr="placeholder:{sk}"></div>') + f"""
 <section style="padding-top:10px"><div class="narrow">{body}<p id="faq-empty" hidden>{T('Nothing matches. <a href="support.html">Ask us</a>.', 'لا شيء مطابق. <a href="support.html">اسألنا</a>.')}</p></div></section>
-""" + '<section class="tint"><div class="narrow center">' + T(*STORY_UI['teaserHeading'], 'h2') + '<a class="btn btn-ghost" href="scenarios.html">' + T(*STORY_UI['nav']) + '</a></div></section>' + cta_band() + foot()
+""" + story_case_cards(['the-reunion-countdown', 'sunday-reset', 'the-sofa-decision']) + cta_band() + foot()
 
 
 AVAILABILITY = [
