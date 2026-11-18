@@ -66,6 +66,10 @@ for locale in NEW_LANGS:
         results=translate_many(batch,locale)
         for source,result in zip(batch,results):
             if not result.strip():
+                # The public batch endpoint occasionally emits an empty item even
+                # when the rest of the batch is valid. Retry that text alone.
+                result=translate_many([source],locale)[0]
+            if not result.strip():
                 raise RuntimeError(f'Invalid {locale} translation for {source!r}: {result!r}')
             data[source]=result
         if i%20==0 or i+1==len(work):
