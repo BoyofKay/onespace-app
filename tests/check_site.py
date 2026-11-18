@@ -165,11 +165,11 @@ def main():
         errors.append("Why OneSpace must be reachable from the main navigation")
     # Preserve the original interactive marketing experiences and real app media.
     for marker in ('id="tour"', 'data-theme-pick=', 'id="connect-care-showcase"',
-                   'id="reviews-preview"', 'data-review-preview="test-only"'):
+                   'id="connect-care-showcase"'):
         if marker not in index:
             errors.append(f"Missing preserved experience or test-labelled prototype: {marker}")
-    if 'AI-GENERATED PLACEHOLDERS' not in index:
-        errors.append("Review testing prototypes must be visibly labelled as AI generated")
+    if 'id="reviews-preview"' in index or 'data-review-preview="test-only"' in index:
+        errors.append("Unverified testimonials and app ratings must stay hidden until launch")
     if '<meta itemprop="ratingValue"' in index or '"aggregateRating"' in index:
         errors.append("Fictional testing prototypes must not feed rating structured data")
     connect=(ROOT/"connect-care.html").read_text(encoding="utf-8")
@@ -193,16 +193,14 @@ def main():
         errors.append("The guided demo must have exactly six selectable steps")
     if demo.count('data-theme-pick=') != 9:
         errors.append("The guided demo must preserve all nine existing themes")
-    if 'data-testimonial-carousel' not in index or 'data-slide-next' not in index:
-        errors.append("Missing compact testimonial carousel")
-    if index.count('class="store-rating-row"') != 10:
-        errors.append("Each of two store panels needs a full five-row rating breakdown")
+    if 'data-testimonial-carousel' in index or 'class="store-rating-row"' in index:
+        errors.append("Hidden testimonial and store-rating prototypes must not render publicly")
     if index.count('class="footer-social-item"') != 5:
         errors.append("All five noninteractive footer social placeholders are required")
     if 'href="#"' in index.split('<div class="footer-social">')[-1].split('</div>', 1)[0]:
         errors.append("Social placeholders must not have fake links")
     for marker in ('id="smart-details"', 'assets/app/en/notifications.webp',
-                   'Illustrative layout', 'data-nosnippet'):
+                   'Illustrative layout'):
         if marker not in index:
             errors.append(f"Missing smart feature or test disclaimer: {marker}")
     if not (ROOT / 'assets/app/en/checkins.png').is_file():
@@ -233,8 +231,8 @@ def main():
         errors.append("Real screenshot/clip showcase must not use the old scrolling strip")
     if "iOS coming soon” refers to the app release" in index:
         errors.append("Do not repeat the awkward iOS-registration clarification")
-    if 'class="review-brand-icon"' not in index:
-        errors.append("Reviews preview must include app platform artwork")
+    if 'class="review-brand-icon"' in index:
+        errors.append("Review platform artwork must remain hidden with its test preview")
     connect = (ROOT / 'connect-care.html').read_text(encoding='utf-8')
     if 'assets/app/en/connect.webp' in connect.split('id="journal"',1)[-1].split('connection-followup',1)[0]:
         errors.append("Feelings journal must not claim a generic Connect screen is the journal")
