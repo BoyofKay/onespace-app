@@ -329,3 +329,16 @@ LEGAL_ROWS = [
   ]
 ]
 LEGAL_EDITORIAL = {locale: {row[0]:row[i+1] for row in LEGAL_ROWS} for i,locale in enumerate(("es","fr","de"))}
+
+# Keep the names users see in today's English/Arabic mobile app; the website
+# being available in ES/FR/DE does not imply the app UI offers those languages.
+LEGAL_EDITORIAL["fr"]["Emails"] = "Les e-mails"
+LEGAL_EDITORIAL["es"]["everything you created: Me → Your data and account → Download my data."] = "todo lo que creaste desde «Me» (Yo) → «Your data and account» (Tus datos y cuenta) → «Download my data» (Descargar mis datos)."
+LEGAL_EDITORIAL["fr"]["everything you created: Me → Your data and account → Download my data."] = "tous les contenus créés depuis « Me » (Moi) → « Your data and account » (Vos données et votre compte) → « Download my data » (Télécharger mes données)."
+LEGAL_EDITORIAL["de"]["everything you created: Me → Your data and account → Download my data."] = "alle erstellten Inhalte unter „Me“ (Ich) → „Your data and account“ (Deine Daten und dein Konto) → „Download my data“ (Meine Daten herunterladen)."
+LEGAL_EDITORIAL["es"]["your details in Me → Profile."] = "tus datos desde «Me» (Yo) → «Profile» (Perfil)."
+LEGAL_EDITORIAL["fr"]["your details in Me → Profile."] = "vos informations dans « Me » (Moi) → « Profile » (Profil)."
+LEGAL_EDITORIAL["de"]["your details in Me → Profile."] = "deine Angaben unter „Me“ (Ich) → „Profile“ (Profil)."
+LEGAL_EDITORIAL["es"]["You can download your data and delete your account at any time (Me → Your data and account). We may end the test or the service with notice by email."] = "Puedes descargar tus datos y eliminar tu cuenta en cualquier momento desde «Me» (Yo) → «Your data and account» (Tus datos y cuenta). Podemos poner fin a la prueba o al servicio notificándolo por correo electrónico."
+LEGAL_EDITORIAL["fr"]["You can download your data and delete your account at any time (Me → Your data and account). We may end the test or the service with notice by email."] = "Vous pouvez télécharger vos données et supprimer votre compte à tout moment dans « Me » (Moi) → « Your data and account » (Vos données et votre compte). Nous pouvons mettre fin au test ou au service après notification par e-mail."
+LEGAL_EDITORIAL["de"]["You can download your data and delete your account at any time (Me → Your data and account). We may end the test or the service with notice by email."] = "Du kannst deine Daten jederzeit unter „Me“ (Ich) → „Your data and account“ (Deine Daten und dein Konto) herunterladen und dein Konto löschen. Wir können den Test oder den Dienst nach vorheriger E-Mail-Benachrichtigung beenden."
