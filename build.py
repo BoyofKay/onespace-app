@@ -114,6 +114,16 @@ def head(page, title, title_ar, desc, desc_ar=''):
             feature_by_slug['trips.html'],
             feature_by_slug['occasions.html'],
         ]),
+        ('Connect & care', 'تواصلا واهتما', [
+            ('connect-care.html#letters','', 'Love letters', 'رسائل الحب',
+             'Write now; open on a chosen day', 'اكتبا الآن وافتحا في يوم تختارانه'),
+            ('connect-care.html#gestures','', 'A little love', 'لمسة حب',
+             'Personal gestures in your own words', 'لفتات خاصة بكلماتكما'),
+            ('connect-care.html#checkins','', 'Daily check-ins', 'التواصل اليومي',
+             'Know how your partner is doing', 'اطمئنا على أحوال بعضكما'),
+            ('connect-care.html#journal','', 'Feelings journal', 'يوميات المشاعر',
+             'Make space for your feelings', 'مساحة للتعبير عن المشاعر'),
+        ]),
     ]
     groups_couples = [
         ('Find your rhythm', 'اختارا ما يناسب حياتكما', [
@@ -135,7 +145,7 @@ def head(page, title, title_ar, desc, desc_ar=''):
     ]
     menu = [
         drop('Features','المزايا',groups_features,
-             ('features.html',) + tuple(d['slug'] for d in DEEP),
+             ('features.html','connect-care.html') + tuple(d['slug'] for d in DEEP),
              'Explore the app','اكتشف التطبيق',
              'Everything, in one shared space','كل تفاصيل حياتكما في مساحة واحدة',
              ('features.html','See all features','عرض كل المزايا')),
@@ -218,11 +228,10 @@ def foot():
       <a class="brand" href="./"><img src="assets/mark.svg" alt="" width="48" height="48"><span class="brand-name">OneSpace</span></a>
       {T('Two of us. One Space. A private home for the life you share — near or far.', 'نحن الاثنان. مساحة واحدة. بيت خاص للحياة التي تتشاركانها — قريبين أو بعيدين.', 'p')}
       <p class="foot-mail"><a href="mailto:hello@onespace.live">hello@onespace.live</a></p>
-      <a class="btn btn-primary btn-sm" href="join.html">{T('Join the Founding 500', 'انضم إلى المؤسسين الـ500')}</a>
     </div>
-    {col('Product', 'المنتج', [('features.html', 'Features', 'المزايا'), ('how-it-works.html', 'Interactive demo', 'العرض التفاعلي'), ('tutorials.html', 'Tutorials', 'الدروس'), ('whats-new.html', "What's new", 'الجديد'), ('whats-new.html#status', 'Availability', 'التوفر')])}
-    {col('For couples', 'للأزواج', [('long-distance.html', 'Living apart', 'متباعدان'), ('living-together.html', 'Living together', 'تحت سقف واحد'), ('join.html', 'Founding 500', 'المؤسسون الـ500'), ('share-kit.html', 'Share kit', 'مواد المشاركة')])}
-    {col('Help', 'المساعدة', [('guides.html', 'Guides for couples', 'أدلة للأزواج'), ('faq.html', 'FAQ', 'الأسئلة الشائعة'), ('support.html', 'Contact & support', 'التواصل والدعم'), ('support.html#signin', "Can't sign in?", 'لا تستطيع الدخول؟')])}
+    {col('Product', 'المنتج', [('features.html', 'Features', 'المزايا'), ('how-it-works.html', 'Interactive demo', 'العرض التفاعلي'), ('tutorials.html', 'Tutorials', 'الدروس'), ('whats-new.html', "What's new", 'الجديد'), ('whats-new.html#status', 'Availability', 'التوفر'), ('join.html', 'Founding 500', 'المؤسسون الـ500')])}
+    {col('For couples', 'للأزواج', [('long-distance.html', 'Living apart', 'متباعدان'), ('living-together.html', 'Living together', 'تحت سقف واحد')])}
+    {col('Help', 'المساعدة', [('guides.html', 'Guides for couples', 'أدلة للأزواج'), ('faq.html', 'FAQ', 'الأسئلة الشائعة'), ('support.html', 'Contact & support', 'التواصل والدعم'), ('support.html#signin', "Can't sign in?", 'لا تستطيع الدخول؟'), ('share-kit.html', 'Share kit', 'مواد المشاركة')])}
     {col('Legal', 'قانوني', [('privacy.html', 'Privacy policy', 'سياسة الخصوصية'), ('terms.html', 'Terms of use', 'شروط الاستخدام'), ('delete-account.html', 'Delete your account', 'حذف حسابك')])}
   </div>
   <div class="foot-bottom">
@@ -760,7 +769,7 @@ def value_grid():
     cards = ''.join(f"""<a class="card link value reveal" href="{d['slug']}"><span class="vi">{d['icon']}</span>{T(d['nav'][0], d['nav'][1], 'h3')}{T(d['navd'][0], d['navd'][1], 'p')}<span class="more">{T('See how →', 'شاهد كيف ←')}</span></a>""" for d in DEEP)
     extra = [('long-distance.html', '🌍', 'Made for distance', 'مصمم للمسافة', 'Two clocks, reunion countdowns, sealed letters', 'ساعتان وعدّ للقاء ورسائل مغلقة'),
              ('features.html#remember', '⏳', 'Counters that understand dates', 'عدّادات تفهم التواريخ', 'The day itself and its anniversary, with progress', 'اليوم نفسه وذكراه، مع التقدم'),
-             ('features.html#connect', '♡', 'A little love, daily', 'لمسة حب يومية', 'Gestures, letters and a one-minute check-in', 'لمسات ورسائل وتواصل يومي في دقيقة')]
+             ('connect-care.html', '♡', 'Connect & care', 'التواصل والاهتمام', 'Letters, gestures, daily check-ins and a feelings journal', 'رسائل ولفتات وتواصل يومي ويوميات المشاعر')]
     cards += ''.join(f"""<a class="card link value reveal" href="{h}"><span class="vi">{i}</span>{T(e, a, 'h3')}{T(de, da, 'p')}<span class="more">{T('See how →', 'شاهد كيف ←')}</span></a>""" for h, i, e, a, de, da in extra)
     return f"""<section id="why"><div class="wrap">
   <div class="sec-head center">{T('Why couples choose OneSpace', 'لماذا يختار الأزواج OneSpace', 'span', 'eyebrow')}<h2>{T('More than the basics.', 'أكثر من الأساسيات.')} <span class="serif accent">{T('Thought through for two.', 'مدروسة لكليكما.')}</span></h2>
@@ -796,7 +805,7 @@ def deep_page(d):
 <section class="tint"><div class="wrap"><div class="sec-head center">{T('The problem', 'المشكلة', 'span', 'eyebrow')}{T('Sound familiar?', 'هل يبدو هذا مألوفًا؟', 'h2')}</div><div class="pains">{pains}</div></div></section>
 {one_list_section('', cta=slug != 'smart-sharing.html') if slug in ('smart-sharing.html', 'watchlists.html', 'trips.html') else ''}
 <section id="how"><div class="wrap split" style="align-items:start">
-  <div>{T('How OneSpace solves it', 'كيف يحلها OneSpace', 'span', 'eyebrow')}{T('Four simple steps.', 'أربع خطوات بسيطة.', 'h2', '', 'style="margin:10px 0 26px"')}<ol class="how">{steps}</ol></div>
+  <div>{T('How OneSpace solves it', 'كيف يحلها OneSpace', 'span', 'eyebrow')}{T('Three simple steps.' if len(d['steps']) == 3 else 'Four simple steps.', 'ثلاث خطوات بسيطة.' if len(d['steps']) == 3 else 'أربع خطوات بسيطة.', 'h2', '', 'style="margin:10px 0 26px"')}<ol class="how">{steps}</ol></div>
   <div class="stage" style="position:sticky;top:100px">{illus}</div>
 </div></section>
 <section class="tint"><div class="wrap"><div class="sec-head">{T('In detail', 'بالتفصيل', 'span', 'eyebrow')}{T('Everything it can do.', 'كل ما يستطيع فعله.', 'h2')}</div><div class="grid g3">{details}</div></div></section>
@@ -825,10 +834,10 @@ def differentiation_section():
        'Compare prices and specifications, organise flights and packing, and prepare occasions with gift ideas and budgets — all connected to the plan.',
        'قارنا الأسعار والمواصفات، ونظّما الرحلات والتجهيز، وخططا للمناسبات بأفكار الهدايا والميزانيات، مع بقاء التفاصيل مرتبطة بالخطة.',
        'trips.html', 'Explore trip planning', 'اكتشفا تخطيط الرحلات'),
-      ('04', 'Familiar features, thoughtfully extended.', 'مزايا مألوفة بتفاصيل أذكى.',
-       'Counters can follow anniversaries, map links can become saved places, and letters can wait until a chosen date. The details make each feature more useful.',
-       'العدّادات تتابع الذكريات السنوية، وروابط الخرائط تتحول إلى أماكن محفوظة، والرسائل تنتظر موعد فتحها. تفاصيل صغيرة تزيد الفائدة.',
-       'features.html', 'Explore every feature', 'اكتشفا كل المزايا'),
+      ('04', 'Emotional connection — and a life beyond it.', 'تواصل عاطفي وحياة مشتركة تتجاوز ذلك.',
+       'Letters, love gestures, check-ins and a feelings journal keep you close. OneSpace goes further: planning, discussion, comparisons and decisions happen in the same space.',
+       'تبقيكما الرسائل ولمسات الحب والتواصل اليومي ويوميات المشاعر قريبين. ويذهب OneSpace أبعد من ذلك: تخططان وتتناقشان وتقارنان الخيارات وتتخذان القرارات في مساحة واحدة.',
+       'connect-care.html', 'Explore Connect & Care', 'اكتشفا التواصل والاهتمام'),
     ]
     lines = ''.join(
       f'<article class="difference-row">'
@@ -842,9 +851,9 @@ def differentiation_section():
       <div class="difference-lead">
         <div>
           {T('WHAT MAKES ONESPACE DIFFERENT', 'ما الذي يميّز OneSpace', 'span', 'eyebrow')}
-          {T('Not just more features. A smarter way to share life.', 'ليست مزايا أكثر فحسب، بل حياة مشتركة أسهل.', 'h2')}
+          {T('More than emotional connection. A life you build together.', 'أكثر من تواصل عاطفي... حياة تبنيانها معًا.', 'h2')}
         </div>
-        {T('OneSpace connects what you share, edit, decide and plan. Each feature works with the others instead of sending you back through scattered apps and messages.', 'يربط OneSpace ما تتشاركانه وتعدّلانه وتقرّرانه وتخططان له. تتكامل المزايا بدل العودة إلى تطبيقات ورسائل متفرقة.', 'p', 'lead')}
+        {T('Love letters and daily gestures matter. What makes OneSpace different is what happens beyond them: share ideas from other apps, edit together, compare options, discuss decisions and put your plans into action.', 'رسائل الحب واللفتات اليومية مهمة، لكن ما يميز OneSpace هو ما بعدها: تشاركا الأفكار من تطبيقات أخرى، وعدّلاها معًا، وقارنا الخيارات، وتناقشا في القرارات، وحوّلا خططكما إلى واقع.', 'p', 'lead')}
       </div>
       <div class="difference-grid">{lines}</div>
       <div class="difference-outro"><a href="compare.html" class="btn btn-ghost">{T('Discover why OneSpace is different', 'اكتشفا الفرق مع OneSpace')}</a></div>
@@ -857,9 +866,9 @@ def page_compare():
              'Discover the difference: smart sharing into unified lists, two-way collaboration, side-by-side choices, trips and occasion budgets in one private couples app.',
              'اكتشف الفرق: مشاركة ذكية إلى قوائم موحدة، وتعاون بين الشريكين، ومقارنة الخيارات، وتخطيط الرحلات وميزانيات المناسبات في تطبيق خاص للأزواج.')
     return h + page_hero('Why OneSpace', 'لماذا OneSpace',
-                         'The difference is how it all connects.', 'الفرق في ترابط كل شيء.',
-                         'A link becomes an option. An option becomes a shared decision. A decision becomes part of a plan. Instead of juggling separate tools, keep that whole journey in one private space for two.',
-                         'رابط يتحوّل إلى خيار، والخيار إلى قرار مشترك، والقرار إلى جزء من خطة. بدل التنقل بين أدوات متفرقة، تجتمع الرحلة كلها في مساحة خاصة لكما.') + \
+                         'Beyond connection: plan and decide together.', 'أكثر من التواصل: خططا وقررا معًا.',
+                         'Emotional connection is only part of a shared life. OneSpace brings your ideas, comparisons, two-way discussions, decisions and plans together in one private space for two.',
+                         'التواصل العاطفي جزء من حياتكما المشتركة، وليس كل شيء. يجمع OneSpace الأفكار والمقارنات والنقاشات المتبادلة والقرارات والخطط في مساحة واحدة خاصة بكما.') + \
        differentiation_section() + f"""
 <section class="difference-compare" aria-labelledby="compare-tools-title"><div class="wrap">
   <div class="sec-head center">
