@@ -1,15 +1,15 @@
 # OneSpace — Brand identity specification
 
-Status: **Approved direction for the website and staged mobile branding**, November 18, 2026.
+Status: **Working specification for layout and messaging only. Original logo is unchanged.**, November 18, 2026.
 
 ## Official lockup
 
-- Use the existing OneSpace symbol in `assets/mark.svg` (website) or `assets/branding/mark.png` (Flutter).
+- **Do not redesign, redraw, modify or recolor the existing OneSpace logo.** Use the original `assets/mark.svg` on the website and `assets/branding/mark.png` in Flutter.
 - Product name: **OneSpace** (never "One Space" in the wordmark).
 - Signature tagline: **Two of Us. One Space.** Exact capitalization and punctuation.
 - The English wordmark and official tagline remain consistent in every locale.
 - Optional explanatory Arabic translation, separate from the official tagline: **نحن الاثنان. مساحة واحدة.**
-- Symbol, wordmark and tagline form one lockup. When the surface is extremely small, show the symbol alone and supply accessible brand text.
+- Adjust only spacing, scale and surrounding layout. When the surface is extremely small, show the original symbol alone and supply accessible brand text.
 
 ## Type
 
@@ -22,15 +22,15 @@ Status: **Approved direction for the website and staged mobile branding**, Novem
 
 | Use | Color |
 |---|---|
-| Wordmark main / midnight navy | `#14213D` |
-| Wordmark accent / ocean teal | `#1F6E78` |
+| Display name / midnight navy | `#14213D` |
+| Surrounding interface accent / ocean teal | `#1F6E78` |
 | Tagline / slate | `#51657A` |
 | Secondary expressive coral | `#E8745A` |
 | Dark surface main text | `#F5F7FB` |
 | Dark surface accent | `#8AD9D3` |
 | Dark surface tagline | `#CCD5E3` |
 
-The existing mark retains its original teal–coral shapes. Do not recolor the official symbol to chase a campaign theme.
+The original brand asset and its existing artwork are the source of truth. These palette values are for adjacent UI typography and accents, **not instructions to modify the logo**.
 
 ## Layout
 
