@@ -131,7 +131,7 @@ def head(page, title, title_ar, desc, desc_ar=''):
   <a class="brand" href="./"><img src="assets/mark.svg" alt="" width="34" height="34">OneSpace</a>
   <nav class="menu" aria-label="Main">{''.join(menu)}<a class="btn btn-primary menu-cta" href="join.html">{T('Join the Founding 500', 'انضم إلى المؤسسين الـ500')}</a></nav>
   <div class="actions">
-    <details class="os-intl-languages"><summary aria-label="Languages / اللغات">🌐 Language</summary><div class="os-intl-languages-list"><a href="{canonical}" data-language-switch="en" lang="en">English</a><a href="{BASE}ar/{'' if page == 'index.html' else page}" data-language-switch="ar" lang="ar">العربية</a><a href="{BASE}es/" data-language-switch="es" lang="es">Español</a><a href="{BASE}fr/" data-language-switch="fr" lang="fr">Français</a><a href="{BASE}de/" data-language-switch="de" lang="de">Deutsch</a></div></details>
+    <details class="os-intl-languages"><summary aria-label="Languages / اللغات">🌐 Language</summary><div class="os-intl-languages-list"><a href="{canonical}" data-language-switch="en" lang="en">English</a><a href="{BASE}ar/{'' if page == 'index.html' else page}" data-language-switch="ar" lang="ar">العربية</a><a href="{BASE}es/{'' if page == 'index.html' else page}" data-language-switch="es" lang="es">Español</a><a href="{BASE}fr/{'' if page == 'index.html' else page}" data-language-switch="fr" lang="fr">Français</a><a href="{BASE}de/{'' if page == 'index.html' else page}" data-language-switch="de" lang="de">Deutsch</a></div></details>
     <a class="btn btn-primary btn-sm" href="join.html">{T('Join the Founding 500', 'انضم إلى المؤسسين الـ500')}</a>
     <button class="burger" type="button" aria-label="Menu" aria-expanded="false">☰</button>
   </div>
@@ -1736,13 +1736,13 @@ def arabic_page(html, name):
 def llms_txt():
     lines = ['# OneSpace', '', '> OneSpace is a private app for couples — living together or apart — that keeps the shared life in one place: '
              'one shared watchlist, one place to compare things to buy, one trip with every flight option, one calendar, reminders for me, '
-             'my partner or both, occasions with budgets, counters, letters and memories. English and Arabic. Android now, iPhone soon.', '',
+             'my partner or both, occasions with budgets, counters, letters and memories. English, Arabic, Spanish, French and German on the website. Android early access; iPhone planned.', '',
              '## Main pages']
     for n, (_, p, _c) in PAGES.items():
         if n in ('privacy.html', 'terms.html', 'delete-account.html'):
             continue
         lines.append(f'- [{n.replace(".html", "").replace("-", " ").title() if n != "index.html" else "Home"}]({BASE}{"" if n == "index.html" else n})')
-    lines += ['', '## Arabic', f'- [العربية]({BASE}ar/)', '', '## Legal', f'- [Privacy]({BASE}privacy.html)', f'- [Terms]({BASE}terms.html)', '']
+    lines += ['', '## Languages', f'- [العربية]({BASE}ar/)', f'- [Español]({BASE}es/)', f'- [Français]({BASE}fr/)', f'- [Deutsch]({BASE}de/)', '', '## Legal', f'- [Privacy]({BASE}privacy.html)', f'- [Terms]({BASE}terms.html)', '']
     return '\n'.join(lines)
 
 
@@ -1777,7 +1777,7 @@ def main():
             urls += f'  <url><loc>{loc}</loc><lastmod>{TODAY}</lastmod><changefreq>{c}</changefreq><priority>{priority}</priority>{alt}</url>\n'
     (ROOT / 'sitemap.xml').write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" '
                                       f'xmlns:xhtml="http://www.w3.org/1999/xhtml">\n{urls}</urlset>\n', encoding='utf-8')
-    (ROOT / 'robots.txt').write_text(f'User-agent: *\nAllow: /\nDisallow: /v4.html\nDisallow: /v4-tutorial.html\nDisallow: /confirm.html\nDisallow: /ar/confirm.html\nDisallow: /unsubscribe.html\nDisallow: /ar/unsubscribe.html\n\nSitemap: {BASE}sitemap.xml\n', encoding='utf-8')
+    (ROOT / 'robots.txt').write_text(f'User-agent: *\nAllow: /\nDisallow: /v4.html\nDisallow: /v4-tutorial.html\nDisallow: /confirm.html\nDisallow: /ar/confirm.html\nDisallow: /unsubscribe.html\nDisallow: /ar/unsubscribe.html\nDisallow: /es/confirm.html\nDisallow: /fr/confirm.html\nDisallow: /de/confirm.html\nDisallow: /es/unsubscribe.html\nDisallow: /fr/unsubscribe.html\nDisallow: /de/unsubscribe.html\n\nSitemap: {BASE}sitemap.xml\n', encoding='utf-8')
     (ROOT / f'{INDEXNOW_KEY}.txt').write_text(INDEXNOW_KEY + '\n', encoding='utf-8')
     (ROOT / 'llms.txt').write_text(llms_txt(), encoding='utf-8')
     (ROOT / 'site.webmanifest').write_text(json.dumps({'name': 'OneSpace', 'short_name': 'OneSpace', 'start_url': './', 'display': 'standalone',
