@@ -895,35 +895,78 @@ def page_connect_care():
 
 
 def ai_review_preview():
-    """Testing-only mockups: clearly fictional, no published review or rating data."""
+    """AI-generated fictional examples: review layouts, never social-proof claims."""
     if not SHOW_AI_REVIEW_PREVIEW:
         return ''
-    quotes = ''.join(f'''<div class="review-preview-quote">
-       <span class="review-fake-tag">{T('AI-generated example — NOT A REAL TESTIMONIAL','مثال مولّد بالذكاء الاصطناعي — ليس شهادة حقيقية')}</span>
-       {T(en,ar,'p','review-quote')}
-       {T('Fictional example for design testing only.','مثال افتراضي لمراجعة التصميم فقط.','p','review-context')}
-       </div>''' for en,ar in [
-       ('“We save ideas together instead of losing them in our messages.”','«نجمع الأفكار معًا بدل أن تضيع بين رسائلنا.»'),
-       ('“We finally have a place to discuss our plans and decide together.”','«أصبح لدينا مكان نناقش فيه خططنا ونتخذ قراراتنا معًا.»')])
-    stores = ''.join(f'''<div class="review-preview-store">
-       <h3>{name}</h3><p class="review-stars" aria-hidden="true">☆ ☆ ☆ ☆ ☆</p>
-       {T('No verified rating yet','لا يوجد تقييم موثّق بعد','p','review-unrated')}
-       {T('AI-generated app review placeholder for testing only.','نموذج مراجعة مولّد بالذكاء الاصطناعي للاختبار فقط.','p')}
-       </div>''' for name in ('Google Play','App Store'))
-    return f'''<section class="review-preview" id="reviews-preview" data-review-preview="test-only" data-nosnippet><div class="wrap">
+    samples = [
+      ('We kept sending each other links. Now our shortlist lives in one place.',
+       'كنا نتبادل الروابط باستمرار، والآن نجمع خياراتنا في قائمة واحدة.', 'Long-distance', 'عن بُعد'),
+      ('We can discuss different options and actually remember what we decided.',
+       'نتناقش في الخيارات المختلفة ونتذكّر فعلًا ما قررناه.', 'Living together', 'نعيش معًا'),
+      ('Our trip ideas, packing list and decisions finally have a place together.',
+       'أفكار رحلتنا وقائمة تجهيزنا وقراراتنا أصبحت في مكان واحد.', 'Planning a trip', 'نخطط لرحلة'),
+      ('The sweet messages are still there, alongside everything we need to plan.',
+       'رسائلنا الجميلة موجودة، ومعها كل ما نحتاج إلى التخطيط له.', 'Living apart', 'نعيش متباعدين'),
+    ]
+    cards = ''.join(
+      f'<article class="testi-card" data-testimonial-card tabindex="0">'
+      f'<span class="testi-label">{T("AI-generated test example","مثال تجريبي مولّد بالذكاء الاصطناعي")}</span>'
+      f'{T("“"+quote+"”","«"+quote_ar+"»","p","testi-quote")}'
+      f'{T(kind,kind_ar,"span","testi-type")}'
+      f'</article>'
+      for quote,quote_ar,kind,kind_ar in samples)
+    dots = ''.join(f'<button type="button" data-slide-dot="{i}" aria-current="{"true" if i == 0 else "false"}" aria-label="Example testimonial {i+1}"></button>' for i in range(len(samples)))
+    def store_panel(name, label, label_ar):
+      bars = ''.join(
+         f'<div class="store-rating-row"><span>{star} ★</span><span class="store-rating-bar" aria-hidden="true"><i></i></span>'
+         f'<span class="store-rating-pending">—</span></div>'
+         for star in (5,4,3,2,1))
+      return f'''<article class="review-preview-store">
+        <div class="review-store-head"><h4>{name}</h4><span class="review-test-tag">{T('TEST PREVIEW','معاينة تجريبية')}</span></div>
+        <div class="review-store-metrics">
+          <div><strong>— / 5</strong>{T('Average rating','متوسط التقييم','span')}</div>
+          <div><strong>—</strong>{T('Ratings & reviews','التقييمات والمراجعات','span')}</div>
+          <div><strong>—</strong>{T('Downloads','التنزيلات','span')}</div>
+        </div>
+        <h5>{T('Rating breakdown', 'توزيع التقييمات')}</h5>
+        <div class="review-rating-breakdown">{bars}</div>
+        <p class="review-unrated">{T('Awaiting verified store data', 'بانتظار بيانات موثّقة من المتجر')}</p>
+        <div class="review-fake-review">
+          <span>{T('Review layout placeholder', 'موضع تجريبي لعرض مراجعة')}</span>
+          <p>{T('A real review will appear here after public release and permission to display it.',
+             'ستظهر هنا مراجعة حقيقية بعد الإطلاق العام والحصول على إذن عرضها.')}</p>
+        </div>
+        <p class="review-store-disclaimer">{T('AI-generated testing layout. Not a real app rating or review.',
+             'تنسيق تجريبي مولّد بالذكاء الاصطناعي. ليس تقييمًا أو مراجعة حقيقية.')}</p>
+      </article>'''
+    return f'''<section class="review-preview" id="reviews-preview" data-review-preview="test-only" data-nosnippet>
+    <div class="wrap">
       <p class="review-preview-warning">{T('TEST ONLY · AI-GENERATED PLACEHOLDERS · NOT REAL CUSTOMER REVIEWS OR RATINGS',
         'للاختبار فقط · نماذج مولّدة بالذكاء الاصطناعي · ليست مراجعات أو تقييمات حقيقية')}</p>
-      <div class="sec-head center">
-        {T('Testimonials & app ratings — design preview', 'شهادات وتقييمات التطبيق — معاينة التصميم','h2')}
-        {T('These examples are fictional and created by AI for testing. They do not represent actual customers or published app-store ratings.',
-           'هذه أمثلة افتراضية أنشأها الذكاء الاصطناعي للاختبار، ولا تمثل مستخدمين حقيقيين أو تقييمات منشورة في متاجر التطبيقات.','p','lead')}
+      <div class="review-preview-head">
+        <div>{T('DESIGN PREVIEW', 'معاينة التصميم', 'span','eyebrow')}
+          {T('A glimpse of what couples might say.', 'لمحة عمّا قد يقوله الأزواج.', 'h2')}
+          {T('Fictional example testimonials for layout testing only. These quotes are not from actual users.',
+            'شهادات افتراضية لاختبار التصميم فقط. هذه الاقتباسات ليست من مستخدمين حقيقيين.', 'p','lead')}</div>
+        <div class="review-slider-actions">
+          <button data-slide-prev type="button" aria-label="Previous testimonial" disabled>‹</button>
+          <button data-slide-next type="button" aria-label="Next testimonial">›</button>
+        </div>
       </div>
-      <div class="review-preview-grid">{quotes}</div>
-      <h3 class="review-preview-subhead">{T('Store review placeholders', 'نماذج مراجعات المتاجر')}</h3>
-      <div class="review-preview-grid">{stores}</div>
-      <p class="review-preview-note">{T('Replace these examples only after genuine, verified, permissioned reviews are available.',
-        'لا تستبدل هذه الأمثلة إلا بمراجعات حقيقية موثّقة ومصرّح باستخدامها.')}</p>
-    </div></section>'''
+      <div class="testimonials-carousel" data-testimonial-carousel>
+        <div class="testi-track" data-slide-track tabindex="0" aria-label="AI-generated example testimonial carousel">{cards}</div>
+        <div class="testi-dots">{dots}</div>
+      </div>
+      <div class="review-stores-header">
+        {T('App ratings & reviews — design preview','تقييمات ومراجعات التطبيق — معاينة التصميم','h3')}
+        {T('We will display verified store metrics when they are available. No ratings or download counts have been invented.',
+           'سنعرض بيانات المتاجر الموثّقة عندما تتوفر. لم نخترع أي تقييمات أو أرقام تنزيلات.', 'p')}
+      </div>
+      <div class="review-preview-grid">{store_panel('Google Play','','')}{store_panel('App Store','','')}</div>
+      <p class="review-preview-note">{T('All examples are AI-generated for testing and must not be presented as real social proof.',
+         'جميع الأمثلة مولّدة بالذكاء الاصطناعي لأغراض الاختبار ولا يجوز عرضها على أنها آراء حقيقية.')}</p>
+    </div>
+    </section>'''
 
 
 
