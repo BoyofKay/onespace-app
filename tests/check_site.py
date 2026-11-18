@@ -9,6 +9,7 @@ PAGES = ["index.html", "compare.html", "smart-sharing.html", "decide-together.ht
          "how-it-works.html", "tutorials.html", "whats-new.html", "faq.html", "join.html",
          "support.html", "share-kit.html", "guides.html", "guide-long-distance-ideas.html", "guide-mental-load.html", "guide-anniversary-planning.html", "privacy.html", "terms.html", "delete-account.html", "404.html"]
 PAGES += ["ar/" + p for p in PAGES if p != "404.html"]  # server-rendered Arabic twins
+PAGES += [f"{lang}/index.html" for lang in ("es", "fr", "de")]  # fully localized landing pages
 REDIRECTS = ["v4.html", "v4-tutorial.html"]
 # Claims the app does not make (D1: automatic gestures retired; D55: voice hidden) and private data.
 FORBIDDEN = ["automatically at the right moment", "Automatic gestures", "voice command", "Kandice", "ph.ahmed"]
@@ -92,6 +93,22 @@ def main():
                 if dest and url.fragment not in dest.ids:
                     errors.append(f"{name}: missing anchor {ref}")
 
+    # Each indexable homepage language variant must have its own canonical,
+    # reciprocal hreflang, visitor tracker and usable Founder registration.
+    sitemap = (ROOT / "sitemap.xml").read_text(encoding="utf-8")
+    for locale in ("es", "fr", "de"):
+        loc = ROOT / locale / "index.html"
+        if not loc.exists():
+            errors.append(f"Missing {locale} landing page")
+            continue
+        raw = loc.read_text(encoding="utf-8")
+        for expected in (f'<html lang="{locale}"', f'hreflang="{locale}"',
+                         f'href="https://onespace.live/{locale}/"', 'data-form="join"',
+                         'goatcounter.com/count', '/assets/os.js'):
+            if expected not in raw:
+                errors.append(f"{loc}: missing {expected}")
+        if f'<loc>https://onespace.live/{locale}/</loc>' not in sitemap:
+            errors.append(f"sitemap missing {locale} homepage")
     if not (ROOT / "robots.txt").exists() or not (ROOT / "sitemap.xml").exists():
         errors.append("Missing SEO files")
     index = (ROOT / "index.html").read_text(encoding="utf-8")
