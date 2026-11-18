@@ -595,3 +595,21 @@ CURATED["de"].update({
   "This compares everyday workflows, not an exhaustive audit of other apps. Features and integrations can vary by product.": "Verglichen werden typische Abläufe im Alltag, nicht sämtliche Funktionen anderer Apps. Funktionen und Integrationen können sich je nach Produkt unterscheiden.",
   "From a link shared in another app to a decision made together, keep your lists, plans, conversations and memories connected in one private space. Made for couples": "Vom Link aus einer anderen App bis zur gemeinsamen Entscheidung: Listen, Pläne, Gespräche und Erinnerungen bleiben an einem privaten Ort verbunden. Für Paare, die"
 })
+
+
+# Feature-page editorial positioning: depth rather than a competitor card.
+CURATED["es"].update({
+  "More than the basics.": "Más allá de lo básico.",
+  "Thought through for two.": "Pensado para los dos.",
+  "Every OneSpace feature adds thoughtful details to a familiar idea. Open one to see the workflow behind it.": "Cada función de OneSpace lleva una idea conocida un paso más allá. Descubran cómo se integra en su día a día."
+})
+CURATED["fr"].update({
+  "More than the basics.": "Bien plus que l’essentiel.",
+  "Thought through for two.": "Pensé pour vous deux.",
+  "Every OneSpace feature adds thoughtful details to a familiar idea. Open one to see the workflow behind it.": "Chaque fonction de OneSpace enrichit une idée familière de détails bien pensés. Découvrez comment elle s’intègre à votre quotidien."
+})
+CURATED["de"].update({
+  "More than the basics.": "Mehr als die Grundlagen.",
+  "Thought through for two.": "Für euch beide durchdacht.",
+  "Every OneSpace feature adds thoughtful details to a familiar idea. Open one to see the workflow behind it.": "Jede OneSpace-Funktion ergänzt eine vertraute Idee um durchdachte Details. Entdeckt, was hinter den einzelnen Abläufen steckt."
+})
