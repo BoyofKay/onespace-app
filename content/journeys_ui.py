@@ -289,6 +289,14 @@ FEATURES = {
     "Anlässe und Budgets",
     "occasions.html"
   ],
+  "themes": [
+    "Anniversary themes & accents",
+    "سمات الذكرى والألوان المميزة",
+    "Temas y colores de aniversario",
+    "Thèmes et couleurs d’anniversaire",
+    "Jahrestagsdesigns und Akzentfarben",
+    "features.html#me"
+  ],
   "privacy": [
     "Private & shared access",
     "الخصوصية والمشاركة",

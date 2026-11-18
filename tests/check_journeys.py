@@ -59,6 +59,18 @@ for lang in ('en','ar','es','fr','de'):
             loc=('es','fr','de').index(lang)+2
             assert j['title'][loc] in body,(lang,j['slug'])
             assert j['stages'][0][loc] == narrative[0].get_text('',strip=False),(lang,j['slug'],'missing narrative translation')
+# Editorial acceptance for the four requested journey changes, all five languages.
+by_slug = {j['slug']: j for j in J}
+assert all('documents' in by_slug['reunion-from-flight-to-memory']['stages'][2][0].lower() for _ in [0])
+assert 'themes' in by_slug['anniversary-across-the-ocean']['features']
+assert 'Automatic seasonal appearance' in by_slug['anniversary-across-the-ocean']['stages'][3][0]
+assert 'exact location' in by_slug['the-apartment-before-the-move']['stages'][1][0]
+assert 'memories' in by_slug['her-family-celebration-from-afar']['features']
+assert '22 available layouts' in by_slug['her-family-celebration-from-afar']['stages'][2][0]
+assert 'PDF' in by_slug['her-family-celebration-from-afar']['stages'][4][0]
+for locale_index in range(5):
+    assert 'PDF' in by_slug['her-family-celebration-from-afar']['stages'][4][locale_index]
+    assert '22' in by_slug['her-family-celebration-from-afar']['stages'][2][locale_index]
 comparison=(ROOT/'compare.html').read_text(encoding='utf8')
 tutorials=(ROOT/'tutorials.html').read_text(encoding='utf8')
 assert 'the-sofa-decision' not in comparison

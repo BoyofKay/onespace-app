@@ -87,10 +87,10 @@ FEATURE_TERMS = {
   },
   "memories": {
     "en": ["shared memory", "shared Memories", "memories", "memory", "scrapbook"],
-    "ar": ["ذكرى مشتركة", "الذكريات", "ذكرى", "الألبوم"],
-    "es": ["recuerdo compartido", "Recuerdos", "recuerdo", "álbum"],
-    "fr": ["souvenir partagé", "souvenirs", "souvenir", "album"],
-    "de": ["gemeinsame Erinnerung", "Erinnerungen", "Erinnerung", "Scrapbook"],
+    "ar": ["ذكرى مشتركة", "ألبوم الذكريات", "الألبوم", "الذكريات", "ذكرى"],
+    "es": ["álbum de recuerdos", "recuerdo compartido", "Recuerdos", "recuerdo", "álbum"],
+    "fr": ["album souvenir", "souvenir partagé", "souvenirs", "souvenir", "album"],
+    "de": ["Erinnerungsalbum", "gemeinsame Erinnerung", "Erinnerungen", "Erinnerung", "Scrapbook"],
   },
   "watchlist": {
     "en": ["shared watchlist", "watchlist"],
@@ -140,6 +140,13 @@ FEATURE_TERMS = {
     "es": ["ocasión privada", "ocasión compartida", "ocasión"],
     "fr": ["occasion privée", "occasion commune", "occasion"],
     "de": ["privaten Anlass", "Anlass"],
+  },
+  "themes": {
+    "en": ["romantic rose accent", "theme"],
+    "ar": ["بلمسة وردية رومانسية", "سمة التطبيق"],
+    "es": ["acento rosa romántico", "aspecto de la app"],
+    "fr": ["accent rose romantique", "thème de l’application"],
+    "de": ["romantischen Rosé-Akzent", "App-Design"],
   },
   "privacy": {
     "en": ["Only me", "private attachments"],
