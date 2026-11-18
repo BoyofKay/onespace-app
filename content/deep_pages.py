@@ -4,7 +4,7 @@ Everything here describes features that exist in the app today (checked in the
 app code, R80). Keep it honest: no automatic gestures (D1), no voice (D55)."""
 
 DEEP = [
- {'slug': 'smart-sharing.html', 'icon': '📲', 'shot': 'places_map', 'theme': 'teal', 'illus': 'share',
+ {'slug': 'smart-sharing.html', 'icon': '📲', 'shot': None, 'shot2': 'lists', 'theme': 'teal', 'illus': 'share',
   'nav': ('Smart sharing', 'المشاركة الذكية'), 'navd': ('Share from any app into the right place', 'شارك من أي تطبيق إلى المكان الصحيح'),
   'title': ('Share anything from any app — OneSpace knows where it goes', 'شارك أي شيء من أي تطبيق — وOneSpace يعرف أين يضعه'),
   'seo': ('Share links from shopping sites, Netflix, Spotify, Google Flights and Google Maps straight into your couples app: gift ideas, watchlists, flight options and places.',
