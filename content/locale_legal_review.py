@@ -342,3 +342,45 @@ LEGAL_EDITORIAL["de"]["your details in Me → Profile."] = "deine Angaben unter 
 LEGAL_EDITORIAL["es"]["You can download your data and delete your account at any time (Me → Your data and account). We may end the test or the service with notice by email."] = "Puedes descargar tus datos y eliminar tu cuenta en cualquier momento desde «Me» (Yo) → «Your data and account» (Tus datos y cuenta). Podemos poner fin a la prueba o al servicio notificándolo por correo electrónico."
 LEGAL_EDITORIAL["fr"]["You can download your data and delete your account at any time (Me → Your data and account). We may end the test or the service with notice by email."] = "Vous pouvez télécharger vos données et supprimer votre compte à tout moment dans « Me » (Moi) → « Your data and account » (Vos données et votre compte). Nous pouvons mettre fin au test ou au service après notification par e-mail."
 LEGAL_EDITORIAL["de"]["You can download your data and delete your account at any time (Me → Your data and account). We may end the test or the service with notice by email."] = "Du kannst deine Daten jederzeit unter „Me“ (Ich) → „Your data and account“ (Deine Daten und dein Konto) herunterladen und dein Konto löschen. Wir können den Test oder den Dienst nach vorheriger E-Mail-Benachrichtigung beenden."
+
+LEGAL_EDITORIAL["es"].update({
+  "In the app (fastest)": "Desde la app (la opción más rápida)",
+  "Me → Your data and account": "Me → Your data and account (Tus datos y cuenta)",
+  "Export my data": "Export my data (Exportar mis datos)",
+  "Your account, your profile and the items only you created are deleted. If your partner stays, the shared space and what they created remain theirs. If you are the last member, the whole space is deleted, including its photos and files.": "Se eliminan tu cuenta, tu perfil y los elementos que has creado solo para ti. Si tu pareja conserva su cuenta, el espacio compartido y sus contenidos permanecen con ella. Si eras la última persona del espacio, se elimina todo, incluidas las fotos y los archivos.",
+  "Send a request below — or email": "Envía una solicitud mediante el formulario de abajo o escribe a",
+  "— from the email on your account. We will confirm it is you, then delete the account and reply.": "desde el correo asociado a tu cuenta. Verificaremos tu identidad, gestionaremos la eliminación y te responderemos.",
+  "Account email *": "Correo de tu cuenta *",
+  "Anything we should know? *": "¿Hay algo que debamos saber? *",
+  "Request deletion": "Solicitar la eliminación",
+  "What is deleted": "Qué se elimina",
+  "Can’t sign in?": "¿No puedes iniciar sesión?"
+})
+
+LEGAL_EDITORIAL["fr"].update({
+  "In the app (fastest)": "Depuis l’application (le plus rapide)",
+  "Me → Your data and account": "Me → Your data and account (Vos données et votre compte)",
+  "Export my data": "Export my data (Exporter mes données)",
+  "Your account, your profile and the items only you created are deleted. If your partner stays, the shared space and what they created remain theirs. If you are the last member, the whole space is deleted, including its photos and files.": "Votre compte, votre profil et les éléments que vous avez créés pour vous seul sont supprimés. Si votre partenaire conserve son compte, l’espace partagé et ses contenus lui restent accessibles. Si vous étiez la dernière personne à utiliser cet espace, celui-ci est entièrement supprimé, photos et fichiers compris.",
+  "Send a request below — or email": "Envoyez une demande à l’aide du formulaire ci-dessous ou écrivez à",
+  "— from the email on your account. We will confirm it is you, then delete the account and reply.": "depuis l’adresse e-mail associée à votre compte. Nous vérifierons votre identité, procéderons à la suppression et vous répondrons.",
+  "Account email *": "Adresse e-mail du compte *",
+  "Anything we should know? *": "Y a-t-il autre chose à nous signaler ? *",
+  "Request deletion": "Demander la suppression",
+  "What is deleted": "Quelles données sont supprimées ?",
+  "Can’t sign in?": "Vous n’arrivez pas à vous connecter ?"
+})
+
+LEGAL_EDITORIAL["de"].update({
+  "In the app (fastest)": "Direkt in der App (am schnellsten)",
+  "Me → Your data and account": "Me → Your data and account (Deine Daten und dein Konto)",
+  "Export my data": "Export my data (Meine Daten exportieren)",
+  "Your account, your profile and the items only you created are deleted. If your partner stays, the shared space and what they created remain theirs. If you are the last member, the whole space is deleted, including its photos and files.": "Dein Konto, dein Profil und deine nur für dich erstellten Einträge werden gelöscht. Wenn deine Partnerperson ihr Konto behält, bleiben der gemeinsame Bereich und ihre Inhalte für sie bestehen. Bist du die letzte Person im Bereich, wird dieser vollständig gelöscht, einschließlich aller Fotos und Dateien.",
+  "Send a request below — or email": "Sende eine Anfrage über das Formular unten oder schreibe an",
+  "— from the email on your account. We will confirm it is you, then delete the account and reply.": "von der E-Mail-Adresse deines Kontos aus. Wir prüfen deine Identität, veranlassen die Löschung und antworten dir.",
+  "Account email *": "E-Mail-Adresse deines Kontos *",
+  "Anything we should know? *": "Gibt es noch etwas, das wir wissen sollten? *",
+  "Request deletion": "Löschung beantragen",
+  "What is deleted": "Welche Daten werden gelöscht?",
+  "Can’t sign in?": "Probleme beim Anmelden?"
+})
