@@ -28,6 +28,10 @@ for locale in ('en','ar','es','fr','de'):
     why = soup.select('header .menu > a[href$="compare.html"]')
     assert len(why) == 1, (locale, 'why OneSpace must be top-level')
     assert not soup.select('.mega-panel .mega-link .e'), locale
+    # Official mark remains the same image on every localized page.
+    marks=soup.select('header .brand img')
+    assert len(marks)==1 and marks[0].get('src','').split('?')[0].endswith('assets/mark.svg'), locale
+    assert len(soup.select('#the-difference .difference-row'))==4, (locale, 'differentiating story')
     # Keep the real page body, not a miniature landing page.
     assert len(soup.select('img'))>=3,locale
 
