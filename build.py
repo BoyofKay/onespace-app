@@ -31,7 +31,7 @@ import sys as _sys
 _sys.path.insert(0, str(ROOT / 'content'))
 from deep_pages import DEEP, COMPARE  # noqa: E402
 from arabic_copy_overrides import revise
-from international import LOCALES, make_page
+from full_localization import NEW_LANGS, LANGS, build_locales
 
 
 def T(en, ar, tag='span', cls='', attrs=''):
@@ -106,7 +106,7 @@ def head(page, title, title_ar, desc, desc_ar=''):
 <link rel="canonical" href="{canonical}">
 <link rel="alternate" hreflang="en" href="{canonical}">
 <link rel="alternate" hreflang="ar" href="{BASE}ar/{'' if page == 'index.html' else page}">
-{''.join(f'<link rel="alternate" hreflang="{k}" href="{BASE}{k}/">' for k in ('es', 'fr', 'de')) if page == 'index.html' else ''}
+{''.join(f'<link rel="alternate" hreflang="{k}" href="{BASE}{k}/{"" if page == "index.html" else page}">' for k in NEW_LANGS)}
 <link rel="alternate" hreflang="x-default" href="{canonical}">{verify}
 <meta property="og:site_name" content="OneSpace">
 <meta property="og:title" content="{escape(title)}">
@@ -1762,23 +1762,19 @@ def main():
     (ROOT / 'ar' / 'unsubscribe.html').write_text(arabic_page((ROOT / 'unsubscribe.html').read_text(encoding='utf-8'), 'unsubscribe.html'), encoding='utf-8')
     for name in PAGES:
         (ROOT / 'ar' / name).write_text(arabic_page((ROOT / name).read_text(encoding='utf-8'), name), encoding='utf-8')
-    for code in LOCALES:
-        (ROOT / code).mkdir(exist_ok=True)
-        (ROOT / code / 'index.html').write_text(make_page(code, BASE), encoding='utf-8')
+    # Every language reuses the identical full English DOM: screenshots, tutorial,
+    # demo, theme preview, interactive forms and all original product pages.
+    count = build_locales(ROOT, list(PAGES) + ['confirm.html', 'unsubscribe.html'])
+    print(f'Localized {count} complete pages from source')
     urls = ''
     for n, (_, p, c) in PAGES.items():
         slug = '' if n == 'index.html' else n
-        alt = (f'<xhtml:link rel="alternate" hreflang="en" href="{BASE}{slug}"/><xhtml:link rel="alternate" hreflang="ar" href="{BASE}ar/{slug}"/>' +
-               (''.join(f'<xhtml:link rel="alternate" hreflang="{code}" href="{BASE}{code}/"/>' for code in ('es', 'fr', 'de')) if n == 'index.html' else '') +
-               f'<xhtml:link rel="alternate" hreflang="x-default" href="{BASE}{slug}"/>')
-        for loc, pr in ((BASE + slug, p), (BASE + 'ar/' + slug, f'{max(float(p) - 0.1, 0.1):.1f}')):
-            urls += f'  <url><loc>{loc}</loc><lastmod>{TODAY}</lastmod><changefreq>{c}</changefreq><priority>{pr}</priority>{alt}</url>\n'
-    home_alts = (f'<xhtml:link rel="alternate" hreflang="en" href="{BASE}"/>' +
-                 f'<xhtml:link rel="alternate" hreflang="ar" href="{BASE}ar/"/>' +
-                 ''.join(f'<xhtml:link rel="alternate" hreflang="{code}" href="{BASE}{code}/"/>' for code in ('es', 'fr', 'de')) +
-                 f'<xhtml:link rel="alternate" hreflang="x-default" href="{BASE}"/>')
-    for code in LOCALES:
-        urls += f'  <url><loc>{BASE}{code}/</loc><lastmod>{TODAY}</lastmod><changefreq>weekly</changefreq><priority>0.9</priority>{home_alts}</url>\n'
+        alt = ''.join(f'<xhtml:link rel="alternate" hreflang="{lang}" href="{BASE}{"" if lang == "en" else lang+"/"}{slug}"/>' for lang in LANGS)
+        alt += f'<xhtml:link rel="alternate" hreflang="x-default" href="{BASE}{slug}"/>'
+        for lang in LANGS:
+            loc = BASE+('' if lang=='en' else lang+'/')+slug
+            priority = p if lang=='en' else f'{max(float(p)-0.1,0.1):.1f}'
+            urls += f'  <url><loc>{loc}</loc><lastmod>{TODAY}</lastmod><changefreq>{c}</changefreq><priority>{priority}</priority>{alt}</url>\n'
     (ROOT / 'sitemap.xml').write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" '
                                       f'xmlns:xhtml="http://www.w3.org/1999/xhtml">\n{urls}</urlset>\n', encoding='utf-8')
     (ROOT / 'robots.txt').write_text(f'User-agent: *\nAllow: /\nDisallow: /v4.html\nDisallow: /v4-tutorial.html\nDisallow: /confirm.html\nDisallow: /ar/confirm.html\nDisallow: /unsubscribe.html\nDisallow: /ar/unsubscribe.html\n\nSitemap: {BASE}sitemap.xml\n', encoding='utf-8')
@@ -1789,11 +1785,11 @@ def main():
         {'src': 'assets/apple-touch-icon.png', 'sizes': '180x180', 'type': 'image/png'}]}, indent=1) + '\n', encoding='utf-8')
     # Cache-busting: each page asks for os.css / os.js / ar.js by content hash, so a change reaches browsers at once.
     ver = {a: hashlib.sha256((ROOT / 'assets' / a).read_bytes()).hexdigest()[:10] for a in ('os.css', 'os.js', 'ar.js')}
-    for f in list(ROOT.glob('*.html')) + list((ROOT / 'ar').glob('*.html')) + [ROOT / code / 'index.html' for code in LOCALES]:
+    for f in list(ROOT.glob('*.html')) + [p for lang in ('ar',)+NEW_LANGS for p in (ROOT/lang).glob('*.html')]:
         t = f.read_text(encoding='utf-8')
         u = re.sub(r'assets/(os\.css|os\.js|ar\.js)(\?v=[0-9a-f]+)?"', lambda m: f'assets/{m.group(1)}?v={ver[m.group(1)]}"', t)
         if u != t: f.write_text(u, encoding='utf-8')
-    print(f'{len(PAGES)} pages, {len(REDIRECTS)} redirects, {len(AR)} Arabic strings')
+    print(f'{len(PAGES)} original pages, {len(REDIRECTS)} redirects, {len(AR)} Arabic strings, {count} full ES/FR/DE pages')
 
 
 if __name__ == '__main__':
