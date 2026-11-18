@@ -1328,3 +1328,8 @@ CURATED["de"].update({
 CURATED["es"].update({"Search & Notifications":"Búsqueda y notificaciones"})
 CURATED["fr"].update({"Search & Notifications":"Recherche et notifications"})
 CURATED["de"].update({"Search & Notifications":"Suche & Mitteilungen"})
+
+# Genuine Android demo-couple daily check-in screen.
+CURATED["es"].update({"Real daily check-in screenshot from the demo couple":"Captura real del registro emocional diario de la pareja ficticia"})
+CURATED["fr"].update({"Real daily check-in screenshot from the demo couple":"Vraie capture du point quotidien du couple fictif"})
+CURATED["de"].update({"Real daily check-in screenshot from the demo couple":"Echter Screenshot des täglichen Check-ins des fiktiven Paares"})
