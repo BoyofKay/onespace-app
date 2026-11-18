@@ -1006,3 +1006,59 @@ html[lang="ar"] .top .menu .mega-eyebrow {
 @media (prefers-reduced-motion: reduce) {
  .top .menu .mega-panel a.mega-link{transition:none;}
 }
+
+
+/* OneSpace brand lockup: identical proportions across every website language.
+   Uses the existing official mark. Avoids embedding language-specific image files. */
+.top .brand,.foot .brand{
+  display:grid;grid-template-columns:48px max-content;grid-template-rows:auto auto;
+  column-gap:11px;row-gap:0;align-items:center;justify-content:start;
+  font-family:var(--font);font-size:26px;font-weight:800;line-height:1.06;
+  letter-spacing:-.045em;color:#14213D;text-decoration:none;white-space:nowrap;
+}
+.top .brand img,.foot .brand img{
+  grid-column:1;grid-row:1 / 3;width:48px;height:48px;object-fit:contain;
+}
+.top .brand::after,.foot .brand::after{
+  content:"Two of Us. One Space.";grid-column:2;grid-row:2;
+  display:block;font:600 10.5px/1.3 var(--font);letter-spacing:.025em;
+  color:#51657A;margin-top:2px;
+}
+.top .brand:hover,.foot .brand:hover{color:#1F6E78}
+html[lang="ar"] .top .brand,html[lang="ar"] .foot .brand{
+  font-family:var(--font);letter-spacing:-.045em;
+}
+@media(max-width:1250px){
+  .top .brand{font-size:23px;grid-template-columns:42px max-content;column-gap:8px}
+  .top .brand img{width:42px;height:42px}
+  .top .brand::after{font-size:9.5px}
+}
+@media(max-width:430px){
+  .top .brand{font-size:21px;grid-template-columns:38px max-content;column-gap:7px}
+  .top .brand img{width:38px;height:38px}
+  .top .brand::after{font-size:9px}
+}
+@media(max-width:360px){
+  .top .brand{font-size:19px;grid-template-columns:34px max-content;column-gap:6px}
+  .top .brand img{width:34px;height:34px}
+  .top .brand::after{font-size:8.5px}
+  .top .os-intl-languages summary{font-size:11px;padding-inline:6px}
+}
+/* One canonical Founder signup: inviting landing-page CTA; full form on Join. */
+.join-entry{display:flex;flex-direction:column;align-items:stretch;gap:13px}
+.join-entry .join-entry-icon{width:47px;height:47px;display:grid;place-items:center;
+  border-radius:15px;background:var(--teal-l);color:var(--teal);font-size:23px}
+.join-entry h3{font-size:23px;line-height:1.2;letter-spacing:-.03em;margin:0}
+.join-entry p{font-size:14px;line-height:1.65;color:var(--ink-2);margin:0}
+.join-entry .btn{align-self:flex-start;min-height:49px}
+.join-optional{margin:17px 0 8px;border:1px solid #C8DADD;border-radius:15px;background:#F8FBFB;padding:2px 16px}
+.join-optional summary{padding:14px 0;color:var(--teal);font-size:14px;font-weight:750;cursor:pointer;list-style:none}
+.join-optional summary::-webkit-details-marker{display:none}
+.join-optional summary::after{content:"＋";float:inline-end;font-size:18px;line-height:1}
+.join-optional[open] summary::after{content:"−"}
+.join-optional > :last-child{margin-bottom:16px}
+.join-optional label{font-size:13px}
+.legal-revision{font-size:13px;line-height:1.6;color:var(--ink-2);
+  border-inline-start:3px solid var(--teal);padding:10px 14px;
+  background:var(--soft);border-radius:0 9px 9px 0}
+html[dir="rtl"] .legal-revision{border-radius:9px 0 0 9px}
