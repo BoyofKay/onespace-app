@@ -13,7 +13,7 @@ concurrency:
 jobs:
   translate:
     runs-on: ubuntu-latest
-    timeout-minutes: 239
+    timeout-minutes: 238
     steps:
       - uses: actions/checkout@v4
         with:
