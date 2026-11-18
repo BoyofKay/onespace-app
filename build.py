@@ -1004,12 +1004,13 @@ def ai_review_preview():
       for quote,quote_ar,kind,kind_ar in samples)
     dots = ''.join(f'<button type="button" data-slide-dot="{i}" aria-current="{"true" if i == 0 else "false"}" aria-label="Example testimonial {i+1}"></button>' for i in range(len(samples)))
     def store_panel(name, label, label_ar):
+      brand = ('''<span class="review-brand-icon" aria-hidden="true"><svg viewBox="0 0 48 48" focusable="false"><path d="M8 4.5v39l21-19.5z" fill="#34A853"/><path d="M8 4.5 32 17 29 24z" fill="#4285F4"/><path d="m29 24 3-7 11 5.8a3.5 3.5 0 0 1 0 6.2L32 31z" fill="#FBBC04"/><path d="m8 43.5 24-12.5-3-7z" fill="#EA4335"/></svg></span>''' if name == 'Google Play' else '''<span class="review-brand-icon" aria-hidden="true"><svg viewBox="0 0 48 48" focusable="false"><rect x="2" y="2" width="44" height="44" rx="10" fill="#1677ED"/><path d="M18.2 11.5 34 37.6M31.4 11.5 15.2 37.6M10.6 29.3h26.9" stroke="#fff" stroke-width="4.7" stroke-linecap="round"/><path d="m18.2 11.5 2.3 3.9" stroke="#fff" stroke-width="4.7" stroke-linecap="round"/></svg></span>''')
       bars = ''.join(
          f'<div class="store-rating-row"><span>{star} ★</span><span class="store-rating-bar" aria-hidden="true"><i></i></span>'
          f'<span class="store-rating-pending">—</span></div>'
          for star in (5,4,3,2,1))
       return f'''<article class="review-preview-store">
-        <div class="review-store-head"><h4 class="review-brand">{name == 'Google Play' ? "<span class=\"review-brand-icon\" aria-hidden=\"true\"><svg viewBox=\"0 0 48 48\" focusable=\"false\"><path d=\"M8 4.5v39l21-19.5z\" fill=\"#34A853\"/><path d=\"M8 4.5 32 17 29 24z\" fill=\"#4285F4\"/><path d=\"m29 24 3-7 11 5.8a3.5 3.5 0 0 1 0 6.2L32 31z\" fill=\"#FBBC04\"/><path d=\"m8 43.5 24-12.5-3-7z\" fill=\"#EA4335\"/></svg></span>" : "<span class=\"review-brand-icon\" aria-hidden=\"true\"><svg viewBox=\"0 0 48 48\" focusable=\"false\"><rect x=\"2\" y=\"2\" width=\"44\" height=\"44\" rx=\"10\" fill=\"#1677ED\"/><path d=\"M18.2 11.5 34 37.6M31.4 11.5 15.2 37.6M10.6 29.3h26.9\" stroke=\"#fff\" stroke-width=\"4.7\" stroke-linecap=\"round\"/><path d=\"m18.2 11.5 2.3 3.9\" stroke=\"#fff\" stroke-width=\"4.7\" stroke-linecap=\"round\"/></svg></span>"}<span>{name}</span></h4><span class="review-test-tag">{T('TEST PREVIEW','معاينة تجريبية')}</span></div>
+        <div class="review-store-head"><h4 class="review-brand">{brand}<span>{name}</span></h4><span class="review-test-tag">{T('TEST PREVIEW','معاينة تجريبية')}</span></div>
         <div class="review-store-metrics">
           <div><strong>— / 5</strong>{T('Average rating','متوسط التقييم','span')}</div>
           <div><strong>—</strong>{T('Ratings & reviews','التقييمات والمراجعات','span')}</div>
