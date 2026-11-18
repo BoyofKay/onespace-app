@@ -1194,3 +1194,23 @@ CURATED["de"].update({
   "Demo steps": "Schritte der Tour",
   "Illustrative layout · real screenshot pending": "Illustrative Ansicht · echter Screenshot folgt"
 })
+
+# Caption and embedded-form text for the multi-platform launch.
+CURATED["es"].update({
+  "Long-distance": "A distancia",
+  "Real OneSpace notifications screen": "Captura real de las notificaciones de OneSpace",
+  "Registration now:": "Inscripciones abiertas:",
+  "Social media channels coming soon": "Redes sociales próximamente"
+})
+CURATED["fr"].update({
+  "Long-distance": "À distance",
+  "Real OneSpace notifications screen": "Capture réelle des notifications OneSpace",
+  "Registration now:": "Inscriptions ouvertes :",
+  "Social media channels coming soon": "Réseaux sociaux bientôt disponibles"
+})
+CURATED["de"].update({
+  "Long-distance": "Fernbeziehung",
+  "Real OneSpace notifications screen": "Echter Screenshot der OneSpace-Mitteilungen",
+  "Registration now:": "Anmeldung offen:",
+  "Social media channels coming soon": "Social-Media-Kanäle folgen bald"
+})
