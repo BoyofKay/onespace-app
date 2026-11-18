@@ -178,6 +178,8 @@ def head(page, title, title_ar, desc, desc_ar=''):
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta http-equiv="Content-Security-Policy" content="object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
 <title data-ar="{escape(title_ar)}">{escape(title)}</title>
 <meta name="description" content="{escape(desc)}" data-i18n-attr="content:{dk}">
 <link rel="canonical" href="{canonical}">
@@ -1265,7 +1267,7 @@ def page_index():
   <div class="grid g3">{guide_cards()}</div>
 </div></section>
 
-{ai_review_preview()}
+{ai_review_preview() if False else ''}
 {store_section()}
 
 <section id="founding"><div class="wrap"><div class="band"><div class="cta-band" style="align-items:start">

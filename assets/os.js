@@ -685,6 +685,8 @@ document.querySelectorAll('[data-pw-toggle]').forEach(function(b){
   b.addEventListener('click',function(){
     var show=inp.type==='password'; inp.type=show?'text':'password';
     b.setAttribute('aria-pressed',show?'true':'false');
-    var l=show?tr('password.hide','Hide key'):tr('password.show','Show key'); b.setAttribute('aria-label',l); b.title=l; inp.focus();
+    var msg = window.ONESPACE_SITE_STRINGS || {}; var arabic = document.documentElement.lang === 'ar';
+    var l = show ? (msg['password.hide'] || (arabic ? 'إخفاء كلمة المرور' : 'Hide key')) : (msg['password.show'] || (arabic ? 'إظهار كلمة المرور' : 'Show key'));
+    b.setAttribute('aria-label',l); b.title=l; inp.focus();
   });
 });
