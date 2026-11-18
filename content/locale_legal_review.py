@@ -125,7 +125,7 @@ LEGAL_ROWS = [
   ],
   [
     "are sent for us by Resend, from founders@onespace.live. Replies reach our own inbox.",
-    "werden über Resend von founders@onespace.live versendet. Antworten gehen direkt in unser Postfach.",
+    "se envían en nuestro nombre a través de Resend, desde founders@onespace.live. Las respuestas llegan a nuestro propio buzón.",
     "sont envoyés pour notre compte par Resend depuis founders@onespace.live. Les réponses arrivent dans notre propre boîte de réception.",
     "werden in unserem Auftrag über Resend von founders@onespace.live versendet. Antworten erreichen direkt unser Postfach."
   ],
@@ -305,7 +305,7 @@ LEGAL_ROWS = [
   ],
   [
     "Test version",
-    "Testversion",
+    "Versión de prueba",
     "Version de test",
     "Testversion"
   ],
