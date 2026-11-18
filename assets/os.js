@@ -276,7 +276,7 @@
   if (invite) { try { sessionStorage.setItem('os-invite', invite); } catch (_) {}
     if (params.get('invite')) track('founders/invite-landing');
     $$('form[data-form="join"]').forEach(function (f) { if (f.elements.invite) f.elements.invite.value = invite; var n = $('.invite-note', f); if (n) n.hidden = false; }); }
-  $('form[data-form="join"] select[name="language"]').forEach(function (sel) { sel.value = lang === 'ar' ? 'ar' : 'en'; });
+  $$('form[data-form="join"] select[name="language"]').forEach(function (sel) { sel.value = lang === 'ar' ? 'ar' : 'en'; });
   var msgs = { sending: 'Sending…', missing: 'Please fill in the fields marked *.', email: 'Please check the email address.',
     consent: 'Please tick the box so we may email you.', busy: 'Too many tries. Please wait a few minutes and try again.',
     failed: 'Could not send. Please check your connection and try again.', sent: 'Thank you — we got it and will reply by email.',
