@@ -837,3 +837,59 @@ CURATED["de"].update({
   "OneSpace love gestures — real app screenshot": "Liebevolle Gesten in OneSpace – echter App-Screenshot",
   "OneSpace love letters — real app screenshot": "Liebesbriefe in OneSpace – echter App-Screenshot"
 })
+
+# Dedicated connection page metadata, screenshot accessibility and formatted bullet fragments.
+CURATED["es"].update({
+  "A LITTLE LOVE": "UN GESTO DE CARIÑO",
+  "Connect & Care": "Conectar y cuidar",
+  "Connect & Care | OneSpace letters, gestures and feelings": "Conectar y cuidar | Cartas, gestos y emociones en OneSpace",
+  "Love letters, personal gestures, daily check-ins and feelings journal in one couples app, alongside shared planning and decisions.": "Cartas de amor, gestos personales, conexión diaria y un diario emocional, junto con planes y decisiones compartidas, en una aplicación para parejas.",
+  "OneSpace A little love screenshot": "Captura de la función Un gesto de cariño en OneSpace",
+  "OneSpace Connect overview": "Vista general de Conectar en OneSpace",
+  "OneSpace Connect overview, not a feelings journal capture": "Vista general de Conectar de OneSpace; no es una captura del diario de emociones",
+  "OneSpace letters screenshot": "Captura de cartas de amor de OneSpace",
+  "— add a personal message to a gesture.": "— añade tu propio mensaje a cada gesto.",
+  "— for birthdays, anniversaries and special days.": "— para cumpleaños, aniversarios y fechas especiales.",
+  "— give your partner context beyond a quick reply.": "— comparte algo más que una respuesta rápida.",
+  "— keep what you want to remember without losing it in chat.": "— guarda lo que importa sin perderlo en el chat.",
+  "— look back at the gestures you have sent and received.": "— revive los gestos que enviaron y recibieron.",
+  "— revisit your earlier notes and feelings.": "— vuelve a tus notas y emociones anteriores.",
+  "— take a moment to name how your day feels.": "— tómate un momento para expresar cómo te sientes.",
+  "— the letter stays for its intended recipient.": "— la carta está reservada para quien la recibe."
+})
+CURATED["fr"].update({
+  "A LITTLE LOVE": "UNE PETITE ATTENTION",
+  "Connect & Care": "Échanger et prendre soin",
+  "Connect & Care | OneSpace letters, gestures and feelings": "Échanger et prendre soin | Lettres, attentions et émotions dans OneSpace",
+  "Love letters, personal gestures, daily check-ins and feelings journal in one couples app, alongside shared planning and decisions.": "Lettres d’amour, petites attentions, nouvelles quotidiennes et journal des émotions, aux côtés de projets et décisions partagés dans une seule appli.",
+  "OneSpace A little love screenshot": "Capture de la fonction Une petite attention dans OneSpace",
+  "OneSpace Connect overview": "Vue d’ensemble d’Échanger dans OneSpace",
+  "OneSpace Connect overview, not a feelings journal capture": "Aperçu général d’Échanger dans OneSpace, pas une capture du journal des émotions",
+  "OneSpace letters screenshot": "Capture des lettres de OneSpace",
+  "— add a personal message to a gesture.": "— ajoutez un message personnel à une attention.",
+  "— for birthdays, anniversaries and special days.": "— pour les anniversaires et les jours particuliers.",
+  "— give your partner context beyond a quick reply.": "— allez au-delà d’une réponse rapide pour donner du contexte à l’autre.",
+  "— keep what you want to remember without losing it in chat.": "— gardez ce qui compte sans le perdre dans les conversations.",
+  "— look back at the gestures you have sent and received.": "— retrouvez les attentions envoyées et reçues.",
+  "— revisit your earlier notes and feelings.": "— retrouvez vos notes et vos émotions passées.",
+  "— take a moment to name how your day feels.": "— prenez un instant pour mettre des mots sur votre journée.",
+  "— the letter stays for its intended recipient.": "— la lettre reste destinée à la personne choisie."
+})
+CURATED["de"].update({
+  "A LITTLE LOVE": "EINE KLEINE AUFMERKSAMKEIT",
+  "Connect & Care": "Nähe & Verbindung",
+  "Connect & Care | OneSpace letters, gestures and feelings": "Nähe & Verbindung | Briefe, Gesten und Gefühle in OneSpace",
+  "Love letters, personal gestures, daily check-ins and feelings journal in one couples app, alongside shared planning and decisions.": "Liebesbriefe, persönliche Gesten, tägliche Check-ins und Gefühlstagebuch neben gemeinsamen Plänen und Entscheidungen – in einer App für Paare.",
+  "OneSpace A little love screenshot": "OneSpace-Screenshot: Eine kleine Aufmerksamkeit",
+  "OneSpace Connect overview": "OneSpace-Übersicht: Verbinden",
+  "OneSpace Connect overview, not a feelings journal capture": "OneSpace-Übersicht zu Verbinden, kein Screenshot des Gefühlstagebuchs",
+  "OneSpace letters screenshot": "OneSpace-Screenshot der Liebesbriefe",
+  "— add a personal message to a gesture.": "– ergänzt eine liebevolle Geste um eine persönliche Nachricht.",
+  "— for birthdays, anniversaries and special days.": "– für Geburtstage, Jahrestage und besondere Momente.",
+  "— give your partner context beyond a quick reply.": "– gebt einander mehr Einblick als mit einer kurzen Antwort.",
+  "— keep what you want to remember without losing it in chat.": "– bewahrt Wichtiges auf, statt es im Chat zu verlieren.",
+  "— look back at the gestures you have sent and received.": "– seht euch die versendeten und empfangenen Gesten wieder an.",
+  "— revisit your earlier notes and feelings.": "– lest frühere Notizen und Gefühle noch einmal.",
+  "— take a moment to name how your day feels.": "– nehmt euch einen Moment, um euren Tag in Worte zu fassen.",
+  "— the letter stays for its intended recipient.": "– der Brief bleibt für die Person bestimmt, die ihn erhalten soll."
+})
