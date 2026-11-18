@@ -84,7 +84,10 @@
   var want = new URLSearchParams(location.search).get('lang') || get('os-lang') ||
     (!get('os-lang-seen') && /^(ar|es|fr|de)$/.test(browserLang) ? browserLang : null);
   put('os-lang-seen', '1');
-  if (/^(en|ar|es|fr|de)$/.test(want || '') && want !== lang && location.protocol !== 'file:') {
+  // An explicit localized URL must always win over saved/browser language.
+  // Otherwise a returning Spanish visitor cannot directly open a German link.
+  var routeLanguage = (location.pathname.match(/^\/(ar|es|fr|de)(?:\/|$)/) || [])[1];
+  if (!routeLanguage && /^(en|ar|es|fr|de)$/.test(want || '') && want !== lang && location.protocol !== 'file:') {
     location.replace(twin(want)); return;
   }
   function tr(key, en) { var local = window.ONESPACE_SITE_STRINGS || {}; return local[key] || (lang === 'ar' && AR[key] ? AR[key] : en); }

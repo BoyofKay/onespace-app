@@ -132,7 +132,7 @@ def head(page, title, title_ar, desc, desc_ar=''):
   <nav class="menu" aria-label="Main">{''.join(menu)}<a class="btn btn-primary menu-cta" href="join.html">{T('Join the Founding 500', 'انضم إلى المؤسسين الـ500')}</a></nav>
   <div class="actions">
     <details class="os-intl-languages"><summary aria-label="Languages / اللغات">🌐 Language</summary><div class="os-intl-languages-list"><a href="{canonical}" data-language-switch="en" lang="en">English</a><a href="{BASE}ar/{'' if page == 'index.html' else page}" data-language-switch="ar" lang="ar">العربية</a><a href="{BASE}es/{'' if page == 'index.html' else page}" data-language-switch="es" lang="es">Español</a><a href="{BASE}fr/{'' if page == 'index.html' else page}" data-language-switch="fr" lang="fr">Français</a><a href="{BASE}de/{'' if page == 'index.html' else page}" data-language-switch="de" lang="de">Deutsch</a></div></details>
-    <a class="btn btn-primary btn-sm" href="join.html">{T('Join the Founding 500', 'انضم إلى المؤسسين الـ500')}</a>
+    <a class="btn btn-primary btn-sm nav-join" href="join.html">{T('Join free', 'انضم مجانًا')}</a>
     <button class="burger" type="button" aria-label="Menu" aria-expanded="false">☰</button>
   </div>
 </div></header>
@@ -194,7 +194,7 @@ def store_section():
     <div class="store-arrival-grid">
       <article class="store-arrival-card android">
         <div class="store-arrival-head">
-          <span class="store-emblem" aria-hidden="true">▶</span>
+          <span class="store-emblem store-platform-google" aria-hidden="true"><svg class="store-platform-symbol" viewBox="0 0 48 48" focusable="false"><path d="M8 4.5v39l21-19.5z" fill="#34A853"/><path d="M8 4.5 32 17 29 24z" fill="#4285F4"/><path d="m29 24 3-7 11 5.8a3.5 3.5 0 0 1 0 6.2L32 31z" fill="#FBBC04"/><path d="m8 43.5 24-12.5-3-7z" fill="#EA4335"/></svg></span>
           <div>{T('ANDROID · FIRST', 'أندرويد · أولاً', 'span', 'store-eyebrow')}
             <h3>Google Play</h3></div>
         </div>
@@ -205,7 +205,7 @@ def store_section():
       </article>
       <article class="store-arrival-card iphone">
         <div class="store-arrival-head">
-          <span class="store-emblem apple" aria-hidden="true">✦</span>
+          <span class="store-emblem apple" aria-hidden="true"><svg class="store-platform-symbol" viewBox="0 0 48 48" focusable="false"><rect x="2" y="2" width="44" height="44" rx="10" fill="#1677ED"/><path d="M18.2 11.5 34 37.6M31.4 11.5 15.2 37.6M10.6 29.3h26.9" stroke="#fff" stroke-width="4.7" stroke-linecap="round"/><path d="m18.2 11.5 2.3 3.9" stroke="#fff" stroke-width="4.7" stroke-linecap="round"/></svg></span>
           <div>{T('IPHONE · COMING NEXT', 'آيفون · لاحقاً', 'span', 'store-eyebrow')}
             <h3>App Store</h3></div>
         </div>

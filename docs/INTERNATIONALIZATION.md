@@ -9,11 +9,11 @@
 ## Translation approach
 - Committed language catalogs: `content/translations/es.json`, `fr.json`, `de.json`. Source inventory: `source_catalog.json`.
 - English phrases are mapped to translated text nodes and user-facing attributes while preserving all HTML structure, links, event data attributes, media and forms.
-- `content/locale_editorial.py` provides 54 editorially polished, idiomatic high-visibility marketing and product terms per language. `GLOSSARY` handles core app terminology and privacy labels.
+- `content/locale_editorial.py` provides cumulative human-authored editorial corrections to high-visibility marketing, navigation, product benefits, support, privacy headlines and tutorials in each language. Review all additions before publishing. `GLOSSARY` handles core app terminology and privacy labels.
 - New missing translations make the build **fail**; they do not silently fall back to English. Rebuilds do not call any translation service.
 - For future source-copy changes: regenerate English source; run the one-time `scripts/translate_full_site.py` to populate **new** missing keys, review changed language strings, then build. This script translates *public marketing copy only* and is not used in production.
 - Style: Spanish broadly understandable, warm and clear; French natural, conversational and polished; German friendly for product marketing, precise for support/privacy language.
-- Review proper names, software terms, quantitative claims, privacy and legal wording before each release. English remains the original reference for interpretation of legal terms.
+- Review proper names, software terms, quantitative claims, privacy and legal wording before each release. English remains the original reference for interpretation of legal terms. Full long-form native-speaker proofreading (especially privacy and terms) is still an outstanding QA milestone; machine-assisted coverage alone must never be described as native-certified.
 
 ## SEO, analytics and Founder limitations
 - Canonical URLs, reciprocal `hreflang` and XML sitemap cover every indexable page across en/ar/es/fr/de. `x-default` remains English. IndexNow and Google Search Console submissions use the same sitemap.
@@ -30,3 +30,11 @@ node --check assets/os.js
 node --check assets/ar.js
 ```
 The site test checks localized links, anchors, metadata, sitemap, privacy and identical counts of screenshots, media, forms, theme selectors, interactive demo components and tracking markers for every translated page.
+
+## Locale-specific UI and brand guidance
+- Preserve the original OneSpace design and use compact, natural CTAs instead of stretching navigation for literal long translations. Mobile navigation begins at the language-safe responsive breakpoint.
+- Horizontal screenshot/theme rails use OneSpace-colored accessible scrollbars. Do not replace the real app images with generated translations of screenshots.
+- The Google Play and App Store cards are **availability previews**, not live download links. Their recognizable in-page platform marks are not official approved download badges. Replace with the officially supplied localized badges and verified store links only once the relevant store listing is available and brand terms permit use.
+- Run Chromium browser responsive checks (script `scripts/check_locale_layout.mjs`) at phone, tablet and desktop sizes when adjusting navigation, language copy or store cards.
+- For German marketing, address a couple as **ihr/euch** and an individual as **du/dein**; avoid unexplained switches to Sie. For French use **vous** consistently; for Spanish use broadly understood, natural language and distinguish singular visitor versus couple.
+- Do not localize proper brand names such as OneSpace, App Store, Google Play, OpenStreetMap, or app navigation identifiers into unrelated words.
