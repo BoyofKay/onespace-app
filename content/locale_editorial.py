@@ -1341,3 +1341,66 @@ CURATED["es"].update({"Founder signup is open NOW to Android and iPhone couples.
 CURATED["es"].update({"Founder registration open: Android & iPhone · App releases follow separately":"Registro de Fundadores abierto: Android y iPhone · Cada app llegará a su debido tiempo"})
 CURATED["fr"].update({"Founder registration open: Android & iPhone · App releases follow separately":"Inscriptions Fondateur ouvertes : Android et iPhone · Sorties des apps à des dates différentes"})
 CURATED["de"].update({"Founder registration open: Android & iPhone · App releases follow separately":"Gründeranmeldung offen: Android & iPhone · Die Apps erscheinen zu unterschiedlichen Zeiten"})
+
+
+# 2026-11-18 review corrections: honest screenshots and existing coral-serif headline language.
+CURATED["es"].update({
+  "Join the Founding 500 today — registration is open to both Android and iPhone users. We will invite you when your version is ready.": "Únanse hoy a los primeros 500 Fundadores: el registro está abierto para Android y iPhone. Les invitaremos cuando su versión esté lista.",
+  "Everything the two of you need,": "Todo lo que necesitan los dos,",
+  "nothing you don’t.": "sin nada de más.",
+  "Share anything from any app": "Compartan desde cualquier app",
+  "OneSpace knows where it goes": "OneSpace sabe dónde guardarlo",
+  "Shared list in OneSpace": "Lista compartida en OneSpace",
+  "Illustration of the share flow": "Ilustración del proceso para compartir",
+  "THE COMPLETE GESTURE JOURNEY": "TODA LA EXPERIENCIA DE CARIÑO",
+  "A gesture, its moment and its history.": "Un gesto, su momento y su historia.",
+  "The gesture picker is shown above from the real app. Dedicated captures of the sending popup and sent/received history are still being prepared.": "Arriba se muestra la selección de gestos real de la app. Aún estamos preparando las capturas de la ventana de envío y del historial de gestos enviados y recibidos.",
+  "Gesture popup": "Ventana del gesto",
+  "Sent & received history": "Historial de enviados y recibidos",
+  "Real screenshot pending": "Captura real pendiente",
+  "Real app screenshot coming soon": "Próximamente, captura real de la app",
+  "Record thoughts and moods over time, and revisit them when you want to reflect on your day.": "Anoten sus pensamientos y estados de ánimo a lo largo del tiempo y revísenlos cuando quieran reflexionar sobre su día.",
+  "The same app, nine looks. Switch any time.": "La misma app, nueve estilos. Cambien cuando quieran.",
+  "Pick a theme": "Elijan un tema",
+  "Feelings journal": "Diario emocional"
+})
+CURATED["fr"].update({
+  "Join the Founding 500 today — registration is open to both Android and iPhone users. We will invite you when your version is ready.": "Rejoignez dès aujourd’hui les 500 Fondateurs : les inscriptions sont ouvertes sur Android et iPhone. Nous vous inviterons lorsque votre version sera prête.",
+  "Everything the two of you need,": "Tout ce dont vous avez besoin à deux,",
+  "nothing you don’t.": "sans superflu.",
+  "Share anything from any app": "Partagez depuis n’importe quelle appli",
+  "OneSpace knows where it goes": "OneSpace sait où les ranger",
+  "Shared list in OneSpace": "Liste partagée dans OneSpace",
+  "Illustration of the share flow": "Illustration du parcours de partage",
+  "THE COMPLETE GESTURE JOURNEY": "TOUT LE PARCOURS D’UNE ATTENTION",
+  "A gesture, its moment and its history.": "Un geste tendre, son instant et son histoire.",
+  "The gesture picker is shown above from the real app. Dedicated captures of the sending popup and sent/received history are still being prepared.": "Le choix des attentions ci-dessus provient de l’application réelle. Les captures de la fenêtre d’envoi et de l’historique des attentions envoyées et reçues sont encore en préparation.",
+  "Gesture popup": "Fenêtre d’envoi d’une attention",
+  "Sent & received history": "Historique des envois et réceptions",
+  "Real screenshot pending": "Capture réelle à venir",
+  "Real app screenshot coming soon": "Une vraie capture de l’application arrive bientôt",
+  "Record thoughts and moods over time, and revisit them when you want to reflect on your day.": "Notez vos pensées et votre humeur au fil du temps, puis retrouvez-les pour réfléchir à votre journée.",
+  "The same app, nine looks. Switch any time.": "La même appli, neuf styles. Changez quand vous voulez.",
+  "Pick a theme": "Choisissez un thème",
+  "Feelings journal": "Journal des émotions"
+})
+CURATED["de"].update({
+  "Join the Founding 500 today — registration is open to both Android and iPhone users. We will invite you when your version is ready.": "Meldet euch jetzt für die ersten 500 Gründungsmitglieder an – die Anmeldung ist für Android und iPhone offen. Wir laden euch ein, sobald eure Version bereit ist.",
+  "Everything the two of you need,": "Alles, was ihr beide braucht,",
+  "nothing you don’t.": "ohne unnötigen Ballast.",
+  "Share anything from any app": "Teilt Inhalte aus jeder App",
+  "OneSpace knows where it goes": "OneSpace weiß, wohin sie gehören",
+  "Shared list in OneSpace": "Gemeinsame Liste in OneSpace",
+  "Illustration of the share flow": "Illustration des Teilens",
+  "THE COMPLETE GESTURE JOURNEY": "DIE GESAMTE GESTEN-ERFAHRUNG",
+  "A gesture, its moment and its history.": "Eine Geste, ihr Moment und ihre Geschichte.",
+  "The gesture picker is shown above from the real app. Dedicated captures of the sending popup and sent/received history are still being prepared.": "Oben seht ihr die echte Gestenauswahl der App. Screenshots des Sendedialogs und des Verlaufs gesendeter und empfangener Gesten werden noch vorbereitet.",
+  "Gesture popup": "Gesten-Dialog",
+  "Sent & received history": "Verlauf gesendeter und empfangener Gesten",
+  "Real screenshot pending": "Echter Screenshot folgt",
+  "Real app screenshot coming soon": "Echter App-Screenshot folgt in Kürze",
+  "Record thoughts and moods over time, and revisit them when you want to reflect on your day.": "Haltet Gedanken und Stimmungen über die Zeit fest und schaut sie euch wieder an, wenn ihr über euren Tag nachdenken möchtet.",
+  "The same app, nine looks. Switch any time.": "Eine App, neun Designs. Wechselt jederzeit.",
+  "Pick a theme": "Design auswählen",
+  "Feelings journal": "Gefühlstagebuch"
+})
