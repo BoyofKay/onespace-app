@@ -35,12 +35,22 @@ for(const route of paths){
    if(stats.topText==='HTML')failures.push(route+' '+width+': raw HTML text visible');
    if(errs.length)failures.push(route+' '+width+': JS errors '+errs.join('; ').slice(0,200));
    if(route==='de/'&&width===1536){
-     const theme=page.locator('[data-theme-pick]').first();
-     if(await theme.count()){
-       const value=await theme.getAttribute('data-theme-pick');
+     const choices=page.locator('[data-theme-pick]');
+     if(await choices.count()>1){
+       const theme=choices.nth(Math.min(2,(await choices.count())-1));
+       const palette=await theme.getAttribute('data-palette');
+       const screenshot=page.locator('img[data-theme-img]').first();
+       const oldSrc=await screenshot.count()?await screenshot.getAttribute('src'):null;
+       const expected=await theme.getAttribute('data-theme-pick');
        await theme.click();
-       const selected=await page.locator('.phone[data-themable]').first().getAttribute('data-theme');
-       if(selected!==value)failures.push('Theme click did not update phone theme');
+       if((await theme.getAttribute('aria-pressed'))!=='true')failures.push('Theme button did not become selected');
+       const phone=page.locator('.phone[data-themable]').first();
+       if(await phone.count()){
+         const actual=await phone.getAttribute('data-theme');
+         if(actual!==expected)failures.push('Theme click did not update themable phone');
+       }
+       if(palette&&oldSrc!==null&&(await screenshot.getAttribute('src'))===oldSrc)
+         failures.push('Theme click did not change screenshot image palette');
      }
    }
    console.log('CHECK',route,width,JSON.stringify(stats));
