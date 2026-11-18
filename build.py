@@ -1774,11 +1774,11 @@ def main():
         for loc, pr in ((BASE + slug, p), (BASE + 'ar/' + slug, f'{max(float(p) - 0.1, 0.1):.1f}')):
             urls += f'  <url><loc>{loc}</loc><lastmod>{TODAY}</lastmod><changefreq>{c}</changefreq><priority>{pr}</priority>{alt}</url>\n'
     home_alts = (f'<xhtml:link rel="alternate" hreflang="en" href="{BASE}"/>' +
-                 f'<xhtml:link rel="alternate" hreflang="ar" href="{BASE}ar/">' +
-                 ''.join(f'<xhtml:link rel="alternate" hreflang="{code}" href="{BASE}{code}/">' for code in ('es', 'fr', 'de')) +
+                 f'<xhtml:link rel="alternate" hreflang="ar" href="{BASE}ar/"/>' +
+                 ''.join(f'<xhtml:link rel="alternate" hreflang="{code}" href="{BASE}{code}/"/>' for code in ('es', 'fr', 'de')) +
                  f'<xhtml:link rel="alternate" hreflang="x-default" href="{BASE}"/>')
     for code in LOCALES:
-        urls += f'  <url><loc>{BASE}{code}/</loc><lastmod>{TODAY}</lastmod><changefreq>weekly</changefreq><priority>0.9</priority>{home_alts}</url>\\n'
+        urls += f'  <url><loc>{BASE}{code}/</loc><lastmod>{TODAY}</lastmod><changefreq>weekly</changefreq><priority>0.9</priority>{home_alts}</url>\n'
     (ROOT / 'sitemap.xml').write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" '
                                       f'xmlns:xhtml="http://www.w3.org/1999/xhtml">\n{urls}</urlset>\n', encoding='utf-8')
     (ROOT / 'robots.txt').write_text(f'User-agent: *\nAllow: /\nDisallow: /v4.html\nDisallow: /v4-tutorial.html\nDisallow: /confirm.html\nDisallow: /ar/confirm.html\nDisallow: /unsubscribe.html\nDisallow: /ar/unsubscribe.html\n\nSitemap: {BASE}sitemap.xml\n', encoding='utf-8')
