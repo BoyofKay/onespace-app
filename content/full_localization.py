@@ -22,6 +22,30 @@ FORM_MESSAGES = {
  'fr':{'sending':'Envoi en cours…','missing':'Merci de remplir les champs obligatoires.','email':'Vérifiez votre adresse e-mail.','consent':'Cochez la case pour recevoir nos e-mails.','busy':'Trop de tentatives. Réessayez dans quelques minutes.','failed':'Envoi impossible. Vérifiez votre connexion et réessayez.','verify':'Un instant : nous devons vérifier que vous êtes une personne.','verify_failed':'La vérification a échoué. Actualisez la page.','sent':'Merci. Nous avons reçu votre message et vous répondrons par e-mail.'},
  'de':{'sending':'Wird gesendet…','missing':'Bitte fülle die Pflichtfelder aus.','email':'Bitte überprüfe deine E-Mail-Adresse.','consent':'Bitte stimme dem E-Mail-Empfang zu.','busy':'Zu viele Versuche. Bitte versuche es in einigen Minuten erneut.','failed':'Senden fehlgeschlagen. Bitte überprüfe deine Verbindung und versuche es erneut.','verify':'Einen Moment: Wir prüfen kurz, ob du ein Mensch bist.','verify_failed':'Die Überprüfung ist fehlgeschlagen. Bitte lade die Seite neu.','sent':'Danke! Wir haben deine Nachricht erhalten und antworten per E-Mail.'}
 }
+SITE_MESSAGES = {
+  "es": {
+    "kit.copied": "Copiado",
+    "share.text": "Me gustaría que probáramos OneSpace: un espacio privado para nuestros planes, gestos de cariño y recuerdos.",
+    "founders.invite-copied": "Enlace copiado",
+    "password.show": "Mostrar contraseña",
+    "password.hide": "Ocultar contraseña"
+  },
+  "fr": {
+    "kit.copied": "Copié",
+    "share.text": "J’aimerais qu’on essaie OneSpace : un espace privé pour nos projets, nos petites attentions et nos souvenirs.",
+    "founders.invite-copied": "Lien copié",
+    "password.show": "Afficher le mot de passe",
+    "password.hide": "Masquer le mot de passe"
+  },
+  "de": {
+    "kit.copied": "Kopiert",
+    "share.text": "Ich würde gern OneSpace mit dir ausprobieren: einen privaten Ort für unsere Pläne, kleinen Liebesgesten und Erinnerungen.",
+    "founders.invite-copied": "Link kopiert",
+    "password.show": "Passwort anzeigen",
+    "password.hide": "Passwort verbergen"
+  }
+}
+
 GLOSSARY = {
  'es': {'Today':'Hoy','Remember':'Recordar','Coordinate':'Organizar','Connect':'Conectar','Me':'Yo','Home':'Inicio',
         'Features':'Funciones','Demo':'Demostración','Tutorials':'Tutoriales','Guides':'Guías','FAQ':'Preguntas frecuentes',
@@ -186,7 +210,8 @@ def localize_html(src, name, locale, translated):
             if inp:inp['value']='en'
     # Browser dynamic feedback uses the same localized language as the visible form.
     bootstrap=soup.new_tag('script')
-    bootstrap.string='window.ONESPACE_FORM_MESSAGES='+json.dumps(FORM_MESSAGES[locale],ensure_ascii=False)+';'
+    bootstrap.string=('window.ONESPACE_FORM_MESSAGES='+json.dumps(FORM_MESSAGES[locale],ensure_ascii=False)+';'
+                      'window.ONESPACE_SITE_STRINGS='+json.dumps(SITE_MESSAGES[locale],ensure_ascii=False)+';')
     head.append(bootstrap)
     for link in soup.select('[data-language-switch]'):
         other=link.get('data-language-switch')
