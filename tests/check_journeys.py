@@ -44,8 +44,10 @@ for lang in ('en','ar','es','fr','de'):
             loc=('es','fr','de').index(lang)+2
             assert j['title'][loc] in body,(lang,j['slug'])
             assert j['stages'][0][loc] in body,(lang,j['slug'],'missing narrative translation')
-homepage=(ROOT/'index.html').read_text(encoding='utf8')
-assert 'the-sofa-decision' not in homepage
-assert 'sofa-that-both-of-us-chose' in homepage
-assert 'course-together-across-time-zones' in homepage
+comparison=(ROOT/'compare.html').read_text(encoding='utf8')
+demo=(ROOT/'how-it-works.html').read_text(encoding='utf8')
+assert 'the-sofa-decision' not in comparison
+assert 'sofa-that-both-of-us-chose' in comparison
+assert 'course-together-across-time-zones' in comparison
+assert 'reunion-from-flight-to-memory' in demo
 print('PASS: 24 complete journeys, 12 apart + 12 together, deep-link previews, all five languages, no screenplay layout.')
