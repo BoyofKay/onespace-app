@@ -1333,3 +1333,6 @@ CURATED["de"].update({"Search & Notifications":"Suche & Mitteilungen"})
 CURATED["es"].update({"Real daily check-in screenshot from the demo couple":"Captura real del registro emocional diario de la pareja ficticia"})
 CURATED["fr"].update({"Real daily check-in screenshot from the demo couple":"Vraie capture du point quotidien du couple fictif"})
 CURATED["de"].update({"Real daily check-in screenshot from the demo couple":"Echter Screenshot des täglichen Check-ins des fiktiven Paares"})
+
+# Corrected native Spanish Founder banner copy.
+CURATED["es"].update({"Founder signup is open NOW to Android and iPhone couples. The first 250 couples — 500 people — can register free and help shape OneSpace; the iOS app itself is coming later.":"Las inscripciones para los primeros 500 Fundadores están ABIERTAS para parejas con Android o iPhone. Las primeras 250 parejas, es decir, 500 personas, pueden apuntarse gratis y contribuir al desarrollo de OneSpace; la app para iOS llegará después."})
