@@ -1404,3 +1404,8 @@ CURATED["de"].update({
   "Pick a theme": "Design auswählen",
   "Feelings journal": "Gefühlstagebuch"
 })
+
+# Accessible label for the deliberately unpictured feelings-journal view.
+CURATED["es"].update({"Journal screen capture pending":"Captura de pantalla del diario emocional pendiente"})
+CURATED["fr"].update({"Journal screen capture pending":"Capture du journal des émotions à venir"})
+CURATED["de"].update({"Journal screen capture pending":"Screenshot des Gefühlstagebuchs folgt"})
