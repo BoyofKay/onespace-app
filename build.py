@@ -1886,7 +1886,7 @@ def page_guides():
     h = head('guides.html', 'Relationship guides for couples — OneSpace', 'أدلة العلاقات للأزواج — OneSpace',
              'Practical guides for couples: long-distance ideas, sharing the mental load at home, and never forgetting an anniversary.',
              'أدلة عملية للأزواج: أفكار للعلاقات عن بُعد، وتقاسم العبء الذهني في البيت، وعدم نسيان الذكرى أبدًا.')
-    return h + page_hero('Guides', 'الأدلة', 'Small ideas for a shared life.', 'أفكار صغيرة لحياة مشتركة.',
+    return (h + page_hero('Guides', 'الأدلة', 'Small ideas for a shared life.', 'أفكار صغيرة لحياة مشتركة.',
                          'Practical, kind and short. Written for real couples — whether you share a sofa or a time difference.',
                          'عملية ولطيفة وقصيرة. مكتوبة لأزواج حقيقيين — سواء تتشاركان أريكة أو فرق توقيت.') + \
         f'<section style="padding-top:20px"><div class="wrap"><div class="grid g3">{guide_cards(GUIDES[:3])}</div>'
@@ -1894,7 +1894,7 @@ def page_guides():
         + T('Explore 9 more practical guides', 'استكشف 9 أدلة عملية أخرى')
         + '</summary><div class="grid g3" style="margin-top:22px">'
         + guide_cards(GUIDES[3:]) + '</div></details></div></section>'
-        + cta_band() + foot()
+        + cta_band() + foot())
 
 
 def guide_page(g):
