@@ -1309,3 +1309,17 @@ CURATED["de"].update({
   "Share the love": "Liebe zeigen",
   "Find it fast. Know what matters.": "Schnell finden. Wichtiges im Blick behalten."
 })
+
+# Preserve translated nested markup in the Founder sign-up checklist.
+CURATED["es"].update({
+  "4. Get the invitation when your app is ready": "4. Reciban la invitación cuando su aplicación esté lista",
+  "— Android first, iPhone later. Registration is open for both today.": "— primero Android y después iPhone. El registro está abierto para los dos desde hoy."
+})
+CURATED["fr"].update({
+  "4. Get the invitation when your app is ready": "4. Recevez l’invitation quand votre application sera prête",
+  "— Android first, iPhone later. Registration is open for both today.": "— d’abord Android, puis iPhone. L’inscription est ouverte aux deux dès aujourd’hui."
+})
+CURATED["de"].update({
+  "4. Get the invitation when your app is ready": "4. Einladung erhalten, sobald eure App bereit ist",
+  "— Android first, iPhone later. Registration is open for both today.": "– zuerst Android, später iPhone. Die Anmeldung ist für beide schon jetzt offen."
+})
