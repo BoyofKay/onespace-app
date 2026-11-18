@@ -760,12 +760,11 @@ def value_grid():
     cards = ''.join(f"""<a class="card link value reveal" href="{d['slug']}"><span class="vi">{d['icon']}</span>{T(d['nav'][0], d['nav'][1], 'h3')}{T(d['navd'][0], d['navd'][1], 'p')}<span class="more">{T('See how →', 'شاهد كيف ←')}</span></a>""" for d in DEEP)
     extra = [('long-distance.html', '🌍', 'Made for distance', 'مصمم للمسافة', 'Two clocks, reunion countdowns, sealed letters', 'ساعتان وعدّ للقاء ورسائل مغلقة'),
              ('features.html#remember', '⏳', 'Counters that understand dates', 'عدّادات تفهم التواريخ', 'The day itself and its anniversary, with progress', 'اليوم نفسه وذكراه، مع التقدم'),
-             ('features.html#connect', '♡', 'A little love, daily', 'لمسة حب يومية', 'Gestures, letters and a one-minute check-in', 'لمسات ورسائل وتواصل يومي في دقيقة'),
-             ('compare.html', '🆚', 'vs. the usual mix', 'مقارنة بالخليط المعتاد', 'Why one app beats chat + notes + calendars', 'لماذا يتفوق تطبيق واحد على المحادثة والملاحظات والتقويمات')]
+             ('features.html#connect', '♡', 'A little love, daily', 'لمسة حب يومية', 'Gestures, letters and a one-minute check-in', 'لمسات ورسائل وتواصل يومي في دقيقة')]
     cards += ''.join(f"""<a class="card link value reveal" href="{h}"><span class="vi">{i}</span>{T(e, a, 'h3')}{T(de, da, 'p')}<span class="more">{T('See how →', 'شاهد كيف ←')}</span></a>""" for h, i, e, a, de, da in extra)
     return f"""<section id="why"><div class="wrap">
-  <div class="sec-head center">{T('Why couples choose OneSpace', 'لماذا يختار الأزواج OneSpace', 'span', 'eyebrow')}<h2>{T('Eleven things your chat app', 'إحدى عشرة ميزة لا يستطيع')} <span class="serif accent">{T('can’t do.', 'تطبيق المحادثة فعلها.')}</span></h2>
-  {T('Each one solves a real problem couples have every week. Tap any card to see exactly how.', 'كل واحدة تحل مشكلة حقيقية يواجهها الأزواج كل أسبوع. انقر أي بطاقة لترى كيف بالضبط.', 'p', 'lead')}</div>
+  <div class="sec-head center">{T('Why couples choose OneSpace', 'لماذا يختار الأزواج OneSpace', 'span', 'eyebrow')}<h2>{T('More than the basics.', 'أكثر من الأساسيات.')} <span class="serif accent">{T('Thought through for two.', 'مدروسة لكليكما.')}</span></h2>
+  {T('Every OneSpace feature adds thoughtful details to a familiar idea. Open one to see the workflow behind it.', 'تضيف كل ميزة في OneSpace تفاصيل مدروسة لفكرة مألوفة. افتحا أي ميزة لتكتشفا طريقة عملها.', 'p', 'lead')}</div>
   <div class="values">{cards}</div>
 </div></section>"""
 
