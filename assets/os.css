@@ -1335,3 +1335,84 @@ html[dir=rtl] .founder-platform-notice{text-align:start}
  align-items:center;justify-content:center;color:#C7D2E1;opacity:.8;font-size:15px;font-weight:800;position:relative}
 .footer-social-item .footer-social-tooltip{display:none}
 .footer-social-note{font-size:11px;color:#AAB8CA;margin:7px 0 0}
+
+
+/* 2026-11-18 feedback pass: retain the site's established bold sans / coral italic serif. */
+.editorial-hero-title{font-size:clamp(34px,4.25vw,60px)!important;line-height:1.16!important;max-width:1120px;letter-spacing:-.038em}
+.editorial-hero-title .serif.accent{font-size:1.04em;line-height:1;letter-spacing:-.018em}
+.deep-hero .editorial-hero-title{max-width:760px}
+html[dir="rtl"] .editorial-hero-title{letter-spacing:0!important}
+.deep-hero .sharing-preview-wrap{display:flex;flex-direction:column;gap:10px;align-items:center}
+.sharing-preview-label{color:#617389;font-size:12px;font-weight:650;text-align:center}
+
+/* The homepage's five-tab playground keeps its 9 chips in a true 3×3 grid. */
+#tour .tour3>div:last-child{min-width:0}
+#tour .tour3>div:last-child .swatches{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px!important;align-items:stretch}
+#tour .tour3>div:last-child .swatch{display:flex;width:100%;min-width:0;max-width:none;min-height:53px;padding:8px;
+ border-radius:16px;font-size:12px!important;line-height:1.3;justify-content:flex-start;
+ white-space:normal;overflow-wrap:anywhere;align-items:center;gap:7px}
+#tour .tour3>div:last-child .swatch i{width:23px;height:23px;flex:0 0 23px}
+
+/* Real tutorial clips: all three fit; no redundant horizontal strip scrollbar. */
+.watch-real-layout{grid-template-columns:minmax(0,.38fr) minmax(0,.62fr);gap:clamp(24px,4vw,64px);align-items:center}
+.watch-clips{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(8px,1.4vw,17px);
+ overflow:visible!important;scroll-snap-type:none!important;padding:10px 2px 20px}
+.watch-clips figure{min-width:0;width:100%;scroll-snap-align:none}
+.watch-clips figure .device{width:100%;max-width:215px;margin:auto}
+.watch-clips figure figcaption{font-size:12px;line-height:1.5}
+@media(max-width:950px){.watch-real-layout{grid-template-columns:1fr}
+ .watch-clips{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:520px){.watch-clips{gap:5px}.watch-clips figure .device{border-radius:18px;padding:4px}
+ .watch-clips figure figcaption{font-size:11px}}
+
+/* The guided wizard is ONE interactive stage: steps, changing phone and themes. */
+.demo-wizard-shell{grid-template-columns:minmax(0,.67fr) minmax(0,1.33fr);gap:clamp(18px,2.3vw,29px)}
+.demo-wizard-sidebar{align-self:start}
+.demo-wizard-stage{display:grid;grid-template-columns:minmax(0,1fr) minmax(215px,.86fr);gap:clamp(12px,2vw,23px);
+ align-items:start;padding:clamp(15px,2vw,25px);min-height:680px}
+.demo-wizard-panels{min-width:0}
+.demo-panel-device{max-width:265px}
+.demo-panel-device .device,.demo-panel-device .phone{max-width:265px}
+.demo-theme-inline{align-self:stretch;background:#FFFFFF;border:1px solid #E1E8EE;border-radius:17px;
+ padding:clamp(12px,1.5vw,19px);min-width:0}
+.demo-theme-inline h3{font-size:20px;margin:8px 0 14px;line-height:1.2}
+.demo-theme-inline .demo-theme-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px!important}
+.demo-theme-inline .demo-theme-grid .swatch{border-radius:12px;min-height:49px;padding:7px 6px;
+ font-size:12px!important;gap:5px;line-height:1.25}
+.demo-theme-inline .swatch i{width:20px;height:20px;flex:0 0 20px}
+.demo-theme-inline .demo-theme-note{font-size:12px;line-height:1.6;color:#64748B;margin:14px 0}
+.demo-theme-inline .demo-theme-device{display:block;width:130px;max-width:100%;margin:12px auto 0}
+.demo-theme-inline .demo-theme-device img{max-width:100%}
+@media(max-width:1150px){
+ .demo-wizard-shell{grid-template-columns:1fr}
+ .demo-wizard-stage{grid-template-columns:minmax(0,1fr) minmax(215px,.7fr)}
+}
+@media(max-width:650px){
+ .demo-wizard-stage{grid-template-columns:1fr;min-height:auto}
+ .demo-theme-inline .demo-theme-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+ .demo-theme-inline .demo-theme-device{width:120px}
+}
+@media(max-width:380px){
+ .demo-theme-inline .demo-theme-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+
+/* Real screenshot unavailable: keep placeholders recognizable as pending, not imitations. */
+.capture-pending{min-height:420px;max-width:315px;margin:auto;padding:26px;
+ display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;text-align:center;
+ border:1px dashed #AFC3CF;border-radius:24px;background:linear-gradient(155deg,#F4F8FB,#EEF6F5);color:#223957}
+.capture-pending>span{font-size:55px;color:#1F6E78}
+.capture-pending strong{font-size:21px;line-height:1.3}
+.capture-pending small{font-size:13px;color:#637890;line-height:1.6}
+.gesture-extra{background:#FAFCFD;padding:32px 0 58px}
+.gesture-extra-layout{display:grid;grid-template-columns:minmax(0,.88fr) minmax(0,1.12fr);gap:36px;align-items:center}
+.gesture-extra h3{font-size:clamp(23px,2.5vw,30px);margin:10px 0 12px}
+.gesture-extra p{line-height:1.7;color:#536B82;max-width:530px}
+.gesture-capture-slots{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.capture-small{width:100%;min-height:235px;padding:16px}
+.capture-small strong{font-size:18px}
+@media(max-width:750px){.gesture-extra-layout{grid-template-columns:1fr}.capture-small{min-height:180px}}
+/* Existing store brand vector artwork, also shown on the clearly test-only reviews. */
+.review-brand{display:flex;align-items:center;gap:10px;margin:0}
+.review-brand-icon{display:inline-flex;align-items:center;justify-content:center;
+ width:43px;height:43px;flex:0 0 43px;background:#F5F8FA;border-radius:11px}
+.review-brand-icon svg{width:34px;height:34px}
