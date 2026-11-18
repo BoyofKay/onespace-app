@@ -8,7 +8,7 @@ import json
 import re
 from pathlib import Path
 from urllib.parse import urlsplit, urlunsplit
-from bs4 import BeautifulSoup, NavigableString
+from bs4 import BeautifulSoup, NavigableString, Doctype, Comment, ProcessingInstruction, CData
 
 LANGS = ('en', 'ar', 'es', 'fr', 'de')
 NEW_LANGS = ('es', 'fr', 'de')
@@ -95,6 +95,8 @@ def eligible(raw):
 
 def content_nodes(soup):
     for node in list(soup.find_all(string=True)):
+        if isinstance(node, (Doctype, Comment, ProcessingInstruction, CData)):
+            continue  # Never translate the HTML doctype into visible text (e.g. 'HTML').
         if any(p.name in INERT for p in node.parents):
             continue
         if eligible(node):
@@ -237,6 +239,8 @@ def localize_html(src, name, locale, translated):
     output=str(soup)
     # Browser URLs in srcset and inline CSS must still resolve from nested /es/, /fr/, /de/ paths.
     output=re.sub(r'(?<![A-Za-z0-9/])assets/', '/assets/', output)
+    if not output.lstrip().lower().startswith('<!doctype html>'):
+        raise RuntimeError(f'Localized page {locale}/{name} lost its HTML5 doctype')
     return output
 
 def build_locales(root, pages):
