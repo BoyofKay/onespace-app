@@ -117,6 +117,18 @@ def main():
                 if original.ui[marker] != target.ui[marker]:
                     errors.append(f"{localized}: {marker} parity mismatch: {target.ui[marker]} != {original.ui[marker]}")
             doc = (ROOT / localized).read_text(encoding="utf-8")
+            # Regression: translating <!doctype html> used to print a literal
+            # 'HTML' above the Spanish navigation bar.
+            if not doc.lstrip().lower().startswith("<!doctype html>"):
+                errors.append(f"{localized}: HTML5 doctype lost or translated into visible text")
+            if en == "index.html":
+                if "store-platform-symbol" not in doc:
+                    errors.append(f"{localized}: store platform icons missing")
+                if "nav-join" not in doc:
+                    errors.append(f"{localized}: compact navigation CTA missing")
+                if locale == "de" and "Ihre Beziehung ist nicht zufrieden" in doc:
+                    errors.append(f"{localized}: incorrect privacy marketing translation")
+
             slug = "" if en == "index.html" else en
             for expected in (f'lang="{locale}"', f'hreflang="{locale}"',
                              f'href="https://onespace.live/{locale}/{slug}"',
@@ -134,6 +146,10 @@ def main():
         data = json.loads((ROOT / "content" / "translations" / (lang+".json")).read_text(encoding="utf-8"))
         if len(data) < 1300:
             errors.append(f"{lang}: translation catalogue too small ({len(data)} strings)")
+    css = (ROOT / "assets" / "os.css").read_text(encoding="utf-8")
+    for marker in ("scrollbar-color:var(--teal)", "store-platform-symbol", ".top .actions .nav-join"):
+        if marker not in css:
+            errors.append(f"Localized visual polish missing from CSS: {marker}")
     if not (ROOT / "robots.txt").exists() or not (ROOT / "sitemap.xml").exists():
         errors.append("Missing SEO files")
     index = (ROOT / "index.html").read_text(encoding="utf-8")
