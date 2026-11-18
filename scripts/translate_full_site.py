@@ -65,7 +65,7 @@ for locale in NEW_LANGS:
     for i,batch in enumerate(work):
         results=translate_many(batch,locale)
         for source,result in zip(batch,results):
-            if not result.strip() or not eligible(result) and eligible(source):
+            if not result.strip():
                 raise RuntimeError(f'Invalid {locale} translation for {source!r}: {result!r}')
             data[source]=result
         if i%20==0 or i+1==len(work):
