@@ -1904,7 +1904,7 @@ def guide_page(g):
     body = ''
     for st, st_ar, tips in g['sections'] + [(*heading, tips) for heading, tips in GUIDE_MORE.get(g['slug'], [])]:
         body += f'{T(st, st_ar, "h2")}<ol>{"".join(f"<li>{T(x, y)}</li>" for x, y in tips)}</ol>'
-    ld = {'@context': 'https://schema.org', '@type': 'Article', 'headline': t_en, 'description': g['desc'][0], 'inLanguage': ['en', 'ar'],
+    ld = {'@context': 'https://schema.org', '@type': 'Article', 'headline': t_en, 'description': g['desc'][0], 'inLanguage': 'en',
           'publisher': {'@type': 'Organization', 'name': 'OneSpace'}, 'datePublished': '2026-11-16', 'mainEntityOfPage': BASE + g['slug']}
     others = ''.join(f'<li><a href="{o["slug"]}">{T(o["title"][0], o["title"][1])}</a></li>' for o in [other for other in GUIDES if other is not g][:4])
     return h + f"""<section class="page-hero"><div class="narrow">
