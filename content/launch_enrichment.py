@@ -465,6 +465,178 @@ STORY_UI = {
     "شاهد هذه الأفكار في حكاية"
   ]
 }
+FAQ_MORE = {
+  "Getting started": [
+    [
+      [
+        "Do we each need an account?",
+        "هل يحتاج كل منا إلى حساب؟"
+      ],
+      [
+        "Yes. Each partner signs in with a separate account. An invitation connects both accounts to the same private space.",
+        "نعم. يسجّل كل شريك بحساب مستقل، وتربط الدعوة الحسابين بمساحة خاصة مشتركة."
+      ]
+    ],
+    [
+      [
+        "Can I join before my partner is ready?",
+        "هل يمكنني الانضمام قبل استعداد شريكي؟"
+      ],
+      [
+        "Yes. Create your space and invite your partner later. Shared collaboration begins once you both join.",
+        "نعم. أنشئ مساحتك وادعُ شريكك لاحقًا. يبدأ التعاون المشترك عندما تنضمان معًا."
+      ]
+    ],
+    [
+      [
+        "Can we change how we live without starting over?",
+        "هل يمكننا تغيير وضع المعيشة دون البدء من جديد؟"
+      ],
+      [
+        "Yes. Switch between living apart and living together. Today adapts without creating a new account or shared space.",
+        "نعم. بدّلا بين العيش بعيدًا والعيش معًا. تتكيّف شاشة «اليوم» دون حساب أو مساحة جديدة."
+      ]
+    ]
+  ],
+  "Founder Members": [
+    [
+      [
+        "Can iPhone owners register today?",
+        "هل يمكن لمستخدمي iPhone التسجيل اليوم؟"
+      ],
+      [
+        "Yes. Founding 500 registration is open to Android and iPhone owners. We invite each member when their platform is ready.",
+        "نعم. التسجيل في المؤسسين الـ500 متاح لمستخدمي أندرويد وiPhone. نرسل الدعوة عندما تصبح نسخة الهاتف جاهزة."
+      ]
+    ],
+    [
+      [
+        "Is our Founder number for one person or the couple?",
+        "هل رقم المؤسس لشخص واحد أم للزوجين؟"
+      ],
+      [
+        "It belongs to the couple. One confirmed couple shares one number, and the second partner joins using the invitation link.",
+        "إنه للزوجين. يتشارك الشريكان رقمًا واحدًا بعد تأكيد التسجيل، وينضم الثاني عبر رابط الدعوة."
+      ]
+    ],
+    [
+      [
+        "What if all Founder places are taken?",
+        "ماذا لو اكتملت أماكن المؤسسين؟"
+      ],
+      [
+        "The first 250 confirmed couples receive Founder numbers. Later signups can join the waiting list for future invitations.",
+        "أول 250 زوجًا يؤكدون التسجيل يحصلون على أرقام المؤسسين. وبعد ذلك يمكن الانضمام إلى قائمة الانتظار للدعوات القادمة."
+      ]
+    ]
+  ],
+  "Using OneSpace": [
+    [
+      [
+        "Do dates create counters automatically?",
+        "هل تنشئ التواريخ عدّادات تلقائيًا؟"
+      ],
+      [
+        "No. Counters are opt-in. You choose a date from a calendar event, occasion or trip, open the counter editor and save it yourself.",
+        "لا. العدّادات اختيارية. تختار تاريخًا من موعد أو مناسبة أو رحلة، ثم تفتح محرر العدّاد وتحفظه بنفسك."
+      ]
+    ],
+    [
+      [
+        "Can we both edit a shared plan?",
+        "هل يمكننا تعديل خطة مشتركة معًا؟"
+      ],
+      [
+        "Yes. Shared Coordinate activities can contain both partners' links, options, notes, comments and final decisions.",
+        "نعم. يمكن أن تتضمن الأنشطة المشتركة روابط الشريكين وخياراتهما وملاحظاتهما وتعليقاتهما والقرارات النهائية."
+      ]
+    ],
+    [
+      [
+        "Does OneSpace read changes made in my phone calendar?",
+        "هل يقرأ OneSpace تعديلات تقويم هاتفي؟"
+      ],
+      [
+        "No. OneSpace currently sends its events one way to a separate phone calendar. Changes made in your phone calendar are not imported back.",
+        "لا. يرسل OneSpace مواعيده في اتجاه واحد إلى تقويم منفصل في الهاتف. ولا يستورد التعديلات التي تجريها في تقويم الهاتف."
+      ]
+    ],
+    [
+      [
+        "Can I share from another iPhone app directly into OneSpace?",
+        "هل يمكنني المشاركة من تطبيق iPhone آخر مباشرة إلى OneSpace؟"
+      ],
+      [
+        "Not yet. The iOS share extension is still in development. Android supports share intake from compatible apps; links can also be added manually.",
+        "ليس بعد. إضافة المشاركة في iOS ما زالت قيد التطوير. يدعم أندرويد الاستقبال من التطبيقات المتوافقة، ويمكن إضافة الروابط يدويًا."
+      ]
+    ]
+  ],
+  "Privacy & account": [
+    [
+      [
+        "What does Only me mean?",
+        "ماذا يعني خيار «أنا فقط»؟"
+      ],
+      [
+        "An Only me item remains private to its owner unless they explicitly grant supported view-only access. The server enforces access rules.",
+        "يظل عنصر «أنا فقط» خاصًا بصاحبه إلا إذا منح إذن عرض فقط صراحةً حيث يتاح ذلك. تُطبَّق قواعد الوصول في الخادم."
+      ]
+    ],
+    [
+      [
+        "Does revoking access delete screenshots already taken?",
+        "هل يمحو إلغاء الوصول صور الشاشة السابقة؟"
+      ],
+      [
+        "No. Revocation blocks future authorized reads, but cannot remove a screenshot or copy someone has already saved.",
+        "لا. يمنع إلغاء الوصول الاطلاع المصرح به لاحقًا، لكنه لا يحذف صورة شاشة أو نسخة حفظها شخص مسبقًا."
+      ]
+    ],
+    [
+      [
+        "Does OneSpace upload all my contacts?",
+        "هل يرفع OneSpace جميع جهات اتصالي؟"
+      ],
+      [
+        "No. You deliberately choose any phone contact you want to save. OneSpace does not automatically upload your address book.",
+        "لا. تختار بنفسك جهة اتصال الهاتف التي تريد حفظها. ولا يرفع OneSpace دفتر العناوين تلقائيًا."
+      ]
+    ]
+  ],
+  "Help": [
+    [
+      [
+        "Why does the website have more languages than the app?",
+        "لماذا يحتوي الموقع على لغات أكثر من التطبيق؟"
+      ],
+      [
+        "The website has five languages. The current mobile app supports English and Arabic. Translated website content does not mean those languages are available in the app.",
+        "يوفر الموقع خمس لغات، بينما يدعم تطبيق الهاتف حاليًا الإنجليزية والعربية. لا تعني ترجمة الموقع توفر هذه اللغات في التطبيق."
+      ]
+    ],
+    [
+      [
+        "I changed phones. Will our space disappear?",
+        "غيّرت هاتفي، فهل ستختفي مساحتنا؟"
+      ],
+      [
+        "No. Your space belongs to your accounts, not to one device. Sign in with your existing account and follow the device security checks.",
+        "لا. ترتبط مساحتكما بالحسابين لا بجهاز واحد. سجّل الدخول بحسابك الحالي وأكمل فحوص أمان الجهاز."
+      ]
+    ],
+    [
+      [
+        "What should I check if notifications stop arriving?",
+        "ماذا أفعل إذا توقفت الإشعارات؟"
+      ],
+      [
+        "Check internet access, phone notification permissions and OneSpace preferences. iPhone push also needs completed Apple/Firebase configuration before testing. Contact Support if the problem continues.",
+        "تحقق من الإنترنت وأذونات الإشعارات وتفضيلات OneSpace. وتتطلب إشعارات iPhone اكتمال إعداد Apple وFirebase قبل الاختبار. تواصل مع الدعم إن استمرت المشكلة."
+      ]
+    ]
+  ]
+}
 EXTRA_TRANSLATIONS = {
   "es": {
     "Tuesday across two time zones": "Un martes entre dos husos horarios",
@@ -565,7 +737,39 @@ EXTRA_TRANSLATIONS = {
     "Seven moments from couples who share the same home.": "Siete momentos de parejas que comparten hogar.",
     "Couples stories": "Historias de pareja",
     "Explore the features": "Explorar las funciones",
-    "OneSpace stories — a shared life in scenes": "Historias OneSpace: la vida en pareja, escena a escena"
+    "OneSpace stories — a shared life in scenes": "Historias OneSpace: la vida en pareja, escena a escena",
+    "Do we each need an account?": "¿Necesitamos una cuenta cada uno?",
+    "Yes. Each partner signs in with a separate account. An invitation connects both accounts to the same private space.": "Sí. Cada persona usa su propia cuenta. Una invitación conecta las dos cuentas en un espacio privado.",
+    "Can I join before my partner is ready?": "¿Puedo empezar antes que mi pareja?",
+    "Yes. Create your space and invite your partner later. Shared collaboration begins once you both join.": "Sí. Crea tu espacio e invita a tu pareja después. Podréis colaborar cuando los dos os hayáis unido.",
+    "Can we change how we live without starting over?": "¿Podemos cambiar nuestra situación sin empezar de cero?",
+    "Yes. Switch between living apart and living together. Today adapts without creating a new account or shared space.": "Sí. Cambiad entre vivir a distancia y vivir juntos. Hoy se adapta sin crear otra cuenta ni otro espacio.",
+    "Can iPhone owners register today?": "¿Pueden inscribirse ya los usuarios de iPhone?",
+    "Yes. Founding 500 registration is open to Android and iPhone owners. We invite each member when their platform is ready.": "Sí. La inscripción está abierta para Android y iPhone. Cada persona recibirá su invitación cuando su versión esté lista.",
+    "Is our Founder number for one person or the couple?": "¿El número fundador es individual o de la pareja?",
+    "It belongs to the couple. One confirmed couple shares one number, and the second partner joins using the invitation link.": "Es para la pareja. Los dos compartís un número tras confirmar la inscripción; la otra persona se une con el enlace.",
+    "What if all Founder places are taken?": "¿Qué ocurre si se agotan las plazas de fundadores?",
+    "The first 250 confirmed couples receive Founder numbers. Later signups can join the waiting list for future invitations.": "Las primeras 250 parejas confirmadas reciben un número fundador. Las demás pasan a la lista de espera.",
+    "Do dates create counters automatically?": "¿Las fechas crean contadores automáticamente?",
+    "No. Counters are opt-in. You choose a date from a calendar event, occasion or trip, open the counter editor and save it yourself.": "No. Los contadores son opcionales. Elige una fecha de un evento, ocasión o viaje y guarda el contador tú mismo.",
+    "Can we both edit a shared plan?": "¿Podemos editar un plan compartido los dos?",
+    "Yes. Shared Coordinate activities can contain both partners' links, options, notes, comments and final decisions.": "Sí. Las actividades compartidas reúnen los enlaces, opciones, notas, comentarios y decisiones de ambos.",
+    "Does OneSpace read changes made in my phone calendar?": "¿OneSpace lee cambios hechos en el calendario del móvil?",
+    "No. OneSpace currently sends its events one way to a separate phone calendar. Changes made in your phone calendar are not imported back.": "No. OneSpace envía sus eventos a un calendario separado del móvil. Los cambios allí no vuelven a OneSpace.",
+    "Can I share from another iPhone app directly into OneSpace?": "¿Puedo compartir directamente desde otra app del iPhone?",
+    "Not yet. The iOS share extension is still in development. Android supports share intake from compatible apps; links can also be added manually.": "Todavía no. La extensión de iOS sigue en desarrollo. Android permite compartir desde apps compatibles; también puedes añadir enlaces a mano.",
+    "What does Only me mean?": "¿Qué significa Solo yo?",
+    "An Only me item remains private to its owner unless they explicitly grant supported view-only access. The server enforces access rules.": "Un elemento Solo yo es privado salvo que su dueño conceda acceso de lectura cuando esté disponible. El servidor aplica los permisos.",
+    "Does revoking access delete screenshots already taken?": "¿Revocar el acceso borra capturas ya hechas?",
+    "No. Revocation blocks future authorized reads, but cannot remove a screenshot or copy someone has already saved.": "No. Impide nuevos accesos autorizados, pero no borra capturas ni copias ya guardadas.",
+    "Does OneSpace upload all my contacts?": "¿OneSpace sube todos mis contactos?",
+    "No. You deliberately choose any phone contact you want to save. OneSpace does not automatically upload your address book.": "No. Tú eliges qué contacto guardar. OneSpace no sube automáticamente toda la agenda.",
+    "Why does the website have more languages than the app?": "¿Por qué la web tiene más idiomas que la app?",
+    "The website has five languages. The current mobile app supports English and Arabic. Translated website content does not mean those languages are available in the app.": "La web tiene cinco idiomas; la app móvil admite actualmente inglés y árabe. Las traducciones web no implican que estén en la app.",
+    "I changed phones. Will our space disappear?": "He cambiado de móvil. ¿Desaparecerá nuestro espacio?",
+    "No. Your space belongs to your accounts, not to one device. Sign in with your existing account and follow the device security checks.": "No. El espacio está vinculado a las cuentas, no al dispositivo. Inicia sesión con tu cuenta y supera las comprobaciones de seguridad.",
+    "What should I check if notifications stop arriving?": "¿Qué hago si dejan de llegar notificaciones?",
+    "Check internet access, phone notification permissions and OneSpace preferences. iPhone push also needs completed Apple/Firebase configuration before testing. Contact Support if the problem continues.": "Comprueba la conexión, los permisos y los ajustes de OneSpace. En iPhone también debe completarse Apple/Firebase antes de probarlo. Si sigue fallando, contacta con Soporte."
   },
   "fr": {
     "Tuesday across two time zones": "Un mardi entre deux fuseaux horaires",
@@ -666,7 +870,39 @@ EXTRA_TRANSLATIONS = {
     "Seven moments from couples who share the same home.": "Sept instants de la vie de couples sous le même toit.",
     "Couples stories": "Histoires de couple",
     "Explore the features": "Découvrir les fonctionnalités",
-    "OneSpace stories — a shared life in scenes": "Histoires OneSpace : la vie à deux en scènes"
+    "OneSpace stories — a shared life in scenes": "Histoires OneSpace : la vie à deux en scènes",
+    "Do we each need an account?": "Avons-nous besoin chacun d’un compte ?",
+    "Yes. Each partner signs in with a separate account. An invitation connects both accounts to the same private space.": "Oui. Chacun utilise son propre compte. Une invitation les relie dans un espace privé commun.",
+    "Can I join before my partner is ready?": "Puis-je commencer avant mon partenaire ?",
+    "Yes. Create your space and invite your partner later. Shared collaboration begins once you both join.": "Oui. Créez votre espace et invitez votre partenaire plus tard. Vous collaborerez une fois tous deux inscrits.",
+    "Can we change how we live without starting over?": "Peut-on changer notre situation sans tout recommencer ?",
+    "Yes. Switch between living apart and living together. Today adapts without creating a new account or shared space.": "Oui. Passez de la vie à distance à la vie commune. Aujourd’hui s’adapte sans recréer de compte ni d’espace.",
+    "Can iPhone owners register today?": "Les utilisateurs d’iPhone peuvent-ils déjà s’inscrire ?",
+    "Yes. Founding 500 registration is open to Android and iPhone owners. We invite each member when their platform is ready.": "Oui. Les inscriptions sont ouvertes pour Android et iPhone. Chaque membre sera invité quand sa version sera prête.",
+    "Is our Founder number for one person or the couple?": "Le numéro fondateur appartient-il à une personne ou au couple ?",
+    "It belongs to the couple. One confirmed couple shares one number, and the second partner joins using the invitation link.": "Il appartient au couple. Après confirmation, vous partagez un seul numéro et le partenaire rejoint avec le lien.",
+    "What if all Founder places are taken?": "Que se passe-t-il si toutes les places fondatrices sont prises ?",
+    "The first 250 confirmed couples receive Founder numbers. Later signups can join the waiting list for future invitations.": "Les 250 premiers couples confirmés reçoivent un numéro fondateur. Les autres rejoignent la liste d’attente.",
+    "Do dates create counters automatically?": "Les dates créent-elles automatiquement des compteurs ?",
+    "No. Counters are opt-in. You choose a date from a calendar event, occasion or trip, open the counter editor and save it yourself.": "Non. Les compteurs sont facultatifs. Choisissez une date liée à un événement, une occasion ou un voyage, puis enregistrez le compteur.",
+    "Can we both edit a shared plan?": "Peut-on modifier tous les deux un projet partagé ?",
+    "Yes. Shared Coordinate activities can contain both partners' links, options, notes, comments and final decisions.": "Oui. Les activités partagées réunissent liens, options, notes, commentaires et décisions des deux partenaires.",
+    "Does OneSpace read changes made in my phone calendar?": "OneSpace lit-il les changements de mon calendrier téléphonique ?",
+    "No. OneSpace currently sends its events one way to a separate phone calendar. Changes made in your phone calendar are not imported back.": "Non. OneSpace envoie ses événements vers un calendrier distinct du téléphone. Les modifications n’y sont pas réimportées.",
+    "Can I share from another iPhone app directly into OneSpace?": "Puis-je partager directement depuis une autre app iPhone ?",
+    "Not yet. The iOS share extension is still in development. Android supports share intake from compatible apps; links can also be added manually.": "Pas encore. L’extension iOS est en développement. Android permet le partage depuis les apps compatibles ; les liens peuvent aussi être ajoutés à la main.",
+    "What does Only me mean?": "Que signifie « Moi uniquement » ?",
+    "An Only me item remains private to its owner unless they explicitly grant supported view-only access. The server enforces access rules.": "Un élément « Moi uniquement » reste privé, sauf partage en lecture seule explicite lorsque cette option existe. Le serveur applique les règles d’accès.",
+    "Does revoking access delete screenshots already taken?": "Retirer l’accès efface-t-il les captures déjà faites ?",
+    "No. Revocation blocks future authorized reads, but cannot remove a screenshot or copy someone has already saved.": "Non. La révocation bloque les nouveaux accès autorisés, mais n’efface pas une capture ou une copie déjà conservée.",
+    "Does OneSpace upload all my contacts?": "OneSpace importe-t-il tous mes contacts ?",
+    "No. You deliberately choose any phone contact you want to save. OneSpace does not automatically upload your address book.": "Non. Vous choisissez le contact à enregistrer. OneSpace n’importe pas automatiquement votre carnet d’adresses.",
+    "Why does the website have more languages than the app?": "Pourquoi le site propose-t-il plus de langues que l’app ?",
+    "The website has five languages. The current mobile app supports English and Arabic. Translated website content does not mean those languages are available in the app.": "Le site propose cinq langues ; l’app prend actuellement en charge l’anglais et l’arabe. Les traductions du site ne sont pas disponibles dans l’app.",
+    "I changed phones. Will our space disappear?": "J’ai changé de téléphone. Notre espace va-t-il disparaître ?",
+    "No. Your space belongs to your accounts, not to one device. Sign in with your existing account and follow the device security checks.": "Non. Votre espace est lié à vos comptes, pas à un appareil. Reconnectez-vous et suivez les contrôles de sécurité.",
+    "What should I check if notifications stop arriving?": "Que vérifier si les notifications n’arrivent plus ?",
+    "Check internet access, phone notification permissions and OneSpace preferences. iPhone push also needs completed Apple/Firebase configuration before testing. Contact Support if the problem continues.": "Vérifiez la connexion, les autorisations et les préférences OneSpace. Les notifications iPhone nécessitent aussi la configuration Apple/Firebase. Contactez le support si nécessaire."
   },
   "de": {
     "Tuesday across two time zones": "Ein Dienstag in zwei Zeitzonen",
@@ -767,6 +1003,38 @@ EXTRA_TRANSLATIONS = {
     "Seven moments from couples who share the same home.": "Sieben Momente von Paaren, die zusammenwohnen.",
     "Couples stories": "Paargeschichten",
     "Explore the features": "Funktionen entdecken",
-    "OneSpace stories — a shared life in scenes": "OneSpace-Geschichten: das gemeinsame Leben in Szenen"
+    "OneSpace stories — a shared life in scenes": "OneSpace-Geschichten: das gemeinsame Leben in Szenen",
+    "Do we each need an account?": "Brauchen wir beide ein eigenes Konto?",
+    "Yes. Each partner signs in with a separate account. An invitation connects both accounts to the same private space.": "Ja. Beide nutzen ein eigenes Konto. Über eine Einladung werden die Konten mit einem gemeinsamen privaten Bereich verbunden.",
+    "Can I join before my partner is ready?": "Kann ich schon vor meinem Partner anfangen?",
+    "Yes. Create your space and invite your partner later. Shared collaboration begins once you both join.": "Ja. Erstelle euren Bereich und lade deinen Partner später ein. Gemeinsam nutzen könnt ihr ihn, sobald beide beigetreten sind.",
+    "Can we change how we live without starting over?": "Können wir unsere Wohnsituation ändern, ohne neu anzufangen?",
+    "Yes. Switch between living apart and living together. Today adapts without creating a new account or shared space.": "Ja. Wechselt zwischen Fernbeziehung und Zusammenleben. Heute passt sich an, ohne dass ihr neue Konten braucht.",
+    "Can iPhone owners register today?": "Können sich iPhone-Nutzer jetzt anmelden?",
+    "Yes. Founding 500 registration is open to Android and iPhone owners. We invite each member when their platform is ready.": "Ja. Die Anmeldung ist für Android und iPhone geöffnet. Die Einladung folgt, sobald die jeweilige Version bereitsteht.",
+    "Is our Founder number for one person or the couple?": "Gilt die Gründernummer für eine Person oder für das Paar?",
+    "It belongs to the couple. One confirmed couple shares one number, and the second partner joins using the invitation link.": "Sie gilt für das Paar. Nach Bestätigung teilt ihr eine Nummer; der Partner tritt über den Einladungslink bei.",
+    "What if all Founder places are taken?": "Was passiert, wenn alle Gründungsplätze vergeben sind?",
+    "The first 250 confirmed couples receive Founder numbers. Later signups can join the waiting list for future invitations.": "Die ersten 250 bestätigten Paare bekommen Gründernummern. Weitere Anmeldungen kommen auf die Warteliste.",
+    "Do dates create counters automatically?": "Werden aus Terminen automatisch Zähler?",
+    "No. Counters are opt-in. You choose a date from a calendar event, occasion or trip, open the counter editor and save it yourself.": "Nein. Zähler sind freiwillig. Wähle ein Datum aus einem Termin, Anlass oder einer Reise und speichere den Zähler selbst.",
+    "Can we both edit a shared plan?": "Können wir beide einen gemeinsamen Plan bearbeiten?",
+    "Yes. Shared Coordinate activities can contain both partners' links, options, notes, comments and final decisions.": "Ja. Gemeinsame Aktivitäten enthalten Links, Optionen, Notizen, Kommentare und Entscheidungen beider Partner.",
+    "Does OneSpace read changes made in my phone calendar?": "Liest OneSpace Änderungen aus meinem Handy-Kalender?",
+    "No. OneSpace currently sends its events one way to a separate phone calendar. Changes made in your phone calendar are not imported back.": "Nein. OneSpace überträgt Termine nur in einen separaten Handy-Kalender. Änderungen dort werden nicht zurückimportiert.",
+    "Can I share from another iPhone app directly into OneSpace?": "Kann ich direkt aus einer anderen iPhone-App an OneSpace teilen?",
+    "Not yet. The iOS share extension is still in development. Android supports share intake from compatible apps; links can also be added manually.": "Noch nicht. Die iOS-Teilen-Erweiterung ist in Entwicklung. Auf Android funktioniert Teilen aus unterstützten Apps; Links kannst du auch manuell hinzufügen.",
+    "What does Only me mean?": "Was bedeutet „Nur ich“?",
+    "An Only me item remains private to its owner unless they explicitly grant supported view-only access. The server enforces access rules.": "Ein „Nur ich“-Eintrag bleibt privat, sofern du nicht ausdrücklich Lesezugriff gewährst, wo dies unterstützt wird. Der Server setzt die Rechte durch.",
+    "Does revoking access delete screenshots already taken?": "Löscht ein Widerruf schon erstellte Screenshots?",
+    "No. Revocation blocks future authorized reads, but cannot remove a screenshot or copy someone has already saved.": "Nein. Der Widerruf verhindert neue berechtigte Zugriffe, entfernt aber keine bereits gespeicherten Screenshots oder Kopien.",
+    "Does OneSpace upload all my contacts?": "Lädt OneSpace alle meine Kontakte hoch?",
+    "No. You deliberately choose any phone contact you want to save. OneSpace does not automatically upload your address book.": "Nein. Du wählst selbst, welchen Kontakt du speichern willst. OneSpace lädt nicht automatisch dein Adressbuch hoch.",
+    "Why does the website have more languages than the app?": "Warum hat die Website mehr Sprachen als die App?",
+    "The website has five languages. The current mobile app supports English and Arabic. Translated website content does not mean those languages are available in the app.": "Die Website bietet fünf Sprachen, die App derzeit Englisch und Arabisch. Weitere Website-Sprachen bedeuten nicht, dass die App sie schon unterstützt.",
+    "I changed phones. Will our space disappear?": "Ich habe ein neues Handy. Verschwindet unser Bereich?",
+    "No. Your space belongs to your accounts, not to one device. Sign in with your existing account and follow the device security checks.": "Nein. Der Bereich gehört zu euren Konten, nicht zu einem Gerät. Melde dich mit deinem bestehenden Konto an und bestätige die Geräteprüfung.",
+    "What should I check if notifications stop arriving?": "Was tun, wenn Benachrichtigungen ausbleiben?",
+    "Check internet access, phone notification permissions and OneSpace preferences. iPhone push also needs completed Apple/Firebase configuration before testing. Contact Support if the problem continues.": "Prüfe Internet, Systemberechtigungen und OneSpace-Einstellungen. iPhone-Push setzt außerdem die Apple-/Firebase-Konfiguration voraus. Bei Problemen hilft der Support."
   }
 }
