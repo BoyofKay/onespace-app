@@ -1,0 +1,70 @@
+{
+  "schemaVersion": 1,
+  "documentation": "Update only the document and language that was actually revised; the date is not the site build date or visitor date.",
+  "privacy": {
+    "en": {
+      "date": "2026-11-18",
+      "version": "1.1"
+    },
+    "ar": {
+      "date": "2026-11-18",
+      "version": "1.1"
+    },
+    "es": {
+      "date": "2026-11-18",
+      "version": "1.1"
+    },
+    "fr": {
+      "date": "2026-11-18",
+      "version": "1.1"
+    },
+    "de": {
+      "date": "2026-11-18",
+      "version": "1.1"
+    }
+  },
+  "terms": {
+    "en": {
+      "date": "2026-11-16",
+      "version": "1.0"
+    },
+    "ar": {
+      "date": "2026-11-16",
+      "version": "1.0"
+    },
+    "es": {
+      "date": "2026-11-16",
+      "version": "1.0"
+    },
+    "fr": {
+      "date": "2026-11-16",
+      "version": "1.0"
+    },
+    "de": {
+      "date": "2026-11-16",
+      "version": "1.0"
+    }
+  },
+  "delete-account": {
+    "en": {
+      "date": "2026-11-18",
+      "version": "1.0"
+    },
+    "ar": {
+      "date": "2026-11-18",
+      "version": "1.0"
+    },
+    "es": {
+      "date": "2026-11-18",
+      "version": "1.0"
+    },
+    "fr": {
+      "date": "2026-11-18",
+      "version": "1.0"
+    },
+    "de": {
+      "date": "2026-11-18",
+      "version": "1.0"
+    }
+  }
+}
