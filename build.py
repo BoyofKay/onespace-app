@@ -1768,7 +1768,7 @@ def main():
     urls = ''
     for n, (_, p, c) in PAGES.items():
         slug = '' if n == 'index.html' else n
-        alt = (f'<xhtml:link rel="alternate" hreflang="en" href="{BASE}{slug}"/><xhtml:link rel="alternate" hreflang="ar" href="{BASE}ar/{slug}"/>'
+        alt = (f'<xhtml:link rel="alternate" hreflang="en" href="{BASE}{slug}"/><xhtml:link rel="alternate" hreflang="ar" href="{BASE}ar/{slug}"/>' +
                (''.join(f'<xhtml:link rel="alternate" hreflang="{code}" href="{BASE}{code}/"/>' for code in ('es', 'fr', 'de')) if n == 'index.html' else '') +
                f'<xhtml:link rel="alternate" hreflang="x-default" href="{BASE}{slug}"/>')
         for loc, pr in ((BASE + slug, p), (BASE + 'ar/' + slug, f'{max(float(p) - 0.1, 0.1):.1f}')):
