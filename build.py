@@ -601,7 +601,7 @@ APP = ROOT / 'assets' / 'app'
 
 
 def has_shot(name, lang='en'):
-    return (APP / lang / f'{name}.webp').exists()
+    return (APP / lang / (name if name.endswith('.png') else f'{name}.webp')).exists()
 
 
 def device(name, alt, alt_ar, cls='', fallback='', themed=False):
@@ -610,8 +610,9 @@ def device(name, alt, alt_ar, cls='', fallback='', themed=False):
     the HTML illustration while the robot hasn't produced that screen yet."""
     if not has_shot(name):
         return fallback
-    en = f'assets/app/en/{name}.webp'
-    ar = f'assets/app/ar/{name}.webp' if has_shot(name, 'ar') else en
+    file_name = name if name.endswith('.png') else f'{name}.webp'
+    en = f'assets/app/en/{file_name}'
+    ar = f'assets/app/ar/{file_name}' if has_shot(name, 'ar') else en
     k = K(alt, alt_ar)
     t = ' data-theme-img' if themed else ''
     return (f'<div class="device {cls}"><img src="{en}" data-en-src="{en}" data-ar-src="{ar}"{t} alt="{escape(alt)}" '
@@ -887,7 +888,7 @@ def page_connect_care():
         'عبّر عن شعورك وما يشغل بالك حتى مع الانشغال أو البعد.',
         [('Daily reflection','take a moment to name how your day feels.','تأمل يومي','توقف قليلًا لتصف شعورك اليوم.'),
          ('Share what matters','give your partner context beyond a quick reply.','مشاركة مهمة','امنح شريكك صورة أوضح من مجرد رد سريع.')],
-        'ourspace','teal',tint=True,label='OneSpace Connect overview') + \
+        'ourspace','teal',tint=True,label='Real daily check-in screenshot from the demo couple',real='checkins.png') + \
       feature_block('journal','FEELINGS JOURNAL','يوميات المشاعر',
         'Give your feelings somewhere to live.','امنح مشاعرك مكانًا تحتفظ به.',
         'Record thoughts and moods over time. This section uses a general Connect screenshot until a dedicated journal capture is available.',
@@ -1299,11 +1300,11 @@ def trust_card(i, c, h, har, p, par):
     return f'<div class="card reveal"><div class="ico {c}">{i}</div>{T(h, har, "h3")}{T(p, par, "p")}</div>'
 
 
-def feature_block(anchor, eyebrow, eyebrow_ar, h2, h2_ar, lead, lead_ar, items, screen_key, theme, rev=False, tint=False, label=''):
+def feature_block(anchor, eyebrow, eyebrow_ar, h2, h2_ar, lead, lead_ar, items, screen_key, theme, rev=False, tint=False, label='', real=None):
     lis = ''.join(f'<li>{T(f"<b>{a}</b> — {b}", f"<b>{c}</b> — {d}")}</li>' for a, b, c, d in items)
     cls = ' class="tint"' if tint else ''
     return f'''<section id="{anchor}"{cls}><div class="wrap split{' rev' if rev else ''}">
-  <div class="stage">{screen(screen_key, theme, label or h2, h2_ar)}</div>
+  <div class="stage">{screen(screen_key, theme, label or h2, h2_ar, real=real)}</div>
   <div>{T(eyebrow, eyebrow_ar, 'span', 'eyebrow')}{T(h2, h2_ar, 'h2')}{T(lead, lead_ar, 'p', 'lead')}<ul class="ticks">{lis}</ul></div>
 </div></section>'''
 
