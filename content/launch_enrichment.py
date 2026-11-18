@@ -562,7 +562,10 @@ EXTRA_TRANSLATIONS = {
     "Little movie-like moments, practical OneSpace workflows": "Escenas breves y usos prácticos de OneSpace",
     "See these ideas in a story": "Ver estas ideas en una historia",
     "Thirteen fictional mini-episodes. Recognizable moments, honest dialogue and the OneSpace features that help two people move from a problem to a plan.": "Trece episodios ficticios: momentos cotidianos, diálogos cercanos y funciones de OneSpace que ayudan a pasar del problema a un plan.",
-    "Seven moments from couples who share the same home.": "Siete momentos de parejas que comparten hogar."
+    "Seven moments from couples who share the same home.": "Siete momentos de parejas que comparten hogar.",
+    "Couples stories": "Historias de pareja",
+    "Explore the features": "Explorar las funciones",
+    "OneSpace stories — a shared life in scenes": "Historias OneSpace: la vida en pareja, escena a escena"
   },
   "fr": {
     "Tuesday across two time zones": "Un mardi entre deux fuseaux horaires",
@@ -660,7 +663,10 @@ EXTRA_TRANSLATIONS = {
     "Little movie-like moments, practical OneSpace workflows": "Petites scènes et usages concrets de OneSpace",
     "See these ideas in a story": "Retrouvez ces idées dans une histoire",
     "Thirteen fictional mini-episodes. Recognizable moments, honest dialogue and the OneSpace features that help two people move from a problem to a plan.": "Treize petits épisodes fictifs : des situations familières, des dialogues et les fonctions de OneSpace pour passer du souci au projet.",
-    "Seven moments from couples who share the same home.": "Sept instants de la vie de couples sous le même toit."
+    "Seven moments from couples who share the same home.": "Sept instants de la vie de couples sous le même toit.",
+    "Couples stories": "Histoires de couple",
+    "Explore the features": "Découvrir les fonctionnalités",
+    "OneSpace stories — a shared life in scenes": "Histoires OneSpace : la vie à deux en scènes"
   },
   "de": {
     "Tuesday across two time zones": "Ein Dienstag in zwei Zeitzonen",
@@ -758,6 +764,9 @@ EXTRA_TRANSLATIONS = {
     "Little movie-like moments, practical OneSpace workflows": "Kleine Filmszenen und praktische OneSpace-Abläufe",
     "See these ideas in a story": "Diese Ideen in einer Geschichte erleben",
     "Thirteen fictional mini-episodes. Recognizable moments, honest dialogue and the OneSpace features that help two people move from a problem to a plan.": "Dreizehn erfundene Mini-Episoden: vertraute Situationen, echte Dialoge und OneSpace-Funktionen, die aus Problemen gemeinsame Pläne machen.",
-    "Seven moments from couples who share the same home.": "Sieben Momente von Paaren, die zusammenwohnen."
+    "Seven moments from couples who share the same home.": "Sieben Momente von Paaren, die zusammenwohnen.",
+    "Couples stories": "Paargeschichten",
+    "Explore the features": "Funktionen entdecken",
+    "OneSpace stories — a shared life in scenes": "OneSpace-Geschichten: das gemeinsame Leben in Szenen"
   }
 }
