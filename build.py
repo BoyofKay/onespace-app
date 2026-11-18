@@ -794,8 +794,8 @@ def page_index():
   <span class="floaty" style="left:4%;top:12%">♥</span><span class="floaty" style="left:44%;top:78%;animation-delay:-3s">✦</span><span class="floaty" style="right:4%;top:70%;animation-delay:-6s;color:var(--coral)">♥</span>
   <div>
     {T('Two of us. One Space.', 'نحن الاثنان. مساحة واحدة.', 'span', 'eyebrow')}
-    <h1>{T('The private home for the life', 'البيت الخاص للحياة')} <span class="serif accent">{T('you share.', 'التي تتشاركانها.')}</span></h1>
-    <p class="lead">{T('Plans, little gestures, letters and memories in one calm app only the two of you can open. Made for couples', 'خطط ولمسات صغيرة ورسائل وذكريات في تطبيق هادئ لا يفتحه سواكما. صُمم لأزواج')} <b class="rotator" style="color:var(--teal)">{rot}</b></p>
+    <h1>{T('The private home for the life', 'مساحتكما الخاصة')} <span class="serif accent">{T('you share.', 'لكل تفاصيل حياتكما.')}</span></h1>
+    <p class="lead">{T('Plans, little gestures, letters and memories in one calm app only the two of you can open. Made for couples', 'خططكما ومواعيدكما ورسائلكما وذكرياتكما… كلها في مساحة خاصة تجمعكما. مناسبة لأزواج')} <b class="rotator" style="color:var(--teal)">{rot}</b></p>
     <div class="cta-row">
       <a class="btn btn-primary" href="#founding" data-track="hero_join">{T('Join the Founding 500 — free', 'انضم إلى المؤسسين الـ500 — مجانًا')}</a>
       <a class="btn btn-ghost" href="how-it-works.html" data-track="hero_demo">▶ {T('Try the demo', 'جرّب العرض')}</a>
@@ -814,7 +814,7 @@ def page_index():
 {one_list_section()}
 
 <section><div class="wrap">
-  <div class="sec-head center">{T('Sound familiar?', 'هل يبدو هذا مألوفًا؟', 'span', 'eyebrow')}<h2>{T('Love is easy.', 'الحب سهل.')} <span class="serif accent">{T('Logistics aren’t.', 'التفاصيل ليست كذلك.')}</span></h2>
+  <div class="sec-head center">{T('Sound familiar?', 'هل يبدو هذا مألوفًا؟', 'span', 'eyebrow')}<h2>{T('Love is easy.', 'الحب جميل…')} <span class="serif accent">{T('Logistics aren’t.', 'لكن التفاصيل محتاجة تنظيم.')}</span></h2>
   {T('Every couple has these conversations. OneSpace quietly takes care of them, so your chats can be about you again.', 'كل زوجين يمرّان بهذه المحادثات. يتولاها OneSpace بهدوء، لتعود محادثاتكما عنكما من جديد.', 'p', 'lead')}</div>
   <div class="pains">
     {pain('Did you book the dentist? 🦷', 'هل حجزت موعد طبيب الأسنان؟ 🦷', 'I thought YOU were doing it 😅', 'ظننت أنكِ ستحجزينه 😅', 'Reminders that belong to someone — and show up in their Today.', 'تذكيرات لها صاحب — وتظهر في «اليوم» لديه.', shot='lists')}
