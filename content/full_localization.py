@@ -149,6 +149,8 @@ for _locale_index, _locale in enumerate(('es','fr','de'), 2):
           'Découvrez 9 autres guides pratiques',
           'Entdecke 9 weitere praktische Ratgeber'])
     for _guide in GUIDE_ADDITIONS_1 + GUIDE_ADDITIONS_2:
+        # The HTML <title> combines the editorial guide title with the brand.
+        _lex[_guide['title'][0] + ' — OneSpace'] = _guide['title'][_locale_index] + ' — OneSpace'
         for _field in ('title','desc','intro','how'):
             _add(_guide[_field])
         for _heading, _tips in _guide['sections']:
