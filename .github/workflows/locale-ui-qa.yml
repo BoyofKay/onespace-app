@@ -27,6 +27,17 @@ jobs:
           python3 tests/check_site.py
           node --check assets/os.js
           node --check assets/ar.js
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Set up headless browser for responsive and interaction QA
+        run: |
+          npm install --no-audit --no-fund --no-save --no-package-lock playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Test localized UI at phone tablet and desktop breakpoints
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 >/tmp/onespace-web.log 2>&1 &
+          node scripts/check_locale_layout.mjs
       - name: Commit source-derived website pages
         run: |
           git config user.name 'github-actions[bot]'
