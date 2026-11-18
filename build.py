@@ -243,7 +243,7 @@ def foot():
     {col('Legal', 'قانوني', [('privacy.html', 'Privacy policy', 'سياسة الخصوصية'), ('terms.html', 'Terms of use', 'شروط الاستخدام'), ('delete-account.html', 'Delete your account', 'حذف حسابك')])}
   </div>
   <div class="foot-bottom">
-    <span>© <span id="year">2026</span> OneSpace · {T('Early test · Android now, iPhone soon', 'تجربة مبكرة · أندرويد الآن وiPhone قريبًا')}</span>
+    <span>© <span id="year">2026</span> OneSpace · {T('Founder registration open: Android & iPhone · App releases follow separately', 'التسجيل في عضوية المؤسسين مفتوح لأندرويد وآيفون · إصدار التطبيق لكل منصة في موعده')}</span>
     <span>{T('No ads. No data selling. Ever.', 'بلا إعلانات. بلا بيع للبيانات. أبدًا.')}</span>
   </div>
 </div></footer>
