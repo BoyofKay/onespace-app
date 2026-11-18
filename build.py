@@ -1186,7 +1186,7 @@ def page_index():
     chips = ''.join(f'<span class="chip">{i} {T(e, a)}</span>' for i, e, a in marquee_items)
     app_ld = {'@context': 'https://schema.org', '@type': 'MobileApplication', 'name': 'OneSpace', 'operatingSystem': 'Android',
               'applicationCategory': 'LifestyleApplication', 'description': 'A private app for couples: shared calendar, lists, trips, gestures, letters, counters and memories.',
-              'inLanguage': ['en', 'ar'], 'url': BASE}
+              'inLanguage': 'en', 'url': BASE}
     rot = ''.join(f'<span class="{"on" if i == 0 else ""}">{T(e, a)}</span>' for i, (e, a) in enumerate([
         ('living together', 'يعيشان معًا'), ('5,700 km apart', 'على بُعد 5,700 كم'), ('just married', 'تزوّجا حديثًا'), ('planning a wedding', 'يخططان لزفاف'), ('with busy weeks', 'أسابيعهم مزدحمة')]))
     toasts = [('🤍', 'Lina sent you a hug', 'أرسلت لك لينا حضنًا', 'just now', 'الآن'), ('💌', 'A letter is waiting for you', 'رسالة تنتظرك', 'opens Saturday', 'تُفتح السبت'),
@@ -1988,6 +1988,7 @@ FAQ = [
 
 
 def page_faq():
+    from bs4 import BeautifulSoup
     h = head('faq.html', 'OneSpace FAQ', 'الأسئلة الشائعة — OneSpace',
              'Answers about OneSpace: getting started, inviting your partner, privacy, calendar sync, languages, export, deletion and help.',
              'إجابات عن OneSpace: البدء ودعوة الشريك والخصوصية ومزامنة التقويم واللغات والتصدير والحذف والمساعدة.')
@@ -1998,7 +1999,7 @@ def page_faq():
         body += f'{T(g, gar, "h2", "faq-group")}<div>{items}</div>'
     sk = K('Search questions…', 'ابحث في الأسئلة…')
     jsonld = {'@context': 'https://schema.org', '@type': 'FAQPage', 'mainEntity': [
-        {'@type': 'Question', 'name': q, 'acceptedAnswer': {'@type': 'Answer', 'text': a}} for g, _, qs in FAQ for q, _, a, _ in (qs + [(*q0, *a0) for q0, a0 in FAQ_MORE.get(g, [])])]}
+        {'@type': 'Question', 'name': q, 'acceptedAnswer': {'@type': 'Answer', 'text': BeautifulSoup(a, 'html.parser').get_text(' ', strip=True)}} for g, _, qs in FAQ for q, _, a, _ in (qs + [(*q0, *a0) for q0, a0 in FAQ_MORE.get(g, [])])]}
     return h + page_hero('FAQ', 'الأسئلة الشائعة', 'Questions, answered.', 'أسئلة وأجوبتها.', 'Can’t find it? <a href="support.html">Contact us</a> — even without an account.',
                          'لم تجد ما تبحث عنه؟ <a href="support.html">تواصل معنا</a> — حتى دون حساب.',
                          extra=f'<div style="max-width:560px;margin-top:24px"><label class="sr" for="faq-search">Search</label><input id="faq-search" class="search" type="search" placeholder="Search questions…" data-i18n-attr="placeholder:{sk}"></div>') + f'''
