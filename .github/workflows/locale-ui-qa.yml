@@ -1,4 +1,5 @@
 name: Rebuild and validate localized UI polish
+# Visual QA uses the original screenshot-based theme switcher.
 on:
   push:
     branches: [polish-localized-nav-scroll-stores-copy]
