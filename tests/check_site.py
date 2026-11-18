@@ -182,6 +182,38 @@ def main():
         errors.append("Smart sharing must display its actual three-step process")
     if 'class="btn btn-primary btn-sm" href="join.html"' in index.split("<footer>",1)[-1].split("</footer>",1)[0]:
         errors.append("Footer must not have a join CTA")
+    # Next marketing iteration: all six real demo steps, theme grid, search,
+    # schedule-aware notifications and truthful platform-neutral Founder sign-up.
+    demo = (ROOT / "how-it-works.html").read_text(encoding="utf-8")
+    for marker in ('data-demo-wizard', 'data-demo-prev', 'data-next="tour"',
+                   'data-demo-progress', 'demo-theme-grid', 'data-views="tour"'):
+        if marker not in demo:
+            errors.append(f"Guided demo missing: {marker}")
+    if demo.count('class="demo-step"') != 6:
+        errors.append("The guided demo must have exactly six selectable steps")
+    if demo.count('data-theme-pick=') != 9:
+        errors.append("The guided demo must preserve all nine existing themes")
+    if 'data-testimonial-carousel' not in index or 'data-slide-next' not in index:
+        errors.append("Missing compact testimonial carousel")
+    if index.count('class="store-rating-row"') != 10:
+        errors.append("Each of two store panels needs a full five-row rating breakdown")
+    if index.count('class="footer-social-item"') != 5:
+        errors.append("All five noninteractive footer social placeholders are required")
+    if 'href="#"' in index.split('<div class="footer-social">')[-1].split('</div>', 1)[0]:
+        errors.append("Social placeholders must not have fake links")
+    for marker in ('id="smart-details"', 'assets/app/en/notifications.webp',
+                   'Illustrative layout', 'data-nosnippet'):
+        if marker not in index:
+            errors.append(f"Missing smart feature or test disclaimer: {marker}")
+    if not (ROOT / 'assets/app/en/checkins.png').is_file():
+        errors.append("Genuine demo couple check-in screenshot must exist")
+    join = (ROOT / "join.html").read_text(encoding="utf-8")
+    for marker in ('iPhone', 'Founder registration is open to Android and iPhone couples',
+                   'name="platform"'):
+        if marker not in join:
+            errors.append(f"Founder sign-up must be available to iPhone owners: {marker}")
+    if 'Founding 500 registration is OPEN to Android and iPhone users now' not in index:
+        errors.append("Public store section must not imply iPhone users must wait to register")
     # Ensure new marketing UI and original protected flows survive regeneration.
     for locale in ("index.html", "ar/index.html"):
         page = (ROOT / locale).read_text(encoding="utf-8")
