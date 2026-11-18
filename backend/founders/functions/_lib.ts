@@ -16,7 +16,7 @@ export function cors(req: Request): Record<string, string> {
 }
 
 export function json(req: Request, body: unknown, status = 200): Response {
-  return new Response(JSON.stringify(body), { status, headers: { ...cors(req), 'Content-Type': 'application/json' } });
+  return new Response(JSON.stringify(body), { status, headers: { ...cors(req), 'Content-Type': 'application/json', 'Cache-Control': 'no-store', 'X-Content-Type-Options': 'nosniff', 'Referrer-Policy': 'no-referrer' } });
 }
 
 export async function rpc(fn: string, args: Record<string, unknown>): Promise<any> {
@@ -34,10 +34,10 @@ export async function rpc(fn: string, args: Record<string, unknown>): Promise<an
 
 // ------------------------------------------------------------------ spam protection
 // Robots fill a hidden `website` field: dropped silently (people never see that field).
-// A form sent less than 2.5 s after the page opened is asked for a Cloudflare Turnstile check instead of
-// being dropped, so a fast person (autofill, a reloaded tab) is never lost. If the check cannot run — it did
-// not load in the browser, Cloudflare is unreachable, or TURNSTILE_SECRET_KEY is not set — the form is
-// accepted: the email confirmation step is what really stops fake sign-ups. Only counts are kept.
+// All public website form submissions require a fresh Cloudflare Turnstile token
+// validated server-side. Client-supplied elapsed time or "Turnstile unavailable"
+// flags must NEVER bypass verification. Existing database rate limits still apply.
+// When Turnstile is unavailable, fail closed and ask the visitor to retry.
 export type Guard = 'ok' | 'drop' | 'verify' | 'blocked';
 
 async function spamCount(form: string, result: string) {
@@ -56,23 +56,20 @@ async function turnstileOk(token: string, req: Request): Promise<boolean | null>
     const r = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', { method: 'POST', body, signal: AbortSignal.timeout(6000) });
     if (!r.ok) return null;
     const j = await r.json();
-    return j.success === true;
+    return j.success === true && (j.hostname === 'onespace.live' || j.hostname === 'www.onespace.live');
   } catch { return null; }
 }
 
 export async function guard(req: Request, b: any, form: 'join' | 'contact'): Promise<Guard> {
+  if (!b || typeof b !== 'object') return 'blocked';
   if (b.website) { await spamCount(form, 'honeypot'); return 'drop'; }
-  if (typeof b.turnstile === 'string' && b.turnstile) {
-    const ok = await turnstileOk(b.turnstile, req);
-    if (ok === null) { await spamCount(form, 'unverified'); return 'ok'; }
-    await spamCount(form, ok ? 'passed' : 'blocked');
-    return ok ? 'ok' : 'blocked';
+  if (typeof b.turnstile !== 'string' || !b.turnstile) {
+    await spamCount(form, 'challenge_required');
+    return 'verify';
   }
-  const fast = typeof b.elapsed === 'number' && b.elapsed < 2500;
-  if (!fast) return 'ok';
-  if (b.turnstile_unavailable === true) { await spamCount(form, 'unavailable'); return 'ok'; }
-  await spamCount(form, 'checked');
-  return 'verify';
+  const ok = await turnstileOk(b.turnstile, req);
+  await spamCount(form, ok === true ? 'passed' : 'blocked');
+  return ok === true ? 'ok' : 'blocked';
 }
 
 // Answer for a guard result that is not 'ok' (the form shows the check, or a "couldn't verify" message).

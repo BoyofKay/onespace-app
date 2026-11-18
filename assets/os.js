@@ -533,15 +533,15 @@
       if (!box) { box = document.createElement('div'); box.className = 'ts-box'; btn.parentNode.insertBefore(box, btn); }
       box.hidden = false; box.innerHTML = '';
       loadTurnstile(function (ts) {
-        if (!ts) { box.hidden = true; say('sending'); return send({ turnstile_unavailable: true }); }
+        if (!ts) { box.hidden = true; return onErr('verify_failed'); }
         ts.render(box, { sitekey: TS_KEY, language: lang, theme: 'auto',
           callback: function (token) { track(name + '/check-passed'); box.hidden = true; say('sending'); send({ turnstile: token }); },
-          'error-callback': function () { box.hidden = true; say('sending'); send({ turnstile_unavailable: true }); return true; } });
+          'error-callback': function () { box.hidden = true; onErr('verify_failed'); return true; } });
       });
     };
-    send();
+    check();
   }
-  $$('form[data-form]').forEach(function (form) {
+  $('form[data-form]').forEach(function (form) {
     var fname = form.getAttribute('data-form') === 'join' ? 'founders' : form.getAttribute('data-form');
     form.addEventListener('focusin', function () { if (!form.dataset.started) { form.dataset.started = '1'; track(fname + '/form-start' + here); } });
     var topic = new URLSearchParams(location.search).get('topic');
