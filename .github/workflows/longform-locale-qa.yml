@@ -1,5 +1,5 @@
 name: Reviewed multilingual longform and legal QA
-# Second run: verify full source coverage and English mobile navigation labels.
+# Final run: include complete guide paragraphs and localized account-deletion process.
 on:
   push:
     branches: [locale-editorial-legal-faq-guides-review]
