@@ -5,7 +5,7 @@ from pathlib import Path
 from urllib.parse import urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
-PAGES = ["index.html", "compare.html", "smart-sharing.html", "decide-together.html", "trips.html", "occasions.html", "watchlists.html", "memories.html", "everyday.html", "features.html", "long-distance.html", "living-together.html",
+PAGES = ["index.html", "compare.html", "smart-sharing.html", "decide-together.html", "trips.html", "occasions.html", "watchlists.html", "memories.html", "everyday.html", "features.html", "connect-care.html", "long-distance.html", "living-together.html",
          "how-it-works.html", "tutorials.html", "whats-new.html", "faq.html", "join.html",
          "support.html", "share-kit.html", "guides.html", "guide-long-distance-ideas.html", "guide-mental-load.html", "guide-anniversary-planning.html", "privacy.html", "terms.html", "delete-account.html", "404.html"]
 PAGES += ["ar/" + p for p in PAGES if p != "404.html"]  # server-rendered Arabic twins
@@ -163,6 +163,25 @@ def main():
         errors.append("The homepage must link to the single Founder signup, not duplicate it")
     if 'href="compare.html"' not in index:
         errors.append("Why OneSpace must be reachable from the main navigation")
+    # Preserve the original interactive marketing experiences and real app media.
+    for marker in ('id="tour"', 'data-theme-pick=', 'id="connect-care-showcase"',
+                   'id="reviews-preview"', 'data-review-preview="test-only"'):
+        if marker not in index:
+            errors.append(f"Missing preserved experience or test-labelled prototype: {marker}")
+    if 'AI-GENERATED PLACEHOLDERS' not in index:
+        errors.append("Review testing prototypes must be visibly labelled as AI generated")
+    if '<meta itemprop="ratingValue"' in index or '"aggregateRating"' in index:
+        errors.append("Fictional testing prototypes must not feed rating structured data")
+    connect=(ROOT/"connect-care.html").read_text(encoding="utf-8")
+    for marker in ('id="letters"', 'id="gestures"', 'id="checkins"', 'id="journal"',
+                   'assets/app/en/letters.webp', 'assets/app/en/love.webp'):
+        if marker not in connect:
+            errors.append(f"Connect & Care missing section or real screenshot: {marker}")
+    smart=(ROOT/"smart-sharing.html").read_text(encoding="utf-8")
+    if 'Three simple steps.' not in smart or 'Four simple steps.' in smart:
+        errors.append("Smart sharing must display its actual three-step process")
+    if 'class="btn btn-primary btn-sm" href="join.html"' in index.split("<footer>",1)[-1].split("</footer>",1)[0]:
+        errors.append("Footer must not have a join CTA")
     # Ensure new marketing UI and original protected flows survive regeneration.
     for locale in ("index.html", "ar/index.html"):
         page = (ROOT / locale).read_text(encoding="utf-8")
