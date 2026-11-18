@@ -1,5 +1,5 @@
 import { chromium } from 'playwright';
-const browser=await chromium.launch({headless:true,args:['--no-sandbox']});
+const browser=await chromium.launch({channel:'chrome',headless:true,args:['--no-sandbox']});
 const failures=[];
 const paths=['es/','fr/','de/','de/features.html','es/how-it-works.html'];
 const widths=[375,810,1120,1536];
