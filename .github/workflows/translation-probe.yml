@@ -2,7 +2,6 @@ name: Translation endpoint feasibility
 on:
   push:
     branches: [full-localization-es-fr-de-preserve-design]
-  workflow_dispatch:
 permissions:
   contents: read
 jobs:
@@ -10,14 +9,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Probe Google public translation interface
+      - name: Probe alternate translation interfaces
         run: |
           python3 - <<'PY'
-          import json,urllib.parse,urllib.request
-          qs=urllib.parse.urlencode([('client','gtx'),('sl','en'),('tl','es'),('dt','t'),('q','Hello, my love!'),('q','Plan your next trip together.')])
-          u='https://translate.googleapis.com/translate_a/single?'+qs
-          try:
-            r=urllib.request.urlopen(urllib.request.Request(u,headers={'User-Agent':'Mozilla/5.0'}),timeout=20)
-            print('PROBE:',r.status,r.read(500).decode('utf8'))
-          except Exception as e:print('PROBE_FAILED:',type(e).__name__,str(e)[:500]);raise
+          import urllib.parse,urllib.request
+          endpoints=[
+          'https://translate.googleapis.com/translate_a/t?'+urllib.parse.urlencode([('client','dict-chrome-ex'),('sl','en'),('tl','es'),('q','Hello, my love!'),('q','Plan your next trip together.')]),
+          'https://api.mymemory.translated.net/get?'+urllib.parse.urlencode({'q':'Plan your next trip together','langpair':'en|es'}),
+          ]
+          for u in endpoints:
+            try:
+              r=urllib.request.urlopen(urllib.request.Request(u,headers={'User-Agent':'Mozilla/5.0'}),timeout=12)
+              print('PROBE_OK',u.split('/')[2],r.status,r.read(550).decode('utf8'))
+            except Exception as e: print('PROBE_FAIL',u.split('/')[2],type(e).__name__,str(e)[:160])
           PY
