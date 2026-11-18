@@ -198,3 +198,32 @@ CURATED["de"].update({
   "We sent you a link from": "Wir haben dir eine Bestätigungs-E-Mail geschickt. Absender:",
   ". Confirm your email and your couple gets its Founder number — then you can invite your partner.": ". Bestätige deine E-Mail-Adresse, damit ihr eure gemeinsame Gründungsnummer erhaltet. Danach kannst du deinen Partner oder deine Partnerin einladen."
 })
+
+# Second editorial pass: support, distance and living together.
+CURATED["es"].update({
+  "Messages from this page go to the same inbox as the app. No account needed. Prefer email? Write to": "Tus mensajes llegan al mismo equipo de soporte que atiende la app. No necesitas tener una cuenta. Si prefieres escribirnos por correo, utiliza",
+  "Try “Forgot password” in the app first. Still stuck? Write to us.": "Prueba primero la opción «¿Olvidaste tu contraseña?» en la app. Si no funciona, escríbenos.",
+  "For a problem, tell us your phone model and what you tapped just before it happened. Please don’t send passwords.": "Si algo falla, cuéntanos qué modelo de teléfono usas y qué tocaste justo antes del problema. Nunca nos envíes tu contraseña.",
+  "Distance is hard enough. OneSpace takes care of the time-zone maths, counts down to the next visit and keeps the small signs of love flowing every day.": "La distancia ya es bastante difícil. OneSpace ayuda a coordinar horarios, seguir la cuenta atrás para el próximo encuentro y mantener vivos los pequeños gestos de cariño.",
+  "A counter with progress from today to the day you land.": "Una cuenta atrás hasta el día del reencuentro, cuando decidan añadirla.",
+  "Living together means a hundred small things to remember. OneSpace puts them in one place both of you can see, so nobody has to be the household’s memory.": "Vivir juntos implica estar pendientes de muchos detalles. OneSpace los reúne en un lugar compartido para que recordar y organizar todo no dependa de una sola persona.",
+  "Create your space, invite your partner with a QR code or link, choose how you live — and Today does the rest.": "Crea un espacio, invita a tu pareja mediante un código QR o enlace y elige si viven juntos o a distancia. En «Hoy» encontrarán lo que merece su atención."
+})
+CURATED["fr"].update({
+  "Messages from this page go to the same inbox as the app. No account needed. Prefer email? Write to": "Les messages de cette page arrivent à la même équipe d’assistance que ceux de l’application. Aucun compte n’est nécessaire. Vous pouvez aussi nous écrire à",
+  "Try “Forgot password” in the app first. Still stuck? Write to us.": "Essayez d’abord « Mot de passe oublié » dans l’application. Si le problème persiste, écrivez-nous.",
+  "For a problem, tell us your phone model and what you tapped just before it happened. Please don’t send passwords.": "En cas de problème, indiquez le modèle de votre téléphone et ce que vous avez fait juste avant. Ne communiquez jamais votre mot de passe.",
+  "Distance is hard enough. OneSpace takes care of the time-zone maths, counts down to the next visit and keeps the small signs of love flowing every day.": "La distance complique déjà bien des choses. OneSpace vous aide à coordonner les horaires, à compter les jours avant les retrouvailles et à garder une place pour les petites attentions.",
+  "A counter with progress from today to the day you land.": "Un compte à rebours jusqu’aux retrouvailles, si vous choisissez de l’ajouter.",
+  "Living together means a hundred small things to remember. OneSpace puts them in one place both of you can see, so nobody has to be the household’s memory.": "Vivre ensemble, c’est penser à une foule de petits détails. OneSpace les rassemble dans un espace commun pour que cette charge ne repose pas sur une seule personne.",
+  "Create your space, invite your partner with a QR code or link, choose how you live — and Today does the rest.": "Créez votre espace, invitez votre partenaire par QR code ou lien et indiquez si vous vivez ensemble ou à distance. L’onglet « Aujourd’hui » vous aide ensuite à retrouver l’essentiel."
+})
+CURATED["de"].update({
+  "Messages from this page go to the same inbox as the app. No account needed. Prefer email? Write to": "Nachrichten von dieser Seite landen beim selben Support-Team wie Nachrichten aus der App. Du brauchst kein Konto. Du kannst uns auch direkt per E-Mail schreiben:",
+  "Try “Forgot password” in the app first. Still stuck? Write to us.": "Versuch zuerst „Passwort vergessen“ in der App. Falls du weiterhin nicht weiterkommst, schreib uns.",
+  "For a problem, tell us your phone model and what you tapped just before it happened. Please don’t send passwords.": "Wenn etwas nicht funktioniert, nenne uns dein Handy-Modell und was du direkt davor angetippt hast. Schicke uns niemals dein Passwort.",
+  "Distance is hard enough. OneSpace takes care of the time-zone maths, counts down to the next visit and keeps the small signs of love flowing every day.": "Eine Fernbeziehung ist schon herausfordernd genug. OneSpace hilft euch bei Zeitzonen, beim Countdown zum Wiedersehen und bei kleinen Zeichen der Zuneigung.",
+  "A counter with progress from today to the day you land.": "Ein Countdown bis zu eurem Wiedersehen – wenn ihr ihn selbst hinzufügen möchtet.",
+  "Living together means a hundred small things to remember. OneSpace puts them in one place both of you can see, so nobody has to be the household’s memory.": "Wenn man zusammenlebt, gibt es unzählige Kleinigkeiten zu beachten. OneSpace bündelt sie an einem Ort, damit nicht eine Person allein an alles denken muss.",
+  "Create your space, invite your partner with a QR code or link, choose how you live — and Today does the rest.": "Erstellt euren gemeinsamen Bereich, ladet euch per QR-Code oder Link ein und wählt, ob ihr zusammen oder getrennt lebt. Unter „Heute“ findet ihr dann das Wichtigste."
+})
