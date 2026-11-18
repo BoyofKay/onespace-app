@@ -820,3 +820,20 @@ CURATED["de"].update({
   "Replace these examples only after genuine, verified, permissioned reviews are available.": "Ersetzt diese Beispiele nur durch echte, verifizierte Rezensionen, deren Nutzung erlaubt ist.",
   "Three simple steps.": "Drei einfache Schritte."
 })
+
+# Existing app screenshot alt text and homepage card summary.
+CURATED["es"].update({
+  "Letters, gestures, daily check-ins and a feelings journal": "Cartas, gestos de cariño, conexión diaria y diario de emociones",
+  "OneSpace love gestures — real app screenshot": "Gestos de cariño de OneSpace: captura real de la aplicación",
+  "OneSpace love letters — real app screenshot": "Cartas de amor de OneSpace: captura real de la aplicación"
+})
+CURATED["fr"].update({
+  "Letters, gestures, daily check-ins and a feelings journal": "Lettres, petites attentions, nouvelles quotidiennes et journal des émotions",
+  "OneSpace love gestures — real app screenshot": "Petites attentions de OneSpace : capture réelle de l’application",
+  "OneSpace love letters — real app screenshot": "Lettres d’amour de OneSpace : capture réelle de l’application"
+})
+CURATED["de"].update({
+  "Letters, gestures, daily check-ins and a feelings journal": "Briefe, liebevolle Gesten, tägliche Check-ins und ein Gefühlstagebuch",
+  "OneSpace love gestures — real app screenshot": "Liebevolle Gesten in OneSpace – echter App-Screenshot",
+  "OneSpace love letters — real app screenshot": "Liebesbriefe in OneSpace – echter App-Screenshot"
+})
