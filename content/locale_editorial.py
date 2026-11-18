@@ -172,3 +172,29 @@ CURATED = {
     "Four simple steps.": "Vier einfache Schritte."
   }
 }
+
+# Founder onboarding and repeated footer text, editorial pass.
+CURATED["es"].update({
+  "Two of us. One Space. A private home for the life you share — near or far.": "Dos personas, un espacio. Todo lo que comparten, estén cerca o lejos.",
+  "OneSpace is in an early test. The first 250 couples — 500 people — become Founder Members: free, first in line, and with a say in what we build.": "OneSpace está en fase de pruebas. Las primeras 250 parejas (500 personas) serán miembros fundadores: acceso anticipado gratuito y la oportunidad de aportar ideas para el futuro de la app.",
+  "Join the Founding 500.": "Únete a los primeros 500 miembros fundadores.",
+  "Nothing after a few minutes? Check spam or Promotions, then try again.": "¿No llegó el correo? Revisa las carpetas de spam y Promociones antes de volver a intentarlo.",
+  "We sent you a link from": "Te enviamos un enlace de confirmación desde",
+  ". Confirm your email and your couple gets its Founder number — then you can invite your partner.": ". Confirma tu dirección y recibirán un número de miembro fundador compartido. Después podrás invitar a tu pareja."
+})
+CURATED["fr"].update({
+  "Two of us. One Space. A private home for the life you share — near or far.": "Deux personnes, un espace. Tout ce que vous partagez, de près comme de loin.",
+  "OneSpace is in an early test. The first 250 couples — 500 people — become Founder Members: free, first in line, and with a say in what we build.": "OneSpace est en phase de test. Les 250 premiers couples (500 personnes) deviendront membres fondateurs : accès anticipé gratuit et possibilité de contribuer aux prochaines fonctionnalités.",
+  "Join the Founding 500.": "Rejoignez les 500 premiers membres fondateurs.",
+  "Nothing after a few minutes? Check spam or Promotions, then try again.": "Vous n’avez pas reçu l’e-mail ? Vérifiez les courriers indésirables et l’onglet Promotions avant de réessayer.",
+  "We sent you a link from": "Nous vous avons envoyé un lien de confirmation depuis",
+  ". Confirm your email and your couple gets its Founder number — then you can invite your partner.": ". Confirmez votre adresse pour obtenir votre numéro fondateur commun. Vous pourrez ensuite inviter votre partenaire."
+})
+CURATED["de"].update({
+  "Two of us. One Space. A private home for the life you share — near or far.": "Zwei Menschen, ein gemeinsamer Ort. Für euer Leben – egal, wie weit ihr voneinander entfernt seid.",
+  "OneSpace is in an early test. The first 250 couples — 500 people — become Founder Members: free, first in line, and with a say in what we build.": "OneSpace befindet sich in der Testphase. Die ersten 250 Paare (500 Personen) werden Gründungsmitglieder: mit kostenlosem Frühzugang und der Möglichkeit, neue Funktionen mitzugestalten.",
+  "Join the Founding 500.": "Gehört zu den ersten 500 Gründungsmitgliedern.",
+  "Nothing after a few minutes? Check spam or Promotions, then try again.": "Keine E-Mail angekommen? Schaut in euren Spam- oder Werbeordner und versucht es dann erneut.",
+  "We sent you a link from": "Wir haben dir eine Bestätigungs-E-Mail geschickt. Absender:",
+  ". Confirm your email and your couple gets its Founder number — then you can invite your partner.": ". Bestätige deine E-Mail-Adresse, damit ihr eure gemeinsame Gründungsnummer erhaltet. Danach kannst du deinen Partner oder deine Partnerin einladen."
+})
