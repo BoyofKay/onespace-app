@@ -1,0 +1,14 @@
+name: OneSpace live clean-route smoke test
+on:
+  push:
+    branches: [main]
+    paths: ["tests/check_live_routes.py", ".github/workflows/live-routes.yml"]
+  workflow_dispatch:
+jobs:
+  live:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify deployed clean URL, SEO canonical and legacy Founder links
+        run: python3 tests/check_live_routes.py
