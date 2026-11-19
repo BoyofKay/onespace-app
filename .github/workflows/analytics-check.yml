@@ -2,7 +2,11 @@
 # and the conversion events. Visits are tagged with ?utm_source=onespace-check so they are
 # easy to recognise in the dashboard. Run it from Actions › analytics-check.
 name: analytics-check
-on: workflow_dispatch
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: [assets/os.js, tests/analytics_check.py, .github/workflows/analytics-check.yml]
 jobs:
   check:
     runs-on: ubuntu-latest

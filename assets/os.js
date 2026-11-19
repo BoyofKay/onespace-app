@@ -47,11 +47,11 @@
     window.addEventListener('pagehide', send);
     window.addEventListener('scroll', function () {
       if (read) return; var h = document.documentElement, max = h.scrollHeight - h.clientHeight;
-      if (max > 400 && (h.scrollTop || window.scrollY) / max > 0.9) { read = true; track('read/end@' + location.pathname.replace(/^\/ar\//, '/')); }
+      if (max > 400 && (h.scrollTop || window.scrollY) / max > 0.9) { read = true; track('read/end@' + location.pathname.replace(/^\/(ar|es|fr|de)\//, '/').replace(/\.html$/, '/')); }
     }, { passive: true });
   })();
-  var here = '@' + location.pathname.replace(/^\/ar\//, '/');
-  // Conversion clicks, named by where they happened: cta/join@/watchlists.html, outbound/play.google.com …
+  var here = '@' + location.pathname.replace(/^\/(ar|es|fr|de)\//, '/').replace(/\.html$/, '/');
+  // Conversion clicks use canonical page paths (e.g. cta/join@/watchlists/); no UTM tokens are sent.
   document.addEventListener('click', function (e) {
     var t = e.target.closest && e.target.closest('[data-track],[data-theme-pick],[data-view],[data-next],a[href]');
     if (!t) return;
@@ -64,8 +64,8 @@
     }
     if (t.hasAttribute('data-next')) return track('demo/' + t.getAttribute('data-next') + '-next');
     var h = t.getAttribute('href') || '';
-    if (/join\.html|#founding/.test(h)) track('cta/join' + here);
-    else if (/how-it-works\.html|#tour/.test(h)) track('cta/demo' + here);
+    if (/(?:^|\/)join(?:\.html|\/)(?:[?#]|$)|#founding/.test(h)) track('cta/join' + here);
+    else if (/(?:^|\/)how-it-works(?:\.html|\/)(?:[?#]|$)|#tour/.test(h)) track('cta/demo' + here);
     else if (/^mailto:/.test(h)) track('email/' + h.slice(7).split('@')[0].replace(/[^a-z]/gi, '') + here);
     else if (/^https?:/.test(h) && t.host !== location.host) track('outbound/' + t.host);
   }, true);
@@ -159,7 +159,7 @@
   // Each legal document and translation has its own explicit published date
   // and revision number; never stamp all documents with today's visit date.
   (function displayLegalRevision() {
-    var match = location.pathname.match(new RegExp('(?:^|/)(privacy|terms|delete-account)[.]html$'));
+    var match = location.pathname.match(/(?:^|\/)(privacy|terms|delete-account)(?:\.html|\/)$/);
     if (!match) return;
     var doc = match[1];
     fetch('/assets/legal-revisions.json', {cache: 'no-cache'}).then(function (r) {
