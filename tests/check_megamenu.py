@@ -20,12 +20,12 @@ for locale in ('en','ar','es','fr','de'):
         assert not panel.select('.e, .card, img, [class*="icon"]'), (locale,pid,'old icon tiles')
         all_links=[a.get('href','') for a in panel.select('a')]
         for target in links:
-            expected=('/'+locale+'/'+target if locale in ('es','fr','de') else
-                      target if locale=='en' else '/ar/'+target)
+            clean_target=target.replace(".html", "/")
+            expected='/' + ('' if locale=='en' else locale+'/') + clean_target
             assert expected in all_links or target in all_links, (locale,pid,target,all_links)
     assert len(soup.select('.mega-panel .mega-link'))==18, locale
     assert not soup.select('#mega-features a[href$="compare.html"]'), locale
-    why = soup.select('header .menu > a[href$="compare.html"]')
+    why = soup.select('header .menu > a[href$="/compare/"]')
     assert len(why) == 1, (locale, 'why OneSpace must be top-level')
     assert len(soup.select('#mega-features .mega-section')) == 3, locale
     assert not soup.select('.mega-panel .mega-link .e'), locale
