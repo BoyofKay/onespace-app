@@ -61,5 +61,5 @@ for lang_idx,lang in enumerate(('en','ar','es','fr','de')):
         schema=article_schemas[0]
         assert schema['inLanguage']==lang,(lang,guide['slug'],'article wrong language')
         assert schema['headline']==page.h1.get_text(' ',strip=True),(lang,guide['slug'],'article wrong headline')
-        assert schema['mainEntityOfPage']=='https://onespace.live/'+prefix+guide['slug'],(lang,guide['slug'],'canonical JSON-LD')
+        assert schema['mainEntityOfPage']=='https://onespace.live/'+prefix+guide['slug'].replace('.html','/'),(lang,guide['slug'],'canonical JSON-LD')
 print('PASS: 50 FAQs, 29 step-by-step tutorials with full journeys, 12 guides, all five locales.')
