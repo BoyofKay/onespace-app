@@ -26,10 +26,13 @@ async def main():
         await page.goto(SITE + '?utm_source=onespace-check&utm_medium=qa&utm_campaign=one-space-smoke', wait_until='load')
         await page.wait_for_timeout(2500)
         await page.locator('[data-theme-pick]').nth(1).click()
+        await page.wait_for_timeout(1100)
         await page.locator('[data-views="tabs"] [data-view]').nth(2).click()
+        await page.wait_for_timeout(1100)
         # The homepage is deliberately not a duplicate signup form.
         await page.locator('a[href="/join/"]:visible').first.click()
         await page.wait_for_url('**/join/')
+        await page.wait_for_timeout(1100)
         assert (await page.evaluate("sessionStorage.getItem('os-utm')")).find('onespace-check') >= 0
         assert await page.evaluate("sessionStorage.getItem('os-landing')") == '/'
         form = page.locator('form[data-form="join"]')
@@ -37,8 +40,9 @@ async def main():
         await page.wait_for_timeout(1500)
         await page.goto(SITE + 'how-it-works/?utm_source=onespace-check', wait_until='load')
         await page.wait_for_timeout(2000)
-        for _ in range(6):
-            await page.locator('[data-next="tour"]').click()
+        # This test checks analytics, not tour completion; avoid burst requests to GoatCounter.
+        await page.locator('[data-next="tour"]').click()
+        await page.wait_for_timeout(1250)
         await page.goto(SITE + 'ar/faq/?utm_source=onespace-check', wait_until='load')
         await page.wait_for_timeout(2500)
         await browser.close()
