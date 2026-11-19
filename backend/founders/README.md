@@ -17,7 +17,7 @@ Runs in the **OneSpace Production** Supabase project (`letcgxbnblohhfyeuigz`, Fr
 | `functions/_lib.ts` | Shared: Resend sending + delivery log, branded EN/AR email templates, spam protection (`guard`) |
 
 Rules: one Founder number per couple, first 250 confirmed couples (500 people); number given only after the
-email is confirmed; a partner joins through `join.html?invite=<code>` and shares the number.
+email is confirmed; a partner joins through `https://onespace.live/join/?invite=<code>` and shares the number.
 
 ## Secrets (Supabase › Edge Functions › Secrets — never in the website or GitHub)
 - `RESEND_API_KEY` — Resend API key with sending access (domain onespace.live verified in Resend).
@@ -36,3 +36,7 @@ Functions are deployed with `verify_jwt = false` (public form endpoints); `_lib.
 - Every public Founder and Support form requires a fresh Cloudflare Turnstile token verified by Siteverify, including matching the onespace.live hostname.
   Valid token → accepted if database limits allow. Missing token → HTTP 428; invalid/reused/expired token or verification outage → request denied with a retry message. There is no client-timing bypass.
 - Nothing is ever discarded silently except the robot field. Counts appear on the admin page and the Command Center Website tab.
+
+## Clean website routes (19 November 2026)
+
+The production confirmation, welcome and follow-up emails now use `/confirm/`, `/join/`, `/privacy/`, and `/unsubscribe/` (with existing token/query fragments preserved). The production `founder-join`, `founder-confirm`, and `founder-unsubscribe` functions were patched from their **current deployed versions** to change only URL targets, because the live function bundles were not identical to the repository source. Avoid overwriting the live bundles from GitHub without a reviewed security/diff reconciliation. The old `.html` links remain compatible through site redirects, so previously sent emails continue to work.
