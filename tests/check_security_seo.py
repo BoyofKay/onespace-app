@@ -44,5 +44,5 @@ assert '"price": "0"' not in index and "'price': '0'" not in index, 'unconfirmed
 sitemap=(ROOT/'sitemap.xml').read_text(encoding='utf-8')
 for lang in LANGS:
     prefix='' if lang=='en' else lang+'/'
-    assert '<loc>https://onespace.live/'+prefix+'scenarios.html</loc>' in sitemap, (lang,'missing scenarios')
+    assert '<loc>https://onespace.live/'+prefix+'scenarios/</loc>' in sitemap, (lang,'missing scenarios')
 print('PASS: public web security controls, hidden reviews, safe links, 5-language SEO parity, no unconfirmed price')
