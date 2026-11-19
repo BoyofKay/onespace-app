@@ -12,7 +12,7 @@
     :root{color-scheme:light dark;font-family:system-ui,-apple-system,'Segoe UI',sans-serif}
     *{box-sizing:border-box}body{margin:0;min-height:100vh;display:grid;place-items:center;background:#f5f7fb;color:#18243a;padding:24px}
     main{width:min(100%,490px);border-radius:24px;background:#fff;padding:clamp(22px,6vw,40px);box-shadow:0 14px 40px #172a4a17}
-    .mark{display:inline-grid;place-items:center;width:50px;height:50px;background:#173e73;color:#fff;border-radius:16px;font-size:28px;font-weight:800}
+    .brand-image{display:block;width:56px;height:56px;object-fit:contain}
     h1{font-size:clamp(26px,6vw,34px);line-height:1.1;letter-spacing:-.03em;margin:22px 0 12px}
     p{color:#526079;line-height:1.55}a.button,button{display:block;width:100%;padding:14px 16px;border:0;border-radius:12px;font:600 16px system-ui;text-align:center;cursor:pointer}
     .button.primary{background:#174477;color:#fff;text-decoration:none;margin:20px 0 10px}
@@ -27,9 +27,9 @@
 </head>
 <body>
 <main>
-  <div class="mark" aria-hidden="true">O</div>
+  <img class="brand-image" src="/assets/icon-512.png" width="56" height="56" alt="OneSpace logo">
   <h1>You've been invited to OneSpace</h1>
-  <p>One Life. Two Places. One Space.</p>
+  <p><strong>Two of Us. One Space.</strong></p>
   <p id="invalid" role="alert">This invitation link is missing or invalid. Ask your partner to resend it from OneSpace.</p>
   <div id="invite">
     <p>Your partner has invited you into a private shared space. Open the app to join. You'll be asked to sign in and confirm the invitation first.</p>
