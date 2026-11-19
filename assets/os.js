@@ -95,8 +95,8 @@
   // Landing-page interest goes through one canonical Founder form at /join.html.
   // Keep the partner invite and campaign parameters in the destination URL.
   (function simplifyFounderSignup() {
-    var founderEntry = $('[data-founder-entry] a[href="join.html"]');
-    if (founderEntry && location.search) founderEntry.href = 'join.html' + location.search;
+    var founderEntry = $('[data-founder-entry] a[data-track="founder_join_canonical"]');
+    if (founderEntry && location.search) founderEntry.href = '/join/' + location.search;
     var homeForm = $('#founding form[data-form="join"]');
     if (homeForm) {
       var panel = homeForm.closest('.panel');
@@ -113,7 +113,7 @@
       title.textContent = heading ? heading.textContent.trim() : originalLabel;
       var link = document.createElement('a');
       link.className = 'btn btn-primary';
-      link.href = 'join.html' + location.search;
+      link.href = '/join/' + location.search;
       link.setAttribute('data-track', 'founder_join_canonical');
       link.textContent = originalLabel;
       var assurance = document.createElement('p');
@@ -603,7 +603,7 @@
 
   // ---------- Share with your partner ----------
   $$('[data-share]').forEach(function (a) {
-    var url = location.origin + location.pathname.replace(/[^/]*$/, '') + 'join.html';
+    var url = location.origin + '/join/';
     var text = tr('share.text', 'I want us to try OneSpace — a private app just for the two of us: plans, little gestures and memories in one place.') + ' ' + url;
     var kind = a.getAttribute('data-share');
     if (kind === 'whatsapp') a.href = 'https://wa.me/?text=' + encodeURIComponent(text);
@@ -676,7 +676,7 @@
 
   // ---------- Mobile: a Join bar once you scroll, hidden near any join form ----------
   var bar = $('[data-sticky-cta]');
-  var noBar = /\/(ar\/)?(join|confirm|unsubscribe)\.html$/.test(location.pathname);
+  var noBar = /^\/(?:ar\/|es\/|fr\/|de\/)?(?:join|confirm|unsubscribe)(?:\.html|\/)$/.test(location.pathname);
   if (bar && !noBar && 'IntersectionObserver' in window) {
     var forms = $$('form[data-form="join"], #founding, footer');
     if ($('#founding')) $('a', bar).setAttribute('href', '#founding');
