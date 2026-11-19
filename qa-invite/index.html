@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow,noarchive">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Cache-Control" content="no-store">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src 'self'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; base-uri 'none'; form-action 'none';">
+  <title>Your OneSpace QA invitation</title>
+  <style>
+    :root{color-scheme:light dark;font-family:system-ui,-apple-system,'Segoe UI',sans-serif}
+    *{box-sizing:border-box}body{margin:0;min-height:100vh;display:grid;place-items:center;background:#f5f7fb;color:#18243a;padding:24px}
+    main{width:min(100%,490px);border-radius:24px;background:#fff;padding:clamp(22px,6vw,40px);box-shadow:0 14px 40px #172a4a17}
+    .brand-image{display:block;width:56px;height:56px;object-fit:contain}
+    h1{font-size:clamp(26px,6vw,34px);line-height:1.1;letter-spacing:-.03em;margin:22px 0 12px}
+    p{color:#526079;line-height:1.55}a.button,button{display:block;width:100%;padding:14px 16px;border:0;border-radius:12px;font:600 16px system-ui;text-align:center;cursor:pointer}
+    .button.primary{background:#174477;color:#fff;text-decoration:none;margin:20px 0 10px}
+    button{background:#edf2f9;color:#173e73}button:focus-visible,a:focus-visible{outline:3px solid #497bba;outline-offset:3px}
+    .code{overflow-wrap:anywhere;user-select:all;font:12px/1.7 ui-monospace,monospace;background:#f3f6fa;padding:12px;border-radius:10px;margin:12px 0}
+    .stores{border-top:1px solid #e5eaf2;margin-top:24px;padding-top:18px;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .store{padding:11px;border:1px solid #d6dde7;border-radius:12px;text-align:center;color:#485a72;font-size:14px}
+    .store strong{display:block;font-size:16px;color:#173e73;margin:4px 0}.note{font-size:13px}
+    #invalid{color:#9a2845}#invite{display:none}
+    @media(prefers-color-scheme:dark){body{background:#0c1425;color:#f4f7fd}main{background:#1c2a40;box-shadow:none}p,.note{color:#c4cbd8}.code{background:#111d31;color:#f4f7fd}.store{border-color:#485771;color:#c4cbd8}.store strong{color:#c5dcfa}button{background:#294c77;color:#fff}}
+  </style>
+</head>
+<body>
+<main>
+  <img class="brand-image" src="/assets/icon-512.png" width="56" height="56" alt="OneSpace logo">
+  <h1>You've been invited to OneSpace</h1>
+  <p><strong>Two of Us. One Space.</strong></p>
+  <p id="invalid" role="alert">This invitation link is missing or invalid. Ask your partner to resend it from OneSpace.</p>
+  <div id="invite">
+    <p>Your partner has invited you into a private shared space. If OneSpace is installed, the invitation link opens the app directly. Otherwise, download OneSpace for your phone and then join using the invitation code.</p>
+    <a id="open" class="button primary" href="#">Open in OneSpace</a>
+    <p class="note">OneSpace QA is a test app. If it is not installed, use the QA installer provided by the testing team. Once installed, open your invitation again or use “Join your partner” and enter the code below. This website does not ask you to sign up.</p>
+    <div id="code" class="code" aria-label="Manual invitation code"></div>
+    <button id="copy" type="button">Copy invitation code</button>
+  </div>
+  <div class="stores" aria-label="Mobile app availability">
+    <div class="store">Android<strong>Google Play</strong><span>QA testing installer required</span></div>
+    <div class="store">iPhone<strong>App Store</strong><span>Store link coming soon</span></div>
+  </div>
+  <p class="note">Invitation links are private and expire. Share yours only with the person you want to connect with. OneSpace will never ask you to send us your code.</p>
+</main>
+<script>
+(function () {
+  'use strict';
+  const p = new URLSearchParams(location.search);
+  const code = p.get('code');
+  const env = 'qa';
+  if (!code || !/^[0-9a-f]{64}$/i.test(code)) return;
+  const scheme = env === 'qa' ? 'onespace-preview' : 'onespace';
+  const deepLink = scheme + '://invite?code=' + encodeURIComponent(code.toLowerCase());
+  document.getElementById('invalid').style.display = 'none';
+  document.getElementById('invite').style.display = 'block';
+  document.getElementById('open').href = deepLink;
+  document.getElementById('code').textContent = code.toLowerCase();
+  document.getElementById('copy').addEventListener('click', async function () {
+    try {
+      await navigator.clipboard.writeText(code.toLowerCase());
+      this.textContent = 'Code copied';
+    } catch (_) {
+      this.textContent = 'Select and copy the code above';
+    }
+  });
+})();
+</script>
+</body>
+</html>
