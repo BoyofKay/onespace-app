@@ -28,7 +28,7 @@ async def main():
         await page.locator('[data-theme-pick]').nth(1).click()
         await page.locator('[data-views="tabs"] [data-view]').nth(2).click()
         # The homepage is deliberately not a duplicate signup form.
-        await page.locator('a[href="/join/"]').first.click()
+        await page.locator('a[href="/join/"]:visible').first.click()
         await page.wait_for_url('**/join/')
         assert (await page.evaluate("sessionStorage.getItem('os-utm')")).find('onespace-check') >= 0
         assert await page.evaluate("sessionStorage.getItem('os-landing')") == '/'
