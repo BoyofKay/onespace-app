@@ -14,3 +14,13 @@ Disallow: /fr/unsubscribe.html
 Disallow: /de/unsubscribe.html
 
 Sitemap: https://onespace.live/sitemap.xml
+Disallow: /confirm/
+Disallow: /unsubscribe/
+Disallow: /ar/confirm/
+Disallow: /ar/unsubscribe/
+Disallow: /es/confirm/
+Disallow: /es/unsubscribe/
+Disallow: /fr/confirm/
+Disallow: /fr/unsubscribe/
+Disallow: /de/confirm/
+Disallow: /de/unsubscribe/

@@ -5,10 +5,12 @@
 ## Main pages
 - [Home](https://onespace.live/)
 - [Features](https://onespace.live/features.html)
+- [Connect Care](https://onespace.live/connect-care.html)
 - [Long Distance](https://onespace.live/long-distance.html)
 - [Living Together](https://onespace.live/living-together.html)
 - [How It Works](https://onespace.live/how-it-works.html)
 - [Whats New](https://onespace.live/whats-new.html)
+- [Scenarios](https://onespace.live/scenarios.html)
 - [Faq](https://onespace.live/faq.html)
 - [Compare](https://onespace.live/compare.html)
 - [Tutorials](https://onespace.live/tutorials.html)
@@ -26,6 +28,15 @@
 - [Guide Long Distance Ideas](https://onespace.live/guide-long-distance-ideas.html)
 - [Guide Mental Load](https://onespace.live/guide-mental-load.html)
 - [Guide Anniversary Planning](https://onespace.live/guide-anniversary-planning.html)
+- [Guide Reunion Trip Checklist](https://onespace.live/guide-reunion-trip-checklist.html)
+- [Guide Time Zone Routines](https://onespace.live/guide-time-zone-routines.html)
+- [Guide Difficult Conversations Apart](https://onespace.live/guide-difficult-conversations-apart.html)
+- [Guide Family Moments Across Distance](https://onespace.live/guide-family-moments-across-distance.html)
+- [Guide Recurring Home Checklists](https://onespace.live/guide-recurring-home-checklists.html)
+- [Guide Choose Big Purchases Together](https://onespace.live/guide-choose-big-purchases-together.html)
+- [Guide Date Night At Home](https://onespace.live/guide-date-night-at-home.html)
+- [Guide Surprise Budgets](https://onespace.live/guide-surprise-budgets.html)
+- [Guide Photo Scrapbook Story](https://onespace.live/guide-photo-scrapbook-story.html)
 
 ## Languages
 - [العربية](https://onespace.live/ar/)
