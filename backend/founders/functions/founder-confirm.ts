@@ -19,7 +19,7 @@ Deno.serve(async (req) => {
     if (r.status !== 'confirmed' && r.status !== 'already') return json(req, { ok: false, status: r.status });
     const lang = r.language === 'ar' ? 'ar/' : '';
     return json(req, { ok: true, status: r.status, founder_number: r.founder_number, couple_status: r.couple_status,
-      role: r.role, couple_full: r.couple_full, invite_url: `${SITE}/${lang}join.html?invite=${r.invite_code}` });
+      role: r.role, couple_full: r.couple_full, invite_url: `${SITE}/${lang}join/?invite=${r.invite_code}` });
   } catch (e) {
     console.error(e);
     return json(req, { ok: false, status: 'server' }, 500);

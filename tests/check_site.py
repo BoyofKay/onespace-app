@@ -134,7 +134,7 @@ def main():
                 if locale == "de" and "Ihre Beziehung ist nicht zufrieden" in doc:
                     errors.append(f"{localized}: incorrect privacy marketing translation")
 
-            slug = "" if en == "index.html" else en
+            slug = "" if en == "index.html" else en[:-5] + "/"
             for expected in (f'lang="{locale}"', f'hreflang="{locale}"',
                              f'href="https://onespace.live/{locale}/{slug}"',
                              'goatcounter.com/count', '/assets/os.js'):
@@ -166,7 +166,7 @@ def main():
         errors.append("The canonical Founder signup form is missing from join.html")
     if 'data-form="join"' in index:
         errors.append("The homepage must link to the single Founder signup, not duplicate it")
-    if 'href="compare.html"' not in index:
+    if 'href="/compare/"' not in index:
         errors.append("Why OneSpace must be reachable from the main navigation")
     # Preserve the original interactive marketing experiences and real app media.
     for marker in ('id="tour"', 'data-theme-pick=', 'id="connect-care-showcase"',
@@ -260,8 +260,32 @@ def main():
         errors.append("Do not link to unpublished store listings")
     sitemap = (ROOT / "sitemap.xml").read_text(encoding="utf-8")
     for path in PAGES:
-        if path != "404.html" and (ROOT / path).exists() and ("/" + path.removesuffix("index.html") + "</loc>") not in sitemap:
-            errors.append(f"sitemap.xml is missing {path}")
+        if path == "404.html":
+            continue
+        lang, name = (path.split("/", 1) if "/" in path else ("en", path))
+        stem = "" if name == "index.html" else name.removesuffix(".html") + "/"
+        loc = "https://onespace.live/" + ("" if lang == "en" else lang + "/") + stem
+        if (ROOT / path).exists() and f"<loc>{loc}</loc>" not in sitemap:
+            errors.append(f"sitemap.xml is missing clean route {loc}")
+    # All public pages must have a directory index, an SEO canonical, and a backwards-compatible link.
+    for path in PAGES:
+        if path.endswith("index.html") or path == "404.html":
+            continue
+        lang, name = (path.split("/", 1) if "/" in path else ("en", path))
+        stem = name.removesuffix(".html")
+        prefix = "" if lang == "en" else lang + "/"
+        clean = ROOT / prefix / stem / "index.html"
+        if not clean.exists():
+            errors.append(f"Missing clean route for {path}")
+            continue
+        clean_html = clean.read_text(encoding="utf-8")
+        canonical = f"https://onespace.live/{prefix}{stem}/"
+        if f'href="{canonical}"' not in clean_html:
+            errors.append(f"Incorrect clean canonical for {path}")
+        if 'href="/assets/os.css?' not in clean_html:
+            errors.append(f"Clean route missing absolute stylesheet: {path}")
+        if 'location.replace(' not in (ROOT / path).read_text(encoding="utf-8"):
+            errors.append(f"Legacy .html redirect not preserved: {path}")
     for path in REDIRECTS:
         if 'http-equiv="refresh"' not in (ROOT / path).read_text(encoding="utf-8"):
             errors.append(f"{path} should redirect")

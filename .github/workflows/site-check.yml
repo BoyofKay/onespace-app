@@ -39,10 +39,11 @@ jobs:
           if ! git diff --quiet -- '*.html' assets/ar.js assets/legal-revisions.json sitemap.xml; then
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add -- '*.html' assets/ar.js assets/legal-revisions.json sitemap.xml
+            git add -- '*.html' assets/ar.js assets/legal-revisions.json sitemap.xml robots.txt llms.txt
             git commit -m "chore(site): refresh localized generated pages"
             git push origin HEAD:main
           fi
       - name: Verify generated files are synchronized
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: |
-          git diff --exit-code -- '*.html' assets/ar.js assets/legal-revisions.json sitemap.xml
+          git diff --exit-code -- '*.html' assets/ar.js assets/legal-revisions.json sitemap.xml robots.txt llms.txt

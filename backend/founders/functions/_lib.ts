@@ -93,7 +93,7 @@ export async function ipHash(req: Request): Promise<string> {
 }
 
 const esc = (s: string) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]!));
-const page = (lang: string, path: string) => `${SITE}${lang === 'ar' ? '/ar/' : '/'}${path}`;
+const page = (lang: string, path: string) => `${SITE}${lang === 'ar' ? '/ar/' : '/'}${path.replace(/\.html$/, '/')}`;
 
 // ------------------------------------------------------------------ templates
 type Mail = { subject: string; html: string; text: string };
@@ -102,8 +102,8 @@ function shell(lang: string, preheader: string, title: string, body: string, but
   const rtl = lang === 'ar';
   const font = rtl ? "'IBM Plex Sans Arabic', Tahoma, Arial, sans-serif" : "'Plus Jakarta Sans', 'Segoe UI', Helvetica, Arial, sans-serif";
   const foot = rtl
-    ? `وصلتك هذه الرسالة لأنك سجّلت في <a href="${SITE}/ar/" style="color:#1F6E78">onespace.live</a>. لأي سؤال، ردّ على هذه الرسالة.<br><a href="${SITE}/ar/privacy.html" style="color:#8A8FA3">الخصوصية</a> · <a href="{{UNSUB_AR}}" style="color:#8A8FA3">إلغاء الاشتراك</a>`
-    : `You received this because you signed up at <a href="${SITE}/" style="color:#1F6E78">onespace.live</a>. Questions? Just reply to this email.<br><a href="${SITE}/privacy.html" style="color:#8A8FA3">Privacy</a> · <a href="{{UNSUB_EN}}" style="color:#8A8FA3">Unsubscribe</a>`;
+    ? `وصلتك هذه الرسالة لأنك سجّلت في <a href="${SITE}/ar/" style="color:#1F6E78">onespace.live</a>. لأي سؤال، ردّ على هذه الرسالة.<br><a href="${SITE}/ar/privacy/" style="color:#8A8FA3">الخصوصية</a> · <a href="{{UNSUB_AR}}" style="color:#8A8FA3">إلغاء الاشتراك</a>`
+    : `You received this because you signed up at <a href="${SITE}/" style="color:#1F6E78">onespace.live</a>. Questions? Just reply to this email.<br><a href="${SITE}/privacy/" style="color:#8A8FA3">Privacy</a> · <a href="{{UNSUB_EN}}" style="color:#8A8FA3">Unsubscribe</a>`;
   const btn = button ? `<tr><td style="padding:8px 0 4px"><a href="${button.href}" style="display:inline-block;background:#E8735A;color:#ffffff;text-decoration:none;font-weight:700;font-size:16px;padding:14px 26px;border-radius:999px">${esc(button.label)}</a></td></tr>` : '';
   return `<!doctype html><html lang="${lang}" dir="${rtl ? 'rtl' : 'ltr'}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width">
 <title>${esc(title)}</title></head>
@@ -207,7 +207,7 @@ export function mailAlready(lang: string, r: any): Mail {
 
 // ------------------------------------------------------------------ sending
 const FN_URL = `${Deno.env.get('SUPABASE_URL') ?? ''}/functions/v1`;
-export const unsubPage = (lang: string, token?: string) => token ? `${SITE}${lang === 'ar' ? '/ar/' : '/'}unsubscribe.html#u=${token}` : `mailto:founders@onespace.live?subject=unsubscribe`;
+export const unsubPage = (lang: string, token?: string) => token ? `${SITE}${lang === 'ar' ? '/ar/' : '/'}unsubscribe/#u=${token}` : `mailto:founders@onespace.live?subject=unsubscribe`;
 
 export async function send(memberId: string, kind: string, to: string, m: Mail, unsub?: string): Promise<boolean> {
   m = { ...m, html: m.html.replace('{{UNSUB_EN}}', unsubPage('en', unsub)).replace('{{UNSUB_AR}}', unsubPage('ar', unsub)) };
