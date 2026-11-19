@@ -2457,9 +2457,14 @@ def main():
     (ROOT / 'site.webmanifest').write_text(json.dumps({'name': 'OneSpace', 'short_name': 'OneSpace', 'start_url': './', 'display': 'standalone',
         'background_color': '#FFFFFF', 'theme_color': '#14213D', 'icons': [{'src': 'assets/icon-512.png', 'sizes': '512x512', 'type': 'image/png'},
         {'src': 'assets/apple-touch-icon.png', 'sizes': '180x180', 'type': 'image/png'}]}, indent=1) + '\n', encoding='utf-8')
+    # Publish /privacy/, /faq/ and all other canonical routes in every language.
+    # Keep the legacy .html pages as redirects for existing bookmarks and Founder emails.
+    from pretty_routes import publish_pretty_routes
+    count_clean = publish_pretty_routes(ROOT, PAGES)
+    print(f'Published {count_clean} clean localized routes and legacy redirects')
     # Cache-busting: each page asks for os.css / os.js / ar.js by content hash, so a change reaches browsers at once.
     ver = {a: hashlib.sha256((ROOT / 'assets' / a).read_bytes()).hexdigest()[:10] for a in ('os.css', 'os.js', 'ar.js')}
-    for f in list(ROOT.glob('*.html')) + [p for lang in ('ar',)+NEW_LANGS for p in (ROOT/lang).glob('*.html')]:
+    for f in list(ROOT.glob('*.html')) + [p for lang in ('ar',)+NEW_LANGS for p in (ROOT/lang).rglob('*.html')] + list(p for p in ROOT.glob('*/index.html') if p.parent.name not in ('ar','es','fr','de')):
         t = f.read_text(encoding='utf-8')
         u = re.sub(r'assets/(os\.css|os\.js|ar\.js)(\?v=[0-9a-f]+)?"', lambda m: f'assets/{m.group(1)}?v={ver[m.group(1)]}"', t)
         if u != t: f.write_text(u, encoding='utf-8')
