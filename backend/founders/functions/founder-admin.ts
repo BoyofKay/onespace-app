@@ -105,10 +105,10 @@ Deno.serve(async (req) => {
         stats.read_to_end = sum(/^read\/end/);
         stats.funnel = [
           { step: 'Visitors', n: stats.visitors },
-          { step: 'Clicked Join', n: sum(/^cta\/(join|hero_join|sticky_join)/) },
+          { step: 'Clicked Join', n: sum(/^cta\/(join|hero_join|sticky_join|founder_join_canonical|store_android_waitlist|store_iphone_waitlist)(?:@|$)/) },
           { step: 'Started the form', n: sum(/^founders\/form-start/) },
           { step: 'Sent the form', n: sum(/^founders\/sent$/) },
-          { step: 'Confirmed email', n: sum(/^founders\/confirmed$/) },
+          { step: 'Confirmed email', n: sum(/^founders\/confirmed(?:-partner|-waitlist)?$/) },
         ];
         stats.demo = { tour_finished: sum(/^demo\/tour-finished/), demo_clicks: sum(/^cta\/demo|^cta\/hero_demo/), theme_picks: sum(/^theme\//),
           outbound_store: sum(/^outbound\/(play\.google\.com|apps\.apple\.com)/), lang_switch: sum(/^lang\//) };
