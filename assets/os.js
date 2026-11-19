@@ -159,7 +159,7 @@
   // Each legal document and translation has its own explicit published date
   // and revision number; never stamp all documents with today's visit date.
   (function displayLegalRevision() {
-    var match = location.pathname.match(new RegExp('(?:^|/)(privacy|terms|delete-account)(?:[.]html|/));
+    var match = location.pathname.match(/(?:^|\/)(privacy|terms|delete-account)(?:\.html|\/)$/);
     if (!match) return;
     var doc = match[1];
     fetch('/assets/legal-revisions.json', {cache: 'no-cache'}).then(function (r) {
