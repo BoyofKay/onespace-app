@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "onespace.qa",
+      "sha256_cert_fingerprints": [
+        "90:37:5B:B8:D7:DB:D6:52:7C:CA:17:F6:26:DA:14:95:34:EA:FF:E1:00:76:C3:8A:5C:69:AC:86:A3:AA:C0:43"
+      ]
+    }
+  }
+]
