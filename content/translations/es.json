@@ -1440,5 +1440,7 @@
   "Your story, counted and kept.": "Tu historia, contada y guardada.",
   "YYZ → IST": "YYZ → IST",
   "YYZ → IST · packing 7/12": "YYZ → IST · embalaje 7/12",
-  "YYZ → IST · Sat 07:40": "YYZ → IST · Sáb 07:40"
+  "YYZ → IST · Sat 07:40": "YYZ → IST · Sáb 07:40",
+  "Once account deletion is enabled, tap": "Cuando se habilite la eliminación de cuentas, pulsa",
+  "— from the email on your account. We will verify your identity and explain the next steps. Sending this request does not automatically delete any data.": "— desde el correo asociado a tu cuenta. Verificaremos tu identidad y te explicaremos los siguientes pasos. Enviar esta solicitud no elimina automáticamente ningún dato."
 }
