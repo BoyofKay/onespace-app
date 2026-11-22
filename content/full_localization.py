@@ -92,6 +92,8 @@ from journeys_apart_01 import JOURNEYS as JA1
 from journeys_apart_02 import JOURNEYS as JA2
 from journeys_together_01 import JOURNEYS as JT1
 from journeys_together_02 import JOURNEYS as JT2
+from journeys_solo_01 import JOURNEYS as JS1
+from nov22_updates import editorial as nov22_editorial, solo_guide_rows
 from journeys_ui import UI as JOURNEY_UI, FEATURES as JOURNEY_FEATURES
 from faq_additions import FAQ_ADDITIONS
 from tutorial_additions import TUTORIAL_ADDITIONS
@@ -109,7 +111,7 @@ for _locale in NEW_LANGS:
 
 # Preserve every paragraph of all 24 journeys in each indexable locale,
 # not a shorter foreign-language version of the storytelling experience.
-for _j in JA1 + JA2 + JT1 + JT2:
+for _j in JA1 + JA2 + JT1 + JT2 + JS1:
     for _entry in [_j['title'], _j['teaser'], *_j['stages']]:
         for _index, _language in enumerate(('es', 'fr', 'de'), 2):
             GLOSSARY[_language][_entry[0]] = _entry[_index]
@@ -158,6 +160,11 @@ for _locale_index, _locale in enumerate(('es','fr','de'), 2):
             _add(_heading)
             for _tip in _tips:
                 _add(_tip)
+
+# 22 Nov 2026 repositioning copy is the newest reviewed wording and wins.
+_NOV22 = nov22_editorial(solo_guide_rows())
+for _locale in NEW_LANGS:
+    GLOSSARY[_locale].update(_NOV22[_locale])
 
 def eligible(raw):
     s = str(raw).strip()

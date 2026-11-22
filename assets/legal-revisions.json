@@ -3,83 +3,83 @@
   "documentation": "Update only the document and language that was actually revised; the date is not the site build date or visitor date.",
   "privacy": {
     "en": {
-      "date": "2026-11-18",
-      "version": "1.1",
-      "content_hash": "ed0e4400bc272e7a47cb1dc5a12ef42ec7a994e7f2d66dca0791a4790adcbfe7"
+      "date": "2026-11-22",
+      "version": "1.2",
+      "content_hash": "72bfd87bb8b0deb58bb54f67280135672ed6f3fce372beeadbb8b377618e4846"
     },
     "ar": {
-      "date": "2026-11-18",
-      "version": "1.1",
-      "content_hash": "23c90290deefeef48f4f9e4598a088f994beb0cb4c1285c2aa14f2995471cacb"
+      "date": "2026-11-22",
+      "version": "1.2",
+      "content_hash": "16fdd038b69e534fb0a25ede36195597b5885a487028d154af2ea36231a542c9"
     },
     "es": {
-      "date": "2026-11-18",
-      "version": "1.1",
-      "content_hash": "6cfd001fbaa53f92ca7317dcfbd7c2ac567eeda83be31f55edc8bf9765f394dc"
+      "date": "2026-11-22",
+      "version": "1.5",
+      "content_hash": "c9560428b11fb5f6955f80693397f1780076cd82c3f32b247b7ba43b1a786a32"
     },
     "fr": {
-      "date": "2026-11-18",
-      "version": "1.1",
-      "content_hash": "808cf333e2e04108c257636854db87290a37e0b2ec4907895e8e1a12fd465dbc"
+      "date": "2026-11-22",
+      "version": "1.4",
+      "content_hash": "1978004ce952a14e3b0fbc4efc6c5dbf7d3c4b8db0501add5adfe01e875aad97"
     },
     "de": {
-      "date": "2026-11-18",
-      "version": "1.1",
-      "content_hash": "5e9d327b396234a1794a3a80dc3794c1ffb480fece5f62ef6c71a70656f83e27"
+      "date": "2026-11-22",
+      "version": "1.4",
+      "content_hash": "efae03de24644e7361da19a0c8dfa040d76f5f6c400b7f677989a53ab7e5acda"
     }
   },
   "terms": {
     "en": {
-      "date": "2026-11-16",
-      "version": "1.0",
-      "content_hash": "5770dcdeefcecb93a8145a09607538316c43d8e0fb0b3e3a1923e46cc5c6b845"
+      "date": "2026-11-22",
+      "version": "1.1",
+      "content_hash": "7b2b65b18dd90f2ca68cd7e665f3c3c24e518c88f29d57b4324809541966c8dc"
     },
     "ar": {
-      "date": "2026-11-16",
-      "version": "1.0",
-      "content_hash": "7596d3441db763ef89772d25cbb3d2356b7299c0d1d6ff12ecaa8a5e2673a1e8"
+      "date": "2026-11-22",
+      "version": "1.1",
+      "content_hash": "6b576d18f5000b3e8e65a8358e49afd4cc74053825f7523ef1d8266f7734b47a"
     },
     "es": {
-      "date": "2026-11-16",
-      "version": "1.0",
-      "content_hash": "05193d47fbd5a174f30fc595fe51c0a465300c1cb0fe9aafab30eb27a2518c66"
+      "date": "2026-11-22",
+      "version": "1.3",
+      "content_hash": "d485a17c4fd4efc5d25180867c1ec60bd6d43683a0350baac1a7bbd8a9d38223"
     },
     "fr": {
-      "date": "2026-11-16",
-      "version": "1.0",
-      "content_hash": "9f2023e0dab96a4a5605385169752bf2730523a9d668dec18d75593f43e40615"
+      "date": "2026-11-22",
+      "version": "1.2",
+      "content_hash": "1ea433bc77fb156d8e2dfe16d951b2fb33e34b3c52c36cd1c90ada8c18486210"
     },
     "de": {
-      "date": "2026-11-16",
-      "version": "1.0",
-      "content_hash": "68909500db1e7e7414afec15371eea89d17c771a2649b86b4948e7e76ba48da7"
+      "date": "2026-11-22",
+      "version": "1.2",
+      "content_hash": "df2bea842f87440d22183514a8c73c5082a975a9275e8008e8cf4236d506e388"
     }
   },
   "delete-account": {
     "en": {
-      "date": "2026-11-18",
-      "version": "1.0",
-      "content_hash": "a36304c616d35bd51ff39d30eb9e04f76b8fba327771557619bb3fcb43ce8188"
+      "date": "2026-11-22",
+      "version": "1.1",
+      "content_hash": "b660e3ee297ebd99e6826e02e4e35a8d325f034eb02f61f5d2b7bcc3763c3419"
     },
     "ar": {
-      "date": "2026-11-18",
-      "version": "1.0",
-      "content_hash": "06241ef10178e037c82e9bcd7ea748638a6c071d08aa3af7c2e5ca7d8591926d"
+      "date": "2026-11-22",
+      "version": "1.1",
+      "content_hash": "1ab006ba9258aab71fc8baa3e5545f2317fd3e326c310f7185b8797e2f716eb4"
     },
     "es": {
-      "date": "2026-11-18",
-      "version": "1.0",
-      "content_hash": "ee4b913edf5c17772f6834b162b4986cb06ce40af4324afe05bd84ada504c848"
+      "date": "2026-11-22",
+      "version": "1.2",
+      "content_hash": "b8bec7e6cd9853898e9dbc515b6e233bf748940f9a7bcfc08111fe1b4a4c8939"
     },
     "fr": {
-      "date": "2026-11-18",
-      "version": "1.0",
-      "content_hash": "6789b3b9b5e6a624389784f4d5d53186bb5efd99771058e59801ffd9b877677c"
+      "date": "2026-11-22",
+      "version": "1.2",
+      "content_hash": "d3dd90667c6c95261a22ec372b4d6bdde2fd54a62fc13c4a02d8c64dea0e3a9a"
     },
     "de": {
-      "date": "2026-11-18",
-      "version": "1.0",
-      "content_hash": "de19c0d5bb726779dd2b732b5c8df944a4ab9ff934d9a68559463a377a04f32f"
+      "date": "2026-11-22",
+      "version": "1.1",
+      "content_hash": "2ed340ce5acb6d8e898d60fb5edf4e024dc6d348adfb6b1abdc81323dce526b9"
     }
   }
 }

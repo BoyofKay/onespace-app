@@ -506,11 +506,11 @@ GUIDE_ADDITIONS_2 = [
         ],
         [
           [
-            "Create a shared scrapbook and invite your partner to accept collaboration.",
-            "أنشئا ألبومًا مشتركًا وادعُ شريكك لقبول التعاون.",
-            "Cread un álbum compartido e invitad a colaborar.",
-            "Créez un album partagé et invitez votre partenaire à contribuer.",
-            "Erstellt ein gemeinsames Album und ladet euren Partner ein."
+            "Create a shared scrapbook — your partner can edit it straight away, and Nudge partner asks for their part.",
+            "أنشئا ألبومًا مشتركًا — يستطيع شريكك تعديله فورًا، و«تنبيه الشريك» يطلب منه مساهمته.",
+            "Cread un álbum compartido: tu pareja puede editarlo enseguida y «Avisar a tu pareja» le pide su parte.",
+            "Créez un album partagé : votre partenaire peut le modifier tout de suite, et « Relancer votre partenaire » lui demande sa part.",
+            "Erstellt ein gemeinsames Album – euer Partner kann es sofort bearbeiten, und „Partner anstupsen“ bittet um seinen Teil."
           ],
           [
             "Let each person add their own photographs and a different version of the same day.",
@@ -548,11 +548,11 @@ GUIDE_ADDITIONS_2 = [
       ]
     ],
     "how": [
-      "OneSpace connection: Memories includes 22 scrapbook designs, invited collaboration, page-by-page editing and whole-book PDF sharing.",
-      "في OneSpace: تشمل الذكريات 22 تصميمًا للصفحات، وتعاونًا بالدعوة وتحريرًا صفحة بصفحة ومشاركة الألبوم كاملًا كملف PDF.",
-      "En OneSpace: Recuerdos tiene 22 diseños, colaboración por invitación, edición por página y PDF completo.",
-      "Avec OneSpace : Souvenirs propose 22 modèles, collaboration sur invitation, édition page par page et export PDF.",
-      "In OneSpace: Erinnerungen bietet 22 Designs, eingeladene Zusammenarbeit, Seitenbearbeitung und PDF-Export."
+      "OneSpace connection: Memories includes 22 scrapbook designs, shared editing by both partners, page-by-page editing and whole-book PDF sharing.",
+      "في OneSpace: تشمل الذكريات 22 تصميمًا للصفحات، وتحريرًا مشتركًا للشريكين، وتحريرًا صفحة بصفحة ومشاركة الألبوم كاملًا كملف PDF.",
+      "En OneSpace: Recuerdos tiene 22 diseños, edición compartida por los dos, edición por página y PDF completo.",
+      "Avec OneSpace : Souvenirs propose 22 modèles, une modification à deux, l’édition page par page et l’export PDF.",
+      "In OneSpace: Erinnerungen bietet 22 Designs, gemeinsames Bearbeiten durch beide, Seitenbearbeitung und PDF-Export."
     ]
   }
 ]

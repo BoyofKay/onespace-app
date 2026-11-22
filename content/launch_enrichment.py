@@ -121,12 +121,12 @@ FAQ_MORE = {
     ],
     [
       [
-        "Is our Founder number for one person or the couple?",
-        "هل رقم المؤسس لشخص واحد أم للزوجين؟"
+        "Is Founder status for one person or the couple?",
+        "هل صفة المؤسس لشخص واحد أم للزوجين؟"
       ],
       [
-        "It belongs to the couple. One confirmed couple shares one number, and the second partner joins using the invitation link.",
-        "إنه للزوجين. يتشارك الشريكان رقمًا واحدًا بعد تأكيد التسجيل، وينضم الثاني عبر رابط الدعوة."
+        "It belongs to each person. You can join on your own or as a couple, and a partner who joins with your invitation becomes a Founder Member too.",
+        "إنها لكل شخص. يمكنك الانضمام بمفردك أو مع شريكك، والشريك الذي ينضم عبر دعوتك يصبح عضوًا مؤسسًا أيضًا."
       ]
     ],
     [
@@ -135,8 +135,8 @@ FAQ_MORE = {
         "ماذا لو اكتملت أماكن المؤسسين؟"
       ],
       [
-        "The first 250 confirmed couples receive Founder numbers. Later signups can join the waiting list for future invitations.",
-        "أول 250 زوجًا يؤكدون التسجيل يحصلون على أرقام المؤسسين. وبعد ذلك يمكن الانضمام إلى قائمة الانتظار للدعوات القادمة."
+        "The first 500 people who confirm their email become Founder Members. Later signups can join the waiting list for future invitations.",
+        "أول 500 شخص يؤكدون بريدهم الإلكتروني يصبحون أعضاء مؤسسين. وبعد ذلك يمكن الانضمام إلى قائمة الانتظار للدعوات القادمة."
       ]
     ]
   ],
@@ -191,16 +191,6 @@ FAQ_MORE = {
       [
         "An Only me item remains private to its owner unless they explicitly grant supported view-only access. The server enforces access rules.",
         "يظل عنصر «أنا فقط» خاصًا بصاحبه إلا إذا منح إذن عرض فقط صراحةً حيث يتاح ذلك. تُطبَّق قواعد الوصول في الخادم."
-      ]
-    ],
-    [
-      [
-        "Does revoking access delete screenshots already taken?",
-        "هل يمحو إلغاء الوصول صور الشاشة السابقة؟"
-      ],
-      [
-        "No. Revocation blocks future authorized reads, but cannot remove a screenshot or copy someone has already saved.",
-        "لا. يمنع إلغاء الوصول الاطلاع المصرح به لاحقًا، لكنه لا يحذف صورة شاشة أو نسخة حفظها شخص مسبقًا."
       ]
     ],
     [
@@ -424,10 +414,10 @@ EXTRA_TRANSLATIONS = {
     "Yes. Switch between living apart and living together. Today adapts without creating a new account or shared space.": "Sí. Cambiad entre vivir a distancia y vivir juntos. Hoy se adapta sin crear otra cuenta ni otro espacio.",
     "Can iPhone owners register today?": "¿Pueden inscribirse ya los usuarios de iPhone?",
     "Yes. Founding 500 registration is open to Android and iPhone owners. We invite each member when their platform is ready.": "Sí. La inscripción está abierta para Android y iPhone. Cada persona recibirá su invitación cuando su versión esté lista.",
-    "Is our Founder number for one person or the couple?": "¿El número fundador es individual o de la pareja?",
-    "It belongs to the couple. One confirmed couple shares one number, and the second partner joins using the invitation link.": "Es para la pareja. Los dos compartís un número tras confirmar la inscripción; la otra persona se une con el enlace.",
+    "Is Founder status for one person or the couple?": "¿La condición de fundador es individual o de la pareja?",
+    "It belongs to each person. You can join on your own or as a couple, and a partner who joins with your invitation becomes a Founder Member too.": "Es de cada persona. Puedes unirte por tu cuenta o en pareja, y quien se una con tu invitación también será miembro fundador.",
     "What if all Founder places are taken?": "¿Qué ocurre si se agotan las plazas de fundadores?",
-    "The first 250 confirmed couples receive Founder numbers. Later signups can join the waiting list for future invitations.": "Las primeras 250 parejas confirmadas reciben un número fundador. Las demás pasan a la lista de espera.",
+    "The first 500 people who confirm their email become Founder Members. Later signups can join the waiting list for future invitations.": "Las primeras 500 personas que confirman su correo se convierten en miembros fundadores. Las demás pasan a la lista de espera.",
     "Do dates create counters automatically?": "¿Las fechas crean contadores automáticamente?",
     "No. Counters are opt-in. You choose a date from a calendar event, occasion or trip, open the counter editor and save it yourself.": "No. Los contadores son opcionales. Elige una fecha de un evento, ocasión o viaje y guarda el contador tú mismo.",
     "Can we both edit a shared plan?": "¿Podemos editar un plan compartido los dos?",
@@ -569,10 +559,10 @@ EXTRA_TRANSLATIONS = {
     "Yes. Switch between living apart and living together. Today adapts without creating a new account or shared space.": "Oui. Passez de la vie à distance à la vie commune. Aujourd’hui s’adapte sans recréer de compte ni d’espace.",
     "Can iPhone owners register today?": "Les utilisateurs d’iPhone peuvent-ils déjà s’inscrire ?",
     "Yes. Founding 500 registration is open to Android and iPhone owners. We invite each member when their platform is ready.": "Oui. Les inscriptions sont ouvertes pour Android et iPhone. Chaque membre sera invité quand sa version sera prête.",
-    "Is our Founder number for one person or the couple?": "Le numéro fondateur appartient-il à une personne ou au couple ?",
-    "It belongs to the couple. One confirmed couple shares one number, and the second partner joins using the invitation link.": "Il appartient au couple. Après confirmation, vous partagez un seul numéro et le partenaire rejoint avec le lien.",
+    "Is Founder status for one person or the couple?": "Le statut de fondateur est-il individuel ou pour le couple ?",
+    "It belongs to each person. You can join on your own or as a couple, and a partner who joins with your invitation becomes a Founder Member too.": "Il est personnel. Vous pouvez vous inscrire seul ou en couple, et le partenaire qui rejoint avec votre invitation devient aussi membre fondateur.",
     "What if all Founder places are taken?": "Que se passe-t-il si toutes les places fondatrices sont prises ?",
-    "The first 250 confirmed couples receive Founder numbers. Later signups can join the waiting list for future invitations.": "Les 250 premiers couples confirmés reçoivent un numéro fondateur. Les autres rejoignent la liste d’attente.",
+    "The first 500 people who confirm their email become Founder Members. Later signups can join the waiting list for future invitations.": "Les 500 premières personnes qui confirment leur e-mail deviennent membres fondateurs. Les inscriptions suivantes rejoignent la liste d’attente.",
     "Do dates create counters automatically?": "Les dates créent-elles automatiquement des compteurs ?",
     "No. Counters are opt-in. You choose a date from a calendar event, occasion or trip, open the counter editor and save it yourself.": "Non. Les compteurs sont facultatifs. Choisissez une date liée à un événement, une occasion ou un voyage, puis enregistrez le compteur.",
     "Can we both edit a shared plan?": "Peut-on modifier tous les deux un projet partagé ?",
@@ -714,10 +704,10 @@ EXTRA_TRANSLATIONS = {
     "Yes. Switch between living apart and living together. Today adapts without creating a new account or shared space.": "Ja. Wechselt zwischen Fernbeziehung und Zusammenleben. Heute passt sich an, ohne dass ihr neue Konten braucht.",
     "Can iPhone owners register today?": "Können sich iPhone-Nutzer jetzt anmelden?",
     "Yes. Founding 500 registration is open to Android and iPhone owners. We invite each member when their platform is ready.": "Ja. Die Anmeldung ist für Android und iPhone geöffnet. Die Einladung folgt, sobald die jeweilige Version bereitsteht.",
-    "Is our Founder number for one person or the couple?": "Gilt die Gründernummer für eine Person oder für das Paar?",
-    "It belongs to the couple. One confirmed couple shares one number, and the second partner joins using the invitation link.": "Sie gilt für das Paar. Nach Bestätigung teilt ihr eine Nummer; der Partner tritt über den Einladungslink bei.",
+    "Is Founder status for one person or the couple?": "Gilt der Gründerstatus für eine Person oder für das Paar?",
+    "It belongs to each person. You can join on your own or as a couple, and a partner who joins with your invitation becomes a Founder Member too.": "Er gilt für jede Person. Du kannst allein oder als Paar beitreten, und wer über deine Einladung beitritt, wird ebenfalls Gründungsmitglied.",
     "What if all Founder places are taken?": "Was passiert, wenn alle Gründungsplätze vergeben sind?",
-    "The first 250 confirmed couples receive Founder numbers. Later signups can join the waiting list for future invitations.": "Die ersten 250 bestätigten Paare bekommen Gründernummern. Weitere Anmeldungen kommen auf die Warteliste.",
+    "The first 500 people who confirm their email become Founder Members. Later signups can join the waiting list for future invitations.": "Die ersten 500 Personen, die ihre E-Mail bestätigen, werden Gründungsmitglieder. Spätere Anmeldungen kommen auf die Warteliste.",
     "Do dates create counters automatically?": "Werden aus Terminen automatisch Zähler?",
     "No. Counters are opt-in. You choose a date from a calendar event, occasion or trip, open the counter editor and save it yourself.": "Nein. Zähler sind freiwillig. Wähle ein Datum aus einem Termin, Anlass oder einer Reise und speichere den Zähler selbst.",
     "Can we both edit a shared plan?": "Können wir beide einen gemeinsamen Plan bearbeiten?",
