@@ -48,8 +48,10 @@ from structured_locale import localize_structured
 for _group, _entries in FAQ_ADDITIONS.items():
     FAQ_MORE.setdefault(_group, []).extend([(q[:2], answer[:2]) for q, answer in _entries])
 from journey_links import linkify_journeys
+from journeys_solo_01 import JOURNEYS as J_SOLO_1
+from nov22_updates import ar as _nov_ar, SOLO_GUIDE, ROWS_BY_EN
 
-JOURNEYS = J_APART_1 + J_APART_2 + J_TOGETHER_1 + J_TOGETHER_2
+JOURNEYS = J_APART_1 + J_APART_2 + J_TOGETHER_1 + J_TOGETHER_2 + J_SOLO_1
 
 
 def T(en, ar, tag='span', cls='', attrs=''):
@@ -59,6 +61,11 @@ def T(en, ar, tag='span', cls='', attrs=''):
     c = f' class="{cls}"' if cls else ''
     a = f' {attrs}' if attrs else ''
     return f'<{tag}{c}{a} data-i18n="{key}">{en}</{tag}>'
+
+
+def N(en, tag='span', cls='', attrs=''):
+    """22 Nov 2026 copy: Arabic (and ES/FR/DE) come from content/nov22_updates.py."""
+    return T(en, _nov_ar(en), tag, cls, attrs)
 
 
 def K(en, ar):
@@ -94,7 +101,7 @@ def head(page, title, title_ar, desc, desc_ar=''):
     def drop(label, label_ar, groups, pages, intro_heading, intro_heading_ar,
              intro_description, intro_description_ar, lead_link):
         """One typographic navigation system — no emoji tile/card grid."""
-        panel_id = 'mega-' + ('features' if label == 'Features' else 'couples' if label == 'For couples' else 'learn')
+        panel_id = 'mega-' + ('features' if label == 'Features' else 'couples' if label == 'Who it’s for' else 'learn')
         cur = ' aria-current="page"' if page in pages else ''
         group_html = ''.join(
             '<section class="mega-section">'
@@ -149,12 +156,14 @@ def head(page, title, title_ar, desc, desc_ar=''):
              'Two cities, two clocks, one life','مدينتان وساعتان وحياة واحدة'),
             ('living-together.html','', 'Living together','تحت سقف واحد',
              'One home, so much to share','بيت واحد وكثير لنتشاركه'),
+            ('on-my-own.html','', 'On my own', _nov_ar('On my own'),
+             'Your own space for everything', _nov_ar('Your own space for everything')),
         ]),
     ]
     groups_learn = [
         ('Get started', 'ابدأ الآن', [
             ('tutorials.html','', 'Tutorials','الدروس','Step-by-step how-tos','شروحات خطوة بخطوة'),
-            ('guides.html','', 'Guides for couples','أدلة للأزواج','Ideas for a shared life','أفكار لحياة مشتركة'),
+            ('guides.html','', 'Guides', _nov_ar('Guides'), 'Ideas for everyday life', _nov_ar('Ideas for everyday life')),
         ]),
         ('More to explore', 'استكشف المزيد', [
             ('scenarios.html','', *STORY_UI['nav'], *STORY_UI['navDesc']),
@@ -169,11 +178,11 @@ def head(page, title, title_ar, desc, desc_ar=''):
              'Everything, in one shared space','كل تفاصيل حياتكما في مساحة واحدة',
              ('features.html','See all features','عرض كل المزايا')),
         link('compare.html','Why OneSpace','لماذا OneSpace'),
-        drop('For couples','للأزواج',groups_couples,
-             ('long-distance.html','living-together.html'),
-             'Built for both of you','مصمم لحياتكما معًا',
-             'Near or far, stay in sync','قريبين أو بعيدين، ابقيا على تواصل',
-             ('long-distance.html','Living apart','متباعدان')),
+        drop('Who it’s for',_nov_ar('Who it’s for'),groups_couples,
+             ('long-distance.html','living-together.html','on-my-own.html'),
+             'Built for your life',_nov_ar('Built for your life'),
+             'Together, apart or on your own',_nov_ar('Together, apart or on your own'),
+             ('scenarios.html','See real-life stories',_nov_ar('See real-life stories'))),
         link('how-it-works.html','Demo','العرض'),
         drop('Learn','تعلّم',groups_learn,
              ('guides.html','tutorials.html','scenarios.html','faq.html','whats-new.html') + tuple(g['slug'] for g in GUIDES),
@@ -247,7 +256,7 @@ def foot():
   <div class="foot">
     <div>
       <a class="brand" href="./"><img src="assets/mark.svg" alt="" width="48" height="48"><span class="brand-name">OneSpace</span></a>
-      {T('Two of us. One Space. A private home for the life you share — near or far.', 'نحن الاثنان. مساحة واحدة. بيت خاص للحياة التي تتشاركانها — قريبين أو بعيدين.', 'p')}
+      {N('Two of Us. One Space. A private home for your life — on your own or together, near or far.', 'p')}
       <p class="foot-mail"><a href="mailto:hello@onespace.live">hello@onespace.live</a></p>
       <div class="footer-social" aria-label="Social media channels coming soon">
         <span class="footer-social-item" role="img" aria-label="Instagram — coming soon"><span aria-hidden="true">◎</span><span class="footer-social-tooltip">Instagram</span></span>
@@ -259,8 +268,8 @@ def foot():
       <p class="footer-social-note">{T('Social channels coming soon', 'حسابات التواصل الاجتماعي قريبًا')}</p>
     </div>
     {col('Product', 'المنتج', [('features.html', 'Features', 'المزايا'), ('how-it-works.html', 'Interactive demo', 'العرض التفاعلي'), ('tutorials.html', 'Tutorials', 'الدروس'), ('whats-new.html', "What's new", 'الجديد'), ('whats-new.html#status', 'Availability', 'التوفر'), ('join.html', 'Founding 500', 'المؤسسون الـ500')])}
-    {col('For couples', 'للأزواج', [('long-distance.html', 'Living apart', 'متباعدان'), ('living-together.html', 'Living together', 'تحت سقف واحد')])}
-    {col('Help', 'المساعدة', [('guides.html', 'Guides for couples', 'أدلة للأزواج'), ('faq.html', 'FAQ', 'الأسئلة الشائعة'), ('support.html', 'Contact & support', 'التواصل والدعم'), ('support.html#signin', "Can't sign in?", 'لا تستطيع الدخول؟'), ('share-kit.html', 'Share kit', 'مواد المشاركة')])}
+    {col('Who it’s for', _nov_ar('Who it’s for'), [('long-distance.html', 'Living apart', 'متباعدان'), ('living-together.html', 'Living together', 'تحت سقف واحد'), ('on-my-own.html', 'On my own', _nov_ar('On my own'))])}
+    {col('Help', 'المساعدة', [('guides.html', 'Guides', _nov_ar('Guides')), ('faq.html', 'FAQ', 'الأسئلة الشائعة'), ('support.html', 'Contact & support', 'التواصل والدعم'), ('support.html#signin', "Can't sign in?", 'لا تستطيع الدخول؟'), ('share-kit.html', 'Share kit', 'مواد المشاركة')])}
     {col('Legal', 'قانوني', [('privacy.html', 'Privacy policy', 'سياسة الخصوصية'), ('terms.html', 'Terms of use', 'شروط الاستخدام'), ('delete-account.html', 'Delete your account', 'حذف حسابك')])}
   </div>
   <div class="foot-bottom">
@@ -303,8 +312,8 @@ def store_section():
           <div>{T('ANDROID · FIRST', 'أندرويد · أولاً', 'span', 'store-eyebrow')}
             <h3>Google Play</h3></div>
         </div>
-        <span class="store-status"><span aria-hidden="true">●</span>{T('Closed testing in preparation', 'نجهّز التجربة المغلقة')}</span>
-        {T('Android testing is being prepared. Join the Founding 500 today and we will send your Google Play invitation when ready. iPhone users are equally welcome to register.', 'نجهّز تجربة أندرويد. سجّل في عضوية المؤسسين اليوم وسنرسل دعوتك إلى Google Play عندما تصبح جاهزة. والتسجيل مفتوح أيضًا لمستخدمي آيفون.', 'p')}
+        <span class="store-status"><span aria-hidden="true">●</span>{N('Closed test on Google Play')}</span>
+        {N('The Android app is in a closed test on Google Play. Join the Founding 500 and we will send your invitation. iPhone users are equally welcome to register.', 'p')}
         <a href="join.html" class="btn btn-primary" data-track="store_android_waitlist">{T('Join Android early access →', 'سجّل لتجربة أندرويد ←')}</a>
         {T('Not publicly available for download yet.', 'غير متاح للتحميل العام حتى الآن.', 'small', 'store-disclaimer')}
       </article>
@@ -314,8 +323,8 @@ def store_section():
           <div>{T('IPHONE · COMING NEXT', 'آيفون · لاحقاً', 'span', 'store-eyebrow')}
             <h3>App Store</h3></div>
         </div>
-        <span class="store-status"><span aria-hidden="true">●</span>{T('iPhone version planned', 'نسخة آيفون قيد التخطيط')}</span>
-        {T('Have an iPhone? Founder registration is open now. You do not need an Android phone to reserve a place; we will email you when the iOS app becomes available.', 'هل تستخدم آيفون؟ التسجيل في عضوية المؤسسين مفتوح الآن. لا تحتاج إلى هاتف أندرويد لحجز مكانك؛ سنراسلك عندما تتوفر نسخة iOS.', 'p')}
+        <span class="store-status"><span aria-hidden="true">●</span>{N('Coming soon via TestFlight')}</span>
+        {N('Have an iPhone? Register now. The iPhone test is coming through TestFlight, and we will email you when it is ready.', 'p')}
         <a href="join.html" class="btn btn-ghost" data-track="store_iphone_waitlist">{T('Join as an iPhone Founder →', 'انضم كمؤسس على آيفون ←')}</a>
         {T('App Store link will be added after release.', 'هنضيف رابط App Store بعد الإطلاق.', 'small', 'store-disclaimer')}
       </article>
@@ -325,9 +334,9 @@ def store_section():
 </section>'''
 
 
-def cta_band(h2='Ready when you two are.', h2_ar='جاهزون متى كنتما مستعدين.',
-             lead='Founder signup is open NOW to Android and iPhone couples. The first 250 couples — 500 people — can register free and help shape OneSpace; the iOS app itself is coming later.',
-             lead_ar='التسجيل في عضوية المؤسسين مفتوح الآن لأزواج أندرويد وآيفون. يمكن لأول 250 زوجًا — 500 شخص — التسجيل مجانًا والمشاركة في تطوير OneSpace؛ ويأتي تطبيق iOS لاحقًا.'):
+def cta_band(h2='Ready when you are.', h2_ar=_nov_ar('Ready when you are.'),
+             lead='Founder registration is open now on Android and iPhone. The first 500 people to join — on their own or as a couple — become Founder Members for free. The iPhone app follows the Android test.',
+             lead_ar=_nov_ar('Founder registration is open now on Android and iPhone. The first 500 people to join — on their own or as a couple — become Founder Members for free. The iPhone app follows the Android test.')):
     return f'''<section><div class="wrap"><div class="band reveal"><div class="cta-band">
   <div>{T(h2, h2_ar, 'h2')}{T(lead, lead_ar, 'p', 'lead')}</div>
   <div class="cta-row" style="justify-content:flex-end">
@@ -345,7 +354,7 @@ def phone(inner, theme='clean', cls='', label='', label_ar='', themable=True):
 <div class="scr"><div class="bar-top"><span>9:41</span><span>●●● ▮</span></div>{inner}</div></div>'''
 
 
-def app_head(sub='Two of us, One Space', sub_ar='نحن الاثنان، مساحة واحدة', bell=True):
+def app_head(sub='Two of Us. One Space.', sub_ar='نحن الاثنان. مساحة واحدة.', bell=True):
     b = '<span class="bell">🔔<i></i></span>' if bell else ''
     return f'''<div class="app-head"><img src="assets/mark.svg" alt=""><div><b>OneSpace</b>{T(sub, sub_ar, 'small')}</div>{b}</div>'''
 
@@ -713,6 +722,35 @@ def home_panel():
         <div class="slot"><time style="color:var(--coral)">22:00</time><div class="card" style="padding:12px 16px">{T('Movie night saved to Experiences, rated ★★★★ and ★★★★★.', 'سهرة الفيلم محفوظة في التجارب، بتقييم ★★★★ و★★★★★.')}</div></div>
       </div><a class="btn btn-primary" style="margin-top:22px" href="living-together.html">{T('OneSpace for living together →', 'OneSpace للحياة المشتركة ←')}</a></div>
   </div>"""
+
+
+def solo_panel():
+    def s(t, text):
+        return f'<div class="slot"><time style="color:var(--teal)">{t}</time><div class="card" style="padding:12px 16px">{N(text)}</div></div>'
+    return f"""<div class="split">
+    <div class="stage">{screen('share', 'clean', 'Saving a link from another app', _nov_ar('Saving a link from another app'))}</div>
+    <div>{N('A day on your own', 'span', 'eyebrow')}{N('Everything in one place — and nothing to remember.', 'h3', '', 'style="font-size:30px;margin:10px 0 18px"')}
+      <div class="day" style="margin-top:0">
+        {s('08:30', 'Sara shares a sofa from IKEA straight into her “New flat” activity.')}
+        {s('12:00', 'A reminder pops up: renew the gym pass before Friday. Done ✓')}
+        {s('18:45', 'Gift ideas for her sister’s birthday, with a budget — 2 shortlisted.')}
+        {s('21:30', 'A series from Netflix lands in her watchlist for the weekend.')}
+      </div><a class="btn btn-primary" style="margin-top:22px" href="on-my-own.html">{N('OneSpace for life on your own →')}</a></div>
+  </div>"""
+
+
+def solo_section():
+    """Solo positioning: no backend vocabulary, just what a person can do alone."""
+    cards = ''.join(trust_card(i, c, h, _nov_ar(h), p, _nov_ar(p)) for i, c, h, p in [
+        ('📲', 'i-blue', 'Everything from every app', 'Links, places, films and products land in one organised space.'),
+        ('🧭', 'i-teal', 'Your plans, your pace', 'Compare options, set reminders and plan trips on your own.'),
+        ('💞', 'i-coral', 'Invite someone when you’re ready', 'Start sharing with a partner later — your private things stay yours.')])
+    return f"""<section id="on-your-own"><div class="wrap">
+  <div class="sec-head center">{N('ON YOUR OWN OR TOGETHER', 'span', 'eyebrow')}<h2>{N('No partner in the app yet?')} <span class="serif accent">{N('No problem.')}</span></h2>
+  {N('OneSpace works as your own personal assistant from day one. Share links from Netflix, Amazon, Google Maps or any app, keep your lists, reminders, trips and memories together, and decide in your own time. When someone special comes along, invite them — what you keep as Only me stays yours.', 'p', 'lead')}</div>
+  <div class="grid g3">{cards}</div>
+  <p class="center" style="margin-top:24px"><a class="btn btn-ghost" href="on-my-own.html">{N('OneSpace on your own →')}</a></p>
+</div></section>"""
 
 
 PALETTES = [('clean', 'cleanLight'), ('coral', 'oneSpace'), ('rose', 'softRose'), ('teal', 'oceanTeal'), ('sage', 'sageGarden'),
@@ -1172,7 +1210,7 @@ def page_index():
         ('connect', '♡', 'Connect', 'تواصل', 'Small, daily ways to feel close.', 'طرق يومية صغيرة للشعور بالقرب.',
          [('A hug or “proud of you” in one tap, in your words', 'حضن أو «فخور بك» بنقرة وبكلماتك'), ('Letters sealed until the right day', 'رسائل مغلقة حتى اليوم المناسب'), ('A one-minute daily check-in', 'تواصل يومي في دقيقة')], 'love', 'features.html#connect'),
         ('me', '👤', 'Me', 'أنا', 'Set it up your way.', 'اضبطه على طريقتك.',
-         [('Nine themes — try them on the phone', 'تسع سمات — جرّبها على الهاتف'), ('English and Arabic, right to left', 'العربية والإنجليزية من اليمين لليسار'), ('Private items, export and delete any time', 'عناصر خاصة وتصدير وحذف في أي وقت')], 'ourspace', 'features.html#me'),
+         [('Nine themes — try them on the phone', 'تسع سمات — جرّبها على الهاتف'), ('English and Arabic, right to left', 'العربية والإنجليزية من اليمين لليسار'), ('Private items, download your data, delete any time', _nov_ar('Private items, download your data, delete any time'))], 'ourspace', 'features.html#me'),
     ]
     btns = ''.join(f'<button class="step" type="button" role="tab" data-view="{k}" aria-selected="{"true" if i == 0 else "false"}"><b>{ic} {T(e, ar)}</b>{T(t, tar)}</button>'
                    for i, (k, ic, e, ar, t, tar, _, _, _) in enumerate(tabs))
@@ -1188,7 +1226,7 @@ def page_index():
               'applicationCategory': 'LifestyleApplication', 'description': 'A private app for couples: shared calendar, lists, trips, gestures, letters, counters and memories.',
               'inLanguage': 'en', 'url': BASE}
     rot = ''.join(f'<span class="{"on" if i == 0 else ""}">{T(e, a)}</span>' for i, (e, a) in enumerate([
-        ('living together', 'يعيشان معًا'), ('5,700 km apart', 'على بُعد 5,700 كم'), ('just married', 'تزوّجا حديثًا'), ('planning a wedding', 'يخططان لزفاف'), ('with busy weeks', 'أسابيعهم مزدحمة')]))
+        (x, _nov_ar(x)) for x in ('couples living together', 'couples 5,700 km apart', 'people on their own', 'couples planning a wedding', 'busy weeks')]))
     toasts = [('🤍', 'Lina sent you a hug', 'أرسلت لك لينا حضنًا', 'just now', 'الآن'), ('💌', 'A letter is waiting for you', 'رسالة تنتظرك', 'opens Saturday', 'تُفتح السبت'),
               ('✅', 'Lina ticked “Buy flowers”', 'أنهت لينا «شراء الورد»', '2 min ago', 'قبل دقيقتين'), ('🏔', 'You both picked Banff', 'اخترتما بانف كلاكما', 'decision saved', 'حُفظ القرار')]
     toast_data = ''.join(f'<template data-toast><span class="e">{i}</span><div>{T(a, b, "b")}{T(c, d)}</div></template>' for i, a, b, c, d in toasts)
@@ -1196,15 +1234,15 @@ def page_index():
 <section class="hero-xl"><div class="wrap hero-grid">
   <span class="floaty" style="left:4%;top:12%">♥</span><span class="floaty" style="left:44%;top:78%;animation-delay:-3s">✦</span><span class="floaty" style="right:4%;top:70%;animation-delay:-6s;color:var(--coral)">♥</span>
   <div>
-    {T('Two of us. One Space.', 'نحن الاثنان. مساحة واحدة.', 'span', 'eyebrow')}
+    {N('Two of Us. One Space.', 'span', 'eyebrow')}
     <h1>{T('The private home for the life', 'مساحتكما الخاصة')} <span class="serif accent">{T('you share.', 'لكل تفاصيل حياتكما.')}</span></h1>
-    <p class="lead">{T('From a link shared in another app to a decision made together, keep your lists, plans, conversations and memories connected in one private space. Made for couples', 'من رابط تشاركانه من تطبيق آخر إلى قرار تتخذانه معًا، تبقى قوائمكما وخططكما ونقاشاتكما وذكرياتكما مترابطة في مساحة خاصة واحدة. مناسب لأزواج')} <b class="rotator" style="color:var(--teal)">{rot}</b></p>
+    <p class="lead">{N('Save what matters from every app, then plan, decide and remember — in one private space. In a relationship or not, OneSpace is your own assistant, and when you’re ready it becomes a space for two. Made for')} <b class="rotator" style="color:var(--teal)">{rot}</b></p>
     <div class="cta-row">
       <a class="btn btn-primary" href="#founding" data-track="hero_join">{T('Join the Founding 500 — free', 'انضم إلى المؤسسين الـ500 — مجانًا')}</a>
       <a class="btn btn-ghost" href="how-it-works.html" data-track="hero_demo">▶ {T('Try the demo', 'جرّب العرض')}</a>
     </div>
     <div class="avatars" style="max-width:360px;margin-top:30px"><span class="av o">O</span><span class="av-line"></span><span class="av l">L</span></div>
-    <div class="trust">{T('Only you two', 'أنتما فقط')}{T('No ads, no data selling', 'بلا إعلانات ولا بيع للبيانات')}{T('English & العربية', 'العربية والإنجليزية')}</div>
+    <div class="trust">{N('Private by design')}{T('No ads, no data selling', 'بلا إعلانات ولا بيع للبيانات')}{T('English & العربية', 'العربية والإنجليزية')}</div>
   </div>
   <div class="stage">
     {hero_devices()}
@@ -1213,9 +1251,9 @@ def page_index():
   </div>
 </div></section>
 <div class="marquee" aria-hidden="true"><div class="marquee-track">{chips}{chips}</div></div>
+{solo_section()}
 {differentiation_section()}
 {watch_section()}
-{one_list_section()}
 {connect_care_preview()}
 
 <section><div class="wrap">
@@ -1253,10 +1291,11 @@ def page_index():
 </div></section>
 
 <section><div class="wrap">
-  <div class="sec-head center">{T('However you live', 'أيًّا كانت طريقتكما في العيش', 'span', 'eyebrow')}<h2>{T('Apart or together,', 'متباعدين أو معًا،')} <span class="serif accent">{T('it fits your life.', 'يناسب حياتكما.')}</span></h2>
-  <div class="seg" role="tablist" data-views="live" style="margin-top:18px"><button type="button" role="tab" data-view="apart" aria-selected="true">🌍 {T('Living apart', 'متباعدان')}</button><button type="button" role="tab" data-view="together" aria-selected="false">🏡 {T('Living together', 'معًا')}</button></div></div>
+  <div class="sec-head center">{N('However you live', 'span', 'eyebrow')}<h2>{N('Together, apart or on your own,')} <span class="serif accent">{N('it fits your life.')}</span></h2>
+  <div class="seg" role="tablist" data-views="live" style="margin-top:18px"><button type="button" role="tab" data-view="apart" aria-selected="true">🌍 {T('Living apart', 'متباعدان')}</button><button type="button" role="tab" data-view="together" aria-selected="false">🏡 {T('Living together', 'معًا')}</button><button type="button" role="tab" data-view="solo" aria-selected="false">🙋 {N('On my own')}</button></div></div>
   <div data-view-of="live" data-view-name="apart">{cities_panel()}</div>
   <div data-view-of="live" data-view-name="together" hidden>{home_panel()}</div>
+  <div data-view-of="live" data-view-name="solo" hidden>{solo_panel()}</div>
 </div></section>
 
 <section id="tour" data-theme-scope><div class="wrap"><div class="playground" data-pg="clean">
@@ -1282,7 +1321,7 @@ def page_index():
 </div></section>
 
 <section><div class="wrap">
-  <div class="sec-head" style="display:flex;justify-content:space-between;align-items:end;max-width:none;gap:20px;flex-wrap:wrap"><div>{T('Guides for couples', 'أدلة للأزواج', 'span', 'eyebrow')}{T('Ideas worth stealing.', 'أفكار تستحق التجربة.', 'h2', '', 'style="margin-top:10px"')}</div><a class="btn btn-ghost" href="guides.html">{T('All guides →', 'كل الأدلة ←')}</a></div>
+  <div class="sec-head" style="display:flex;justify-content:space-between;align-items:end;max-width:none;gap:20px;flex-wrap:wrap"><div>{N('Guides', 'span', 'eyebrow')}{T('Ideas worth stealing.', 'أفكار تستحق التجربة.', 'h2', '', 'style="margin-top:10px"')}</div><a class="btn btn-ghost" href="guides.html">{T('All guides →', 'كل الأدلة ←')}</a></div>
   <div class="grid g3">{guide_cards()}</div>
 </div></section>
 
@@ -1292,8 +1331,8 @@ def page_index():
 <section id="founding"><div class="wrap"><div class="band"><div class="cta-band" style="align-items:start">
   <div>
     {T('The Founding 500', 'المؤسسون الـ500', 'span', 'eyebrow')}
-    <h2>{T('Be one of the', 'كونا من')} <span class="serif" style="color:#F3A27E">{T('first 250 couples.', 'أول 250 زوجًا.')}</span></h2>
-    {T('Registration is open now for Android and iPhone couples. The first 250 couples to confirm get one Founder number for both partners, free early access when their version is ready, and a say in what we build. Founder benefits will be announced before any pricing.', 'التسجيل مفتوح الآن لأزواج أندرويد وآيفون. يحصل أول 250 زوجًا يؤكدون تسجيلهم على رقم مؤسس مشترك ووصول مبكر مجاني عند جاهزية نسختهم وفرصة للمشاركة في تطوير التطبيق. سنعلن مزايا العضوية قبل أي أسعار.', 'p', 'lead')}
+    <h2>{N('Be one of the')} <span class="serif" style="color:#F3A27E">{N('first 500 people.')}</span></h2>
+    {N('Registration is open now for Android and iPhone. The first 500 people to confirm — on their own or as a couple — become Founder Members, with free early access when their version is ready and a say in what we build. Founder benefits will be announced before any pricing.', 'p', 'lead')}
     <ul class="ticks"><li>{T('<b>Free</b> during early access', '<b>مجاني</b> خلال الوصول المبكر')}</li><li>{T('<b>Registration now:</b> Android and iPhone', '<b>التسجيل مفتوح الآن:</b> أندرويد وآيفون')}</li><li>{T('<b>Your email only</b> for the invite and launch updates', '<b>بريدك فقط</b> للدعوة وتحديثات الإطلاق')}</li></ul>
   </div>
   {founding_entry()}
@@ -1318,8 +1357,8 @@ def founding_form(prefix, full=False):
     ek = K('you@example.com', 'you@example.com')
     extra = ''
     if full:
-        extra = f"""<label>{T('How do you two live?', 'كيف تعيشان؟')}</label>
-      {radio('living', [('apart', 'Living apart', 'متباعدان'), ('together', 'Living together', 'معًا'), ('both', 'A bit of both', 'بين هذا وذاك'), ('soon', 'Moving in soon', 'سننتقل للعيش معًا قريبًا')])}
+        extra = f"""<label>{N('How do you live?')}</label>
+      {radio('living', [('apart', 'Living apart', 'متباعدان'), ('together', 'Living together', 'معًا'), ('solo', 'On my own', _nov_ar('On my own')), ('both', 'A bit of both', 'بين هذا وذاك'), ('soon', 'Moving in soon', 'سننتقل للعيش معًا قريبًا')])}
       <div class="f2"><div><label for="{prefix}-name">{T('Your first name', 'اسمك الأول')}</label><input id="{prefix}-name" name="name" autocomplete="given-name" maxlength="60"></div>
       <div><label for="{prefix}-l">{T('Language', 'اللغة')}</label><select id="{prefix}-l" name="language"><option value="en">English</option><option value="ar">العربية</option>{T('Both', 'كلاهما', 'option', attrs='value="both"')}</select></div></div>
       <label for="{prefix}-s">{T('How did you hear about us?', 'كيف عرفت عنا؟')}</label><select id="{prefix}-s" name="source">{T('A friend', 'صديق', 'option', attrs='value="friend"')}{T('My partner', 'شريكي', 'option', attrs='value="partner"')}{T('Social media', 'وسائل التواصل', 'option', attrs='value="social"')}{T('Search', 'البحث', 'option', attrs='value="search"')}{T('Other', 'أخرى', 'option', attrs='value="other"')}</select>
@@ -1327,7 +1366,7 @@ def founding_form(prefix, full=False):
     return f"""<div class="panel">
     <form data-form="join" data-done="{prefix}-done" novalidate>
       {T('Reserve a Founder spot — Android or iPhone', 'احجز مكانك بين المؤسسين — أندرويد أو آيفون', 'h3')}
-      <div class="invite-note" hidden>💞 {T('Your partner invited you — you will join their Founder couple number.', 'دعاك شريكك — ستنضم إلى رقم المؤسس الخاص بزوجكما.')}</div>
+      <div class="invite-note" hidden>💞 {N('Your partner invited you — you’ll join the Founding 500 together.')}</div>
       <input type="hidden" name="invite" value="">
       <label for="{prefix}-email">{T('Email *', 'البريد الإلكتروني *')}</label><input id="{prefix}-email" name="email" type="email" required autocomplete="email" placeholder="you@example.com" data-i18n-attr="placeholder:{ek}">
       <label>{T('Your phone — both platforms can register now', 'نوع هاتفك — التسجيل مفتوح للمنصتين الآن')}</label>
@@ -1342,7 +1381,7 @@ def founding_form(prefix, full=False):
     <div id="{prefix}-done" class="done" tabindex="-1">
       <div style="font-size:46px">📬</div>
       {T('Check your inbox', 'تفقّد بريدك', 'h3', '', 'style="font-size:24px"')}
-      {T('We sent you a link from <b>founders@onespace.live</b>. Confirm your email and your couple gets its Founder number — then you can invite your partner.', 'أرسلنا لك رابطًا من <b>founders@onespace.live</b>. أكّد بريدك ليحصل زوجكما على رقم المؤسس — ثم ادعُ شريكك.', 'p', 'muted')}
+      {N('We sent you a link from <b>founders@onespace.live</b>. Confirm your email to become a Founder Member — then you can invite your partner if you like.', 'p', 'muted')}
       {T('Nothing after a few minutes? Check spam or Promotions, then try again.', 'لم يصل شيء بعد دقائق؟ تفقّد البريد العشوائي أو العروض ثم حاول مجددًا.', 'p', 'muted', 'style="font-size:14px"')}
       <p style="margin-top:16px"><a href="how-it-works.html">{T('While you wait: try the demo →', 'أثناء الانتظار: جرّب العرض ←')}</a></p>
     </div>
@@ -1377,16 +1416,16 @@ def page_features():
     jump = ''.join(f'<a class="chip" href="#{a}">{i} {T(e, ar)}</a>' for a, i, e, ar in [
         ('today', '📅', 'Today', 'اليوم'), ('remember', '🔖', 'Remember', 'تذكّر'), ('coordinate', '🧭', 'Coordinate', 'نسّق'),
         ('trips', '✈️', 'Trips', 'الرحلات'), ('occasions', '🎁', 'Occasions', 'المناسبات'), ('connect', '♡', 'Connect', 'تواصل'), ('me', '👤', 'Me', 'أنا')])
-    return h + page_hero('Features', 'المزايا', 'Everything the two of you need, nothing you don’t.', 'كل ما تحتاجانه، ولا شيء زائد.',
-                         'OneSpace is organised the way a couple actually lives: what is happening today, what you want to remember, what you need to coordinate, how you stay close, and how you like things set up.',
-                         'نُظّم OneSpace بالطريقة التي يعيش بها الزوجان فعلًا: ما يحدث اليوم، وما تريدان تذكّره، وما تحتاجان إلى تنسيقه، وكيف تبقيان قريبين، وكيف تحبان ضبط الأشياء.',
+    return h + page_hero('Features', 'المزايا', 'Everything you need, nothing you don’t.', _nov_ar('Everything you need, nothing you don’t.'),
+                         'OneSpace is organised the way life actually works: what is happening today, what you want to remember, what you need to coordinate, how you stay close, and how you like things set up. Use it on your own or with your partner.',
+                         _nov_ar('OneSpace is organised the way life actually works: what is happening today, what you want to remember, what you need to coordinate, how you stay close, and how you like things set up. Use it on your own or with your partner.'),
                          extra=f'<div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:22px">{jump}</div>',
-                         headline_html=T('Everything the two of you need,', 'كل ما تحتاجانه،', 'span') + ' <span class="serif accent">' + T('nothing you don’t.', 'ولا شيء زائد.') + '</span>') + \
-        differentiation_section() + \
+                         headline_html=N('Everything you need,') + ' <span class="serif accent">' + T('nothing you don’t.', 'ولا شيء زائد.') + '</span>') + \
         feature_block('today', 'Today', 'اليوم', 'Open the app, know what matters.', 'افتح التطبيق واعرف ما يهم.',
-                      'Today brings together what your partner sent, what needs your answer, and the next seven days — shaped by whether you live together or apart.',
-                      'يجمع «اليوم» ما أرسله شريكك وما يحتاج ردّك والأيام السبعة القادمة — بحسب ما إذا كنتما معًا أو متباعدين.',
-                      [('Since you were away', 'gestures, letters and updates you missed.', 'منذ غيابك', 'اللمسات والرسائل والتحديثات التي فاتتك.'),
+                      'Today brings together what needs your answer, what your partner sent and the next seven days — shaped by whether you live on your own, together or apart.',
+                      _nov_ar('Today brings together what needs your answer, what your partner sent and the next seven days — shaped by whether you live on your own, together or apart.'),
+                      [('Your day, side by side', 'your plans, your partner’s and what you do together, in one day view.', _nov_ar('Your day, side by side'), _nov_ar('your plans, your partner’s and what you do together, in one day view.')),
+                       ('Since you were away', 'gestures, letters and updates you missed.', 'منذ غيابك', 'اللمسات والرسائل والتحديثات التي فاتتك.'),
                        ('Needs your attention', 'votes, decisions and items assigned to you.', 'يحتاج انتباهك', 'التصويتات والقرارات والعناصر المسندة إليك.'),
                        ('Two clocks & weather', 'when you live apart, see both cities at once.', 'ساعتان وطقس', 'حين تكونان متباعدين، شاهد المدينتين معًا.'),
                        ('Quick add', 'a reminder, to-do, note, place or trip in two taps.', 'إضافة سريعة', 'تذكير أو مهمة أو ملاحظة أو مكان أو رحلة بنقرتين.'),
@@ -1397,15 +1436,17 @@ def page_features():
                       [('Counters', 'days, weeks, months and years — the date itself and its anniversary, with progress bars.', 'العدّادات', 'أيام وأسابيع وأشهر وسنوات — التاريخ نفسه وذكراه، مع أشرطة تقدّم.'),
                        ('Linked dates', 'see the time between two moments, like first date → wedding.', 'تواريخ مرتبطة', 'شاهد المدة بين لحظتين، مثل الموعد الأول ← الزفاف.'),
                        ('Our places', 'been there and bucket list, pinned on a map, shared from Maps.', 'أماكننا', 'ما زرتماه وقائمة الأحلام، على خريطة، ومشاركة من الخرائط.'),
-                       ('Memories & scrapbooks', 'stories, daily selfies of both of you, save as PDF.', 'الذكريات والألبومات', 'قصص وسيلفي يومي لكليكما، واحفظها كـ PDF.'),
+                       ('Memories & scrapbooks', 'stories, a daily selfie calendar, scrapbooks you can both edit, save as PDF.', 'الذكريات والألبومات', _nov_ar('stories, a daily selfie calendar, scrapbooks you can both edit, save as PDF.')),
                        ('Notes & contact cards', 'rich notes and the details you always need — sizes, the doctor, the plumber.', 'الملاحظات وبطاقات التواصل', 'ملاحظات منسقة والتفاصيل التي تحتاجها دائمًا — المقاسات والطبيب والسبّاك.')],
                       'places', 'teal', rev=True, tint=True) + \
         feature_block('coordinate', 'Coordinate', 'نسّق', 'Decide together, without the back-and-forth.', 'قررا معًا دون أخذ ورد.',
                       'A shared calendar, lists and reminders — plus activities where you each mark the options you like and decide together.',
                       'تقويم وقوائم وتذكيرات مشتركة — وأنشطة يحدد فيها كل منكما الخيارات التي تعجبه وتقرران معًا.',
-                      [('Calendar', 'one calendar for both of you, sent one way to your phone calendar if you like.', 'التقويم', 'تقويم واحد لكليكما، ويُرسل إلى تقويم هاتفك إن أردت.'),
+                      [('Calendar', 'one calendar with work days, days off and public holidays for your country — sent one way to your phone calendar if you like.', 'التقويم', _nov_ar('one calendar with work days, days off and public holidays for your country — sent one way to your phone calendar if you like.')),
+                       ('Who’s taking part', 'mark each event for you, your partner or both, in its own time zone.', _nov_ar('Who’s taking part'), _nov_ar('mark each event for you, your partner or both, in its own time zone.')),
                        ('To-do lists & reminders', 'assign to one of you or both, with due dates and repeats.', 'المهام والتذكيرات', 'أسندها لأحدكما أو لكليكما، بمواعيد وتكرار.'),
-                       ('Activities', 'compare options, vote, talk it through with voice notes and @mentions, then decide.', 'الأنشطة', 'قارنا الخيارات وصوّتا وتحدثا بالرسائل الصوتية والإشارات ثم قررا.')],
+                       ('Activities', 'compare options, vote, talk it through with voice notes and @mentions, then decide.', 'الأنشطة', 'قارنا الخيارات وصوّتا وتحدثا بالرسائل الصوتية والإشارات ثم قررا.'),
+                       ('Nudge partner', 'a gentle reminder to your partner, without nagging.', _nov_ar('Nudge partner'), _nov_ar('a gentle reminder to your partner, without nagging.'))],
                       'activity', 'sage') + \
         feature_block('trips', 'Trips', 'الرحلات', 'Every trip in one place — flights to packing.', 'كل رحلة في مكان واحد — من الطيران إلى التجهيز.',
                       'Flights, stays, a shared packing list and private travel documents only the two of you can open.',
@@ -1425,7 +1466,7 @@ def page_features():
         smart_utilities() + \
         f'''<section id="me" class="dark" data-theme-scope><div class="wrap split">
   <div>{T('Me', 'أنا', 'span', 'eyebrow')}{T('Set it up your way.', 'اضبطه على طريقتك.', 'h2')}
-  {T('Nine themes, Arabic or English, notifications grouped by day, privacy controls and a full export.', 'تسع سمات، والعربية أو الإنجليزية، وإشعارات مجمعة حسب اليوم، وإعدادات خصوصية، وتصدير كامل.', 'p', 'lead')}
+  {N('Nine themes, Arabic or English, notifications grouped by day, privacy controls and a download of your data.', 'p', 'lead')}
   <div class="swatches" style="margin-top:24px">{swatches()}</div>
   <ul class="ticks"><li>{T('<b>Notifications that explain themselves</b> — who, what and when, grouped by day.', '<b>إشعارات واضحة</b> — من وماذا ومتى، مجمعة حسب اليوم.')}</li>
   <li>{T('<b>Help without signing in</b> — contact us even if you are locked out.', '<b>مساعدة دون تسجيل الدخول</b> — تواصل معنا حتى لو لم تستطع الدخول.')}</li></ul></div>
@@ -1461,21 +1502,25 @@ def story_case_cards(slugs):
 
 
 def story_previews(apart):
-    mode = 'apart' if apart else 'together'
+    mode = apart if isinstance(apart, str) else ('apart' if apart else 'together')
     journeys = [j for j in JOURNEYS if j['mode'] == mode]
-    intro = JOURNEY_UI['apartDescription'] if apart else JOURNEY_UI['togetherDescription']
+    intro = {'apart': JOURNEY_UI['apartDescription'], 'together': JOURNEY_UI['togetherDescription'],
+             'solo': JOURNEY_UI['soloDescription']}[mode]
+    heading = JOURNEY_UI['previewHeading'] if mode != 'solo' else ROWS_BY_EN['Real-life stories']
+    more = JOURNEY_UI['soloMore'] if mode == 'solo' else JOURNEY_UI['more']
+    fiction = JOURNEY_UI['soloFiction'] if mode == 'solo' else JOURNEY_UI['fiction']
     first = ''.join(journey_preview_card(j, i + 1) for i, j in enumerate(journeys[:3]))
     hidden = ''.join(journey_preview_card(j, i + 4) for i, j in enumerate(journeys[3:]))
     return ('<section class="story-preview-section journey-previews"><div class="wrap">'
-            + '<div class="sec-head center">' + journey_text(JOURNEY_UI['previewHeading'], 'h2')
+            + '<div class="sec-head center">' + journey_text(heading, 'h2')
             + journey_text(intro, 'p', 'muted') + '</div>'
             + '<div class="story-preview-grid">' + first + '</div>'
-            + '<details class="journey-show-more"><summary>' + journey_text(JOURNEY_UI['more'])
+            + '<details class="journey-show-more"><summary>' + journey_text(more)
             + '</summary>'
             + '<div class="story-preview-grid journey-additional">' + hidden + '</div></details>'
             + '<p class="journey-view-all"><a href="scenarios.html#story-season-' + mode + '">'
             + journey_text(JOURNEY_UI['navOpen']) + ' <span aria-hidden="true">↗</span></a></p>'
-            + '<p class="story-disclaimer">' + journey_text(JOURNEY_UI['fiction'])
+            + '<p class="story-disclaimer">' + journey_text(fiction)
             + '</p></div></section>')
 
 
@@ -1484,12 +1529,13 @@ def page_scenarios():
     nav = ('<nav class="journey-switch" aria-label="' + JOURNEY_UI['jumpHint'][0] + '">'
            + '<a href="#story-season-apart">' + journey_text(JOURNEY_UI['apart']) + '</a>'
            + '<a href="#story-season-together">' + journey_text(JOURNEY_UI['together']) + '</a>'
+           + '<a href="#story-season-solo">' + journey_text(JOURNEY_UI['solo']) + '</a>'
            + '</nav>')
     seasons = []
-    for mode in ('apart', 'together'):
+    for mode in ('apart', 'together', 'solo'):
         sequence = [j for j in JOURNEYS if j['mode'] == mode]
-        label = JOURNEY_UI['apart'] if mode == 'apart' else JOURNEY_UI['together']
-        intro = JOURNEY_UI['apartDescription'] if mode == 'apart' else JOURNEY_UI['togetherDescription']
+        label = JOURNEY_UI[mode]
+        intro = JOURNEY_UI[mode + 'Description']
         episodes = []
         for index, journey in enumerate(sequence, 1):
             narrative = ''.join(
@@ -1507,7 +1553,7 @@ def page_scenarios():
                 + journey_text(journey['teaser'], 'span')
                 + '</span></summary>'
                 + '<div class="journey-full"><div class="journey-intro-label">'
-                + journey_text(JOURNEY_UI['follow']) + '</div>'
+                + journey_text(JOURNEY_UI['followSolo' if mode == 'solo' else 'follow']) + '</div>'
                 + '<div class="journey-beats">' + narrative + '</div>'
                 + '<div class="journey-connections"><h3>' + journey_text(JOURNEY_UI['features'])
                 + '</h3><div class="journey-feature-links">' + linked + '</div></div></div></details>')
@@ -1519,7 +1565,48 @@ def page_scenarios():
     return (h + page_hero(*JOURNEY_UI['eyebrow'][:2], *JOURNEY_UI['headline'][:2], *JOURNEY_UI['subhead'][:2])
             + '<div class="wrap">' + nav + '</div>'
             + '<div class="narrow"><p class="story-disclaimer">' + journey_text(JOURNEY_UI['fiction'])
+            + ' ' + journey_text(JOURNEY_UI['soloFiction'])
             + '</p></div>' + ''.join(seasons) + cta_band() + foot())
+
+
+def page_solo():
+    page = 'on-my-own.html'
+    h = head(page, 'OneSpace for people on their own', _nov_ar('OneSpace for people on their own'),
+             'In a relationship or not, OneSpace is your own assistant: save links from any app, plan trips, never miss a birthday and keep your memories — then invite someone when you’re ready.',
+             _nov_ar('In a relationship or not, OneSpace is your own assistant: save links from any app, plan trips, never miss a birthday and keep your memories — then invite someone when you’re ready.'))
+    hero = page_hero('On my own', _nov_ar('On my own'), 'Your life, in one place.', _nov_ar('Your life, in one place.'),
+                     'You don’t need a partner to use OneSpace. It gathers what you save in a dozen apps — links, places, films, gifts, plans — into one calm, private space. When someone special comes along, you can invite them. Until then, it’s all yours.',
+                     _nov_ar('You don’t need a partner to use OneSpace. It gathers what you save in a dozen apps — links, places, films, gifts, plans — into one calm, private space. When someone special comes along, you can invite them. Until then, it’s all yours.'))
+    points = [('📲', 'i-blue', 'One list per kind', 'Films, books, products and places from every app — sorted for you.'),
+              ('🧭', 'i-teal', 'Decisions without 40 tabs', 'Compare flats, phones or courses side by side, with prices and notes.'),
+              ('✈️', 'i-coral', 'Trips, sorted', 'Flight options, packing and documents in one trip.'),
+              ('🎁', 'i-rose', 'Birthdays, never missed', 'Family and friends’ occasions with gift ideas and a budget.'),
+              ('📸', 'i-violet', 'Your memories, kept', 'A daily selfie calendar, a feelings journal and scrapbooks you can save as PDF.'),
+              ('💞', 'i-gold', 'Share later, on your terms', 'Invite a partner any time. Only me items stay private, always.')]
+    cards = ''.join(trust_card(i, c, t, _nov_ar(t), d, _nov_ar(d)) for i, c, t, d in points)
+    you = ('You', _nov_ar('You'))
+    pains_html = ''.join(pain(q, _nov_ar(q), a, _nov_ar(a), r, _nov_ar(r), who=you[0], who_ar=you[1]) for q, a, r in [
+        ('Where did I save that flat?', 'Somewhere between WhatsApp, three browsers and a screenshot…', 'Activities: every option you shared, side by side, with your notes.'),
+        ('Is Mum’s birthday this week?!', '…it was yesterday 💔', 'Occasions that remind you weeks ahead, with gift ideas and a budget.'),
+        ('What was that series everyone recommended?', 'No idea. It was in a chat… last month?', 'Shared from any app into one watchlist, waiting for the weekend.')])
+    g = next(x for x in GUIDES if x['slug'] == SOLO_GUIDE['slug'])
+    return h + hero + f'''
+<section style="padding-top:20px"><div class="wrap">{solo_panel()}</div></section>
+<section class="tint"><div class="wrap"><div class="sec-head center">{T('Sound familiar?', 'هل يبدو هذا مألوفًا؟', 'span', 'eyebrow')}{N('The conversations you have with yourself.', 'h2')}</div>
+<div class="pains">{pains_html}</div></div></section>
+<section><div class="wrap split">
+  <div class="stage">{screen('watch', 'clean', 'One list per kind', _nov_ar('One list per kind'))}</div>
+  <div><div class="grid g2">{cards}</div></div>
+</div></section>
+{story_previews('solo')}
+<section class="tint"><div class="narrow center">
+  {T('A real week with OneSpace', 'أسبوع حقيقي مع OneSpace', 'span', 'eyebrow')}
+  {N('Set up once. It works quietly in the background.', 'h2')}
+  {N('Create your space with your email, share things in from your other apps — and invite someone whenever you’re ready.', 'p', 'lead')}
+  <div class="cta-row" style="justify-content:center"><a class="btn btn-primary" href="join.html">{T('Join the Founding 500', 'انضم إلى المؤسسين الـ500')}</a><a class="btn btn-ghost" href="living-together.html">{N('Living with a partner?')}</a></div>
+</div></section>
+<section><div class="narrow"><a class="card link art-card" href="{g['slug']}" style="flex-direction:row;align-items:center;gap:20px"><div class="cover" style="background:{g['bg']};width:120px;height:120px;flex:none;margin:0">{g['emoji']}</div><div>{T('Guide', 'دليل', 'span', 'eyebrow')}{T(g['title'][0], g['title'][1], 'h3')}{T(g['desc'][0], g['desc'][1], 'p')}</div></a></div></section>
+''' + cta_band() + foot()
 
 
 def persona_page(page, apart):
@@ -1576,7 +1663,7 @@ def persona_page(page, apart):
 <section class="tint"><div class="narrow center">
   {T('A real week with OneSpace', 'أسبوع حقيقي مع OneSpace', 'span', 'eyebrow')}
   {T('Set up once. It works quietly in the background.', 'اضبطه مرة واحدة. ويعمل بهدوء في الخلفية.', 'h2')}
-  {T('Create your space, invite your partner with a QR code or link, choose how you live — and Today does the rest.', 'أنشئ مساحتكما، وادعُ شريكك برمز QR أو رابط، واختر كيف تعيشان — ويتولى «اليوم» الباقي.', 'p', 'lead')}
+  {N('Create your space, invite your partner by email, choose how you live — and Today does the rest.', 'p', 'lead')}
   <div class="cta-row" style="justify-content:center"><a class="btn btn-primary" href="join.html">{T('Join the Founding 500', 'انضم إلى المؤسسين الـ500')}</a><a class="btn btn-ghost" href="{other[0]}">{T(other[1], other[2])}</a></div>
 </div></section>
 <section><div class="narrow"><a class="card link art-card" href="{g['slug']}" style="flex-direction:row;align-items:center;gap:20px"><div class="cover" style="background:{g['bg']};width:120px;height:120px;flex:none;margin:0">{g['emoji']}</div><div>{T('Guide', 'دليل', 'span', 'eyebrow')}{T(g['title'][0], g['title'][1], 'h3')}{T(g['desc'][0], g['desc'][1], 'p')}</div></a></div></section>
@@ -1611,7 +1698,7 @@ def page_how():
       for q,qa,answer,answer_ar in [
         ('Does my partner need the app too?', 'هل يحتاج شريكي إلى التطبيق أيضًا؟', 'Yes. Each of you has an account in the same shared space.', 'نعم. لكل منكما حساب في المساحة المشتركة نفسها.'),
         ('Can we use different languages?', 'هل يمكننا استخدام لغتين مختلفتين؟', 'Yes. Each partner chooses their own app language.', 'نعم. يختار كل شريك لغة التطبيق الخاصة به.'),
-        ('Can iPhone users sign up now?', 'هل يستطيع مستخدمو آيفون التسجيل الآن؟', 'Absolutely. Founder registration is open to Android and iPhone couples now. The iOS app comes later.', 'بالتأكيد. التسجيل في عضوية المؤسسين مفتوح الآن لأزواج أندرويد وآيفون، أما تطبيق iOS فسيصدر لاحقًا.')
+        ('Can iPhone users sign up now?', 'هل يستطيع مستخدمو آيفون التسجيل الآن؟', 'Absolutely. Founder registration is open to Android and iPhone users now. The iOS app comes later.', _nov_ar('Absolutely. Founder registration is open to Android and iPhone users now. The iOS app comes later.'))
       ])
     return h + page_hero('Demo', 'العرض',
         'One idea. Two perspectives. One shared plan.', 'فكرة واحدة، ورأيان، وخطة مشتركة.',
@@ -1658,8 +1745,12 @@ TUTORIALS = [
         ('Create your space and invite your partner', 'أنشئ مساحتكما وادعُ شريكك', [
             ('Sign up with your email and accept the short terms.', 'سجّل ببريدك واقبل الشروط المختصرة.'),
             ('Create your space and give it a name.', 'أنشئ مساحتكما وسمّها.'),
-            ('Share the invite code or show its QR code.', 'شارك رمز الدعوة أو اعرض رمز QR.'),
-            ('Your partner signs up and taps “Scan your partner’s QR code”. That’s it — a space holds exactly two people.', 'يسجّل شريكك وينقر «امسح رمز QR الخاص بشريكك». هذا كل شيء — المساحة تتسع لشخصين فقط.')]),
+            ('Tap Invite and enter your partner’s email — or share your invite code.', _nov_ar('Tap Invite and enter your partner’s email — or share your invite code.')),
+            ('Your partner accepts the invitation in the app. Invitations expire after 48 hours, and a space holds exactly two people.', _nov_ar('Your partner accepts the invitation in the app. Invitations expire after 48 hours, and a space holds exactly two people.'))]),
+        ('Use OneSpace on your own', _nov_ar('Use OneSpace on your own'), [
+            (x, _nov_ar(x)) for x in ('Sign up with your email and create your space — no partner needed.',
+                                      'Share links from other apps, and add reminders, lists, trips and memories as usual.',
+                                      'When you’re ready, invite someone from Me. Anything you keep as Only me stays private.')]),
         ('Tell OneSpace how you live', 'أخبر OneSpace كيف تعيشان', [
             ('Tap “Tell OneSpace how you live” in your space.', 'انقر «أخبر OneSpace كيف تعيشان» في مساحتكما.'),
             ('Choose living apart or together. Apart adds both cities’ clocks and weather to Today.', 'اختر متباعدين أو معًا. خيار التباعد يضيف ساعتي المدينتين وطقسهما إلى «اليوم».'),
@@ -1708,16 +1799,17 @@ TUTORIALS = [
             ('Open the map to see all your pins; tick bucket-list places to plan a trip.', 'افتح الخريطة لترى كل الدبابيس؛ واختر أماكن من قائمة الأحلام لتخطط لرحلة.')]),
         ('Make a scrapbook', 'اصنع ألبومًا', [
             ('Pick a template and add memories and photos.', 'اختر قالبًا وأضف ذكريات وصورًا.'),
-            ('Invite your partner to add pages.', 'ادعُ شريكك لإضافة صفحات.'),
+            ('In a shared scrapbook, both of you can add and edit pages. Use Nudge partner to ask for their part.', _nov_ar('In a shared scrapbook, both of you can add and edit pages. Use Nudge partner to ask for their part.')),
             ('Use “Save or share as PDF” to keep or print it.', 'استخدم «احفظ أو شارك كـ PDF» للاحتفاظ به أو طباعته.')]),
     ]),
     ('privacy', '🔒', 'Privacy & help', 'الخصوصية والمساعدة', [
         ('Keep something private', 'أبقِ شيئًا خاصًا', [
             ('When creating or editing an item, choose Only me instead of Shared.', 'عند إنشاء عنصر أو تعديله، اختر «أنا فقط» بدل «مشترك».'),
             ('Only-me items never show on your partner’s phone.', 'العناصر الخاصة لا تظهر أبدًا على هاتف شريكك.')]),
-        ('Export or delete your data', 'صدّر بياناتك أو احذفها', [
+        ('Download or delete your data', _nov_ar('Download or delete your data'), [
             ('Open Me → Your data and account.', 'افتح «أنا» ← «بياناتك وحسابك».'),
-            ('Export first if you want a copy, then tap Delete my account.', 'صدّر أولًا إن أردت نسخة، ثم انقر «حذف حسابي».'),
+            ('Tap Download my data if you want a copy (photos and files are not included), then tap Delete my account.', _nov_ar('Tap Download my data if you want a copy (photos and files are not included), then tap Delete my account.')),
+            ('Nothing is deleted for 7 days, and you can cancel at any time in that period.', _nov_ar('Nothing is deleted for 7 days, and you can cancel at any time in that period.')),
             ('Locked out? Use the <a href="delete-account.html">deletion request form</a>.', 'لا تستطيع الدخول؟ استخدم <a href="delete-account.html">نموذج طلب الحذف</a>.')]),
         ('Get help when you can’t sign in', 'احصل على مساعدة إن لم تستطع الدخول', [
             ('The sign-in screen has Help, Contact us and Report a problem — no account needed.', 'في شاشة الدخول: المساعدة وتواصل معنا والإبلاغ عن مشكلة — دون حساب.'),
@@ -1767,10 +1859,10 @@ def page_tutorials():
 
 
 AVAILABILITY = [
-    ('Available now', 'متاح الآن', 'i-green', ['Android app (early test)', 'Everything on the Features page', 'English and Arabic', 'Help without signing in'],
-     ['تطبيق أندرويد (تجربة مبكرة)', 'كل ما في صفحة المزايا', 'العربية والإنجليزية', 'المساعدة دون تسجيل الدخول']),
-    ('In testing', 'قيد الاختبار', 'i-gold', ['iPhone app via TestFlight', 'Sign in with Google and Apple', 'Sharing into OneSpace from iPhone apps'],
-     ['تطبيق iPhone عبر TestFlight', 'الدخول بحساب Google وApple', 'المشاركة إلى OneSpace من تطبيقات iPhone']),
+    ('Available now', 'متاح الآن', 'i-green', ['Android app (closed test on Google Play)', 'Everything on the Features page', 'Use it on your own or as a couple', 'English and Arabic', 'Help without signing in'],
+     [_nov_ar('Android app (closed test on Google Play)'), 'كل ما في صفحة المزايا', _nov_ar('Use it on your own or as a couple'), 'العربية والإنجليزية', 'المساعدة دون تسجيل الدخول']),
+    ('In testing', 'قيد الاختبار', 'i-gold', ['iPhone app via TestFlight', 'Sharing into OneSpace from iPhone apps'],
+     ['تطبيق iPhone عبر TestFlight', 'المشاركة إلى OneSpace من تطبيقات iPhone']),
     ('On the roadmap', 'في الخطة', 'i-violet', ['Founder Member benefits (announced before pricing)', 'Smarter love reminders', 'Pricing — not decided yet'],
      ['مزايا الأعضاء المؤسسين (تُعلن قبل الأسعار)', 'تذكيرات حب أذكى', 'الأسعار — لم تُحدد بعد']),
 ]
@@ -1867,6 +1959,12 @@ GUIDES = [
 
 # Nine optional new reading resources: keep the guide hub concise by hiding
 # the additional cards until the visitor explicitly asks to explore them.
+GUIDES.insert(2, {'slug': SOLO_GUIDE['slug'], 'emoji': SOLO_GUIDE['emoji'], 'bg': SOLO_GUIDE['bg'], 'mins': SOLO_GUIDE['mins'],
+                  'title': tuple(SOLO_GUIDE['title'][:2]), 'desc': tuple(SOLO_GUIDE['desc'][:2]),
+                  'intro': tuple(SOLO_GUIDE['intro'][:2]), 'how': tuple(SOLO_GUIDE['how'][:2]),
+                  'sections': [(h[0], h[1], [(t[0], t[1]) for t in tips]) for h, tips in SOLO_GUIDE['sections']]})
+
+
 def _from_localized_guide(entry):
     return {'slug': entry['slug'], 'emoji': entry['emoji'], 'bg': entry['bg'],
             'mins': entry['mins'], 'title': entry['title'][:2],
@@ -1888,11 +1986,11 @@ def page_guides():
              'Practical guides for couples: long-distance ideas, sharing the mental load at home, and never forgetting an anniversary.',
              'أدلة عملية للأزواج: أفكار للعلاقات عن بُعد، وتقاسم العبء الذهني في البيت، وعدم نسيان الذكرى أبدًا.')
     return (h + page_hero('Guides', 'الأدلة', 'Small ideas for a shared life.', 'أفكار صغيرة لحياة مشتركة.',
-                         'Practical, kind and short. Written for real couples — whether you share a sofa or a time difference.',
-                         'عملية ولطيفة وقصيرة. مكتوبة لأزواج حقيقيين — سواء تتشاركان أريكة أو فرق توقيت.') + \
+                         'Practical, kind and short. Written for real life — on your own, sharing a sofa or a time difference.',
+                         _nov_ar('Practical, kind and short. Written for real life — on your own, sharing a sofa or a time difference.')) + \
         f'<section style="padding-top:20px"><div class="wrap"><div class="grid g3">{guide_cards(GUIDES[:3])}</div>'
         + '<details class="journey-show-more guide-show-more"><summary>'
-        + T('Explore 9 more practical guides', 'استكشف 9 أدلة عملية أخرى')
+        + N('Explore 10 more practical guides')
         + '</summary><div class="grid g3" style="margin-top:22px">'
         + guide_cards(GUIDES[3:]) + '</div></details></div></section>'
         + cta_band() + foot())
@@ -1920,10 +2018,17 @@ def guide_page(g):
 """ + cta_band() + foot()
 
 
+_NEW_22 = ['Use OneSpace on your own, and invite someone when you’re ready.',
+           'Today shows your day, your partner’s and what you do together side by side — with work days, days off and public holidays for your country.',
+           'Events say who’s taking part and can have their own time zone.',
+           'A daily selfie calendar, scrapbooks you can both edit, and Nudge partner.',
+           'Invite your partner by email; invitations expire after 48 hours.']
 WHATS_NEW = [
+    ('November 2026', 'نوفمبر 2026', 'Made for you — on your own or together', _nov_ar('Made for you — on your own or together'),
+     _NEW_22, [_nov_ar(x) for x in _NEW_22]),
     ('November 2026', 'نوفمبر 2026', 'The Founding 500 is open', 'باب المؤسسين الـ500 مفتوح',
-     ['Join with your email and confirm it to get your Founder couple number.', 'Invite your partner with your own link — you share one number.', 'The reunion counter is right in every “living apart” setting; theme previews fit smaller phones.'],
-     ['انضم ببريدك وأكّده لتحصل على رقمكما كزوجين مؤسسين.', 'ادعُ شريكك برابطك الخاص — رقم واحد لكما.', 'عدّاد اللقاء صحيح في كل إعدادات «متباعدان»، ومعاينات السمات تناسب الهواتف الأصغر.']),
+     ['Join with your email and confirm it to become a Founder Member.', 'Invite your partner with your own link — they become a Founder Member too.', 'The reunion counter is right in every “living apart” setting; theme previews fit smaller phones.'],
+     [_nov_ar('Join with your email and confirm it to become a Founder Member.'), _nov_ar('Invite your partner with your own link — they become a Founder Member too.'), 'عدّاد اللقاء صحيح في كل إعدادات «متباعدان»، ومعاينات السمات تناسب الهواتف الأصغر.']),
     ('November 2026', 'نوفمبر 2026', 'Places, counters and a map', 'الأماكن والعدّادات والخريطة',
      ['Our places: been there and bucket list, pinned on a map, shared from Google Maps.', 'Counters that tell the date itself from its anniversary, with progress bars and a Today line.', 'Plan a trip from the bucket-list places you pick.'],
      ['أماكننا: ما زرتماه وقائمة الأحلام على خريطة، ومشاركة من خرائط Google.', 'عدّادات تفرّق بين التاريخ نفسه وذكراه، مع أشرطة تقدّم وخط اليوم.', 'خطط لرحلة من أماكن قائمة الأحلام التي تختارها.']),
@@ -1953,31 +2058,32 @@ def page_whats_new():
 
 FAQ = [
     ('Getting started', 'البدء', [
-        ('What is OneSpace?', 'ما هو OneSpace؟', 'A private app for two people in a relationship: a shared calendar, lists, reminders, trips, occasions, letters, little gestures, counters, places and memories in one place.', 'تطبيق خاص لشخصين في علاقة: تقويم وقوائم وتذكيرات ورحلات ومناسبات ورسائل ولمسات صغيرة وعدّادات وأماكن وذكريات في مكان واحد.'),
-        ('How do I get it?', 'كيف أحصل عليه؟', 'OneSpace is in an early test on Android. <a href="join.html">Join the Founding 500</a>, confirm your email, and we will invite couples in small groups. iPhone is coming next.', 'OneSpace في تجربة مبكرة على أندرويد. <a href="join.html">انضم إلى المؤسسين الـ500</a> وأكّد بريدك، وسندعو الأزواج على دفعات صغيرة. ويأتي iPhone بعد ذلك.'),
-        ('How do I invite my partner?', 'كيف أدعو شريكي؟', 'After creating your space, share your invite code or its QR code. Your partner signs up and taps “Scan your partner’s QR code”. A space holds exactly two people.', 'بعد إنشاء المساحة، شارك رمز الدعوة أو رمز QR الخاص به. يسجّل شريكك وينقر «امسح رمز QR الخاص بشريكك». المساحة تتسع لشخصين فقط.'),
+        ('What is OneSpace?', 'ما هو OneSpace؟', 'A private app for your everyday life — on your own or with your partner: a calendar, lists, reminders, trips, occasions, places, counters and memories in one place, plus letters and little gestures for couples.', _nov_ar('A private app for your everyday life — on your own or with your partner: a calendar, lists, reminders, trips, occasions, places, counters and memories in one place, plus letters and little gestures for couples.')),
+        ('Can I use OneSpace without a partner?', _nov_ar('Can I use OneSpace without a partner?'), 'Yes. Create your space and use it on your own — share links from other apps and keep lists, reminders, trips and memories. Invite someone whenever you’re ready.', _nov_ar('Yes. Create your space and use it on your own — share links from other apps and keep lists, reminders, trips and memories. Invite someone whenever you’re ready.')),
+        ('How do I get it?', 'كيف أحصل عليه؟', 'OneSpace is in a closed test on Android through Google Play. <a href="join.html">Join the Founding 500</a>, confirm your email, and we will invite people in small groups. iPhone is coming next through TestFlight.', _nov_ar('OneSpace is in a closed test on Android through Google Play.') + ' <a href="join.html">انضم إلى المؤسسين الـ500</a>' + _nov_ar(', confirm your email, and we will invite people in small groups. iPhone is coming next through TestFlight.')),
+        ('How do I invite my partner?', 'كيف أدعو شريكي؟', 'After creating your space, tap Invite and enter your partner’s email, or share your invite code. Your partner accepts or declines in the app. Invitations expire after 48 hours, and a space holds exactly two people.', _nov_ar('After creating your space, tap Invite and enter your partner’s email, or share your invite code. Your partner accepts or declines in the app. Invitations expire after 48 hours, and a space holds exactly two people.')),
         ('Is it free?', 'هل هو مجاني؟', 'Yes, during the early test. If that ever changes, we will tell you clearly and in advance.', 'نعم، خلال التجربة المبكرة. وإذا تغيّر ذلك سنخبرك بوضوح ومسبقًا.'),
     ]),
     ('Founder Members', 'الأعضاء المؤسسون', [
-        ('What is the Founding 500?', 'ما هم المؤسسون الـ500؟', 'The first 250 couples — 500 people — who join and confirm their email become Founder Members. You get the app first, a direct line to the team and a say in what we build.', 'أول 250 زوجًا — 500 شخص — ينضمون ويؤكدون بريدهم يصبحون أعضاء مؤسسين: تحصلون على التطبيق أولًا، وخط مباشر مع الفريق، ورأي فيما نبنيه.'),
-        ('Do we both need to sign up?', 'هل يجب أن نسجّل كلانا؟', 'One of you is enough to claim a place. After confirming, you get an invite link for your partner — they join under the same Founder number.', 'يكفي أحدكما لحجز المكان. بعد التأكيد تحصل على رابط دعوة لشريكك لينضم بالرقم نفسه.'),
-        ('When does our Founder number come?', 'متى نحصل على رقم المؤسس؟', 'When you click the link in the confirmation email from founders@onespace.live. Numbers go in the order emails are confirmed.', 'عند النقر على الرابط في رسالة التأكيد من founders@onespace.live. تُمنح الأرقام بترتيب تأكيد البريد.'),
+        ('What is the Founding 500?', 'ما هم المؤسسون الـ500؟', 'The first 500 people who join and confirm their email — on their own or as a couple — become Founder Members. You get the app first, a direct line to the team and a say in what we build.', _nov_ar('The first 500 people who join and confirm their email — on their own or as a couple — become Founder Members. You get the app first, a direct line to the team and a say in what we build.')),
+        ('Do we both need to sign up?', 'هل يجب أن نسجّل كلانا؟', 'One of you is enough to start. After confirming, you get an invite link for your partner — they become a Founder Member too.', _nov_ar('One of you is enough to start. After confirming, you get an invite link for your partner — they become a Founder Member too.')),
+        ('When does my Founder membership start?', _nov_ar('When does my Founder membership start?'), 'As soon as you click the link in the confirmation email from founders@onespace.live. Places go in the order emails are confirmed.', _nov_ar('As soon as you click the link in the confirmation email from founders@onespace.live. Places go in the order emails are confirmed.')),
         ('The confirmation email didn’t arrive.', 'لم تصل رسالة التأكيد.', 'Check spam or Promotions for founders@onespace.live. Still nothing after 10 minutes? Sign up again with the same email and we will send a fresh link.', 'تفقّد البريد العشوائي أو العروض بحثًا عن founders@onespace.live. لم يصل شيء بعد 10 دقائق؟ سجّل مجددًا بالبريد نفسه وسنرسل رابطًا جديدًا.'),
         ('What do Founder Members get?', 'ماذا يحصل الأعضاء المؤسسون؟', 'Early access, a direct line to the team and a say in what we build. Founder benefits will be announced before any pricing is introduced.', 'وصول مبكر، وخط مباشر مع الفريق، ورأي فيما نبنيه. وسنعلن مزايا المؤسسين قبل تقديم أي أسعار.'),
-        ('Can I stop the emails?', 'هل يمكنني إيقاف الرسائل؟', 'Yes — every email has an Unsubscribe link, and your Founder number stays yours.', 'نعم — في كل رسالة رابط لإلغاء الاشتراك، ويبقى رقمك كمؤسس لك.'),
+        ('Can I stop the emails?', 'هل يمكنني إيقاف الرسائل؟', 'Yes — every email has an Unsubscribe link, and you stay a Founder Member.', _nov_ar('Yes — every email has an Unsubscribe link, and you stay a Founder Member.')),
     ]),
     ('Using OneSpace', 'استخدام OneSpace', [
         ('Does it work for couples who live together?', 'هل يناسب الأزواج الذين يعيشون معًا؟', 'Yes. Choose “Together” and Today focuses on your home and shared plans. Distance-only messages are never sent.', 'نعم. اختر «معًا» فيركز «اليوم» على البيت والخطط المشتركة. ولا تُرسل رسائل البعد أبدًا.'),
-        ('Can I keep something from my partner?', 'هل يمكنني إخفاء شيء عن شريكي؟', 'Yes — mark items “Only me”, for example a surprise gift or occasion.', 'نعم — اجعل العناصر «أنا فقط»، مثل هدية أو مناسبة مفاجئة.'),
+        ('Can I keep something from my partner?', 'هل يمكنني إخفاء شيء عن شريكي؟', 'Yes — mark items “Only me”. They stay private to you, always — for example a surprise gift or occasion.', _nov_ar('Yes — mark items “Only me”. They stay private to you, always — for example a surprise gift or occasion.')),
         ('Does it sync with my phone calendar?', 'هل يتزامن مع تقويم هاتفي؟', 'You can send OneSpace events one way to your phone calendar (Google, Samsung or iPhone calendar). Changes in your phone calendar do not come back.', 'يمكنك إرسال مواعيد OneSpace في اتجاه واحد إلى تقويم هاتفك (Google أو Samsung أو iPhone). التغييرات في تقويم هاتفك لا تعود إلى التطبيق.'),
         ('Can I write my own love notes?', 'هل يمكنني كتابة رسائل الحب بنفسي؟', 'Yes. Every gesture can carry your own words, and you can set a private reminder to send a little love.', 'نعم. كل لمسة يمكن أن تحمل كلماتك، ويمكنك ضبط تذكير خاص لإرسال لمسة حب.'),
         ('Which languages are supported?', 'ما اللغات المدعومة؟', 'English and Arabic (right to left). Each of you picks your own.', 'الإنجليزية والعربية (من اليمين لليسار). يختار كل منكما لغته.'),
     ]),
     ('Privacy & account', 'الخصوصية والحساب', [
-        ('Who can see our space?', 'من يرى مساحتنا؟', 'Only the two members. Photos and documents are stored privately and opened with short-lived links.', 'العضوان فقط. الصور والمستندات محفوظة بخصوصية وتُفتح بروابط قصيرة الصلاحية.'),
+        ('Who can see my space?', _nov_ar('Who can see my space?'), 'Only you — and your partner, for the things you share. Photos and documents are stored privately and opened with short-lived links.', _nov_ar('Only you — and your partner, for the things you share. Photos and documents are stored privately and opened with short-lived links.')),
         ('Do you sell data or show ads?', 'هل تبيعون البيانات أو تعرضون إعلانات؟', 'No, never.', 'لا، أبدًا.'),
-        ('How do I export or delete my data?', 'كيف أصدّر بياناتي أو أحذفها؟', 'In the app: Me → Your data and account. Locked out? Use <a href="delete-account.html">this form</a>.', 'في التطبيق: «أنا» ← «بياناتك وحسابك». لا تستطيع الدخول؟ استخدم <a href="delete-account.html">هذا النموذج</a>.'),
-        ('What happens if we break up?', 'ماذا يحدث إذا انفصلنا؟', 'Either of you can leave the space at any time from Me. You can export first.', 'يمكن لأي منكما مغادرة المساحة في أي وقت من «أنا». ويمكنك التصدير أولًا.'),
+        ('How do I download or delete my data?', _nov_ar('How do I download or delete my data?'), 'In the app: Me → Your data and account. Account deletion has a 7-day period to change your mind. Locked out? Use <a href="delete-account.html">this form</a>.', _nov_ar('In the app: Me → Your data and account. Account deletion has a 7-day period to change your mind. Locked out? Use') + ' <a href="delete-account.html">هذا النموذج</a>.'),
+        ('What happens if we break up?', 'ماذا يحدث إذا انفصلنا؟', 'Either of you can leave the shared space from Me. Everything you shared with that partner is then permanently deleted for both of you, and each of you keeps your own Only me items. The app explains this and asks you to confirm first.', _nov_ar('Either of you can leave the shared space from Me. Everything you shared with that partner is then permanently deleted for both of you, and each of you keeps your own Only me items. The app explains this and asks you to confirm first.')),
     ]),
     ('Help', 'المساعدة', [
         ('I can’t sign in.', 'لا أستطيع تسجيل الدخول.', 'Use “Forgot password” on the sign-in screen, or <a href="support.html?topic=signin#contact">contact us</a> — no account needed.', 'استخدم «نسيت كلمة المرور» في شاشة الدخول، أو <a href="support.html?topic=signin#contact">تواصل معنا</a> — دون حساب.'),
@@ -2021,19 +2127,19 @@ def share_buttons():
 
 def page_join():
     h = head('join.html', 'Join the Founding 500 — OneSpace early access', 'انضم إلى المؤسسين الـ500 — OneSpace',
-             'Join the OneSpace early test for free. Tell us a little about the two of you and we will send you both an invite.',
-             'انضم مجانًا إلى التجربة المبكرة لـ OneSpace. أخبرنا قليلًا عنكما وسنرسل لكما دعوة.')
+             'Join the OneSpace early test for free. Tell us a little about yourself and we will send you an invite.',
+             _nov_ar('Join the OneSpace early test for free. Tell us a little about yourself and we will send you an invite.'))
     ek = K('you@example.com', 'you@example.com')
     return h + f'''
 <section class="page-hero"><div class="wrap split" style="align-items:start">
   <div>
     <div class="crumbs"><a href="./">{T('Home', 'الرئيسية')}</a> › {T('Join', 'انضم')}</div>
     {T('Join the Founding 500.', 'انضم إلى المؤسسين الـ500.', 'h1')}
-    {T('Founder registration is open to Android and iPhone couples NOW — there is no need to wait for iOS to launch. The first 250 couples — 500 people — can reserve one Founder number together. Early access is free, and benefits will be announced before pricing.', 'التسجيل في عضوية المؤسسين مفتوح الآن للأزواج من مستخدمي أندرويد وآيفون؛ لا حاجة إلى انتظار إصدار iOS. يستطيع أول 250 زوجًا — 500 شخص — حجز رقم مؤسس مشترك. الوصول المبكر مجاني، وسنعلن مزايا العضوية قبل الأسعار.', 'p', 'lead')}
+    {N('Founder registration is open to Android and iPhone NOW — there is no need to wait for iOS to launch. The first 500 people to join — on their own or as a couple — become Founder Members. Early access is free, and benefits will be announced before pricing.', 'p', 'lead')}
     <ul class="ticks">
-      <li>{T('<b>1. Tell us about you two</b> — 30 seconds.', '<b>1. أخبرنا عنكما</b> — 30 ثانية.')}</li>
-      <li>{T('<b>2. Confirm your email</b> — that is when your couple gets its Founder number.', '<b>2. أكّد بريدك</b> — وعندها يحصل زوجكما على رقم المؤسس.')}</li>
-      <li>{T('<b>3. Invite your partner</b> with your link — they join under the same number.', '<b>3. ادعُ شريكك</b> برابطك — لينضم بالرقم نفسه.')}</li>
+      <li>{N('<b>1. Tell us about yourself</b> — 30 seconds.')}</li>
+      <li>{N('<b>2. Confirm your email</b> — that is when you become a Founder Member.')}</li>
+      <li>{N('<b>3. Invite your partner</b> if you have one — they become a Founder Member too.')}</li>
       <li>{T('<b>4. Get the invitation when your app is ready</b> — Android first, iPhone later. Registration is open for both today.', '<b>4. استلما الدعوة عند جاهزية التطبيق</b> — أندرويد أولًا وآيفون لاحقًا. التسجيل مفتوح لكليهما اليوم.')}</li>
     </ul>
     <div class="note-box" style="margin-top:24px">{T('We only use your email for your Founder membership and the launch updates you agree to. No marketing lists, no sharing. Questions: <a href="mailto:founders@onespace.live">founders@onespace.live</a> · <a href="privacy.html">Privacy</a>', 'نستخدم بريدك فقط لعضويتك كمؤسس وتحديثات الإطلاق التي توافق عليها. لا قوائم تسويق ولا مشاركة. للأسئلة: <a href="mailto:founders@onespace.live">founders@onespace.live</a> · <a href="privacy.html">الخصوصية</a>')}</div>
@@ -2042,7 +2148,7 @@ def page_join():
 </div></section>
 <section class="tint"><div class="wrap"><div class="grid g3">
   {trust_card('🆓', 'i-green', 'Free during the test', 'مجاني خلال التجربة', 'No card, no trial timer.', 'بلا بطاقة ولا مدة تجريبية.')}
-  {trust_card('🔒', 'i-teal', 'Only you two', 'أنتما فقط', 'Your space is private to its two members.', 'مساحتكما خاصة بعضويها.')}
+  {trust_card('🔒', 'i-teal', 'Private by design', _nov_ar('Private by design'), 'Only you — and the partner you invite — can see your space.', _nov_ar('Only you — and the partner you invite — can see your space.'))}
   {trust_card('💬', 'i-coral', 'A direct line to us', 'خط مباشر معنا', 'Testers shape what we build next.', 'المختبرون يحددون ما نبنيه بعد ذلك.')}
 </div></div></section>
 ''' + foot()
@@ -2087,9 +2193,9 @@ def page_delete():
     return h + page_hero('Delete your account', 'حذف حسابك', 'Delete your account and data', 'احذف حسابك وبياناتك', 'You are always in control. Here is exactly what happens.', 'أنت المتحكم دائمًا. إليك ما يحدث بالضبط.') + f'''
 <section style="padding-top:20px"><div class="narrow legal">
   {T('In the app (fastest)', 'من التطبيق (الأسرع)', 'h2')}
-  <ol><li>{T('Open <b>Me → Your data and account</b>.', 'افتح <b>أنا ← بياناتك وحسابك</b>.')}</li><li>{T('Optional: <b>Export my data</b> first.', 'اختياري: <b>صدّر بياناتي</b> أولًا.')}</li><li>{T('Tap <b>Delete my account</b> and confirm.', 'انقر <b>حذف حسابي</b> وأكّد.')}</li></ol>
+  <ol><li>{T('Open <b>Me → Your data and account</b>.', 'افتح <b>أنا ← بياناتك وحسابك</b>.')}</li><li>{N('Optional: <b>Download my data</b> first (photos and files are not included).')}</li><li>{T('Tap <b>Delete my account</b> and confirm.', 'انقر <b>حذف حسابي</b> وأكّد.')}</li></ol>
   {T('What is deleted', 'ما الذي يُحذف', 'h2')}
-  {T('Your account, your profile and the items only you created are deleted. If your partner stays, the shared space and what they created remain theirs. If you are the last member, the whole space is deleted, including its photos and files.', 'يُحذف حسابك وملفك والعناصر التي أنشأتها وحدك. إذا بقي شريكك، تبقى المساحة المشتركة وما أنشأه له. وإذا كنت آخر عضو تُحذف المساحة بالكامل بما فيها الصور والملفات.', 'p')}
+  {N('Nothing is deleted for 7 days — you can cancel at any time in that period and everything stays as it was. After 7 days, your account and your Only me items are permanently deleted, together with everything you shared with your current partner. Your partner keeps their own Only me items.', 'p')}
   {T('Can’t sign in?', 'لا تستطيع الدخول؟', 'h2', '', 'id="request"')}
   {T('Send a request below — or email <a href="mailto:privacy@onespace.live">privacy@onespace.live</a> — from the email on your account. We will confirm it is you, then delete the account and reply.', 'أرسل طلبًا من الأسفل — أو راسل <a href="mailto:privacy@onespace.live">privacy@onespace.live</a> — من البريد المسجل في حسابك. سنتأكد من هويتك ثم نحذف الحساب ونرد عليك.', 'p')}
   <div class="panel"><form data-form="account" novalidate>
@@ -2182,20 +2288,20 @@ def page_share_kit():
 
 def page_confirm():
     h = head('confirm.html', 'Confirm your email — OneSpace Founders', 'تأكيد بريدك — مؤسسو OneSpace',
-             'Confirm your email to claim your OneSpace Founder couple number.', 'أكّد بريدك لتحصل على رقمكما كزوجين مؤسسين في OneSpace.')
+             'Confirm your email to join the OneSpace Founding 500.', _nov_ar('Confirm your email to join the OneSpace Founding 500.'))
     h = h.replace('<meta charset="utf-8">', '<meta charset="utf-8">\n<meta name="robots" content="noindex">', 1)
     return h + f"""
 <section class="page-hero"><div class="narrow center" data-confirm>
   <div class="cf-state" data-state="loading"><div style="font-size:46px">⏳</div>{T('Confirming your email…', 'جارٍ تأكيد بريدك…', 'h1')}</div>
   <div class="cf-state" data-state="ok" hidden>
     <div style="font-size:46px">🎉</div>
-    {T('Welcome, Founders!', 'أهلًا بكما أيها المؤسسان!', 'h1')}
-    <div class="founder-badge"><span>{T('Founder Couple', 'الزوجان المؤسسان')}</span><b data-number>#—</b></div>
-    <p class="lead" data-role-first>{T('Your email is confirmed and this number belongs to the two of you. We sent the details to your inbox.', 'تأكد بريدك وهذا الرقم لكما معًا. أرسلنا التفاصيل إلى بريدك.')}</p>
-    <p class="lead" data-role-partner hidden>{T('You have joined your partner — together you hold this Founder number.', 'انضممت إلى شريكك — هذا رقمكما معًا كمؤسسين.')}</p>
+    {N('Welcome to the Founding 500!', 'h1')}
+    <div class="founder-badge"><span>{N('Founder Member')}</span><b>{T('Founding 500', 'المؤسسون الـ500')}</b></div>
+    <p class="lead" data-role-first>{N('Your email is confirmed — you’re one of the Founding 500. We sent the details to your inbox.')}</p>
+    <p class="lead" data-role-partner hidden>{N('You have joined your partner — you’re both Founder Members.')}</p>
     <div class="panel" data-invite hidden style="text-align:start;margin-top:20px">
       {T('Now invite your partner', 'الآن ادعُ شريكك', 'h3')}
-      {T('OneSpace is for two. Your partner joins under the same number with this link:', 'OneSpace لشخصين. ينضم شريكك بالرقم نفسه عبر هذا الرابط:', 'p', 'muted')}
+      {N('Have a partner? Send them this link and they join the Founding 500 with you:', 'p', 'muted')}
       <input class="invite-url" readonly data-invite-url value="">
       <div class="cta-row" style="margin-top:12px"><a class="btn btn-primary" data-invite-wa href="#" target="_blank" rel="noopener">{T('Send on WhatsApp', 'أرسل عبر واتساب')}</a>
       <button class="btn btn-ghost" type="button" data-invite-copy>{T('Copy link', 'انسخ الرابط')}</button></div>
@@ -2203,8 +2309,8 @@ def page_confirm():
     <p style="margin-top:22px"><a class="btn btn-ghost" href="how-it-works.html">{T('While you wait: try the demo →', 'أثناء الانتظار: جرّب العرض ←')}</a></p>
   </div>
   <div class="cf-state" data-state="waitlist" hidden>
-    <div style="font-size:46px">🕊</div>{T('You’re on the waitlist', 'أنتما على قائمة الانتظار', 'h1')}
-    {T('Your email is confirmed. All 250 Founder places are taken, so we’ll invite you as soon as more places open.', 'تأكد بريدك. اكتملت أماكن المؤسسين الـ250، وسندعوكما فور فتح أماكن جديدة.', 'p', 'lead')}</div>
+    <div style="font-size:46px">🕊</div>{N('You’re on the waitlist', 'h1')}
+    {N('Your email is confirmed. All 500 Founder places are taken, so we’ll invite you as soon as more places open.', 'p', 'lead')}</div>
   <div class="cf-state" data-state="expired" hidden>
     <div style="font-size:46px">⌛</div>{T('This link has expired', 'انتهت صلاحية هذا الرابط', 'h1')}
     {T('Links last 7 days. Sign up again with the same email and we’ll send a fresh one.', 'تصلح الروابط 7 أيام. سجّل مجددًا بالبريد نفسه وسنرسل رابطًا جديدًا.', 'p', 'lead')}
@@ -2222,7 +2328,7 @@ def page_unsubscribe():
     return h + f"""
 <section class="page-hero"><div class="narrow center" data-unsub>
   <div class="cf-state" data-state="ask"><div style="font-size:46px">✉️</div>{T('Stop Founder emails?', 'إيقاف رسائل المؤسسين؟', 'h1')}
-    {T('You will stop receiving OneSpace launch updates and invitations. Your Founder number stays yours.', 'لن تصلك تحديثات إطلاق OneSpace ودعواته. ويبقى رقمك كمؤسس محفوظًا لك.', 'p', 'lead')}
+    {N('You will stop receiving OneSpace launch updates and invitations. You stay a Founder Member.', 'p', 'lead')}
     <button class="btn btn-primary" type="button" data-unsub-go>{T('Unsubscribe', 'إلغاء الاشتراك')}</button></div>
   <div class="cf-state" data-state="done" hidden><div style="font-size:46px">✅</div>{T('You’re unsubscribed', 'تم إلغاء اشتراكك', 'h1')}
     {T('No more emails from us. Changed your mind? Sign up again with the same email.', 'لن نراسلك بعد الآن. غيّرت رأيك؟ سجّل مجددًا بالبريد نفسه.', 'p', 'lead')}</div>
@@ -2253,6 +2359,7 @@ PAGES = {
     'index.html': (page_index, '1.0', 'weekly'), 'features.html': (page_features, '0.9', 'weekly'), 'connect-care.html': (page_connect_care, '0.9', 'weekly'),
     'long-distance.html': (lambda: persona_page('long-distance.html', True), '0.8', 'monthly'),
     'living-together.html': (lambda: persona_page('living-together.html', False), '0.8', 'monthly'),
+    'on-my-own.html': (page_solo, '0.8', 'monthly'),
     'how-it-works.html': (page_how, '0.8', 'monthly'), 'whats-new.html': (page_whats_new, '0.7', 'weekly'),
     'scenarios.html': (page_scenarios, '0.8', 'monthly'), 'faq.html': (page_faq, '0.7', 'monthly'), 'compare.html': (page_compare, '0.8', 'monthly'), 'tutorials.html': (page_tutorials, '0.7', 'monthly'), 'guides.html': (page_guides, '0.8', 'weekly'), 'join.html': (page_join, '0.9', 'monthly'),
     'support.html': (page_support, '0.6', 'monthly'), 'share-kit.html': ((lambda: _press_previews(page_share_kit())), '0.4', 'monthly'),

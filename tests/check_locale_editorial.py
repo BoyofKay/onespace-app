@@ -65,7 +65,7 @@ for lang, paths in CHECKS.items():
       assert soup.find('b', string=lambda s: bool(s and s.strip().lower() in
                            {'no recopilamos','pas','keine'})), f'{page}: legally vital negative emphasis lost'
     if category == 'faq':
-      assert len(soup.select('details[data-faq]')) == 22, f'{page}: FAQ coverage'
+      assert len(soup.select('details[data-faq]')) == 50, f'{page}: FAQ coverage'
   # Critical untranslated or dangerously mistranslated legal fragments must never return.
   privacy = (ROOT/lang/'privacy.html').read_text(encoding='utf8')
   banned = {

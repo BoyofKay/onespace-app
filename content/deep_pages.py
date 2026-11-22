@@ -147,7 +147,7 @@ DEEP = [
     ('I miss seeing your face every day', 'أفتقد رؤية وجهك كل يوم', 'Same 🥺', 'وأنا 🥺', 'A daily selfie: two photos, one day — side by side.', 'سيلفي يومي: صورتان ويوم واحد — جنبًا إلى جنب.')],
   'steps': [('Save a memory', 'احفظ ذكرى', 'A story, a collage or a daily selfie — with place, date and captions.', 'قصة أو كولاج أو سيلفي يومي — بالمكان والتاريخ والتعليقات.'),
             ('Pick a page design', 'اختر تصميم صفحة', '22+ designs: Our First Date, Wedding Day, Miles Apart, Date Night, Birthday Bash, Film Strip, Our Year…', 'أكثر من 22 تصميمًا: موعدنا الأول ويوم الزفاف وبعيدان وليلة موعد وحفلة عيد ميلاد وشريط الفيلم وسنتنا…'),
-            ('Fill it together', 'املآها معًا', 'Invite your partner to add photos and words to any page.', 'ادعُ شريكك لإضافة صور وكلمات إلى أي صفحة.'),
+            ('Fill it together', 'املآها معًا', 'Both of you can add photos and words to any page of a shared scrapbook — and Nudge partner asks for their part.', 'يستطيع كلاكما إضافة صور وكلمات إلى أي صفحة في الألبوم المشترك — و«تنبيه الشريك» يطلب منه مساهمته.'),
             ('Keep it', 'احتفظا بها', 'Save or share as a PDF — print it, email it, keep it.', 'احفظ أو شارك كملف PDF — اطبعه أو أرسله بالبريد أو احتفظ به.')],
   'details': [('🤳', 'Daily selfie, together', 'سيلفي يومي معًا', 'Each of you adds your own photo to the same day — a diary of your life, or of the distance.', 'يضيف كل منكما صورته إلى اليوم نفسه — يوميات لحياتكما أو للمسافة.'),
               ('📒', 'Scrapbook studio', 'استوديو الألبومات', 'Type and tap right on the page; remove pages; read page by page.', 'اكتب وانقر على الصفحة مباشرة واحذف صفحات واقرأ صفحة بصفحة.'),

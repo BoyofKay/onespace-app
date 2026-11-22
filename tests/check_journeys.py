@@ -8,15 +8,17 @@ from journeys_apart_01 import JOURNEYS as A1
 from journeys_apart_02 import JOURNEYS as A2
 from journeys_together_01 import JOURNEYS as T1
 from journeys_together_02 import JOURNEYS as T2
+from journeys_solo_01 import JOURNEYS as S1
 from journeys_ui import FEATURES
-J=A1+A2+T1+T2
-assert len(J)==24,len(J)
+J=A1+A2+T1+T2+S1
+assert len(J)==30,len(J)
 assert sum(j['mode']=='apart' for j in J)==12
 assert sum(j['mode']=='together' for j in J)==12
-assert len({j['slug'] for j in J})==24
+assert sum(j['mode']=='solo' for j in J)==6
+assert len({j['slug'] for j in J})==30
 for j in J:
     assert 4<=len(j['stages'])<=7,(j['slug'],len(j['stages']))
-    assert sum(len(stage[0].split()) for stage in j['stages'])>=200,j['slug']
+    assert sum(len(stage[0].split()) for stage in j['stages'])>=(140 if j['mode']=='solo' else 200),j['slug']
     assert len(j['features'])>=4,j['slug']
     for v in [j['title'],j['teaser'],*j['stages']]:
         assert len(v)==5 and all(v),j['slug']
@@ -25,11 +27,11 @@ for lang in ('en','ar','es','fr','de'):
     prefix='' if lang=='en' else lang+'/'
     html=(ROOT/prefix/'scenarios.html').read_text(encoding='utf8')
     doc=BeautifulSoup(html,'html.parser')
-    assert len(doc.select('details.journey-episode'))==24,lang
+    assert len(doc.select('details.journey-episode'))==30,lang
     assert not doc.select('div.story-scene'),lang
-    for mode,slug in [('apart','long-distance.html'),('together','living-together.html')]:
+    for mode,slug,count in [('apart','long-distance.html',12),('together','living-together.html',12),('solo','on-my-own.html',6)]:
         mode_page=BeautifulSoup((ROOT/prefix/slug).read_text(encoding='utf8'),'html.parser')
-        assert len(mode_page.select('a.journey-preview'))==12,(lang,mode)
+        assert len(mode_page.select('a.journey-preview'))==count,(lang,mode)
         assert len(mode_page.select('details.journey-show-more'))==1,(lang,mode)
         more = mode_page.select_one('details.journey-show-more summary')
         assert more,(lang,mode)
@@ -77,4 +79,4 @@ assert 'the-sofa-decision' not in comparison
 assert 'sofa-that-both-of-us-chose' in comparison
 assert 'course-together-across-time-zones' in comparison
 assert 'reunion-from-flight-to-memory' in tutorials
-print('PASS: 24 complete journeys, contextual feature links, clean expand/collapse icons, five-language parity.')
+print('PASS: 30 complete journeys (12 apart, 12 together, 6 solo), contextual feature links, clean expand/collapse icons, five-language parity.')

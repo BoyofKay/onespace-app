@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 ROOT=Path(__file__).resolve().parents[1]
 required={'mega-features':{'features.html','smart-sharing.html','decide-together.html','trips.html',
     'everyday.html','occasions.html','watchlists.html','memories.html','connect-care.html#letters','connect-care.html#gestures','connect-care.html#checkins','connect-care.html#journal'},
- 'mega-couples':{'long-distance.html','living-together.html'},
+ 'mega-couples':{'long-distance.html','living-together.html','on-my-own.html'},
  'mega-learn':{'guides.html','tutorials.html','scenarios.html','faq.html','whats-new.html'}}
 for locale in ('en','ar','es','fr','de'):
     prefix='' if locale=='en' else locale+'/'
@@ -23,7 +23,7 @@ for locale in ('en','ar','es','fr','de'):
             clean_target=target.replace(".html", "/")
             expected='/' + ('' if locale=='en' else locale+'/') + clean_target
             assert expected in all_links or target in all_links, (locale,pid,target,all_links)
-    assert len(soup.select('.mega-panel .mega-link'))==18, locale
+    assert len(soup.select('.mega-panel .mega-link'))==19, locale
     assert not soup.select('#mega-features a[href$="compare.html"]'), locale
     why = soup.select('header .menu > a[href$="/compare/"]')
     assert len(why) == 1, (locale, 'why OneSpace must be top-level')

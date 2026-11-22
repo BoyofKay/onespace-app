@@ -211,7 +211,7 @@ def main():
     if not (ROOT / 'assets/app/en/checkins.png').is_file():
         errors.append("Genuine demo couple check-in screenshot must exist")
     join = (ROOT / "join.html").read_text(encoding="utf-8")
-    for marker in ('iPhone', 'Founder registration is open to Android and iPhone couples',
+    for marker in ('iPhone', 'Founder registration is open to Android and iPhone',
                    'name="platform"'):
         if marker not in join:
             errors.append(f"Founder sign-up must be available to iPhone owners: {marker}")

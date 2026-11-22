@@ -1,34 +1,35 @@
-"""Presentation copy and feature destinations for 24 realistic OneSpace journeys.
+"""Presentation copy and feature destinations for 30 realistic OneSpace journeys.
 Every human-facing string is authored in English, Arabic, Spanish, French and German.
 """
+from nov22_updates import ROWS_BY_EN
 UI = {
   "headline": [
-    "24 real-life journeys. One shared space.",
-    "24 حكاية من الحياة اليومية. مساحة واحدة تجمعكما.",
-    "24 historias de la vida cotidiana. Un espacio compartido.",
-    "24 histoires du quotidien. Un espace à deux.",
-    "24 Alltagsgeschichten. Ein gemeinsamer Ort."
+    "30 real-life journeys. One space.",
+    "30 حكاية من الحياة اليومية. مساحة واحدة.",
+    "30 historias de la vida cotidiana. Un solo espacio.",
+    "30 histoires du quotidien. Un seul espace.",
+    "30 Alltagsgeschichten. Ein Ort."
   ],
   "subhead": [
-    "Follow Lina and Omar through the real details of a day: something happens, they share the work, compare their choices, decide what comes next and remember what matters. Twelve stories for couples living apart and twelve for those living together.",
-    "رافق لينا وعمر في تفاصيل يوم حقيقي: موقف يحدث، فيتشاركان العمل، ويقارنان الخيارات، ويتخذان القرار، ثم يحتفظان بما يهم. اثنتا عشرة حكاية للزوجين المتباعدين واثنتا عشرة لمن يعيشان معًا.",
-    "Acompaña a Lina y Omar en situaciones reales del día a día: surge algo, colaboran, comparan opciones, deciden los siguientes pasos y guardan lo importante. Doce historias para parejas a distancia y doce para quienes viven juntas.",
-    "Suivez Lina et Omar dans leur quotidien : un événement survient, ils se répartissent les tâches, comparent, prennent une décision et gardent l’essentiel. Douze histoires pour les couples à distance et douze pour ceux qui vivent ensemble.",
-    "Begleite Lina und Omar durch echte Alltagssituationen: Etwas passiert, sie teilen Aufgaben, vergleichen Möglichkeiten, entscheiden und bewahren Erinnerungen. Zwölf Geschichten für Fernbeziehungen und zwölf fürs Zusammenleben."
+    "Follow Lina and Omar through the real details of a day: something happens, they share the work, compare their choices, decide what comes next and remember what matters. Twelve stories for couples living apart, twelve for those living together — and six with Sara, who uses OneSpace on her own.",
+    "رافق لينا وعمر في تفاصيل يوم حقيقي: موقف يحدث، فيتشاركان العمل، ويقارنان الخيارات، ويتخذان القرار، ثم يحتفظان بما يهم. اثنتا عشرة حكاية للزوجين المتباعدين، واثنتا عشرة لمن يعيشان معًا — وست حكايات مع سارة التي تستخدم OneSpace بمفردها.",
+    "Acompaña a Lina y Omar en situaciones reales del día a día: surge algo, colaboran, comparan opciones, deciden los siguientes pasos y guardan lo importante. Doce historias para parejas a distancia, doce para quienes viven juntas y seis con Sara, que usa OneSpace por su cuenta.",
+    "Suivez Lina et Omar dans leur quotidien : un événement survient, ils se répartissent les tâches, comparent, prennent une décision et gardent l’essentiel. Douze histoires pour les couples à distance, douze pour ceux qui vivent ensemble, et six avec Sara, qui utilise OneSpace seule.",
+    "Begleite Lina und Omar durch echte Alltagssituationen: Etwas passiert, sie teilen Aufgaben, vergleichen Möglichkeiten, entscheiden und bewahren Erinnerungen. Zwölf Geschichten für Fernbeziehungen, zwölf fürs Zusammenleben – und sechs mit Sara, die OneSpace allein nutzt."
   ],
   "description": [
-    "Read 24 detailed fictional end-to-end examples showing how OneSpace links activities, decisions, checklists, reminders, places and personal gestures for couples living together or apart.",
-    "اقرأ 24 مثالًا خياليًا مفصلًا من البداية إلى النهاية يوضح كيف يربط OneSpace الأنشطة والقرارات والقوائم والتذكيرات والأماكن واللفتات الشخصية للأزواج معًا أو بعيدًا.",
-    "Descubre 24 ejemplos ficticios y detallados de cómo OneSpace conecta actividades, decisiones, listas, recordatorios, lugares y gestos para parejas juntas o a distancia.",
-    "Découvrez 24 parcours fictifs détaillés montrant comment OneSpace relie activités, décisions, listes, rappels, lieux et petites attentions pour les couples ensemble ou à distance.",
-    "Entdecke 24 ausführliche fiktive Beispiele dafür, wie OneSpace Aktivitäten, Entscheidungen, Checklisten, Erinnerungen, Orte und persönliche Gesten für Paare verbindet."
+    "Read 30 detailed fictional end-to-end examples showing how OneSpace links activities, decisions, checklists, reminders, places and personal gestures — for couples living together or apart, and for people on their own.",
+    "اقرأ 30 مثالًا خياليًا مفصلًا من البداية إلى النهاية يوضح كيف يربط OneSpace الأنشطة والقرارات والقوائم والتذكيرات والأماكن واللفتات الشخصية — للأزواج معًا أو بعيدًا، ولمن يعيش بمفرده.",
+    "Descubre 30 ejemplos ficticios y detallados de cómo OneSpace conecta actividades, decisiones, listas, recordatorios, lugares y gestos, para parejas juntas o a distancia y para quien va por su cuenta.",
+    "Découvrez 30 parcours fictifs détaillés montrant comment OneSpace relie activités, décisions, listes, rappels, lieux et petites attentions, pour les couples ensemble ou à distance et pour les personnes seules.",
+    "Entdecke 30 ausführliche fiktive Beispiele dafür, wie OneSpace Aktivitäten, Entscheidungen, Checklisten, Erinnerungen, Orte und persönliche Gesten verbindet – für Paare und für Menschen, die allein leben."
   ],
   "pageTitle": [
-    "24 everyday couple journeys — OneSpace",
-    "24 حكاية يومية للأزواج — OneSpace",
-    "24 historias cotidianas en pareja — OneSpace",
-    "24 histoires de couples au quotidien — OneSpace",
-    "24 Alltagsgeschichten für Paare — OneSpace"
+    "30 everyday journeys — OneSpace",
+    "30 حكاية يومية — OneSpace",
+    "30 historias cotidianas — OneSpace",
+    "30 histoires du quotidien — OneSpace",
+    "30 Alltagsgeschichten — OneSpace"
   ],
   "eyebrow": [
     "LIFE IN ONESPACE",
@@ -115,11 +116,11 @@ UI = {
     "Wähle eine Geschichte und begleite beide vom ersten Gedanken bis zum Ergebnis."
   ],
   "navOpen": [
-    "Browse all 24 stories",
-    "تصفح الحكايات الـ24",
-    "Ver las 24 historias",
-    "Voir les 24 histoires",
-    "Alle 24 Geschichten ansehen"
+    "Browse all 30 stories",
+    "تصفح الحكايات الـ30",
+    "Ver las 30 historias",
+    "Voir les 30 histoires",
+    "Alle 30 Geschichten ansehen"
   ],
   "cardsLabel": [
     "Real-life examples",
@@ -127,6 +128,17 @@ UI = {
     "Ejemplos de la vida",
     "Exemples du quotidien",
     "Beispiele aus dem Alltag"
+  ],
+  "solo": ROWS_BY_EN["On your own · 6 journeys"],
+  "soloDescription": ROWS_BY_EN["One person, a dozen apps and a full life. See how Sara keeps her plans, decisions, people and memories together — and what happens when someone special arrives."],
+  "soloFiction": ROWS_BY_EN["Fictional examples featuring Sara. They illustrate OneSpace workflows, not actual customer experiences or reviews."],
+  "followSolo": ROWS_BY_EN["How her day unfolded"],
+  "soloMore": [
+    "Explore the other 3 journeys",
+    "استكشف الحكايات الثلاث الأخرى",
+    "Descubrir las otras 3 historias",
+    "Découvrir les 3 autres histoires",
+    "Die anderen 3 Geschichten entdecken"
   ],
   "jumpHint": [
     "Choose how they live",

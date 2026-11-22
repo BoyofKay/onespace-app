@@ -2,9 +2,9 @@
  "privacy": [
   [
    "Who we are",
-   "<p>OneSpace is an app for couples. In this policy “we” means the OneSpace team. You can reach us any time from <a href=\"support.html\">Support</a>, from the sign-in screen of the app, or from Me → Help in the app. For privacy questions or requests, email <a href=\"mailto:privacy@onespace.live\">privacy@onespace.live</a>.</p>",
+   "<p>OneSpace is an app for your everyday life — on your own or as a couple. In this policy “we” means the OneSpace team. You can reach us any time from <a href=\"support.html\">Support</a>, from the sign-in screen of the app, or from Me → Help in the app. For privacy questions or requests, email <a href=\"mailto:privacy@onespace.live\">privacy@onespace.live</a>.</p>",
    "من نحن",
-   "<p>OneSpace تطبيق للأزواج. في هذه السياسة تعني «نحن» فريق OneSpace. يمكنك التواصل معنا في أي وقت من <a href=\"support.html\">الدعم</a>، أو من شاشة الدخول في التطبيق، أو من «أنا» ← «المساعدة». ولأسئلة الخصوصية وطلباتها راسلنا على <a href=\"mailto:privacy@onespace.live\">privacy@onespace.live</a>.</p>"
+   "<p>OneSpace تطبيق لحياتك اليومية — بمفردك أو مع شريكك. في هذه السياسة تعني «نحن» فريق OneSpace. يمكنك التواصل معنا في أي وقت من <a href=\"support.html\">الدعم</a>، أو من شاشة الدخول في التطبيق، أو من «أنا» ← «المساعدة». ولأسئلة الخصوصية وطلباتها راسلنا على <a href=\"mailto:privacy@onespace.live\">privacy@onespace.live</a>.</p>"
   ],
   [
    "What we collect",
@@ -14,33 +14,33 @@
   ],
   [
    "The website and the Founder waitlist",
-   "<ul><li><b>Founder sign-up:</b> your email, first name (optional), phone type, how you live, language, how you heard about us, the page you arrived on, your consent and its time. Your network address is kept only as a one-way code to stop abuse. We use it to confirm your email, give your couple a Founder number, link your partner and send launch updates you agreed to.</li><li><b>Emails</b> are sent for us by Resend, from founders@onespace.live. Replies reach our own inbox.</li><li><b>Spam check:</b> if a form is sent within a couple of seconds of the page opening, we may ask for a quick Cloudflare Turnstile check that you are human. Cloudflare sees your network address and browser details for that check only; we keep just a count of checks, never who took them.</li><li><b>Visitor statistics</b> come from GoatCounter: page addresses, the site you came from, screen size and anonymous events such as “demo finished”, a rough time band for how long a page stayed open (for example “1–3 min”) and whether you reached the end of a page. No cookies, no personal data, nothing you type.</li><li>To leave the waitlist or delete your sign-up, reply “unsubscribe” to any email or write to privacy@onespace.live.</li></ul>",
+   "<ul><li><b>Founder sign-up:</b> your email, first name (optional), phone type, how you live, language, how you heard about us, the page you arrived on, your consent and its time. Your network address is kept only as a one-way code to stop abuse. We use it to confirm your email, mark you as a Founder Member, link your partner and send launch updates you agreed to.</li><li><b>Emails</b> are sent for us by Resend, from founders@onespace.live. Replies reach our own inbox.</li><li><b>Spam check:</b> if a form is sent within a couple of seconds of the page opening, we may ask for a quick Cloudflare Turnstile check that you are human. Cloudflare sees your network address and browser details for that check only; we keep just a count of checks, never who took them.</li><li><b>Visitor statistics</b> come from GoatCounter: page addresses, the site you came from, screen size and anonymous events such as “demo finished”, a rough time band for how long a page stayed open (for example “1–3 min”) and whether you reached the end of a page. No cookies, no personal data, nothing you type.</li><li>To leave the waitlist or delete your sign-up, reply “unsubscribe” to any email or write to privacy@onespace.live.</li></ul>",
    "الموقع وقائمة المؤسسين",
-   "<ul><li><b>تسجيل المؤسسين:</b> بريدك واسمك الأول (اختياري) ونوع هاتفك وطريقة عيشكما واللغة وكيف عرفت عنا والصفحة التي وصلت منها وموافقتك ووقتها. يُحفظ عنوان شبكتك كرمز أحادي الاتجاه فقط لمنع الإساءة. نستخدم ذلك لتأكيد بريدك ومنح زوجكما رقم المؤسس وربط شريكك وإرسال تحديثات الإطلاق التي وافقت عليها.</li><li><b>الرسائل</b> ترسلها لنا خدمة Resend من founders@onespace.live، والردود تصل إلى صندوقنا.</li><li><b>التحقق من الرسائل المزعجة:</b> إذا أُرسل نموذج خلال ثوانٍ من فتح الصفحة، قد نطلب تحققًا قصيرًا من Cloudflare Turnstile أنك إنسان. ترى Cloudflare عنوان شبكتك وتفاصيل متصفحك لهذا التحقق فقط، ونحتفظ بعدد مرات التحقق فقط دون معرفة من قام به.</li><li><b>إحصاءات الزوار</b> من GoatCounter: عناوين الصفحات والموقع الذي جئت منه وحجم الشاشة وأحداث مجهولة مثل «أنهى العرض» ومدة تقريبية لبقاء الصفحة مفتوحة (مثل «1–3 دقائق») وهل وصلت إلى نهاية الصفحة. بلا ملفات تعريف ارتباط ولا بيانات شخصية ولا أي شيء تكتبه.</li><li>لمغادرة القائمة أو حذف تسجيلك ردّ بكلمة «إلغاء» على أي رسالة أو راسل privacy@onespace.live.</li></ul>"
+   "<ul><li><b>تسجيل المؤسسين:</b> بريدك واسمك الأول (اختياري) ونوع هاتفك وطريقة عيشكما واللغة وكيف عرفت عنا والصفحة التي وصلت منها وموافقتك ووقتها. يُحفظ عنوان شبكتك كرمز أحادي الاتجاه فقط لمنع الإساءة. نستخدم ذلك لتأكيد بريدك وتسجيلك عضوًا مؤسسًا وربط شريكك وإرسال تحديثات الإطلاق التي وافقت عليها.</li><li><b>الرسائل</b> ترسلها لنا خدمة Resend من founders@onespace.live، والردود تصل إلى صندوقنا.</li><li><b>التحقق من الرسائل المزعجة:</b> إذا أُرسل نموذج خلال ثوانٍ من فتح الصفحة، قد نطلب تحققًا قصيرًا من Cloudflare Turnstile أنك إنسان. ترى Cloudflare عنوان شبكتك وتفاصيل متصفحك لهذا التحقق فقط، ونحتفظ بعدد مرات التحقق فقط دون معرفة من قام به.</li><li><b>إحصاءات الزوار</b> من GoatCounter: عناوين الصفحات والموقع الذي جئت منه وحجم الشاشة وأحداث مجهولة مثل «أنهى العرض» ومدة تقريبية لبقاء الصفحة مفتوحة (مثل «1–3 دقائق») وهل وصلت إلى نهاية الصفحة. بلا ملفات تعريف ارتباط ولا بيانات شخصية ولا أي شيء تكتبه.</li><li>لمغادرة القائمة أو حذف تسجيلك ردّ بكلمة «إلغاء» على أي رسالة أو راسل privacy@onespace.live.</li></ul>"
   ],
   [
    "Who can see it",
-   "<p>Everything in your space is visible only to you and your partner. Each item is either <b>Shared</b> (both of you) or <b>Only me</b> (just you). These rules are enforced by our database for every item, not only by the app. We do not access your content except to keep the service running, to answer a request you make, or when the law requires it.</p>",
+   "<p>Each item is either <b>Shared</b> (you and your partner) or <b>Only me</b> (just you). Only me items are never shown to a partner — not your current partner and not a future one. These rules are enforced by our database for every item, not only by the app. We do not access your content except to keep the service running, to answer a request you make, or when the law requires it.</p>",
    "من يمكنه رؤيته",
-   "<p>كل ما في مساحتكما لا يراه سواكما. كل عنصر إما <b>مشترك</b> (لكما) أو <b>أنا فقط</b> (لك وحدك). وتُطبّق قاعدة البيانات هذه القواعد على كل عنصر، وليس التطبيق وحده. لا نطّلع على محتواكما إلا لتشغيل الخدمة أو للرد على طلب منك أو عندما يلزم القانون بذلك.</p>"
+   "<p>كل عنصر إما <b>مشترك</b> (لك ولشريكك) أو <b>أنا فقط</b> (لك وحدك). لا تُعرض عناصر «أنا فقط» على أي شريك أبدًا — لا الحالي ولا المستقبلي. وتُطبّق قاعدة البيانات هذه القواعد على كل عنصر، وليس التطبيق وحده. لا نطّلع على محتواك إلا لتشغيل الخدمة أو للرد على طلب منك أو عندما يلزم القانون بذلك.</p>"
   ],
   [
    "Services we use",
-   "<ul><li><b>Supabase</b> — our database, sign-in and file storage (hosted in the Asia-Pacific region).</li><li><b>Firebase Cloud Messaging (Google)</b> — to deliver notifications to your phone.</li><li><b>OpenStreetMap</b> — map tiles for “Our map”, and place search: when you look up a place, its name, city and country are sent to OpenStreetMap’s search service.</li><li><b>Google or Apple sign-in</b> — only if you choose to sign in that way.</li><li><b>Weather and public-holiday services</b> — receive only a city or a country, never who you are.</li></ul><p>We never sell your data or share it for advertising.</p>",
+   "<ul><li><b>Supabase</b> — our database, sign-in and file storage (the live service is hosted in the European Union, in Frankfurt; early test versions may use servers in South Korea).</li><li><b>Firebase Cloud Messaging (Google)</b> — to deliver notifications to your phone.</li><li><b>OpenStreetMap</b> — map tiles for “Our map”, and place search: when you look up a place, its name, city and country are sent to OpenStreetMap’s search service.</li><li><b>Weather and public-holiday services</b> — receive only a city or a country, never who you are.</li></ul><p>We never sell your data or share it for advertising.</p>",
    "الخدمات التي نستخدمها",
-   "<ul><li><b>Supabase</b> — قاعدة البيانات وتسجيل الدخول وتخزين الملفات (مستضافة في منطقة آسيا والمحيط الهادئ).</li><li><b>Firebase Cloud Messaging (Google)</b> — لإيصال الإشعارات إلى هاتفك.</li><li><b>OpenStreetMap</b> — بلاطات الخريطة في «خريطتنا» والبحث عن الأماكن: عند البحث عن مكان يُرسل اسمه ومدينته ودولته إلى خدمة البحث في OpenStreetMap.</li><li><b>تسجيل الدخول عبر Google أو Apple</b> — فقط إذا اخترت ذلك.</li><li><b>خدمات الطقس والعطلات الرسمية</b> — تستقبل مدينة أو دولة فقط، ولا تعرف من أنت.</li></ul><p>لا نبيع بياناتك ولا نشاركها لأغراض إعلانية أبدًا.</p>"
+   "<ul><li><b>Supabase</b> — قاعدة البيانات وتسجيل الدخول وتخزين الملفات (الخدمة الفعلية مستضافة في الاتحاد الأوروبي، في فرانكفورت؛ وقد تستخدم النسخ التجريبية المبكرة خوادم في كوريا الجنوبية).</li><li><b>Firebase Cloud Messaging (Google)</b> — لإيصال الإشعارات إلى هاتفك.</li><li><b>OpenStreetMap</b> — بلاطات الخريطة في «خريطتنا» والبحث عن الأماكن: عند البحث عن مكان يُرسل اسمه ومدينته ودولته إلى خدمة البحث في OpenStreetMap.</li><li><b>خدمات الطقس والعطلات الرسمية</b> — تستقبل مدينة أو دولة فقط، ولا تعرف من أنت.</li></ul><p>لا نبيع بياناتك ولا نشاركها لأغراض إعلانية أبدًا.</p>"
   ],
   [
    "How long we keep it",
-   "<p>We keep your data while your account exists. When you delete your account there is a 7-day period to change your mind; after that, your private items, files, devices and settings are deleted, and shared items stay with your partner with you shown as “Former partner”. Error reports are deleted after 60 days. Usage statistics are deleted after 180 days, or with your account.</p>",
+   "<p>We keep your data while your account exists. When you delete your account, nothing is deleted for 7 days and you can cancel at any time in that period. After that, your account, your Only me items, files, devices and settings are permanently deleted, together with everything shared with your current partner; your partner keeps their own Only me items. If either of you leaves the shared space, removes the other or deletes it, everything shared in it is permanently deleted for both of you and cannot be restored; each person keeps their own Only me items. Error reports are deleted after 60 days. Usage statistics are deleted after 180 days, or with your account.</p>",
    "مدة الاحتفاظ",
-   "<p>نحتفظ ببياناتك ما دام حسابك موجودًا. عند حذف حسابك لديك 7 أيام للتراجع، وبعدها تُحذف عناصرك الخاصة وملفاتك وأجهزتك وإعداداتك، وتبقى العناصر المشتركة مع شريكك ويظهر اسمك «شريك سابق». وتُحذف تقارير الأخطاء بعد 60 يومًا. وتُحذف إحصاءات الاستخدام بعد 180 يومًا أو مع حسابك.</p>"
+   "<p>نحتفظ ببياناتك ما دام حسابك موجودًا. عند حذف حسابك لا يُحذف شيء لمدة 7 أيام، ويمكنك الإلغاء في أي وقت خلالها. بعد ذلك يُحذف نهائيًا حسابك وعناصر «أنا فقط» وملفاتك وأجهزتك وإعداداتك، ومعها كل ما تشاركته مع شريكك الحالي؛ ويحتفظ شريكك بعناصر «أنا فقط» الخاصة به. وإذا غادر أحدكما المساحة المشتركة أو أزال الآخر أو حذفها، يُحذف كل ما فيها نهائيًا لكليكما ولا يمكن استعادته؛ ويحتفظ كل شخص بعناصر «أنا فقط» الخاصة به. وتُحذف تقارير الأخطاء بعد 60 يومًا. وتُحذف إحصاءات الاستخدام بعد 180 يومًا أو مع حسابك.</p>"
   ],
   [
    "Your rights and choices",
-   "<ul><li><b>Download</b> everything you created: Me → Your data and account → Download my data.</li><li><b>Correct</b> your details in Me → Profile.</li><li><b>Delete</b> your account in the app, or ask us on the <a href=\"delete-account.html\">Delete your account</a> page.</li><li><b>Notifications</b> can be turned off at any time in the app or in your phone settings.</li><li><b>Usage statistics</b> can be switched off in Settings → Privacy.</li></ul>",
+   "<ul><li><b>Download</b> a copy of your account information (without photos and files): Me → Your data and account → Download my data.</li><li><b>Correct</b> your details in Me → Profile.</li><li><b>Delete</b> your account in the app (with a 7-day period to cancel), or ask us on the <a href=\"delete-account.html\">Delete your account</a> page.</li><li><b>Notifications</b> can be turned off at any time in the app or in your phone settings.</li><li><b>Usage statistics</b> can be switched off in Settings → Privacy.</li></ul>",
    "حقوقك وخياراتك",
-   "<ul><li><b>نزّل</b> كل ما أنشأته: «أنا» ← «بياناتك وحسابك» ← «تنزيل بياناتي».</li><li><b>صحّح</b> بياناتك من «أنا» ← «الملف الشخصي».</li><li><b>احذف</b> حسابك من التطبيق، أو اطلب ذلك من صفحة <a href=\"delete-account.html\">حذف حسابك</a>.</li><li>يمكنك إيقاف <b>الإشعارات</b> في أي وقت من التطبيق أو من إعدادات هاتفك.</li><li><b>إحصاءات الاستخدام</b> يمكن إيقافها من الإعدادات ← الخصوصية.</li></ul>"
+   "<ul><li><b>نزّل</b> نسخة من بيانات حسابك (دون الصور والملفات): «أنا» ← «بياناتك وحسابك» ← «تنزيل بياناتي».</li><li><b>صحّح</b> بياناتك من «أنا» ← «الملف الشخصي».</li><li><b>احذف</b> حسابك من التطبيق (مع مهلة 7 أيام للإلغاء)، أو اطلب ذلك من صفحة <a href=\"delete-account.html\">حذف حسابك</a>.</li><li>يمكنك إيقاف <b>الإشعارات</b> في أي وقت من التطبيق أو من إعدادات هاتفك.</li><li><b>إحصاءات الاستخدام</b> يمكن إيقافها من الإعدادات ← الخصوصية.</li></ul>"
   ],
   [
    "Security",
@@ -62,15 +62,15 @@
   ]
  ],
  "privacy_intro": [
-  "In short: your space is private to you and your partner, we don’t sell data or show ads, and you can download or delete everything at any time.",
-  "باختصار: مساحتكما خاصة بكما، ولا نبيع البيانات ولا نعرض إعلانات، ويمكنك تنزيل كل شيء أو حذفه في أي وقت."
+  "In short: your space is private — only you, and the partner you invite, can see it. We don’t sell data or show ads, and you can download your data or delete your account at any time.",
+  "باختصار: مساحتك خاصة — لا يراها إلا أنت والشريك الذي تدعوه. لا نبيع البيانات ولا نعرض إعلانات، ويمكنك تنزيل بياناتك أو حذف حسابك في أي وقت."
  ],
  "terms": [
   [
    "Your account",
-   "<p>You need to be at least 18. Give a real email address and keep your sign-in private. You are responsible for what happens under your account. One shared space connects exactly two people.</p>",
+   "<p>You need to be at least 18. Give a real email address and keep your sign-in private. You are responsible for what happens under your account. You can use OneSpace on your own; a shared space connects exactly two people.</p>",
    "حسابك",
-   "<p>يجب أن يكون عمرك 18 عامًا على الأقل. استخدم بريدًا حقيقيًا وحافظ على سرية تسجيل دخولك. أنت مسؤول عمّا يحدث في حسابك. المساحة المشتركة تجمع شخصين فقط.</p>"
+   "<p>يجب أن يكون عمرك 18 عامًا على الأقل. استخدم بريدًا حقيقيًا وحافظ على سرية تسجيل دخولك. أنت مسؤول عمّا يحدث في حسابك. يمكنك استخدام OneSpace بمفردك؛ والمساحة المشتركة تجمع شخصين فقط.</p>"
   ],
   [
    "Your content",
@@ -80,9 +80,9 @@
   ],
   [
    "Sharing with your partner",
-   "<p>Items marked “Shared” are visible to your partner and may notify them. “Only me” items are visible only to you. If one of you leaves or deletes the account, shared items stay with the other person.</p>",
+   "<p>Items marked “Shared” are visible to your partner, who can also edit them, and may notify them. “Only me” items are visible only to you. If either of you leaves the shared space, removes the other or deletes it, everything shared in it is permanently deleted for both of you and cannot be restored; each person keeps their own “Only me” items. If you delete your account, the same happens after a 7-day period in which you can cancel.</p>",
    "المشاركة مع شريكك",
-   "<p>العناصر «المشتركة» يراها شريكك وقد تصله إشعارات عنها. عناصر «أنا فقط» تراها وحدك. إذا غادر أحدكما أو حذف حسابه، تبقى العناصر المشتركة مع الآخر.</p>"
+   "<p>العناصر «المشتركة» يراها شريكك ويستطيع تعديلها، وقد تصله إشعارات عنها. عناصر «أنا فقط» تراها وحدك. إذا غادر أحدكما المساحة المشتركة أو أزال الآخر أو حذفها، يُحذف كل ما فيها نهائيًا لكليكما ولا يمكن استعادته؛ ويحتفظ كل شخص بعناصر «أنا فقط» الخاصة به. وإذا حذفت حسابك يحدث الأمر نفسه بعد مهلة 7 أيام يمكنك الإلغاء خلالها.</p>"
   ],
   [
    "Acceptable use",
@@ -116,7 +116,7 @@
   ]
  ],
  "terms_intro": [
-  "The short version: OneSpace is a private space for you and your partner. Use it kindly and lawfully, keep your password safe, and remember that what you mark “Shared” is seen by your partner.",
-  "باختصار: OneSpace مساحة خاصة لك ولشريكك. استخدمه بلطف وبما يوافق القانون، واحفظ كلمة مرورك، وتذكّر أن ما تجعله «مشتركًا» يراه شريكك."
+  "The short version: OneSpace is a private space for you — and for you and your partner, if you invite one. Use it kindly and lawfully, keep your password safe, and remember that what you mark “Shared” is seen by your partner.",
+  "باختصار: OneSpace مساحة خاصة لك — ولك ولشريكك إن دعوته. استخدمه بلطف وبما يوافق القانون، واحفظ كلمة مرورك، وتذكّر أن ما تجعله «مشتركًا» يراه شريكك."
  ]
 }

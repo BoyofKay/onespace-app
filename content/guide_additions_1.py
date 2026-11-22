@@ -420,11 +420,11 @@ GUIDE_ADDITIONS_1 = [
         ],
         [
           [
-            "Build a shared scrapbook, choose a page design and invite your partner to contribute photos.",
-            "أنشئا ألبومًا مشتركًا واختارا تصميم الصفحات وادعُ شريكك لإضافة الصور.",
-            "Cread un álbum compartido, elegid diseños e invitad a colaborar.",
-            "Créez un album partagé, choisissez les mises en page et invitez l’autre à contribuer.",
-            "Erstellt ein gemeinsames Album, wählt Seitenlayouts und ladet den Partner ein."
+            "Build a shared scrapbook and choose a page design — both of you can add photos straight away.",
+            "أنشئا ألبومًا مشتركًا واختارا تصميم الصفحات — ويستطيع كلاكما إضافة الصور فورًا.",
+            "Cread un álbum compartido y elegid un diseño: los dos podéis añadir fotos desde el principio.",
+            "Créez un album partagé et choisissez une mise en page : vous pouvez tous deux ajouter des photos tout de suite.",
+            "Erstellt ein gemeinsames Album und wählt ein Seitenlayout – ihr könnt beide sofort Fotos hinzufügen."
           ],
           [
             "Export the finished pages to PDF for relatives who aren't using the app.",
@@ -437,7 +437,7 @@ GUIDE_ADDITIONS_1 = [
       ]
     ],
     "how": [
-      "OneSpace connection: shared occasions and checklists coordinate preparation; scrapbook collaboration and PDF sharing make the memories portable.",
+      "OneSpace connection: shared occasions and checklists coordinate preparation; shared scrapbooks and PDF sharing make the memories portable.",
       "في OneSpace: تنظم المناسبات والقوائم المشتركة التحضير، وتتيح ألبومات الذكريات والتصدير إلى PDF الاحتفاظ باللحظات ومشاركتها.",
       "En OneSpace: ocasiones y listas coordinan tareas; el álbum colaborativo y PDF permiten compartir recuerdos.",
       "Avec OneSpace : occasions et listes répartissent le travail ; l’album collaboratif et son PDF transmettent les souvenirs.",

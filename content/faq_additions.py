@@ -37,18 +37,18 @@ FAQ_ADDITIONS = {
   "Founder Members": [
     [
       [
-        "Does signing up reserve a Founder number immediately?",
-        "هل يمنحني التسجيل رقم مؤسس فورًا؟",
-        "¿Me asignan un número fundador al registrarme?",
-        "L’inscription attribue-t-elle immédiatement un numéro fondateur ?",
-        "Bekomme ich direkt bei der Anmeldung eine Gründungsnummer?"
+        "Does signing up make me a Founder Member immediately?",
+        "هل يجعلني التسجيل عضوًا مؤسسًا فورًا؟",
+        "¿Me convierto en miembro fundador al registrarme?",
+        "L’inscription fait-elle immédiatement de moi un membre fondateur ?",
+        "Werde ich direkt bei der Anmeldung Gründungsmitglied?"
       ],
       [
-        "Not until you confirm your email. Confirmed registrations are assigned in order; partners use one shared Founder couple number.",
-        "ليس قبل تأكيد بريدك الإلكتروني. تُمنح الأرقام حسب ترتيب التأكيد، ويشترك الشريكان في رقم مؤسس واحد للزوجين.",
-        "No hasta confirmar el correo. Los números se asignan por orden de confirmación, y la pareja comparte uno solo.",
-        "Pas avant la confirmation de votre e-mail. Les numéros suivent l’ordre des confirmations et sont communs aux deux partenaires.",
-        "Erst nach Bestätigung der E-Mail. Die Nummern werden nach Bestätigung vergeben; beide Partner teilen eine gemeinsame Nummer."
+        "Not until you confirm your email. Founder status follows the real order of confirmation, and there are no Founder numbers.",
+        "ليس قبل تأكيد بريدك الإلكتروني. تُمنح صفة المؤسس حسب الترتيب الفعلي للتأكيد، ولا توجد أرقام للمؤسسين.",
+        "No hasta confirmar tu correo. La condición de fundador sigue el orden real de confirmación y no hay números de fundador.",
+        "Pas avant la confirmation de votre e-mail. Le statut de fondateur suit l’ordre réel des confirmations, sans numéro de fondateur.",
+        "Erst nach Bestätigung deiner E-Mail. Der Gründerstatus folgt der tatsächlichen Reihenfolge der Bestätigungen; Gründungsnummern gibt es nicht."
       ]
     ],
     [
@@ -126,11 +126,11 @@ FAQ_ADDITIONS = {
         "Können beide Partner dasselbe Erinnerungsalbum bearbeiten?"
       ],
       [
-        "Yes, when the scrapbook is shared and the invited partner has accepted the collaboration invitation. Both can then add pages, photos and text.",
-        "نعم، إذا كان الألبوم مشتركًا وقبل الشريك دعوة التعاون. بعد ذلك يستطيع كلاهما إضافة الصفحات والصور والنصوص.",
-        "Sí, si el álbum es compartido y la otra persona acepta la invitación a colaborar. Entonces ambos pueden añadir páginas, fotos y textos.",
-        "Oui, si l’album est partagé et que le partenaire a accepté l’invitation. Tous deux peuvent alors ajouter pages, photos et textes.",
-        "Ja, wenn das Album geteilt ist und die Einladung zur Zusammenarbeit angenommen wurde. Dann können beide Seiten, Fotos und Texte ergänzen."
+        "Yes. A shared scrapbook can be edited by both of you — pages, photos and text. Use Nudge partner in its menu to ask for their part.",
+        "نعم. يمكن لكليكما تعديل الألبوم المشترك — الصفحات والصور والنصوص. استخدم «تنبيه الشريك» في قائمته لتطلب مساهمته.",
+        "Sí. Un álbum compartido lo podéis editar los dos: páginas, fotos y textos. Usa «Avisar a tu pareja» en su menú para pedirle su parte.",
+        "Oui. Un album partagé peut être modifié par vous deux : pages, photos et textes. Utilisez « Relancer votre partenaire » dans son menu pour lui demander sa part.",
+        "Ja. Ein geteiltes Album könnt ihr beide bearbeiten – Seiten, Fotos und Texte. Mit „Partner anstupsen“ im Menü bittest du um seinen Teil."
       ]
     ],
     [

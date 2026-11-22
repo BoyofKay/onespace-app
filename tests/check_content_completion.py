@@ -29,10 +29,10 @@ for lang_idx,lang in enumerate(('en','ar','es','fr','de')):
         card=faq.select('details[data-faq]')[i]
         assert entry['name']==card.summary.get_text(' ',strip=True),(lang,'FAQ schema name',i)
         assert entry['acceptedAnswer']['text']==card.find('div').get_text(' ',strip=True),(lang,'FAQ schema answer',i)
-    assert len(tutorials.select('details[data-faq]'))==29,(lang,'tutorial count')
-    assert len(listing.select('a.art-card'))==12,(lang,'guide cards')
+    assert len(tutorials.select('details[data-faq]'))==30,(lang,'tutorial count')
+    assert len(listing.select('a.art-card'))==13,(lang,'guide cards')
     assert len(listing.select('details.guide-show-more'))==1,(lang,'extra guides are opt-in')
-    assert len(listing.select('details.guide-show-more a.art-card'))==9,(lang,'hidden guides')
+    assert len(listing.select('details.guide-show-more a.art-card'))==10,(lang,'hidden guides')
     assert len(tutorials.select('a[href*="scenarios.html#story-"]'))>=2,(lang,'tutorial journey links')
     for grp in FAQ_ADDITIONS.values():
         for q,a in grp:
@@ -62,4 +62,4 @@ for lang_idx,lang in enumerate(('en','ar','es','fr','de')):
         assert schema['inLanguage']==lang,(lang,guide['slug'],'article wrong language')
         assert schema['headline']==page.h1.get_text(' ',strip=True),(lang,guide['slug'],'article wrong headline')
         assert schema['mainEntityOfPage']=='https://onespace.live/'+prefix+guide['slug'].replace('.html','/'),(lang,guide['slug'],'canonical JSON-LD')
-print('PASS: 50 FAQs, 29 step-by-step tutorials with full journeys, 12 guides, all five locales.')
+print('PASS: 50 FAQs, 30 step-by-step tutorials with full journeys, 13 guides, all five locales.')

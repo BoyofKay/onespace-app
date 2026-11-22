@@ -627,13 +627,12 @@
         if (!b.ok) { track('founders/confirm-' + (b.status === 'expired' ? 'expired' : 'invalid')); return showState(b.status === 'expired' ? 'expired' : 'invalid'); }
         if (b.couple_status !== 'founder') { track('founders/confirmed-waitlist'); return showState('waitlist'); }
         if (b.status === 'confirmed') track(b.role === 'partner' ? 'founders/confirmed-partner' : 'founders/confirmed');
-        $('[data-number]', cf).textContent = '#' + b.founder_number;
         $('[data-role-first]', cf).hidden = b.role === 'partner';
         $('[data-role-partner]', cf).hidden = b.role !== 'partner';
         if (b.role !== 'partner' && !b.couple_full && b.invite_url) {
           var box = $('[data-invite]', cf), url = b.invite_url;
           box.hidden = false; $('[data-invite-url]', box).value = url;
-          var msg = (lang === 'ar' ? 'انضم إليّ في OneSpace — رقمنا كزوجين مؤسسين: ' : 'Join me on OneSpace — we are a Founder Couple: ') + url;
+          var msg = (lang === 'ar' ? 'انضم إليّ في OneSpace كعضو مؤسس: ' : 'Join me on OneSpace as a Founder Member: ') + url;
           $('[data-invite-wa]', box).href = 'https://wa.me/?text=' + encodeURIComponent(msg);
           $('[data-invite-wa]', box).addEventListener('click', function () { track('founders/invite-whatsapp'); });
           $('[data-invite-copy]', box).addEventListener('click', function () {
