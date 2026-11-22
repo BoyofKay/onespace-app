@@ -18,8 +18,7 @@ Deno.serve(async (req) => {
     }
     if (r.status !== 'confirmed' && r.status !== 'already') return json(req, { ok: false, status: r.status });
     const lang = r.language === 'ar' ? 'ar/' : '';
-    // founder_number is only read by the confirm page before PR #48 (which stops showing it); remove after that merges.
-    return json(req, { ok: true, status: r.status, founder_number: r.founder_number, couple_status: r.couple_status,
+    return json(req, { ok: true, status: r.status, couple_status: r.couple_status,
       role: r.role, couple_full: r.couple_full, invite_url: `${SITE}/${lang}join/?invite=${r.invite_code}` });
   } catch (e) {
     console.error(e);
