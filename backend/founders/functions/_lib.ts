@@ -122,8 +122,9 @@ function shell(lang: string, preheader: string, title: string, body: string, but
 </table></td></tr></table></body></html>`;
 }
 const p = (s: string) => `<tr><td style="padding:0 0 12px">${s}</td></tr>`;
-const big = (n: string) => `<tr><td style="padding:4px 0 16px"><div style="display:inline-block;background:#14213D;color:#fff;border-radius:16px;padding:14px 22px;font-size:30px;font-weight:700">${n}</div></td></tr>`;
 
+// Founder Members are the first 500 people (on their own or as a couple) who confirm their email.
+// No Founder numbers are ever shown or sent (Amr, 22 Nov 2026); the real order is kept in the database only.
 export function mailConfirm(lang: string, name: string, token: string, partnerInvite: boolean): Mail {
   const href = `${page(lang, 'confirm.html')}#t=${token}`;
   if (lang === 'ar') {
@@ -131,8 +132,8 @@ export function mailConfirm(lang: string, name: string, token: string, partnerIn
     return {
       subject: 'أكّد بريدك لتحصل على مكانك كعضو مؤسس في OneSpace',
       text: `${hi}\nأكّد بريدك لتحصل على مكانك كعضو مؤسس:\n${href}\nينتهي الرابط خلال 7 أيام. إن لم تسجّل، تجاهل هذه الرسالة.`,
-      html: shell('ar', 'خطوة أخيرة لتحصل على رقمك كمؤسس.', 'خطوة أخيرة لتأكيد مكانك', p(hi) +
-        p(partnerInvite ? 'شكرًا لانضمامك إلى عضوية شريكك كمؤسس. أكّد بريدك لنربط حسابيكما.' : 'شكرًا لتسجيلك في OneSpace. أكّد بريدك وسنمنحكما رقمكما كزوجين مؤسسين — أول 250 زوجًا فقط.') +
+      html: shell('ar', 'خطوة أخيرة لتصبح عضوًا مؤسسًا.', 'خطوة أخيرة لتأكيد مكانك', p(hi) +
+        p(partnerInvite ? 'شكرًا لانضمامك إلى شريكك في OneSpace. أكّد بريدك لنربط حسابيكما وتصبح عضوًا مؤسسًا أيضًا.' : 'شكرًا لتسجيلك في OneSpace. أكّد بريدك لتصبح من الأعضاء المؤسسين — أول 500 شخص يؤكدون بريدهم فقط.') +
         p('<span style="color:#8A8FA3;font-size:14px">ينتهي الرابط خلال 7 أيام. إن لم تسجّل أنت، تجاهل هذه الرسالة ولن نراسلك مجددًا.</span>'),
         { label: 'أكّد بريدي', href }),
     };
@@ -141,66 +142,64 @@ export function mailConfirm(lang: string, name: string, token: string, partnerIn
   return {
     subject: 'Confirm your email to claim your OneSpace Founder place',
     text: `${hi}\nConfirm your email to claim your Founder place:\n${href}\nThe link expires in 7 days. If you didn't sign up, ignore this email.`,
-    html: shell('en', 'One last step to get your Founder number.', 'One last step to claim your place', p(hi) +
-      p(partnerInvite ? 'Thanks for joining your partner’s Founder membership. Confirm your email and we’ll link the two of you.'
-        : 'Thanks for signing up for OneSpace. Confirm your email and we’ll give the two of you your Founder couple number — only the first 250 couples get one.') +
+    html: shell('en', 'One last step to become a Founder Member.', 'One last step to claim your place', p(hi) +
+      p(partnerInvite ? 'Thanks for joining your partner on OneSpace. Confirm your email and we’ll link the two of you — you’ll be a Founder Member too.'
+        : 'Thanks for signing up for OneSpace. Confirm your email to become one of the Founding 500 — the first 500 people to confirm.') +
       p('<span style="color:#8A8FA3;font-size:14px">The link expires in 7 days. If you didn’t sign up, ignore this email and we won’t write again.</span>'),
       { label: 'Confirm my email', href }),
   };
 }
 
 export function mailWelcome(lang: string, r: any, firstName = ''): Mail {
-  const num = r.founder_number ? `#${r.founder_number}` : '';
   const invite = `${page(lang, 'join.html')}?invite=${r.invite_code}`;
   const waitlist = r.couple_status !== 'founder';
   const partner = r.role === 'partner';
+  const showInvite = !partner && !r.couple_full;
   if (lang === 'ar') {
     const hi = r.name ? `أهلًا ${esc(r.name)}،` : 'أهلًا،';
-    const title = waitlist ? 'أنتما على قائمة الانتظار' : partner ? `انضممت إلى الزوجين المؤسسين ${num}` : `أنتما الزوجان المؤسسان ${num}`;
+    const title = waitlist ? 'أنت على قائمة الانتظار' : 'أنت من المؤسسين الـ500';
     const body = p(hi) + (waitlist
-      ? p('شكرًا لتأكيد بريدك. اكتملت أماكن المؤسسين الـ250، وأنتما الآن على قائمة الانتظار — سنرسل لكما الدعوة فور فتح أماكن جديدة.')
-      : big(num) + p(partner ? `انضممت إلى ${esc(firstName) || 'شريكك'} — أنتما الآن الزوجان المؤسسان ${num}. سيصلكما التطبيق معًا.`
-        : `مرحبًا بكما في OneSpace! رقمكما كزوجين مؤسسين هو ${num}. سنعلن مزايا المؤسسين قبل تقديم أي أسعار، وOneSpace مجاني خلال الوصول المبكر.`)) +
-      (partner || r.couple_full ? '' : p('OneSpace لشخصين. أرسل هذا الرابط لشريكك لينضم إلى رقمكما نفسه:') + p(`<a href="${invite}" style="color:#1F6E78;word-break:break-all">${invite}</a>`));
-    return { subject: waitlist ? 'أنتما على قائمة انتظار OneSpace' : `أهلًا بكما — أنتما الزوجان المؤسسان ${num} في OneSpace`, html: shell('ar', title, title, body,
-      partner || r.couple_full ? { label: 'جرّب العرض', href: page('ar', 'how-it-works.html') } : { label: 'ادعُ شريكك', href: invite }),
-      text: `${hi}\n${title}\n${partner || r.couple_full ? '' : 'رابط دعوة شريكك: ' + invite}` };
+      ? p('شكرًا لتأكيد بريدك. اكتملت أماكن المؤسسين الـ500، وأنت الآن على قائمة الانتظار — سنرسل لك الدعوة فور توفر التطبيق.')
+      : p(partner ? `انضممت إلى ${esc(firstName) || 'شريكك'} — أنت الآن عضو مؤسس في OneSpace. ستظهر شارة المؤسس في ملفك الشخصي داخل التطبيق.`
+        : 'مرحبًا بك في OneSpace! أنت من أول 500 شخص يؤكدون بريدهم، وأصبحت عضوًا مؤسسًا. ستظهر شارة المؤسس في ملفك الشخصي داخل التطبيق. سنعلن مزايا المؤسسين قبل تقديم أي أسعار، وOneSpace مجاني خلال الوصول المبكر.')) +
+      (showInvite ? p('تستخدمه بمفردك؟ هذا رائع. وإن أردت مشاركته مع شريكك لاحقًا، أرسل له هذا الرابط ليصبح عضوًا مؤسسًا أيضًا:') + p(`<a href="${invite}" style="color:#1F6E78;word-break:break-all">${invite}</a>`) : '');
+    return { subject: waitlist ? 'أنت على قائمة انتظار OneSpace' : 'أهلًا بك — أنت من المؤسسين الـ500 في OneSpace', html: shell('ar', title, title, body,
+      showInvite ? { label: 'ادعُ شريكك', href: invite } : { label: 'جرّب العرض', href: page('ar', 'how-it-works.html') }),
+      text: `${hi}\n${title}\n${showInvite ? 'رابط دعوة شريكك: ' + invite : ''}` };
   }
   const hi = r.name ? `Hi ${esc(r.name)},` : 'Hi there,';
-  const title = waitlist ? 'You’re on the waitlist' : partner ? `You’ve joined Founder Couple ${num}` : `You’re Founder Couple ${num}`;
+  const title = waitlist ? 'You’re on the waitlist' : 'You’re one of the Founding 500';
   const body = p(hi) + (waitlist
-    ? p('Thanks for confirming. All 250 Founder places are taken, so the two of you are on the waitlist — we’ll invite you as soon as more places open.')
-    : big(num) + p(partner ? `You’ve joined ${esc(firstName) || 'your partner'} — together you are Founder Couple ${num}. You’ll get the app together.`
-      : `Welcome to OneSpace! Your Founder couple number is ${num}. Founder benefits will be announced before any pricing, and OneSpace is free during early access.`)) +
-    (partner || r.couple_full ? '' : p('OneSpace is for two. Send your partner this link so they join under the same number:') + p(`<a href="${invite}" style="color:#1F6E78;word-break:break-all">${invite}</a>`));
-  return { subject: waitlist ? 'You’re on the OneSpace waitlist' : `Welcome — you’re OneSpace Founder Couple ${num}`, html: shell('en', title, title, body,
-    partner || r.couple_full ? { label: 'Try the demo', href: page('en', 'how-it-works.html') } : { label: 'Invite your partner', href: invite }),
-    text: `${hi}\n${title}\n${partner || r.couple_full ? '' : 'Invite your partner: ' + invite}` };
+    ? p('Thanks for confirming. All 500 Founder places are taken, so you’re on the waitlist — we’ll invite you as soon as the app is available.')
+    : p(partner ? `You’ve joined ${esc(firstName) || 'your partner'} — you’re now a OneSpace Founder Member. Your Founder badge will appear on your profile in the app.`
+      : 'Welcome to OneSpace! You’re one of the first 500 people to confirm, so you’re a Founder Member. Your Founder badge will appear on your profile in the app. Founder benefits will be announced before any pricing, and OneSpace is free during early access.')) +
+    (showInvite ? p('Using it on your own? That’s great. If you’d like to share it with a partner later, send them this link and they’ll be a Founder Member too:') + p(`<a href="${invite}" style="color:#1F6E78;word-break:break-all">${invite}</a>`) : '');
+  return { subject: waitlist ? 'You’re on the OneSpace waitlist' : 'Welcome — you’re one of the OneSpace Founding 500', html: shell('en', title, title, body,
+    showInvite ? { label: 'Invite your partner', href: invite } : { label: 'Try the demo', href: page('en', 'how-it-works.html') }),
+    text: `${hi}\n${title}\n${showInvite ? 'Invite your partner: ' + invite : ''}` };
 }
 
-export function mailPartnerJoined(lang: string, firstName: string, partnerName: string, num: number | null): Mail {
-  const n = num ? `#${num}` : '';
+export function mailPartnerJoined(lang: string, firstName: string, partnerName: string, _num?: unknown): Mail {
   if (lang === 'ar') {
     const t = `${esc(partnerName) || 'شريكك'} انضم إليك`;
-    return { subject: `${partnerName || 'شريكك'} انضم إلى OneSpace — اكتمل زوجكما المؤسس ${n}`, text: `${t}. اكتمل زوجكما المؤسس ${n}.`,
-      html: shell('ar', t, t, p(firstName ? `أهلًا ${esc(firstName)}،` : 'أهلًا،') + p(`أكّد شريكك بريده. أنتما الآن الزوجان المؤسسان ${n} — اكتمل زوجكما.`),
+    return { subject: `${partnerName || 'شريكك'} انضم إليك في OneSpace`, text: `${t}. أنتما الآن عضوان مؤسسان.`,
+      html: shell('ar', t, t, p(firstName ? `أهلًا ${esc(firstName)}،` : 'أهلًا،') + p('أكّد شريكك بريده. أنتما الآن عضوان مؤسسان في OneSpace.'),
         { label: 'جرّب العرض معًا', href: page('ar', 'how-it-works.html') }) };
   }
   const t = `${esc(partnerName) || 'Your partner'} joined you`;
-  return { subject: `${partnerName || 'Your partner'} joined OneSpace — Founder Couple ${n} is complete`, text: `${t}. Founder Couple ${n} is complete.`,
-    html: shell('en', t, t, p(firstName ? `Hi ${esc(firstName)},` : 'Hi there,') + p(`Your partner confirmed their email. You are now Founder Couple ${n} — both of you.`),
+  return { subject: `${partnerName || 'Your partner'} joined you on OneSpace`, text: `${t}. You are both Founder Members now.`,
+    html: shell('en', t, t, p(firstName ? `Hi ${esc(firstName)},` : 'Hi there,') + p('Your partner confirmed their email. You are both OneSpace Founder Members now.'),
       { label: 'Try the demo together', href: page('en', 'how-it-works.html') }) };
 }
 
 export function mailAlready(lang: string, r: any): Mail {
-  const num = r.founder_number ? `#${r.founder_number}` : '';
   const invite = `${page(lang, 'join.html')}?invite=${r.invite_code}`;
   if (lang === 'ar') {
-    const t = r.couple_status === 'founder' ? `أنتما بالفعل الزوجان المؤسسان ${num}` : 'أنتما بالفعل على قائمة الانتظار';
-    return { subject: t, text: `${t}.`, html: shell('ar', t, t, p('حاول أحدهم التسجيل بهذا البريد مجددًا. لا داعي لفعل شيء — مكانكما محفوظ.') +
+    const t = r.couple_status === 'founder' ? 'أنت بالفعل عضو مؤسس' : 'أنت بالفعل على قائمة الانتظار';
+    return { subject: t, text: `${t}.`, html: shell('ar', t, t, p('حاول أحدهم التسجيل بهذا البريد مجددًا. لا داعي لفعل شيء — مكانك محفوظ.') +
       (r.role === 'first' ? p(`رابط دعوة شريكك: <a href="${invite}" style="color:#1F6E78;word-break:break-all">${invite}</a>`) : '')) };
   }
-  const t = r.couple_status === 'founder' ? `You’re already Founder Couple ${num}` : 'You’re already on the waitlist';
+  const t = r.couple_status === 'founder' ? 'You’re already a Founder Member' : 'You’re already on the waitlist';
   return { subject: t, text: `${t}.`, html: shell('en', t, t, p('Someone tried to sign up with this email again. Nothing to do — your place is safe.') +
     (r.role === 'first' ? p(`Your partner’s invite link: <a href="${invite}" style="color:#1F6E78;word-break:break-all">${invite}</a>`) : '')) };
 }

@@ -7,7 +7,7 @@ Runs in the **OneSpace Production** Supabase project (`letcgxbnblohhfyeuigz`, Fr
 |---|---|
 | `0134_founder_members.sql` | Tables (couples, members, email log, attempts) and functions: join, confirm, stats, email log, resend list |
 | `functions/founder-join.ts` | `POST /functions/v1/founder-join` — form endpoint: spam traps, rate limits, consent, sends the confirmation email |
-| `functions/founder-confirm.ts` | `POST /functions/v1/founder-confirm` — confirmation link; gives the Founder number, sends welcome / partner-joined emails |
+| `functions/founder-confirm.ts` | `POST /functions/v1/founder-confirm` — confirmation link; gives Founder status, sends welcome / partner-joined emails |
 | `functions/founder-admin.ts` | `GET/POST /functions/v1/founder-admin` — numbers for the Command Center Website tab (needs `x-admin-key`; the public admin page was retired 17 Nov 2026) |
 | `functions/founder-unsubscribe.ts` | One-click unsubscribe (RFC 8058 POST from mail apps; GET redirects to `/unsubscribe.html`) |
 | `functions/site-contact.ts` | Support and Delete-account forms: saves the request and emails it to support@ / privacy@ (Reply-To = visitor) |
@@ -16,8 +16,10 @@ Runs in the **OneSpace Production** Supabase project (`letcgxbnblohhfyeuigz`, Fr
 | `functions/secrets-check.ts` | Health check: which secrets exist (booleans), callable only with the Vault worker secret |
 | `functions/_lib.ts` | Shared: Resend sending + delivery log, branded EN/AR email templates, spam protection (`guard`) |
 
-Rules: one Founder number per couple, first 250 confirmed couples (500 people); number given only after the
-email is confirmed; a partner joins through `https://onespace.live/join/?invite=<code>` and shares the number.
+Rules (Amr, 22 Nov 2026, see `0140_founding_500_people.sql`): the first 500 PEOPLE who confirm their email are
+Founder Members, on their own ("On my own", living = 'solo') or as a couple. A partner who confirms through
+`https://onespace.live/join/?invite=<code>` is a Founder Member too. No Founder number is ever shown or emailed;
+`founder_couples.founder_number` is an internal sequence and `founder_members.confirmed_at` is the real order.
 
 ## Secrets (Supabase › Edge Functions › Secrets — never in the website or GitHub)
 - `RESEND_API_KEY` — Resend API key with sending access (domain onespace.live verified in Resend).
