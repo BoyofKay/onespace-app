@@ -30,11 +30,8 @@ for lang in LANGS:
     for sensitive in ('confirm.html','unsubscribe.html'):
         txt=(ROOT/prefix/sensitive).read_text(encoding='utf-8')
         assert 'noindex' in txt, (lang,sensitive,'indexing')
-src=(ROOT/'backend/founders/functions/_lib.ts').read_text(encoding='utf-8')
-assert "return ok === true ? 'ok' : 'blocked'" in src, 'Turnstile must fail closed'
-assert "j.hostname === 'onespace.live'" in src, 'Turnstile hostname binding absent'
-assert "turnstile_unavailable === true" not in src, 'unverified token bypass'
-assert "const fast =" not in src, 'client timing should not bypass checks'
+# Founder backend (Turnstile server checks) moved to the private app repository on
+# 26 Nov 2026: BoyofKay/OneSpace supabase/founders/, test/founders_backend_security_test.dart.
 js=(ROOT/'assets/os.js').read_text(encoding='utf-8')
 assert "turnstile_unavailable: true" not in js, 'frontend captcha bypass'
 assert "$$('form[data-form]').forEach" in js, 'multi-form handler missing'

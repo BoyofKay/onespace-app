@@ -10,7 +10,7 @@ from guide_additions_2 import GUIDE_ADDITIONS_2
 from faq_additions import FAQ_ADDITIONS
 from tutorial_additions import TUTORIAL_ADDITIONS
 from tutorial_journeys import JOURNEY_TUTORIAL_ADDITIONS
-assert sum(map(len,FAQ_ADDITIONS.values()))==12
+assert sum(map(len,FAQ_ADDITIONS.values()))==18  # 12 + 6 closed-tester answers (26 Nov 2026)
 assert sum(map(len,TUTORIAL_ADDITIONS.values()))==12
 assert len(JOURNEY_TUTORIAL_ADDITIONS['journey'])==2
 ALL_GUIDES=GUIDE_ADDITIONS_1+GUIDE_ADDITIONS_2
@@ -20,11 +20,11 @@ for lang_idx,lang in enumerate(('en','ar','es','fr','de')):
     faq=BeautifulSoup((ROOT/prefix/'faq.html').read_text(encoding='utf8'),'html.parser')
     tutorials=BeautifulSoup((ROOT/prefix/'tutorials.html').read_text(encoding='utf8'),'html.parser')
     listing=BeautifulSoup((ROOT/prefix/'guides.html').read_text(encoding='utf8'),'html.parser')
-    assert len(faq.select('details[data-faq]'))==50,(lang,'FAQ count')
+    assert len(faq.select('details[data-faq]'))==56,(lang,'FAQ count')
     faq_schema=[json.loads(s.string) for s in faq.select('script[type="application/ld+json"]')
                 if s.string and json.loads(s.string).get('@type')=='FAQPage']
     assert len(faq_schema)==1,(lang,'FAQ schema')
-    assert len(faq_schema[0]['mainEntity'])==50,(lang,'FAQ JSON-LD length')
+    assert len(faq_schema[0]['mainEntity'])==56,(lang,'FAQ JSON-LD length')
     for i,entry in enumerate(faq_schema[0]['mainEntity']):
         card=faq.select('details[data-faq]')[i]
         assert entry['name']==card.summary.get_text(' ',strip=True),(lang,'FAQ schema name',i)
@@ -62,4 +62,4 @@ for lang_idx,lang in enumerate(('en','ar','es','fr','de')):
         assert schema['inLanguage']==lang,(lang,guide['slug'],'article wrong language')
         assert schema['headline']==page.h1.get_text(' ',strip=True),(lang,guide['slug'],'article wrong headline')
         assert schema['mainEntityOfPage']=='https://onespace.live/'+prefix+guide['slug'].replace('.html','/'),(lang,guide['slug'],'canonical JSON-LD')
-print('PASS: 50 FAQs, 30 step-by-step tutorials with full journeys, 13 guides, all five locales.')
+print('PASS: 56 FAQs, 30 step-by-step tutorials with full journeys, 13 guides, all five locales.')
