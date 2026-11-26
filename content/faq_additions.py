@@ -203,3 +203,108 @@ FAQ_ADDITIONS = {
     ]
   ]
 }
+
+
+# Closed-testing workflow FAQ corrections, in EN/AR/ES/FR/DE.
+FAQ_ADDITIONS.setdefault("Getting started", []).extend([
+  [
+    [
+      "How do I resend, replace or revoke an invitation?",
+      "كيف أعيد إرسال الدعوة أو أستبدلها أو ألغيها؟",
+      "¿Cómo reenvío, reemplazo o revoco una invitación?",
+      "Comment renvoyer, remplacer ou révoquer une invitation ?",
+      "Wie sende ich eine Einladung erneut, ersetze oder widerrufe sie?"
+    ],
+    [
+      "From Invite my partner, resend the existing email without changing its code or expiry. Generate a replacement to invalidate the old code, or revoke the invitation to stop it being used.",
+      "من «دعوة شريكي»، أعد إرسال البريد دون تغيير الرمز أو موعد انتهائه. أنشئ رمزًا بديلًا لإبطال الرمز السابق، أو ألغِ الدعوة لمنع استخدامها.",
+      "Desde Invitar a mi pareja, reenvía el correo sin cambiar su código ni vencimiento. Genera un reemplazo para invalidar el código anterior o revoca la invitación para impedir su uso.",
+      "Depuis Inviter mon partenaire, renvoyez l’e-mail sans changer son code ni sa date d’expiration. Générez un nouveau code pour invalider l’ancien ou révoquez l’invitation pour empêcher son utilisation.",
+      "Unter Partner einladen kannst du die E-Mail erneut senden, ohne Code oder Ablauf zu ändern. Erzeuge einen Ersatzcode, um den alten ungültig zu machen, oder widerrufe die Einladung."
+    ]
+  ],
+  [
+    [
+      "I confirmed my email but cannot find my invitation. What should I do?",
+      "أكّدت بريدي ولم أجد الدعوة. ماذا أفعل؟",
+      "Confirmé mi correo pero no encuentro la invitación. ¿Qué hago?",
+      "J’ai confirmé mon e-mail mais ne trouve pas mon invitation. Que faire ?",
+      "Ich habe meine E-Mail bestätigt, finde aber die Einladung nicht. Was tun?"
+    ],
+    [
+      "Sign in using the invited email. OneSpace checks for a pending invitation even if the browser did not pass its link. Retry the lookup if needed; do not create another shared space while trying to join.",
+      "سجّل الدخول بالبريد المدعو. يتحقق OneSpace من الدعوة المعلّقة حتى إذا لم يرسل المتصفح رابطها. أعد البحث عند الحاجة، ولا تنشئ مساحة مشتركة أخرى أثناء محاولة الانضمام.",
+      "Inicia sesión con el correo invitado. OneSpace busca una invitación pendiente aunque el navegador no haya enviado el enlace. Repite la búsqueda si es necesario; no crees otro espacio compartido mientras intentas unirte.",
+      "Connectez-vous avec l’adresse invitée. OneSpace recherche une invitation en attente même si le navigateur n’a pas transmis son lien. Relancez la recherche si nécessaire ; ne créez pas un autre espace partagé pendant que vous tentez de rejoindre celui-ci.",
+      "Melde dich mit der eingeladenen E-Mail-Adresse an. OneSpace sucht auch dann nach einer ausstehenden Einladung, wenn der Browser den Link nicht weitergegeben hat. Wiederhole bei Bedarf die Suche; erstelle beim Beitrittsversuch keinen anderen gemeinsamen Bereich."
+    ]
+  ]
+])
+FAQ_ADDITIONS.setdefault("Privacy & account", []).extend([
+  [
+    [
+      "Can a new partner see an old relationship’s content?",
+      "هل يستطيع شريك جديد رؤية محتوى علاقة سابقة؟",
+      "¿Puede una nueva pareja ver el contenido de una relación anterior?",
+      "Un nouveau partenaire peut-il voir le contenu d’une ancienne relation ?",
+      "Kann ein neuer Partner Inhalte einer früheren Beziehung sehen?"
+    ],
+    [
+      "No. After a shared space is permanently deleted, both people keep only their own private records. A new shared space starts without any records or attachments from that previous relationship.",
+      "لا. بعد حذف المساحة المشتركة نهائيًا، يحتفظ كل شخص بسجلاته الخاصة فقط. تبدأ المساحة المشتركة الجديدة دون سجلات أو مرفقات من العلاقة السابقة.",
+      "No. Tras eliminar definitivamente un espacio compartido, cada persona conserva solo sus registros privados. El nuevo espacio empieza sin datos ni archivos de la relación anterior.",
+      "Non. Après la suppression définitive d’un espace partagé, chacun conserve uniquement ses données privées. Le nouvel espace commence sans données ni pièces jointes de la relation précédente.",
+      "Nein. Nach der endgültigen Löschung eines gemeinsamen Bereichs behält jeder nur seine privaten Einträge. Ein neuer gemeinsamer Bereich beginnt ohne Einträge oder Anhänge der früheren Beziehung."
+    ]
+  ],
+  [
+    [
+      "Is there an archive or backup when we end a shared space?",
+      "هل يُنشأ أرشيف أو نسخة احتياطية عند إنهاء المساحة المشتركة؟",
+      "¿Se crea un archivo o una copia de seguridad al terminar un espacio compartido?",
+      "Une archive ou une sauvegarde est-elle créée à la fin d’un espace partagé ?",
+      "Wird beim Beenden eines gemeinsamen Bereichs ein Archiv oder Backup erstellt?"
+    ],
+    [
+      "No automatic archive, export or restore is created. You can manually export available account information as an unencrypted JSON file; it does not include photos, documents or other attachments. Permanent shared-space deletion cannot be undone.",
+      "لا يتم إنشاء أرشيف أو تصدير أو نسخة استعادة تلقائية. يمكنك تصدير معلومات الحساب المتاحة يدويًا في ملف JSON غير مشفّر، ولا يشمل الصور أو المستندات أو المرفقات الأخرى. لا يمكن التراجع عن الحذف النهائي للمساحة المشتركة.",
+      "No se crea un archivo, exportación o restauración automática. Puedes exportar manualmente la información disponible de tu cuenta en un JSON sin cifrar; no incluye fotos, documentos ni otros archivos. La eliminación definitiva del espacio no se puede deshacer.",
+      "Aucune archive, exportation ni restauration automatique n’est créée. Vous pouvez exporter manuellement les informations disponibles du compte dans un fichier JSON non chiffré, sans photos, documents ni autres pièces jointes. La suppression définitive de l’espace est irréversible.",
+      "Es wird kein automatisches Archiv, kein Export und keine Wiederherstellung erstellt. Du kannst verfügbare Kontodaten manuell als unverschlüsselte JSON-Datei exportieren, ohne Fotos, Dokumente oder andere Anhänge. Die endgültige Löschung des gemeinsamen Bereichs kann nicht rückgängig gemacht werden."
+    ]
+  ],
+  [
+    [
+      "What happens after the 7-day account deletion period?",
+      "ماذا يحدث بعد انتهاء مهلة حذف الحساب البالغة 7 أيام؟",
+      "¿Qué ocurre tras los 7 días de espera para eliminar mi cuenta?",
+      "Que se passe-t-il après les 7 jours de délai de suppression du compte ?",
+      "Was passiert nach der siebentägigen Frist zur Kontolöschung?"
+    ],
+    [
+      "Until the deadline you can cancel, and nothing is deleted. After it, your account and private records and files are permanently deleted, along with the current relationship’s shared content and attachments. Your partner keeps their own private content and becomes unpaired.",
+      "حتى انتهاء المهلة يمكنك الإلغاء، ولا يُحذف شيء. بعد ذلك يُحذف حسابك وسجلاتك وملفاتك الخاصة نهائيًا، وكذلك المحتوى المشترك ومرفقاته في علاقتك الحالية. يحتفظ شريكك بمحتواه الخاص ويصبح غير مرتبط بمساحة مشتركة.",
+      "Hasta la fecha límite puedes cancelar y no se elimina nada. Después se eliminan definitivamente tu cuenta, tus registros y archivos privados y el contenido y archivos compartidos de tu relación actual. Tu pareja conserva sus datos privados y deja de estar vinculada.",
+      "Jusqu’à la date limite, vous pouvez annuler et rien n’est supprimé. Ensuite, votre compte, vos données et fichiers privés ainsi que le contenu et les pièces jointes partagés de votre relation actuelle sont définitivement supprimés. Votre partenaire conserve son contenu privé et n’est plus associé.",
+      "Bis zum Ablauf kannst du stornieren; nichts wird gelöscht. Danach werden dein Konto, deine privaten Einträge und Dateien sowie die gemeinsamen Inhalte und Anhänge deiner aktuellen Beziehung endgültig gelöscht. Dein Partner behält seine privaten Inhalte und ist nicht mehr verbunden."
+    ]
+  ]
+])
+FAQ_ADDITIONS.setdefault("Help", []).extend([
+  [
+    [
+      "Can support see the screenshot I attach to a ticket?",
+      "هل يمكن للدعم رؤية لقطة الشاشة التي أرفقها بالطلب؟",
+      "¿Puede el equipo de soporte ver la captura adjunta a mi solicitud?",
+      "L’assistance peut-elle voir la capture jointe à ma demande ?",
+      "Kann der Support den Screenshot in meiner Anfrage sehen?"
+    ],
+    [
+      "When signed in, you can optionally attach a screenshot to Report a technical issue. It is stored privately and intended for the support team to investigate your request. Avoid including sensitive information you do not want to disclose.",
+      "بعد تسجيل الدخول، يمكنك إرفاق لقطة شاشة اختياريًا عند «الإبلاغ عن مشكلة تقنية». تُحفظ بشكل خاص وتُرسل إلى فريق الدعم للتحقق من طلبك. تجنّب تضمين معلومات حساسة لا ترغب في الإفصاح عنها.",
+      "Con la sesión iniciada puedes adjuntar opcionalmente una captura a Informar de un problema técnico. Se guarda de forma privada para que soporte investigue tu solicitud. Evita incluir información sensible que no quieras compartir.",
+      "Une fois connecté, vous pouvez joindre une capture à Signaler un problème technique. Elle est conservée en privé pour permettre à l’assistance d’examiner votre demande. Évitez les informations sensibles que vous ne souhaitez pas communiquer.",
+      "Wenn du angemeldet bist, kannst du bei Technisches Problem melden optional einen Screenshot anhängen. Er wird privat gespeichert und dient dem Support zur Prüfung deiner Anfrage. Vermeide sensible Informationen, die du nicht weitergeben möchtest."
+    ]
+  ]
+])
