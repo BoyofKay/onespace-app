@@ -20,3 +20,8 @@ Applies to all coding agents (ChatGPT, Codex, Claude and others). Owner-approved
 - Normal visibility: public because GitHub Pages hosts onespace.live. Do not change visibility or hosting without explicit approval and a validated continuity plan. The temporary-public procedure does not apply while this repository is intentionally public.
 - Keep published content safe for public disclosure; do not add confidential engineering notes, internal operational/security reports, private customer records or credentials. Any relocation of backend-only source or documents is a separate authorized task.
 - Follow README generation, localization and route rules; regenerate and validate all five languages, preserve links/SEO and the tagline Two of Us. One Space. No production backend changes or deployment outside authorized scope.
+
+## Project book and development process (owner decision, 26 Nov 2026)
+- The single project document is `docs/PROJECT_BOOK.md` in the private repository `BoyofKay/OneSpace` (attach that repository if you work elsewhere). Read its sections 0-5 before acting.
+- Follow its SDLC (section 2): work on one branch `iteration/YYYY-MM-DD-topic` created from the latest `main`; merge it back into `main` when the iteration is done. Never branch from another working branch and never continue an old branch (section 7 lists them).
+- Do not create new project documents. At the end of every iteration update the book: dated decisions (section 4), current state (section 5) and history (section 6). When a decision replaces an older one, mark the older one "OVERRIDDEN by Dnn (date)" and keep it; never delete a decision.
