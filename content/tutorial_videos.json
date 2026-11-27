@@ -1,158 +1,958 @@
 [
- {"id": "today", "clip": "today",
-  "title": {"en": "Today", "ar": "اليوم", "es": "Hoy", "fr": "Aujourd’hui", "de": "Heute"},
-  "helps": {"en": "Open the app and see what matters now: both clocks and weather, the best time to talk and what needs you.", "ar": "افتح التطبيق وشاهد ما يهم الآن: الساعتان والطقس وأفضل وقت للحديث وما يحتاج إليك.", "es": "Abre la app y mira lo que importa ahora: los dos relojes y el tiempo, el mejor momento para hablar y lo que te necesita.", "fr": "Ouvrez l’app et voyez ce qui compte maintenant : les deux horloges et la météo, le meilleur moment pour se parler et ce qui vous attend.", "de": "Öffne die App und sieh, was jetzt zählt: beide Uhren und das Wetter, die beste Zeit zum Reden und was auf dich wartet."},
+ {
+  "id": "today",
+  "clip": "today",
+  "title": {
+   "en": "Today",
+   "ar": "اليوم",
+   "es": "Hoy",
+   "fr": "Aujourd’hui",
+   "de": "Heute"
+  },
+  "helps": {
+   "en": "Open the app and see what matters now: both clocks and weather, the best time to talk and what needs you.",
+   "ar": "افتح التطبيق وشاهد ما يهم الآن: الساعتان والطقس وأفضل وقت للحديث وما يحتاج إليك.",
+   "es": "Abre la app y mira lo que importa ahora: los dos relojes y el tiempo, el mejor momento para hablar y lo que te necesita.",
+   "fr": "Ouvrez l’app et voyez ce qui compte maintenant : les deux horloges et la météo, le meilleur moment pour se parler et ce qui vous attend.",
+   "de": "Öffne die App und sieh, was jetzt zählt: beide Uhren und das Wetter, die beste Zeit zum Reden und was auf dich wartet."
+  },
   "chapters": [
-   {"en": "Your day at a glance", "ar": "يومك في لمحة", "es": "Tu día de un vistazo", "fr": "Votre journée en un coup d’œil", "de": "Dein Tag auf einen Blick"},
-   {"en": "Both clocks and weather", "ar": "الساعتان والطقس", "es": "Los dos relojes y el tiempo", "fr": "Les deux horloges et la météo", "de": "Beide Uhren und das Wetter"},
-   {"en": "A good time to talk", "ar": "وقت مناسب للحديث", "es": "Un buen momento para hablar", "fr": "Un bon moment pour se parler", "de": "Eine gute Zeit zum Reden"},
-   {"en": "What needs you now", "ar": "ما يحتاج إليك الآن", "es": "Lo que te necesita ahora", "fr": "Ce qui vous attend maintenant", "de": "Was jetzt auf dich wartet"},
-   {"en": "Quick add in two taps", "ar": "إضافة سريعة بلمستين", "es": "Añadir rápido en dos toques", "fr": "Ajout rapide en deux touches", "de": "Schnell hinzufügen mit zwei Tipps"}],
-  "partner": {"en": "Lina’s Today shows her own clock and weather first, and Adam’s updates under Since you were away.", "ar": "تعرض صفحة «اليوم» لدى لينا ساعتها وطقسها أولًا، وتحديثات آدم تحت «منذ غيابك».", "es": "El Hoy de Lina muestra primero su propio reloj y su tiempo, y las novedades de Adam en Desde que no estabas.", "fr": "L’Aujourd’hui de Lina affiche d’abord son horloge et sa météo, et les nouveautés d’Adam sous Depuis votre absence.", "de": "Linas Heute zeigt zuerst ihre eigene Uhr und ihr Wetter und Adams Neuigkeiten unter Seit du weg warst."}},
- {"id": "calendar", "clip": "calendar",
-  "title": {"en": "Calendar", "ar": "التقويم", "es": "Calendario", "fr": "Calendrier", "de": "Kalender"},
-  "helps": {"en": "See both of your days side by side, so plans don’t collide and you can find time for each other.", "ar": "شاهدا يوميكما جنبًا إلى جنب كي لا تتعارض الخطط وتجدا وقتًا لبعضكما.", "es": "Mirad vuestros dos días uno al lado del otro, para que los planes no choquen y encontréis tiempo juntos.", "fr": "Voyez vos deux journées côte à côte, pour que les projets ne se chevauchent pas et que vous trouviez du temps à deux.", "de": "Seht eure beiden Tage nebeneinander, damit sich Pläne nicht überschneiden und ihr Zeit füreinander findet."},
+   {
+    "en": "Your day at a glance",
+    "ar": "يومك في لمحة",
+    "es": "Tu día de un vistazo",
+    "fr": "Votre journée en un coup d’œil",
+    "de": "Dein Tag auf einen Blick"
+   },
+   {
+    "en": "Both clocks and weather",
+    "ar": "الساعتان والطقس",
+    "es": "Los dos relojes y el tiempo",
+    "fr": "Les deux horloges et la météo",
+    "de": "Beide Uhren und das Wetter"
+   },
+   {
+    "en": "A good time to talk",
+    "ar": "وقت مناسب للحديث",
+    "es": "Un buen momento para hablar",
+    "fr": "Un bon moment pour se parler",
+    "de": "Eine gute Zeit zum Reden"
+   },
+   {
+    "en": "What needs you now",
+    "ar": "ما يحتاج إليك الآن",
+    "es": "Lo que te necesita ahora",
+    "fr": "Ce qui vous attend maintenant",
+    "de": "Was jetzt auf dich wartet"
+   },
+   {
+    "en": "Quick add in two taps",
+    "ar": "إضافة سريعة بلمستين",
+    "es": "Añadir rápido en dos toques",
+    "fr": "Ajout rapide en deux touches",
+    "de": "Schnell hinzufügen mit zwei Tipps"
+   }
+  ],
+  "partner": {
+   "en": "Lina’s Today shows her own clock and weather first, and Adam’s updates under Since you were away.",
+   "ar": "تعرض صفحة «اليوم» لدى لينا ساعتها وطقسها أولًا، وتحديثات آدم تحت «منذ غيابك».",
+   "es": "El Hoy de Lina muestra primero su propio reloj y su tiempo, y las novedades de Adam en Desde que no estabas.",
+   "fr": "L’Aujourd’hui de Lina affiche d’abord son horloge et sa météo, et les nouveautés d’Adam sous Depuis votre absence.",
+   "de": "Linas Heute zeigt zuerst ihre eigene Uhr und ihr Wetter und Adams Neuigkeiten unter Seit du weg warst."
+  }
+ },
+ {
+  "id": "calendar",
+  "clip": "calendar",
+  "title": {
+   "en": "Calendar",
+   "ar": "التقويم",
+   "es": "Calendario",
+   "fr": "Calendrier",
+   "de": "Kalender"
+  },
+  "helps": {
+   "en": "See both of your days side by side, so plans don’t collide and you can find time for each other.",
+   "ar": "شاهدا يوميكما جنبًا إلى جنب كي لا تتعارض الخطط وتجدا وقتًا لبعضكما.",
+   "es": "Mirad vuestros dos días uno al lado del otro, para que los planes no choquen y encontréis tiempo juntos.",
+   "fr": "Voyez vos deux journées côte à côte, pour que les projets ne se chevauchent pas et que vous trouviez du temps à deux.",
+   "de": "Seht eure beiden Tage nebeneinander, damit sich Pläne nicht überschneiden und ihr Zeit füreinander findet."
+  },
   "chapters": [
-   {"en": "Add an event", "ar": "أضف موعدًا", "es": "Añade un evento", "fr": "Ajoutez un événement", "de": "Einen Termin hinzufügen"},
-   {"en": "Who it is for: you, Lina or both", "ar": "لمن هو: لك أو للينا أو لكليكما", "es": "Para quién es: tú, Lina o los dos", "fr": "Pour qui : vous, Lina ou les deux", "de": "Für wen: dich, Lina oder beide"},
-   {"en": "Shared or Only me", "ar": "مشترك أو أنا فقط", "es": "Compartido o Solo yo", "fr": "Partagé ou Moi seulement", "de": "Geteilt oder Nur ich"},
-   {"en": "One day, two lanes", "ar": "يوم واحد بمسارين", "es": "Un día, dos carriles", "fr": "Une journée, deux colonnes", "de": "Ein Tag, zwei Spuren"}],
-  "partner": {"en": "A shared event appears in Lina’s calendar at her local time.", "ar": "يظهر الموعد المشترك في تقويم لينا بتوقيتها المحلي.", "es": "Un evento compartido aparece en el calendario de Lina a su hora local.", "fr": "Un événement partagé apparaît dans le calendrier de Lina à son heure locale.", "de": "Ein geteilter Termin erscheint in Linas Kalender zu ihrer Ortszeit."},
-  "solo": {"en": "On your own, the day view has one lane.", "ar": "بمفردك، يعرض اليوم مسارًا واحدًا.", "es": "Por tu cuenta, la vista del día tiene un solo carril.", "fr": "Seul(e), la vue du jour n’a qu’une colonne.", "de": "Allein hat die Tagesansicht eine Spur."}},
- {"id": "todo", "clip": "todo",
-  "title": {"en": "To-do lists", "ar": "قوائم المهام", "es": "Listas de tareas", "fr": "Listes de tâches", "de": "To-do-Listen"},
-  "helps": {"en": "Groceries, chores and routines in one list you both tick, so nobody has to be the household’s memory.", "ar": "البقالة والأعمال المنزلية والروتين في قائمة واحدة يضع كلاكما عليها العلامات، فلا يضطر أحد أن يكون ذاكرة البيت.", "es": "La compra, las tareas y las rutinas en una lista que marcáis los dos, para que nadie tenga que ser la memoria de la casa.", "fr": "Courses, tâches et routines dans une liste que vous cochez tous les deux, pour que personne ne soit la mémoire du foyer.", "de": "Einkäufe, Hausarbeit und Routinen in einer Liste, die ihr beide abhakt, damit niemand das Gedächtnis des Haushalts sein muss."},
+   {
+    "en": "Add an event",
+    "ar": "أضف موعدًا",
+    "es": "Añade un evento",
+    "fr": "Ajoutez un événement",
+    "de": "Einen Termin hinzufügen"
+   },
+   {
+    "en": "Who it is for: you, Lina or both",
+    "ar": "لمن هو: لك أو للينا أو لكليكما",
+    "es": "Para quién es: tú, Lina o los dos",
+    "fr": "Pour qui : vous, Lina ou les deux",
+    "de": "Für wen: dich, Lina oder beide"
+   },
+   {
+    "en": "Shared or Only me",
+    "ar": "مشترك أو أنا فقط",
+    "es": "Compartido o Solo yo",
+    "fr": "Partagé ou Moi seulement",
+    "de": "Geteilt oder Nur ich"
+   },
+   {
+    "en": "One day, two lanes",
+    "ar": "يوم واحد بمسارين",
+    "es": "Un día, dos carriles",
+    "fr": "Une journée, deux colonnes",
+    "de": "Ein Tag, zwei Spuren"
+   }
+  ],
+  "partner": {
+   "en": "A shared event appears in Lina’s calendar at her local time.",
+   "ar": "يظهر الموعد المشترك في تقويم لينا بتوقيتها المحلي.",
+   "es": "Un evento compartido aparece en el calendario de Lina a su hora local.",
+   "fr": "Un événement partagé apparaît dans le calendrier de Lina à son heure locale.",
+   "de": "Ein geteilter Termin erscheint in Linas Kalender zu ihrer Ortszeit."
+  },
+  "solo": {
+   "en": "On your own, the day view has one lane.",
+   "ar": "بمفردك، يعرض اليوم مسارًا واحدًا.",
+   "es": "Por tu cuenta, la vista del día tiene un solo carril.",
+   "fr": "Seul(e), la vue du jour n’a qu’une colonne.",
+   "de": "Allein hat die Tagesansicht eine Spur."
+  }
+ },
+ {
+  "id": "todo",
+  "clip": "todo",
+  "title": {
+   "en": "To-do lists",
+   "ar": "قوائم المهام",
+   "es": "Listas de tareas",
+   "fr": "Listes de tâches",
+   "de": "To-do-Listen"
+  },
+  "helps": {
+   "en": "Groceries, chores and routines in one list you both tick, so nobody has to be the household’s memory.",
+   "ar": "البقالة والأعمال المنزلية والروتين في قائمة واحدة يضع كلاكما عليها العلامات، فلا يضطر أحد أن يكون ذاكرة البيت.",
+   "es": "La compra, las tareas y las rutinas en una lista que marcáis los dos, para que nadie tenga que ser la memoria de la casa.",
+   "fr": "Courses, tâches et routines dans une liste que vous cochez tous les deux, pour que personne ne soit la mémoire du foyer.",
+   "de": "Einkäufe, Hausarbeit und Routinen in einer Liste, die ihr beide abhakt, damit niemand das Gedächtnis des Haushalts sein muss."
+  },
   "chapters": [
-   {"en": "Start a list", "ar": "ابدأ قائمة", "es": "Empieza una lista", "fr": "Commencez une liste", "de": "Eine Liste anlegen"},
-   {"en": "One item per line", "ar": "عنصر واحد في كل سطر", "es": "Un elemento por línea", "fr": "Un élément par ligne", "de": "Ein Eintrag pro Zeile"},
-   {"en": "Tick as you go", "ar": "ضع العلامات أولًا بأول", "es": "Marca sobre la marcha", "fr": "Cochez au fur et à mesure", "de": "Unterwegs abhaken"},
-   {"en": "Repeats every week", "ar": "تتكرر كل أسبوع", "es": "Se repite cada semana", "fr": "Se répète chaque semaine", "de": "Wiederholt sich jede Woche"}],
-  "partner": {"en": "Ticks on a shared list appear on Lina’s phone.", "ar": "تظهر العلامات في القائمة المشتركة على هاتف لينا.", "es": "Lo que marcas en una lista compartida aparece en el teléfono de Lina.", "fr": "Les cases cochées d’une liste partagée apparaissent sur le téléphone de Lina.", "de": "Abgehakte Einträge einer geteilten Liste erscheinen auf Linas Handy."}},
- {"id": "reminders", "clip": "reminders",
-  "title": {"en": "Reminders", "ar": "التذكيرات", "es": "Recordatorios", "fr": "Rappels", "de": "Erinnerungen"},
-  "helps": {"en": "Remember for each other: the right person gets the alert at the right time.", "ar": "تذكّرا لبعضكما: يصل التنبيه إلى الشخص المناسب في الوقت المناسب.", "es": "Recordad el uno por el otro: el aviso llega a la persona correcta en el momento correcto.", "fr": "Souvenez-vous l’un pour l’autre : la bonne personne reçoit l’alerte au bon moment.", "de": "Erinnert euch gegenseitig: Die richtige Person bekommt die Meldung zur richtigen Zeit."},
+   {
+    "en": "Start a list",
+    "ar": "ابدأ قائمة",
+    "es": "Empieza una lista",
+    "fr": "Commencez une liste",
+    "de": "Eine Liste anlegen"
+   },
+   {
+    "en": "One item per line",
+    "ar": "عنصر واحد في كل سطر",
+    "es": "Un elemento por línea",
+    "fr": "Un élément par ligne",
+    "de": "Ein Eintrag pro Zeile"
+   },
+   {
+    "en": "Tick as you go",
+    "ar": "ضع العلامات أولًا بأول",
+    "es": "Marca sobre la marcha",
+    "fr": "Cochez au fur et à mesure",
+    "de": "Unterwegs abhaken"
+   },
+   {
+    "en": "Repeats every week",
+    "ar": "تتكرر كل أسبوع",
+    "es": "Se repite cada semana",
+    "fr": "Se répète chaque semaine",
+    "de": "Wiederholt sich jede Woche"
+   }
+  ],
+  "partner": {
+   "en": "Ticks on a shared list appear on Lina’s phone.",
+   "ar": "تظهر العلامات في القائمة المشتركة على هاتف لينا.",
+   "es": "Lo que marcas en una lista compartida aparece en el teléfono de Lina.",
+   "fr": "Les cases cochées d’une liste partagée apparaissent sur le téléphone de Lina.",
+   "de": "Abgehakte Einträge einer geteilten Liste erscheinen auf Linas Handy."
+  }
+ },
+ {
+  "id": "reminders",
+  "clip": "reminders",
+  "title": {
+   "en": "Reminders",
+   "ar": "التذكيرات",
+   "es": "Recordatorios",
+   "fr": "Rappels",
+   "de": "Erinnerungen"
+  },
+  "helps": {
+   "en": "Remember for each other: the right person gets the alert at the right time.",
+   "ar": "تذكّرا لبعضكما: يصل التنبيه إلى الشخص المناسب في الوقت المناسب.",
+   "es": "Recordad el uno por el otro: el aviso llega a la persona correcta en el momento correcto.",
+   "fr": "Souvenez-vous l’un pour l’autre : la bonne personne reçoit l’alerte au bon moment.",
+   "de": "Erinnert euch gegenseitig: Die richtige Person bekommt die Meldung zur richtigen Zeit."
+  },
   "chapters": [
-   {"en": "What and when", "ar": "ماذا ومتى", "es": "Qué y cuándo", "fr": "Quoi et quand", "de": "Was und wann"},
-   {"en": "For you, Lina or both", "ar": "لك أو للينا أو لكليكما", "es": "Para ti, para Lina o para los dos", "fr": "Pour vous, Lina ou les deux", "de": "Für dich, Lina oder beide"},
-   {"en": "Repeat, and urgent only when it must ring", "ar": "التكرار، والعاجل فقط حين يجب أن يرن", "es": "Repetir, y urgente solo si debe sonar", "fr": "Répéter, et urgent seulement s’il doit sonner", "de": "Wiederholen, und dringend nur, wenn es klingeln muss"},
-   {"en": "All your reminders", "ar": "كل تذكيراتك", "es": "Todos tus recordatorios", "fr": "Tous vos rappels", "de": "Alle deine Erinnerungen"}]},
- {"id": "notes", "clip": "notes",
-  "title": {"en": "Notes", "ar": "الملاحظات", "es": "Notas", "fr": "Notes", "de": "Notizen"},
-  "helps": {"en": "One place for ideas, plans and things to remember, shared or just for you.", "ar": "مكان واحد للأفكار والخطط وما تريد تذكّره، مشتركًا أو لك وحدك.", "es": "Un lugar para ideas, planes y cosas que recordar, compartido o solo para ti.", "fr": "Un seul endroit pour les idées, les projets et les choses à retenir, partagé ou rien que pour vous.", "de": "Ein Ort für Ideen, Pläne und Dinge zum Merken, geteilt oder nur für dich."},
+   {
+    "en": "What and when",
+    "ar": "ماذا ومتى",
+    "es": "Qué y cuándo",
+    "fr": "Quoi et quand",
+    "de": "Was und wann"
+   },
+   {
+    "en": "For you, Lina or both",
+    "ar": "لك أو للينا أو لكليكما",
+    "es": "Para ti, para Lina o para los dos",
+    "fr": "Pour vous, Lina ou les deux",
+    "de": "Für dich, Lina oder beide"
+   },
+   {
+    "en": "Repeat, and urgent only when it must ring",
+    "ar": "التكرار، والعاجل فقط حين يجب أن يرن",
+    "es": "Repetir, y urgente solo si debe sonar",
+    "fr": "Répéter, et urgent seulement s’il doit sonner",
+    "de": "Wiederholen, und dringend nur, wenn es klingeln muss"
+   },
+   {
+    "en": "All your reminders",
+    "ar": "كل تذكيراتك",
+    "es": "Todos tus recordatorios",
+    "fr": "Tous vos rappels",
+    "de": "Alle deine Erinnerungen"
+   }
+  ]
+ },
+ {
+  "id": "notes",
+  "clip": "notes",
+  "title": {
+   "en": "Notes",
+   "ar": "الملاحظات",
+   "es": "Notas",
+   "fr": "Notes",
+   "de": "Notizen"
+  },
+  "helps": {
+   "en": "One place for ideas, plans and things to remember, shared or just for you.",
+   "ar": "مكان واحد للأفكار والخطط وما تريد تذكّره، مشتركًا أو لك وحدك.",
+   "es": "Un lugar para ideas, planes y cosas que recordar, compartido o solo para ti.",
+   "fr": "Un seul endroit pour les idées, les projets et les choses à retenir, partagé ou rien que pour vous.",
+   "de": "Ein Ort für Ideen, Pläne und Dinge zum Merken, geteilt oder nur für dich."
+  },
   "chapters": [
-   {"en": "Write a note", "ar": "اكتب ملاحظة", "es": "Escribe una nota", "fr": "Écrivez une note", "de": "Eine Notiz schreiben"},
-   {"en": "Format as you write", "ar": "نسّق أثناء الكتابة", "es": "Da formato mientras escribes", "fr": "Mettez en forme en écrivant", "de": "Beim Schreiben formatieren"},
-   {"en": "Shared or Only me", "ar": "مشترك أو أنا فقط", "es": "Compartido o Solo yo", "fr": "Partagé ou Moi seulement", "de": "Geteilt oder Nur ich"}],
-  "partner": {"en": "Lina can read and edit shared notes; typing @ mentions her and sends a notification.", "ar": "تستطيع لينا قراءة الملاحظات المشتركة وتعديلها، وكتابة @ تشير إليها وترسل إشعارًا.", "es": "Lina puede leer y editar las notas compartidas; escribir @ la menciona y le envía una notificación.", "fr": "Lina peut lire et modifier les notes partagées ; taper @ la mentionne et lui envoie une notification.", "de": "Lina kann geteilte Notizen lesen und bearbeiten; mit @ erwähnst du sie und sie bekommt eine Benachrichtigung."}},
- {"id": "activities", "clip": "activities",
-  "title": {"en": "Activities", "ar": "الأنشطة", "es": "Actividades", "fr": "Activités", "de": "Aktivitäten"},
-  "helps": {"en": "Decide together, calmly: options side by side, a conversation that stays with the decision and a clear outcome.", "ar": "قرّرا معًا بهدوء: خيارات جنبًا إلى جنب، ومحادثة تبقى مع القرار، ونتيجة واضحة.", "es": "Decidid juntos y con calma: opciones lado a lado, una conversación que se queda con la decisión y un resultado claro.", "fr": "Décidez ensemble, sereinement : les options côte à côte, une conversation qui reste avec la décision et un résultat clair.", "de": "Entscheidet gemeinsam und in Ruhe: Optionen nebeneinander, ein Gespräch, das bei der Entscheidung bleibt, und ein klares Ergebnis."},
+   {
+    "en": "Write a note",
+    "ar": "اكتب ملاحظة",
+    "es": "Escribe una nota",
+    "fr": "Écrivez une note",
+    "de": "Eine Notiz schreiben"
+   },
+   {
+    "en": "Format as you write",
+    "ar": "نسّق أثناء الكتابة",
+    "es": "Da formato mientras escribes",
+    "fr": "Mettez en forme en écrivant",
+    "de": "Beim Schreiben formatieren"
+   },
+   {
+    "en": "Shared or Private",
+    "ar": "مشتركة أو خاصة",
+    "es": "Compartida o privada",
+    "fr": "Partagée ou privée",
+    "de": "Geteilt oder privat"
+   }
+  ],
+  "partner": {
+   "en": "Lina can read and edit shared notes; typing @ mentions her and sends a notification.",
+   "ar": "تستطيع لينا قراءة الملاحظات المشتركة وتعديلها، وكتابة @ تشير إليها وترسل إشعارًا.",
+   "es": "Lina puede leer y editar las notas compartidas; escribir @ la menciona y le envía una notificación.",
+   "fr": "Lina peut lire et modifier les notes partagées ; taper @ la mentionne et lui envoie une notification.",
+   "de": "Lina kann geteilte Notizen lesen und bearbeiten; mit @ erwähnst du sie und sie bekommt eine Benachrichtigung."
+  }
+ },
+ {
+  "id": "activities",
+  "clip": "activities",
+  "title": {
+   "en": "Activities",
+   "ar": "الأنشطة",
+   "es": "Actividades",
+   "fr": "Activités",
+   "de": "Aktivitäten"
+  },
+  "helps": {
+   "en": "Decide together, calmly: options side by side, a conversation that stays with the decision and a clear outcome.",
+   "ar": "قرّرا معًا بهدوء: خيارات جنبًا إلى جنب، ومحادثة تبقى مع القرار، ونتيجة واضحة.",
+   "es": "Decidid juntos y con calma: opciones lado a lado, una conversación que se queda con la decisión y un resultado claro.",
+   "fr": "Décidez ensemble, sereinement : les options côte à côte, une conversation qui reste avec la décision et un résultat clair.",
+   "de": "Entscheidet gemeinsam und in Ruhe: Optionen nebeneinander, ein Gespräch, das bei der Entscheidung bleibt, und ein klares Ergebnis."
+  },
   "chapters": [
-   {"en": "Choose what it is for", "ar": "اختر الغرض", "es": "Elige para qué es", "fr": "Choisissez à quoi elle sert", "de": "Wähle, wofür sie ist"},
-   {"en": "Options with prices", "ar": "خيارات بأسعارها", "es": "Opciones con precios", "fr": "Des options avec leurs prix", "de": "Optionen mit Preisen"},
-   {"en": "Talk it through", "ar": "تحدّثا عنه", "es": "Habladlo", "fr": "Parlez-en", "de": "Darüber reden"},
-   {"en": "Compare side by side", "ar": "قارنا جنبًا إلى جنب", "es": "Comparad lado a lado", "fr": "Comparez côte à côte", "de": "Nebeneinander vergleichen"},
-   {"en": "Record the decision", "ar": "سجّلا القرار", "es": "Registrad la decisión", "fr": "Enregistrez la décision", "de": "Die Entscheidung festhalten"}],
-  "partner": {"en": "Lina adds her own options and reactions, and sees the decision when it is recorded.", "ar": "تضيف لينا خياراتها وتفاعلاتها، وترى القرار عند تسجيله.", "es": "Lina añade sus propias opciones y reacciones, y ve la decisión cuando se registra.", "fr": "Lina ajoute ses propres options et réactions, et voit la décision dès qu’elle est enregistrée.", "de": "Lina fügt eigene Optionen und Reaktionen hinzu und sieht die Entscheidung, sobald sie festgehalten ist."}},
- {"id": "trips", "clip": "trips",
-  "title": {"en": "Trips", "ar": "الرحلات", "es": "Viajes", "fr": "Voyages", "de": "Reisen"},
-  "helps": {"en": "Flights, stays, plans and packing for one trip in one place, for both of you.", "ar": "الرحلات الجوية والإقامة والخطط والتجهيز لرحلة واحدة في مكان واحد، لكليكما.", "es": "Vuelos, alojamiento, planes y equipaje de un viaje en un solo lugar, para los dos.", "fr": "Vols, hébergement, programme et valises d’un voyage au même endroit, pour vous deux.", "de": "Flüge, Unterkünfte, Pläne und Packliste einer Reise an einem Ort, für euch beide."},
+   {
+    "en": "Choose what it is for",
+    "ar": "اختر الغرض",
+    "es": "Elige para qué es",
+    "fr": "Choisissez à quoi elle sert",
+    "de": "Wähle, wofür sie ist"
+   },
+   {
+    "en": "Options with prices",
+    "ar": "خيارات بأسعارها",
+    "es": "Opciones con precios",
+    "fr": "Des options avec leurs prix",
+    "de": "Optionen mit Preisen"
+   },
+   {
+    "en": "Talk it through",
+    "ar": "تحدّثا عنه",
+    "es": "Habladlo",
+    "fr": "Parlez-en",
+    "de": "Darüber reden"
+   },
+   {
+    "en": "Compare side by side",
+    "ar": "قارنا جنبًا إلى جنب",
+    "es": "Comparad lado a lado",
+    "fr": "Comparez côte à côte",
+    "de": "Nebeneinander vergleichen"
+   },
+   {
+    "en": "Record the decision",
+    "ar": "سجّلا القرار",
+    "es": "Registrad la decisión",
+    "fr": "Enregistrez la décision",
+    "de": "Die Entscheidung festhalten"
+   }
+  ],
+  "partner": {
+   "en": "Lina adds her own options and reactions, and sees the decision when it is recorded.",
+   "ar": "تضيف لينا خياراتها وتفاعلاتها، وترى القرار عند تسجيله.",
+   "es": "Lina añade sus propias opciones y reacciones, y ve la decisión cuando se registra.",
+   "fr": "Lina ajoute ses propres options et réactions, et voit la décision dès qu’elle est enregistrée.",
+   "de": "Lina fügt eigene Optionen und Reaktionen hinzu und sieht die Entscheidung, sobald sie festgehalten ist."
+  }
+ },
+ {
+  "id": "trips",
+  "clip": "trips",
+  "title": {
+   "en": "Trips",
+   "ar": "الرحلات",
+   "es": "Viajes",
+   "fr": "Voyages",
+   "de": "Reisen"
+  },
+  "helps": {
+   "en": "Flights, stays, plans and packing for one trip in one place, for both of you.",
+   "ar": "الرحلات الجوية والإقامة والخطط والتجهيز لرحلة واحدة في مكان واحد، لكليكما.",
+   "es": "Vuelos, alojamiento, planes y equipaje de un viaje en un solo lugar, para los dos.",
+   "fr": "Vols, hébergement, programme et valises d’un voyage au même endroit, pour vous deux.",
+   "de": "Flüge, Unterkünfte, Pläne und Packliste einer Reise an einem Ort, für euch beide."
+  },
   "chapters": [
-   {"en": "Your trips", "ar": "رحلاتكما", "es": "Vuestros viajes", "fr": "Vos voyages", "de": "Eure Reisen"},
-   {"en": "The trip at a glance", "ar": "الرحلة في لمحة", "es": "El viaje de un vistazo", "fr": "Le voyage en un coup d’œil", "de": "Die Reise auf einen Blick"},
-   {"en": "Flight options compared", "ar": "مقارنة خيارات الطيران", "es": "Opciones de vuelo comparadas", "fr": "Les options de vol comparées", "de": "Flugoptionen im Vergleich"},
-   {"en": "The itinerary", "ar": "برنامج الرحلة", "es": "El itinerario", "fr": "L’itinéraire", "de": "Der Reiseplan"},
-   {"en": "Documents and packing list", "ar": "المستندات وقائمة التجهيز", "es": "Documentos y lista de equipaje", "fr": "Documents et liste de valise", "de": "Dokumente und Packliste"}],
-  "partner": {"en": "Lina sees the shared trip, its documents and the packing list.", "ar": "ترى لينا الرحلة المشتركة ومستنداتها وقائمة التجهيز.", "es": "Lina ve el viaje compartido, sus documentos y la lista de equipaje.", "fr": "Lina voit le voyage partagé, ses documents et la liste de valise.", "de": "Lina sieht die geteilte Reise, ihre Dokumente und die Packliste."},
-  "works": {"en": "Create an airport or online check-in reminder from the trip.", "ar": "أنشئ تذكيرًا بالتوجه إلى المطار أو بإجراءات السفر عبر الإنترنت من الرحلة.", "es": "Crea desde el viaje un recordatorio para ir al aeropuerto o para facturar en línea.", "fr": "Créez depuis le voyage un rappel pour l’aéroport ou l’enregistrement en ligne.", "de": "Erstelle aus der Reise eine Erinnerung für den Flughafen oder den Online-Check-in."}},
- {"id": "occasions", "clip": "occasions",
-  "title": {"en": "Occasions", "ar": "المناسبات", "es": "Ocasiones", "fr": "Occasions", "de": "Anlässe"},
-  "helps": {"en": "Never miss the moment: plan a gift early, within a budget, or keep it a surprise.", "ar": "لا تفوّت اللحظة: خطّط للهدية مبكرًا ضمن ميزانية، أو احتفظ بها مفاجأة.", "es": "No te pierdas el momento: planea un regalo con tiempo, dentro de un presupuesto, o mantenlo en sorpresa.", "fr": "Ne manquez jamais le moment : préparez un cadeau tôt, dans un budget, ou gardez la surprise.", "de": "Verpasse nie den Moment: Plane ein Geschenk früh und im Budget, oder halte es als Überraschung geheim."},
+   {
+    "en": "Your trips",
+    "ar": "رحلاتكما",
+    "es": "Vuestros viajes",
+    "fr": "Vos voyages",
+    "de": "Eure Reisen"
+   },
+   {
+    "en": "The trip at a glance",
+    "ar": "الرحلة في لمحة",
+    "es": "El viaje de un vistazo",
+    "fr": "Le voyage en un coup d’œil",
+    "de": "Die Reise auf einen Blick"
+   },
+   {
+    "en": "Flight options compared",
+    "ar": "مقارنة خيارات الطيران",
+    "es": "Opciones de vuelo comparadas",
+    "fr": "Les options de vol comparées",
+    "de": "Flugoptionen im Vergleich"
+   },
+   {
+    "en": "The itinerary",
+    "ar": "برنامج الرحلة",
+    "es": "El itinerario",
+    "fr": "L’itinéraire",
+    "de": "Der Reiseplan"
+   },
+   {
+    "en": "Documents and packing list",
+    "ar": "المستندات وقائمة التجهيز",
+    "es": "Documentos y lista de equipaje",
+    "fr": "Documents et liste de valise",
+    "de": "Dokumente und Packliste"
+   }
+  ],
+  "partner": {
+   "en": "Lina sees the shared trip, its documents and the packing list.",
+   "ar": "ترى لينا الرحلة المشتركة ومستنداتها وقائمة التجهيز.",
+   "es": "Lina ve el viaje compartido, sus documentos y la lista de equipaje.",
+   "fr": "Lina voit le voyage partagé, ses documents et la liste de valise.",
+   "de": "Lina sieht die geteilte Reise, ihre Dokumente und die Packliste."
+  },
+  "works": {
+   "en": "Create an airport or online check-in reminder from the trip.",
+   "ar": "أنشئ تذكيرًا بالتوجه إلى المطار أو بإجراءات السفر عبر الإنترنت من الرحلة.",
+   "es": "Crea desde el viaje un recordatorio para ir al aeropuerto o para facturar en línea.",
+   "fr": "Créez depuis le voyage un rappel pour l’aéroport ou l’enregistrement en ligne.",
+   "de": "Erstelle aus der Reise eine Erinnerung für den Flughafen oder den Online-Check-in."
+  }
+ },
+ {
+  "id": "occasions",
+  "clip": "occasions",
+  "title": {
+   "en": "Occasions",
+   "ar": "المناسبات",
+   "es": "Ocasiones",
+   "fr": "Occasions",
+   "de": "Anlässe"
+  },
+  "helps": {
+   "en": "Never miss the moment: plan a gift early, within a budget, or keep it a surprise.",
+   "ar": "لا تفوّت اللحظة: خطّط للهدية مبكرًا ضمن ميزانية، أو احتفظ بها مفاجأة.",
+   "es": "No te pierdas el momento: planea un regalo con tiempo, dentro de un presupuesto, o mantenlo en sorpresa.",
+   "fr": "Ne manquez jamais le moment : préparez un cadeau tôt, dans un budget, ou gardez la surprise.",
+   "de": "Verpasse nie den Moment: Plane ein Geschenk früh und im Budget, oder halte es als Überraschung geheim."
+  },
   "chapters": [
-   {"en": "Pick the occasion", "ar": "اختر المناسبة", "es": "Elige la ocasión", "fr": "Choisissez l’occasion", "de": "Den Anlass wählen"},
-   {"en": "Set a budget", "ar": "حدّد ميزانية", "es": "Fija un presupuesto", "fr": "Fixez un budget", "de": "Ein Budget festlegen"},
-   {"en": "Compare gift ideas", "ar": "قارن أفكار الهدايا", "es": "Compara ideas de regalo", "fr": "Comparez les idées de cadeaux", "de": "Geschenkideen vergleichen"},
-   {"en": "Bought and still to buy", "ar": "ما اشتُري وما بقي", "es": "Comprado y por comprar", "fr": "Acheté et encore à acheter", "de": "Gekauft und noch zu kaufen"},
-   {"en": "Preparation reminders", "ar": "تذكيرات التحضير", "es": "Recordatorios de preparación", "fr": "Rappels de préparation", "de": "Vorbereitungs-Erinnerungen"}],
-  "partner": {"en": "Lina’s birthday is Only me, so Lina sees nothing: no occasion and no notification.", "ar": "عيد ميلاد لينا «أنا فقط»، فلا ترى لينا شيئًا: لا مناسبة ولا إشعار.", "es": "El cumpleaños de Lina es Solo yo, así que Lina no ve nada: ni la ocasión ni ninguna notificación.", "fr": "L’anniversaire de Lina est en Moi seulement : Lina ne voit rien, ni l’occasion ni de notification.", "de": "Linas Geburtstag ist Nur ich, also sieht Lina nichts: keinen Anlass und keine Benachrichtigung."}},
- {"id": "counters", "clip": "counters",
-  "title": {"en": "Counters & timelines", "ar": "العدّادات والخطوط الزمنية", "es": "Contadores y líneas de tiempo", "fr": "Compteurs et chronologies", "de": "Zähler und Zeitleisten"},
-  "helps": {"en": "Count the days since the day you met, or until the next thing you are looking forward to.", "ar": "عُدّ الأيام منذ يوم تعارفكما أو حتى الشيء التالي الذي تنتظره.", "es": "Cuenta los días desde que os conocisteis, o hasta lo próximo que esperas con ilusión.", "fr": "Comptez les jours depuis votre rencontre, ou jusqu’à ce que vous attendez avec impatience.", "de": "Zählt die Tage seit eurem Kennenlernen oder bis zum nächsten Ereignis, auf das ihr euch freut."},
+   {
+    "en": "Pick the occasion",
+    "ar": "اختر المناسبة",
+    "es": "Elige la ocasión",
+    "fr": "Choisissez l’occasion",
+    "de": "Den Anlass wählen"
+   },
+   {
+    "en": "Set a budget",
+    "ar": "حدّد ميزانية",
+    "es": "Fija un presupuesto",
+    "fr": "Fixez un budget",
+    "de": "Ein Budget festlegen"
+   },
+   {
+    "en": "Compare gift ideas",
+    "ar": "قارن أفكار الهدايا",
+    "es": "Compara ideas de regalo",
+    "fr": "Comparez les idées de cadeaux",
+    "de": "Geschenkideen vergleichen"
+   },
+   {
+    "en": "Bought and still to buy",
+    "ar": "ما اشتُري وما بقي",
+    "es": "Comprado y por comprar",
+    "fr": "Acheté et encore à acheter",
+    "de": "Gekauft und noch zu kaufen"
+   },
+   {
+    "en": "Preparation reminders",
+    "ar": "تذكيرات التحضير",
+    "es": "Recordatorios de preparación",
+    "fr": "Rappels de préparation",
+    "de": "Vorbereitungs-Erinnerungen"
+   }
+  ],
+  "partner": {
+   "en": "Lina’s birthday is Only me, so Lina sees nothing: no occasion and no notification.",
+   "ar": "عيد ميلاد لينا «أنا فقط»، فلا ترى لينا شيئًا: لا مناسبة ولا إشعار.",
+   "es": "El cumpleaños de Lina es Solo yo, así que Lina no ve nada: ni la ocasión ni ninguna notificación.",
+   "fr": "L’anniversaire de Lina est en Moi seulement : Lina ne voit rien, ni l’occasion ni de notification.",
+   "de": "Linas Geburtstag ist Nur ich, also sieht Lina nichts: keinen Anlass und keine Benachrichtigung."
+  }
+ },
+ {
+  "id": "counters",
+  "clip": "counters",
+  "title": {
+   "en": "Counters & timelines",
+   "ar": "العدّادات والخطوط الزمنية",
+   "es": "Contadores y líneas de tiempo",
+   "fr": "Compteurs et chronologies",
+   "de": "Zähler und Zeitleisten"
+  },
+  "helps": {
+   "en": "Count the days since the day you met, or until the next thing you are looking forward to.",
+   "ar": "عُدّ الأيام منذ يوم تعارفكما أو حتى الشيء التالي الذي تنتظره.",
+   "es": "Cuenta los días desde que os conocisteis, o hasta lo próximo que esperas con ilusión.",
+   "fr": "Comptez les jours depuis votre rencontre, ou jusqu’à ce que vous attendez avec impatience.",
+   "de": "Zählt die Tage seit eurem Kennenlernen oder bis zum nächsten Ereignis, auf das ihr euch freut."
+  },
   "chapters": [
-   {"en": "Your counters", "ar": "عدّاداتك", "es": "Tus contadores", "fr": "Vos compteurs", "de": "Deine Zähler"},
-   {"en": "Add a counter", "ar": "أضف عدّادًا", "es": "Añade un contador", "fr": "Ajoutez un compteur", "de": "Einen Zähler hinzufügen"},
-   {"en": "The next milestone", "ar": "المحطة التالية", "es": "El próximo hito", "fr": "La prochaine étape", "de": "Der nächste Meilenstein"},
-   {"en": "Named timelines", "ar": "خطوط زمنية بأسماء", "es": "Líneas de tiempo con nombre", "fr": "Des chronologies nommées", "de": "Benannte Zeitleisten"}],
-  "solo": {"en": "On your own, counters and timelines are just for you.", "ar": "بمفردك، تكون العدّادات والخطوط الزمنية لك وحدك.", "es": "Por tu cuenta, los contadores y las líneas de tiempo son solo para ti.", "fr": "Seul(e), compteurs et chronologies sont rien que pour vous.", "de": "Allein sind Zähler und Zeitleisten nur für dich."}},
- {"id": "places", "clip": "places",
-  "title": {"en": "Our places", "ar": "أماكننا", "es": "Nuestros lugares", "fr": "Nos lieux", "de": "Unsere Orte"},
-  "helps": {"en": "Keep the places you love and the ones you dream of, on a list and on a map.", "ar": "احتفظا بالأماكن التي تحبانها والتي تحلمان بها، في قائمة وعلى خريطة.", "es": "Guardad los lugares que os encantan y los que soñáis, en una lista y en un mapa.", "fr": "Gardez les lieux que vous aimez et ceux dont vous rêvez, en liste et sur une carte.", "de": "Bewahrt die Orte, die ihr liebt, und die, von denen ihr träumt, in einer Liste und auf einer Karte."},
+   {
+    "en": "Your counters",
+    "ar": "عدّاداتك",
+    "es": "Tus contadores",
+    "fr": "Vos compteurs",
+    "de": "Deine Zähler"
+   },
+   {
+    "en": "Add a counter",
+    "ar": "أضف عدّادًا",
+    "es": "Añade un contador",
+    "fr": "Ajoutez un compteur",
+    "de": "Einen Zähler hinzufügen"
+   },
+   {
+    "en": "The next milestone",
+    "ar": "المحطة التالية",
+    "es": "El próximo hito",
+    "fr": "La prochaine étape",
+    "de": "Der nächste Meilenstein"
+   },
+   {
+    "en": "Named timelines",
+    "ar": "خطوط زمنية بأسماء",
+    "es": "Líneas de tiempo con nombre",
+    "fr": "Des chronologies nommées",
+    "de": "Benannte Zeitleisten"
+   }
+  ],
+  "solo": {
+   "en": "On your own, counters and timelines are just for you.",
+   "ar": "بمفردك، تكون العدّادات والخطوط الزمنية لك وحدك.",
+   "es": "Por tu cuenta, los contadores y las líneas de tiempo son solo para ti.",
+   "fr": "Seul(e), compteurs et chronologies sont rien que pour vous.",
+   "de": "Allein sind Zähler und Zeitleisten nur für dich."
+  }
+ },
+ {
+  "id": "places",
+  "clip": "places",
+  "title": {
+   "en": "Our places",
+   "ar": "أماكننا",
+   "es": "Nuestros lugares",
+   "fr": "Nos lieux",
+   "de": "Unsere Orte"
+  },
+  "helps": {
+   "en": "Keep the places you love and the ones you dream of, on a list and on a map.",
+   "ar": "احتفظا بالأماكن التي تحبانها والتي تحلمان بها، في قائمة وعلى خريطة.",
+   "es": "Guardad los lugares que os encantan y los que soñáis, en una lista y en un mapa.",
+   "fr": "Gardez les lieux que vous aimez et ceux dont vous rêvez, en liste et sur une carte.",
+   "de": "Bewahrt die Orte, die ihr liebt, und die, von denen ihr träumt, in einer Liste und auf einer Karte."
+  },
   "chapters": [
-   {"en": "Places you’ve been", "ar": "أماكن زرتماها", "es": "Lugares donde habéis estado", "fr": "Les lieux où vous êtes allés", "de": "Orte, an denen ihr wart"},
-   {"en": "Your bucket list", "ar": "قائمة أحلامكما", "es": "Vuestra lista de deseos", "fr": "Votre liste de rêves", "de": "Eure Wunschliste"},
-   {"en": "The map and its pins", "ar": "الخريطة ودبابيسها", "es": "El mapa y sus marcadores", "fr": "La carte et ses repères", "de": "Die Karte und ihre Pins"},
-   {"en": "Plan a trip from a dream", "ar": "خطّطا لرحلة من حلم", "es": "Planead un viaje desde un sueño", "fr": "Préparez un voyage à partir d’un rêve", "de": "Aus einem Traum eine Reise planen"}]},
- {"id": "contacts", "clip": "contacts",
-  "title": {"en": "Contact cards", "ar": "بطاقات جهات الاتصال", "es": "Fichas de contacto", "fr": "Fiches contact", "de": "Kontaktkarten"},
-  "helps": {"en": "The numbers you both need, like the doctor or the building, saved once for both of you.", "ar": "الأرقام التي تحتاجانها، مثل الطبيب أو المبنى، محفوظة مرة واحدة لكليكما.", "es": "Los números que necesitáis los dos, como el médico o el edificio, guardados una vez para ambos.", "fr": "Les numéros dont vous avez besoin tous les deux, comme le médecin ou l’immeuble, enregistrés une fois pour vous deux.", "de": "Die Nummern, die ihr beide braucht, etwa Arzt oder Hausverwaltung, einmal für euch beide gespeichert."},
+   {
+    "en": "Places you’ve been",
+    "ar": "أماكن زرتماها",
+    "es": "Lugares donde habéis estado",
+    "fr": "Les lieux où vous êtes allés",
+    "de": "Orte, an denen ihr wart"
+   },
+   {
+    "en": "Your bucket list",
+    "ar": "قائمة أحلامكما",
+    "es": "Vuestra lista de deseos",
+    "fr": "Votre liste de rêves",
+    "de": "Eure Wunschliste"
+   },
+   {
+    "en": "The map and its pins",
+    "ar": "الخريطة ودبابيسها",
+    "es": "El mapa y sus marcadores",
+    "fr": "La carte et ses repères",
+    "de": "Die Karte und ihre Pins"
+   },
+   {
+    "en": "Plan a trip from a dream",
+    "ar": "خطّطا لرحلة من حلم",
+    "es": "Planead un viaje desde un sueño",
+    "fr": "Préparez un voyage à partir d’un rêve",
+    "de": "Aus einem Traum eine Reise planen"
+   }
+  ]
+ },
+ {
+  "id": "contacts",
+  "clip": "contacts",
+  "title": {
+   "en": "Contact cards",
+   "ar": "بطاقات جهات الاتصال",
+   "es": "Fichas de contacto",
+   "fr": "Fiches contact",
+   "de": "Kontaktkarten"
+  },
+  "helps": {
+   "en": "The numbers you both need, like the doctor or the building, saved once for both of you.",
+   "ar": "الأرقام التي تحتاجانها، مثل الطبيب أو المبنى، محفوظة مرة واحدة لكليكما.",
+   "es": "Los números que necesitáis los dos, como el médico o el edificio, guardados una vez para ambos.",
+   "fr": "Les numéros dont vous avez besoin tous les deux, comme le médecin ou l’immeuble, enregistrés une fois pour vous deux.",
+   "de": "Die Nummern, die ihr beide braucht, etwa Arzt oder Hausverwaltung, einmal für euch beide gespeichert."
+  },
   "chapters": [
-   {"en": "Your contact cards", "ar": "بطاقاتكما", "es": "Vuestras fichas", "fr": "Vos fiches", "de": "Eure Kontaktkarten"},
-   {"en": "Open a card", "ar": "افتح بطاقة", "es": "Abre una ficha", "fr": "Ouvrez une fiche", "de": "Eine Karte öffnen"},
-   {"en": "Call, map or website", "ar": "اتصال أو خريطة أو موقع", "es": "Llamar, mapa o web", "fr": "Appel, carte ou site web", "de": "Anrufen, Karte oder Website"},
-   {"en": "Import from or save to your phone", "ar": "استورد من هاتفك أو احفظ فيه", "es": "Importa desde tu teléfono o guarda en él", "fr": "Importez depuis votre téléphone ou enregistrez-y", "de": "Vom Handy importieren oder dort speichern"}]},
- {"id": "letters", "clip": "letters",
-  "title": {"en": "Letters", "ar": "الرسائل", "es": "Cartas", "fr": "Lettres", "de": "Briefe"},
-  "helps": {"en": "Longer words for someone you love, sent now or opened on a special day.", "ar": "كلمات أطول لمن تحب، تُرسل الآن أو تُفتح في يوم مميز.", "es": "Palabras más largas para quien quieres, enviadas ahora o abiertas en un día especial.", "fr": "Des mots plus longs pour la personne que vous aimez, envoyés maintenant ou ouverts un jour spécial.", "de": "Längere Worte für den Menschen, den du liebst, jetzt gesendet oder an einem besonderen Tag geöffnet."},
+   {
+    "en": "Your contact cards",
+    "ar": "بطاقاتكما",
+    "es": "Vuestras fichas",
+    "fr": "Vos fiches",
+    "de": "Eure Kontaktkarten"
+   },
+   {
+    "en": "Open a card",
+    "ar": "افتح بطاقة",
+    "es": "Abre una ficha",
+    "fr": "Ouvrez une fiche",
+    "de": "Eine Karte öffnen"
+   },
+   {
+    "en": "Call, map or website",
+    "ar": "اتصال أو خريطة أو موقع",
+    "es": "Llamar, mapa o web",
+    "fr": "Appel, carte ou site web",
+    "de": "Anrufen, Karte oder Website"
+   },
+   {
+    "en": "Import from or save to your phone",
+    "ar": "استورد من هاتفك أو احفظ فيه",
+    "es": "Importa desde tu teléfono o guarda en él",
+    "fr": "Importez depuis votre téléphone ou enregistrez-y",
+    "de": "Vom Handy importieren oder dort speichern"
+   }
+  ]
+ },
+ {
+  "id": "letters",
+  "clip": "letters",
+  "title": {
+   "en": "Letters",
+   "ar": "الرسائل",
+   "es": "Cartas",
+   "fr": "Lettres",
+   "de": "Briefe"
+  },
+  "helps": {
+   "en": "Longer words for someone you love, sent now or opened on a special day.",
+   "ar": "كلمات أطول لمن تحب، تُرسل الآن أو تُفتح في يوم مميز.",
+   "es": "Palabras más largas para quien quieres, enviadas ahora o abiertas en un día especial.",
+   "fr": "Des mots plus longs pour la personne que vous aimez, envoyés maintenant ou ouverts un jour spécial.",
+   "de": "Längere Worte für den Menschen, den du liebst, jetzt gesendet oder an einem besonderen Tag geöffnet."
+  },
   "chapters": [
-   {"en": "Write a letter", "ar": "اكتب رسالة", "es": "Escribe una carta", "fr": "Écrivez une lettre", "de": "Einen Brief schreiben"},
-   {"en": "Open on a special day", "ar": "تُفتح في يوم مميز", "es": "Abrir en un día especial", "fr": "À ouvrir un jour spécial", "de": "An einem besonderen Tag öffnen"},
-   {"en": "Send, or keep it as a draft", "ar": "أرسلها أو احتفظ بها مسودة", "es": "Envíala o guárdala como borrador", "fr": "Envoyez-la ou gardez-la en brouillon", "de": "Senden oder als Entwurf behalten"},
-   {"en": "Read and reply", "ar": "اقرأ وردّ", "es": "Lee y responde", "fr": "Lisez et répondez", "de": "Lesen und antworten"}],
-  "solo": {"en": "On your own, write private drafts and send them once you connect a partner.", "ar": "بمفردك، اكتب مسودات خاصة وأرسلها بعد ربط شريك.", "es": "Por tu cuenta, escribe borradores privados y envíalos cuando conectes a tu pareja.", "fr": "Seul(e), écrivez des brouillons privés et envoyez-les une fois votre partenaire connecté.", "de": "Allein schreibst du private Entwürfe und sendest sie, sobald du einen Partner verbunden hast."}},
- {"id": "gestures", "clip": "gestures",
-  "title": {"en": "A little love", "ar": "لمسة حب", "es": "Un poco de amor", "fr": "Un peu d’amour", "de": "Ein bisschen Liebe"},
-  "helps": {"en": "A hug, a kiss or a thank you in one tap, felt across any distance.", "ar": "عناق أو قبلة أو شكر بلمسة واحدة، يُحَسّ عبر أي مسافة.", "es": "Un abrazo, un beso o un gracias en un toque, que se siente a cualquier distancia.", "fr": "Un câlin, un bisou ou un merci en une touche, ressenti à n’importe quelle distance.", "de": "Eine Umarmung, ein Kuss oder ein Danke mit einem Tipp, spürbar über jede Entfernung."},
+   {
+    "en": "Write a letter",
+    "ar": "اكتب رسالة",
+    "es": "Escribe una carta",
+    "fr": "Écrivez une lettre",
+    "de": "Einen Brief schreiben"
+   },
+   {
+    "en": "Open on a special day",
+    "ar": "تُفتح في يوم مميز",
+    "es": "Abrir en un día especial",
+    "fr": "À ouvrir un jour spécial",
+    "de": "An einem besonderen Tag öffnen"
+   },
+   {
+    "en": "Send, or keep it as a draft",
+    "ar": "أرسلها أو احتفظ بها مسودة",
+    "es": "Envíala o guárdala como borrador",
+    "fr": "Envoyez-la ou gardez-la en brouillon",
+    "de": "Senden oder als Entwurf behalten"
+   },
+   {
+    "en": "Read and reply",
+    "ar": "اقرأ وردّ",
+    "es": "Lee y responde",
+    "fr": "Lisez et répondez",
+    "de": "Lesen und antworten"
+   }
+  ],
+  "solo": {
+   "en": "On your own, write private drafts and send them once you connect a partner.",
+   "ar": "بمفردك، اكتب مسودات خاصة وأرسلها بعد ربط شريك.",
+   "es": "Por tu cuenta, escribe borradores privados y envíalos cuando conectes a tu pareja.",
+   "fr": "Seul(e), écrivez des brouillons privés et envoyez-les une fois votre partenaire connecté.",
+   "de": "Allein schreibst du private Entwürfe und sendest sie, sobald du einen Partner verbunden hast."
+  }
+ },
+ {
+  "id": "gestures",
+  "clip": "gestures",
+  "title": {
+   "en": "A little love",
+   "ar": "لمسة حب",
+   "es": "Un poco de amor",
+   "fr": "Un peu d’amour",
+   "de": "Ein bisschen Liebe"
+  },
+  "helps": {
+   "en": "A hug, a kiss or a thank you in one tap, felt across any distance.",
+   "ar": "عناق أو قبلة أو شكر بلمسة واحدة، يُحَسّ عبر أي مسافة.",
+   "es": "Un abrazo, un beso o un gracias en un toque, que se siente a cualquier distancia.",
+   "fr": "Un câlin, un bisou ou un merci en une touche, ressenti à n’importe quelle distance.",
+   "de": "Eine Umarmung, ein Kuss oder ein Danke mit einem Tipp, spürbar über jede Entfernung."
+  },
   "chapters": [
-   {"en": "Tap a gesture", "ar": "المس لفتة", "es": "Toca un gesto", "fr": "Touchez un geste", "de": "Eine Geste antippen"},
-   {"en": "Sent with a message picked at random", "ar": "تُرسل برسالة مختارة عشوائيًا", "es": "Se envía con un mensaje elegido al azar", "fr": "Envoyé avec un message choisi au hasard", "de": "Mit einer zufällig gewählten Nachricht gesendet"},
-   {"en": "Make the messages yours", "ar": "اجعل الرسائل بأسلوبك", "es": "Haz tuyos los mensajes", "fr": "Personnalisez les messages", "de": "Mach die Nachrichten zu deinen"},
-   {"en": "Create your own gesture", "ar": "أنشئ لفتتك الخاصة", "es": "Crea tu propio gesto", "fr": "Créez votre propre geste", "de": "Deine eigene Geste erstellen"}],
-  "partner": {"en": "Lina gets a notification with the message.", "ar": "يصل إلى لينا إشعار بالرسالة.", "es": "Lina recibe una notificación con el mensaje.", "fr": "Lina reçoit une notification avec le message.", "de": "Lina bekommt eine Benachrichtigung mit der Nachricht."},
-  "solo": {"en": "A little love needs a partner.", "ar": "تحتاج لمسة الحب إلى شريك.", "es": "Un poco de amor necesita una pareja.", "fr": "Un peu d’amour nécessite un partenaire.", "de": "Ein bisschen Liebe braucht einen Partner."}},
- {"id": "checkins", "clip": "checkins",
-  "title": {"en": "Daily check-ins", "ar": "التواصل اليومي", "es": "Check-ins diarios", "fr": "Check-ins quotidiens", "de": "Tägliche Check-ins"},
-  "helps": {"en": "A one-minute habit: how you feel today and one honest line, shared with your partner.", "ar": "عادة دقيقة واحدة: شعورك اليوم وسطر صادق، تشاركه مع شريكك.", "es": "Un hábito de un minuto: cómo te sientes hoy y una frase sincera, compartida con tu pareja.", "fr": "Une habitude d’une minute : comment vous vous sentez aujourd’hui et une phrase sincère, partagée avec votre partenaire.", "de": "Eine Gewohnheit von einer Minute: wie du dich heute fühlst und ein ehrlicher Satz, mit deinem Partner geteilt."},
+   {
+    "en": "Tap a gesture",
+    "ar": "المس لفتة",
+    "es": "Toca un gesto",
+    "fr": "Touchez un geste",
+    "de": "Eine Geste antippen"
+   },
+   {
+    "en": "Sent with a message picked at random",
+    "ar": "تُرسل برسالة مختارة عشوائيًا",
+    "es": "Se envía con un mensaje elegido al azar",
+    "fr": "Envoyé avec un message choisi au hasard",
+    "de": "Mit einer zufällig gewählten Nachricht gesendet"
+   },
+   {
+    "en": "Make the messages yours",
+    "ar": "اجعل الرسائل بأسلوبك",
+    "es": "Haz tuyos los mensajes",
+    "fr": "Personnalisez les messages",
+    "de": "Mach die Nachrichten zu deinen"
+   },
+   {
+    "en": "Create your own gesture",
+    "ar": "أنشئ لفتتك الخاصة",
+    "es": "Crea tu propio gesto",
+    "fr": "Créez votre propre geste",
+    "de": "Deine eigene Geste erstellen"
+   }
+  ],
+  "partner": {
+   "en": "Lina gets a notification with the message.",
+   "ar": "يصل إلى لينا إشعار بالرسالة.",
+   "es": "Lina recibe una notificación con el mensaje.",
+   "fr": "Lina reçoit une notification avec le message.",
+   "de": "Lina bekommt eine Benachrichtigung mit der Nachricht."
+  },
+  "solo": {
+   "en": "A little love needs a partner.",
+   "ar": "تحتاج لمسة الحب إلى شريك.",
+   "es": "Un poco de amor necesita una pareja.",
+   "fr": "Un peu d’amour nécessite un partenaire.",
+   "de": "Ein bisschen Liebe braucht einen Partner."
+  }
+ },
+ {
+  "id": "checkins",
+  "clip": "checkins",
+  "title": {
+   "en": "Daily check-ins",
+   "ar": "التواصل اليومي",
+   "es": "Check-ins diarios",
+   "fr": "Check-ins quotidiens",
+   "de": "Tägliche Check-ins"
+  },
+  "helps": {
+   "en": "A one-minute habit: how you feel today and one honest line, shared with your partner.",
+   "ar": "عادة دقيقة واحدة: شعورك اليوم وسطر صادق، تشاركه مع شريكك.",
+   "es": "Un hábito de un minuto: cómo te sientes hoy y una frase sincera, compartida con tu pareja.",
+   "fr": "Une habitude d’une minute : comment vous vous sentez aujourd’hui et une phrase sincère, partagée avec votre partenaire.",
+   "de": "Eine Gewohnheit von einer Minute: wie du dich heute fühlst und ein ehrlicher Satz, mit deinem Partner geteilt."
+  },
   "chapters": [
-   {"en": "How do you feel today?", "ar": "كيف تشعر اليوم؟", "es": "¿Cómo te sientes hoy?", "fr": "Comment vous sentez-vous aujourd’hui ?", "de": "Wie fühlst du dich heute?"},
-   {"en": "Your answers side by side", "ar": "إجاباتكما جنبًا إلى جنب", "es": "Vuestras respuestas lado a lado", "fr": "Vos réponses côte à côte", "de": "Eure Antworten nebeneinander"},
-   {"en": "Earlier days", "ar": "الأيام السابقة", "es": "Días anteriores", "fr": "Les jours précédents", "de": "Frühere Tage"},
-   {"en": "One entry a day", "ar": "إدخال واحد في اليوم", "es": "Una entrada al día", "fr": "Une entrée par jour", "de": "Ein Eintrag pro Tag"}],
-  "solo": {"en": "On your own, it is your private feelings journal.", "ar": "بمفردك، هو دفتر مشاعرك الخاص.", "es": "Por tu cuenta, es tu diario privado de emociones.", "fr": "Seul(e), c’est votre journal intime des émotions.", "de": "Allein ist es dein privates Gefühlstagebuch."}},
- {"id": "experiences", "clip": "experiences",
-  "title": {"en": "Shared experiences", "ar": "التجارب المشتركة", "es": "Experiencias compartidas", "fr": "Expériences partagées", "de": "Gemeinsame Erlebnisse"},
-  "helps": {"en": "Films, shows, books and outings you want to enjoy together, from idea to review.", "ar": "الأفلام والمسلسلات والكتب والنزهات التي تريدان الاستمتاع بها معًا، من الفكرة إلى التقييم.", "es": "Películas, series, libros y salidas para disfrutar juntos, de la idea a la reseña.", "fr": "Films, séries, livres et sorties à apprécier ensemble, de l’idée à l’avis.", "de": "Filme, Serien, Bücher und Ausflüge, die ihr gemeinsam genießen wollt, von der Idee bis zur Bewertung."},
+   {
+    "en": "How do you feel today?",
+    "ar": "كيف تشعر اليوم؟",
+    "es": "¿Cómo te sientes hoy?",
+    "fr": "Comment vous sentez-vous aujourd’hui ?",
+    "de": "Wie fühlst du dich heute?"
+   },
+   {
+    "en": "Your answers side by side",
+    "ar": "إجاباتكما جنبًا إلى جنب",
+    "es": "Vuestras respuestas lado a lado",
+    "fr": "Vos réponses côte à côte",
+    "de": "Eure Antworten nebeneinander"
+   },
+   {
+    "en": "Earlier days",
+    "ar": "الأيام السابقة",
+    "es": "Días anteriores",
+    "fr": "Les jours précédents",
+    "de": "Frühere Tage"
+   },
+   {
+    "en": "One entry a day",
+    "ar": "إدخال واحد في اليوم",
+    "es": "Una entrada al día",
+    "fr": "Une entrée par jour",
+    "de": "Ein Eintrag pro Tag"
+   }
+  ],
+  "solo": {
+   "en": "On your own, it is your private feelings journal.",
+   "ar": "بمفردك، هو دفتر مشاعرك الخاص.",
+   "es": "Por tu cuenta, es tu diario privado de emociones.",
+   "fr": "Seul(e), c’est votre journal intime des émotions.",
+   "de": "Allein ist es dein privates Gefühlstagebuch."
+  }
+ },
+ {
+  "id": "experiences",
+  "clip": "experiences",
+  "title": {
+   "en": "Shared experiences",
+   "ar": "التجارب المشتركة",
+   "es": "Experiencias compartidas",
+   "fr": "Expériences partagées",
+   "de": "Gemeinsame Erlebnisse"
+  },
+  "helps": {
+   "en": "Films, shows, books and outings you want to enjoy together, from idea to review.",
+   "ar": "الأفلام والمسلسلات والكتب والنزهات التي تريدان الاستمتاع بها معًا، من الفكرة إلى التقييم.",
+   "es": "Películas, series, libros y salidas para disfrutar juntos, de la idea a la reseña.",
+   "fr": "Films, séries, livres et sorties à apprécier ensemble, de l’idée à l’avis.",
+   "de": "Filme, Serien, Bücher und Ausflüge, die ihr gemeinsam genießen wollt, von der Idee bis zur Bewertung."
+  },
   "chapters": [
-   {"en": "Add a show, film or book", "ar": "أضف مسلسلًا أو فيلمًا أو كتابًا", "es": "Añade una serie, película o libro", "fr": "Ajoutez une série, un film ou un livre", "de": "Eine Serie, einen Film oder ein Buch hinzufügen"},
-   {"en": "Your lists", "ar": "قوائمكما", "es": "Vuestras listas", "fr": "Vos listes", "de": "Eure Listen"},
-   {"en": "Planned for a date", "ar": "مخطط لموعد", "es": "Planeado para una cita", "fr": "Prévu pour un rendez-vous", "de": "Für ein Date geplant"},
-   {"en": "Rate and review", "ar": "قيّما وراجعا", "es": "Puntuad y reseñad", "fr": "Notez et donnez votre avis", "de": "Bewerten und rezensieren"}],
-  "partner": {"en": "Lina sees the plan and can comment.", "ar": "ترى لينا الخطة ويمكنها التعليق.", "es": "Lina ve el plan y puede comentar.", "fr": "Lina voit le programme et peut commenter.", "de": "Lina sieht den Plan und kann kommentieren."}},
- {"id": "memories", "clip": "memories",
-  "title": {"en": "Memories & scrapbooks", "ar": "الذكريات والألبومات", "es": "Recuerdos y álbumes", "fr": "Souvenirs et albums", "de": "Erinnerungen und Fotoalben"},
-  "helps": {"en": "Keep your moments in pages you make together, and a daily selfie made by both of you.", "ar": "احفظا لحظاتكما في صفحات تصنعانها معًا، وسيلفي يومي يصنعه كلاكما.", "es": "Guardad vuestros momentos en páginas que hacéis juntos, y un selfie diario hecho por los dos.", "fr": "Gardez vos moments dans des pages créées ensemble, et un selfie quotidien fait par vous deux.", "de": "Bewahrt eure Momente auf Seiten, die ihr gemeinsam gestaltet, und ein tägliches Selfie von euch beiden."},
+   {
+    "en": "Add a show, film or book",
+    "ar": "أضف مسلسلًا أو فيلمًا أو كتابًا",
+    "es": "Añade una serie, película o libro",
+    "fr": "Ajoutez une série, un film ou un livre",
+    "de": "Eine Serie, einen Film oder ein Buch hinzufügen"
+   },
+   {
+    "en": "Your lists",
+    "ar": "قوائمكما",
+    "es": "Vuestras listas",
+    "fr": "Vos listes",
+    "de": "Eure Listen"
+   },
+   {
+    "en": "Planned for a date",
+    "ar": "مخطط لموعد",
+    "es": "Planeado para una cita",
+    "fr": "Prévu pour un rendez-vous",
+    "de": "Für ein Date geplant"
+   },
+   {
+    "en": "Rate and review",
+    "ar": "قيّما وراجعا",
+    "es": "Puntuad y reseñad",
+    "fr": "Notez et donnez votre avis",
+    "de": "Bewerten und rezensieren"
+   }
+  ],
+  "partner": {
+   "en": "Lina sees the plan and can comment.",
+   "ar": "ترى لينا الخطة ويمكنها التعليق.",
+   "es": "Lina ve el plan y puede comentar.",
+   "fr": "Lina voit le programme et peut commenter.",
+   "de": "Lina sieht den Plan und kann kommentieren."
+  }
+ },
+ {
+  "id": "memories",
+  "clip": "memories",
+  "title": {
+   "en": "Memories & scrapbooks",
+   "ar": "الذكريات والألبومات",
+   "es": "Recuerdos y álbumes",
+   "fr": "Souvenirs et albums",
+   "de": "Erinnerungen und Fotoalben"
+  },
+  "helps": {
+   "en": "Keep your moments in pages you make together, and a daily selfie made by both of you.",
+   "ar": "احفظا لحظاتكما في صفحات تصنعانها معًا، وسيلفي يومي يصنعه كلاكما.",
+   "es": "Guardad vuestros momentos en páginas que hacéis juntos, y un selfie diario hecho por los dos.",
+   "fr": "Gardez vos moments dans des pages créées ensemble, et un selfie quotidien fait par vous deux.",
+   "de": "Bewahrt eure Momente auf Seiten, die ihr gemeinsam gestaltet, und ein tägliches Selfie von euch beiden."
+  },
   "chapters": [
-   {"en": "Pick a page design", "ar": "اختر تصميم صفحة", "es": "Elige un diseño de página", "fr": "Choisissez un modèle de page", "de": "Ein Seitendesign wählen"},
-   {"en": "Photos and words", "ar": "صور وكلمات", "es": "Fotos y palabras", "fr": "Photos et mots", "de": "Fotos und Worte"},
-   {"en": "A scrapbook made together", "ar": "ألبوم تصنعانه معًا", "es": "Un álbum hecho juntos", "fr": "Un album fait ensemble", "de": "Ein gemeinsam gestaltetes Album"},
-   {"en": "Add pages, nudge your partner", "ar": "أضف صفحات ونبّه شريكك", "es": "Añade páginas y avisa a tu pareja", "fr": "Ajoutez des pages, relancez votre partenaire", "de": "Seiten hinzufügen, Partner anstupsen"},
-   {"en": "Daily selfie, made by both", "ar": "سيلفي يومي يصنعه كلاكما", "es": "Selfie diario, hecho por los dos", "fr": "Selfie quotidien, fait à deux", "de": "Tägliches Selfie, von beiden gemacht"}],
-  "partner": {"en": "Lina gets the nudge and adds her part to the same pages.", "ar": "يصل التنبيه إلى لينا فتضيف جزءها إلى الصفحات نفسها.", "es": "Lina recibe el aviso y añade su parte a las mismas páginas.", "fr": "Lina reçoit la relance et ajoute sa part aux mêmes pages.", "de": "Lina bekommt den Stups und ergänzt ihren Teil auf denselben Seiten."}},
- {"id": "share-in", "clip": "share_in",
-  "title": {"en": "Save from any app", "ar": "احفظ من أي تطبيق", "es": "Guarda desde cualquier app", "fr": "Enregistrez depuis n’importe quelle app", "de": "Aus jeder App speichern"},
-  "helps": {"en": "Share a link from a shop, a map or a website, and OneSpace suggests where it belongs.", "ar": "شارك رابطًا من متجر أو خريطة أو موقع، ويقترح OneSpace المكان المناسب له.", "es": "Comparte un enlace de una tienda, un mapa o una web, y OneSpace sugiere dónde va.", "fr": "Partagez un lien d’une boutique, d’une carte ou d’un site, et OneSpace suggère où le ranger.", "de": "Teile einen Link aus einem Shop, einer Karte oder einer Website, und OneSpace schlägt vor, wohin er gehört."},
+   {
+    "en": "Pick a page design",
+    "ar": "اختر تصميم صفحة",
+    "es": "Elige un diseño de página",
+    "fr": "Choisissez un modèle de page",
+    "de": "Ein Seitendesign wählen"
+   },
+   {
+    "en": "Photos and words on each page",
+    "ar": "صور وكلمات في كل صفحة",
+    "es": "Fotos y palabras en cada página",
+    "fr": "Photos et mots sur chaque page",
+    "de": "Fotos und Worte auf jeder Seite"
+   },
+   {
+    "en": "Your memories",
+    "ar": "ذكرياتكما",
+    "es": "Vuestros recuerdos",
+    "fr": "Vos souvenirs",
+    "de": "Eure Erinnerungen"
+   },
+   {
+    "en": "Stories, places and dates",
+    "ar": "قصص وأماكن وتواريخ",
+    "es": "Historias, lugares y fechas",
+    "fr": "Histoires, lieux et dates",
+    "de": "Geschichten, Orte und Daten"
+   },
+   {
+    "en": "Daily selfie, made by both",
+    "ar": "سيلفي يومي يصنعه كلاكما",
+    "es": "Selfie diario, hecho por los dos",
+    "fr": "Selfie quotidien, fait à deux",
+    "de": "Tägliches Selfie, von beiden gemacht"
+   }
+  ],
+  "partner": {
+   "en": "Lina can add her part to a shared scrapbook, and a nudge invites her to add pages.",
+   "ar": "تستطيع لينا إضافة جزئها إلى الألبوم المشترك، والتنبيه يدعوها لإضافة صفحات.",
+   "es": "Lina puede añadir su parte a un álbum compartido, y un aviso la invita a añadir páginas.",
+   "fr": "Lina peut ajouter sa part à un album partagé, et une relance l’invite à ajouter des pages.",
+   "de": "Lina kann ihren Teil zu einem geteilten Album beitragen, und ein Stups lädt sie ein, Seiten hinzuzufügen."
+  }
+ },
+ {
+  "id": "share-in",
+  "clip": "share_in",
+  "title": {
+   "en": "Save from any app",
+   "ar": "احفظ من أي تطبيق",
+   "es": "Guarda desde cualquier app",
+   "fr": "Enregistrez depuis n’importe quelle app",
+   "de": "Aus jeder App speichern"
+  },
+  "helps": {
+   "en": "Share a link from a shop, a map or a website, and OneSpace suggests where it belongs.",
+   "ar": "شارك رابطًا من متجر أو خريطة أو موقع، ويقترح OneSpace المكان المناسب له.",
+   "es": "Comparte un enlace de una tienda, un mapa o una web, y OneSpace sugiere dónde va.",
+   "fr": "Partagez un lien d’une boutique, d’une carte ou d’un site, et OneSpace suggère où le ranger.",
+   "de": "Teile einen Link aus einem Shop, einer Karte oder einer Website, und OneSpace schlägt vor, wohin er gehört."
+  },
   "chapters": [
-   {"en": "Shared from another app", "ar": "مشاركة من تطبيق آخر", "es": "Compartido desde otra app", "fr": "Partagé depuis une autre app", "de": "Aus einer anderen App geteilt"},
-   {"en": "OneSpace suggests where it goes", "ar": "يقترح OneSpace مكانه", "es": "OneSpace sugiere dónde va", "fr": "OneSpace suggère où le ranger", "de": "OneSpace schlägt vor, wohin es gehört"},
-   {"en": "Choose, or keep it for later", "ar": "اختر، أو احتفظ به لاحقًا", "es": "Elige, o guárdalo para después", "fr": "Choisissez, ou gardez-le pour plus tard", "de": "Auswählen oder für später behalten"},
-   {"en": "Items to sort", "ar": "عناصر للفرز", "es": "Elementos por ordenar", "fr": "Éléments à trier", "de": "Zu sortierende Einträge"}]}
+   {
+    "en": "Shared from another app",
+    "ar": "مشاركة من تطبيق آخر",
+    "es": "Compartido desde otra app",
+    "fr": "Partagé depuis une autre app",
+    "de": "Aus einer anderen App geteilt"
+   },
+   {
+    "en": "OneSpace suggests where it goes",
+    "ar": "يقترح OneSpace مكانه",
+    "es": "OneSpace sugiere dónde va",
+    "fr": "OneSpace suggère où le ranger",
+    "de": "OneSpace schlägt vor, wohin es gehört"
+   },
+   {
+    "en": "Choose, or keep it for later",
+    "ar": "اختر، أو احتفظ به لاحقًا",
+    "es": "Elige, o guárdalo para después",
+    "fr": "Choisissez, ou gardez-le pour plus tard",
+    "de": "Auswählen oder für später behalten"
+   },
+   {
+    "en": "Items to sort",
+    "ar": "عناصر للفرز",
+    "es": "Elementos por ordenar",
+    "fr": "Éléments à trier",
+    "de": "Zu sortierende Einträge"
+   }
+  ]
+ }
 ]

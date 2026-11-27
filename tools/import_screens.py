@@ -69,6 +69,9 @@ def main(src: Path):
                                    capture_output=True, text=True).stdout.strip() or 1)
         subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-ss', f'{dur * 0.72:.2f}', '-i', str(mp4), '-frames:v', '1', '-q:v', '4',
                         str(vdir / mp4.with_suffix('.jpg').name)], check=True)
+    # D110: chapter times for the tutorial videos (seconds where each caption starts).
+    for marks in sorted((src / 'videos').glob('*.chapters.json')) if (src / 'videos').exists() else []:
+        (vdir / marks.name).write_bytes(marks.read_bytes())
     crops()
     print(f'imported {len(shots)} screens and {len(vids)} clips')
 
