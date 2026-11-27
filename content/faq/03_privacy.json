@@ -1,0 +1,225 @@
+{
+ "id": "privacy",
+ "title": {
+  "en": "Privacy and sharing",
+  "ar": "الخصوصية والمشاركة",
+  "es": "Privacidad y uso compartido",
+  "fr": "Confidentialité et partage",
+  "de": "Privatsphäre und Teilen"
+ },
+ "items": [
+  {
+   "id": "who-sees",
+   "where": "both",
+   "q": {
+    "en": "Who can see what I add?",
+    "ar": "من يستطيع رؤية ما أضيفه؟",
+    "es": "¿Quién puede ver lo que añado?",
+    "fr": "Qui peut voir ce que j’ajoute ?",
+    "de": "Wer kann sehen, was ich hinzufüge?"
+   },
+   "a": [
+    [
+     "p",
+     {
+      "en": "Only you, and the partner you invite. Nobody else.",
+      "ar": "أنت فقط، والشريك الذي تدعوه. لا أحد غيركما.",
+      "es": "Solo tú y la pareja que invites. Nadie más.",
+      "fr": "Vous seul, et le partenaire que vous invitez. Personne d’autre.",
+      "de": "Nur du und der Partner, den du einlädst. Sonst niemand."
+     }
+    ],
+    [
+     "bullets",
+     [
+      {
+       "en": "Shared: you both see it, can edit it and may get a notification.",
+       "ar": "مشترك: يراه كلاكما ويمكنكما تعديله وقد يصلكما إشعار.",
+       "es": "Compartido: ambos lo veis, podéis editarlo y puede llegar un aviso.",
+       "fr": "Partagé : vous le voyez tous les deux, pouvez le modifier et pouvez recevoir une notification.",
+       "de": "Geteilt: Ihr seht es beide, könnt es bearbeiten und bekommt eventuell eine Benachrichtigung."
+      },
+      {
+       "en": "Only me: only you see it, never a current or future partner.",
+       "ar": "أنا فقط: تراه أنت وحدك، ولا يراه أي شريك حالي أو مستقبلي.",
+       "es": "Solo yo: solo tú lo ves, nunca una pareja actual ni futura.",
+       "fr": "Moi seul : vous seul le voyez, jamais un partenaire actuel ou futur.",
+       "de": "Nur ich: Nur du siehst es, nie ein aktueller oder künftiger Partner."
+      }
+     ]
+    ],
+    [
+     "p",
+     {
+      "en": "Each item shows Shared or Only me at the bottom of its page.",
+      "ar": "يعرض كل عنصر «مشترك» أو «أنا فقط» أسفل صفحته.",
+      "es": "Cada elemento indica Compartido o Solo yo al final de su página.",
+      "fr": "Chaque élément indique Partagé ou Moi seul en bas de sa page.",
+      "de": "Jeder Eintrag zeigt unten auf seiner Seite Geteilt oder Nur ich."
+     }
+    ]
+   ]
+  },
+  {
+   "id": "surprise",
+   "where": "both",
+   "q": {
+    "en": "Can I plan a surprise?",
+    "ar": "هل يمكنني التخطيط لمفاجأة؟",
+    "es": "¿Puedo preparar una sorpresa?",
+    "fr": "Puis-je préparer une surprise ?",
+    "de": "Kann ich eine Überraschung planen?"
+   },
+   "a": [
+    [
+     "p",
+     {
+      "en": "Yes. Make the occasion, trip, gift idea or note Only me. Your partner sees nothing and gets no notification until you choose to share it.",
+      "ar": "نعم. اجعل المناسبة أو الرحلة أو فكرة الهدية أو الملاحظة «أنا فقط». لن يرى شريكك شيئًا ولن يصله أي إشعار حتى تختار مشاركتها.",
+      "es": "Sí. Pon la ocasión, el viaje, la idea de regalo o la nota en Solo yo. Tu pareja no verá nada ni recibirá avisos hasta que lo compartas.",
+      "fr": "Oui. Mettez l’occasion, le voyage, l’idée cadeau ou la note en Moi seul. Votre partenaire ne voit rien et ne reçoit aucune notification jusqu’à ce que vous partagiez.",
+      "de": "Ja. Stelle Anlass, Reise, Geschenkidee oder Notiz auf Nur ich. Dein Partner sieht nichts und wird nicht benachrichtigt, bis du teilst."
+     }
+    ]
+   ]
+  },
+  {
+   "id": "tracking",
+   "where": "both",
+   "q": {
+    "en": "Does OneSpace track my location or my phone?",
+    "ar": "هل يتتبع OneSpace موقعي أو هاتفي؟",
+    "es": "¿OneSpace rastrea mi ubicación o mi teléfono?",
+    "fr": "OneSpace suit-il ma position ou mon téléphone ?",
+    "de": "Verfolgt OneSpace meinen Standort oder mein Telefon?"
+   },
+   "a": [
+    [
+     "p",
+     {
+      "en": "No. There is no location tracking, no activity tracking and no “online” status. For weather you choose a city yourself.",
+      "ar": "لا. لا يوجد تتبع للموقع ولا للنشاط ولا حالة «متصل». وللطقس تختار المدينة بنفسك.",
+      "es": "No. No hay seguimiento de ubicación ni de actividad, ni estado «en línea». Para el tiempo eliges tú la ciudad.",
+      "fr": "Non. Aucun suivi de position ni d’activité, aucun statut « en ligne ». Pour la météo, vous choisissez la ville.",
+      "de": "Nein. Kein Standort-Tracking, kein Aktivitäts-Tracking, kein „Online“-Status. Für das Wetter wählst du selbst eine Stadt."
+     }
+    ]
+   ]
+  },
+  {
+   "id": "ads",
+   "where": "both",
+   "q": {
+    "en": "Do you sell data or show ads?",
+    "ar": "هل تبيعون البيانات أو تعرضون إعلانات؟",
+    "es": "¿Vendéis datos o mostráis anuncios?",
+    "fr": "Vendez-vous des données ou affichez-vous des publicités ?",
+    "de": "Verkauft ihr Daten oder zeigt Werbung?"
+   },
+   "a": [
+    [
+     "p",
+     {
+      "en": "No. We do not sell data, show ads or read your content to profile you.",
+      "ar": "لا. لا نبيع البيانات ولا نعرض إعلانات ولا نقرأ محتواك لتكوين ملف عنك.",
+      "es": "No. No vendemos datos, no mostramos anuncios ni leemos tu contenido para perfilarte.",
+      "fr": "Non. Nous ne vendons pas de données, n’affichons pas de publicité et ne lisons pas vos contenus pour vous profiler.",
+      "de": "Nein. Wir verkaufen keine Daten, zeigen keine Werbung und lesen deine Inhalte nicht, um ein Profil zu erstellen."
+     }
+    ]
+   ]
+  },
+  {
+   "id": "contacts",
+   "where": "both",
+   "q": {
+    "en": "Does OneSpace upload all my contacts?",
+    "ar": "هل يرفع OneSpace جميع جهات اتصالي؟",
+    "es": "¿OneSpace sube todos mis contactos?",
+    "fr": "OneSpace envoie-t-il tous mes contacts ?",
+    "de": "Lädt OneSpace alle meine Kontakte hoch?"
+   },
+   "a": [
+    [
+     "p",
+     {
+      "en": "No. You pick one contact on your phone, and only the card you save is stored in OneSpace.",
+      "ar": "لا. تختار جهة اتصال واحدة من هاتفك، ولا يُحفظ في OneSpace إلا البطاقة التي تحفظها.",
+      "es": "No. Eliges un contacto en tu teléfono y solo se guarda la ficha que guardas.",
+      "fr": "Non. Vous choisissez un contact sur votre téléphone ; seule la fiche enregistrée est conservée.",
+      "de": "Nein. Du wählst einen Kontakt auf dem Telefon; gespeichert wird nur die Karte, die du anlegst."
+     }
+    ]
+   ]
+  },
+  {
+   "id": "new-partner",
+   "where": "both",
+   "q": {
+    "en": "Can a new partner see an old relationship’s content?",
+    "ar": "هل يرى الشريك الجديد محتوى علاقة سابقة؟",
+    "es": "¿Una nueva pareja puede ver el contenido de una relación anterior?",
+    "fr": "Un nouveau partenaire peut-il voir le contenu d’une relation passée ?",
+    "de": "Kann ein neuer Partner Inhalte einer früheren Beziehung sehen?"
+   },
+   "a": [
+    [
+     "p",
+     {
+      "en": "No. Shared content is deleted when a shared space ends, and your Only me items are never shown to any partner.",
+      "ar": "لا. يُحذف المحتوى المشترك عند انتهاء المساحة المشتركة، ولا تُعرض عناصرك «أنا فقط» لأي شريك أبدًا.",
+      "es": "No. El contenido compartido se borra cuando termina un espacio compartido, y tus elementos Solo yo nunca se muestran a ninguna pareja.",
+      "fr": "Non. Le contenu partagé est supprimé à la fin d’un espace commun, et vos éléments Moi seul ne sont jamais montrés à un partenaire.",
+      "de": "Nein. Geteilte Inhalte werden gelöscht, wenn ein gemeinsamer Raum endet, und deine Nur-ich-Einträge werden keinem Partner gezeigt."
+     }
+    ]
+   ]
+  },
+  {
+   "id": "lock",
+   "where": "both",
+   "q": {
+    "en": "Can I lock the app?",
+    "ar": "هل يمكنني قفل التطبيق؟",
+    "es": "¿Puedo bloquear la app?",
+    "fr": "Puis-je verrouiller l’application ?",
+    "de": "Kann ich die App sperren?"
+   },
+   "a": [
+    [
+     "p",
+     {
+      "en": "Yes. OneSpace can ask for your phone PIN, fingerprint or face unlock when it opens.",
+      "ar": "نعم. يمكن أن يطلب OneSpace رمز هاتفك أو بصمتك أو التعرف على وجهك عند فتحه.",
+      "es": "Sí. OneSpace puede pedir el PIN, la huella o el desbloqueo facial al abrirse.",
+      "fr": "Oui. OneSpace peut demander le code, l’empreinte ou la reconnaissance faciale à l’ouverture.",
+      "de": "Ja. OneSpace kann beim Öffnen nach PIN, Fingerabdruck oder Gesichtsentsperrung fragen."
+     }
+    ]
+   ]
+  },
+  {
+   "id": "support-screens",
+   "where": "both",
+   "q": {
+    "en": "Can support see the screenshot I attach to a ticket?",
+    "ar": "هل يرى فريق الدعم لقطة الشاشة التي أرفقها بالبلاغ؟",
+    "es": "¿El soporte puede ver la captura que adjunto?",
+    "fr": "Le support voit-il la capture jointe à ma demande ?",
+    "de": "Kann der Support den Screenshot zu meiner Meldung sehen?"
+   },
+   "a": [
+    [
+     "p",
+     {
+      "en": "Yes, only that screenshot, and only to help with your ticket. Each view is logged. Support never sees your notes, photos or messages.",
+      "ar": "نعم، تلك اللقطة فقط ولمساعدتك في بلاغك فقط، وتُسجَّل كل مشاهدة. لا يرى فريق الدعم ملاحظاتك أو صورك أو رسائلك أبدًا.",
+      "es": "Sí, solo esa captura y solo para ayudarte. Cada vista queda registrada. El soporte nunca ve tus notas, fotos ni mensajes.",
+      "fr": "Oui, seulement cette capture et seulement pour votre demande. Chaque consultation est enregistrée. Le support ne voit jamais vos notes, photos ou messages.",
+      "de": "Ja, nur diesen Screenshot und nur für deine Meldung. Jeder Abruf wird protokolliert. Deine Notizen, Fotos und Nachrichten sieht der Support nie."
+     }
+    ]
+   ]
+  }
+ ]
+}

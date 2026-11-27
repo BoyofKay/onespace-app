@@ -31,7 +31,9 @@ import sys as _sys
 _sys.path.insert(0, str(ROOT / 'content'))
 from deep_pages import DEEP, COMPARE  # noqa: E402
 from arabic_copy_overrides import revise
-from full_localization import NEW_LANGS, LANGS, build_locales
+from full_localization import NEW_LANGS, LANGS, build_locales, GLOSSARY as _GLOSSARY
+import faq_master  # 27 Nov 2026: one FAQ for website and app (content/faq/*.json)
+faq_master.register_translations(_GLOSSARY)
 from launch_enrichment import STORY_UI, FAQ_MORE, GUIDE_MORE
 from journeys_apart_01 import JOURNEYS as J_APART_1
 from journeys_apart_02 import JOURNEYS as J_APART_2
@@ -52,6 +54,12 @@ from journeys_solo_01 import JOURNEYS as J_SOLO_1
 from nov22_updates import ar as _nov_ar, SOLO_GUIDE, ROWS_BY_EN
 
 JOURNEYS = J_APART_1 + J_APART_2 + J_TOGETHER_1 + J_TOGETHER_2 + J_SOLO_1
+
+
+def _i18n_key(en, ar):
+    key = 'k' + hashlib.sha1(en.encode()).hexdigest()[:10]
+    AR[key] = ar
+    return key
 
 
 def T(en, ar, tag='span', cls='', attrs=''):
@@ -2099,13 +2107,21 @@ def page_faq():
              'Answers about OneSpace: getting started, inviting your partner, privacy, calendar sync, languages, export, deletion and help.',
              'إجابات عن OneSpace: البدء ودعوة الشريك والخصوصية ومزامنة التقويم واللغات والتصدير والحذف والمساعدة.')
     body = ''
-    for g, gar, qs in FAQ:
+    for g in faq_master.web_groups():
+        items = ''.join(f'<details data-faq id="{g["id"]}-{i["id"]}">{T(i["q"]["en"], i["q"]["ar"], "summary")}'
+                        f'<div>{faq_master.answer_html(i, T)}</div></details>' for i in g['items'])
+        body += f'<h2 class="faq-group" id="{g["id"]}" data-i18n="{_i18n_key(g["title"]["en"], g["title"]["ar"])}">{g["title"]["en"]}</h2><div>{items}</div>'
+    # Founder Members questions are about the website registration only.
+    founders = [x for x in FAQ if x[0] == 'Founder Members']
+    for g, gar, qs in founders:
         qs = qs + [(*q, *a) for q, a in FAQ_MORE.get(g, [])]
         items = ''.join(f'<details data-faq>{T(q, qa, "summary")}{T(a, aa, "div")}</details>' for q, qa, a, aa in qs)
-        body += f'{T(g, gar, "h2", "faq-group")}<div>{items}</div>'
+        body += f'<h2 class="faq-group" id="founders" data-i18n="{_i18n_key(g, gar)}">{g}</h2><div>{items}</div>'
     sk = K('Search questions…', 'ابحث في الأسئلة…')
     jsonld = {'@context': 'https://schema.org', '@type': 'FAQPage', 'mainEntity': [
-        {'@type': 'Question', 'name': q, 'acceptedAnswer': {'@type': 'Answer', 'text': BeautifulSoup(a, 'html.parser').get_text(' ', strip=True)}} for g, _, qs in FAQ for q, _, a, _ in (qs + [(*q0, *a0) for q0, a0 in FAQ_MORE.get(g, [])])]}
+        {'@type': 'Question', 'name': i['q']['en'], 'acceptedAnswer': {'@type': 'Answer', 'text': BeautifulSoup(faq_master.answer_html(i, T), 'html.parser').get_text(' ', strip=True)}}
+        for g in faq_master.web_groups() for i in g['items']] + [
+        {'@type': 'Question', 'name': q, 'acceptedAnswer': {'@type': 'Answer', 'text': BeautifulSoup(a, 'html.parser').get_text(' ', strip=True)}} for g, _, qs in founders for q, _, a, _ in (qs + [(*q0, *a0) for q0, a0 in FAQ_MORE.get(g, [])])]}
     return h + page_hero('FAQ', 'الأسئلة الشائعة', 'Questions, answered.', 'أسئلة وأجوبتها.', 'Can’t find it? <a href="support.html">Contact us</a> — even without an account.',
                          'لم تجد ما تبحث عنه؟ <a href="support.html">تواصل معنا</a> — حتى دون حساب.',
                          extra=f'<div style="max-width:560px;margin-top:24px"><label class="sr" for="faq-search">Search</label><input id="faq-search" class="search" type="search" placeholder="Search questions…" data-i18n-attr="placeholder:{sk}"></div>') + f'''

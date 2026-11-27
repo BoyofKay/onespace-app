@@ -1,0 +1,194 @@
+{
+ "id": "help",
+ "title": {
+  "en": "Signing in and help",
+  "ar": "تسجيل الدخول والمساعدة",
+  "es": "Acceso y ayuda",
+  "fr": "Connexion et aide",
+  "de": "Anmeldung und Hilfe"
+ },
+ "items": [
+  {
+   "id": "cannot-sign-in",
+   "where": "both",
+   "q": {
+    "en": "I cannot sign in.",
+    "ar": "لا أستطيع تسجيل الدخول.",
+    "es": "No puedo iniciar sesión.",
+    "fr": "Je n’arrive pas à me connecter.",
+    "de": "Ich kann mich nicht anmelden."
+   },
+   "a": [
+    [
+     "steps",
+     [
+      {
+       "en": "Check the email address for typos.",
+       "ar": "تأكد من عدم وجود خطأ في البريد الإلكتروني.",
+       "es": "Revisa que el correo esté bien escrito.",
+       "fr": "Vérifiez l’adresse e-mail.",
+       "de": "Prüfe die E-Mail-Adresse auf Tippfehler."
+      },
+      {
+       "en": "Tap Forgot your password? and open the link on the same phone.",
+       "ar": "اضغط «نسيت كلمة المرور؟» وافتح الرابط على الهاتف نفسه.",
+       "es": "Toca ¿Olvidaste tu contraseña? y abre el enlace en el mismo teléfono.",
+       "fr": "Touchez Mot de passe oublié ? et ouvrez le lien sur le même téléphone.",
+       "de": "Tippe auf Passwort vergessen? und öffne den Link auf demselben Telefon."
+      },
+      {
+       "en": "Still stuck? Tap Contact us at the bottom of the sign-in screen and choose I cannot sign in. No sign-in is needed; we reply by email.",
+       "ar": "ما زلت عالقًا؟ اضغط «تواصل معنا» أسفل شاشة الدخول واختر «لا أستطيع تسجيل الدخول». لا تحتاج إلى تسجيل الدخول، وسنرد بالبريد.",
+       "es": "¿Sigues sin entrar? Toca Contáctanos al pie de la pantalla de acceso y elige No puedo iniciar sesión. No hace falta entrar; respondemos por correo.",
+       "fr": "Toujours bloqué ? Touchez Nous contacter en bas de l’écran de connexion et choisissez Je n’arrive pas à me connecter. Pas besoin d’être connecté ; nous répondons par e-mail.",
+       "de": "Immer noch nicht? Tippe unten auf dem Anmeldebildschirm auf Kontakt und wähle Ich kann mich nicht anmelden. Keine Anmeldung nötig; wir antworten per E-Mail."
+      }
+     ]
+    ]
+   ]
+  },
+  {
+   "id": "confirmation",
+   "where": "both",
+   "q": {
+    "en": "I did not get the confirmation email.",
+    "ar": "لم تصلني رسالة التأكيد.",
+    "es": "No me llegó el correo de confirmación.",
+    "fr": "Je n’ai pas reçu l’e-mail de confirmation.",
+    "de": "Ich habe die Bestätigungs-E-Mail nicht bekommen."
+   },
+   "a": [
+    [
+     "steps",
+     [
+      {
+       "en": "Look in Spam or Promotions.",
+       "ar": "ابحث في البريد المزعج أو العروض.",
+       "es": "Mira en Spam o Promociones.",
+       "fr": "Regardez dans Spam ou Promotions.",
+       "de": "Sieh im Spam- oder Werbeordner nach."
+      },
+      {
+       "en": "On the sign-in screen, tap Resend confirmation email.",
+       "ar": "في شاشة الدخول اضغط «أعد إرسال رسالة التأكيد».",
+       "es": "En la pantalla de acceso, toca Reenviar correo de confirmación.",
+       "fr": "Sur l’écran de connexion, touchez Renvoyer l’e-mail de confirmation.",
+       "de": "Tippe auf dem Anmeldebildschirm auf Bestätigungs-E-Mail erneut senden."
+      },
+      {
+       "en": "Open the link on the same phone so it returns you to OneSpace.",
+       "ar": "افتح الرابط على الهاتف نفسه ليعيدك إلى OneSpace.",
+       "es": "Abre el enlace en el mismo teléfono para volver a OneSpace.",
+       "fr": "Ouvrez le lien sur le même téléphone pour revenir dans OneSpace.",
+       "de": "Öffne den Link auf demselben Telefon, damit er dich zu OneSpace zurückbringt."
+      }
+     ]
+    ]
+   ]
+  },
+  {
+   "id": "report",
+   "where": "both",
+   "q": {
+    "en": "How do I report a problem or send an idea?",
+    "ar": "كيف أبلغ عن مشكلة أو أرسل فكرة؟",
+    "es": "¿Cómo informo de un problema o envío una idea?",
+    "fr": "Comment signaler un problème ou proposer une idée ?",
+    "de": "Wie melde ich ein Problem oder schicke eine Idee?"
+   },
+   "a": [
+    [
+     "bullets",
+     [
+      {
+       "en": "A problem: Me → Report a technical issue. Describe what happened and add a screenshot if you can.",
+       "ar": "مشكلة: أنا ← الإبلاغ عن مشكلة تقنية. صف ما حدث وأرفق لقطة شاشة إن أمكن.",
+       "es": "Un problema: Yo → Informar de un problema técnico. Describe lo ocurrido y añade una captura si puedes.",
+       "fr": "Un problème : Moi → Signaler un problème technique. Décrivez ce qui s’est passé et ajoutez une capture si possible.",
+       "de": "Ein Problem: Ich → Technisches Problem melden. Beschreibe, was passiert ist, und füge wenn möglich einen Screenshot hinzu."
+      },
+      {
+       "en": "An idea, question or complaint: Me → Contact us.",
+       "ar": "فكرة أو سؤال أو شكوى: أنا ← تواصل معنا.",
+       "es": "Una idea, pregunta o queja: Yo → Contáctanos.",
+       "fr": "Une idée, une question ou une réclamation : Moi → Nous contacter.",
+       "de": "Eine Idee, Frage oder Beschwerde: Ich → Kontakt."
+      }
+     ]
+    ],
+    [
+     "p",
+     {
+      "en": "Your notes, photos and messages are never included.",
+      "ar": "لا تُرفق ملاحظاتك أو صورك أو رسائلك أبدًا.",
+      "es": "Nunca se incluyen tus notas, fotos ni mensajes.",
+      "fr": "Vos notes, photos et messages ne sont jamais inclus.",
+      "de": "Deine Notizen, Fotos und Nachrichten werden nie mitgeschickt."
+     }
+    ]
+   ]
+  },
+  {
+   "id": "messages",
+   "where": "app",
+   "q": {
+    "en": "Where do I see the answer to my message?",
+    "ar": "أين أرى الرد على رسالتي؟",
+    "es": "¿Dónde veo la respuesta a mi mensaje?",
+    "fr": "Où voir la réponse à mon message ?",
+    "de": "Wo sehe ich die Antwort auf meine Nachricht?"
+   },
+   "a": [
+    [
+     "p",
+     {
+      "en": "Me → Your messages shows each message you sent, its status and outcome, and any reply from OneSpace support. Pull down to refresh.",
+      "ar": "أنا ← رسائلك تعرض كل رسالة أرسلتها وحالتها ونتيجتها وأي رد من فريق دعم OneSpace. اسحب للأسفل للتحديث.",
+      "es": "Yo → Tus mensajes muestra cada mensaje enviado, su estado, su resultado y la respuesta del soporte. Desliza hacia abajo para actualizar.",
+      "fr": "Moi → Vos messages affiche chaque message envoyé, son statut, son résultat et la réponse du support. Tirez vers le bas pour actualiser.",
+      "de": "Ich → Deine Nachrichten zeigt jede gesendete Nachricht mit Status, Ergebnis und Antwort des Supports. Zum Aktualisieren nach unten ziehen."
+     }
+    ]
+   ]
+  },
+  {
+   "id": "sync",
+   "where": "both",
+   "q": {
+    "en": "Something does not show up on my partner’s phone. What should I do?",
+    "ar": "لا يظهر شيء على هاتف شريكي، فماذا أفعل؟",
+    "es": "Algo no aparece en el teléfono de mi pareja. ¿Qué hago?",
+    "fr": "Un élément n’apparaît pas chez mon partenaire. Que faire ?",
+    "de": "Etwas erscheint nicht auf dem Telefon meines Partners. Was tun?"
+   },
+   "a": [
+    [
+     "steps",
+     [
+      {
+       "en": "Check that the item is Shared, not Only me.",
+       "ar": "تأكد أن العنصر «مشترك» وليس «أنا فقط».",
+       "es": "Comprueba que el elemento sea Compartido y no Solo yo.",
+       "fr": "Vérifiez que l’élément est Partagé et non Moi seul.",
+       "de": "Prüfe, ob der Eintrag Geteilt und nicht Nur ich ist."
+      },
+      {
+       "en": "Both phones need an internet connection. Pull down to refresh the list.",
+       "ar": "يحتاج الهاتفان إلى اتصال بالإنترنت. اسحب القائمة للأسفل لتحديثها.",
+       "es": "Ambos teléfonos necesitan conexión. Desliza hacia abajo para actualizar la lista.",
+       "fr": "Les deux téléphones doivent être connectés. Tirez la liste vers le bas pour l’actualiser.",
+       "de": "Beide Telefone brauchen Internet. Ziehe die Liste zum Aktualisieren nach unten."
+      },
+      {
+       "en": "Still missing? Use Me → Report a technical issue.",
+       "ar": "ما زال غير ظاهر؟ استخدم أنا ← الإبلاغ عن مشكلة تقنية.",
+       "es": "¿Sigue sin aparecer? Usa Yo → Informar de un problema técnico.",
+       "fr": "Toujours absent ? Utilisez Moi → Signaler un problème technique.",
+       "de": "Fehlt es immer noch? Nutze Ich → Technisches Problem melden."
+      }
+     ]
+    ]
+   ]
+  }
+ ]
+}

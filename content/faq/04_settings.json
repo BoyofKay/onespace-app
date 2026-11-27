@@ -1,0 +1,206 @@
+{
+ "id": "settings",
+ "title": {
+  "en": "Notifications and settings",
+  "ar": "الإشعارات والإعدادات",
+  "es": "Notificaciones y ajustes",
+  "fr": "Notifications et réglages",
+  "de": "Benachrichtigungen und Einstellungen"
+ },
+ "items": [
+  {
+   "id": "no-notifications",
+   "where": "both",
+   "q": {
+    "en": "I am not getting notifications. What should I check?",
+    "ar": "لا تصلني الإشعارات. ماذا أتحقق؟",
+    "es": "No me llegan notificaciones. ¿Qué reviso?",
+    "fr": "Je ne reçois pas de notifications. Que vérifier ?",
+    "de": "Ich bekomme keine Benachrichtigungen. Was prüfe ich?"
+   },
+   "a": [
+    [
+     "steps",
+     [
+      {
+       "en": "Allow notifications for OneSpace in your phone settings.",
+       "ar": "اسمح بإشعارات OneSpace في إعدادات هاتفك.",
+       "es": "Permite las notificaciones de OneSpace en los ajustes del teléfono.",
+       "fr": "Autorisez les notifications de OneSpace dans les réglages du téléphone.",
+       "de": "Erlaube Benachrichtigungen für OneSpace in den Telefoneinstellungen."
+      },
+      {
+       "en": "Make sure battery saving is not restricting OneSpace.",
+       "ar": "تأكد أن توفير البطارية لا يقيّد OneSpace.",
+       "es": "Comprueba que el ahorro de batería no limite OneSpace.",
+       "fr": "Vérifiez que l’économie de batterie ne limite pas OneSpace.",
+       "de": "Stelle sicher, dass der Energiesparmodus OneSpace nicht einschränkt."
+      },
+      {
+       "en": "Remember that alerts wait during sleep hours unless they are Urgent.",
+       "ar": "تذكّر أن التنبيهات تنتظر خلال ساعات النوم ما لم تكن «عاجلة».",
+       "es": "Recuerda que los avisos esperan en horas de sueño salvo los Urgentes.",
+       "fr": "Les alertes attendent pendant les heures de sommeil, sauf si elles sont Urgentes.",
+       "de": "Benachrichtigungen warten während der Schlafenszeit, außer sie sind Dringend."
+      }
+     ]
+    ],
+    [
+     "p",
+     {
+      "en": "Still nothing? Use Me → Report a technical issue.",
+      "ar": "ما زال لا شيء؟ استخدم أنا ← الإبلاغ عن مشكلة تقنية.",
+      "es": "¿Sigue sin llegar? Usa Yo → Informar de un problema técnico.",
+      "fr": "Toujours rien ? Utilisez Moi → Signaler un problème technique.",
+      "de": "Immer noch nichts? Nutze Ich → Technisches Problem melden."
+     }
+    ]
+   ]
+  },
+  {
+   "id": "quiet",
+   "where": "both",
+   "q": {
+    "en": "How do sleep hours and time zones work?",
+    "ar": "كيف تعمل ساعات النوم والمناطق الزمنية؟",
+    "es": "¿Cómo funcionan las horas de sueño y las zonas horarias?",
+    "fr": "Comment fonctionnent heures de sommeil et fuseaux horaires ?",
+    "de": "Wie funktionieren Schlafzeiten und Zeitzonen?"
+   },
+   "a": [
+    [
+     "p",
+     {
+      "en": "Each of you sets work and sleep hours in Me → Settings → Schedule & days off. Times show in each phone’s own time zone.",
+      "ar": "يحدد كل منكما ساعات العمل والنوم في أنا ← الإعدادات ← الجدول وأيام الإجازة، وتظهر الأوقات بتوقيت كل هاتف.",
+      "es": "Cada uno fija sus horas de trabajo y sueño en Yo → Ajustes → Horario y días libres. Las horas se muestran en la zona de cada teléfono.",
+      "fr": "Chacun règle ses heures de travail et de sommeil dans Moi → Réglages → Horaires et congés. Les heures s’affichent dans le fuseau de chaque téléphone.",
+      "de": "Jeder legt Arbeits- und Schlafzeiten unter Ich → Einstellungen → Zeitplan & freie Tage fest. Zeiten erscheinen in der Zeitzone des jeweiligen Telefons."
+     }
+    ],
+    [
+     "p",
+     {
+      "en": "Non-urgent alerts are held until the other person wakes up.",
+      "ar": "تُؤجَّل التنبيهات غير العاجلة حتى يستيقظ الطرف الآخر.",
+      "es": "Los avisos no urgentes esperan a que el otro despierte.",
+      "fr": "Les alertes non urgentes attendent le réveil de l’autre.",
+      "de": "Nicht dringende Benachrichtigungen warten, bis der andere aufwacht."
+     }
+    ]
+   ]
+  },
+  {
+   "id": "language",
+   "where": "both",
+   "q": {
+    "en": "How do I change the language or currency?",
+    "ar": "كيف أغيّر اللغة أو العملة؟",
+    "es": "¿Cómo cambio el idioma o la moneda?",
+    "fr": "Comment changer la langue ou la devise ?",
+    "de": "Wie ändere ich Sprache oder Währung?"
+   },
+   "a": [
+    [
+     "p",
+     {
+      "en": "Me → Language and currency. Each of you chooses English or Arabic and a preferred currency. What you write is not translated automatically.",
+      "ar": "أنا ← اللغة والعملة. يختار كل منكما العربية أو الإنجليزية وعملته المفضلة. ما تكتبه لا يُترجَم تلقائيًا.",
+      "es": "Yo → Idioma y moneda. Cada uno elige inglés o árabe y su moneda. Lo que escribes no se traduce automáticamente.",
+      "fr": "Moi → Langue et devise. Chacun choisit l’anglais ou l’arabe et sa devise. Ce que vous écrivez n’est pas traduit automatiquement.",
+      "de": "Ich → Sprache und Währung. Jeder wählt Englisch oder Arabisch und seine Währung. Was du schreibst, wird nicht automatisch übersetzt."
+     }
+    ],
+    [
+     "p",
+     {
+      "en": "The website is also available in Spanish, French and German.",
+      "ar": "الموقع متاح أيضًا بالإسبانية والفرنسية والألمانية.",
+      "es": "La web también está en español, francés y alemán.",
+      "fr": "Le site existe aussi en espagnol, français et allemand.",
+      "de": "Die Website gibt es auch auf Spanisch, Französisch und Deutsch."
+     }
+    ]
+   ]
+  },
+  {
+   "id": "themes",
+   "where": "both",
+   "q": {
+    "en": "Can I change the colors and background?",
+    "ar": "هل يمكنني تغيير الألوان والخلفية؟",
+    "es": "¿Puedo cambiar los colores y el fondo?",
+    "fr": "Puis-je changer les couleurs et le fond ?",
+    "de": "Kann ich Farben und Hintergrund ändern?"
+   },
+   "a": [
+    [
+     "p",
+     {
+      "en": "Yes. Me → Settings → Appearance & themes: choose a color theme, light or dark, and a background.",
+      "ar": "نعم. أنا ← الإعدادات ← المظهر والسمات: اختر سمة لونية وفاتحًا أو داكنًا وخلفية.",
+      "es": "Sí. Yo → Ajustes → Apariencia y temas: elige un tema de color, claro u oscuro, y un fondo.",
+      "fr": "Oui. Moi → Réglages → Apparence et thèmes : choisissez un thème, clair ou sombre, et un fond.",
+      "de": "Ja. Ich → Einstellungen → Darstellung & Themen: Wähle ein Farbthema, hell oder dunkel und einen Hintergrund."
+     }
+    ]
+   ]
+  },
+  {
+   "id": "phone-calendar",
+   "where": "both",
+   "q": {
+    "en": "Can OneSpace show in my phone calendar?",
+    "ar": "هل يمكن أن يظهر OneSpace في تقويم هاتفي؟",
+    "es": "¿OneSpace puede aparecer en el calendario del teléfono?",
+    "fr": "OneSpace peut-il apparaître dans l’agenda du téléphone ?",
+    "de": "Kann OneSpace im Telefonkalender erscheinen?"
+   },
+   "a": [
+    [
+     "p",
+     {
+      "en": "Yes: Me → Settings → Show in my phone calendar. Your events, trips, occasions and special dates appear in a separate “OneSpace” calendar.",
+      "ar": "نعم: أنا ← الإعدادات ← عرض في تقويم هاتفي. تظهر مواعيدك ورحلاتك ومناسباتك وتواريخك الخاصة في تقويم منفصل باسم «OneSpace».",
+      "es": "Sí: Yo → Ajustes → Mostrar en el calendario del teléfono. Tus eventos, viajes, ocasiones y fechas especiales aparecen en un calendario «OneSpace» aparte.",
+      "fr": "Oui : Moi → Réglages → Afficher dans l’agenda du téléphone. Vos événements, voyages, occasions et dates spéciales apparaissent dans un agenda « OneSpace » distinct.",
+      "de": "Ja: Ich → Einstellungen → Im Telefonkalender anzeigen. Termine, Reisen, Anlässe und besondere Daten erscheinen in einem eigenen „OneSpace“-Kalender."
+     }
+    ],
+    [
+     "p",
+     {
+      "en": "It works one way: OneSpace never reads your other calendars.",
+      "ar": "يعمل باتجاه واحد: لا يقرأ OneSpace تقاويمك الأخرى أبدًا.",
+      "es": "Funciona de forma unidireccional: OneSpace nunca lee tus otros calendarios.",
+      "fr": "Dans un seul sens : OneSpace ne lit jamais vos autres agendas.",
+      "de": "Es funktioniert nur in eine Richtung: OneSpace liest deine anderen Kalender nie."
+     }
+    ]
+   ]
+  },
+  {
+   "id": "tablet",
+   "where": "both",
+   "q": {
+    "en": "Does OneSpace work on a tablet or in landscape?",
+    "ar": "هل يعمل OneSpace على الجهاز اللوحي أو بالوضع الأفقي؟",
+    "es": "¿OneSpace funciona en tableta o en horizontal?",
+    "fr": "OneSpace fonctionne-t-il sur tablette ou en paysage ?",
+    "de": "Funktioniert OneSpace auf dem Tablet oder im Querformat?"
+   },
+   "a": [
+    [
+     "p",
+     {
+      "en": "OneSpace is designed for phones and stays in portrait. It runs on supported tablets in portrait too.",
+      "ar": "صُمّم OneSpace للهواتف ويبقى بالوضع العمودي، ويعمل على الأجهزة اللوحية المدعومة بالوضع العمودي أيضًا.",
+      "es": "OneSpace está pensado para móviles y se queda en vertical. También funciona en tabletas compatibles en vertical.",
+      "fr": "OneSpace est conçu pour les téléphones et reste en portrait. Il fonctionne aussi sur les tablettes compatibles en portrait.",
+      "de": "OneSpace ist für Telefone gemacht und bleibt im Hochformat. Auf unterstützten Tablets läuft es ebenfalls im Hochformat."
+     }
+    ]
+   ]
+  }
+ ]
+}
