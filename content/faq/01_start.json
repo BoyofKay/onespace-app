@@ -133,7 +133,6 @@
   {
    "id": "invite",
    "where": "both",
-   "tutorial": true,
    "q": {
     "en": "How do I invite my partner?",
     "ar": "كيف أدعو شريكي؟",

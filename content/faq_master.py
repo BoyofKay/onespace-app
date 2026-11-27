@@ -7,7 +7,7 @@ the two can no longer drift apart.
 
 Each answer is a list of blocks: ["p", text], ["steps", [texts]] or
 ["bullets", [texts]]. "where": both | web | app. "tutorial": true adds a link
-to the step-by-step tutorials.
+to that feature's video tutorial (tutorials.html#<id>, D110).
 """
 import json
 from pathlib import Path
@@ -15,8 +15,8 @@ from pathlib import Path
 LANGS = ('en', 'ar', 'es', 'fr', 'de')
 ROOT = Path(__file__).resolve().parent / 'faq'
 TUTORIAL_LINK = {
-    'en': 'Step-by-step tutorial →', 'ar': 'الشرح خطوة بخطوة ←', 'es': 'Tutorial paso a paso →',
-    'fr': 'Tutoriel pas à pas →', 'de': 'Schritt-für-Schritt-Anleitung →',
+    'en': 'Watch the video tutorial →', 'ar': 'شاهد الدرس بالفيديو ←', 'es': 'Ver el tutorial en vídeo →',
+    'fr': 'Voir le tutoriel vidéo →', 'de': 'Video-Tutorial ansehen →',
 }
 
 
