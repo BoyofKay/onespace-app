@@ -1,0 +1,196 @@
+{
+ "id": "account",
+ "title": {
+  "en": "Account, data and separation",
+  "ar": "الحساب والبيانات والانفصال",
+  "es": "Cuenta, datos y separación",
+  "fr": "Compte, données et séparation",
+  "de": "Konto, Daten und Trennung"
+ },
+ "items": [
+  {
+   "id": "download",
+   "where": "both",
+   "q": {
+    "en": "How do I download my data?",
+    "ar": "كيف أنزّل بياناتي؟",
+    "es": "¿Cómo descargo mis datos?",
+    "fr": "Comment télécharger mes données ?",
+    "de": "Wie lade ich meine Daten herunter?"
+   },
+   "a": [
+    [
+     "p",
+     {
+      "en": "Me → Your data and account → Download my data. Your account information is saved as a JSON file on your phone.",
+      "ar": "أنا ← بياناتك وحسابك ← تنزيل بياناتي. تُحفظ معلومات حسابك كملف JSON على هاتفك.",
+      "es": "Yo → Tus datos y tu cuenta → Descargar mis datos. La información de tu cuenta se guarda como archivo JSON en el teléfono.",
+      "fr": "Moi → Vos données et votre compte → Télécharger mes données. Les informations du compte sont enregistrées en fichier JSON sur le téléphone.",
+      "de": "Ich → Deine Daten und dein Konto → Meine Daten herunterladen. Deine Kontoinformationen werden als JSON-Datei auf dem Telefon gespeichert."
+     }
+    ],
+    [
+     "p",
+     {
+      "en": "Photos, documents and other attachments are not included. Keep the file private.",
+      "ar": "لا تُضمَّن الصور والمستندات والمرفقات الأخرى. احتفظ بالملف في مكان خاص.",
+      "es": "No incluye fotos, documentos ni otros adjuntos. Guarda el archivo en privado.",
+      "fr": "Photos, documents et autres pièces jointes ne sont pas inclus. Gardez le fichier en lieu sûr.",
+      "de": "Fotos, Dokumente und andere Anhänge sind nicht enthalten. Bewahre die Datei privat auf."
+     }
+    ]
+   ]
+  },
+  {
+   "id": "delete",
+   "where": "both",
+   "q": {
+    "en": "What happens if I delete my account?",
+    "ar": "ماذا يحدث إذا حذفت حسابي؟",
+    "es": "¿Qué pasa si elimino mi cuenta?",
+    "fr": "Que se passe-t-il si je supprime mon compte ?",
+    "de": "Was passiert, wenn ich mein Konto lösche?"
+   },
+   "a": [
+    [
+     "steps",
+     [
+      {
+       "en": "For 7 days nothing is deleted, and you can cancel at any time.",
+       "ar": "لمدة 7 أيام لا يُحذف شيء، ويمكنك الإلغاء في أي وقت.",
+       "es": "Durante 7 días no se borra nada y puedes cancelar cuando quieras.",
+       "fr": "Pendant 7 jours, rien n’est supprimé et vous pouvez annuler à tout moment.",
+       "de": "7 Tage lang wird nichts gelöscht, und du kannst jederzeit abbrechen."
+      },
+      {
+       "en": "After that, your account, your Only me items, photos and settings are permanently deleted.",
+       "ar": "بعد ذلك يُحذف حسابك وعناصرك «أنا فقط» وصورك وإعداداتك نهائيًا.",
+       "es": "Después se borran para siempre tu cuenta, tus elementos Solo yo, fotos y ajustes.",
+       "fr": "Ensuite, votre compte, vos éléments Moi seul, photos et réglages sont supprimés définitivement.",
+       "de": "Danach werden dein Konto, deine Nur-ich-Einträge, Fotos und Einstellungen endgültig gelöscht."
+      },
+      {
+       "en": "What you share with your current partner is deleted too. Your partner keeps their own Only me items.",
+       "ar": "ويُحذف أيضًا ما تشاركه مع شريكك الحالي، ويحتفظ شريكك بعناصره «أنا فقط».",
+       "es": "También se borra lo que compartes con tu pareja actual. Tu pareja conserva sus elementos Solo yo.",
+       "fr": "Ce que vous partagez avec votre partenaire actuel est aussi supprimé. Il garde ses éléments Moi seul.",
+       "de": "Was du mit deinem aktuellen Partner teilst, wird ebenfalls gelöscht. Dein Partner behält seine Nur-ich-Einträge."
+      }
+     ]
+    ]
+   ]
+  },
+  {
+   "id": "separate",
+   "where": "both",
+   "q": {
+    "en": "What happens if we separate?",
+    "ar": "ماذا يحدث إذا انفصلنا؟",
+    "es": "¿Qué pasa si nos separamos?",
+    "fr": "Que se passe-t-il si nous nous séparons ?",
+    "de": "Was passiert, wenn wir uns trennen?"
+   },
+   "a": [
+    [
+     "p",
+     {
+      "en": "If either of you leaves the shared space, removes the other or deletes it, everything shared in it is permanently deleted for both of you.",
+      "ar": "إذا غادر أحدكما المساحة المشتركة أو أزال الآخر أو حذفها، يُحذف كل ما شورك فيها نهائيًا لكليكما.",
+      "es": "Si uno de los dos sale del espacio compartido, quita al otro o lo elimina, todo lo compartido se borra para siempre para ambos.",
+      "fr": "Si l’un de vous quitte l’espace commun, retire l’autre ou le supprime, tout ce qui y était partagé est définitivement supprimé pour vous deux.",
+      "de": "Wenn einer von euch den gemeinsamen Raum verlässt, den anderen entfernt oder ihn löscht, wird alles Geteilte für euch beide endgültig gelöscht."
+     }
+    ],
+    [
+     "p",
+     {
+      "en": "There is no archive or backup of shared content. Each of you keeps your own Only me items and can invite someone new later.",
+      "ar": "لا يوجد أرشيف أو نسخة احتياطية للمحتوى المشترك. يحتفظ كل منكما بعناصره «أنا فقط» ويمكنه دعوة شخص جديد لاحقًا.",
+      "es": "No hay archivo ni copia del contenido compartido. Cada uno conserva sus elementos Solo yo y puede invitar a alguien más adelante.",
+      "fr": "Il n’y a ni archive ni sauvegarde du contenu partagé. Chacun garde ses éléments Moi seul et peut inviter quelqu’un plus tard.",
+      "de": "Es gibt kein Archiv und keine Sicherung geteilter Inhalte. Jeder behält seine Nur-ich-Einträge und kann später jemand Neues einladen."
+     }
+    ]
+   ]
+  },
+  {
+   "id": "removed",
+   "where": "both",
+   "q": {
+    "en": "Where did something I removed go?",
+    "ar": "أين ذهب شيء أزلته؟",
+    "es": "¿Dónde está algo que eliminé?",
+    "fr": "Où est passé un élément que j’ai retiré ?",
+    "de": "Wo ist etwas, das ich entfernt habe?"
+   },
+   "a": [
+    [
+     "p",
+     {
+      "en": "Most lists have a Removed filter where you can find and restore items you removed one by one. Where a 30-day period applies, a removed item can be restored for 30 days and is then cleared for good.",
+      "ar": "لمعظم القوائم عامل تصفية «المحذوفات» حيث تجد العناصر التي أزلتها واحدًا واحدًا وتستعيدها. وحيث تنطبق مدة 30 يومًا، يمكن استعادة العنصر خلال 30 يومًا ثم يُحذف نهائيًا.",
+      "es": "La mayoría de las listas tienen un filtro Eliminados para recuperar lo que quitaste uno a uno. Donde se aplica un plazo de 30 días, se puede recuperar durante 30 días y luego se borra para siempre.",
+      "fr": "La plupart des listes ont un filtre Retirés pour retrouver et restaurer les éléments un par un. Là où un délai de 30 jours s’applique, l’élément reste restaurable 30 jours, puis il est effacé définitivement.",
+      "de": "Die meisten Listen haben einen Filter Entfernt, um einzeln Entferntes wiederherzustellen. Wo eine 30-Tage-Frist gilt, lässt sich ein Eintrag 30 Tage lang wiederherstellen und wird danach endgültig gelöscht."
+     }
+    ],
+    [
+     "p",
+     {
+      "en": "This does not apply to deleting a shared space or an account: that cannot be undone.",
+      "ar": "لا ينطبق ذلك على حذف المساحة المشتركة أو الحساب، فهذا لا يمكن التراجع عنه.",
+      "es": "No se aplica al borrar un espacio compartido o una cuenta: eso no se puede deshacer.",
+      "fr": "Cela ne vaut pas pour la suppression d’un espace commun ou d’un compte : elle est irréversible.",
+      "de": "Das gilt nicht für das Löschen eines gemeinsamen Raums oder Kontos: Das lässt sich nicht rückgängig machen."
+     }
+    ]
+   ]
+  },
+  {
+   "id": "new-phone",
+   "where": "both",
+   "q": {
+    "en": "I changed phones. Will our space disappear?",
+    "ar": "غيّرت هاتفي، فهل ستختفي مساحتنا؟",
+    "es": "He cambiado de teléfono. ¿Desaparecerá nuestro espacio?",
+    "fr": "J’ai changé de téléphone. Notre espace va-t-il disparaître ?",
+    "de": "Ich habe das Telefon gewechselt. Verschwindet unser Raum?"
+   },
+   "a": [
+    [
+     "p",
+     {
+      "en": "No. Your space is stored with your account. Install OneSpace on the new phone and sign in with the same email.",
+      "ar": "لا. مساحتك محفوظة مع حسابك. ثبّت OneSpace على الهاتف الجديد وسجّل الدخول بالبريد نفسه.",
+      "es": "No. Tu espacio va con tu cuenta. Instala OneSpace en el nuevo teléfono y entra con el mismo correo.",
+      "fr": "Non. Votre espace est lié à votre compte. Installez OneSpace sur le nouveau téléphone et connectez-vous avec la même adresse.",
+      "de": "Nein. Dein Raum gehört zu deinem Konto. Installiere OneSpace auf dem neuen Telefon und melde dich mit derselben E-Mail an."
+     }
+    ]
+   ]
+  },
+  {
+   "id": "founder-badge",
+   "where": "both",
+   "q": {
+    "en": "What is the Founder badge?",
+    "ar": "ما هي شارة المؤسس؟",
+    "es": "¿Qué es la insignia de fundador?",
+    "fr": "Qu’est-ce que le badge Fondateur ?",
+    "de": "Was ist das Gründungsmitglied-Abzeichen?"
+   },
+   "a": [
+    [
+     "p",
+     {
+      "en": "The first 500 people to join OneSpace are Founder Members. The badge appears on your profile in Me.",
+      "ar": "أول 500 شخص ينضمون إلى OneSpace هم الأعضاء المؤسسون، وتظهر الشارة في ملفك في «أنا».",
+      "es": "Las primeras 500 personas en unirse a OneSpace son Miembros Fundadores. La insignia aparece en tu perfil en Yo.",
+      "fr": "Les 500 premières personnes à rejoindre OneSpace sont Membres Fondateurs. Le badge apparaît sur votre profil dans Moi.",
+      "de": "Die ersten 500 Menschen bei OneSpace sind Gründungsmitglieder. Das Abzeichen erscheint in deinem Profil unter Ich."
+     }
+    ]
+   ]
+  }
+ ]
+}

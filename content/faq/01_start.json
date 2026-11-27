@@ -1,0 +1,459 @@
+{
+ "id": "start",
+ "title": {
+  "en": "Getting started",
+  "ar": "البداية",
+  "es": "Primeros pasos",
+  "fr": "Premiers pas",
+  "de": "Erste Schritte"
+ },
+ "items": [
+  {
+   "id": "what",
+   "where": "both",
+   "q": {
+    "en": "What is OneSpace?",
+    "ar": "ما هو OneSpace؟",
+    "es": "¿Qué es OneSpace?",
+    "fr": "Qu’est-ce que OneSpace ?",
+    "de": "Was ist OneSpace?"
+   },
+   "a": [
+    [
+     "p",
+     {
+      "en": "Your private space for everyday life: calendar, to-do lists, reminders, notes, trips, occasions and memories in one place.",
+      "ar": "مساحتك الخاصة لحياتك اليومية: التقويم وقوائم المهام والتذكيرات والملاحظات والرحلات والمناسبات والذكريات في مكان واحد.",
+      "es": "Tu espacio privado para el día a día: calendario, listas de tareas, recordatorios, notas, viajes, ocasiones y recuerdos en un solo lugar.",
+      "fr": "Votre espace privé pour le quotidien : agenda, listes de tâches, rappels, notes, voyages, occasions et souvenirs au même endroit.",
+      "de": "Dein privater Raum für den Alltag: Kalender, To-dos, Erinnerungen, Notizen, Reisen, Anlässe und Erinnerungsstücke an einem Ort."
+     }
+    ],
+    [
+     "p",
+     {
+      "en": "Use it on your own, or invite your partner. Together you also get letters, daily check-ins, little gestures and shared plans, whether you live together or far apart.",
+      "ar": "استخدمه بمفردك أو ادعُ شريكك. ومعًا تحصلان أيضًا على الرسائل والتواصل اليومي واللمسات الصغيرة والخطط المشتركة، سواء كنتما تعيشان معًا أو بعيدين.",
+      "es": "Úsalo por tu cuenta o invita a tu pareja. Juntos también tenéis cartas, check-ins diarios, pequeños gestos y planes compartidos, viváis juntos o lejos.",
+      "fr": "Utilisez-le seul ou invitez votre partenaire. À deux, vous avez aussi des lettres, des nouvelles quotidiennes, de petites attentions et des projets communs, que vous viviez ensemble ou loin l’un de l’autre.",
+      "de": "Nutze es allein oder lade deinen Partner ein. Zu zweit habt ihr außerdem Briefe, tägliche Check-ins, kleine Gesten und gemeinsame Pläne – ob ihr zusammenlebt oder weit voneinander entfernt."
+     }
+    ]
+   ]
+  },
+  {
+   "id": "alone",
+   "where": "both",
+   "q": {
+    "en": "Can I use OneSpace without a partner?",
+    "ar": "هل يمكنني استخدام OneSpace بدون شريك؟",
+    "es": "¿Puedo usar OneSpace sin pareja?",
+    "fr": "Puis-je utiliser OneSpace sans partenaire ?",
+    "de": "Kann ich OneSpace ohne Partner nutzen?"
+   },
+   "a": [
+    [
+     "p",
+     {
+      "en": "Yes. OneSpace works fully on your own. Everything you add stays yours.",
+      "ar": "نعم. يعمل OneSpace بالكامل وأنت بمفردك، وكل ما تضيفه يبقى لك.",
+      "es": "Sí. OneSpace funciona por completo en solitario. Todo lo que añades sigue siendo tuyo.",
+      "fr": "Oui. OneSpace fonctionne entièrement en solo. Tout ce que vous ajoutez reste à vous.",
+      "de": "Ja. OneSpace funktioniert auch allein vollständig. Alles, was du hinzufügst, bleibt deins."
+     }
+    ],
+    [
+     "p",
+     {
+      "en": "When someone special comes along, you can invite them. Your “Only me” items stay private even then.",
+      "ar": "وعندما يأتي شخص مميز يمكنك دعوته، وتبقى عناصرك «أنا فقط» خاصة حتى حينها.",
+      "es": "Cuando llegue alguien especial, puedes invitarle. Tus elementos «Solo yo» siguen siendo privados.",
+      "fr": "Quand quelqu’un de spécial arrive, vous pouvez l’inviter. Vos éléments « Moi seul » restent privés.",
+      "de": "Wenn jemand Besonderes in dein Leben kommt, kannst du ihn einladen. Deine „Nur ich“-Einträge bleiben trotzdem privat."
+     }
+    ]
+   ]
+  },
+  {
+   "id": "get",
+   "where": "both",
+   "q": {
+    "en": "How do I get OneSpace, and is there an iPhone app?",
+    "ar": "كيف أحصل على OneSpace؟ وهل يوجد تطبيق للآيفون؟",
+    "es": "¿Cómo consigo OneSpace? ¿Hay app para iPhone?",
+    "fr": "Comment obtenir OneSpace ? Existe-t-il une application iPhone ?",
+    "de": "Wie bekomme ich OneSpace, und gibt es eine iPhone-App?"
+   },
+   "a": [
+    [
+     "p",
+     {
+      "en": "OneSpace is in closed testing on Android through Google Play. Register on onespace.live to receive an invitation.",
+      "ar": "OneSpace في مرحلة الاختبار المغلق على أندرويد عبر Google Play. سجّل في onespace.live لتصلك دعوة.",
+      "es": "OneSpace está en pruebas cerradas en Android a través de Google Play. Regístrate en onespace.live para recibir una invitación.",
+      "fr": "OneSpace est en test fermé sur Android via Google Play. Inscrivez-vous sur onespace.live pour recevoir une invitation.",
+      "de": "OneSpace ist auf Android in einem geschlossenen Test über Google Play. Registriere dich auf onespace.live, um eine Einladung zu erhalten."
+     }
+    ],
+    [
+     "p",
+     {
+      "en": "The iPhone version is being prepared and will first be shared through TestFlight. Your account and your space are the same on both phones.",
+      "ar": "نسخة الآيفون قيد التحضير وستُتاح أولًا عبر TestFlight. حسابك ومساحتك هما نفسهما على الهاتفين.",
+      "es": "La versión para iPhone está en preparación y se compartirá primero por TestFlight. Tu cuenta y tu espacio son los mismos en ambos teléfonos.",
+      "fr": "La version iPhone est en préparation et sera d’abord proposée via TestFlight. Votre compte et votre espace sont les mêmes sur les deux téléphones.",
+      "de": "Die iPhone-Version wird vorbereitet und zuerst über TestFlight geteilt. Dein Konto und dein Raum sind auf beiden Telefonen dieselben."
+     }
+    ]
+   ]
+  },
+  {
+   "id": "free",
+   "where": "both",
+   "q": {
+    "en": "Is OneSpace free?",
+    "ar": "هل OneSpace مجاني؟",
+    "es": "¿OneSpace es gratis?",
+    "fr": "OneSpace est-il gratuit ?",
+    "de": "Ist OneSpace kostenlos?"
+   },
+   "a": [
+    [
+     "p",
+     {
+      "en": "Yes, during the early test. If that ever changes, we will tell you clearly and in advance.",
+      "ar": "نعم، خلال الاختبار المبكر. وإذا تغيّر ذلك يومًا فسنخبرك بوضوح ومسبقًا.",
+      "es": "Sí, durante la prueba inicial. Si eso cambia, te lo diremos con claridad y antelación.",
+      "fr": "Oui, pendant le test. Si cela change, nous vous le dirons clairement et à l’avance.",
+      "de": "Ja, während des frühen Tests. Sollte sich das ändern, sagen wir es dir klar und rechtzeitig."
+     }
+    ]
+   ]
+  },
+  {
+   "id": "invite",
+   "where": "both",
+   "tutorial": true,
+   "q": {
+    "en": "How do I invite my partner?",
+    "ar": "كيف أدعو شريكي؟",
+    "es": "¿Cómo invito a mi pareja?",
+    "fr": "Comment inviter mon partenaire ?",
+    "de": "Wie lade ich meinen Partner ein?"
+   },
+   "a": [
+    [
+     "steps",
+     [
+      {
+       "en": "On Today, tap Invite my partner.",
+       "ar": "في «اليوم» اضغط «ادعُ شريكي».",
+       "es": "En Hoy, toca Invitar a mi pareja.",
+       "fr": "Dans Aujourd’hui, touchez Inviter mon partenaire.",
+       "de": "Tippe in Heute auf Partner einladen."
+      },
+      {
+       "en": "Enter your partner’s email address and send.",
+       "ar": "أدخل بريد شريكك الإلكتروني وأرسل الدعوة.",
+       "es": "Escribe el correo de tu pareja y envía.",
+       "fr": "Saisissez l’adresse e-mail de votre partenaire et envoyez.",
+       "de": "Gib die E-Mail-Adresse deines Partners ein und sende sie."
+      },
+      {
+       "en": "Your partner opens the email (or uses the code or QR code) and accepts within 48 hours.",
+       "ar": "يفتح شريكك الرسالة (أو يستخدم الرمز أو رمز QR) ويقبل خلال 48 ساعة.",
+       "es": "Tu pareja abre el correo (o usa el código o el QR) y acepta en 48 horas.",
+       "fr": "Votre partenaire ouvre l’e-mail (ou utilise le code ou le QR code) et accepte sous 48 heures.",
+       "de": "Dein Partner öffnet die E-Mail (oder nutzt Code oder QR-Code) und nimmt innerhalb von 48 Stunden an."
+      }
+     ]
+    ],
+    [
+     "p",
+     {
+      "en": "Only the account with that verified email can join. Your “Only me” items stay private.",
+      "ar": "لا ينضم إلا الحساب صاحب ذلك البريد الموثّق، وتبقى عناصرك «أنا فقط» خاصة.",
+      "es": "Solo puede unirse la cuenta con ese correo verificado. Tus elementos «Solo yo» siguen siendo privados.",
+      "fr": "Seul le compte avec cette adresse vérifiée peut rejoindre. Vos éléments « Moi seul » restent privés.",
+      "de": "Nur das Konto mit dieser bestätigten E-Mail kann beitreten. Deine „Nur ich“-Einträge bleiben privat."
+     }
+    ]
+   ]
+  },
+  {
+   "id": "invite-manage",
+   "where": "both",
+   "q": {
+    "en": "How do I resend, replace or revoke an invitation?",
+    "ar": "كيف أعيد إرسال الدعوة أو أستبدلها أو ألغيها؟",
+    "es": "¿Cómo reenvío, sustituyo o revoco una invitación?",
+    "fr": "Comment renvoyer, remplacer ou révoquer une invitation ?",
+    "de": "Wie sende ich eine Einladung erneut, ersetze oder widerrufe sie?"
+   },
+   "a": [
+    [
+     "p",
+     {
+      "en": "On Today, tap Manage invitation.",
+      "ar": "في «اليوم» اضغط «إدارة الدعوة».",
+      "es": "En Hoy, toca Gestionar invitación.",
+      "fr": "Dans Aujourd’hui, touchez Gérer l’invitation.",
+      "de": "Tippe in Heute auf Einladung verwalten."
+     }
+    ],
+    [
+     "bullets",
+     [
+      {
+       "en": "Resend email: same code, same expiry.",
+       "ar": "إعادة إرسال البريد: الرمز نفسه والصلاحية نفسها.",
+       "es": "Reenviar correo: mismo código y misma caducidad.",
+       "fr": "Renvoyer l’e-mail : même code, même expiration.",
+       "de": "E-Mail erneut senden: gleicher Code, gleiche Gültigkeit."
+      },
+      {
+       "en": "Generate a replacement code: the old code stops working at once.",
+       "ar": "إنشاء رمز بديل: يتوقف الرمز القديم فورًا.",
+       "es": "Generar un código nuevo: el anterior deja de funcionar al instante.",
+       "fr": "Générer un nouveau code : l’ancien cesse aussitôt de fonctionner.",
+       "de": "Ersatzcode erzeugen: Der alte Code funktioniert sofort nicht mehr."
+      },
+      {
+       "en": "Revoke invitation: nobody can use it any more.",
+       "ar": "إلغاء الدعوة: لا يمكن لأحد استخدامها بعد ذلك.",
+       "es": "Revocar invitación: nadie podrá usarla.",
+       "fr": "Révoquer l’invitation : plus personne ne peut l’utiliser.",
+       "de": "Einladung widerrufen: Niemand kann sie mehr nutzen."
+      }
+     ]
+    ]
+   ]
+  },
+  {
+   "id": "invite-missing",
+   "where": "both",
+   "q": {
+    "en": "I confirmed my email but cannot find my invitation. What should I do?",
+    "ar": "أكّدت بريدي ولم أجد الدعوة. ماذا أفعل؟",
+    "es": "Confirmé mi correo pero no encuentro la invitación. ¿Qué hago?",
+    "fr": "J’ai confirmé mon e-mail mais ne trouve pas mon invitation. Que faire ?",
+    "de": "Ich habe meine E-Mail bestätigt, finde aber die Einladung nicht. Was tun?"
+   },
+   "a": [
+    [
+     "p",
+     {
+      "en": "Sign in using the invited email. OneSpace checks for a pending invitation even if the browser did not pass its link. Retry the lookup if needed; do not create another shared space while trying to join.",
+      "ar": "سجّل الدخول بالبريد المدعو. يتحقق OneSpace من الدعوة المعلّقة حتى إذا لم يرسل المتصفح رابطها. أعد البحث عند الحاجة، ولا تنشئ مساحة مشتركة أخرى أثناء محاولة الانضمام.",
+      "es": "Inicia sesión con el correo invitado. OneSpace busca una invitación pendiente aunque el navegador no haya enviado el enlace. Repite la búsqueda si es necesario; no crees otro espacio compartido mientras intentas unirte.",
+      "fr": "Connectez-vous avec l’adresse invitée. OneSpace recherche une invitation en attente même si le navigateur n’a pas transmis son lien. Relancez la recherche si nécessaire ; ne créez pas un autre espace partagé pendant que vous tentez de rejoindre celui-ci.",
+      "de": "Melde dich mit der eingeladenen E-Mail-Adresse an. OneSpace sucht auch dann nach einer ausstehenden Einladung, wenn der Browser den Link nicht weitergegeben hat. Wiederhole bei Bedarf die Suche; erstelle beim Beitrittsversuch keinen anderen gemeinsamen Bereich."
+     }
+    ]
+   ]
+  },
+  {
+   "id": "accounts",
+   "where": "both",
+   "q": {
+    "en": "Do we each need an account?",
+    "ar": "هل يحتاج كل منا إلى حساب؟",
+    "es": "¿Necesitamos una cuenta cada uno?",
+    "fr": "Avons-nous besoin chacun d’un compte ?",
+    "de": "Braucht jeder von uns ein Konto?"
+   },
+   "a": [
+    [
+     "p",
+     {
+      "en": "Yes. Each of you signs in with your own email. You share one space for “Shared” items, and each keeps a private side for “Only me” items.",
+      "ar": "نعم. يسجّل كل منكما الدخول ببريده. تتشاركان مساحة واحدة للعناصر «المشتركة»، ويحتفظ كل منكما بجانب خاص لعناصر «أنا فقط».",
+      "es": "Sí. Cada uno entra con su propio correo. Compartís un espacio para lo «Compartido» y cada uno mantiene su parte privada para «Solo yo».",
+      "fr": "Oui. Chacun se connecte avec son e-mail. Vous partagez un espace pour les éléments « Partagé », et chacun garde un côté privé pour « Moi seul ».",
+      "de": "Ja. Jeder meldet sich mit seiner eigenen E-Mail an. Ihr teilt einen Raum für „Geteilt“-Einträge, und jeder behält einen privaten Bereich für „Nur ich“."
+     }
+    ]
+   ]
+  },
+  {
+   "id": "together-apart",
+   "where": "both",
+   "q": {
+    "en": "Does it work whether we live together or apart?",
+    "ar": "هل يعمل سواء كنا نعيش معًا أو بعيدين؟",
+    "es": "¿Funciona tanto si vivimos juntos como separados?",
+    "fr": "Est-ce que ça marche que l’on vive ensemble ou à distance ?",
+    "de": "Funktioniert es, ob wir zusammenleben oder getrennt?"
+   },
+   "a": [
+    [
+     "p",
+     {
+      "en": "Yes. Once your partner has joined, set how you live in either place:",
+      "ar": "نعم. بعد انضمام شريكك اضبط طريقة عيشكما من أي من المكانين:",
+      "es": "Sí. Cuando tu pareja se haya unido, indica cómo vivís en cualquiera de estos sitios:",
+      "fr": "Oui. Une fois votre partenaire inscrit, indiquez votre situation à l’un de ces endroits :",
+      "de": "Ja. Sobald dein Partner dabei ist, lege an einer dieser Stellen fest, wie ihr lebt:"
+     }
+    ],
+    [
+     "bullets",
+     [
+      {
+       "en": "Me → Settings → Our relationship → Living arrangement & meeting dates (also your last visit and next reunion).",
+       "ar": "أنا ← الإعدادات ← علاقتنا ← طريقة العيش ومواعيد اللقاء (وفيها أيضًا آخر زيارة واللقاء القادم).",
+       "es": "Yo → Ajustes → Nuestra relación → Forma de convivencia y fechas de encuentro (también la última visita y el próximo reencuentro).",
+       "fr": "Moi → Réglages → Notre relation → Mode de vie et dates de rencontre (avec la dernière visite et les prochaines retrouvailles).",
+       "de": "Ich → Einstellungen → Unsere Beziehung → Wohnsituation & Treffen (auch letzter Besuch und nächstes Wiedersehen)."
+      },
+      {
+       "en": "On Today, tap the home or airplane icon and choose Together or Apart.",
+       "ar": "في «اليوم» اضغط أيقونة البيت أو الطائرة واختر «معًا» أو «بعيدين».",
+       "es": "En Hoy, toca el icono de casa o de avión y elige Juntos o Separados.",
+       "fr": "Dans Aujourd’hui, touchez l’icône maison ou avion et choisissez Ensemble ou À distance.",
+       "de": "Tippe in Heute auf das Haus- oder Flugzeugsymbol und wähle Zusammen oder Getrennt."
+      }
+     ]
+    ],
+    [
+     "p",
+     {
+      "en": "It is one shared setting, and your partner is notified when it changes. Apart is split automatically into the same or different time zones from your two phones. It does not apply while you use OneSpace on your own.",
+      "ar": "إنه إعداد مشترك واحد، ويُبلَّغ شريكك عند تغييره. وتُحدَّد حالة «بعيدين» تلقائيًا كمنطقة زمنية واحدة أو مختلفة من هاتفيكما. ولا ينطبق وأنت تستخدم OneSpace بمفردك.",
+      "es": "Es un ajuste compartido y se avisa a tu pareja cuando cambia. Separados se divide automáticamente en misma o distinta zona horaria según vuestros teléfonos. No se aplica si usas OneSpace solo.",
+      "fr": "C’est un réglage commun, et votre partenaire est prévenu quand il change. À distance se précise automatiquement (même fuseau ou fuseaux différents) d’après vos téléphones. Il ne s’applique pas en solo.",
+      "de": "Es ist eine gemeinsame Einstellung, und dein Partner wird bei Änderungen benachrichtigt. Getrennt wird automatisch nach gleicher oder unterschiedlicher Zeitzone eurer Telefone unterschieden. Allein gilt die Einstellung nicht."
+     }
+    ]
+   ]
+  },
+  {
+   "id": "tabs",
+   "where": "both",
+   "q": {
+    "en": "What is on each tab?",
+    "ar": "ماذا يوجد في كل تبويب؟",
+    "es": "¿Qué hay en cada pestaña?",
+    "fr": "Que contient chaque onglet ?",
+    "de": "Was findet sich in welchem Tab?"
+   },
+   "a": [
+    [
+     "bullets",
+     [
+      {
+       "en": "Today: what needs you now, what is coming up, and updates since you were away.",
+       "ar": "اليوم: ما يحتاجك الآن وما هو قادم والتحديثات منذ غيابك.",
+       "es": "Hoy: lo que te necesita ahora, lo próximo y las novedades desde tu última visita.",
+       "fr": "Aujourd’hui : ce qui vous attend, ce qui arrive et les nouveautés depuis votre absence.",
+       "de": "Heute: was dich jetzt braucht, was ansteht und was seit deinem letzten Besuch passiert ist."
+      },
+      {
+       "en": "Remember: calendar, to-do lists, reminders, notes, counters, occasions, places and contact cards.",
+       "ar": "نتذكّر: التقويم وقوائم المهام والتذكيرات والملاحظات والعدّادات والمناسبات والأماكن وبطاقات جهات الاتصال.",
+       "es": "Recordar: calendario, tareas, recordatorios, notas, contadores, ocasiones, lugares y fichas de contacto.",
+       "fr": "Se souvenir : agenda, tâches, rappels, notes, compteurs, occasions, lieux et fiches contact.",
+       "de": "Merken: Kalender, To-dos, Erinnerungen, Notizen, Zähler, Anlässe, Orte und Kontaktkarten."
+      },
+      {
+       "en": "Coordinate: Activities (plans and decisions) and trips.",
+       "ar": "ننسّق: الأنشطة (الخطط والقرارات) والرحلات.",
+       "es": "Organizar: actividades (planes y decisiones) y viajes.",
+       "fr": "Organiser : activités (projets et décisions) et voyages.",
+       "de": "Planen: Aktivitäten (Pläne und Entscheidungen) und Reisen."
+      },
+      {
+       "en": "Connect: letters, a little love, daily check-ins, shared experiences and memories.",
+       "ar": "نتواصل: الرسائل ولمسة حب والتواصل اليومي والتجارب المشتركة والذكريات.",
+       "es": "Conectar: cartas, un poco de cariño, check-ins diarios, experiencias compartidas y recuerdos.",
+       "fr": "Échanger : lettres, petites attentions, nouvelles du jour, expériences partagées et souvenirs.",
+       "de": "Verbinden: Briefe, ein bisschen Liebe, tägliche Check-ins, gemeinsame Erlebnisse und Erinnerungen."
+      },
+      {
+       "en": "Me: profile, settings, help and your data.",
+       "ar": "أنا: الملف الشخصي والإعدادات والمساعدة وبياناتك.",
+       "es": "Yo: perfil, ajustes, ayuda y tus datos.",
+       "fr": "Moi : profil, réglages, aide et vos données.",
+       "de": "Ich: Profil, Einstellungen, Hilfe und deine Daten."
+      }
+     ]
+    ]
+   ]
+  },
+  {
+   "id": "offline",
+   "where": "both",
+   "q": {
+    "en": "Do we need to be online at the same time?",
+    "ar": "هل يجب أن نكون متصلين في الوقت نفسه؟",
+    "es": "¿Tenemos que estar conectados al mismo tiempo?",
+    "fr": "Devons-nous être connectés en même temps ?",
+    "de": "Müssen wir gleichzeitig online sein?"
+   },
+   "a": [
+    [
+     "p",
+     {
+      "en": "No. Each of you adds things when it suits you. Shared changes appear for the other partner the next time they open the app.",
+      "ar": "لا. يضيف كل منكما ما يريد في الوقت المناسب له، وتظهر التغييرات المشتركة للشريك الآخر عندما يفتح التطبيق.",
+      "es": "No. Cada uno añade cosas cuando le viene bien. Los cambios compartidos aparecen para el otro al abrir la app.",
+      "fr": "Non. Chacun ajoute ce qu’il veut quand il veut. Les changements partagés apparaissent chez l’autre à sa prochaine ouverture de l’application.",
+      "de": "Nein. Jeder fügt Dinge hinzu, wann es passt. Geteilte Änderungen erscheinen beim anderen, sobald er die App öffnet."
+     }
+    ]
+   ]
+  },
+  {
+   "id": "test",
+   "where": "both",
+   "q": {
+    "en": "This is a test version. What should I report?",
+    "ar": "هذه نسخة تجريبية، فما الذي أبلغ عنه؟",
+    "es": "Es una versión de prueba. ¿Qué debo comunicar?",
+    "fr": "C’est une version de test. Que dois-je signaler ?",
+    "de": "Das ist eine Testversion. Was soll ich melden?"
+   },
+   "a": [
+    [
+     "p",
+     {
+      "en": "Anything that breaks, looks wrong, is confusing or is missing.",
+      "ar": "أي شيء يتعطل أو يبدو خاطئًا أو مربكًا أو ناقصًا.",
+      "es": "Todo lo que falle, se vea mal, confunda o falte.",
+      "fr": "Tout ce qui plante, s’affiche mal, prête à confusion ou manque.",
+      "de": "Alles, was nicht funktioniert, falsch aussieht, verwirrt oder fehlt."
+     }
+    ],
+    [
+     "bullets",
+     [
+      {
+       "en": "Problems: Me → Report a technical issue (you can add a screenshot).",
+       "ar": "المشكلات: أنا ← الإبلاغ عن مشكلة تقنية (يمكنك إرفاق لقطة شاشة).",
+       "es": "Problemas: Yo → Informar de un problema técnico (puedes añadir una captura).",
+       "fr": "Problèmes : Moi → Signaler un problème technique (capture d’écran possible).",
+       "de": "Probleme: Ich → Technisches Problem melden (Screenshot möglich)."
+      },
+      {
+       "en": "Ideas and questions: Me → Contact us.",
+       "ar": "الأفكار والأسئلة: أنا ← تواصل معنا.",
+       "es": "Ideas y preguntas: Yo → Contáctanos.",
+       "fr": "Idées et questions : Moi → Nous contacter.",
+       "de": "Ideen und Fragen: Ich → Kontakt."
+      }
+     ]
+    ],
+    [
+     "p",
+     {
+      "en": "Errors are also sent to us automatically, without any of your content.",
+      "ar": "تصلنا الأخطاء أيضًا تلقائيًا، دون أي من محتواك.",
+      "es": "Los errores también nos llegan automáticamente, sin tu contenido.",
+      "fr": "Les erreurs nous parviennent aussi automatiquement, sans votre contenu.",
+      "de": "Fehler erreichen uns außerdem automatisch – ohne deine Inhalte."
+     }
+    ]
+   ]
+  }
+ ]
+}

@@ -9,7 +9,18 @@ import sys
 sys.path.insert(0, str(ROOT / 'content'))
 from locale_legal_review import LEGAL_EDITORIAL
 from locale_faq_review import FAQ_EDITORIAL
+from faq_master import web_groups as _faq_web_groups
 from locale_guides_review import GUIDE_EDITORIAL
+# 27 Nov 2026: the FAQ is content/faq/*.json (website items) plus the website-only Founder group.
+def _expected_faq_total():
+    en=BeautifulSoup((ROOT/'faq.html').read_text(encoding='utf8'),'html.parser')
+    total=len(en.select('details[data-faq]'))
+    web=sum(len(g['items']) for g in _faq_web_groups())
+    founders=len(en.select('#founders + div details[data-faq]'))
+    assert founders>0 and total==web+founders,(total,web,founders)
+    return total
+EXPECTED_FAQ=_expected_faq_total()
+
 catalog = json.loads((ROOT / 'content' / 'translations' / 'source_catalog.json').read_text(encoding='utf8'))
 for language in ('es', 'fr', 'de'):
   for name, corrections in [('privacy/terms', LEGAL_EDITORIAL[language]),
@@ -65,7 +76,7 @@ for lang, paths in CHECKS.items():
       assert soup.find('b', string=lambda s: bool(s and s.strip().lower() in
                            {'no recopilamos','pas','keine'})), f'{page}: legally vital negative emphasis lost'
     if category == 'faq':
-      assert len(soup.select('details[data-faq]')) == 56, f'{page}: FAQ coverage'
+      assert len(soup.select('details[data-faq]')) == EXPECTED_FAQ, f'{page}: FAQ coverage'
   # Critical untranslated or dangerously mistranslated legal fragments must never return.
   privacy = (ROOT/lang/'privacy.html').read_text(encoding='utf8')
   banned = {
