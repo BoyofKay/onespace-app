@@ -32,11 +32,11 @@ JOURNEY_TUTORIAL_ADDITIONS = {
           "Wählt gespeicherte Orte und haltet genug freie Zeit."
         ],
         [
-          "After the visit, create a shared memory. <a href=\"scenarios.html#story-reunion-from-flight-to-memory\">Read Lina and Omar's complete reunion journey</a>.",
-          "بعد الزيارة اصنعا ذكرى مشتركة. <a href=\"scenarios.html#story-reunion-from-flight-to-memory\">اقرأ حكاية لقاء لينا وعمر كاملة</a>.",
-          "Tras la visita cread un recuerdo. <a href=\"scenarios.html#story-reunion-from-flight-to-memory\">Lee la historia completa de Lina y Omar</a>.",
-          "Après la visite, créez un souvenir. <a href=\"scenarios.html#story-reunion-from-flight-to-memory\">Lisez toute l’histoire de Lina et Omar</a>.",
-          "Erstellt danach eine gemeinsame Erinnerung. <a href=\"scenarios.html#story-reunion-from-flight-to-memory\">Lies Linas und Omars gesamte Geschichte</a>."
+          "After the visit, create a shared memory. <a href=\"scenarios.html#story-reunion-from-flight-to-memory\">Read Lina and Adam's complete reunion journey</a>.",
+          "بعد الزيارة اصنعا ذكرى مشتركة. <a href=\"scenarios.html#story-reunion-from-flight-to-memory\">اقرأ حكاية لقاء لينا وآدم كاملة</a>.",
+          "Tras la visita cread un recuerdo. <a href=\"scenarios.html#story-reunion-from-flight-to-memory\">Lee la historia completa de Lina y Adam</a>.",
+          "Après la visite, créez un souvenir. <a href=\"scenarios.html#story-reunion-from-flight-to-memory\">Lisez toute l’histoire de Lina et Adam</a>.",
+          "Erstellt danach eine gemeinsame Erinnerung. <a href=\"scenarios.html#story-reunion-from-flight-to-memory\">Lies Linas und Adams gesamte Geschichte</a>."
         ]
       ]
     },

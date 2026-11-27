@@ -1243,7 +1243,7 @@ CURATED["es"].update({
   "Make it an activity": "Crear una actividad",
   "Android and iPhone couples": "Parejas con Android o iPhone",
   "Join the Founding 500 — iPhone welcome →": "Unirse a los Fundadores: también con iPhone →",
-  "Six steps, one real workflow — from noticing something on Today to a decision on your calendar. Tap a step or press Next. The people are examples: Omar and Lina.": "Seis pasos en un flujo real, desde un aviso en Hoy hasta una decisión en el calendario. Elijan un paso o pulsen Siguiente. Omar y Lina son personajes ficticios.",
+  "Six steps, one real workflow — from noticing something on Today to a decision on your calendar. Tap a step or press Next. The people are examples: Adam and Lina.": "Seis pasos en un flujo real, desde un aviso en Hoy hasta una decisión en el calendario. Elijan un paso o pulsen Siguiente. Adam y Lina son personajes ficticios.",
   "Share the love": "Compartir cariño",
   "Find it fast. Know what matters.": "Encuéntrenlo rápido. Sepan qué importa."
 })
@@ -1274,7 +1274,7 @@ CURATED["fr"].update({
   "Make it an activity": "Créer une activité",
   "Android and iPhone couples": "Couples avec Android ou iPhone",
   "Join the Founding 500 — iPhone welcome →": "Rejoindre les Fondateurs — iPhone bienvenu →",
-  "Six steps, one real workflow — from noticing something on Today to a decision on your calendar. Tap a step or press Next. The people are examples: Omar and Lina.": "Six étapes d’un véritable parcours, de l’information dans Aujourd’hui à la décision dans le calendrier. Choisissez une étape ou appuyez sur Suivant. Omar et Lina sont fictifs.",
+  "Six steps, one real workflow — from noticing something on Today to a decision on your calendar. Tap a step or press Next. The people are examples: Adam and Lina.": "Six étapes d’un véritable parcours, de l’information dans Aujourd’hui à la décision dans le calendrier. Choisissez une étape ou appuyez sur Suivant. Adam et Lina sont fictifs.",
   "Share the love": "Faire un geste tendre",
   "Find it fast. Know what matters.": "Retrouvez vite l’essentiel. Restez au courant."
 })
@@ -1305,7 +1305,7 @@ CURATED["de"].update({
   "Make it an activity": "Aktivität erstellen",
   "Android and iPhone couples": "Paare mit Android oder iPhone",
   "Join the Founding 500 — iPhone welcome →": "Gründerplatz sichern – auch mit iPhone →",
-  "Six steps, one real workflow — from noticing something on Today to a decision on your calendar. Tap a step or press Next. The people are examples: Omar and Lina.": "Sechs Schritte in einem echten Ablauf – vom Hinweis unter Heute bis zur Entscheidung im Kalender. Wählt einen Schritt oder Weiter. Omar und Lina sind fiktiv.",
+  "Six steps, one real workflow — from noticing something on Today to a decision on your calendar. Tap a step or press Next. The people are examples: Adam and Lina.": "Sechs Schritte in einem echten Ablauf – vom Hinweis unter Heute bis zur Entscheidung im Kalender. Wählt einen Schritt oder Weiter. Adam und Lina sind fiktiv.",
   "Share the love": "Liebe zeigen",
   "Find it fast. Know what matters.": "Schnell finden. Wichtiges im Blick behalten."
 })

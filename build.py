@@ -4,7 +4,7 @@
     python3 build.py        # writes the .html pages, assets/ar.js, sitemap.xml, robots.txt
 
 All copy lives here and in content/ (English + Arabic). Illustrations are
-HTML/CSS recreations of real app screens with example people (Omar & Lina) —
+HTML/CSS recreations of real app screens with example people (Adam & Lina) —
 never screenshots with real data.
 """
 import hashlib
@@ -383,13 +383,13 @@ def row(icon, title, title_ar, sub='', sub_ar='', value='', value_ar='', small='
 def scr_today(apart=True):
     if apart:
         place = f'''<div class="pc"><h4>✈️ {T('Living apart', 'متباعدان')}</h4>
-  <div class="clocks"><div>{T('Omar · Toronto', 'عمر · تورونتو')}<b>12:14 PM</b><em>☀️ 18° · {T('clear', 'صافٍ')}</em></div>
+  <div class="clocks"><div>{T('Adam · Toronto', 'آدم · تورونتو')}<b>12:14 PM</b><em>☀️ 18° · {T('clear', 'صافٍ')}</em></div>
   <div>{T('Lina · London', 'لينا · لندن')}<b>5:14 PM</b><em>🌧 9° · {T('good time to talk', 'وقت مناسب للحديث')}</em></div></div></div>'''
     else:
         place = f'''<div class="pc"><h4>🏡 {T('Together under one roof', 'معًا تحت سقف واحد')}</h4>
   {row('💗', 'One home, one shared space.', 'بيت واحد ومساحة مشتركة واحدة.', 'Your day together, at a glance', 'يومكما معًا في لمحة')}</div>'''
     return f'''{app_head()}<div class="body">
-  {T('Good evening, Omar', 'مساء الخير، عمر', 'div', 'greet')}{T('Your space with Lina', 'مساحتك مع لينا', 'div', 'sub')}
+  {T('Good evening, Adam', 'مساء الخير، آدم', 'div', 'greet')}{T('Your space with Lina', 'مساحتك مع لينا', 'div', 'sub')}
   {place}
   <div class="pc"><h4>💌 {T('Since you were away', 'منذ غيابك')}</h4>
     {row('🤍', 'Lina sent you a hug', 'أرسلت لك لينا حضنًا', '“Sending you a big, warm hug.”', '«أرسل لك حضنًا كبيرًا ودافئًا.»', '2m', 'دقيقتان')}</div>
@@ -422,7 +422,7 @@ def scr_quickadd():
              ('🌤', 'Daily feeling', 'شعور اليوم'), ('💌', 'Letter', 'رسالة'), ('🤍', 'A little love', 'لمسة حب'), ('📍', 'Place', 'مكان')]
     qa = ''.join(f'<div><i>{i}</i>{T(e, a)}</div>' for i, e, a in items)
     return f'''{app_head()}<div class="body" style="opacity:.35">
-  {T('Good evening, Omar', 'مساء الخير، عمر', 'div', 'greet')}
+  {T('Good evening, Adam', 'مساء الخير، آدم', 'div', 'greet')}
   <div class="pc" style="height:90px"></div><div class="pc" style="height:120px"></div></div>
   <div class="sheet">{T('Quick add', 'إضافة سريعة', 'div', 'greet')}<div style="height:8px"></div><div class="qa">{qa}</div></div>'''
 
@@ -461,7 +461,7 @@ def scr_trip():
     {row('🛬', 'IST → YYZ · Thu 18:05', 'إسطنبول ← تورونتو · الخميس 18:05', 'Direct · seat 14A', 'مباشر · مقعد 14A')}</div>
   <div class="pc"><h4>🧳 {T('Packing', 'التجهيز')} <span class="n">7/12</span></h4><div class="prog"><i style="width:58%"></i></div>
     {row('🛂', 'Passports and visas', 'الجوازات والتأشيرات', 'Lina · done', 'لينا · تم')}
-    {row('🔌', 'Travel adapter', 'محوّل الكهرباء', 'Omar', 'عمر')}</div>
+    {row('🔌', 'Travel adapter', 'محوّل الكهرباء', 'Adam', 'آدم')}</div>
   <div class="pc"><h4>📄 {T('Travel documents', 'مستندات السفر')}</h4>{row('🏨', 'Hotel booking.pdf', 'حجز الفندق.pdf', 'Only us two can open it', 'لا يفتحه سوانا')}</div>
 </div>{nav_bar('coordinate')}'''
 
@@ -503,8 +503,8 @@ def scr_occasion():
 def scr_activity():
     return f'''<div class="app-head"><b style="font-size:15px">← {T('Activity', 'النشاط')}</b></div><div class="body">
   {T('A new sofa', 'أريكة جديدة', 'div', 'greet')}<div class="sub">{T('Exploring · compare 2 options', 'قيد البحث · مقارنة خيارين')}</div>
-  <div class="pc"><h4>⚖️ {T('Options', 'الخيارات')}</h4>{row('🛋', 'Grey corner sofa', 'أريكة زاوية رمادية', 'Omar ♥ · Lina ?', 'عمر ♥ · لينا ؟', '$1,400', '1,400 دولار')}{row('🛋', 'Velvet 3-seater', 'أريكة مخمل لثلاثة', 'Omar ? · Lina ♥', 'عمر ؟ · لينا ♥', '$1,150', '1,150 دولار')}</div>
-  <div class="pc"><h4>💬 {T('Conversation', 'المحادثة')}</h4>{row('🎙', 'Voice note · 0:12', 'رسالة صوتية · 0:12', 'Lina')}{row('💬', '“The velvet one fits the window”', '«المخمل يناسب النافذة»', 'Omar')}</div>
+  <div class="pc"><h4>⚖️ {T('Options', 'الخيارات')}</h4>{row('🛋', 'Grey corner sofa', 'أريكة زاوية رمادية', 'Adam ♥ · Lina ?', 'آدم ♥ · لينا ؟', '$1,400', '1,400 دولار')}{row('🛋', 'Velvet 3-seater', 'أريكة مخمل لثلاثة', 'Adam ? · Lina ♥', 'آدم ؟ · لينا ♥', '$1,150', '1,150 دولار')}</div>
+  <div class="pc"><h4>💬 {T('Conversation', 'المحادثة')}</h4>{row('🎙', 'Voice note · 0:12', 'رسالة صوتية · 0:12', 'Lina')}{row('💬', '“The velvet one fits the window”', '«المخمل يناسب النافذة»', 'Adam')}</div>
   <div class="pc"><h4>✅ {T('Decision', 'القرار')}</h4>{row('🛋', 'Velvet 3-seater', 'أريكة مخمل لثلاثة', 'Decided together', 'قررناها معًا')}</div>
 </div>{nav_bar('coordinate')}'''
 
@@ -512,9 +512,9 @@ def scr_activity():
 def scr_arabic():
     return f'''<div dir="rtl" style="display:flex;flex-direction:column;height:100%;font-family:var(--font-ar)">
   <div class="app-head"><img src="assets/mark.svg" alt=""><div><b>OneSpace</b><small>نحن الاثنان، مساحة واحدة</small></div><span class="bell">🔔<i></i></span></div>
-  <div class="body"><div class="greet">صباح الخير، لينا</div><div class="sub">مساحتك مع عمر</div>
-  <div class="pc"><h4>✈️ متباعدان</h4><div class="clocks"><div><span>لينا · لندن</span><b>8:02 ص</b><em>🌧 9°</em></div><div><span>عمر · تورونتو</span><b>3:02 ص</b><em>🌙 12°</em></div></div></div>
-  <div class="pc"><h4>💌 منذ غيابك</h4><div class="row"><span class="ri">☀️</span><span class="rt"><b>عمر يقول صباح الخير</b><span>«يومك جميل يا حبيبتي»</span></span></div></div>
+  <div class="body"><div class="greet">صباح الخير، لينا</div><div class="sub">مساحتك مع آدم</div>
+  <div class="pc"><h4>✈️ متباعدان</h4><div class="clocks"><div><span>لينا · لندن</span><b>8:02 ص</b><em>🌧 9°</em></div><div><span>آدم · تورونتو</span><b>3:02 ص</b><em>🌙 12°</em></div></div></div>
+  <div class="pc"><h4>💌 منذ غيابك</h4><div class="row"><span class="ri">☀️</span><span class="rt"><b>آدم يقول صباح الخير</b><span>«يومك جميل يا حبيبتي»</span></span></div></div>
   <div class="pc"><h4>📅 اليوم والأيام السبعة القادمة</h4><div class="row"><span class="ri">✈️</span><span class="rt"><b>رحلة إلى إسطنبول</b><span>السبت · 7:40 ص</span></span></div></div>
   </div><div class="nav-b"><span class="on"><i>📅</i>اليوم</span><span><i>🔖</i>تذكّر</span><span><i>🧭</i>نسّق</span><span><i>♡</i>تواصل</span><span><i>👤</i>أنا</span></div></div>'''
 
@@ -546,7 +546,7 @@ def scr_watch():
     {row('📺', 'The Great British Bake Off', 'مسابقة الخَبز البريطانية', 'Planned · Fri 9 PM', 'مخطط · الجمعة 9 م')}
     {row('🎵', 'Our wedding playlist', 'قائمة أغاني زفافنا', 'Music · Spotify', 'موسيقى · سبوتيفاي')}
     {row('📖', 'The Little Prince', 'الأمير الصغير', 'Book · a chapter each', 'كتاب · فصل لكل منا')}</div>
-  <div class="pc"><h4>⭐ {T('Our ratings', 'تقييماتنا')}</h4>{row('🎞', 'Before Sunrise', 'قبل الشروق', 'Omar ★★★★ · Lina ★★★★★', 'عمر ★★★★ · لينا ★★★★★')}</div>
+  <div class="pc"><h4>⭐ {T('Our ratings', 'تقييماتنا')}</h4>{row('🎞', 'Before Sunrise', 'قبل الشروق', 'Adam ★★★★ · Lina ★★★★★', 'آدم ★★★★ · لينا ★★★★★')}</div>
 </div>{nav_bar('connect')}"""
 
 
@@ -590,8 +590,8 @@ def scr_demo_activity():
     return f"""{_bar('Activity', 'النشاط')}<div class="body">
   {T('Weekend away', 'عطلة نهاية الأسبوع', 'div', 'greet')}<div class="sub">{T('Exploring · Fri 28 Nov · 2 options', 'قيد البحث · الجمعة 28 نوفمبر · خياران')}</div>
   <div class="pc"><h4>⚖️ {T('Options', 'الخيارات')}</h4>
-    {row('🏔', 'Banff, 2 nights', 'بانف، ليلتان', 'Omar ♥ · Lina ?', 'عمر ♥ · لينا ؟', '$760', '760 دولار')}
-    {row('🛶', 'Muskoka, 2 nights', 'موسكوكا، ليلتان', 'Omar ? · Lina ?', 'عمر ؟ · لينا ؟', '$540', '540 دولار')}</div>
+    {row('🏔', 'Banff, 2 nights', 'بانف، ليلتان', 'Adam ♥ · Lina ?', 'آدم ♥ · لينا ؟', '$760', '760 دولار')}
+    {row('🛶', 'Muskoka, 2 nights', 'موسكوكا، ليلتان', 'Adam ? · Lina ?', 'آدم ؟ · لينا ؟', '$540', '540 دولار')}</div>
   <div class="pc"><h4>📎 {T('Linked', 'مرتبط')}</h4>{row('📝', 'Weekend away ideas', 'أفكار لعطلة نهاية الأسبوع', 'Note', 'ملاحظة')}</div>
   <div class="pc" style="background:color-mix(in srgb,var(--p) 12%,var(--pcard))">{row('🔔', 'Lina was asked to pick', 'طُلب من لينا الاختيار', 'Shows in her Needs your attention', 'يظهر في «يحتاج انتباهك» لديها')}</div>
 </div>{nav_bar('coordinate')}"""
@@ -614,7 +614,7 @@ def scr_demo_decision():
   <div class="pc" style="background:color-mix(in srgb,var(--p) 12%,var(--pcard))"><h4>✅ {T('Decision', 'القرار')}</h4>{row('🏔', 'Banff, 2 nights', 'بانف، ليلتان', 'Fri 28 – Sun 30 Nov', 'الجمعة 28 – الأحد 30 نوفمبر', '$760', '760 دولار')}</div>
   <div class="pc"><h4>📎 {T('Linked items', 'العناصر المرتبطة')}</h4>
     {row('📅', 'Calendar · Banff weekend', 'التقويم · عطلة بانف', 'Fri 28 Nov, all weekend', 'الجمعة 28 نوفمبر، طوال العطلة')}
-    {row('⏰', 'Reminder · book the hotel', 'تذكير · احجز الفندق', 'Omar · tomorrow 9:00 AM', 'عمر · غدًا 9:00 ص')}
+    {row('⏰', 'Reminder · book the hotel', 'تذكير · احجز الفندق', 'Adam · tomorrow 9:00 AM', 'آدم · غدًا 9:00 ص')}
     {row('📝', 'Weekend away ideas', 'أفكار لعطلة نهاية الأسبوع', 'Note', 'ملاحظة')}</div>
 </div>{nav_bar('coordinate')}"""
 
@@ -708,11 +708,11 @@ def cities_panel():
     <div class="split" style="gap:40px;align-items:start">
       <div>{T('A day in two cities', 'يوم في مدينتين', 'span', 'eyebrow')}{T('5,700 km, one shared day.', '5,700 كم، ويوم مشترك واحد.', 'h3', '', 'style="font-size:30px;margin:10px 0 0"')}
         <svg class="route" viewBox="0 0 400 120" aria-hidden="true"><path class="arc" d="M30 95 Q200 -20 370 95" fill="none" stroke="#F3A27E" stroke-width="2.5"/><circle cx="30" cy="95" r="7" fill="#F3A27E"/><circle cx="370" cy="95" r="7" fill="#7FC4CC"/><text x="200" y="40" text-anchor="middle" font-size="22">✈️</text></svg>
-        <div class="city-row"><div class="city">{T('Toronto · Omar', 'تورونتو · عمر')}<b>12:14 PM</b><span>☀️ 18° · {T('lunchtime', 'وقت الغداء')}</span></div><div class="city">{T('London · Lina', 'لندن · لينا')}<b>5:14 PM</b><span>🌧 9° · {T('good time to talk', 'وقت مناسب للحديث')}</span></div></div>
+        <div class="city-row"><div class="city">{T('Toronto · Adam', 'تورونتو · آدم')}<b>12:14 PM</b><span>☀️ 18° · {T('lunchtime', 'وقت الغداء')}</span></div><div class="city">{T('London · Lina', 'لندن · لينا')}<b>5:14 PM</b><span>🌧 9° · {T('good time to talk', 'وقت مناسب للحديث')}</span></div></div>
         <a class="btn btn-primary" style="margin-top:24px" href="long-distance.html">{T('OneSpace for long distance →', 'OneSpace للعلاقات عن بُعد ←')}</a></div>
       <div class="day">
-        {slot('07:40', '<b>Lina</b> wakes up to “Good morning ☀️” Omar sent before bed.', '<b>لينا</b> تستيقظ على «صباح الخير ☀️» أرسلها عمر قبل نومه.')}
-        {slot('12:10', '<b>Omar</b> adds the flight to Istanbul — YYZ → IST, Saturday 07:40.', '<b>عمر</b> يضيف رحلة إسطنبول — تورونتو ← إسطنبول، السبت 07:40.')}
+        {slot('07:40', '<b>Lina</b> wakes up to “Good morning ☀️” Adam sent before bed.', '<b>لينا</b> تستيقظ على «صباح الخير ☀️» أرسلها آدم قبل نومه.')}
+        {slot('12:10', '<b>Adam</b> adds the flight to Istanbul — YYZ → IST, Saturday 07:40.', '<b>آدم</b> يضيف رحلة إسطنبول — تورونتو ← إسطنبول، السبت 07:40.')}
         {slot('17:14', 'Today says it is <b>a good time to talk</b> in London. They call.', '«اليوم» يقول إنه <b>وقت مناسب للحديث</b> في لندن. يتصلان.')}
         {slot('21:30', '<b>Lina</b> ticks “Passports” on the packing list. 7 of 12 done.', '<b>لينا</b> تضع علامة على «الجوازات» في قائمة التجهيز. 7 من 12.')}
         {slot('23:55', 'The reunion counter flips to <b>5 days</b>. ✈️', 'عدّاد اللقاء يصبح <b>5 أيام</b>. ✈️')}
@@ -724,7 +724,7 @@ def home_panel():
     <div class="stage">{device('together/today', 'Today for a couple living together', 'اليوم لزوجين يعيشان معًا', fallback=phone(scr_today(False), 'coral', label='Today for a couple living together', label_ar='اليوم لزوجين يعيشان معًا', themable=False))}</div>
     <div>{T('One home, shared load', 'بيت واحد وعبء مشترك', 'span', 'eyebrow')}{T('Nobody has to be the household’s memory.', 'لا أحد مضطر لأن يكون ذاكرة البيت.', 'h3', '', 'style="font-size:30px;margin:10px 0 18px"')}
       <div class="day" style="margin-top:0">
-        <div class="slot"><time style="color:var(--coral)">08:00</time><div class="card" style="padding:12px 16px">{T('Shared grocery list — Omar grabs milk on the way to work.', 'قائمة المشتريات المشتركة — عمر يشتري الحليب في طريقه للعمل.')}</div></div>
+        <div class="slot"><time style="color:var(--coral)">08:00</time><div class="card" style="padding:12px 16px">{T('Shared grocery list — Adam grabs milk on the way to work.', 'قائمة المشتريات المشتركة — آدم يشتري الحليب في طريقه للعمل.')}</div></div>
         <div class="slot"><time style="color:var(--coral)">13:00</time><div class="card" style="padding:12px 16px">{T('Internet bill reminder, assigned to Lina. Paid ✓', 'تذكير فاتورة الإنترنت، مُسند إلى لينا. تم الدفع ✓')}</div></div>
         <div class="slot"><time style="color:var(--coral)">19:30</time><div class="card" style="padding:12px 16px">{T('They finally decide on the sofa — both picked the velvet one.', 'قرّرا أخيرًا الأريكة — كلاهما اختار المخملية.')}</div></div>
         <div class="slot"><time style="color:var(--coral)">22:00</time><div class="card" style="padding:12px 16px">{T('Movie night saved to Experiences, rated ★★★★ and ★★★★★.', 'سهرة الفيلم محفوظة في التجارب، بتقييم ★★★★ و★★★★★.')}</div></div>
@@ -824,7 +824,7 @@ def watch_section():
     return f'''<section class="warm"><div class="wrap split watch-real-layout">
   <div class="stage">{tour}</div>
   <div>{T('See it move', 'شاهده يتحرك', 'span', 'eyebrow')}{T('This is the real app — not a mock-up.', 'هذا هو التطبيق الحقيقي — وليس تصميمًا تخيليًا.', 'h2')}
-  {T('Recorded on a phone with our fictional couple, Omar and Lina. What you see is exactly what you get.', 'سُجّل على هاتف مع زوجينا الافتراضيين عمر ولينا. ما تراه هو ما ستحصل عليه تمامًا.', 'p', 'lead')}
+  {T('Recorded on a phone with our fictional couple, Adam and Lina. What you see is exactly what you get.', 'سُجّل على هاتف مع زوجينا الافتراضيين آدم ولينا. ما تراه هو ما ستحصل عليه تمامًا.', 'p', 'lead')}
   <div class="wall watch-clips" style="margin-top:20px">{small}</div></div>
 </div></section>'''
 
@@ -1226,7 +1226,7 @@ def page_index():
                     f'<ul class="ticks" style="max-width:320px">{"".join(f"<li>{T(x, y)}</li>" for x, y in pts)}</ul><a class="more" href="{href}" style="font-weight:700">{T("More about " + e + " →", "المزيد عن " + ar + " ←")}</a></div>'
                     for i, (k, ic, e, ar, t, tar, pts, sc, href) in enumerate(tabs))
     marquee_items = [('🛒', 'Groceries for Friday · 4 left', 'مشتريات الجمعة · بقي 4'), ('💍', 'Anniversary in 12 days', 'الذكرى بعد 12 يومًا'), ('💌', 'A letter opens on Saturday', 'رسالة تُفتح يوم السبت'),
-                     ('🏔', 'Lina picked Banff', 'اختارت لينا بانف'), ('🤗', 'Omar sent a hug', 'أرسل عمر حضنًا'), ('✈️', 'YYZ → IST · packing 7/12', 'تورونتو ← إسطنبول · التجهيز 7/12'),
+                     ('🏔', 'Lina picked Banff', 'اختارت لينا بانف'), ('🤗', 'Adam sent a hug', 'أرسل آدم حضنًا'), ('✈️', 'YYZ → IST · packing 7/12', 'تورونتو ← إسطنبول · التجهيز 7/12'),
                      ('🧾', 'Internet bill due Thursday', 'فاتورة الإنترنت الخميس'), ('📍', 'Santorini added to the bucket list', 'أُضيفت سانتوريني إلى قائمة الأحلام'), ('🎂', 'Gift ideas: 3 shortlisted', 'أفكار هدايا: 3 في القائمة'),
                      ('😊', 'Lina felt great today', 'شعرت لينا اليوم بأنها رائعة'), ('🎬', 'Movie night · Friday 9 PM', 'سهرة فيلم · الجمعة 9 م'), ('☕', 'Our café · 12 visits', 'مقهانا · 12 زيارة')]
     chips = ''.join(f'<span class="chip">{i} {T(e, a)}</span>' for i, e, a in marquee_items)
@@ -1289,10 +1289,10 @@ def page_index():
     <div class="bx b-2 mint reveal"><div class="ico i-teal">📍</div>{T('Our places, on a map', 'أماكننا على خريطة', 'h3')}{T('Been there and bucket list. Share straight from Google Maps.', 'ما زرتماه وقائمة الأحلام. شارك مباشرة من خرائط Google.', 'p')}
       <div class="viz"><div class="mini-map"><span class="pin" style="left:28%;top:50%">❤️</span><span class="pin" style="left:58%;top:40%;animation-delay:.3s">❤️</span><span class="pin" style="left:78%;top:78%;animation-delay:.6s">🧭</span><span class="pin" style="left:42%;top:86%;animation-delay:.9s">🧭</span></div></div></div>
     <div class="bx b-2 sun reveal"><div class="ico i-gold">🧳</div>{T('Trips, packed together', 'رحلات نجهّزها معًا', 'h3')}<div class="viz"><ul class="check-list">
-      <li class="d">{T('Passports — Lina', 'الجوازات — لينا')}</li><li class="d">{T('Hotel booking — Omar', 'حجز الفندق — عمر')}</li><li>{T('Travel adapter — Omar', 'محوّل الكهرباء — عمر')}</li></ul></div></div>
+      <li class="d">{T('Passports — Lina', 'الجوازات — لينا')}</li><li class="d">{T('Hotel booking — Adam', 'حجز الفندق — آدم')}</li><li>{T('Travel adapter — Adam', 'محوّل الكهرباء — آدم')}</li></ul></div></div>
     <div class="bx b-2 lilac reveal"><div class="ico i-violet">🌤</div>{T('A one-minute check-in', 'تواصل يومي في دقيقة', 'h3')}{T('How was today, really? Pick a face, add one honest line.', 'كيف كان يومك حقًا؟ اختر وجهًا وأضف سطرًا صادقًا.', 'p')}<div class="viz"><div class="faces"><span>😞</span><span>😕</span><span>🙂</span><span class="on">😊</span><span>🤩</span></div></div></div>
     <div class="bx b-4 ink reveal"><div class="ico" style="background:rgba(255,255,255,.1)">🌙</div>{T('Arabic and English, side by side', 'العربية والإنجليزية جنبًا إلى جنب', 'h3')}{T('Each of you picks your language. Every screen works right to left.', 'يختار كل منكما لغته. وكل شاشة تعمل من اليمين لليسار.', 'p')}
-      <div class="viz lang-pair"><div>🤗 <b style="color:#fff">Lina sent you a hug</b><br><span style="color:#B9C3D8">“Sending you a big, warm hug.”</span></div><div dir="rtl" style="font-family:var(--font-ar)">🤗 <b style="color:#fff">أرسل لكِ عمر حضنًا</b><br><span style="color:#B9C3D8">«أرسل لكِ حضنًا كبيرًا ودافئًا.»</span></div></div></div>
+      <div class="viz lang-pair"><div>🤗 <b style="color:#fff">Lina sent you a hug</b><br><span style="color:#B9C3D8">“Sending you a big, warm hug.”</span></div><div dir="rtl" style="font-family:var(--font-ar)">🤗 <b style="color:#fff">أرسل لكِ آدم حضنًا</b><br><span style="color:#B9C3D8">«أرسل لكِ حضنًا كبيرًا ودافئًا.»</span></div></div></div>
     <div class="bx b-2 reveal"><div class="ico i-green">🎁</div>{T('Surprises stay secret', 'المفاجآت تبقى سرًا', 'h3')}{T('Mark a gift or an occasion “Only me”. Your partner never sees it.', 'اجعل الهدية أو المناسبة «أنا فقط». لن يراها شريكك أبدًا.', 'p')}<div class="viz"><span class="chip">🔒 {T('Only me', 'أنا فقط')}</span> <span class="chip">💰 $370 {T('left', 'متبقٍ')}</span></div></div>
   </div>
   <p class="center" style="margin-top:28px"><a class="btn btn-ghost" href="features.html">{T('See every feature →', 'شاهد كل المزايا ←')}</a></p>
@@ -2243,7 +2243,7 @@ def store_shots():
     if not (ROOT / 'assets' / 'press' / 'store-en-1.png').exists():
         return ''
     imgs = ''.join(f'<a href="assets/press/store-en-{i}.png" download data-ar-href="assets/press/store-ar-{i}.png"><img src="assets/press/store-en-{i}.png" data-en-src="assets/press/store-en-{i}.png" data-ar-src="assets/press/store-ar-{i}.png" alt="Store screenshot {i}" loading="lazy" width="1080" height="1920"></a>' for i in range(1, 7))
-    return f'''<section><div class="wrap"><div class="sec-head">{T('App store screenshots', 'لقطات متجر التطبيقات', 'h2')}{T('Real screens from the app with the fictional couple Omar and Lina. 1080×1920, English and Arabic (switch the page language).', 'شاشات حقيقية من التطبيق مع الزوجين الافتراضيين عمر ولينا. 1080×1920 بالعربية والإنجليزية (بدّل لغة الصفحة).', 'p', 'muted')}</div>
+    return f'''<section><div class="wrap"><div class="sec-head">{T('App store screenshots', 'لقطات متجر التطبيقات', 'h2')}{T('Real screens from the app with the fictional couple Adam and Lina. 1080×1920, English and Arabic (switch the page language).', 'شاشات حقيقية من التطبيق مع الزوجين الافتراضيين آدم ولينا. 1080×1920 بالعربية والإنجليزية (بدّل لغة الصفحة).', 'p', 'muted')}</div>
   <div class="grid assets-grid store-grid">{imgs}</div></div></section>'''
 
 

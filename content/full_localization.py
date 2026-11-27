@@ -171,7 +171,7 @@ def eligible(raw):
     return bool(s and len(s) > 1 and re.search(r'[A-Za-z]', s) and not SKIP.fullmatch(s)
                 and s not in ('OneSpace', 'Android', 'iPhone', 'Google Play', 'App Store', 'TestFlight',
                               'WhatsApp', 'Telegram', 'Facebook', 'Instagram', 'YouTube', 'PDF', 'PNG', '© OneSpace',
-                              'Omar', 'Lina', 'English', 'العربية', 'Español', 'Français', 'Deutsch'))
+                              'Adam', 'Lina', 'English', 'العربية', 'Español', 'Français', 'Deutsch'))
 
 def content_nodes(soup):
     for node in list(soup.find_all(string=True)):

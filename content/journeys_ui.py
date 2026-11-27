@@ -11,11 +11,11 @@ UI = {
     "30 Alltagsgeschichten. Ein Ort."
   ],
   "subhead": [
-    "Follow Lina and Omar through the real details of a day: something happens, they share the work, compare their choices, decide what comes next and remember what matters. Twelve stories for couples living apart, twelve for those living together — and six with Sara, who uses OneSpace on her own.",
-    "رافق لينا وعمر في تفاصيل يوم حقيقي: موقف يحدث، فيتشاركان العمل، ويقارنان الخيارات، ويتخذان القرار، ثم يحتفظان بما يهم. اثنتا عشرة حكاية للزوجين المتباعدين، واثنتا عشرة لمن يعيشان معًا — وست حكايات مع سارة التي تستخدم OneSpace بمفردها.",
-    "Acompaña a Lina y Omar en situaciones reales del día a día: surge algo, colaboran, comparan opciones, deciden los siguientes pasos y guardan lo importante. Doce historias para parejas a distancia, doce para quienes viven juntas y seis con Sara, que usa OneSpace por su cuenta.",
-    "Suivez Lina et Omar dans leur quotidien : un événement survient, ils se répartissent les tâches, comparent, prennent une décision et gardent l’essentiel. Douze histoires pour les couples à distance, douze pour ceux qui vivent ensemble, et six avec Sara, qui utilise OneSpace seule.",
-    "Begleite Lina und Omar durch echte Alltagssituationen: Etwas passiert, sie teilen Aufgaben, vergleichen Möglichkeiten, entscheiden und bewahren Erinnerungen. Zwölf Geschichten für Fernbeziehungen, zwölf fürs Zusammenleben – und sechs mit Sara, die OneSpace allein nutzt."
+    "Follow Lina and Adam through the real details of a day: something happens, they share the work, compare their choices, decide what comes next and remember what matters. Twelve stories for couples living apart, twelve for those living together — and six with Sara, who uses OneSpace on her own.",
+    "رافق لينا وآدم في تفاصيل يوم حقيقي: موقف يحدث، فيتشاركان العمل، ويقارنان الخيارات، ويتخذان القرار، ثم يحتفظان بما يهم. اثنتا عشرة حكاية للزوجين المتباعدين، واثنتا عشرة لمن يعيشان معًا — وست حكايات مع سارة التي تستخدم OneSpace بمفردها.",
+    "Acompaña a Lina y Adam en situaciones reales del día a día: surge algo, colaboran, comparan opciones, deciden los siguientes pasos y guardan lo importante. Doce historias para parejas a distancia, doce para quienes viven juntas y seis con Sara, que usa OneSpace por su cuenta.",
+    "Suivez Lina et Adam dans leur quotidien : un événement survient, ils se répartissent les tâches, comparent, prennent une décision et gardent l’essentiel. Douze histoires pour les couples à distance, douze pour ceux qui vivent ensemble, et six avec Sara, qui utilise OneSpace seule.",
+    "Begleite Lina und Adam durch echte Alltagssituationen: Etwas passiert, sie teilen Aufgaben, vergleichen Möglichkeiten, entscheiden und bewahren Erinnerungen. Zwölf Geschichten für Fernbeziehungen, zwölf fürs Zusammenleben – und sechs mit Sara, die OneSpace allein nutzt."
   ],
   "description": [
     "Read 30 detailed fictional end-to-end examples showing how OneSpace links activities, decisions, checklists, reminders, places and personal gestures — for couples living together or apart, and for people on their own.",
@@ -67,11 +67,11 @@ UI = {
     "Ein gemeinsames Zuhause beseitigt nicht die mentale Last. Diese Geschichten zeigen, wie zwei Menschen Aufgaben, Entscheidungen, Feste und Fürsorge teilen."
   ],
   "fiction": [
-    "Fictional examples featuring Lina and Omar. They illustrate OneSpace workflows, not actual customer experiences or reviews.",
-    "أمثلة خيالية عن لينا وعمر لتوضيح استخدام OneSpace، وليست تجارب عملاء أو تقييمات حقيقية.",
-    "Ejemplos ficticios con Lina y Omar. Ilustran funciones de OneSpace; no son experiencias ni opiniones de clientes reales.",
-    "Exemples fictifs avec Lina et Omar. Ils illustrent les usages de OneSpace, pas des témoignages ou avis réels.",
-    "Fiktive Beispiele mit Lina und Omar. Sie zeigen OneSpace-Abläufe und sind keine echten Kundenberichte oder Bewertungen."
+    "Fictional examples featuring Lina and Adam. They illustrate OneSpace workflows, not actual customer experiences or reviews.",
+    "أمثلة خيالية عن لينا وآدم لتوضيح استخدام OneSpace، وليست تجارب عملاء أو تقييمات حقيقية.",
+    "Ejemplos ficticios con Lina y Adam. Ilustran funciones de OneSpace; no son experiencias ni opiniones de clientes reales.",
+    "Exemples fictifs avec Lina et Adam. Ils illustrent les usages de OneSpace, pas des témoignages ou avis réels.",
+    "Fiktive Beispiele mit Lina und Adam. Sie zeigen OneSpace-Abläufe und sind keine echten Kundenberichte oder Bewertungen."
   ],
   "read": [
     "Read the full journey",
