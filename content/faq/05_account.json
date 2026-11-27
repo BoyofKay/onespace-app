@@ -127,11 +127,11 @@
     [
      "p",
      {
-      "en": "Most lists have a Removed filter where you can find and restore items you removed one by one.",
-      "ar": "لمعظم القوائم عامل تصفية «المحذوفات» حيث تجد العناصر التي أزلتها واحدًا واحدًا وتستعيدها.",
-      "es": "La mayoría de las listas tienen un filtro Eliminados donde recuperar lo que quitaste uno a uno.",
-      "fr": "La plupart des listes ont un filtre Retirés pour retrouver et restaurer les éléments retirés un par un.",
-      "de": "Die meisten Listen haben einen Filter Entfernt, in dem du einzeln entfernte Einträge findest und wiederherstellst."
+      "en": "Most lists have a Removed filter where you can find and restore items you removed one by one. Where a 30-day period applies, a removed item can be restored for 30 days and is then cleared for good.",
+      "ar": "لمعظم القوائم عامل تصفية «المحذوفات» حيث تجد العناصر التي أزلتها واحدًا واحدًا وتستعيدها. وحيث تنطبق مدة 30 يومًا، يمكن استعادة العنصر خلال 30 يومًا ثم يُحذف نهائيًا.",
+      "es": "La mayoría de las listas tienen un filtro Eliminados para recuperar lo que quitaste uno a uno. Donde se aplica un plazo de 30 días, se puede recuperar durante 30 días y luego se borra para siempre.",
+      "fr": "La plupart des listes ont un filtre Retirés pour retrouver et restaurer les éléments un par un. Là où un délai de 30 jours s’applique, l’élément reste restaurable 30 jours, puis il est effacé définitivement.",
+      "de": "Die meisten Listen haben einen Filter Entfernt, um einzeln Entferntes wiederherzustellen. Wo eine 30-Tage-Frist gilt, lässt sich ein Eintrag 30 Tage lang wiederherstellen und wird danach endgültig gelöscht."
      }
     ],
     [
@@ -188,16 +188,6 @@
       "es": "Las primeras 500 personas en unirse a OneSpace son Miembros Fundadores. La insignia aparece en tu perfil en Yo.",
       "fr": "Les 500 premières personnes à rejoindre OneSpace sont Membres Fondateurs. Le badge apparaît sur votre profil dans Moi.",
       "de": "Die ersten 500 Menschen bei OneSpace sind Gründungsmitglieder. Das Abzeichen erscheint in deinem Profil unter Ich."
-     }
-    ],
-    [
-     "p",
-     {
-      "en": "There is no number; it is simply our thank-you for being early.",
-      "ar": "لا يوجد رقم؛ إنها ببساطة شكرنا لك على انضمامك المبكر.",
-      "es": "No lleva número; es simplemente nuestro agradecimiento por llegar pronto.",
-      "fr": "Il n’y a pas de numéro : c’est simplement notre merci pour votre confiance de la première heure.",
-      "de": "Es gibt keine Nummer; es ist einfach unser Dankeschön dafür, dass du früh dabei bist."
      }
     ]
    ]

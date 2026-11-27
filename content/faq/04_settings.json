@@ -104,11 +104,11 @@
     [
      "p",
      {
-      "en": "Me → Language and currency. Each of you chooses English or Arabic and a preferred currency. What you write is not translated automatically.",
-      "ar": "أنا ← اللغة والعملة. يختار كل منكما العربية أو الإنجليزية وعملته المفضلة. ما تكتبه لا يُترجَم تلقائيًا.",
-      "es": "Yo → Idioma y moneda. Cada uno elige inglés o árabe y su moneda. Lo que escribes no se traduce automáticamente.",
-      "fr": "Moi → Langue et devise. Chacun choisit l’anglais ou l’arabe et sa devise. Ce que vous écrivez n’est pas traduit automatiquement.",
-      "de": "Ich → Sprache und Währung. Jeder wählt Englisch oder Arabisch und seine Währung. Was du schreibst, wird nicht automatisch übersetzt."
+      "en": "Me → Language and currency. Each of you chooses English or Arabic and your preferred currency.",
+      "ar": "أنا ← اللغة والعملة. يختار كل منكما العربية أو الإنجليزية وعملته المفضلة.",
+      "es": "Yo → Idioma y moneda. Cada uno elige inglés o árabe y su moneda preferida.",
+      "fr": "Moi → Langue et devise. Chacun choisit l’anglais ou l’arabe et sa devise préférée.",
+      "de": "Ich → Sprache und Währung. Jeder wählt Englisch oder Arabisch und seine bevorzugte Währung."
      }
     ],
     [

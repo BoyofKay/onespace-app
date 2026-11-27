@@ -23,38 +23,69 @@
     [
      "p",
      {
-      "en": "Today is your start page. It shows what needs you now, what is coming up and what changed since you were away.",
-      "ar": "«اليوم» هي صفحتك الأولى: تعرض ما يحتاجك الآن وما هو قادم وما تغيّر منذ غيابك.",
-      "es": "Hoy es tu página de inicio: muestra lo que te necesita ahora, lo próximo y lo que cambió desde tu última visita.",
-      "fr": "Aujourd’hui est votre page d’accueil : ce qui vous attend, ce qui arrive et ce qui a changé depuis votre absence.",
-      "de": "Heute ist deine Startseite: was dich jetzt braucht, was ansteht und was sich seit deinem letzten Besuch geändert hat."
+      "en": "Today is your start page: what needs you now, what is coming up and what changed while you were away.",
+      "ar": "«اليوم» هي صفحتك الأولى: ما يحتاجك الآن وما هو قادم وما تغيّر أثناء غيابك.",
+      "es": "Hoy es tu página de inicio: lo que te necesita ahora, lo que viene y lo que cambió mientras no estabas.",
+      "fr": "Aujourd’hui est votre page d’accueil : ce qui vous attend, ce qui arrive et ce qui a changé pendant votre absence.",
+      "de": "Heute ist deine Startseite: was dich jetzt braucht, was ansteht und was sich in deiner Abwesenheit geändert hat."
      }
     ],
     [
-     "steps",
+     "bullets",
      [
       {
-       "en": "Tap Quick add to save a reminder, to-do, note, place or trip in two taps.",
-       "ar": "اضغط «إضافة سريعة» لحفظ تذكير أو مهمة أو ملاحظة أو مكان أو رحلة بضغطتين.",
-       "es": "Toca Añadir rápido para guardar un recordatorio, tarea, nota, lugar o viaje en dos toques.",
-       "fr": "Touchez Ajout rapide pour enregistrer un rappel, une tâche, une note, un lieu ou un voyage en deux gestes.",
-       "de": "Tippe auf Schnell hinzufügen, um eine Erinnerung, ein To-do, eine Notiz, einen Ort oder eine Reise mit zwei Tippern zu speichern."
+       "en": "Clocks and weather: when you live apart, each of you has a column with your local time and the weather of the city you chose (temperature, high and low, chance of rain). Choose your city in Me → Settings. When you live together, the card shows one home instead.",
+       "ar": "الساعات والطقس: عندما تعيشان بعيدين، لكل منكما عمود فيه وقته المحلي وطقس المدينة التي اختارها (الحرارة والعظمى والصغرى واحتمال المطر). اختر مدينتك من أنا ← الإعدادات. وعندما تعيشان معًا تعرض البطاقة بيتًا واحدًا بدلًا من ذلك.",
+       "es": "Relojes y tiempo: si vivís separados, cada uno tiene una columna con su hora local y el tiempo de la ciudad elegida (temperatura, máxima y mínima, probabilidad de lluvia). Elige tu ciudad en Yo → Ajustes. Si vivís juntos, la tarjeta muestra un solo hogar.",
+       "fr": "Horloges et météo : si vous vivez à distance, chacun a une colonne avec son heure locale et la météo de la ville choisie (température, max et min, risque de pluie). Choisissez votre ville dans Moi → Réglages. Si vous vivez ensemble, la carte montre un seul foyer.",
+       "de": "Uhren und Wetter: Lebt ihr getrennt, hat jeder eine Spalte mit seiner Ortszeit und dem Wetter der gewählten Stadt (Temperatur, Höchst- und Tiefstwert, Regenwahrscheinlichkeit). Wähle deine Stadt unter Ich → Einstellungen. Lebt ihr zusammen, zeigt die Karte stattdessen ein Zuhause."
       },
       {
-       "en": "Tap any item under Needs attention to open it.",
-       "ar": "اضغط أي عنصر في «يحتاج انتباهك» لفتحه.",
-       "es": "Toca cualquier elemento de Necesita atención para abrirlo.",
-       "fr": "Touchez un élément de À traiter pour l’ouvrir.",
-       "de": "Tippe auf einen Eintrag unter Braucht Aufmerksamkeit, um ihn zu öffnen."
+       "en": "Good time to talk: when you live in different time zones, Today shows when you are both awake and free, based on your work and sleep hours.",
+       "ar": "وقت مناسب للحديث: عندما تعيشان في منطقتين زمنيتين مختلفتين، تعرض «اليوم» متى تكونان مستيقظين ومتفرغين، بناءً على ساعات العمل والنوم.",
+       "es": "Buen momento para hablar: si vivís en zonas horarias distintas, Hoy muestra cuándo estáis los dos despiertos y libres, según vuestras horas de trabajo y sueño.",
+       "fr": "Bon moment pour parler : si vous êtes dans des fuseaux différents, Aujourd’hui indique quand vous êtes tous deux éveillés et libres, selon vos heures de travail et de sommeil.",
+       "de": "Gute Zeit zum Reden: In verschiedenen Zeitzonen zeigt Heute, wann ihr beide wach und frei seid – nach euren Arbeits- und Schlafzeiten."
       },
       {
-       "en": "Use the shortcuts to jump to the parts you use most.",
-       "ar": "استخدم الاختصارات للانتقال إلى الأقسام التي تستخدمها أكثر.",
-       "es": "Usa los accesos directos para ir a lo que más usas.",
-       "fr": "Utilisez les raccourcis pour aller vers ce que vous utilisez le plus.",
-       "de": "Nutze die Kurzbefehle, um zu deinen meistgenutzten Bereichen zu springen."
+       "en": "The home or airplane icon shows how you live; tap it to change between Together and Apart (your partner is told).",
+       "ar": "أيقونة البيت أو الطائرة تُظهر طريقة عيشكما؛ اضغطها للتبديل بين «معًا» و«بعيدين» (ويُبلَّغ شريكك).",
+       "es": "El icono de casa o de avión muestra cómo vivís; tócalo para cambiar entre Juntos y Separados (se avisa a tu pareja).",
+       "fr": "L’icône maison ou avion indique votre situation ; touchez-la pour passer de Ensemble à À distance (votre partenaire est prévenu).",
+       "de": "Das Haus- oder Flugzeugsymbol zeigt, wie ihr lebt; tippe darauf, um zwischen Zusammen und Getrennt zu wechseln (dein Partner wird informiert)."
+      },
+      {
+       "en": "Needs attention lists overdue and urgent items, reminders due now and check-ins waiting for you. Tap one to open it.",
+       "ar": "«يحتاج انتباهك» يعرض العناصر المتأخرة والعاجلة والتذكيرات المستحقة الآن ورسائل الاطمئنان التي تنتظرك. اضغط أيًا منها لفتحه.",
+       "es": "Necesita atención muestra lo vencido y urgente, recordatorios para ahora y check-ins pendientes. Toca uno para abrirlo.",
+       "fr": "À traiter liste les éléments en retard ou urgents, les rappels du moment et les nouvelles en attente. Touchez-en un pour l’ouvrir.",
+       "de": "Braucht Aufmerksamkeit zeigt Überfälliges und Dringendes, jetzt fällige Erinnerungen und wartende Check-ins. Tippe darauf, um sie zu öffnen."
+      },
+      {
+       "en": "Coming up shows the next dates, trips and occasions. Since you were away lists your partner’s updates.",
+       "ar": "«قادم» يعرض المواعيد والرحلات والمناسبات التالية. و«منذ غيابك» يعرض تحديثات شريكك.",
+       "es": "Próximamente muestra las siguientes fechas, viajes y ocasiones. Desde tu última visita muestra las novedades de tu pareja.",
+       "fr": "À venir montre les prochaines dates, voyages et occasions. Depuis votre absence liste les nouveautés de votre partenaire.",
+       "de": "Demnächst zeigt die nächsten Termine, Reisen und Anlässe. Seit deinem letzten Besuch listet die Neuigkeiten deines Partners."
+      },
+      {
+       "en": "Quick add saves a reminder, to-do, note, place or trip in two taps, and the shortcuts open the parts you use most.",
+       "ar": "«إضافة سريعة» تحفظ تذكيرًا أو مهمة أو ملاحظة أو مكانًا أو رحلة بضغطتين، والاختصارات تفتح الأقسام التي تستخدمها أكثر.",
+       "es": "Añadir rápido guarda un recordatorio, tarea, nota, lugar o viaje en dos toques, y los accesos directos abren lo que más usas.",
+       "fr": "Ajout rapide enregistre un rappel, une tâche, une note, un lieu ou un voyage en deux gestes ; les raccourcis ouvrent ce que vous utilisez le plus.",
+       "de": "Schnell hinzufügen speichert eine Erinnerung, ein To-do, eine Notiz, einen Ort oder eine Reise mit zwei Tippern; die Kurzbefehle öffnen, was du am meisten nutzt."
       }
      ]
+    ],
+    [
+     "p",
+     {
+      "en": "On your own, Today shows your clock, weather, plans and reminders without the partner parts.",
+      "ar": "وأنت بمفردك تعرض «اليوم» ساعتك وطقسك وخططك وتذكيراتك دون أجزاء الشريك.",
+      "es": "Si estás solo, Hoy muestra tu reloj, el tiempo, tus planes y recordatorios sin la parte de pareja.",
+      "fr": "En solo, Aujourd’hui affiche votre heure, la météo, vos projets et rappels, sans la partie partenaire.",
+      "de": "Allein zeigt Heute deine Uhr, das Wetter, deine Pläne und Erinnerungen – ohne die Partnerteile."
+     }
     ]
    ]
   },
@@ -81,29 +112,62 @@
        "de": "Gehe zu Merken → Kalender und tippe auf +."
       },
       {
-       "en": "Add a title, date and time. Choose Shared or Only me.",
-       "ar": "أضف عنوانًا وتاريخًا ووقتًا، واختر «مشترك» أو «أنا فقط».",
-       "es": "Añade título, fecha y hora. Elige Compartido o Solo yo.",
-       "fr": "Ajoutez un titre, une date et une heure. Choisissez Partagé ou Moi seul.",
-       "de": "Füge Titel, Datum und Uhrzeit hinzu. Wähle Geteilt oder Nur ich."
+       "en": "Write what is happening and set the date and time (or All day). Add a place if you like.",
+       "ar": "اكتب ما الذي سيحدث وحدّد التاريخ والوقت (أو طوال اليوم)، وأضف مكانًا إن شئت.",
+       "es": "Escribe qué pasa y fija fecha y hora (o Todo el día). Añade un lugar si quieres.",
+       "fr": "Indiquez ce qui se passe, la date et l’heure (ou Toute la journée). Ajoutez un lieu si vous voulez.",
+       "de": "Schreibe, was ansteht, und setze Datum und Uhrzeit (oder Ganztägig). Füge bei Bedarf einen Ort hinzu."
       },
       {
-       "en": "Save. A shared event appears on your partner’s calendar in their own time zone.",
-       "ar": "احفظ. يظهر الموعد المشترك في تقويم شريكك بتوقيته المحلي.",
-       "es": "Guarda. Un evento compartido aparece en el calendario de tu pareja en su zona horaria.",
-       "fr": "Enregistrez. Un événement partagé apparaît dans l’agenda de votre partenaire, à son heure locale.",
-       "de": "Speichern. Ein geteilter Termin erscheint im Kalender deines Partners in seiner Zeitzone."
+       "en": "Choose who it is for: me, my partner or both of us.",
+       "ar": "اختر لمن هو: لي أو لشريكي أو لكلينا.",
+       "es": "Elige para quién es: para mí, para mi pareja o para los dos.",
+       "fr": "Choisissez pour qui : moi, mon partenaire ou nous deux.",
+       "de": "Wähle, für wen es ist: für mich, für meinen Partner oder für uns beide."
+      },
+      {
+       "en": "Choose who can see it: Shared or Only me. Then save.",
+       "ar": "اختر من يراه: «مشترك» أو «أنا فقط»، ثم احفظ.",
+       "es": "Elige quién lo ve: Compartido o Solo yo. Luego guarda.",
+       "fr": "Choisissez qui le voit : Partagé ou Moi seul. Puis enregistrez.",
+       "de": "Wähle, wer es sieht: Geteilt oder Nur ich. Dann speichern."
+      }
+     ]
+    ],
+    [
+     "bullets",
+     [
+      {
+       "en": "The day view has one lane for each of you. An event for one of you appears in that person’s lane; an event for both of you spans both lanes. Your work and sleep hours are shaded, so you can see when you are both free.",
+       "ar": "في عرض اليوم مسار لكل منكما. يظهر موعد أحدكما في مساره، ويمتد موعدكما معًا على المسارين. وتظهر ساعات العمل والنوم مظللة لتريا متى تكونان متفرغين.",
+       "es": "La vista del día tiene un carril para cada uno. Un evento de uno aparece en su carril; uno de los dos ocupa ambos carriles. Las horas de trabajo y sueño aparecen sombreadas para ver cuándo estáis libres.",
+       "fr": "La vue du jour a une colonne par personne. Un événement pour l’un apparaît dans sa colonne ; un événement pour vous deux s’étend sur les deux. Les heures de travail et de sommeil sont grisées pour voir quand vous êtes libres.",
+       "de": "Die Tagesansicht hat für jeden eine Spur. Ein Termin für einen von euch erscheint in dessen Spur, einer für beide über beide Spuren. Arbeits- und Schlafzeiten sind schattiert, damit ihr seht, wann ihr frei seid."
+      },
+      {
+       "en": "A shared event shows on your partner’s calendar in their own time zone.",
+       "ar": "يظهر الموعد المشترك في تقويم شريكك بتوقيته المحلي.",
+       "es": "Un evento compartido aparece en el calendario de tu pareja en su zona horaria.",
+       "fr": "Un événement partagé apparaît dans l’agenda de votre partenaire, à son heure locale.",
+       "de": "Ein geteilter Termin erscheint im Kalender deines Partners in seiner Zeitzone."
+      },
+      {
+       "en": "From an event you can create a reminder, a to-do or a note, or open its place in Maps.",
+       "ar": "من الموعد يمكنك إنشاء تذكير أو مهمة أو ملاحظة، أو فتح مكانه في الخرائط.",
+       "es": "Desde un evento puedes crear un recordatorio, una tarea o una nota, o abrir el lugar en Mapas.",
+       "fr": "Depuis un événement, vous pouvez créer un rappel, une tâche ou une note, ou ouvrir le lieu dans Plans.",
+       "de": "Aus einem Termin kannst du eine Erinnerung, ein To-do oder eine Notiz erstellen oder den Ort in Karten öffnen."
       }
      ]
     ],
     [
      "p",
      {
-      "en": "The day view shows both of your work and sleep hours, so you can find a good time to talk.",
-      "ar": "يعرض عرض اليوم ساعات العمل والنوم لكليكما لتجدا وقتًا مناسبًا للحديث.",
-      "es": "La vista del día muestra las horas de trabajo y sueño de ambos para encontrar un buen momento para hablar.",
-      "fr": "La vue du jour montre vos heures de travail et de sommeil à tous les deux, pour trouver un bon moment pour parler.",
-      "de": "Die Tagesansicht zeigt eure Arbeits- und Schlafzeiten, damit ihr eine gute Zeit zum Reden findet."
+      "en": "On your own, events are Only me and for you, and the day view shows one lane.",
+      "ar": "وأنت بمفردك تكون المواعيد «أنا فقط» ولك أنت، ويعرض عرض اليوم مسارًا واحدًا.",
+      "es": "Si estás solo, los eventos son Solo yo y para ti, y la vista del día muestra un carril.",
+      "fr": "En solo, les événements sont Moi seul et pour vous, et la vue du jour n’a qu’une colonne.",
+      "de": "Allein sind Termine Nur ich und für dich, und die Tagesansicht zeigt eine Spur."
      }
     ]
    ]
@@ -131,29 +195,36 @@
        "de": "Gehe zu Merken → To-do und tippe auf +."
       },
       {
-       "en": "Write a title. For a checklist, add one item per line.",
-       "ar": "اكتب عنوانًا. ولقائمة تحقق أضف عنصرًا في كل سطر.",
-       "es": "Escribe un título. Para una lista, añade un elemento por línea.",
-       "fr": "Écrivez un titre. Pour une checklist, un élément par ligne.",
-       "de": "Schreibe einen Titel. Für eine Checkliste einen Punkt pro Zeile."
+       "en": "Write a title. To make a checklist, type one item per line: each line becomes its own item to tick.",
+       "ar": "اكتب عنوانًا. ولعمل قائمة تحقق اكتب عنصرًا في كل سطر: كل سطر يصبح عنصرًا مستقلًا تضع عليه علامة.",
+       "es": "Escribe un título. Para una lista, escribe un elemento por línea: cada línea se convierte en un elemento para marcar.",
+       "fr": "Écrivez un titre. Pour une checklist, un élément par ligne : chaque ligne devient un élément à cocher.",
+       "de": "Schreibe einen Titel. Für eine Checkliste einen Punkt pro Zeile: Jede Zeile wird ein eigener abhakbarer Punkt."
       },
       {
-       "en": "Optional: assign it to one of you, set a date or make it repeat.",
-       "ar": "اختياري: أسندها لأحدكما أو حدّد تاريخًا أو اجعلها تتكرر.",
-       "es": "Opcional: asígnala a uno de los dos, pon fecha o haz que se repita.",
-       "fr": "Facultatif : attribuez-la à l’un de vous, ajoutez une date ou une répétition.",
-       "de": "Optional: einem von euch zuweisen, ein Datum setzen oder wiederholen lassen."
+       "en": "Optional: set the priority, a date, who it belongs to, and Shared or Only me.",
+       "ar": "اختياري: حدّد الأولوية والتاريخ ولمن تتبع، و«مشترك» أو «أنا فقط».",
+       "es": "Opcional: fija prioridad, fecha, a quién pertenece y Compartido o Solo yo.",
+       "fr": "Facultatif : priorité, date, personne concernée, et Partagé ou Moi seul.",
+       "de": "Optional: Priorität, Datum, wem es gehört und Geteilt oder Nur ich."
+      },
+      {
+       "en": "For a routine, choose Repeat. Each time it starts fresh, and it can skip the days off of the person it belongs to.",
+       "ar": "للمهام الروتينية اختر «تكرار». تبدأ من جديد في كل مرة، ويمكنها تخطي أيام إجازة صاحبها.",
+       "es": "Para una rutina, elige Repetir. Cada vez empieza de cero y puede saltarse los días libres de su responsable.",
+       "fr": "Pour une routine, choisissez Répéter. Elle repart à zéro à chaque fois et peut sauter les jours de congé de la personne concernée.",
+       "de": "Für eine Routine wähle Wiederholen. Sie beginnt jedes Mal neu und kann die freien Tage der zuständigen Person überspringen."
       }
      ]
     ],
     [
      "p",
      {
-      "en": "A repeating checklist starts fresh each time and can skip the days off of the person it belongs to.",
-      "ar": "قائمة التحقق المتكررة تبدأ من جديد في كل مرة ويمكنها تخطي أيام إجازة صاحبها.",
-      "es": "Una lista repetida empieza de cero cada vez y puede saltarse los días libres de su responsable.",
-      "fr": "Une checklist répétée repart à zéro à chaque fois et peut sauter les jours de congé de la personne concernée.",
-      "de": "Eine wiederkehrende Checkliste beginnt jedes Mal neu und kann die freien Tage der zuständigen Person überspringen."
+      "en": "A shared list updates on both phones as items are ticked.",
+      "ar": "تتحدّث القائمة المشتركة على الهاتفين عند وضع العلامات على العناصر.",
+      "es": "Una lista compartida se actualiza en ambos teléfonos al marcar elementos.",
+      "fr": "Une liste partagée se met à jour sur les deux téléphones à chaque élément coché.",
+      "de": "Eine geteilte Liste aktualisiert sich auf beiden Telefonen, sobald Punkte abgehakt werden."
      }
     ]
    ]
@@ -188,22 +259,22 @@
        "de": "Schreibe, woran und wann erinnert werden soll. Wähle für wen: dich, deinen Partner oder beide."
       },
       {
-       "en": "Mark it Urgent only if it must ring during sleep hours.",
-       "ar": "اجعله «عاجلًا» فقط إذا كان يجب أن يرن خلال ساعات النوم.",
-       "es": "Márcalo Urgente solo si debe sonar en horas de sueño.",
-       "fr": "Marquez-le Urgent seulement s’il doit sonner pendant les heures de sommeil.",
-       "de": "Markiere sie nur als Dringend, wenn sie in der Schlafenszeit klingeln muss."
+       "en": "Make it repeat if needed. Mark it Urgent only if it must ring during sleep hours.",
+       "ar": "اجعله يتكرر عند الحاجة، واجعله «عاجلًا» فقط إذا كان يجب أن يرن خلال ساعات النوم.",
+       "es": "Hazlo repetir si hace falta. Márcalo Urgente solo si debe sonar en horas de sueño.",
+       "fr": "Faites-le répéter si besoin. Marquez-le Urgent seulement s’il doit sonner pendant le sommeil.",
+       "de": "Lass sie bei Bedarf wiederholen. Markiere sie nur als Dringend, wenn sie in der Schlafenszeit klingeln muss."
       }
      ]
     ],
     [
      "p",
      {
-      "en": "When it rings, you can mark it done, snooze it or add a follow-up note.",
-      "ar": "عندما يرن يمكنك إنهاؤه أو تأجيله أو إضافة ملاحظة متابعة.",
-      "es": "Cuando suene, puedes marcarlo hecho, posponerlo o añadir una nota de seguimiento.",
-      "fr": "Quand il sonne, vous pouvez le terminer, le reporter ou ajouter une note de suivi.",
-      "de": "Wenn sie klingelt, kannst du sie erledigen, verschieben oder eine Notiz ergänzen."
+      "en": "When it rings, mark it done, snooze it or add a follow-up note. Type @ in the details to mention your partner.",
+      "ar": "عندما يرن يمكنك إنهاؤه أو تأجيله أو إضافة ملاحظة متابعة. واكتب @ في التفاصيل للإشارة إلى شريكك.",
+      "es": "Cuando suene, márcalo hecho, posponlo o añade una nota de seguimiento. Escribe @ en los detalles para mencionar a tu pareja.",
+      "fr": "Quand il sonne, terminez-le, reportez-le ou ajoutez une note de suivi. Tapez @ dans les détails pour mentionner votre partenaire.",
+      "de": "Wenn sie klingelt, erledige oder verschiebe sie oder füge eine Folgenotiz hinzu. Tippe @ in den Details, um deinen Partner zu erwähnen."
      }
     ]
    ]
@@ -231,18 +302,18 @@
        "de": "Gehe zu Merken → Notizen und tippe auf +."
       },
       {
-       "en": "Write and format your note. Type @ to mention your partner.",
-       "ar": "اكتب ملاحظتك ونسّقها، واكتب @ للإشارة إلى شريكك.",
-       "es": "Escribe y da formato. Escribe @ para mencionar a tu pareja.",
-       "fr": "Rédigez et mettez en forme. Tapez @ pour mentionner votre partenaire.",
-       "de": "Schreibe und formatiere deine Notiz. Tippe @, um deinen Partner zu erwähnen."
+       "en": "Write and format your note. Type @ to mention your partner; they get a notification.",
+       "ar": "اكتب ملاحظتك ونسّقها، واكتب @ للإشارة إلى شريكك فيصله إشعار.",
+       "es": "Escribe y da formato. Escribe @ para mencionar a tu pareja; recibirá un aviso.",
+       "fr": "Rédigez et mettez en forme. Tapez @ pour mentionner votre partenaire ; il est notifié.",
+       "de": "Schreibe und formatiere deine Notiz. Tippe @, um deinen Partner zu erwähnen; er wird benachrichtigt."
       },
       {
-       "en": "Choose Shared or Only me, then save.",
-       "ar": "اختر «مشترك» أو «أنا فقط» ثم احفظ.",
-       "es": "Elige Compartido o Solo yo y guarda.",
-       "fr": "Choisissez Partagé ou Moi seul, puis enregistrez.",
-       "de": "Wähle Geteilt oder Nur ich und speichere."
+       "en": "Choose Shared or Only me, then save. From a note you can also create a reminder, an event or a to-do.",
+       "ar": "اختر «مشترك» أو «أنا فقط» ثم احفظ. ومن الملاحظة يمكنك أيضًا إنشاء تذكير أو موعد أو مهمة.",
+       "es": "Elige Compartido o Solo yo y guarda. Desde una nota también puedes crear un recordatorio, un evento o una tarea.",
+       "fr": "Choisissez Partagé ou Moi seul, puis enregistrez. Depuis une note, vous pouvez aussi créer un rappel, un événement ou une tâche.",
+       "de": "Wähle Geteilt oder Nur ich und speichere. Aus einer Notiz kannst du auch eine Erinnerung, einen Termin oder ein To-do erstellen."
       }
      ]
     ]
@@ -261,30 +332,104 @@
    },
    "a": [
     [
+     "p",
+     {
+      "en": "An Activity holds one plan or decision from start to finish: the options, the conversation and the outcome.",
+      "ar": "يجمع النشاط خطة أو قرارًا واحدًا من البداية إلى النهاية: الخيارات والمحادثة والنتيجة.",
+      "es": "Una Actividad reúne un plan o una decisión de principio a fin: las opciones, la conversación y el resultado.",
+      "fr": "Une Activité réunit un projet ou une décision du début à la fin : les options, la conversation et le résultat.",
+      "de": "Eine Aktivität hält einen Plan oder eine Entscheidung von Anfang bis Ende fest: Optionen, Gespräch und Ergebnis."
+     }
+    ],
+    [
      "steps",
      [
       {
-       "en": "Go to Coordinate and tap New Activity. Pick what it is for: buy something, find a service, plan an event or decide something.",
-       "ar": "اذهب إلى «ننسّق» واضغط «نشاط جديد»، واختر الغرض: شراء شيء أو البحث عن خدمة أو التخطيط لمناسبة أو اتخاذ قرار.",
-       "es": "Ve a Organizar y toca Nueva actividad. Elige para qué es: comprar algo, buscar un servicio, planear un evento o decidir algo.",
-       "fr": "Allez dans Organiser et touchez Nouvelle activité. Choisissez le but : acheter, trouver un service, organiser un événement ou décider.",
-       "de": "Gehe zu Planen und tippe auf Neue Aktivität. Wähle den Zweck: etwas kaufen, einen Dienst finden, ein Ereignis planen oder etwas entscheiden."
+       "en": "Go to Coordinate → New Activity and choose what it is for: buy something, find a service or provider, plan an event, decide something, or just a note.",
+       "ar": "اذهب إلى «ننسّق» ← «نشاط جديد» واختر الغرض: شراء شيء، أو البحث عن خدمة أو مقدم خدمة، أو التخطيط لمناسبة، أو اتخاذ قرار، أو مجرد ملاحظة.",
+       "es": "Ve a Organizar → Nueva actividad y elige para qué es: comprar algo, buscar un servicio o proveedor, planear un evento, decidir algo o solo una nota.",
+       "fr": "Allez dans Organiser → Nouvelle activité et choisissez le but : acheter, trouver un service ou un prestataire, organiser un événement, décider, ou simple note.",
+       "de": "Gehe zu Planen → Neue Aktivität und wähle den Zweck: etwas kaufen, einen Dienst oder Anbieter finden, ein Ereignis planen, etwas entscheiden oder nur eine Notiz."
       },
       {
-       "en": "Add options (links, prices, photos, contacts) and discuss them in the comments.",
-       "ar": "أضف خيارات (روابط وأسعار وصور وجهات اتصال) وناقشاها في التعليقات.",
-       "es": "Añade opciones (enlaces, precios, fotos, contactos) y comentadlas.",
-       "fr": "Ajoutez des options (liens, prix, photos, contacts) et discutez-en dans les commentaires.",
-       "de": "Füge Optionen hinzu (Links, Preise, Fotos, Kontakte) und besprecht sie in den Kommentaren."
+       "en": "Set the priority (low to urgent), the status (exploring or comparing), a due date and Shared or Only me.",
+       "ar": "حدّد الأولوية (من منخفضة إلى عاجلة) والحالة (استكشاف أو مقارنة) وتاريخ الاستحقاق و«مشترك» أو «أنا فقط».",
+       "es": "Fija la prioridad (de baja a urgente), el estado (explorando o comparando), una fecha límite y Compartido o Solo yo.",
+       "fr": "Réglez la priorité (de basse à urgente), le statut (exploration ou comparaison), une échéance et Partagé ou Moi seul.",
+       "de": "Lege Priorität (niedrig bis dringend), Status (erkunden oder vergleichen), ein Fälligkeitsdatum und Geteilt oder Nur ich fest."
       },
       {
-       "en": "Compare, choose one and record the outcome, for example Purchased or Booked or signed up.",
-       "ar": "قارنا واختارا واحدًا وسجّلا النتيجة، مثل «تم الشراء» أو «تم الحجز أو التسجيل».",
-       "es": "Comparad, elegid una y registrad el resultado, por ejemplo Comprado o Reservado o inscrito.",
-       "fr": "Comparez, choisissez et notez le résultat, par exemple Acheté ou Réservé ou inscrit.",
-       "de": "Vergleicht, wählt eine Option und haltet das Ergebnis fest, z. B. Gekauft oder Gebucht oder angemeldet."
+       "en": "Add options and details: products or links with prices, specifications, steps, photos, map locations, voice notes and contact information.",
+       "ar": "أضف الخيارات والتفاصيل: منتجات أو روابط بأسعارها ومواصفات وخطوات وصور ومواقع على الخريطة وملاحظات صوتية ومعلومات اتصال.",
+       "es": "Añade opciones y detalles: productos o enlaces con precios, especificaciones, pasos, fotos, ubicaciones, notas de voz y datos de contacto.",
+       "fr": "Ajoutez options et détails : produits ou liens avec prix, caractéristiques, étapes, photos, lieux, notes vocales et coordonnées.",
+       "de": "Füge Optionen und Details hinzu: Produkte oder Links mit Preisen, Spezifikationen, Schritte, Fotos, Kartenorte, Sprachnotizen und Kontaktdaten."
+      },
+      {
+       "en": "Talk it through in the Conversation and react to each option with Like or Dislike.",
+       "ar": "تناقشا في «المحادثة» وتفاعلا مع كل خيار بإعجاب أو عدم إعجاب.",
+       "es": "Habladlo en la Conversación y reaccionad a cada opción con Me gusta o No me gusta.",
+       "fr": "Discutez-en dans la Conversation et réagissez à chaque option avec J’aime ou Je n’aime pas.",
+       "de": "Besprecht es im Gespräch und reagiert auf jede Option mit Gefällt mir oder Gefällt mir nicht."
+      },
+      {
+       "en": "Tap Compare to see the options side by side, choose one, and record the outcome (for example Purchased, Booked or signed up, or Done or received).",
+       "ar": "اضغط «قارن» لرؤية الخيارات جنبًا إلى جنب، واختر واحدًا، وسجّل النتيجة (مثل «تم الشراء» أو «تم الحجز أو التسجيل» أو «تم أو استُلم»).",
+       "es": "Toca Comparar para ver las opciones lado a lado, elige una y registra el resultado (por ejemplo Comprado, Reservado o inscrito, o Hecho o recibido).",
+       "fr": "Touchez Comparer pour voir les options côte à côte, choisissez-en une et notez le résultat (par exemple Acheté, Réservé ou inscrit, ou Fait ou reçu).",
+       "de": "Tippe auf Vergleichen, um die Optionen nebeneinander zu sehen, wähle eine und halte das Ergebnis fest (z. B. Gekauft, Gebucht oder angemeldet, Erledigt oder erhalten)."
       }
      ]
+    ],
+    [
+     "bullets",
+     [
+      {
+       "en": "Compare shows one column per option and one row per detail (price, specifications, pros and cons). An empty cell means not recorded yet.",
+       "ar": "تعرض المقارنة عمودًا لكل خيار وصفًا لكل تفصيل (السعر والمواصفات والمزايا والعيوب). والخانة الفارغة تعني أنه لم يُسجَّل بعد.",
+       "es": "Comparar muestra una columna por opción y una fila por detalle (precio, especificaciones, pros y contras). Una celda vacía significa que aún no se ha registrado.",
+       "fr": "Comparer affiche une colonne par option et une ligne par détail (prix, caractéristiques, pour et contre). Une case vide signifie non renseigné.",
+       "de": "Vergleichen zeigt eine Spalte pro Option und eine Zeile pro Detail (Preis, Spezifikationen, Vor- und Nachteile). Ein leeres Feld heißt: noch nicht erfasst."
+      },
+      {
+       "en": "Link the Activity to a trip, occasion, experience, event, reminder, to-do, note or memory, or use Create from this to make a reminder, an event, a to-do, a note or a trip from it.",
+       "ar": "اربط النشاط برحلة أو مناسبة أو تجربة أو موعد أو تذكير أو مهمة أو ملاحظة أو ذكرى، أو استخدم «إنشاء من هذا» لعمل تذكير أو موعد أو مهمة أو ملاحظة أو رحلة منه.",
+       "es": "Vincula la Actividad a un viaje, ocasión, experiencia, evento, recordatorio, tarea, nota o recuerdo, o usa Crear a partir de esto para hacer un recordatorio, evento, tarea, nota o viaje.",
+       "fr": "Liez l’Activité à un voyage, une occasion, une expérience, un événement, un rappel, une tâche, une note ou un souvenir, ou utilisez Créer à partir de ceci pour en faire un rappel, un événement, une tâche, une note ou un voyage.",
+       "de": "Verknüpfe die Aktivität mit einer Reise, einem Anlass, Erlebnis, Termin, einer Erinnerung, einem To-do, einer Notiz oder Erinnerung, oder nutze Daraus erstellen für Erinnerung, Termin, To-do, Notiz oder Reise."
+      },
+      {
+       "en": "A chosen gift option can be sent to an occasion’s shopping plan.",
+       "ar": "يمكن إرسال خيار الهدية المختار إلى خطة شراء المناسبة.",
+       "es": "Una opción de regalo elegida se puede enviar al plan de compras de una ocasión.",
+       "fr": "Une option de cadeau choisie peut être envoyée au plan d’achats d’une occasion.",
+       "de": "Eine gewählte Geschenkoption kann in den Einkaufsplan eines Anlasses übernommen werden."
+      },
+      {
+       "en": "Contact information you attach is also saved as a card in Contact cards, with the same privacy as the Activity.",
+       "ar": "تُحفظ معلومات الاتصال التي ترفقها أيضًا كبطاقة في «بطاقات جهات الاتصال» بخصوصية النشاط نفسها.",
+       "es": "Los datos de contacto que adjuntas también se guardan como ficha en Fichas de contacto, con la misma privacidad que la Actividad.",
+       "fr": "Les coordonnées jointes sont aussi enregistrées comme fiche dans Fiches contact, avec la même confidentialité que l’Activité.",
+       "de": "Angehängte Kontaktdaten werden auch als Karte in Kontaktkarten gespeichert – mit derselben Privatsphäre wie die Aktivität."
+      },
+      {
+       "en": "From another app or website, tap Share → OneSpace and choose Activity to add a link as a new Activity or as an option.",
+       "ar": "من تطبيق أو موقع آخر اضغط «مشاركة» ← OneSpace واختر «نشاط» لإضافة الرابط كنشاط جديد أو كخيار.",
+       "es": "Desde otra app o web, toca Compartir → OneSpace y elige Actividad para añadir el enlace como nueva Actividad u opción.",
+       "fr": "Depuis une autre application ou un site, touchez Partager → OneSpace et choisissez Activité pour ajouter le lien comme nouvelle Activité ou option.",
+       "de": "Aus einer anderen App oder Website: Teilen → OneSpace und Aktivität wählen, um den Link als neue Aktivität oder Option hinzuzufügen."
+      }
+     ]
+    ],
+    [
+     "p",
+     {
+      "en": "On your own, Activities work the same way as a private planner; the conversation and reactions are just yours.",
+      "ar": "وأنت بمفردك تعمل الأنشطة بالطريقة نفسها كمخطط خاص، والمحادثة والتفاعلات لك وحدك.",
+      "es": "Si estás solo, las Actividades funcionan igual como planificador privado; la conversación y las reacciones son solo tuyas.",
+      "fr": "En solo, les Activités fonctionnent de la même façon comme un planificateur privé ; conversation et réactions restent à vous.",
+      "de": "Allein funktionieren Aktivitäten genauso als privater Planer; Gespräch und Reaktionen gehören nur dir."
+     }
     ]
    ]
   },
@@ -304,25 +449,72 @@
      "steps",
      [
       {
-       "en": "Go to Coordinate → Trips and tap +. Add the destination and dates.",
-       "ar": "اذهب إلى «ننسّق» ← «الرحلات» واضغط +، وأضف الوجهة والتواريخ.",
-       "es": "Ve a Organizar → Viajes y toca +. Añade destino y fechas.",
-       "fr": "Allez dans Organiser → Voyages et touchez +. Ajoutez la destination et les dates.",
-       "de": "Gehe zu Planen → Reisen und tippe auf +. Füge Ziel und Daten hinzu."
+       "en": "Go to Coordinate → Trips and tap +. Give it a name, the type of trip and where and when (dates can wait). Choose Both of us, or Only me for a surprise.",
+       "ar": "اذهب إلى «ننسّق» ← «الرحلات» واضغط +. أعطها اسمًا ونوعًا والوجهة والتوقيت (يمكن تأجيل التواريخ). اختر «كلانا» أو «أنا فقط» لمفاجأة.",
+       "es": "Ve a Organizar → Viajes y toca +. Ponle nombre, tipo de viaje, destino y fechas (pueden esperar). Elige Ambos, o Solo yo para una sorpresa.",
+       "fr": "Allez dans Organiser → Voyages et touchez +. Donnez un nom, le type de voyage, le lieu et les dates (elles peuvent attendre). Choisissez Nous deux, ou Moi seul pour une surprise.",
+       "de": "Gehe zu Planen → Reisen und tippe auf +. Gib Namen, Reiseart, Ziel und Zeitraum an (Daten können warten). Wähle Wir beide oder Nur ich für eine Überraschung."
       },
       {
-       "en": "Add flights, stays, places, a packing checklist and travel documents.",
-       "ar": "أضف الرحلات الجوية والإقامة والأماكن وقائمة التجهيز ووثائق السفر.",
-       "es": "Añade vuelos, alojamientos, lugares, lista de equipaje y documentos.",
-       "fr": "Ajoutez vols, hébergements, lieux, checklist de bagages et documents de voyage.",
-       "de": "Füge Flüge, Unterkünfte, Orte, eine Packliste und Reisedokumente hinzu."
+       "en": "Flights: tap Search on Google Flights (it opens with your airports, dates and travellers). When you find one, share it back to OneSpace or copy the link and tap Paste a flight.",
+       "ar": "الرحلات الجوية: اضغط «ابحث في Google Flights» (يفتح بمطاراتك وتواريخك وعدد المسافرين). وعندما تجد رحلة شاركها إلى OneSpace أو انسخ الرابط واضغط «الصق رحلة».",
+       "es": "Vuelos: toca Buscar en Google Flights (se abre con tus aeropuertos, fechas y viajeros). Cuando encuentres uno, compártelo a OneSpace o copia el enlace y toca Pegar un vuelo.",
+       "fr": "Vols : touchez Rechercher sur Google Flights (avec vos aéroports, dates et voyageurs). Quand vous en trouvez un, partagez-le vers OneSpace ou copiez le lien et touchez Coller un vol.",
+       "de": "Flüge: Tippe auf Bei Google Flights suchen (mit deinen Flughäfen, Daten und Reisenden). Wenn du einen findest, teile ihn an OneSpace oder kopiere den Link und tippe auf Flug einfügen."
       },
       {
-       "en": "Choose Both of us to plan it together, or Only me to plan a surprise.",
-       "ar": "اختر «كلانا» للتخطيط معًا أو «أنا فقط» للتخطيط لمفاجأة.",
-       "es": "Elige Ambos para planificarlo juntos, o Solo yo para una sorpresa.",
-       "fr": "Choisissez Nous deux pour le préparer ensemble, ou Moi seul pour une surprise.",
-       "de": "Wähle Wir beide, um gemeinsam zu planen, oder Nur ich für eine Überraschung."
+       "en": "Compare the saved flight options (the price you saw, baggage, seats, pros and cons), then add the one you book to the itinerary. Its dates fill in the trip.",
+       "ar": "قارن خيارات الرحلات المحفوظة (السعر الذي رأيته والأمتعة والمقاعد والمزايا والعيوب)، ثم أضف ما تحجزه إلى خط السير، فتملأ تواريخه الرحلة.",
+       "es": "Compara las opciones guardadas (precio visto, equipaje, asientos, pros y contras) y añade la que reserves al itinerario. Sus fechas completan el viaje.",
+       "fr": "Comparez les options enregistrées (prix vu, bagages, sièges, pour et contre), puis ajoutez celle que vous réservez à l’itinéraire. Ses dates complètent le voyage.",
+       "de": "Vergleiche die gespeicherten Flugoptionen (gesehener Preis, Gepäck, Sitzplätze, Vor- und Nachteile) und füge die gebuchte dem Reiseplan hinzu. Ihre Daten füllen die Reise."
+      },
+      {
+       "en": "Build the itinerary with stays, activities and reservations, in local times.",
+       "ar": "ابنِ خط السير بالإقامة والأنشطة والحجوزات بالتوقيت المحلي.",
+       "es": "Construye el itinerario con alojamientos, actividades y reservas, en hora local.",
+       "fr": "Construisez l’itinéraire avec hébergements, activités et réservations, en heure locale.",
+       "de": "Baue den Reiseplan mit Unterkünften, Aktivitäten und Reservierungen in Ortszeit."
+      },
+      {
+       "en": "Add a travel checklist and attach travel documents (boarding passes, tickets, visas; PDF or photo up to 10 MB). Only people who can see the trip can open them.",
+       "ar": "أضف قائمة تجهيز للسفر وأرفق وثائق السفر (بطاقات الصعود والتذاكر والتأشيرات؛ PDF أو صورة حتى 10 ميغابايت). لا يفتحها إلا من يرى الرحلة.",
+       "es": "Añade una lista de viaje y adjunta documentos (tarjetas de embarque, billetes, visados; PDF o foto de hasta 10 MB). Solo quien ve el viaje puede abrirlos.",
+       "fr": "Ajoutez une checklist de voyage et joignez vos documents (cartes d’embarquement, billets, visas ; PDF ou photo jusqu’à 10 Mo). Seules les personnes qui voient le voyage peuvent les ouvrir.",
+       "de": "Füge eine Reise-Checkliste hinzu und hänge Dokumente an (Bordkarten, Tickets, Visa; PDF oder Foto bis 10 MB). Nur wer die Reise sieht, kann sie öffnen."
+      },
+      {
+       "en": "Before you leave, use Create from this for a leave-for-the-airport reminder (6:00 on the day) or an online check-in reminder (9:00 the day before).",
+       "ar": "قبل السفر استخدم «إنشاء من هذا» لتذكير بالتوجه إلى المطار (6:00 صباح يوم السفر) أو تذكير بإنهاء إجراءات السفر عبر الإنترنت (9:00 في اليوم السابق).",
+       "es": "Antes de salir, usa Crear a partir de esto para un recordatorio de salir al aeropuerto (6:00 del día) o de facturar en línea (9:00 del día anterior).",
+       "fr": "Avant le départ, utilisez Créer à partir de ceci pour un rappel de départ à l’aéroport (6 h le jour J) ou d’enregistrement en ligne (9 h la veille).",
+       "de": "Nutze vor der Abreise Daraus erstellen für eine Erinnerung zur Abfahrt zum Flughafen (6:00 am Reisetag) oder zum Online-Check-in (9:00 am Vortag)."
+      }
+     ]
+    ],
+    [
+     "bullets",
+     [
+      {
+       "en": "Each trip has its own conversation, and Costs so far adds up what you entered.",
+       "ar": "لكل رحلة محادثتها الخاصة، ويجمع «التكاليف حتى الآن» ما أدخلتماه.",
+       "es": "Cada viaje tiene su conversación, y Gastos hasta ahora suma lo que habéis anotado.",
+       "fr": "Chaque voyage a sa conversation, et Coûts à ce jour additionne ce que vous avez saisi.",
+       "de": "Jede Reise hat ihr eigenes Gespräch, und Bisherige Kosten addiert, was ihr eingetragen habt."
+      },
+      {
+       "en": "Booking sites and travel links shared into OneSpace can go straight to a trip.",
+       "ar": "يمكن أن تذهب مواقع الحجز وروابط السفر التي تشاركها إلى OneSpace مباشرة إلى رحلة.",
+       "es": "Webs de reservas y enlaces de viaje compartidos a OneSpace pueden ir directamente a un viaje.",
+       "fr": "Les sites de réservation et liens de voyage partagés vers OneSpace peuvent aller directement dans un voyage.",
+       "de": "Buchungsseiten und Reiselinks, die du an OneSpace teilst, können direkt in eine Reise gehen."
+      },
+      {
+       "en": "Nothing is bought or checked in for you: prices are what you saw when saving.",
+       "ar": "لا يُشترى أي شيء ولا تُنجز إجراءات السفر نيابة عنك: الأسعار هي ما رأيته عند الحفظ.",
+       "es": "No se compra ni se factura nada por ti: los precios son los que viste al guardar.",
+       "fr": "Rien n’est acheté ni enregistré à votre place : les prix sont ceux vus à l’enregistrement.",
+       "de": "Nichts wird für dich gekauft oder eingecheckt: Preise sind die beim Speichern gesehenen."
       }
      ]
     ]
@@ -344,36 +536,76 @@
      "steps",
      [
       {
-       "en": "Go to Remember → Occasions and add a birthday, anniversary or holiday.",
-       "ar": "اذهب إلى «نتذكّر» ← «المناسبات» وأضف عيد ميلاد أو ذكرى أو عطلة.",
-       "es": "Ve a Recordar → Ocasiones y añade un cumpleaños, aniversario o festivo.",
-       "fr": "Allez dans Se souvenir → Occasions et ajoutez un anniversaire ou une fête.",
-       "de": "Gehe zu Merken → Anlässe und füge einen Geburtstag, Jahrestag oder Feiertag hinzu."
+       "en": "Go to Remember → Occasions and tap +. Pick one of your saved special dates or a public holiday, or type your own (a birthday, anniversary, graduation…). Choose who it is for and Shared or Only me.",
+       "ar": "اذهب إلى «نتذكّر» ← «المناسبات» واضغط +. اختر أحد تواريخك الخاصة المحفوظة أو عطلة رسمية، أو اكتب مناسبتك (عيد ميلاد، ذكرى، تخرج…). واختر لمن هي و«مشترك» أو «أنا فقط».",
+       "es": "Ve a Recordar → Ocasiones y toca +. Elige una de tus fechas especiales guardadas o un festivo, o escribe la tuya (cumpleaños, aniversario, graduación…). Elige para quién y Compartido o Solo yo.",
+       "fr": "Allez dans Se souvenir → Occasions et touchez +. Choisissez une de vos dates spéciales enregistrées ou un jour férié, ou saisissez la vôtre (anniversaire, remise de diplôme…). Choisissez pour qui et Partagé ou Moi seul.",
+       "de": "Gehe zu Merken → Anlässe und tippe auf +. Wähle ein gespeichertes besonderes Datum oder einen Feiertag oder gib deinen eigenen ein (Geburtstag, Jahrestag, Abschluss …). Wähle, für wen, und Geteilt oder Nur ich."
       },
       {
-       "en": "Set a budget and add gift ideas. Mark what you reserve or buy.",
-       "ar": "حدّد ميزانية وأضف أفكار هدايا، وضع علامة على ما تحجزه أو تشتريه.",
-       "es": "Fija un presupuesto y añade ideas de regalo. Marca lo que reservas o compras.",
-       "fr": "Fixez un budget et ajoutez des idées cadeaux. Indiquez ce que vous réservez ou achetez.",
-       "de": "Lege ein Budget fest und füge Geschenkideen hinzu. Markiere, was du reservierst oder kaufst."
+       "en": "Set a total budget. The budget shows what is reserved, what is spent and what is left, and warns you when you go over.",
+       "ar": "حدّد ميزانية إجمالية. تعرض الميزانية ما حُجز وما أُنفق وما تبقى، وتنبهك عند تجاوزها.",
+       "es": "Fija un presupuesto total. Muestra lo reservado, lo gastado y lo que queda, y avisa si te pasas.",
+       "fr": "Fixez un budget total. Il montre le réservé, le dépensé et le reste, et vous alerte en cas de dépassement.",
+       "de": "Lege ein Gesamtbudget fest. Es zeigt Reserviertes, Ausgegebenes und Verbleibendes und warnt bei Überschreitung."
       },
       {
-       "en": "Turn on preparation reminders so you start early.",
-       "ar": "فعّل تذكيرات التحضير لتبدأ مبكرًا.",
-       "es": "Activa los recordatorios de preparación para empezar a tiempo.",
-       "fr": "Activez les rappels de préparation pour vous y prendre tôt.",
-       "de": "Aktiviere Vorbereitungs-Erinnerungen, um früh anzufangen."
+       "en": "Add gift options with a product link, price, shop, rating and expected delivery. Compare lists of gifts and try different combinations before you decide.",
+       "ar": "أضف خيارات الهدايا برابط المنتج والسعر والمتجر والتقييم وموعد التسليم المتوقع. وقارن قوائم الهدايا وجرّب تركيبات مختلفة قبل أن تقرر.",
+       "es": "Añade opciones de regalo con enlace, precio, tienda, valoración y entrega prevista. Compara listas y prueba combinaciones antes de decidir.",
+       "fr": "Ajoutez des idées cadeaux avec lien, prix, boutique, note et livraison prévue. Comparez des listes et essayez des combinaisons avant de décider.",
+       "de": "Füge Geschenkoptionen mit Produktlink, Preis, Shop, Bewertung und erwarteter Lieferung hinzu. Vergleiche Listen und probiere Kombinationen, bevor du entscheidest."
+      },
+      {
+       "en": "Reserve your choices (the cost is set aside), then mark each as purchased when you order it (the cost moves to Spent). Track the order number, status and delivery; you are warned if it arrives after the date.",
+       "ar": "احجز اختياراتك (يُخصص المبلغ)، ثم ضع علامة «تم الشراء» على كل منها عند الطلب (ينتقل المبلغ إلى «المنفق»). تابع رقم الطلب وحالته وموعد التسليم، وستُنبَّه إذا كان سيصل بعد الموعد.",
+       "es": "Reserva tus elecciones (el coste se aparta) y márcalas como compradas al pedir (pasa a Gastado). Sigue el número de pedido, el estado y la entrega; te avisa si llega tarde.",
+       "fr": "Réservez vos choix (le montant est mis de côté), puis marquez-les achetés à la commande (il passe en Dépensé). Suivez numéro, statut et livraison ; vous êtes alerté si elle arrive après la date.",
+       "de": "Reserviere deine Auswahl (der Betrag wird zurückgelegt) und markiere sie bei Bestellung als gekauft (er wandert zu Ausgegeben). Verfolge Bestellnummer, Status und Lieferung; du wirst gewarnt, wenn sie zu spät kommt."
+      },
+      {
+       "en": "Set preparation reminders: save money, research choices, order in time, final preparations. Nothing is scheduled until you choose.",
+       "ar": "اضبط تذكيرات التحضير: ادخار المال، والبحث عن الخيارات، والطلب في الوقت المناسب، والتحضيرات الأخيرة. لا يُجدول شيء حتى تختار.",
+       "es": "Pon recordatorios de preparación: ahorrar, buscar opciones, pedir a tiempo y últimos preparativos. Nada se programa hasta que lo elijas.",
+       "fr": "Programmez des rappels de préparation : épargner, chercher, commander à temps, derniers préparatifs. Rien n’est planifié sans votre choix.",
+       "de": "Setze Vorbereitungs-Erinnerungen: sparen, recherchieren, rechtzeitig bestellen, letzte Vorbereitungen. Nichts wird geplant, bevor du es wählst."
+      }
+     ]
+    ],
+    [
+     "bullets",
+     [
+      {
+       "en": "Planning intelligence gives tips such as nothing reserved yet with the date close, items without a price, or a budget overrun.",
+       "ar": "يقدّم «التخطيط الذكي» نصائح مثل اقتراب الموعد دون حجز شيء، أو عناصر بلا سعر، أو تجاوز الميزانية.",
+       "es": "La planificación inteligente da consejos como fecha cercana sin nada reservado, artículos sin precio o presupuesto superado.",
+       "fr": "La planification intelligente donne des conseils : date proche sans rien de réservé, articles sans prix ou budget dépassé.",
+       "de": "Die intelligente Planung gibt Hinweise, etwa: Termin nah und nichts reserviert, Artikel ohne Preis oder Budget überschritten."
+      },
+      {
+       "en": "Shop links shared into OneSpace can become gift ideas, and an option chosen in an Activity can be sent to the occasion.",
+       "ar": "يمكن أن تصبح روابط المتاجر التي تشاركها إلى OneSpace أفكار هدايا، ويمكن إرسال خيار تم اختياره في نشاط إلى المناسبة.",
+       "es": "Los enlaces de tiendas compartidos a OneSpace pueden ser ideas de regalo, y una opción elegida en una Actividad puede enviarse a la ocasión.",
+       "fr": "Les liens de boutiques partagés vers OneSpace peuvent devenir des idées cadeaux, et une option choisie dans une Activité peut être envoyée à l’occasion.",
+       "de": "An OneSpace geteilte Shop-Links können Geschenkideen werden, und eine in einer Aktivität gewählte Option kann an den Anlass gesendet werden."
+      },
+      {
+       "en": "Planning a surprise? Make it Only me: your partner sees nothing until you share it.",
+       "ar": "تخطط لمفاجأة؟ اجعلها «أنا فقط»: لن يرى شريكك شيئًا حتى تشاركها.",
+       "es": "¿Una sorpresa? Ponla en Solo yo: tu pareja no verá nada hasta que la compartas.",
+       "fr": "Une surprise ? Mettez-la en Moi seul : votre partenaire ne voit rien tant que vous ne partagez pas.",
+       "de": "Eine Überraschung? Stelle sie auf Nur ich – dein Partner sieht nichts, bis du teilst."
       }
      ]
     ],
     [
      "p",
      {
-      "en": "Planning a surprise? Make the occasion Only me. Your partner sees nothing until you share it.",
-      "ar": "تخطط لمفاجأة؟ اجعل المناسبة «أنا فقط»، ولن يرى شريكك شيئًا حتى تشاركها.",
-      "es": "¿Preparas una sorpresa? Ponla en Solo yo: tu pareja no verá nada hasta que la compartas.",
-      "fr": "Une surprise ? Mettez l’occasion en Moi seul : votre partenaire ne voit rien tant que vous ne la partagez pas.",
-      "de": "Eine Überraschung? Stelle den Anlass auf Nur ich – dein Partner sieht nichts, bis du ihn teilst."
+      "en": "Tip: save birthdays and your anniversary once in Me → Settings → Birthdays, anniversary & special dates, and they are ready to pick here.",
+      "ar": "نصيحة: احفظ أعياد الميلاد وذكرى ارتباطكما مرة واحدة في أنا ← الإعدادات ← أعياد الميلاد والذكرى والتواريخ الخاصة، فتكون جاهزة للاختيار هنا.",
+      "es": "Consejo: guarda cumpleaños y aniversario una vez en Yo → Ajustes → Cumpleaños, aniversario y fechas especiales, y estarán listos aquí.",
+      "fr": "Astuce : enregistrez anniversaires et date de couple une fois dans Moi → Réglages → Anniversaires et dates spéciales, ils seront prêts ici.",
+      "de": "Tipp: Speichere Geburtstage und euren Jahrestag einmal unter Ich → Einstellungen → Geburtstage, Jahrestag & besondere Daten, dann stehen sie hier zur Auswahl."
      }
     ]
    ]
@@ -391,106 +623,351 @@
    },
    "a": [
     [
+     "p",
+     {
+      "en": "A counter shows how long since or until a moment that matters: days, months and years, with the next milestone.",
+      "ar": "يعرض العدّاد كم مضى على لحظة مهمة أو كم بقي عليها: بالأيام والأشهر والسنوات، مع المناسبة القادمة.",
+      "es": "Un contador muestra cuánto ha pasado desde un momento importante o cuánto falta: días, meses y años, con el próximo hito.",
+      "fr": "Un compteur montre le temps écoulé depuis un moment important ou restant avant lui, en jours, mois et années, avec le prochain cap.",
+      "de": "Ein Zähler zeigt, wie lange ein wichtiger Moment her ist oder noch dauert – in Tagen, Monaten und Jahren, mit dem nächsten Meilenstein."
+     }
+    ],
+    [
      "steps",
      [
       {
-       "en": "Go to Remember → Counters and tap +. Add what happened or is coming, and the date.",
-       "ar": "اذهب إلى «نتذكّر» ← «العدّادات» واضغط +، وأضف ما حدث أو ما هو قادم والتاريخ.",
-       "es": "Ve a Recordar → Contadores y toca +. Añade lo que pasó o lo que viene, y la fecha.",
-       "fr": "Allez dans Se souvenir → Compteurs et touchez +. Indiquez l’événement passé ou à venir et sa date.",
-       "de": "Gehe zu Merken → Zähler und tippe auf +. Füge hinzu, was passiert ist oder ansteht, und das Datum."
+       "en": "Go to Remember → Counters and tap +. Write what happened or is coming, and the date. Or pick it from your calendar, special dates, occasions, flights or trips.",
+       "ar": "اذهب إلى «نتذكّر» ← «العدّادات» واضغط +. اكتب ما حدث أو ما هو قادم والتاريخ، أو اختره من تقويمك أو تواريخك الخاصة أو المناسبات أو الرحلات الجوية أو الرحلات.",
+       "es": "Ve a Recordar → Contadores y toca +. Escribe lo que pasó o lo que viene y la fecha, o elígelo de tu calendario, fechas especiales, ocasiones, vuelos o viajes.",
+       "fr": "Allez dans Se souvenir → Compteurs et touchez +. Indiquez l’événement et la date, ou choisissez-le dans votre agenda, vos dates spéciales, occasions, vols ou voyages.",
+       "de": "Gehe zu Merken → Zähler und tippe auf +. Schreibe, was passiert ist oder ansteht, und das Datum – oder wähle es aus Kalender, besonderen Daten, Anlässen, Flügen oder Reisen."
       },
       {
-       "en": "To see the time between moments, tap Timelines, create a named timeline and add counters to it.",
-       "ar": "لرؤية المدة بين اللحظات اضغط «الخطوط الزمنية» وأنشئ خطًا زمنيًا باسم وأضف إليه العدّادات.",
-       "es": "Para ver el tiempo entre momentos, toca Líneas de tiempo, crea una con nombre y añade contadores.",
-       "fr": "Pour voir le temps entre les moments, touchez Frises, créez une frise nommée et ajoutez-y des compteurs.",
-       "de": "Um die Zeit zwischen Momenten zu sehen, tippe auf Zeitleisten, lege eine benannte Zeitleiste an und füge Zähler hinzu."
+       "en": "Choose Every year for anniversaries and birthdays, and Shared or Only me.",
+       "ar": "اختر «كل سنة» للذكريات السنوية وأعياد الميلاد، و«مشترك» أو «أنا فقط».",
+       "es": "Elige Cada año para aniversarios y cumpleaños, y Compartido o Solo yo.",
+       "fr": "Choisissez Chaque année pour les anniversaires, et Partagé ou Moi seul.",
+       "de": "Wähle Jedes Jahr für Jahrestage und Geburtstage sowie Geteilt oder Nur ich."
+      },
+      {
+       "en": "To see the time between moments, tap Timelines, create a named timeline (Shared or Only me) and add counters to it. One counter can be on several timelines.",
+       "ar": "لرؤية المدة بين اللحظات اضغط «الخطوط الزمنية» وأنشئ خطًا زمنيًا باسم («مشترك» أو «أنا فقط») وأضف إليه العدّادات. يمكن أن يكون العدّاد في عدة خطوط.",
+       "es": "Para ver el tiempo entre momentos, toca Líneas de tiempo, crea una con nombre (Compartida o Solo yo) y añade contadores. Un contador puede estar en varias.",
+       "fr": "Pour voir le temps entre les moments, touchez Frises, créez une frise nommée (Partagée ou Moi seul) et ajoutez des compteurs. Un compteur peut être sur plusieurs frises.",
+       "de": "Um die Zeit zwischen Momenten zu sehen, tippe auf Zeitleisten, lege eine benannte Zeitleiste an (Geteilt oder Nur ich) und füge Zähler hinzu. Ein Zähler kann auf mehreren sein."
       }
      ]
     ],
     [
      "p",
      {
-      "en": "One counter can be on several timelines.",
-      "ar": "يمكن أن يكون العدّاد الواحد في عدة خطوط زمنية.",
-      "es": "Un contador puede estar en varias líneas de tiempo.",
-      "fr": "Un compteur peut figurer sur plusieurs frises.",
-      "de": "Ein Zähler kann auf mehreren Zeitleisten sein."
+      "en": "A timeline shows the time between each pair of moments, and Today appears on it when today falls between the first and last. On your own, counters and timelines are Only me.",
+      "ar": "يعرض الخط الزمني المدة بين كل لحظتين متتاليتين، ويظهر «اليوم» عليه إذا وقع بين أول لحظة وآخر لحظة. وأنت بمفردك تكون العدّادات والخطوط «أنا فقط».",
+      "es": "Una línea de tiempo muestra el tiempo entre cada par de momentos, y Hoy aparece si cae entre el primero y el último. Si estás solo, son Solo yo.",
+      "fr": "Une frise montre le temps entre chaque paire de moments, et Aujourd’hui y apparaît s’il tombe entre le premier et le dernier. En solo, tout est Moi seul.",
+      "de": "Eine Zeitleiste zeigt die Zeit zwischen je zwei Momenten; Heute erscheint, wenn es zwischen dem ersten und letzten liegt. Allein ist alles Nur ich."
      }
     ]
    ]
   },
   {
-   "id": "places-contacts",
+   "id": "places",
    "where": "both",
    "tutorial": true,
    "q": {
-    "en": "How do I save places and contact cards?",
-    "ar": "كيف أحفظ الأماكن وبطاقات جهات الاتصال؟",
-    "es": "¿Cómo guardo lugares y fichas de contacto?",
-    "fr": "Comment enregistrer des lieux et des fiches contact ?",
-    "de": "Wie speichere ich Orte und Kontaktkarten?"
+    "en": "How do I use Our places and the map?",
+    "ar": "كيف أستخدم «أماكننا» والخريطة؟",
+    "es": "¿Cómo uso Nuestros lugares y el mapa?",
+    "fr": "Comment utiliser Nos lieux et la carte ?",
+    "de": "Wie nutze ich Unsere Orte und die Karte?"
    },
    "a": [
+    [
+     "steps",
+     [
+      {
+       "en": "Go to Remember → Our places and tap +. Search the map, paste a Google Maps link, or tap the map where the place is (or press and hold).",
+       "ar": "اذهب إلى «نتذكّر» ← «أماكننا» واضغط +. ابحث في الخريطة أو الصق رابط Google Maps أو اضغط على موقع المكان في الخريطة (أو اضغط مطولًا).",
+       "es": "Ve a Recordar → Nuestros lugares y toca +. Busca en el mapa, pega un enlace de Google Maps o toca el mapa donde está el lugar (o mantén pulsado).",
+       "fr": "Allez dans Se souvenir → Nos lieux et touchez +. Cherchez sur la carte, collez un lien Google Maps ou touchez la carte à l’endroit voulu (ou appui long).",
+       "de": "Gehe zu Merken → Unsere Orte und tippe auf +. Suche auf der Karte, füge einen Google-Maps-Link ein oder tippe auf die Stelle (oder halte gedrückt)."
+      },
+      {
+       "en": "Choose Been here (a visit, with the date and your rating) or Add to bucket list (a place you want to go). Choose Shared or Only me.",
+       "ar": "اختر «زرناه» (زيارة بتاريخها وتقييمكما) أو «أضف إلى قائمة الأمنيات» (مكان تريدان زيارته)، واختر «مشترك» أو «أنا فقط».",
+       "es": "Elige Estuvimos aquí (una visita con fecha y valoración) o Añadir a la lista de deseos (un lugar al que queréis ir). Elige Compartido o Solo yo.",
+       "fr": "Choisissez Déjà venus (une visite avec date et note) ou Ajouter à nos envies (un lieu où aller). Choisissez Partagé ou Moi seul.",
+       "de": "Wähle Hier gewesen (ein Besuch mit Datum und Bewertung) oder Zur Wunschliste (ein Ort, an den ihr wollt). Wähle Geteilt oder Nur ich."
+      }
+     ]
+    ],
     [
      "bullets",
      [
       {
-       "en": "Places: Remember → Our places → +. Save where you have been and your bucket list, with notes and photos.",
-       "ar": "الأماكن: «نتذكّر» ← «أماكننا» ← +. احفظ الأماكن التي زرتماها وقائمة أمنياتكما مع ملاحظات وصور.",
-       "es": "Lugares: Recordar → Nuestros lugares → +. Guarda dónde habéis estado y vuestros deseos, con notas y fotos.",
-       "fr": "Lieux : Se souvenir → Nos lieux → +. Enregistrez où vous êtes allés et vos envies, avec notes et photos.",
-       "de": "Orte: Merken → Unsere Orte → +. Speichert, wo ihr wart, und eure Wunschliste mit Notizen und Fotos."
+       "en": "On the map, a red check pin is a place you have been, a teal bookmark pin is on your bucket list, and each pin shows a category icon. The initials on a pin show who can see it.",
+       "ar": "على الخريطة: الدبوس الأحمر بعلامة صح مكان زرتماه، والدبوس الأخضر المزرق بعلامة إشارة مرجعية في قائمة الأمنيات، ولكل دبوس أيقونة فئة. والأحرف الأولى على الدبوس تُظهر من يستطيع رؤيته.",
+       "es": "En el mapa, un pin rojo con marca es un lugar visitado, un pin verde azulado con marcador está en la lista de deseos, y cada pin muestra un icono de categoría. Las iniciales indican quién puede verlo.",
+       "fr": "Sur la carte, une épingle rouge cochée est un lieu visité, une épingle bleu-vert avec signet est dans vos envies, et chaque épingle porte une icône de catégorie. Les initiales indiquent qui peut la voir.",
+       "de": "Auf der Karte ist eine rote Nadel mit Haken ein besuchter Ort, eine blaugrüne Nadel mit Lesezeichen steht auf der Wunschliste, und jede Nadel zeigt ein Kategoriesymbol. Die Initialen zeigen, wer sie sehen kann."
       },
       {
-       "en": "Contact cards: Remember → Contact cards → +. Keep useful numbers, addresses and opening hours in one place, or import one from your phone.",
-       "ar": "بطاقات جهات الاتصال: «نتذكّر» ← «بطاقات جهات الاتصال» ← +. احتفظ بالأرقام والعناوين وساعات العمل المفيدة في مكان واحد، أو استورد جهة من هاتفك.",
-       "es": "Fichas de contacto: Recordar → Fichas de contacto → +. Guarda números, direcciones y horarios útiles, o importa uno de tu teléfono.",
-       "fr": "Fiches contact : Se souvenir → Fiches contact → +. Gardez numéros, adresses et horaires utiles, ou importez-en un depuis votre téléphone.",
-       "de": "Kontaktkarten: Merken → Kontaktkarten → +. Bewahre nützliche Nummern, Adressen und Öffnungszeiten auf oder importiere einen Kontakt vom Telefon."
+       "en": "From a bucket-list place, tap Plan a trip to start a trip there; the place then shows In a planned trip.",
+       "ar": "من مكان في قائمة الأمنيات اضغط «خطط لرحلة» لبدء رحلة إليه، فيظهر المكان بعدها «في رحلة مخطط لها».",
+       "es": "Desde un lugar de la lista de deseos, toca Planear un viaje para empezar un viaje allí; luego aparece En un viaje planeado.",
+       "fr": "Depuis un lieu de vos envies, touchez Préparer un voyage pour en démarrer un ; le lieu affiche ensuite Dans un voyage prévu.",
+       "de": "Tippe bei einem Wunschlisten-Ort auf Reise planen, um eine Reise dorthin zu starten; der Ort zeigt dann In einer geplanten Reise."
+      },
+      {
+       "en": "Photos and stories of a visit live in Memories. In Google Maps you can also tap Share → OneSpace to save a place.",
+       "ar": "صور وقصص الزيارة تُحفظ في «الذكريات». ويمكنك أيضًا في Google Maps الضغط على «مشاركة» ← OneSpace لحفظ مكان.",
+       "es": "Las fotos e historias de una visita están en Recuerdos. En Google Maps también puedes tocar Compartir → OneSpace para guardar un lugar.",
+       "fr": "Les photos et récits d’une visite sont dans Souvenirs. Dans Google Maps, touchez aussi Partager → OneSpace pour enregistrer un lieu.",
+       "de": "Fotos und Geschichten eines Besuchs liegen in Erinnerungen. In Google Maps kannst du auch Teilen → OneSpace tippen, um einen Ort zu speichern."
       }
      ]
     ]
    ]
   },
   {
-   "id": "connect",
+   "id": "contacts",
    "where": "both",
    "tutorial": true,
    "q": {
-    "en": "How do I use letters, a little love and daily check-ins?",
-    "ar": "كيف أستخدم الرسائل ولمسة حب والتواصل اليومي؟",
-    "es": "¿Cómo uso las cartas, un poco de cariño y los check-ins diarios?",
-    "fr": "Comment utiliser les lettres, les petites attentions et les nouvelles du jour ?",
-    "de": "Wie nutze ich Briefe, ein bisschen Liebe und tägliche Check-ins?"
+    "en": "How do I use contact cards?",
+    "ar": "كيف أستخدم بطاقات جهات الاتصال؟",
+    "es": "¿Cómo uso las fichas de contacto?",
+    "fr": "Comment utiliser les fiches contact ?",
+    "de": "Wie nutze ich Kontaktkarten?"
+   },
+   "a": [
+    [
+     "steps",
+     [
+      {
+       "en": "Go to Remember → Contact cards and tap +, or tap Import from phone to start from one of your phone contacts.",
+       "ar": "اذهب إلى «نتذكّر» ← «بطاقات جهات الاتصال» واضغط +، أو اضغط «استيراد من الهاتف» للبدء من إحدى جهات اتصال هاتفك.",
+       "es": "Ve a Recordar → Fichas de contacto y toca +, o toca Importar del teléfono para empezar desde un contacto.",
+       "fr": "Allez dans Se souvenir → Fiches contact et touchez +, ou touchez Importer du téléphone pour partir d’un contact.",
+       "de": "Gehe zu Merken → Kontaktkarten und tippe auf +, oder tippe auf Vom Telefon importieren, um von einem Kontakt auszugehen."
+      },
+      {
+       "en": "Add the name on the card, a contact person, phone, email, website, address, opening hours, work details and notes.",
+       "ar": "أضف الاسم على البطاقة والشخص المسؤول والهاتف والبريد والموقع والعنوان وساعات العمل وتفاصيل العمل والملاحظات.",
+       "es": "Añade el nombre, una persona de contacto, teléfono, correo, web, dirección, horario, datos de trabajo y notas.",
+       "fr": "Ajoutez le nom, une personne de contact, téléphone, e-mail, site, adresse, horaires, infos professionnelles et notes.",
+       "de": "Füge Namen, Ansprechperson, Telefon, E-Mail, Website, Adresse, Öffnungszeiten, Arbeitsangaben und Notizen hinzu."
+      },
+      {
+       "en": "Choose Shared or Only me and save.",
+       "ar": "اختر «مشترك» أو «أنا فقط» واحفظ.",
+       "es": "Elige Compartido o Solo yo y guarda.",
+       "fr": "Choisissez Partagé ou Moi seul et enregistrez.",
+       "de": "Wähle Geteilt oder Nur ich und speichere."
+      }
+     ]
+    ],
+    [
+     "bullets",
+     [
+      {
+       "en": "From a card you can call, email, open the website or the address in Maps, or tap Save to phone to add it to your phone contacts.",
+       "ar": "من البطاقة يمكنك الاتصال أو المراسلة أو فتح الموقع أو العنوان في الخرائط، أو الضغط على «حفظ في الهاتف» لإضافتها إلى جهات اتصال هاتفك.",
+       "es": "Desde una ficha puedes llamar, escribir, abrir la web o la dirección en Mapas, o tocar Guardar en el teléfono para añadirla a tus contactos.",
+       "fr": "Depuis une fiche, appelez, écrivez, ouvrez le site ou l’adresse dans Plans, ou touchez Enregistrer sur le téléphone pour l’ajouter à vos contacts.",
+       "de": "Von einer Karte aus kannst du anrufen, mailen, Website oder Adresse in Karten öffnen oder Auf Telefon speichern tippen, um sie in deine Kontakte zu übernehmen."
+      },
+      {
+       "en": "Contacts you add inside an Activity also appear here, with the Activity’s privacy.",
+       "ar": "تظهر هنا أيضًا جهات الاتصال التي تضيفها داخل نشاط، بخصوصية ذلك النشاط.",
+       "es": "Los contactos que añades dentro de una Actividad también aparecen aquí, con la privacidad de la Actividad.",
+       "fr": "Les contacts ajoutés dans une Activité apparaissent aussi ici, avec la confidentialité de l’Activité.",
+       "de": "Kontakte, die du in einer Aktivität hinzufügst, erscheinen auch hier – mit der Privatsphäre der Aktivität."
+      },
+      {
+       "en": "OneSpace only stores the cards you save; it never uploads your phone contacts.",
+       "ar": "لا يحفظ OneSpace إلا البطاقات التي تحفظها، ولا يرفع جهات اتصال هاتفك أبدًا.",
+       "es": "OneSpace solo guarda las fichas que guardas; nunca sube los contactos del teléfono.",
+       "fr": "OneSpace ne conserve que les fiches que vous enregistrez ; il n’envoie jamais vos contacts.",
+       "de": "OneSpace speichert nur die Karten, die du anlegst; deine Telefonkontakte werden nie hochgeladen."
+      }
+     ]
+    ]
+   ]
+  },
+  {
+   "id": "letters",
+   "where": "both",
+   "tutorial": true,
+   "q": {
+    "en": "How do I use letters?",
+    "ar": "كيف أستخدم الرسائل؟",
+    "es": "¿Cómo uso las cartas?",
+    "fr": "Comment utiliser les lettres ?",
+    "de": "Wie nutze ich Briefe?"
+   },
+   "a": [
+    [
+     "steps",
+     [
+      {
+       "en": "Go to Connect → Letters and start a new letter.",
+       "ar": "اذهب إلى «نتواصل» ← «الرسائل» وابدأ رسالة جديدة.",
+       "es": "Ve a Conectar → Cartas y empieza una nueva.",
+       "fr": "Allez dans Échanger → Lettres et commencez une nouvelle lettre.",
+       "de": "Gehe zu Verbinden → Briefe und beginne einen neuen Brief."
+      },
+      {
+       "en": "Write it. Save privately as a draft as often as you like; only you see drafts.",
+       "ar": "اكتبها، واحفظها كمسودة خاصة متى شئت؛ لا يرى المسودات غيرك.",
+       "es": "Escríbela. Guárdala como borrador privado cuando quieras; solo tú ves los borradores.",
+       "fr": "Écrivez-la. Enregistrez-la en brouillon privé autant que vous voulez ; vous seul voyez les brouillons.",
+       "de": "Schreibe ihn. Speichere ihn beliebig oft als privaten Entwurf; Entwürfe siehst nur du."
+      },
+      {
+       "en": "Optional: choose Open on a special day. Your partner can open it from that date.",
+       "ar": "اختياري: اختر «تُفتح في يوم مميز»، فيستطيع شريكك فتحها من ذلك التاريخ.",
+       "es": "Opcional: elige Abrir en un día especial. Tu pareja podrá abrirla desde esa fecha.",
+       "fr": "Facultatif : choisissez Ouvrir un jour spécial. Votre partenaire pourra l’ouvrir à partir de cette date.",
+       "de": "Optional: Wähle An einem besonderen Tag öffnen. Dein Partner kann ihn ab diesem Datum öffnen."
+      },
+      {
+       "en": "Send it. A sent letter cannot be edited and stays in your shared history. You see when your partner has read it, and they can write a reply.",
+       "ar": "أرسلها. لا يمكن تعديل الرسالة المرسلة وتبقى في سجلكما المشترك. ترى متى قرأها شريكك، ويمكنه كتابة رد.",
+       "es": "Envíala. Una carta enviada no se puede editar y queda en vuestro historial. Verás cuándo la ha leído tu pareja, que puede responder.",
+       "fr": "Envoyez-la. Une lettre envoyée ne peut plus être modifiée et reste dans votre historique. Vous voyez quand elle est lue, et votre partenaire peut répondre.",
+       "de": "Sende ihn. Ein gesendeter Brief lässt sich nicht mehr bearbeiten und bleibt in eurem Verlauf. Du siehst, wann er gelesen wurde, und dein Partner kann antworten."
+      }
+     ]
+    ],
+    [
+     "p",
+     {
+      "en": "On your own, you can write and keep private drafts, and send them once you connect a partner.",
+      "ar": "وأنت بمفردك يمكنك كتابة مسودات خاصة والاحتفاظ بها، وإرسالها بعد ربط شريك.",
+      "es": "Si estás solo, puedes escribir y guardar borradores privados y enviarlos cuando conectes con una pareja.",
+      "fr": "En solo, vous pouvez écrire et garder des brouillons privés, puis les envoyer une fois un partenaire connecté.",
+      "de": "Allein kannst du private Entwürfe schreiben und behalten und sie senden, sobald ein Partner verbunden ist."
+     }
+    ]
+   ]
+  },
+  {
+   "id": "gestures",
+   "where": "both",
+   "tutorial": true,
+   "q": {
+    "en": "How do I use A little love?",
+    "ar": "كيف أستخدم «لمسة حب»؟",
+    "es": "¿Cómo uso Un poco de cariño?",
+    "fr": "Comment utiliser Petites attentions ?",
+    "de": "Wie nutze ich Ein bisschen Liebe?"
+   },
+   "a": [
+    [
+     "steps",
+     [
+      {
+       "en": "Go to Connect → A little love and tap a gesture: a hug, thinking of you, good morning, good night, thank you, proud of you, I miss you and more.",
+       "ar": "اذهب إلى «نتواصل» ← «لمسة حب» واضغط لمسة: حضن، أفكر فيك، صباح الخير، تصبح على خير، شكرًا، فخور بك، أشتاق إليك وغيرها.",
+       "es": "Ve a Conectar → Un poco de cariño y toca un gesto: un abrazo, pienso en ti, buenos días, buenas noches, gracias, orgullo, te echo de menos y más.",
+       "fr": "Allez dans Échanger → Petites attentions et touchez un geste : câlin, je pense à toi, bonjour, bonne nuit, merci, fier de toi, tu me manques, etc.",
+       "de": "Gehe zu Verbinden → Ein bisschen Liebe und tippe auf eine Geste: Umarmung, ich denke an dich, guten Morgen, gute Nacht, danke, stolz auf dich, ich vermisse dich und mehr."
+      },
+      {
+       "en": "OneSpace picks a message for it at random from that gesture’s pool. Edit the message before sending if you want your own words.",
+       "ar": "يختار OneSpace رسالة عشوائية من مجموعة رسائل تلك اللمسة، ويمكنك تعديلها قبل الإرسال لتكتب بكلماتك.",
+       "es": "OneSpace elige un mensaje al azar del grupo de ese gesto. Edítalo antes de enviar si quieres tus propias palabras.",
+       "fr": "OneSpace choisit un message au hasard dans la réserve de ce geste. Modifiez-le avant l’envoi si vous voulez vos mots.",
+       "de": "OneSpace wählt zufällig eine Nachricht aus dem Pool dieser Geste. Bearbeite sie vor dem Senden, wenn du eigene Worte willst."
+      },
+      {
+       "en": "Send it. Your partner gets a notification, and both of you see it in the sent and received history.",
+       "ar": "أرسلها. يصل شريكك إشعار، ويراها كلاكما في سجل المرسل والمستلم.",
+       "es": "Envíalo. Tu pareja recibe un aviso y ambos lo veis en el historial de enviados y recibidos.",
+       "fr": "Envoyez-le. Votre partenaire est notifié, et vous le voyez tous deux dans l’historique.",
+       "de": "Sende sie. Dein Partner wird benachrichtigt, und ihr seht sie beide im Verlauf."
+      }
+     ]
+    ],
+    [
+     "bullets",
+     [
+      {
+       "en": "Make it yours: tap Create my own gesture for a gesture with your own name and message. In Me → Settings → Love gesture settings you can edit or hide the built-in messages, add your own, and mark one Don’t pick this one at random.",
+       "ar": "اجعلها خاصة بك: اضغط «أنشئ لمستي الخاصة» لعمل لمسة باسمك ورسالتك. ومن أنا ← الإعدادات ← إعدادات لمسات الحب يمكنك تعديل الرسائل الجاهزة أو إخفاؤها وإضافة رسائلك وتحديد رسالة «لا تخترها عشوائيًا».",
+       "es": "Hazlo tuyo: toca Crear mi propio gesto con tu nombre y mensaje. En Yo → Ajustes → Ajustes de gestos puedes editar u ocultar los mensajes incluidos, añadir los tuyos y marcar uno como No elegir al azar.",
+       "fr": "Personnalisez : touchez Créer mon propre geste avec votre nom et message. Dans Moi → Réglages → Réglages des attentions, modifiez ou masquez les messages fournis, ajoutez les vôtres et marquez-en un Ne pas choisir au hasard.",
+       "de": "Mach sie persönlich: Tippe auf Eigene Geste erstellen mit eigenem Namen und Text. Unter Ich → Einstellungen → Gesten-Einstellungen kannst du vorgegebene Nachrichten bearbeiten oder ausblenden, eigene hinzufügen und eine als Nicht zufällig wählen markieren."
+      },
+      {
+       "en": "Living together, the “from miles away” messages and the missing-home gestures are left out. Living apart, you also get gestures such as I miss us together and missing our home.",
+       "ar": "عند العيش معًا تُستبعد رسائل «من بعيد» ولمسات الحنين إلى البيت. وعند العيش بعيدين تحصلان أيضًا على لمسات مثل «أشتاق إلى وجودنا معًا» و«أشتاق إلى بيتنا».",
+       "es": "Si vivís juntos, se omiten los mensajes «desde lejos» y los gestos de echar de menos el hogar. Si vivís separados, también tenéis gestos como Echo de menos estar juntos o nuestro hogar.",
+       "fr": "Si vous vivez ensemble, les messages « à distance » et les gestes de manque du foyer sont retirés. À distance, vous avez aussi des gestes comme Nous deux me manquons ou Notre maison me manque.",
+       "de": "Lebt ihr zusammen, fallen „aus der Ferne“-Nachrichten und Heimweh-Gesten weg. Lebt ihr getrennt, gibt es zusätzlich Gesten wie Ich vermisse uns zusammen oder unser Zuhause."
+      }
+     ]
+    ],
+    [
+     "p",
+     {
+      "en": "A little love needs a partner. On your own it is not available.",
+      "ar": "تحتاج «لمسة حب» إلى شريك، ولا تتوفر وأنت بمفردك.",
+      "es": "Un poco de cariño necesita una pareja; si estás solo no está disponible.",
+      "fr": "Les petites attentions nécessitent un partenaire ; en solo, elles ne sont pas disponibles.",
+      "de": "Ein bisschen Liebe braucht einen Partner; allein ist es nicht verfügbar."
+     }
+    ]
+   ]
+  },
+  {
+   "id": "checkins",
+   "where": "both",
+   "tutorial": true,
+   "q": {
+    "en": "How do I use daily check-ins?",
+    "ar": "كيف أستخدم التواصل اليومي؟",
+    "es": "¿Cómo uso los check-ins diarios?",
+    "fr": "Comment utiliser les nouvelles du jour ?",
+    "de": "Wie nutze ich tägliche Check-ins?"
    },
    "a": [
     [
      "bullets",
      [
       {
-       "en": "Letters (Connect → Letters): write a longer message. Drafts are private; a sent letter stays in your shared history.",
-       "ar": "الرسائل («نتواصل» ← «الرسائل»): اكتب رسالة أطول. المسودات خاصة، والرسالة المرسلة تبقى في سجلكما المشترك.",
-       "es": "Cartas (Conectar → Cartas): escribe un mensaje largo. Los borradores son privados; una carta enviada queda en vuestro historial.",
-       "fr": "Lettres (Échanger → Lettres) : écrivez un message plus long. Les brouillons sont privés ; une lettre envoyée reste dans votre historique.",
-       "de": "Briefe (Verbinden → Briefe): Schreibe eine längere Nachricht. Entwürfe sind privat; ein gesendeter Brief bleibt in eurem Verlauf."
+       "en": "Feelings journal: go to Connect → Daily check-ins and record how you feel today, once a day. You can edit today’s feeling, and search your journal later.",
+       "ar": "دفتر المشاعر: اذهب إلى «نتواصل» ← «التواصل اليومي» وسجّل شعورك اليوم، مرة واحدة يوميًا. يمكنك تعديل شعور اليوم والبحث في دفترك لاحقًا.",
+       "es": "Diario de emociones: ve a Conectar → Check-ins diarios y anota cómo te sientes hoy, una vez al día. Puedes editar el de hoy y buscar en tu diario después.",
+       "fr": "Journal des humeurs : allez dans Échanger → Nouvelles du jour et notez votre humeur, une fois par jour. Vous pouvez modifier celle du jour et chercher dans votre journal.",
+       "de": "Gefühlstagebuch: Gehe zu Verbinden → Tägliche Check-ins und halte einmal am Tag fest, wie es dir geht. Den heutigen Eintrag kannst du bearbeiten und dein Tagebuch später durchsuchen."
       },
       {
-       "en": "A little love (Connect → A little love): send a hug, a thought or sweet dreams in one tap, with your own words if you like.",
-       "ar": "لمسة حب («نتواصل» ← «لمسة حب»): أرسل حضنًا أو تفكيرًا أو أحلامًا سعيدة بضغطة واحدة، وبكلماتك إن شئت.",
-       "es": "Un poco de cariño (Conectar → Un poco de cariño): envía un abrazo, un pensamiento o dulces sueños con un toque, con tus palabras si quieres.",
-       "fr": "Petites attentions (Échanger → Petites attentions) : envoyez un câlin, une pensée ou une bonne nuit d’un geste, avec vos mots si vous voulez.",
-       "de": "Ein bisschen Liebe (Verbinden → Ein bisschen Liebe): Sende eine Umarmung, einen Gedanken oder süße Träume mit einem Tippen, gern mit eigenen Worten."
+       "en": "With a partner, you can share your feeling with them, or ask them how they are. They reply when they choose, and you can answer back with a gesture.",
+       "ar": "مع شريك يمكنك مشاركته شعورك أو سؤاله عن حاله. يرد عندما يختار، ويمكنك الرد عليه بلمسة.",
+       "es": "Con pareja, puedes compartirle tu emoción o preguntarle cómo está. Responde cuando quiera, y tú puedes contestar con un gesto.",
+       "fr": "En couple, partagez votre humeur ou demandez à votre partenaire comment il va. Il répond quand il veut, et vous pouvez répondre par un geste.",
+       "de": "Mit Partner kannst du dein Gefühl teilen oder fragen, wie es ihm geht. Er antwortet, wann er möchte, und du kannst mit einer Geste antworten."
       },
       {
-       "en": "Daily check-ins (Connect → Daily check-ins): share how you feel today, or ask your partner how they are.",
-       "ar": "التواصل اليومي («نتواصل» ← «التواصل اليومي»): شارك شعورك اليوم أو اسأل شريكك عن حاله.",
-       "es": "Check-ins diarios (Conectar → Check-ins diarios): comparte cómo te sientes hoy o pregunta a tu pareja cómo está.",
-       "fr": "Nouvelles du jour (Échanger → Nouvelles du jour) : partagez votre humeur ou demandez à votre partenaire comment il va.",
-       "de": "Tägliche Check-ins (Verbinden → Tägliche Check-ins): Teile, wie es dir heute geht, oder frag deinen Partner."
+       "en": "Only your partner sees a feeling you share with them.",
+       "ar": "لا يرى الشعور الذي تشاركه مع شريكك أحد غيره.",
+       "es": "Solo tu pareja ve la emoción que compartes con ella.",
+       "fr": "Seul votre partenaire voit l’humeur que vous lui partagez.",
+       "de": "Ein geteiltes Gefühl sieht nur dein Partner."
       }
      ]
+    ],
+    [
+     "p",
+     {
+      "en": "On your own, the feelings journal works fully as your private diary.",
+      "ar": "وأنت بمفردك يعمل دفتر المشاعر بالكامل كمذكراتك الخاصة.",
+      "es": "Si estás solo, el diario de emociones funciona por completo como tu diario privado.",
+      "fr": "En solo, le journal des humeurs fonctionne entièrement comme votre carnet privé.",
+      "de": "Allein funktioniert das Gefühlstagebuch vollständig als dein privates Tagebuch."
+     }
     ]
    ]
   },
@@ -510,27 +987,51 @@
      "steps",
      [
       {
-       "en": "Go to Connect → Shared experiences and pick a category: movies, shows, music, books or games.",
-       "ar": "اذهب إلى «نتواصل» ← «التجارب المشتركة» واختر فئة: أفلام أو مسلسلات أو موسيقى أو كتب أو ألعاب.",
-       "es": "Ve a Conectar → Experiencias compartidas y elige: películas, series, música, libros o juegos.",
-       "fr": "Allez dans Échanger → Expériences partagées et choisissez : films, séries, musique, livres ou jeux.",
-       "de": "Gehe zu Verbinden → Gemeinsame Erlebnisse und wähle: Filme, Serien, Musik, Bücher oder Spiele."
+       "en": "Go to Connect → Shared experiences and pick a category: movies, shows, music, books or games. Each tile shows how many are still to enjoy.",
+       "ar": "اذهب إلى «نتواصل» ← «التجارب المشتركة» واختر فئة: أفلام أو مسلسلات أو موسيقى أو كتب أو ألعاب. وتعرض كل فئة عدد ما بقي للاستمتاع.",
+       "es": "Ve a Conectar → Experiencias compartidas y elige: películas, series, música, libros o juegos. Cada tarjeta muestra cuántas quedan por disfrutar.",
+       "fr": "Allez dans Échanger → Expériences partagées et choisissez : films, séries, musique, livres ou jeux. Chaque tuile indique combien restent à apprécier.",
+       "de": "Gehe zu Verbinden → Gemeinsame Erlebnisse und wähle: Filme, Serien, Musik, Bücher oder Spiele. Jede Kachel zeigt, wie viele noch offen sind."
       },
       {
-       "en": "Add something you want to enjoy together.",
-       "ar": "أضف شيئًا تريدان الاستمتاع به معًا.",
-       "es": "Añade algo que queráis disfrutar juntos.",
-       "fr": "Ajoutez quelque chose à apprécier ensemble.",
-       "de": "Füge etwas hinzu, das ihr gemeinsam genießen wollt."
+       "en": "Add one with its title, where to watch, read or play, and a link. You can also share it from Netflix, Spotify or any website with Share → OneSpace.",
+       "ar": "أضف تجربة بعنوانها ومكان المشاهدة أو القراءة أو اللعب ورابطها. ويمكنك أيضًا مشاركتها من نتفليكس أو سبوتيفاي أو أي موقع عبر «مشاركة» ← OneSpace.",
+       "es": "Añade una con título, dónde verla, leerla o jugarla, y un enlace. También puedes compartirla desde Netflix, Spotify o cualquier web con Compartir → OneSpace.",
+       "fr": "Ajoutez-en une avec son titre, où la regarder, lire ou jouer, et un lien. Vous pouvez aussi la partager depuis Netflix, Spotify ou n’importe quel site via Partager → OneSpace.",
+       "de": "Füge eins mit Titel, wo man es schaut, liest oder spielt, und einem Link hinzu. Du kannst es auch aus Netflix, Spotify oder jeder Website per Teilen → OneSpace teilen."
       },
       {
-       "en": "When you both mark interest, it becomes a mutual pick. Rate it after you enjoy it.",
-       "ar": "عندما يبدي كلاكما اهتمامه يصبح اختيارًا مشتركًا، وقيّماه بعد الاستمتاع به.",
-       "es": "Cuando ambos mostráis interés, se vuelve una elección mutua. Valoradla después.",
-       "fr": "Quand vous êtes tous deux intéressés, c’est un choix commun. Notez-le après.",
-       "de": "Wenn ihr beide Interesse zeigt, wird es eine gemeinsame Wahl. Bewertet es danach."
+       "en": "Each of you marks Interested on your own. When you both do, it becomes a mutual pick.",
+       "ar": "يختار كل منكما «مهتم» بشكل مستقل، وعندما يفعل كلاكما يصبح اختيارًا مشتركًا.",
+       "es": "Cada uno marca Interesado por su cuenta. Cuando ambos lo hacéis, es una elección mutua.",
+       "fr": "Chacun marque Intéressé de son côté. Quand vous l’êtes tous deux, c’est un choix commun.",
+       "de": "Jeder markiert für sich Interessiert. Wenn ihr es beide tut, wird es eine gemeinsame Wahl."
+      },
+      {
+       "en": "Tap Plan a date to choose when you will enjoy it together; your partner sees the plan. Open link takes you straight to the platform.",
+       "ar": "اضغط «خطط لموعد» لاختيار متى تستمتعان بها معًا، فيرى شريكك الخطة. و«افتح الرابط» ينقلك مباشرة إلى المنصة.",
+       "es": "Toca Planear una cita para elegir cuándo disfrutarla juntos; tu pareja ve el plan. Abrir enlace te lleva directamente a la plataforma.",
+       "fr": "Touchez Prévoir un moment pour choisir quand en profiter ensemble ; votre partenaire voit le projet. Ouvrir le lien mène directement à la plateforme.",
+       "de": "Tippe auf Date planen, um festzulegen, wann ihr es gemeinsam genießt; dein Partner sieht den Plan. Link öffnen führt direkt zur Plattform."
+      },
+      {
+       "en": "Afterwards, mark it enjoyed, then rate and review it. Talk about it in the comments.",
+       "ar": "بعد ذلك ضع علامة «استمتعنا بها» ثم قيّمها واكتب رأيك، وتحدثا عنها في التعليقات.",
+       "es": "Después, márcala como disfrutada, valórala y opina. Comentadla en los comentarios.",
+       "fr": "Ensuite, marquez-la appréciée, notez-la et donnez votre avis. Discutez-en dans les commentaires.",
+       "de": "Danach markiere es als genossen, bewerte und rezensiere es. Sprecht in den Kommentaren darüber."
       }
      ]
+    ],
+    [
+     "p",
+     {
+      "en": "Now and then, OneSpace suggests “What shall we do together?” from your list, preferring mutual picks. On your own, it works as your personal watch, read and play list.",
+      "ar": "من حين لآخر يقترح OneSpace «ماذا نفعل معًا؟» من قائمتكما، مفضّلًا الاختيارات المشتركة. وأنت بمفردك تعمل كقائمتك الشخصية للمشاهدة والقراءة واللعب.",
+      "es": "De vez en cuando, OneSpace sugiere «¿Qué hacemos juntos?» desde vuestra lista, priorizando las elecciones mutuas. Si estás solo, funciona como tu lista personal.",
+      "fr": "De temps en temps, OneSpace propose « Que faisons-nous ensemble ? » à partir de votre liste, en privilégiant les choix communs. En solo, c’est votre liste personnelle.",
+      "de": "Ab und zu schlägt OneSpace „Was machen wir zusammen?“ aus eurer Liste vor, bevorzugt gemeinsame Wahlen. Allein ist es deine persönliche Liste."
+     }
     ]
    ]
   },
@@ -539,47 +1040,73 @@
    "where": "both",
    "tutorial": true,
    "q": {
-    "en": "How do I keep memories and make a scrapbook?",
-    "ar": "كيف أحفظ الذكريات وأصنع ألبومًا؟",
-    "es": "¿Cómo guardo recuerdos y hago un álbum?",
-    "fr": "Comment garder des souvenirs et créer un album ?",
-    "de": "Wie bewahre ich Erinnerungen auf und gestalte ein Album?"
+    "en": "How do I keep memories, make a scrapbook and take daily selfies?",
+    "ar": "كيف أحفظ الذكريات وأصنع ألبومًا وألتقط السيلفي اليومية؟",
+    "es": "¿Cómo guardo recuerdos, hago un álbum y me hago selfies diarios?",
+    "fr": "Comment garder des souvenirs, créer un album et prendre des selfies quotidiens ?",
+    "de": "Wie bewahre ich Erinnerungen auf, gestalte ein Album und mache tägliche Selfies?"
    },
    "a": [
     [
      "steps",
      [
       {
-       "en": "Go to Connect → Memories and tap +. Add photos, a date, a place and what happened.",
-       "ar": "اذهب إلى «نتواصل» ← «الذكريات» واضغط +، وأضف صورًا وتاريخًا ومكانًا وما حدث.",
-       "es": "Ve a Conectar → Recuerdos y toca +. Añade fotos, fecha, lugar y lo que pasó.",
-       "fr": "Allez dans Échanger → Souvenirs et touchez +. Ajoutez photos, date, lieu et ce qui s’est passé.",
-       "de": "Gehe zu Verbinden → Erinnerungen und tippe auf +. Füge Fotos, Datum, Ort und das Erlebte hinzu."
+       "en": "Go to Connect → Memories and tap +. Add a title, date, place, the story and photos. People and photo tags make it easy to find later.",
+       "ar": "اذهب إلى «نتواصل» ← «الذكريات» واضغط +. أضف عنوانًا وتاريخًا ومكانًا والقصة والصور، وتسهّل وسوم الأشخاص والصور العثور عليها لاحقًا.",
+       "es": "Ve a Conectar → Recuerdos y toca +. Añade título, fecha, lugar, la historia y fotos. Las etiquetas de personas y fotos ayudan a encontrarlo.",
+       "fr": "Allez dans Échanger → Souvenirs et touchez +. Ajoutez titre, date, lieu, récit et photos. Les étiquettes de personnes et de photos aident à les retrouver.",
+       "de": "Gehe zu Verbinden → Erinnerungen und tippe auf +. Füge Titel, Datum, Ort, Geschichte und Fotos hinzu. Personen- und Foto-Tags helfen beim Wiederfinden."
       },
       {
-       "en": "Choose a scrapbook design to lay out the pages. In a shared scrapbook you can both edit every page.",
-       "ar": "اختر تصميم ألبوم لترتيب الصفحات. في الألبوم المشترك يمكن لكليكما تعديل كل صفحة.",
-       "es": "Elige un diseño de álbum. En un álbum compartido ambos podéis editar todas las páginas.",
-       "fr": "Choisissez un modèle d’album. Dans un album partagé, vous pouvez tous deux modifier chaque page.",
-       "de": "Wähle ein Album-Design. In einem geteilten Album könnt ihr beide jede Seite bearbeiten."
+       "en": "For a scrapbook, pick a page design and fill it right on the page. Add as many pages as you like with New page.",
+       "ar": "للألبوم اختر تصميم صفحة واملأه مباشرة على الصفحة، وأضف ما تشاء من الصفحات عبر «صفحة جديدة».",
+       "es": "Para un álbum, elige un diseño de página y rellénalo en la misma página. Añade las páginas que quieras con Nueva página.",
+       "fr": "Pour un album, choisissez un modèle de page et remplissez-le directement. Ajoutez autant de pages que voulu avec Nouvelle page.",
+       "de": "Für ein Album wähle ein Seitendesign und fülle es direkt auf der Seite. Mit Neue Seite fügst du beliebig viele Seiten hinzu."
       },
       {
-       "en": "Save or share the finished scrapbook as a PDF.",
-       "ar": "احفظ الألبوم المكتمل أو شاركه كملف PDF.",
-       "es": "Guarda o comparte el álbum terminado en PDF.",
-       "fr": "Enregistrez ou partagez l’album fini en PDF.",
-       "de": "Speichere oder teile das fertige Album als PDF."
+       "en": "In a shared scrapbook you can both edit every page. Use Nudge partner in the memory menu to ask for their part.",
+       "ar": "في الألبوم المشترك يمكن لكليكما تعديل كل صفحة. استخدم «نبّه شريكك» من قائمة الذكرى لتطلب منه إضافة جزئه.",
+       "es": "En un álbum compartido ambos podéis editar todas las páginas. Usa Avisar a tu pareja en el menú del recuerdo para pedir su parte.",
+       "fr": "Dans un album partagé, vous pouvez tous deux modifier chaque page. Utilisez Relancer mon partenaire dans le menu du souvenir pour lui demander sa part.",
+       "de": "In einem geteilten Album könnt ihr beide jede Seite bearbeiten. Nutze Partner anstupsen im Menü der Erinnerung, um um seinen Teil zu bitten."
+      },
+      {
+       "en": "Save or share the finished scrapbook as a PDF (saved in Downloads › OneSpace).",
+       "ar": "احفظ الألبوم المكتمل أو شاركه كملف PDF (يُحفظ في التنزيلات › OneSpace).",
+       "es": "Guarda o comparte el álbum terminado en PDF (en Descargas › OneSpace).",
+       "fr": "Enregistrez ou partagez l’album fini en PDF (dans Téléchargements › OneSpace).",
+       "de": "Speichere oder teile das fertige Album als PDF (unter Downloads › OneSpace)."
+      }
+     ]
+    ],
+    [
+     "bullets",
+     [
+      {
+       "en": "Daily selfie: one selfie a day. In a couple it is made together: each of you adds your own photo to the same day (Add yours to today’s selfie).",
+       "ar": "السيلفي اليومية: سيلفي واحدة في اليوم. وللزوجين تُصنع معًا: يضيف كل منكما صورته إلى اليوم نفسه («أضف صورتك إلى سيلفي اليوم»).",
+       "es": "Selfie diario: uno al día. En pareja se hace juntos: cada uno añade su foto al mismo día (Añade la tuya al selfie de hoy).",
+       "fr": "Selfie du jour : un par jour. En couple, il se fait à deux : chacun ajoute sa photo au même jour (Ajoute la tienne au selfie du jour).",
+       "de": "Tägliches Selfie: eins pro Tag. Als Paar entsteht es gemeinsam: Jeder fügt sein Foto zum selben Tag hinzu (Füge deins zum heutigen Selfie hinzu)."
+      },
+      {
+       "en": "The selfie calendar shows your days with a selfie; a small photo in the corner is your partner’s.",
+       "ar": "يعرض تقويم السيلفي الأيام التي فيها سيلفي، والصورة الصغيرة في الزاوية هي صورة شريكك.",
+       "es": "El calendario de selfies muestra los días con selfie; la foto pequeña de la esquina es la de tu pareja.",
+       "fr": "Le calendrier des selfies montre vos jours avec selfie ; la petite photo dans le coin est celle de votre partenaire.",
+       "de": "Der Selfie-Kalender zeigt eure Tage mit Selfie; das kleine Foto in der Ecke ist das deines Partners."
       }
      ]
     ],
     [
      "p",
      {
-      "en": "You can also take one daily selfie; the calendar view shows your days together.",
-      "ar": "يمكنك أيضًا التقاط سيلفي يومية، ويعرض التقويم أيامكما معًا.",
-      "es": "También puedes hacer un selfie diario; el calendario muestra vuestros días.",
-      "fr": "Vous pouvez aussi prendre un selfie par jour ; le calendrier montre vos journées.",
-      "de": "Du kannst auch ein tägliches Selfie machen; die Kalenderansicht zeigt eure Tage."
+      "en": "On your own, memories, scrapbooks and daily selfies are your private story.",
+      "ar": "وأنت بمفردك تكون الذكريات والألبومات والسيلفي اليومية قصتك الخاصة.",
+      "es": "Si estás solo, recuerdos, álbumes y selfies diarios son tu historia privada.",
+      "fr": "En solo, souvenirs, albums et selfies quotidiens forment votre histoire privée.",
+      "de": "Allein sind Erinnerungen, Alben und tägliche Selfies deine private Geschichte."
      }
     ]
    ]
@@ -589,44 +1116,44 @@
    "where": "both",
    "tutorial": true,
    "q": {
-    "en": "How do I save something from another app?",
-    "ar": "كيف أحفظ شيئًا من تطبيق آخر؟",
-    "es": "¿Cómo guardo algo desde otra app?",
-    "fr": "Comment enregistrer quelque chose depuis une autre application ?",
-    "de": "Wie speichere ich etwas aus einer anderen App?"
+    "en": "How do I save something from another app or website?",
+    "ar": "كيف أحفظ شيئًا من تطبيق أو موقع آخر؟",
+    "es": "¿Cómo guardo algo desde otra app o web?",
+    "fr": "Comment enregistrer quelque chose depuis une autre application ou un site ?",
+    "de": "Wie speichere ich etwas aus einer anderen App oder Website?"
    },
    "a": [
     [
      "steps",
      [
       {
-       "en": "In any app, tap Share and choose OneSpace (Android).",
-       "ar": "في أي تطبيق اضغط «مشاركة» واختر OneSpace (أندرويد).",
-       "es": "En cualquier app, toca Compartir y elige OneSpace (Android).",
-       "fr": "Dans n’importe quelle application, touchez Partager et choisissez OneSpace (Android).",
-       "de": "Tippe in einer beliebigen App auf Teilen und wähle OneSpace (Android)."
+       "en": "In any app or website, tap Share and choose OneSpace (Android).",
+       "ar": "في أي تطبيق أو موقع اضغط «مشاركة» واختر OneSpace (أندرويد).",
+       "es": "En cualquier app o web, toca Compartir y elige OneSpace (Android).",
+       "fr": "Dans n’importe quelle application ou site, touchez Partager et choisissez OneSpace (Android).",
+       "de": "Tippe in einer App oder auf einer Website auf Teilen und wähle OneSpace (Android)."
       },
       {
-       "en": "It lands in Items to sort.",
-       "ar": "يصل إلى «عناصر للفرز».",
-       "es": "Llega a Elementos por ordenar.",
-       "fr": "Il arrive dans Éléments à trier.",
-       "de": "Es landet in Zu sortieren."
+       "en": "OneSpace suggests up to three places for it, based on what you shared: a shop link → gift idea, Activity option or to-do; a movie or song → shared experience; a flight → flight option or trip; a Google Maps place → bucket list or visited place; text with a date → reminder, to-do or event. More… shows every other choice.",
+       "ar": "يقترح OneSpace حتى ثلاثة أماكن لحفظه حسب ما شاركته: رابط متجر ← فكرة هدية أو خيار في نشاط أو مهمة؛ فيلم أو أغنية ← تجربة مشتركة؛ رحلة طيران ← خيار رحلة أو رحلة؛ مكان من Google Maps ← قائمة الأمنيات أو مكان زرتماه؛ نص فيه تاريخ ← تذكير أو مهمة أو موعد. ويعرض «المزيد…» بقية الخيارات.",
+       "es": "OneSpace sugiere hasta tres destinos según lo que compartes: enlace de tienda → idea de regalo, opción de Actividad o tarea; película o canción → experiencia compartida; vuelo → opción de vuelo o viaje; lugar de Google Maps → lista de deseos o lugar visitado; texto con fecha → recordatorio, tarea o evento. Más… muestra el resto.",
+       "fr": "OneSpace propose jusqu’à trois destinations selon ce que vous partagez : lien de boutique → idée cadeau, option d’Activité ou tâche ; film ou chanson → expérience partagée ; vol → option de vol ou voyage ; lieu Google Maps → envies ou lieu visité ; texte avec date → rappel, tâche ou événement. Plus… montre tout le reste.",
+       "de": "OneSpace schlägt bis zu drei Ziele vor, je nachdem, was du teilst: Shop-Link → Geschenkidee, Aktivitätsoption oder To-do; Film oder Song → gemeinsames Erlebnis; Flug → Flugoption oder Reise; Google-Maps-Ort → Wunschliste oder besuchter Ort; Text mit Datum → Erinnerung, To-do oder Termin. Mehr… zeigt alle weiteren."
       },
       {
-       "en": "Turn it into a note, to-do, trip item or memory when you have a moment.",
-       "ar": "حوّله إلى ملاحظة أو مهمة أو عنصر رحلة أو ذكرى عندما يتاح لك الوقت.",
-       "es": "Conviértelo en nota, tarea, elemento de viaje o recuerdo cuando puedas.",
-       "fr": "Transformez-le en note, tâche, élément de voyage ou souvenir quand vous avez un moment.",
-       "de": "Mache daraus eine Notiz, ein To-do, einen Reiseeintrag oder eine Erinnerung, wenn du Zeit hast."
+       "en": "Not sure yet? Save it to Items to sort (only you see it) and sort it later; items older than 30 days get a gentle “still want this?” label.",
+       "ar": "لم تقرر بعد؟ احفظه في «عناصر للفرز» (لا يراه غيرك) وافرزه لاحقًا؛ وتحصل العناصر الأقدم من 30 يومًا على تذكير لطيف «هل ما زلت تريده؟».",
+       "es": "¿Aún no lo sabes? Guárdalo en Elementos por ordenar (solo tú lo ves) y ordénalo luego; los de más de 30 días muestran «¿Aún lo quieres?».",
+       "fr": "Pas encore décidé ? Enregistrez-le dans Éléments à trier (vous seul le voyez) et triez plus tard ; après 30 jours, un « Toujours utile ? » apparaît.",
+       "de": "Noch unsicher? Speichere es in Zu sortieren (nur du siehst es) und sortiere später; nach 30 Tagen erscheint ein sanftes „Noch gewünscht?“."
       }
      ]
     ],
     [
      "p",
      {
-      "en": "Sharing into OneSpace on iPhone is coming with the iPhone app.",
-      "ar": "المشاركة إلى OneSpace على الآيفون قادمة مع تطبيق الآيفون.",
+      "en": "Sharing into OneSpace on iPhone comes with the iPhone app.",
+      "ar": "المشاركة إلى OneSpace على الآيفون تأتي مع تطبيق الآيفون.",
       "es": "Compartir en OneSpace desde iPhone llegará con la app para iPhone.",
       "fr": "Le partage vers OneSpace sur iPhone arrivera avec l’application iPhone.",
       "de": "Teilen in OneSpace auf dem iPhone kommt mit der iPhone-App."
@@ -648,21 +1175,11 @@
     [
      "p",
      {
-      "en": "Yes, on Android. Long-press the OneSpace icon and choose Voice command, then speak. For example: “Remind me to call the clinic tomorrow at 5 pm”.",
-      "ar": "نعم على أندرويد. اضغط مطولًا على أيقونة OneSpace واختر «أمر صوتي» ثم تحدث. مثال: «ذكرني أن أتصل بالعيادة غدًا الساعة 5 مساءً».",
-      "es": "Sí, en Android. Mantén pulsado el icono de OneSpace, elige Comando de voz y habla. Por ejemplo: «Recuérdame llamar a la clínica mañana a las 5».",
-      "fr": "Oui, sur Android. Appuyez longuement sur l’icône OneSpace, choisissez Commande vocale et parlez. Par exemple : « Rappelle-moi d’appeler la clinique demain à 17 h ».",
-      "de": "Ja, auf Android. Halte das OneSpace-Symbol gedrückt, wähle Sprachbefehl und sprich, z. B.: „Erinnere mich morgen um 17 Uhr, die Praxis anzurufen“."
-     }
-    ],
-    [
-     "p",
-     {
-      "en": "Your voice is handled by your phone’s speech service and is not stored by OneSpace.",
-      "ar": "تعالج خدمة الكلام في هاتفك صوتك، ولا يحفظه OneSpace.",
-      "es": "Tu voz la procesa el servicio de voz del teléfono y OneSpace no la guarda.",
-      "fr": "Votre voix est traitée par le service vocal du téléphone et n’est pas conservée par OneSpace.",
-      "de": "Deine Stimme verarbeitet der Sprachdienst deines Telefons; OneSpace speichert sie nicht."
+      "en": "Voice commands are coming soon. We will let you know in What’s new when they are ready.",
+      "ar": "الأوامر الصوتية قادمة قريبًا، وسنخبرك في «ما الجديد» عندما تصبح جاهزة.",
+      "es": "Los comandos de voz llegarán pronto. Te avisaremos en Novedades cuando estén listos.",
+      "fr": "Les commandes vocales arrivent bientôt. Nous vous préviendrons dans Nouveautés.",
+      "de": "Sprachbefehle kommen bald. Wir sagen dir unter Neuigkeiten Bescheid, wenn sie bereit sind."
      }
     ]
    ]

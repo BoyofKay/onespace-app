@@ -45,6 +45,13 @@
        "es": "Solo yo: solo tú lo ves, nunca una pareja actual ni futura.",
        "fr": "Moi seul : vous seul le voyez, jamais un partenaire actuel ou futur.",
        "de": "Nur ich: Nur du siehst es, nie ein aktueller oder künftiger Partner."
+      },
+      {
+       "en": "If you separate: everything Shared is permanently deleted for both of you; each of you keeps your own Only me items.",
+       "ar": "إذا انفصلتما: يُحذف كل ما هو «مشترك» نهائيًا لكليكما، ويحتفظ كل منكما بعناصره «أنا فقط».",
+       "es": "Si os separáis: todo lo Compartido se borra para siempre para ambos; cada uno conserva sus elementos Solo yo.",
+       "fr": "En cas de séparation : tout ce qui est Partagé est définitivement supprimé pour vous deux ; chacun garde ses éléments Moi seul.",
+       "de": "Bei einer Trennung: Alles Geteilte wird für euch beide endgültig gelöscht; jeder behält seine Nur-ich-Einträge."
       }
      ]
     ],

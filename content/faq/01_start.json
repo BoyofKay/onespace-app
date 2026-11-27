@@ -289,21 +289,40 @@
     [
      "p",
      {
-      "en": "Yes. Once your partner joins, open Connect and set Our relationship to Together or Living apart. It is one shared setting, and you can change it any time without starting over.",
-      "ar": "نعم. بعد انضمام شريكك افتح «نتواصل» واضبط «علاقتنا» على «معًا» أو «نعيش بعيدين». إنه إعداد مشترك واحد، ويمكنكما تغييره في أي وقت دون البدء من جديد.",
-      "es": "Sí. Cuando tu pareja se una, abre Conectar y pon Nuestra relación en Juntos o Viviendo separados. Es un ajuste compartido que podéis cambiar cuando queráis sin empezar de cero.",
-      "fr": "Oui. Une fois votre partenaire inscrit, ouvrez Échanger et réglez Notre relation sur Ensemble ou À distance. C’est un réglage commun, modifiable à tout moment sans repartir de zéro.",
-      "de": "Ja. Sobald dein Partner dabei ist, öffne Verbinden und stelle Unsere Beziehung auf Zusammen oder Getrennt lebend. Es ist eine gemeinsame Einstellung, die ihr jederzeit ändern könnt, ohne neu anzufangen."
+      "en": "Yes. Once your partner has joined, set how you live in either place:",
+      "ar": "نعم. بعد انضمام شريكك اضبط طريقة عيشكما من أي من المكانين:",
+      "es": "Sí. Cuando tu pareja se haya unido, indica cómo vivís en cualquiera de estos sitios:",
+      "fr": "Oui. Une fois votre partenaire inscrit, indiquez votre situation à l’un de ces endroits :",
+      "de": "Ja. Sobald dein Partner dabei ist, lege an einer dieser Stellen fest, wie ihr lebt:"
      }
+    ],
+    [
+     "bullets",
+     [
+      {
+       "en": "Me → Settings → Our relationship → Living arrangement & meeting dates (also your last visit and next reunion).",
+       "ar": "أنا ← الإعدادات ← علاقتنا ← طريقة العيش ومواعيد اللقاء (وفيها أيضًا آخر زيارة واللقاء القادم).",
+       "es": "Yo → Ajustes → Nuestra relación → Forma de convivencia y fechas de encuentro (también la última visita y el próximo reencuentro).",
+       "fr": "Moi → Réglages → Notre relation → Mode de vie et dates de rencontre (avec la dernière visite et les prochaines retrouvailles).",
+       "de": "Ich → Einstellungen → Unsere Beziehung → Wohnsituation & Treffen (auch letzter Besuch und nächstes Wiedersehen)."
+      },
+      {
+       "en": "On Today, tap the home or airplane icon and choose Together or Apart.",
+       "ar": "في «اليوم» اضغط أيقونة البيت أو الطائرة واختر «معًا» أو «بعيدين».",
+       "es": "En Hoy, toca el icono de casa o de avión y elige Juntos o Separados.",
+       "fr": "Dans Aujourd’hui, touchez l’icône maison ou avion et choisissez Ensemble ou À distance.",
+       "de": "Tippe in Heute auf das Haus- oder Flugzeugsymbol und wähle Zusammen oder Getrennt."
+      }
+     ]
     ],
     [
      "p",
      {
-      "en": "Each phone keeps its own time zone, so times are always shown correctly for both of you.",
-      "ar": "يحتفظ كل هاتف بمنطقته الزمنية، فتظهر الأوقات صحيحة لكليكما دائمًا.",
-      "es": "Cada teléfono mantiene su zona horaria, así que las horas siempre se ven bien para los dos.",
-      "fr": "Chaque téléphone garde son fuseau horaire : les heures sont toujours justes pour vous deux.",
-      "de": "Jedes Telefon behält seine Zeitzone, sodass die Zeiten für euch beide immer stimmen."
+      "en": "It is one shared setting, and your partner is notified when it changes. Apart is split automatically into the same or different time zones from your two phones. It does not apply while you use OneSpace on your own.",
+      "ar": "إنه إعداد مشترك واحد، ويُبلَّغ شريكك عند تغييره. وتُحدَّد حالة «بعيدين» تلقائيًا كمنطقة زمنية واحدة أو مختلفة من هاتفيكما. ولا ينطبق وأنت تستخدم OneSpace بمفردك.",
+      "es": "Es un ajuste compartido y se avisa a tu pareja cuando cambia. Separados se divide automáticamente en misma o distinta zona horaria según vuestros teléfonos. No se aplica si usas OneSpace solo.",
+      "fr": "C’est un réglage commun, et votre partenaire est prévenu quand il change. À distance se précise automatiquement (même fuseau ou fuseaux différents) d’après vos téléphones. Il ne s’applique pas en solo.",
+      "de": "Es ist eine gemeinsame Einstellung, und dein Partner wird bei Änderungen benachrichtigt. Getrennt wird automatisch nach gleicher oder unterschiedlicher Zeitzone eurer Telefone unterschieden. Allein gilt die Einstellung nicht."
      }
     ]
    ]
