@@ -1163,7 +1163,7 @@
   },
   {
    "id": "voice",
-   "where": "app",
+   "where": "both",
    "q": {
     "en": "Can I use OneSpace by voice?",
     "ar": "هل يمكنني استخدام OneSpace بالصوت؟",
@@ -1175,11 +1175,11 @@
     [
      "p",
      {
-      "en": "Voice commands are coming soon. We will let you know in What’s new when they are ready.",
-      "ar": "الأوامر الصوتية قادمة قريبًا، وسنخبرك في «ما الجديد» عندما تصبح جاهزة.",
-      "es": "Los comandos de voz llegarán pronto. Te avisaremos en Novedades cuando estén listos.",
-      "fr": "Les commandes vocales arrivent bientôt. Nous vous préviendrons dans Nouveautés.",
-      "de": "Sprachbefehle kommen bald. Wir sagen dir unter Neuigkeiten Bescheid, wenn sie bereit sind."
+      "en": "Not yet. Speaking to OneSpace is coming soon, and we will announce it in What’s new when it is ready.",
+      "ar": "ليس بعد. التحدث إلى OneSpace قادم قريبًا، وسنعلن عنه في «ما الجديد» عندما يصبح جاهزًا.",
+      "es": "Todavía no. Hablarle a OneSpace llegará pronto y lo anunciaremos en Novedades cuando esté listo.",
+      "fr": "Pas encore. Parler à OneSpace arrive bientôt ; nous l’annoncerons dans Nouveautés.",
+      "de": "Noch nicht. Mit OneSpace zu sprechen kommt bald; wir kündigen es unter Neuigkeiten an."
      }
     ]
    ]
