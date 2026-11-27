@@ -2111,17 +2111,11 @@ def page_faq():
         items = ''.join(f'<details data-faq id="{g["id"]}-{i["id"]}">{T(i["q"]["en"], i["q"]["ar"], "summary")}'
                         f'<div>{faq_master.answer_html(i, T)}</div></details>' for i in g['items'])
         body += f'<h2 class="faq-group" id="{g["id"]}" data-i18n="{_i18n_key(g["title"]["en"], g["title"]["ar"])}">{g["title"]["en"]}</h2><div>{items}</div>'
-    # Founder Members questions are about the website registration only.
-    founders = [x for x in FAQ if x[0] == 'Founder Members']
-    for g, gar, qs in founders:
-        qs = qs + [(*q, *a) for q, a in FAQ_MORE.get(g, [])]
-        items = ''.join(f'<details data-faq>{T(q, qa, "summary")}{T(a, aa, "div")}</details>' for q, qa, a, aa in qs)
-        body += f'<h2 class="faq-group" id="founders" data-i18n="{_i18n_key(g, gar)}">{g}</h2><div>{items}</div>'
+    # 27 Nov 2026 (owner): the Founder Members questions are no longer in the FAQ.
     sk = K('Search questions…', 'ابحث في الأسئلة…')
     jsonld = {'@context': 'https://schema.org', '@type': 'FAQPage', 'mainEntity': [
         {'@type': 'Question', 'name': i['q']['en'], 'acceptedAnswer': {'@type': 'Answer', 'text': BeautifulSoup(faq_master.answer_html(i, T), 'html.parser').get_text(' ', strip=True)}}
-        for g in faq_master.web_groups() for i in g['items']] + [
-        {'@type': 'Question', 'name': q, 'acceptedAnswer': {'@type': 'Answer', 'text': BeautifulSoup(a, 'html.parser').get_text(' ', strip=True)}} for g, _, qs in founders for q, _, a, _ in (qs + [(*q0, *a0) for q0, a0 in FAQ_MORE.get(g, [])])]}
+        for g in faq_master.web_groups() for i in g['items']]}
     return h + page_hero('FAQ', 'الأسئلة الشائعة', 'Questions, answered.', 'أسئلة وأجوبتها.', 'Can’t find it? <a href="support.html">Contact us</a> — even without an account.',
                          'لم تجد ما تبحث عنه؟ <a href="support.html">تواصل معنا</a> — حتى دون حساب.',
                          extra=f'<div style="max-width:560px;margin-top:24px"><label class="sr" for="faq-search">Search</label><input id="faq-search" class="search" type="search" placeholder="Search questions…" data-i18n-attr="placeholder:{sk}"></div>') + f'''
