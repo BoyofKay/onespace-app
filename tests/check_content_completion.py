@@ -9,8 +9,7 @@ from guide_additions_1 import GUIDE_ADDITIONS_1
 from guide_additions_2 import GUIDE_ADDITIONS_2
 from faq_additions import FAQ_ADDITIONS
 from faq_master import web_groups as _faq_web_groups
-from tutorial_additions import TUTORIAL_ADDITIONS
-from tutorial_journeys import JOURNEY_TUTORIAL_ADDITIONS
+import tutorial_videos
 assert sum(map(len,FAQ_ADDITIONS.values()))==18  # 12 + 6 closed-tester answers (26 Nov 2026)
 # 27 Nov 2026: the FAQ is content/faq/*.json (website items) plus the website-only Founder group.
 def _expected_faq_total():
@@ -22,8 +21,9 @@ def _expected_faq_total():
     return total
 EXPECTED_FAQ=_expected_faq_total()
 
-assert sum(map(len,TUTORIAL_ADDITIONS.values()))==12
-assert len(JOURNEY_TUTORIAL_ADDITIONS['journey'])==2
+# 27 Nov 2026 (D110): the tutorials page is one video tutorial per feature (17).
+VIDEO_TUTORIALS=tutorial_videos.tutorials()
+assert len(VIDEO_TUTORIALS)==17 and len({t['id'] for t in VIDEO_TUTORIALS})==17
 ALL_GUIDES=GUIDE_ADDITIONS_1+GUIDE_ADDITIONS_2
 assert len(ALL_GUIDES)==9 and len({g['slug'] for g in ALL_GUIDES})==9
 for lang_idx,lang in enumerate(('en','ar','es','fr','de')):
@@ -40,7 +40,21 @@ for lang_idx,lang in enumerate(('en','ar','es','fr','de')):
         card=faq.select('details[data-faq]')[i]
         assert entry['name']==card.summary.get_text(' ',strip=True),(lang,'FAQ schema name',i)
         assert entry['acceptedAnswer']['text']==card.find('div').get_text(' ',strip=True),(lang,'FAQ schema answer',i)
-    assert len(tutorials.select('details[data-faq]'))==30,(lang,'tutorial count')
+    assert len(tutorials.select('article.tut[data-tut]'))==17,(lang,'tutorial count')
+    faq_ids={d.get('id') for d in faq.select('details[data-faq]')}
+    tut_text=tutorials.get_text(' ',strip=True)
+    for t in VIDEO_TUTORIALS:
+        card=tutorials.select_one(f'article.tut#{t["id"]}')
+        assert card,(lang,'tutorial missing',t['id'])
+        assert t['title'][lang] in card.get_text(' ',strip=True),(lang,'tutorial title',t['id'])
+        buttons=card.select('.tut-chapters button[data-t]')
+        assert len(buttons)==len(t['chapters']),(lang,'chapter count',t['id'])
+        for c in t['chapters']:
+            assert c[lang] in card.get_text(' ',strip=True),(lang,'chapter caption',t['id'],c['en'])
+        for key in ('partner','solo','works'):
+            if key in t: assert t[key][lang] in card.get_text(' ',strip=True),(lang,key,t['id'])
+        link=card.select_one('.faq-more a')['href'].split('#')[1]
+        assert link in faq_ids,(lang,'tutorial FAQ link',t['id'],link)
     assert len(listing.select('a.art-card'))==13,(lang,'guide cards')
     assert len(listing.select('details.guide-show-more'))==1,(lang,'extra guides are opt-in')
     assert len(listing.select('details.guide-show-more a.art-card'))==10,(lang,'hidden guides')
@@ -51,12 +65,6 @@ for lang_idx,lang in enumerate(('en','ar','es','fr','de')):
         for q,a in grp:
             assert q[lang_idx] in faq.get_text(' ',strip=True),(lang,'FAQ question',q[0])
             assert a[lang_idx] in faq.get_text(' ',strip=True),(lang,'FAQ answer',q[0])
-    for group in [*TUTORIAL_ADDITIONS.values(),*JOURNEY_TUTORIAL_ADDITIONS.values()]:
-        for guide in group:
-            assert guide['t'][lang_idx] in tutorials.get_text(' ',strip=True),(lang,'tutorial title')
-            for step in guide['steps']:
-                rendered=BeautifulSoup(step[lang_idx],'html.parser').get_text(' ',strip=True)
-                assert rendered in tutorials.get_text(' ',strip=True),(lang,'tutorial step',guide['t'][0],rendered)
     for guide in ALL_GUIDES:
         page=BeautifulSoup((ROOT/prefix/guide['slug']).read_text(encoding='utf8'),'html.parser')
         content=page.get_text(' ',strip=True)
@@ -75,4 +83,4 @@ for lang_idx,lang in enumerate(('en','ar','es','fr','de')):
         assert schema['inLanguage']==lang,(lang,guide['slug'],'article wrong language')
         assert schema['headline']==page.h1.get_text(' ',strip=True),(lang,guide['slug'],'article wrong headline')
         assert schema['mainEntityOfPage']=='https://onespace.live/'+prefix+guide['slug'].replace('.html','/'),(lang,guide['slug'],'canonical JSON-LD')
-print('PASS: 56 FAQs, 30 step-by-step tutorials with full journeys, 13 guides, all five locales.')
+print(f'PASS: {EXPECTED_FAQ} FAQs, 17 video tutorials with chapter captions, 13 guides, all five locales.')

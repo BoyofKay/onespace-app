@@ -33,7 +33,9 @@ from deep_pages import DEEP, COMPARE  # noqa: E402
 from arabic_copy_overrides import revise
 from full_localization import NEW_LANGS, LANGS, build_locales, GLOSSARY as _GLOSSARY
 import faq_master  # 27 Nov 2026: one FAQ for website and app (content/faq/*.json)
+import tutorial_videos  # 27 Nov 2026 (D110): one video tutorial per feature
 faq_master.register_translations(_GLOSSARY)
+tutorial_videos.register_translations(_GLOSSARY)
 from launch_enrichment import STORY_UI, FAQ_MORE, GUIDE_MORE
 from journeys_apart_01 import JOURNEYS as J_APART_1
 from journeys_apart_02 import JOURNEYS as J_APART_2
@@ -1843,26 +1845,19 @@ TUT_CLIPS = {'Add anything in two taps': 'quickadd', 'Decide together with an ac
 
 
 def page_tutorials():
-    h = head('tutorials.html', 'OneSpace tutorials — step-by-step guides', 'دروس OneSpace — أدلة خطوة بخطوة',
-             'Step-by-step OneSpace guides: invite your partner, quick add, phone calendar, activities, trips, surprises, counters, places from Google Maps, scrapbooks and privacy.',
-             'أدلة OneSpace خطوة بخطوة: دعوة الشريك والإضافة السريعة وتقويم الهاتف والأنشطة والرحلات والمفاجآت والعدّادات والأماكن من خرائط Google والألبومات والخصوصية.')
-    jump = ''.join(f'<a class="chip" href="#{k}">{i} {T(e, a)}</a>' for k, i, e, a, _ in TUTORIALS)
-    body = ''
-    for k, i, e, a, guides in TUTORIALS:
-        items = ''
-        for t, tar, steps in guides:
-            ol = ''.join(f'<li>{T(x, y)}</li>' for x, y in steps)
-            v = clip(TUT_CLIPS[t], t, tar, 'xs') if t in TUT_CLIPS else ''
-            body_html = (f'<div style="display:flex;gap:22px;align-items:flex-start;flex-wrap:wrap">{v}<ol style="padding-inline-start:22px;margin:0;flex:1;min-width:220px">{ol}</ol></div>'
-                         if v else f'<ol style="padding-inline-start:22px;margin:0">{ol}</ol>')
-            items += f'<details data-faq>{T(t, tar, "summary")}<div>{body_html}</div></details>'
-        body += f'<h2 class="faq-group" id="{k}">{i} {T(e, a)}</h2><div>{items}</div>'
-    sk = K('Search tutorials…', 'ابحث في الدروس…')
-    return h + page_hero('Tutorials', 'الدروس', 'Step-by-step guides.', 'أدلة خطوة بخطوة.',
-                         'Short, practical how-tos for the things couples do most. Prefer to see it? <a href="how-it-works.html">Try the demo</a>.',
-                         'إرشادات قصيرة وعملية لأكثر ما يفعله الأزواج. تفضّل أن تراه؟ <a href="how-it-works.html">جرّب العرض</a>.',
-                         extra=f'<div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:22px">{jump}</div><div style="max-width:560px;margin-top:18px"><label class="sr" for="faq-search">Search</label><input id="faq-search" class="search" type="search" placeholder="Search tutorials…" data-i18n-attr="placeholder:{sk}"></div>') + f"""
-<section style="padding-top:10px"><div class="narrow">{body}<p id="faq-empty" hidden>{T('Nothing matches. <a href="support.html">Ask us</a>.', 'لا شيء مطابق. <a href="support.html">اسألنا</a>.')}</p></div></section>
+    """27 Nov 2026 (D110): one short video per feature, with chapter captions.
+    Exact steps live in the FAQ; mixed real-life stories live on Stories & scenarios."""
+    h = head('tutorials.html', 'OneSpace tutorials — a short video for every feature', 'دروس OneSpace — فيديو قصير لكل ميزة',
+             'Short videos of every OneSpace feature in the real app: Today, calendar, lists, reminders, notes, activities, trips, occasions, counters, places, contact cards, letters, check-ins, experiences, memories and saving from any app.',
+             'فيديوهات قصيرة لكل ميزة في OneSpace من التطبيق الحقيقي: اليوم والتقويم والقوائم والتذكيرات والملاحظات والأنشطة والرحلات والمناسبات والعدّادات والأماكن وبطاقات الاتصال والرسائل والتواصل اليومي والتجارب والذكريات والحفظ من أي تطبيق.')
+    items = tutorial_videos.tutorials()
+    jump = ''.join(f'<a class="chip" href="#{t["id"]}">{T(t["title"]["en"], t["title"]["ar"])}</a>' for t in items)
+    body = ''.join(tutorial_videos.tutorial_html(t, T, K) for t in items)
+    return h + page_hero('Tutorials', 'الدروس', 'See each feature in action.', 'شاهد كل ميزة أثناء العمل.',
+                         'A short video of every feature in the real app, with Adam and Lina, a fictional couple. Tap a caption to jump to that moment. For exact steps, each tutorial links to the FAQ; for real-life stories, see <a href="scenarios.html">Stories &amp; scenarios</a>.',
+                         'فيديو قصير لكل ميزة في التطبيق الحقيقي مع آدم ولينا، وهما زوجان من الخيال. المس أي عنوان للانتقال إلى تلك اللحظة. للخطوات الدقيقة يرتبط كل درس بالأسئلة الشائعة، وللقصص الواقعية راجع <a href="scenarios.html">القصص والسيناريوهات</a>.',
+                         extra=f'<div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:22px">{jump}</div>') + f"""
+<section style="padding-top:10px"><div class="wrap tuts">{body}</div></section>
 """ + story_case_cards(['reunion-from-flight-to-memory', 'a-sunday-that-didnt-belong-to-chores', 'sofa-that-both-of-us-chose']) + cta_band() + foot()
 
 

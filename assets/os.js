@@ -673,6 +673,21 @@
     } else clips.forEach(function (v) { v.controls = true; });
   }
 
+  // ---------- Tutorial videos: chapter captions jump to their moment ----------
+  $$('[data-tut]').forEach(function (box) {
+    var v = $('video', box), caps = $$('[data-t]', box);
+    if (!v || !caps.length) return;
+    caps.forEach(function (c) { c.addEventListener('click', function () {
+      v.currentTime = parseFloat(c.getAttribute('data-t')) || 0;
+      var pr = v.play(); if (pr && pr.catch) pr.catch(function () {});
+    }); });
+    v.addEventListener('timeupdate', function () {
+      var t = v.currentTime, on = -1;
+      caps.forEach(function (c, i) { if (t + 0.15 >= parseFloat(c.getAttribute('data-t'))) on = i; });
+      caps.forEach(function (c, i) { c.setAttribute('aria-current', i === on ? 'true' : 'false'); });
+    });
+  });
+
   // ---------- Mobile: a Join bar once you scroll, hidden near any join form ----------
   var bar = $('[data-sticky-cta]');
   var noBar = /^\/(?:ar\/|es\/|fr\/|de\/)?(?:join|confirm|unsubscribe)(?:\.html|\/)$/.test(location.pathname);

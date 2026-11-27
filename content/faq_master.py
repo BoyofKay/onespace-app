@@ -63,7 +63,9 @@ def answer_html(item, T):
             tag = 'ol' if kind == 'steps' else 'ul'
             html += f'<{tag} class="faq-{kind}">' + ''.join(T(v['en'], v['ar'], 'li') for v in value) + f'</{tag}>'
     if item.get('tutorial'):
-        html += f'<p class="faq-more"><a href="tutorials.html">{T(TUTORIAL_LINK["en"], TUTORIAL_LINK["ar"])}</a></p>'
+        import tutorial_videos  # a feature with its own video opens at that video (D110)
+        anchor = f'#{item["id"]}' if item['id'] in {t['id'] for t in tutorial_videos.tutorials()} else ''
+        html += f'<p class="faq-more"><a href="tutorials.html{anchor}">{T(TUTORIAL_LINK["en"], TUTORIAL_LINK["ar"])}</a></p>'
     return html
 
 
