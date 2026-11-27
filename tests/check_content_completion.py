@@ -17,8 +17,8 @@ def _expected_faq_total():
     en=BeautifulSoup((ROOT/'faq.html').read_text(encoding='utf8'),'html.parser')
     total=len(en.select('details[data-faq]'))
     web=sum(len(g['items']) for g in _faq_web_groups())
-    founders=len(en.select('#founders + div details[data-faq]'))
-    assert founders>0 and total==web+founders,(total,web,founders)
+    # 27 Nov 2026 (owner): only the shared FAQ; no Founder Members group.
+    assert total==web and not en.select('#founders'),(total,web)
     return total
 EXPECTED_FAQ=_expected_faq_total()
 
@@ -47,7 +47,7 @@ for lang_idx,lang in enumerate(('en','ar','es','fr','de')):
     assert len(tutorials.select('a[href*="scenarios.html#story-"]'))>=2,(lang,'tutorial journey links')
     # 27 Nov 2026: only the website-only Founder questions still come from faq_additions;
     # the rest of the FAQ is content/faq/*.json (checked by the schema/count tests above).
-    for grp in [FAQ_ADDITIONS['Founder Members']]:
+    for grp in []:  # Founder Members questions removed from the FAQ (27 Nov 2026)
         for q,a in grp:
             assert q[lang_idx] in faq.get_text(' ',strip=True),(lang,'FAQ question',q[0])
             assert a[lang_idx] in faq.get_text(' ',strip=True),(lang,'FAQ answer',q[0])

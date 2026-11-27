@@ -16,8 +16,8 @@ def _expected_faq_total():
     en=BeautifulSoup((ROOT/'faq.html').read_text(encoding='utf8'),'html.parser')
     total=len(en.select('details[data-faq]'))
     web=sum(len(g['items']) for g in _faq_web_groups())
-    founders=len(en.select('#founders + div details[data-faq]'))
-    assert founders>0 and total==web+founders,(total,web,founders)
+    # 27 Nov 2026 (owner): only the shared FAQ; no Founder Members group.
+    assert total==web and not en.select('#founders'),(total,web)
     return total
 EXPECTED_FAQ=_expected_faq_total()
 
@@ -35,7 +35,7 @@ CHECKS = {
                 'privacy@onespace.live', 'founders@onespace.live', 'unsubscribe'],
     'terms': ['18 años','contenido','elementos compartidos','OneSpace'],
     'account': ['Me → Your data and account', 'Correo de tu cuenta', 'privacy@onespace.live'],
-    'faq': ['¿Qué son los primeros 500 miembros fundadores?', 'unidireccional', 'Google'],
+    'faq': ['unidireccional', 'Google'],  # Founder questions removed 27 Nov 2026
     'guide': ['Respeten los horarios del otro', 'Compartan también lo cotidiano'],
   },
   'fr': {
@@ -43,7 +43,7 @@ CHECKS = {
                 '60 jours','180 jours','sept jours','privacy@onespace.live','founders@onespace.live','unsubscribe'],
     'terms': ['18 ans','contenus','Partagé','OneSpace'],
     'account': ['Me → Your data and account', 'Adresse e-mail du compte', 'privacy@onespace.live'],
-    'faq': ['Les 500 membres fondateurs', 'un seul sens', 'Google'],
+    'faq': ['un seul sens', 'Google'],
     'guide': ['Respecter le rythme de l’autre', 'Partager aussi le quotidien'],
   },
   'de': {
@@ -51,7 +51,7 @@ CHECKS = {
                 'sieben Tage','privacy@onespace.live','founders@onespace.live','unsubscribe'],
     'terms': ['18 Jahre','Inhalte','Geteilt','OneSpace'],
     'account': ['Me → Your data and account', 'E-Mail-Adresse deines Kontos', 'privacy@onespace.live'],
-    'faq': ['500 Gründungsmitglieder','nur in eine Richtung','Google'],
+    'faq': ['nur in eine Richtung','Google'],
     'guide': ['Nehmt Rücksicht auf eure Tageszeiten', 'Teilt auch die alltäglichen Dinge'],
   },
 }
